@@ -49,11 +49,7 @@ void _ZN30QBackingStoreDefaultCompositorD2Ev(void*) {}
 void* _ZNK30QBackingStoreDefaultCompositor9toTextureEPK21QPlatformBackingStoreP4QRhiP23QRhiResourceUpdateBatchRK7QRegionP6QFlagsINS0_11TextureFlagEE(
     void*, void*, void*, void*, void*, void*) { return NULL; }
 
-// GpuDescription stubs
-struct GpuDescription_stub { int vendorId; int deviceId; int revision; };
-GpuDescription_stub _ZN14GpuDescription6detectEv() { return {}; }
-void* _ZN14GpuDescription9detectAllEv() { return nullptr; }
-int _ZNK14GpuDescription9toVariantEv(void*) { return 0; }
+// GpuDescription - now compiled in qt6-zig-build
 
 // Qt resource initialization stubs
 void _Z22qInitResources_cursorsv() {}

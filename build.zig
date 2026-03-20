@@ -249,6 +249,7 @@ pub fn build(b: *std.Build) !void {
             "wtsapi32",
             "opengl32",
             "shcore",
+            "d3d9",
         }) |lib_name| {
             exe.root_module.linkSystemLibrary(lib_name, .{});
         }
