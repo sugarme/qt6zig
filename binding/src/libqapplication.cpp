@@ -1,3 +1,5 @@
+// Static platform plugin registration removed - handled elsewhere
+
 #include <QApplication>
 #include <QChildEvent>
 #include <QCoreApplication>

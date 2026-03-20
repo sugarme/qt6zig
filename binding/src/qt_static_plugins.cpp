@@ -1,22 +1,21 @@
 // Static plugin registration for Qt6 static builds.
-// Must be called before QApplication is created.
+// Must be called explicitly before QApplication creation.
 
 #include <QtPlugin>
 
-// Symbols exported by qwindows.lib
-extern "C" QObject *qt_plugin_instance();
-extern "C" const char *qt_plugin_query_metadata_v2(size_t *len);
+extern "C" QObject* qt_plugin_instance();
+extern "C" const char* qt_plugin_query_metadata_v2(size_t*);
 
-static QPluginMetaData qt_plugin_metadata_wrapper() {
+static QPluginMetaData qt6zig_qwindows_metadata() {
     size_t len = 0;
-    const char *data = qt_plugin_query_metadata_v2(&len);
+    const char* data = qt_plugin_query_metadata_v2(&len);
     return { data, len };
 }
 
 extern "C" void qt6zig_register_platform_plugins() {
-    static bool registered = false;
-    if (registered) return;
-    registered = true;
-    QStaticPlugin sp(qt_plugin_instance, qt_plugin_metadata_wrapper);
+    static bool done = false;
+    if (done) return;
+    done = true;
+    QStaticPlugin sp(qt_plugin_instance, qt6zig_qwindows_metadata);
     qRegisterStaticPluginFunction(sp);
 }
