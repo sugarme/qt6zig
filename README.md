@@ -4,33 +4,37 @@ Pure Zig bindings for Qt6. Build standalone desktop applications with Zig and Qt
 
 ## Features
 
-- **Static linking**: Produces standalone executables with no Qt6 DLL dependencies
+- **Static linking**: Produces standalone executables (~20MB) with no Qt6 DLL dependencies
+- **No console window**: Executables use Windows GUI subsystem
 - **Three-layer binding**: Zig wrappers → C ABI wrappers → Qt6 C++ (static libs)
 - **Zig-native build**: Uses `zig build` for everything, including C++ compilation
 - **Pre-generated bindings**: No Clang needed to build - bindings are checked in
 - **Pure Zig generator**: Binding generator written in Zig (replaces Go-based tool)
+- **Signal/slot support**: Connect Qt signals to Zig callback functions
+- **Virtual method overrides**: Override Qt virtual methods from Zig code
+- **Zig 0.16-dev compatible**: Works with latest Zig development builds
 
 ## Quick Start
 
 ### Prerequisites
 
-1. [Zig 0.14+](https://ziglang.org/download/)
+1. [Zig 0.16-dev](https://ziglang.org/download/) (or compatible version)
 2. Build [qt6-zig-build](https://github.com/sugarme/qt6-zig-build) to get static Qt6 libraries
 
 ### Clone and Build
 
 ```bash
-git clone --recursive https://github.com/nicholasgasior/qt6zig.git
+git clone --recursive https://github.com/sugarme/qt6zig.git
 cd qt6zig
 
 # Build qt6-zig-build first (one-time, takes a while)
 cd qt6-zig-build
-zig build
+zig build -Doptimize=ReleaseFast
 cd ..
 
 # Build and run an example
-zig build example-hello_window
-./zig-out/bin/hello_window
+zig build example-hello_window -Dqt6-build-path=../qt6-zig-build
+./zig-out/bin/hello_window.exe
 ```
 
 ### Examples
@@ -42,13 +46,15 @@ const qapplication = qt6.qapplication;
 const qwidget = qt6.qwidget;
 
 pub fn main() !void {
-    const app = qapplication.New(argc, argv);
-    defer qapplication.Delete(app);
+    const dummy_arg: [*:0]u8 = @constCast(@ptrCast("qt6zig"));
+    var argv = [_][*:0]u8{dummy_arg};
+    const app = qapplication.New(1, &argv);
+    defer qapplication.QDelete(app);
 
     const window = qwidget.New2();
-    qwidget.SetWindowTitle(window, "Hello from Zig!");
-    qwidget.Resize(window, 400, 300);
-    qwidget.Show(window);
+    qwidget.SetWindowTitle(window, "Hello Qt6 from Zig!");
+    qwidget.SetFixedSize2(window, 400, 300);
+    qwidget.ShowNormal(window);
 
     _ = qapplication.Exec();
 }
@@ -80,14 +86,14 @@ Qt6 Static Libraries (qt6-zig-build/zig-out/lib/)
 
 ```
 binding/
+├── libqt6.zig    # Root Zig module (re-exports all)
 ├── src/          # Per-class files (.cpp, .h, .hxx, .zig)
-│   ├── qtlibc.h        # Base C structures (libqt_string, etc.)
-│   ├── libqwidget.cpp  # C ABI implementation
-│   ├── libqwidget.h    # C ABI declarations
-│   ├── libqwidget.hxx  # Virtual callback header
-│   └── libqwidget.zig  # Zig wrapper
+│   ├── qtlibc.h              # Base C structures (libqt_string, etc.)
+│   ├── libqwidget.cpp/.h/.hxx/.zig   # Per-class bindings
+│   ├── qt_static_plugins.cpp # Platform plugin registration
+│   ├── qt_rhi_stubs.cpp      # Stubs for missing Qt RHI symbols
+│   └── ubsan_stubs.c         # UBSAN runtime stubs
 └── include/      # Module aggregators
-    ├── libqt6.zig      # Root Zig module
     ├── libqtc.zig      # Type aliases
     └── libqt6c.h       # Aggregate C header
 ```
@@ -101,6 +107,13 @@ Available classes:
 - QWidget, QPushButton, QAbstractButton
 - QWidgetAction, QEvent, QTimerEvent
 
+## Build Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `qt6-build-path` | `qt6-zig-build` | Path to qt6-zig-build directory |
+| `optimize` | `Debug` (→`ReleaseFast`) | Optimization level |
+
 ## Binding Generator
 
 The `gen/` directory contains a Zig-based binding generator that replaces the Go-based `genbindings` tool from libqt6zig. It parses Qt headers via Clang AST JSON output and generates the four-file-per-class binding set.
@@ -110,7 +123,7 @@ The `gen/` directory contains a Zig-based binding generator that replaces the Go
 zig build gen
 
 # Run it to regenerate bindings
-./zig-out/bin/qt6zig-gen --out-dir binding
+./zig-out/bin/qt6zig-gen
 ```
 
 ## License
