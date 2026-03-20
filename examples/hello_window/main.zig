@@ -10,7 +10,8 @@ pub fn main() !void {
 
     const window = qwidget.New2();
     qwidget.SetWindowTitle(window, "Hello Qt6 from Zig!");
-    qwidget.SetGeometry(window, 100, 100, 400, 300);
+    qwidget.SetFixedSize2(window, 400, 300);
+    qwidget.Move(window, 200, 200);
     qwidget.ShowNormal(window);
 
     _ = qapplication.Exec();

@@ -12,7 +12,8 @@ pub fn main() !void {
 
     const window = qwidget.New2();
     qwidget.SetWindowTitle(window, "Hello Button");
-    qwidget.SetGeometry(window, 100, 100, 300, 200);
+    qwidget.SetFixedSize2(window, 300, 200);
+    qwidget.Move(window, 200, 200);
 
     const button = qpushbutton.New5("Click me!", window);
     qpushbutton.SetGeometry(button, 50, 50, 200, 60);

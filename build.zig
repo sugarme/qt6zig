@@ -181,6 +181,9 @@ pub fn build(b: *std.Build) !void {
             }),
         });
 
+        // Hide console window on Windows
+        exe.subsystem = .windows;
+
         exe.root_module.addImport("qt6zig", qt6zig_mod);
         exe.root_module.addImport("qt6c", qtc_bindings);
         exe.root_module.addImport("qtzig", qtzig_types);

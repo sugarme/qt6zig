@@ -12,7 +12,8 @@ pub fn main() !void {
 
     const window = qwidget.New2();
     qwidget.SetWindowTitle(window, "Simple Qt6 App");
-    qwidget.SetGeometry(window, 100, 100, 600, 400);
+    qwidget.SetFixedSize2(window, 600, 400);
+    qwidget.Move(window, 200, 200);
 
     const btn_hello = qpushbutton.New5("Say Hello", window);
     qpushbutton.SetGeometry(btn_hello, 50, 50, 150, 40);
