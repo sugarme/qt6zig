@@ -41,16 +41,16 @@ pub fn build(b: *std.Build) !void {
         }
     }
 
-    // Fallback: check system paths
+    // Fallback: check qt6-zig-build's bundled Qt sources for headers
     if (qt_include_paths.items.len == 0) {
-        for ([_][]const u8{
-            "C:/Users/nikon/projects/qt6-static/include",
-            "C:/Users/nikon/projects/qt6-static/include/QtCore",
-            "C:/Users/nikon/projects/qt6-static/include/QtGui",
-            "C:/Users/nikon/projects/qt6-static/include/QtWidgets",
-        }) |p| {
-            if (pathExists(cwd, io, p)) {
-                try qt_include_paths.append(allocator, p);
+        const fallback_base = try std.fs.path.join(allocator, &.{ qt6_build_path, "qt-sources", "6.8.3", "include" });
+        if (pathExists(cwd, io, fallback_base)) {
+            try qt_include_paths.append(allocator, fallback_base);
+            for (qt_modules) |mod| {
+                const mod_path = try std.fs.path.join(allocator, &.{ fallback_base, mod });
+                if (pathExists(cwd, io, mod_path)) {
+                    try qt_include_paths.append(allocator, mod_path);
+                }
             }
         }
     }
