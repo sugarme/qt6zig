@@ -1,0 +1,3 @@
+[submodule "qt6-zig-build"]
+	path = qt6-zig-build
+	url = git@github.com:sugarme/qt6-zig-build.git

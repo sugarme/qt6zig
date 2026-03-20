@@ -1,0 +1,14 @@
+.{
+    .name = .qt6zig,
+    .version = "6.8.3",
+    .minimum_zig_version = "0.14.0",
+    .dependencies = .{},
+    .paths = .{
+        "LICENSE",
+        "README.md",
+        "build.zig",
+        "build.zig.zon",
+        "binding",
+    },
+    .fingerprint = 0x96215726c0acfb9b,
+}

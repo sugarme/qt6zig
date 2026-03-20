@@ -1,0 +1,19 @@
+# Zig build artifacts
+zig-out/
+.zig-cache/
+zig-cache/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Clang AST cache (generator)
+gen/cachedir/
