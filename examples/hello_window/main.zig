@@ -3,6 +3,9 @@ const qapplication = qt6.qapplication;
 const qwidget = qt6.qwidget;
 
 pub fn main() !void {
+    // Register static platform plugin (required for static Qt builds)
+    qt6.registerPlatformPlugins();
+
     // Initialize the Qt application
     const dummy_arg: [*:0]u8 = @constCast(@ptrCast("qt6zig"));
     var argv = [_][*:0]u8{dummy_arg};

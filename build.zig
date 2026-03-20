@@ -248,6 +248,7 @@ pub fn build(b: *std.Build) !void {
             "bcrypt",
             "wtsapi32",
             "opengl32",
+            "shcore",
         }) |lib_name| {
             exe.root_module.linkSystemLibrary(lib_name, .{});
         }

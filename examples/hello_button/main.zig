@@ -5,6 +5,8 @@ const qpushbutton = qt6.qpushbutton;
 const qwidget = qt6.qwidget;
 
 pub fn main() !void {
+    qt6.registerPlatformPlugins();
+
     const dummy_arg: [*:0]u8 = @constCast(@ptrCast("qt6zig"));
     var argv = [_][*:0]u8{dummy_arg};
     const app = qapplication.New(1, &argv);

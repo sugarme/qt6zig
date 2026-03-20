@@ -29,4 +29,7 @@
 #include "../src/libqwidget.h"
 #include "../src/libqwidgetaction.h"
 
+// Static plugin registration (must be called before QApplication)
+void qt6zig_register_platform_plugins(void);
+
 #endif

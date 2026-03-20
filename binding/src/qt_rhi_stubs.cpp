@@ -49,4 +49,35 @@ void _ZN30QBackingStoreDefaultCompositorD2Ev(void*) {}
 void* _ZNK30QBackingStoreDefaultCompositor9toTextureEPK21QPlatformBackingStoreP4QRhiP23QRhiResourceUpdateBatchRK7QRegionP6QFlagsINS0_11TextureFlagEE(
     void*, void*, void*, void*, void*, void*) { return NULL; }
 
+// GpuDescription stubs
+struct GpuDescription { int vendorId; int deviceId; int revision; };
+GpuDescription _ZN14GpuDescription6detectEv() { return {}; }
+void* _ZN14GpuDescription9detectAllEv() { return nullptr; }
+int _ZNK14GpuDescription9toVariantEv(void*) { return 0; }
+
+// Qt resource initialization stubs
+void _Z22qInitResources_cursorsv() {}
+void _Z31qInitResources_openglblacklistsv() {}
+void _Z19qInitResources_qpdfv() {}
+void _Z21qInitResources_qstylev() {}
+void _Z26qInitResources_qmessageboxv() {}
+
+// QPlatformScreen::staticMetaObject stub
+// This is a QMetaObject struct - provide a minimal one
+#include <cstring>
+struct FakeMetaObject {
+    void* superdata;
+    void* stringdata;
+    void* data;
+    void* static_metacall;
+    void* relatedMetaObjects;
+    void* metaTypes;
+    void* extradata;
+};
+FakeMetaObject _ZN15QPlatformScreen16staticMetaObjectE = {};
+
+// WinRT stubs
+long WindowsCreateStringReference(const void*, unsigned int, void*, void**) { return -1; }
+long RoGetActivationFactory(void*, const void*, void**) { return -1; }
+
 } // extern "C"

@@ -33,3 +33,9 @@ pub const qwidgetaction = @import("src/libqwidgetaction.zig").qwidgetaction;
 pub const qwidget_enums = @import("src/libqwidget.zig").enums;
 pub const qsizepolicy_enums = @import("src/libqsizepolicy.zig").enums;
 pub const qaction_enums = @import("src/libqaction.zig").enums;
+
+// Platform plugin registration - must be called before QApplication.New()
+const qtc = @import("qt6c");
+pub fn registerPlatformPlugins() void {
+    qtc.qt6zig_register_platform_plugins();
+}
