@@ -66,6 +66,14 @@ struct FakeMetaObject {
 };
 FakeMetaObject _ZN15QPlatformScreen16staticMetaObjectE = {};
 
+// OpenGL/RHI stubs — referenced by qwindows.lib and Qt6Gui.lib
+// but not defined because GLES2 RHI backend source files are not compiled.
+// D3D11 is the primary backend; these stubs prevent link errors.
+void* _ZN20QOpenGLStaticContext6createEb(int) { return nullptr; }
+void* _ZN20QOpenGLStaticContext8opengl32E = nullptr;
+void _ZN9QRhiGles2C1EP19QRhiGles2InitParamsP22QRhiGles2NativeHandles(void*, void*) {}
+void _ZN9QRhiGles2C2EP19QRhiGles2InitParamsP22QRhiGles2NativeHandles(void*, void*) {}
+
 // WinRT stubs
 long WindowsCreateStringReference(const void*, unsigned int, void*, void**) { return -1; }
 long RoGetActivationFactory(void*, const void*, void**) { return -1; }
