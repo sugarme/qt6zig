@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QTEXTCURSOR_H_C_LIB
-#define QTEXTCURSOR_H_C_LIB
+#ifndef SRCC_LIBQTEXTCURSOR_H
+#define SRCC_LIBQTEXTCURSOR_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -29,17 +29,7 @@ typedef struct QTextList QTextList;
 typedef struct QTextListFormat QTextListFormat;
 typedef struct QTextTable QTextTable;
 typedef struct QTextTableFormat QTextTableFormat;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
-
-
-
-
-
-
 
 QTextCursor* QTextCursor_new();
 QTextCursor* QTextCursor_new2(QTextDocument* document);

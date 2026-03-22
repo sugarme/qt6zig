@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QPIXMAP_H_C_LIB
-#define QPIXMAP_H_C_LIB
+#ifndef SRCC_LIBQPIXMAP_H
+#define SRCC_LIBQPIXMAP_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -22,31 +22,27 @@ typedef struct QImage QImage;
 typedef struct QImageReader QImageReader;
 typedef struct QPaintDevice QPaintDevice;
 typedef struct QPaintEngine QPaintEngine;
+typedef struct QPainter QPainter;
 typedef struct QPixmap QPixmap;
+typedef struct QPoint QPoint;
 typedef struct QRect QRect;
 typedef struct QRegion QRegion;
 typedef struct QSize QSize;
 typedef struct QSizeF QSizeF;
 typedef struct QTransform QTransform;
 typedef struct QVariant QVariant;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
-
 
 QPixmap* QPixmap_new();
 QPixmap* QPixmap_new2(int w, int h);
 QPixmap* QPixmap_new3(const QSize* param1);
 QPixmap* QPixmap_new4(const libqt_string fileName);
-QPixmap* QPixmap_new5(const char** xpm);
-QPixmap* QPixmap_new6(const QPixmap* param1);
-QPixmap* QPixmap_new7(const libqt_string fileName, const char* format);
-QPixmap* QPixmap_new8(const libqt_string fileName, const char* format, int flags);
+QPixmap* QPixmap_new5(const QPixmap* param1);
+QPixmap* QPixmap_new6(const libqt_string fileName, const char* format);
+QPixmap* QPixmap_new7(const libqt_string fileName, const char* format, int flags);
 void QPixmap_OperatorAssign(QPixmap* self, const QPixmap* param1);
 void QPixmap_Swap(QPixmap* self, QPixmap* other);
-QVariant* QPixmap_OperatorQVariant(const QPixmap* self);
+QVariant* QPixmap_ToQVariant(const QPixmap* self);
 bool QPixmap_IsNull(const QPixmap* self);
 int QPixmap_DevType(const QPixmap* self);
 int QPixmap_Width(const QPixmap* self);
@@ -123,12 +119,18 @@ void QPixmap_OnPaintEngine(const QPixmap* self, intptr_t slot);
 QPaintEngine* QPixmap_QBasePaintEngine(const QPixmap* self);
 void QPixmap_OnMetric(const QPixmap* self, intptr_t slot);
 int QPixmap_QBaseMetric(const QPixmap* self, int param1);
-QPixmap* QPixmap_FromImageInPlace(QPixmap* self, QImage* image);
-void QPixmap_OnFromImageInPlace(QPixmap* self, intptr_t slot);
-QPixmap* QPixmap_QBaseFromImageInPlace(QPixmap* self, QImage* image);
-QPixmap* QPixmap_FromImageInPlace2(QPixmap* self, QImage* image, int flags);
-void QPixmap_OnFromImageInPlace2(QPixmap* self, intptr_t slot);
-QPixmap* QPixmap_QBaseFromImageInPlace2(QPixmap* self, QImage* image, int flags);
+void QPixmap_InitPainter(const QPixmap* self, QPainter* painter);
+void QPixmap_OnInitPainter(const QPixmap* self, intptr_t slot);
+void QPixmap_QBaseInitPainter(const QPixmap* self, QPainter* painter);
+QPaintDevice* QPixmap_Redirected(const QPixmap* self, QPoint* offset);
+void QPixmap_OnRedirected(const QPixmap* self, intptr_t slot);
+QPaintDevice* QPixmap_QBaseRedirected(const QPixmap* self, QPoint* offset);
+QPainter* QPixmap_SharedPainter(const QPixmap* self);
+void QPixmap_OnSharedPainter(const QPixmap* self, intptr_t slot);
+QPainter* QPixmap_QBaseSharedPainter(const QPixmap* self);
+double QPixmap_GetDecodedMetricF(const QPixmap* self, int metricA, int metricB);
+void QPixmap_OnGetDecodedMetricF(const QPixmap* self, intptr_t slot);
+double QPixmap_QBaseGetDecodedMetricF(const QPixmap* self, int metricA, int metricB);
 void QPixmap_Delete(QPixmap* self);
 
 #ifdef __cplusplus

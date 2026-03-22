@@ -1,165 +1,139 @@
 const QtC = @import("qt6zig");
-const qtc = @import("qt6c");%%_IMPORTLIBS_%%
-%%_STRUCTDEFS_%%
+const qtc = @import("qt6c");
+const qpaintdevice_enums = enums;
 
 /// https://doc.qt.io/qt-6/qpaintdevice.html
 pub const qpaintdevice = struct {
-
-    pub fn DevType(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#devType)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn DevType(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_DevType(@ptrCast(self));
     }
 
-    /// Allows for overriding the related default method
-    pub fn OnDevType(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) i32) void {
-        qtc.QPaintDevice_OnDevType(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseDevType(self: ?*anyopaque, ) i32 {
-        return qtc.QPaintDevice_QBaseDevType(@ptrCast(self));
-    }
-
-    pub fn PaintingActive(self: ?*anyopaque, ) bool {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#paintingActive)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn PaintingActive(self: ?*anyopaque) bool {
         return qtc.QPaintDevice_PaintingActive(@ptrCast(self));
     }
 
-    pub fn PaintEngine(self: ?*anyopaque, ) QtC.QPaintEngine {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#paintEngine)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn PaintEngine(self: ?*anyopaque) QtC.QPaintEngine {
         return qtc.QPaintDevice_PaintEngine(@ptrCast(self));
     }
 
-    pub fn Width(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#width)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn Width(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_Width(@ptrCast(self));
     }
 
-    pub fn Height(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#height)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn Height(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_Height(@ptrCast(self));
     }
 
-    pub fn WidthMM(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#widthMM)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn WidthMM(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_WidthMM(@ptrCast(self));
     }
 
-    pub fn HeightMM(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#heightMM)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn HeightMM(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_HeightMM(@ptrCast(self));
     }
 
-    pub fn LogicalDpiX(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#logicalDpiX)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn LogicalDpiX(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_LogicalDpiX(@ptrCast(self));
     }
 
-    pub fn LogicalDpiY(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#logicalDpiY)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn LogicalDpiY(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_LogicalDpiY(@ptrCast(self));
     }
 
-    pub fn PhysicalDpiX(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#physicalDpiX)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn PhysicalDpiX(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_PhysicalDpiX(@ptrCast(self));
     }
 
-    pub fn PhysicalDpiY(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#physicalDpiY)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn PhysicalDpiY(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_PhysicalDpiY(@ptrCast(self));
     }
 
-    pub fn DevicePixelRatio(self: ?*anyopaque, ) f64 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#devicePixelRatio)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn DevicePixelRatio(self: ?*anyopaque) f64 {
         return qtc.QPaintDevice_DevicePixelRatio(@ptrCast(self));
     }
 
-    pub fn DevicePixelRatioF(self: ?*anyopaque, ) f64 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#devicePixelRatioF)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn DevicePixelRatioF(self: ?*anyopaque) f64 {
         return qtc.QPaintDevice_DevicePixelRatioF(@ptrCast(self));
     }
 
-    pub fn ColorCount(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#colorCount)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn ColorCount(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_ColorCount(@ptrCast(self));
     }
 
-    pub fn Depth(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#depth)
+    ///
+    /// ``` self: QtC.QPaintDevice ```
+    pub fn Depth(self: ?*anyopaque) i32 {
         return qtc.QPaintDevice_Depth(@ptrCast(self));
     }
 
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#devicePixelRatioFScale)
+    ///
+    ///
     pub fn DevicePixelRatioFScale() f64 {
         return qtc.QPaintDevice_DevicePixelRatioFScale();
     }
 
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#encodeMetricF)
+    ///
+    /// ``` metric: qpaintdevice_enums.PaintDeviceMetric, value: f64 ```
     pub fn EncodeMetricF(metric: i32, value: f64) i32 {
-        return qtc.QPaintDevice_EncodeMetricF(@intCast(metric), value);
+        return qtc.QPaintDevice_EncodeMetricF(@intCast(metric), @floatCast(value));
     }
 
-    pub fn Metric(self: ?*anyopaque, metric: i32) i32 {
-        return qtc.QPaintDevice_Metric(@ptrCast(self), @intCast(metric));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnMetric(self: ?*anyopaque, callback: *const fn (?*anyopaque, i32) callconv(.c) i32) void {
-        qtc.QPaintDevice_OnMetric(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseMetric(self: ?*anyopaque, metric: i32) i32 {
-        return qtc.QPaintDevice_QBaseMetric(@ptrCast(self), @intCast(metric));
-    }
-
-    pub fn InitPainter(self: ?*anyopaque, painter: ?*anyopaque) void {
-        qtc.QPaintDevice_InitPainter(@ptrCast(self), @ptrCast(painter));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnInitPainter(self: ?*anyopaque, callback: *const fn (?*anyopaque, ?*anyopaque) callconv(.c) void) void {
-        qtc.QPaintDevice_OnInitPainter(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseInitPainter(self: ?*anyopaque, painter: ?*anyopaque) void {
-        qtc.QPaintDevice_QBaseInitPainter(@ptrCast(self), @ptrCast(painter));
-    }
-
-    pub fn Redirected(self: ?*anyopaque, offset: ?*anyopaque) QtC.QPaintDevice {
-        return qtc.QPaintDevice_Redirected(@ptrCast(self), @ptrCast(offset));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnRedirected(self: ?*anyopaque, callback: *const fn (?*anyopaque, ?*anyopaque) callconv(.c) QtC.QPaintDevice) void {
-        qtc.QPaintDevice_OnRedirected(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseRedirected(self: ?*anyopaque, offset: ?*anyopaque) QtC.QPaintDevice {
-        return qtc.QPaintDevice_QBaseRedirected(@ptrCast(self), @ptrCast(offset));
-    }
-
-    pub fn SharedPainter(self: ?*anyopaque, ) QtC.QPainter {
-        return qtc.QPaintDevice_SharedPainter(@ptrCast(self));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnSharedPainter(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) QtC.QPainter) void {
-        qtc.QPaintDevice_OnSharedPainter(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseSharedPainter(self: ?*anyopaque, ) QtC.QPainter {
-        return qtc.QPaintDevice_QBaseSharedPainter(@ptrCast(self));
-    }
-
-    pub fn GetDecodedMetricF(self: ?*anyopaque, metricA: i32, metricB: i32) f64 {
-        return qtc.QPaintDevice_GetDecodedMetricF(@ptrCast(self), @intCast(metricA), @intCast(metricB));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnGetDecodedMetricF(self: ?*anyopaque, callback: *const fn (?*anyopaque, i32, i32) callconv(.c) f64) void {
-        qtc.QPaintDevice_OnGetDecodedMetricF(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseGetDecodedMetricF(self: ?*anyopaque, metricA: i32, metricB: i32) f64 {
-        return qtc.QPaintDevice_QBaseGetDecodedMetricF(@ptrCast(self), @intCast(metricA), @intCast(metricB));
-    }
-
+    /// [Qt documentation](https://doc.qt.io/qt-6/qpaintdevice.html#dtor.QPaintDevice)
+    ///
     /// Delete this object from C++ memory.
+    ///
+    /// ``` self: QtC.QPaintDevice ```
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QPaintDevice_Delete(@ptrCast(self));
     }
 };
 
-/// https://doc.qt.io/qt-6/paintdevice.html#types
+/// https://doc.qt.io/qt-6/qpaintdevice.html#types
 pub const enums = struct {
     pub const PaintDeviceMetric = enum {
         pub const PdmWidth: i32 = 1;
@@ -177,5 +151,4 @@ pub const enums = struct {
         pub const PdmDevicePixelRatioF_EncodedA: i32 = 13;
         pub const PdmDevicePixelRatioF_EncodedB: i32 = 14;
     };
-
 };

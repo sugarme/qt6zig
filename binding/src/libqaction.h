@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QACTION_H_C_LIB
-#define QACTION_H_C_LIB
+#ifndef SRCC_LIBQACTION_H
+#define SRCC_LIBQACTION_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -17,17 +17,17 @@ extern "C" {
 #else
 typedef struct QAction QAction;
 typedef struct QActionGroup QActionGroup;
+typedef struct QChildEvent QChildEvent;
 typedef struct QEvent QEvent;
 typedef struct QFont QFont;
 typedef struct QIcon QIcon;
 typedef struct QKeySequence QKeySequence;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
 typedef struct QObject QObject;
+typedef struct QTimerEvent QTimerEvent;
 typedef struct QVariant QVariant;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
 
 QAction* QAction_new();
 QAction* QAction_new2(const libqt_string text);
@@ -35,8 +35,11 @@ QAction* QAction_new3(const QIcon* icon, const libqt_string text);
 QAction* QAction_new4(QObject* parent);
 QAction* QAction_new5(const libqt_string text, QObject* parent);
 QAction* QAction_new6(const QIcon* icon, const libqt_string text, QObject* parent);
+QMetaObject* QAction_MetaObject(const QAction* self);
+void* QAction_Metacast(QAction* self, const char* param1);
+int QAction_Metacall(QAction* self, int param1, int param2, void** param3);
 libqt_string QAction_Tr(const char* s);
-libqt_list QAction_AssociatedObjects(const QAction* self);
+libqt_list /* of QObject* */ QAction_AssociatedObjects(const QAction* self);
 void QAction_SetActionGroup(QAction* self, QActionGroup* group);
 QActionGroup* QAction_ActionGroup(const QAction* self);
 void QAction_SetIcon(QAction* self, const QIcon* icon);
@@ -57,9 +60,9 @@ void QAction_SetSeparator(QAction* self, bool b);
 bool QAction_IsSeparator(const QAction* self);
 void QAction_SetShortcut(QAction* self, const QKeySequence* shortcut);
 QKeySequence* QAction_Shortcut(const QAction* self);
-void QAction_SetShortcuts(QAction* self, const libqt_list shortcuts);
+void QAction_SetShortcuts(QAction* self, const libqt_list /* of QKeySequence* */ shortcuts);
 void QAction_SetShortcuts2(QAction* self, int shortcuts);
-libqt_list QAction_Shortcuts(const QAction* self);
+libqt_list /* of QKeySequence* */ QAction_Shortcuts(const QAction* self);
 void QAction_SetShortcutContext(QAction* self, int context);
 int QAction_ShortcutContext(const QAction* self);
 void QAction_SetAutoRepeat(QAction* self, bool autoRepeat);
@@ -109,8 +112,40 @@ libqt_string QAction_Tr3(const char* s, const char* c, int n);
 bool QAction_ShowStatusText1(QAction* self, QObject* object);
 void QAction_Triggered1(QAction* self, bool checked);
 void QAction_Connect_Triggered1(QAction* self, intptr_t slot);
+void QAction_OnMetacall(QAction* self, intptr_t slot);
+int QAction_QBaseMetacall(QAction* self, int param1, int param2, void** param3);
 void QAction_OnEvent(QAction* self, intptr_t slot);
 bool QAction_QBaseEvent(QAction* self, QEvent* param1);
+bool QAction_EventFilter(QAction* self, QObject* watched, QEvent* event);
+void QAction_OnEventFilter(QAction* self, intptr_t slot);
+bool QAction_QBaseEventFilter(QAction* self, QObject* watched, QEvent* event);
+void QAction_TimerEvent(QAction* self, QTimerEvent* event);
+void QAction_OnTimerEvent(QAction* self, intptr_t slot);
+void QAction_QBaseTimerEvent(QAction* self, QTimerEvent* event);
+void QAction_ChildEvent(QAction* self, QChildEvent* event);
+void QAction_OnChildEvent(QAction* self, intptr_t slot);
+void QAction_QBaseChildEvent(QAction* self, QChildEvent* event);
+void QAction_CustomEvent(QAction* self, QEvent* event);
+void QAction_OnCustomEvent(QAction* self, intptr_t slot);
+void QAction_QBaseCustomEvent(QAction* self, QEvent* event);
+void QAction_ConnectNotify(QAction* self, const QMetaMethod* signal);
+void QAction_OnConnectNotify(QAction* self, intptr_t slot);
+void QAction_QBaseConnectNotify(QAction* self, const QMetaMethod* signal);
+void QAction_DisconnectNotify(QAction* self, const QMetaMethod* signal);
+void QAction_OnDisconnectNotify(QAction* self, intptr_t slot);
+void QAction_QBaseDisconnectNotify(QAction* self, const QMetaMethod* signal);
+QObject* QAction_Sender(const QAction* self);
+void QAction_OnSender(const QAction* self, intptr_t slot);
+QObject* QAction_QBaseSender(const QAction* self);
+int QAction_SenderSignalIndex(const QAction* self);
+void QAction_OnSenderSignalIndex(const QAction* self, intptr_t slot);
+int QAction_QBaseSenderSignalIndex(const QAction* self);
+int QAction_Receivers(const QAction* self, const char* signal);
+void QAction_OnReceivers(const QAction* self, intptr_t slot);
+int QAction_QBaseReceivers(const QAction* self, const char* signal);
+bool QAction_IsSignalConnected(const QAction* self, const QMetaMethod* signal);
+void QAction_OnIsSignalConnected(const QAction* self, intptr_t slot);
+bool QAction_QBaseIsSignalConnected(const QAction* self, const QMetaMethod* signal);
 void QAction_Delete(QAction* self);
 
 #ifdef __cplusplus

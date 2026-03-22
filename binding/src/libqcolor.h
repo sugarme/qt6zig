@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QCOLOR_H_C_LIB
-#define QCOLOR_H_C_LIB
+#ifndef SRCC_LIBQCOLOR_H
+#define SRCC_LIBQCOLOR_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -15,14 +15,11 @@ extern "C" {
 
 #ifdef __cplusplus
 #else
+typedef struct QAnyStringView QAnyStringView;
 typedef struct QColor QColor;
 typedef struct QRgba64 QRgba64;
 typedef struct QVariant QVariant;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
 
 QColor* QColor_new(const QColor* other);
 QColor* QColor_new2(QColor* other);
@@ -40,11 +37,12 @@ QColor* QColor_new13(int r, int g, int b, int a);
 QColor* QColor_new14(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4, uint16_t a5);
 void QColor_CopyAssign(QColor* self, QColor* other);
 void QColor_MoveAssign(QColor* self, QColor* other);
+QColor* QColor_FromString(libqt_string name);
 void QColor_OperatorAssign(QColor* self, int color);
 bool QColor_IsValid(const QColor* self);
 libqt_string QColor_Name(const QColor* self);
 void QColor_SetNamedColor(QColor* self, const libqt_string name);
-libqt_list QColor_ColorNames();
+libqt_list /* of libqt_string */ QColor_ColorNames();
 int QColor_Spec(const QColor* self);
 int QColor_Alpha(const QColor* self);
 void QColor_SetAlpha(QColor* self, int alpha);
@@ -130,9 +128,9 @@ QColor* QColor_Lighter(const QColor* self);
 QColor* QColor_Darker(const QColor* self);
 bool QColor_OperatorEqual(const QColor* self, const QColor* c);
 bool QColor_OperatorNotEqual(const QColor* self, const QColor* c);
-QVariant* QColor_OperatorQVariant(const QColor* self);
+QVariant* QColor_ToQVariant(const QColor* self);
 bool QColor_IsValidColor(const libqt_string name);
-void QColor_OperatorAssign2(QColor* self, const QColor* param1);
+bool QColor_IsValidColorName(libqt_string param1);
 libqt_string QColor_Name1(const QColor* self, int format);
 void QColor_GetRgb4(const QColor* self, int* r, int* g, int* b, int* a);
 void QColor_SetRgb4(QColor* self, int r, int g, int b, int a);

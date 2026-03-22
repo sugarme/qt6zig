@@ -54,13 +54,13 @@ void QPalette_SetCurrentColorGroup(QPalette* self, int cg) {
 	self->setCurrentColorGroup(static_cast<QPalette::ColorGroup>(cg));
 }
 
-const QColor* QPalette_Color(const QPalette* self, int cg, int cr) {
+QColor* QPalette_Color(const QPalette* self, int cg, int cr) {
 	const QColor& _ret = self->color(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QColor*>(&_ret);
 }
 
-const QBrush* QPalette_Brush(const QPalette* self, int cg, int cr) {
+QBrush* QPalette_Brush(const QPalette* self, int cg, int cr) {
 	const QBrush& _ret = self->brush(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
@@ -94,139 +94,139 @@ bool QPalette_IsEqual(const QPalette* self, int cr1, int cr2) {
 	return self->isEqual(static_cast<QPalette::ColorGroup>(cr1), static_cast<QPalette::ColorGroup>(cr2));
 }
 
-const QColor* QPalette_Color2(const QPalette* self, int cr) {
+QColor* QPalette_Color2(const QPalette* self, int cr) {
 	const QColor& _ret = self->color(static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QColor*>(&_ret);
 }
 
-const QBrush* QPalette_Brush2(const QPalette* self, int cr) {
+QBrush* QPalette_Brush2(const QPalette* self, int cr) {
 	const QBrush& _ret = self->brush(static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_WindowText(const QPalette* self) {
+QBrush* QPalette_WindowText(const QPalette* self) {
 	const QBrush& _ret = self->windowText();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Button(const QPalette* self) {
+QBrush* QPalette_Button(const QPalette* self) {
 	const QBrush& _ret = self->button();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Light(const QPalette* self) {
+QBrush* QPalette_Light(const QPalette* self) {
 	const QBrush& _ret = self->light();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Dark(const QPalette* self) {
+QBrush* QPalette_Dark(const QPalette* self) {
 	const QBrush& _ret = self->dark();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Mid(const QPalette* self) {
+QBrush* QPalette_Mid(const QPalette* self) {
 	const QBrush& _ret = self->mid();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Text(const QPalette* self) {
+QBrush* QPalette_Text(const QPalette* self) {
 	const QBrush& _ret = self->text();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Base(const QPalette* self) {
+QBrush* QPalette_Base(const QPalette* self) {
 	const QBrush& _ret = self->base();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_AlternateBase(const QPalette* self) {
+QBrush* QPalette_AlternateBase(const QPalette* self) {
 	const QBrush& _ret = self->alternateBase();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_ToolTipBase(const QPalette* self) {
+QBrush* QPalette_ToolTipBase(const QPalette* self) {
 	const QBrush& _ret = self->toolTipBase();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_ToolTipText(const QPalette* self) {
+QBrush* QPalette_ToolTipText(const QPalette* self) {
 	const QBrush& _ret = self->toolTipText();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Window(const QPalette* self) {
+QBrush* QPalette_Window(const QPalette* self) {
 	const QBrush& _ret = self->window();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Midlight(const QPalette* self) {
+QBrush* QPalette_Midlight(const QPalette* self) {
 	const QBrush& _ret = self->midlight();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_BrightText(const QPalette* self) {
+QBrush* QPalette_BrightText(const QPalette* self) {
 	const QBrush& _ret = self->brightText();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_ButtonText(const QPalette* self) {
+QBrush* QPalette_ButtonText(const QPalette* self) {
 	const QBrush& _ret = self->buttonText();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Shadow(const QPalette* self) {
+QBrush* QPalette_Shadow(const QPalette* self) {
 	const QBrush& _ret = self->shadow();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Highlight(const QPalette* self) {
+QBrush* QPalette_Highlight(const QPalette* self) {
 	const QBrush& _ret = self->highlight();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_HighlightedText(const QPalette* self) {
+QBrush* QPalette_HighlightedText(const QPalette* self) {
 	const QBrush& _ret = self->highlightedText();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Link(const QPalette* self) {
+QBrush* QPalette_Link(const QPalette* self) {
 	const QBrush& _ret = self->link();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_LinkVisited(const QPalette* self) {
+QBrush* QPalette_LinkVisited(const QPalette* self) {
 	const QBrush& _ret = self->linkVisited();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_PlaceholderText(const QPalette* self) {
+QBrush* QPalette_PlaceholderText(const QPalette* self) {
 	const QBrush& _ret = self->placeholderText();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-const QBrush* QPalette_Accent(const QPalette* self) {
+QBrush* QPalette_Accent(const QPalette* self) {
 	const QBrush& _ret = self->accent();
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);

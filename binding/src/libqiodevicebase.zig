@@ -1,23 +1,24 @@
 const QtC = @import("qt6zig");
-const qtc = @import("qt6c");%%_IMPORTLIBS_%%
-%%_STRUCTDEFS_%%
+const qtc = @import("qt6c");
 
 /// https://doc.qt.io/qt-6/qiodevicebase.html
 pub const qiodevicebase = struct {
-
     /// New constructs a new QIODeviceBase object.
+    ///
+    /// ``` other: QtC.QIODeviceBase ```
     pub fn New(other: ?*anyopaque) QtC.QIODeviceBase {
         return qtc.QIODeviceBase_new(@ptrCast(other));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
+    ///
+    /// ``` self: QtC.QIODeviceBase, other: QtC.QIODeviceBase ```
     pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QIODeviceBase_CopyAssign(@ptrCast(self), @ptrCast(other));
     }
-
 };
 
-/// https://doc.qt.io/qt-6/iodevicebase.html#types
+/// https://doc.qt.io/qt-6/qiodevicebase.html#types
 pub const enums = struct {
     pub const OpenModeFlag = enum {
         pub const NotOpen: i32 = 0;
@@ -31,5 +32,4 @@ pub const enums = struct {
         pub const NewOnly: i32 = 64;
         pub const ExistingOnly: i32 = 128;
     };
-
 };

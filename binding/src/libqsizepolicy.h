@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QSIZEPOLICY_H_C_LIB
-#define QSIZEPOLICY_H_C_LIB
+#ifndef SRCC_LIBQSIZEPOLICY_H
+#define SRCC_LIBQSIZEPOLICY_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -17,11 +17,7 @@ extern "C" {
 #else
 typedef struct QSizePolicy QSizePolicy;
 typedef struct QVariant QVariant;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
 
 QSizePolicy* QSizePolicy_new(const QSizePolicy* other);
 QSizePolicy* QSizePolicy_new2(QSizePolicy* other);
@@ -44,7 +40,7 @@ void QSizePolicy_SetWidthForHeight(QSizePolicy* self, bool b);
 bool QSizePolicy_HasWidthForHeight(const QSizePolicy* self);
 bool QSizePolicy_OperatorEqual(const QSizePolicy* self, const QSizePolicy* s);
 bool QSizePolicy_OperatorNotEqual(const QSizePolicy* self, const QSizePolicy* s);
-QVariant* QSizePolicy_OperatorQVariant(const QSizePolicy* self);
+QVariant* QSizePolicy_ToQVariant(const QSizePolicy* self);
 int QSizePolicy_HorizontalStretch(const QSizePolicy* self);
 int QSizePolicy_VerticalStretch(const QSizePolicy* self);
 void QSizePolicy_SetHorizontalStretch(QSizePolicy* self, int stretchFactor);

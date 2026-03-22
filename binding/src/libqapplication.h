@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QAPPLICATION_H_C_LIB
-#define QAPPLICATION_H_C_LIB
+#ifndef SRCC_LIBQAPPLICATION_H
+#define SRCC_LIBQAPPLICATION_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -16,27 +16,27 @@ extern "C" {
 #ifdef __cplusplus
 #else
 typedef struct QApplication QApplication;
+typedef struct QChildEvent QChildEvent;
+typedef struct QCoreApplication QCoreApplication;
 typedef struct QEvent QEvent;
-typedef struct QEventLoop QEventLoop;
 typedef struct QFont QFont;
 typedef struct QFontMetrics QFontMetrics;
 typedef struct QGuiApplication QGuiApplication;
-typedef struct QLocale QLocale;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
 typedef struct QObject QObject;
 typedef struct QPalette QPalette;
 typedef struct QPoint QPoint;
 typedef struct QStyle QStyle;
+typedef struct QTimerEvent QTimerEvent;
 typedef struct QWidget QWidget;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
-
-
 
 QApplication* QApplication_new(int* argc, char** argv);
 QApplication* QApplication_new2(int* argc, char** argv, int param3);
+QMetaObject* QApplication_MetaObject(const QApplication* self);
+void* QApplication_Metacast(QApplication* self, const char* param1);
+int QApplication_Metacall(QApplication* self, int param1, int param2, void** param3);
 libqt_string QApplication_Tr(const char* s);
 QStyle* QApplication_Style();
 void QApplication_SetStyle(QStyle* style);
@@ -49,8 +49,8 @@ QFont* QApplication_Font2(const QWidget* param1);
 QFont* QApplication_Font3(const char* className);
 void QApplication_SetFont(const QFont* param1);
 QFontMetrics* QApplication_FontMetrics();
-libqt_list QApplication_AllWidgets();
-libqt_list QApplication_TopLevelWidgets();
+libqt_list /* of QWidget* */ QApplication_AllWidgets();
+libqt_list /* of QWidget* */ QApplication_TopLevelWidgets();
 QWidget* QApplication_ActivePopupWidget();
 QWidget* QApplication_ActiveModalWidget();
 QWidget* QApplication_FocusWidget();
@@ -93,13 +93,45 @@ void QApplication_SetPalette2(const QPalette* param1, const char* className);
 void QApplication_SetFont2(const QFont* param1, const char* className);
 void QApplication_Alert2(QWidget* widget, int duration);
 void QApplication_SetEffectEnabled2(int param1, bool enable);
+void QApplication_OnMetacall(QApplication* self, intptr_t slot);
+int QApplication_QBaseMetacall(QApplication* self, int param1, int param2, void** param3);
 void QApplication_OnNotify(QApplication* self, intptr_t slot);
 bool QApplication_QBaseNotify(QApplication* self, QObject* param1, QEvent* param2);
 void QApplication_OnEvent(QApplication* self, intptr_t slot);
 bool QApplication_QBaseEvent(QApplication* self, QEvent* param1);
+bool QApplication_EventFilter(QApplication* self, QObject* watched, QEvent* event);
+void QApplication_OnEventFilter(QApplication* self, intptr_t slot);
+bool QApplication_QBaseEventFilter(QApplication* self, QObject* watched, QEvent* event);
+void QApplication_TimerEvent(QApplication* self, QTimerEvent* event);
+void QApplication_OnTimerEvent(QApplication* self, intptr_t slot);
+void QApplication_QBaseTimerEvent(QApplication* self, QTimerEvent* event);
+void QApplication_ChildEvent(QApplication* self, QChildEvent* event);
+void QApplication_OnChildEvent(QApplication* self, intptr_t slot);
+void QApplication_QBaseChildEvent(QApplication* self, QChildEvent* event);
+void QApplication_CustomEvent(QApplication* self, QEvent* event);
+void QApplication_OnCustomEvent(QApplication* self, intptr_t slot);
+void QApplication_QBaseCustomEvent(QApplication* self, QEvent* event);
+void QApplication_ConnectNotify(QApplication* self, const QMetaMethod* signal);
+void QApplication_OnConnectNotify(QApplication* self, intptr_t slot);
+void QApplication_QBaseConnectNotify(QApplication* self, const QMetaMethod* signal);
+void QApplication_DisconnectNotify(QApplication* self, const QMetaMethod* signal);
+void QApplication_OnDisconnectNotify(QApplication* self, intptr_t slot);
+void QApplication_QBaseDisconnectNotify(QApplication* self, const QMetaMethod* signal);
 void* QApplication_ResolveInterface(const QApplication* self, const char* name, int revision);
 void QApplication_OnResolveInterface(const QApplication* self, intptr_t slot);
 void* QApplication_QBaseResolveInterface(const QApplication* self, const char* name, int revision);
+QObject* QApplication_Sender(const QApplication* self);
+void QApplication_OnSender(const QApplication* self, intptr_t slot);
+QObject* QApplication_QBaseSender(const QApplication* self);
+int QApplication_SenderSignalIndex(const QApplication* self);
+void QApplication_OnSenderSignalIndex(const QApplication* self, intptr_t slot);
+int QApplication_QBaseSenderSignalIndex(const QApplication* self);
+int QApplication_Receivers(const QApplication* self, const char* signal);
+void QApplication_OnReceivers(const QApplication* self, intptr_t slot);
+int QApplication_QBaseReceivers(const QApplication* self, const char* signal);
+bool QApplication_IsSignalConnected(const QApplication* self, const QMetaMethod* signal);
+void QApplication_OnIsSignalConnected(const QApplication* self, intptr_t slot);
+bool QApplication_QBaseIsSignalConnected(const QApplication* self, const QMetaMethod* signal);
 void QApplication_Delete(QApplication* self);
 
 #ifdef __cplusplus

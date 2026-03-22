@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QNAMESPACE_H_C_LIB
-#define QNAMESPACE_H_C_LIB
+#ifndef SRCC_LIBQNAMESPACE_H
+#define SRCC_LIBQNAMESPACE_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -18,14 +18,10 @@ extern "C" {
 typedef Qt::Disambiguated_t Disambiguated_t;
 #endif
 #else
+typedef struct Disambiguated_t Disambiguated_t;
 typedef struct QInternal QInternal;
 typedef struct QKeyCombination QKeyCombination;
-typedef struct Disambiguated_t Disambiguated_t;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
 
 Disambiguated_t* Disambiguated_t_new(const Disambiguated_t* other);
 Disambiguated_t* Disambiguated_t_new2(Disambiguated_t* other);
@@ -37,12 +33,9 @@ void Disambiguated_t_Delete(Disambiguated_t* self);
 
 QInternal* QInternal_new(const QInternal* other);
 QInternal* QInternal_new2(QInternal* other);
-QInternal* QInternal_new3();
-QInternal* QInternal_new4(const QInternal* param1);
 void QInternal_CopyAssign(QInternal* self, QInternal* other);
 void QInternal_MoveAssign(QInternal* self, QInternal* other);
 bool QInternal_ActivateCallbacks(int param1, void** param2);
-void QInternal_OperatorAssign(QInternal* self, const QInternal* param1);
 void QInternal_Delete(QInternal* self);
 
 QKeyCombination* QKeyCombination_new(const QKeyCombination* other);
@@ -60,7 +53,7 @@ int QKeyCombination_KeyboardModifiers(const QKeyCombination* self);
 int QKeyCombination_Key(const QKeyCombination* self);
 QKeyCombination* QKeyCombination_FromCombined(int combined);
 int QKeyCombination_ToCombined(const QKeyCombination* self);
-int QKeyCombination_Operatorint(const QKeyCombination* self);
+int QKeyCombination_ToInt(const QKeyCombination* self);
 void QKeyCombination_Delete(QKeyCombination* self);
 
 #ifdef __cplusplus

@@ -1,45 +1,56 @@
 const QtC = @import("qt6zig");
-const qtc = @import("qt6c");%%_IMPORTLIBS_%%
-%%_STRUCTDEFS_%%
+const qtc = @import("qt6c");
+const qnamespace_enums = enums;
 
-/// https://doc.qt.io/qt-6/disambiguated_t.html
+/// https://doc.qt.io/qt-6/disambiguated-t.html
 pub const disambiguated_t = struct {
-
     /// New constructs a new Qt::Disambiguated_t object.
+    ///
+    /// ``` other: QtC.Disambiguated_t ```
     pub fn New(other: ?*anyopaque) QtC.Disambiguated_t {
         return qtc.Disambiguated_t_new(@ptrCast(other));
     }
 
-
-    /// New2 constructs a new Qt::Disambiguated_t object.
+    /// New2 constructs a new Qt::Disambiguated_t object and invalidates the source Qt::Disambiguated_t object.
+    ///
+    /// ``` other: QtC.Disambiguated_t ```
     pub fn New2(other: ?*anyopaque) QtC.Disambiguated_t {
         return qtc.Disambiguated_t_new2(@ptrCast(other));
     }
 
-
     /// New3 constructs a new Qt::Disambiguated_t object.
+    ///
+    ///
     pub fn New3() QtC.Disambiguated_t {
         return qtc.Disambiguated_t_new3();
     }
 
-
     /// New4 constructs a new Qt::Disambiguated_t object.
+    ///
+    /// ``` param1: QtC.Disambiguated_t ```
     pub fn New4(param1: ?*anyopaque) QtC.Disambiguated_t {
         return qtc.Disambiguated_t_new4(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
+    ///
+    /// ``` self: QtC.Disambiguated_t, other: QtC.Disambiguated_t ```
     pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.Disambiguated_t_CopyAssign(@ptrCast(self), @ptrCast(other));
     }
 
     /// MoveAssign moves `other` into `self` and invalidates `other`.
+    ///
+    /// ``` self: QtC.Disambiguated_t, other: QtC.Disambiguated_t ```
     pub fn MoveAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.Disambiguated_t_MoveAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
+    /// [Qt documentation](https://doc.qt.io/qt-6/disambiguated-t.html#dtor.Disambiguated_t)
+    ///
     /// Delete this object from C++ memory.
+    ///
+    /// ``` self: QtC.Disambiguated_t ```
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.Disambiguated_t_Delete(@ptrCast(self));
     }
@@ -47,50 +58,46 @@ pub const disambiguated_t = struct {
 
 /// https://doc.qt.io/qt-6/qinternal.html
 pub const qinternal = struct {
-
     /// New constructs a new QInternal object.
+    ///
+    /// ``` other: QtC.QInternal ```
     pub fn New(other: ?*anyopaque) QtC.QInternal {
         return qtc.QInternal_new(@ptrCast(other));
     }
 
-
-    /// New2 constructs a new QInternal object.
+    /// New2 constructs a new QInternal object and invalidates the source QInternal object.
+    ///
+    /// ``` other: QtC.QInternal ```
     pub fn New2(other: ?*anyopaque) QtC.QInternal {
         return qtc.QInternal_new2(@ptrCast(other));
     }
 
-
-    /// New3 constructs a new QInternal object.
-    pub fn New3() QtC.QInternal {
-        return qtc.QInternal_new3();
-    }
-
-
-    /// New4 constructs a new QInternal object.
-    pub fn New4(param1: ?*anyopaque) QtC.QInternal {
-        return qtc.QInternal_new4(@ptrCast(param1));
-    }
-
     /// CopyAssign shallow copies `other` into `self`.
+    ///
+    /// ``` self: QtC.QInternal, other: QtC.QInternal ```
     pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QInternal_CopyAssign(@ptrCast(self), @ptrCast(other));
     }
 
     /// MoveAssign moves `other` into `self` and invalidates `other`.
+    ///
+    /// ``` self: QtC.QInternal, other: QtC.QInternal ```
     pub fn MoveAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QInternal_MoveAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
+    /// [Qt documentation](https://doc.qt.io/qt-6/qinternal.html#activateCallbacks)
+    ///
+    /// ``` param1: qnamespace_enums.Callback, param2: ?*anyopaque ```
     pub fn ActivateCallbacks(param1: i32, param2: ?*anyopaque) bool {
-        return qtc.QInternal_ActivateCallbacks(@intCast(param1), @ptrCast(param2));
+        return qtc.QInternal_ActivateCallbacks(@intCast(param1), param2);
     }
 
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QInternal_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
-
+    /// [Qt documentation](https://doc.qt.io/qt-6/qinternal.html#dtor.QInternal)
+    ///
     /// Delete this object from C++ memory.
+    ///
+    /// ``` self: QtC.QInternal ```
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QInternal_Delete(@ptrCast(self));
     }
@@ -98,98 +105,133 @@ pub const qinternal = struct {
 
 /// https://doc.qt.io/qt-6/qkeycombination.html
 pub const qkeycombination = struct {
-
     /// New constructs a new QKeyCombination object.
+    ///
+    /// ``` other: QtC.QKeyCombination ```
     pub fn New(other: ?*anyopaque) QtC.QKeyCombination {
         return qtc.QKeyCombination_new(@ptrCast(other));
     }
 
-
-    /// New2 constructs a new QKeyCombination object.
+    /// New2 constructs a new QKeyCombination object and invalidates the source QKeyCombination object.
+    ///
+    /// ``` other: QtC.QKeyCombination ```
     pub fn New2(other: ?*anyopaque) QtC.QKeyCombination {
         return qtc.QKeyCombination_new2(@ptrCast(other));
     }
 
-
     /// New3 constructs a new QKeyCombination object.
+    ///
+    ///
     pub fn New3() QtC.QKeyCombination {
         return qtc.QKeyCombination_new3();
     }
 
-
     /// New4 constructs a new QKeyCombination object.
-    pub fn New4(modifiers: i32) QtC.QKeyCombination {
+    ///
+    /// ``` modifiers: flag of qnamespace_enums.Modifier ```
+    pub fn New4(modifiers: i64) QtC.QKeyCombination {
         return qtc.QKeyCombination_new4(@intCast(modifiers));
     }
 
-
     /// New5 constructs a new QKeyCombination object.
+    ///
+    /// ``` modifiers: flag of qnamespace_enums.KeyboardModifier ```
     pub fn New5(modifiers: i64) QtC.QKeyCombination {
         return qtc.QKeyCombination_new5(@intCast(modifiers));
     }
 
-
     /// New6 constructs a new QKeyCombination object.
+    ///
+    /// ``` param1: QtC.QKeyCombination ```
     pub fn New6(param1: ?*anyopaque) QtC.QKeyCombination {
         return qtc.QKeyCombination_new6(@ptrCast(param1));
     }
 
-
     /// New7 constructs a new QKeyCombination object.
+    ///
+    /// ``` key: qnamespace_enums.Key ```
     pub fn New7(key: i32) QtC.QKeyCombination {
         return qtc.QKeyCombination_new7(@intCast(key));
     }
 
-
     /// New8 constructs a new QKeyCombination object.
-    pub fn New8(modifiers: i32, key: i32) QtC.QKeyCombination {
+    ///
+    /// ``` modifiers: flag of qnamespace_enums.Modifier, key: qnamespace_enums.Key ```
+    pub fn New8(modifiers: i64, key: i32) QtC.QKeyCombination {
         return qtc.QKeyCombination_new8(@intCast(modifiers), @intCast(key));
     }
 
-
     /// New9 constructs a new QKeyCombination object.
+    ///
+    /// ``` modifiers: flag of qnamespace_enums.KeyboardModifier, key: qnamespace_enums.Key ```
     pub fn New9(modifiers: i64, key: i32) QtC.QKeyCombination {
         return qtc.QKeyCombination_new9(@intCast(modifiers), @intCast(key));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
+    ///
+    /// ``` self: QtC.QKeyCombination, other: QtC.QKeyCombination ```
     pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QKeyCombination_CopyAssign(@ptrCast(self), @ptrCast(other));
     }
 
     /// MoveAssign moves `other` into `self` and invalidates `other`.
+    ///
+    /// ``` self: QtC.QKeyCombination, other: QtC.QKeyCombination ```
     pub fn MoveAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QKeyCombination_MoveAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
-    pub fn KeyboardModifiers(self: ?*anyopaque, ) i64 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qkeycombination.html#keyboardModifiers)
+    ///
+    /// ``` self: QtC.QKeyCombination ```
+    ///
+    /// Returns: ``` flag of qnamespace_enums.KeyboardModifier ```
+    pub fn KeyboardModifiers(self: ?*anyopaque) i64 {
         return qtc.QKeyCombination_KeyboardModifiers(@ptrCast(self));
     }
 
-    pub fn Key(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qkeycombination.html#key)
+    ///
+    /// ``` self: QtC.QKeyCombination ```
+    ///
+    /// Returns: ``` qnamespace_enums.Key ```
+    pub fn Key(self: ?*anyopaque) i32 {
         return qtc.QKeyCombination_Key(@ptrCast(self));
     }
 
+    /// [Qt documentation](https://doc.qt.io/qt-6/qkeycombination.html#fromCombined)
+    ///
+    /// ``` combined: i32 ```
     pub fn FromCombined(combined: i32) QtC.QKeyCombination {
-        return qtc.QKeyCombination_FromCombined(combined);
+        return qtc.QKeyCombination_FromCombined(@intCast(combined));
     }
 
-    pub fn ToCombined(self: ?*anyopaque, ) i32 {
+    /// [Qt documentation](https://doc.qt.io/qt-6/qkeycombination.html#toCombined)
+    ///
+    /// ``` self: QtC.QKeyCombination ```
+    pub fn ToCombined(self: ?*anyopaque) i32 {
         return qtc.QKeyCombination_ToCombined(@ptrCast(self));
     }
 
-    pub fn Operatorint(self: ?*anyopaque, ) i32 {
-        return qtc.QKeyCombination_Operatorint(@ptrCast(self));
+    /// [Qt documentation](https://doc.qt.io/qt-6/qkeycombination.html#operator)
+    ///
+    /// ``` self: QtC.QKeyCombination ```
+    pub fn ToInt(self: ?*anyopaque) i32 {
+        return qtc.QKeyCombination_ToInt(@ptrCast(self));
     }
 
+    /// [Qt documentation](https://doc.qt.io/qt-6/qkeycombination.html#dtor.QKeyCombination)
+    ///
     /// Delete this object from C++ memory.
+    ///
+    /// ``` self: QtC.QKeyCombination ```
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QKeyCombination_Delete(@ptrCast(self));
     }
 };
 
-/// https://doc.qt.io/qt-6/namespace.html#types
+/// https://doc.qt.io/qt-6/qt.html#types
 pub const enums = struct {
     pub const GlobalColor = enum {
         pub const Color0: i32 = 0;
@@ -221,41 +263,41 @@ pub const enums = struct {
     };
 
     pub const MouseButton = enum {
-        pub const NoButton: i64 = 0;
-        pub const LeftButton: i64 = 1;
-        pub const RightButton: i64 = 2;
-        pub const MiddleButton: i64 = 4;
-        pub const BackButton: i64 = 8;
-        pub const XButton1: i64 = 8;
-        pub const ExtraButton1: i64 = 8;
-        pub const ForwardButton: i64 = 16;
-        pub const XButton2: i64 = 16;
-        pub const ExtraButton2: i64 = 16;
-        pub const TaskButton: i64 = 32;
-        pub const ExtraButton3: i64 = 32;
-        pub const ExtraButton4: i64 = 64;
-        pub const ExtraButton5: i64 = 128;
-        pub const ExtraButton6: i64 = 256;
-        pub const ExtraButton7: i64 = 512;
-        pub const ExtraButton8: i64 = 1024;
-        pub const ExtraButton9: i64 = 2048;
-        pub const ExtraButton10: i64 = 4096;
-        pub const ExtraButton11: i64 = 8192;
-        pub const ExtraButton12: i64 = 16384;
-        pub const ExtraButton13: i64 = 32768;
-        pub const ExtraButton14: i64 = 65536;
-        pub const ExtraButton15: i64 = 131072;
-        pub const ExtraButton16: i64 = 262144;
-        pub const ExtraButton17: i64 = 524288;
-        pub const ExtraButton18: i64 = 1048576;
-        pub const ExtraButton19: i64 = 2097152;
-        pub const ExtraButton20: i64 = 4194304;
-        pub const ExtraButton21: i64 = 8388608;
-        pub const ExtraButton22: i64 = 16777216;
-        pub const ExtraButton23: i64 = 33554432;
-        pub const ExtraButton24: i64 = 67108864;
-        pub const AllButtons: i64 = 134217727;
-        pub const MaxMouseButton: i64 = 67108864;
+        pub const NoButton: i32 = 0;
+        pub const LeftButton: i32 = 1;
+        pub const RightButton: i32 = 2;
+        pub const MiddleButton: i32 = 4;
+        pub const BackButton: i32 = 8;
+        pub const XButton1: i32 = 8;
+        pub const ExtraButton1: i32 = 8;
+        pub const ForwardButton: i32 = 16;
+        pub const XButton2: i32 = 16;
+        pub const ExtraButton2: i32 = 16;
+        pub const TaskButton: i32 = 32;
+        pub const ExtraButton3: i32 = 32;
+        pub const ExtraButton4: i32 = 64;
+        pub const ExtraButton5: i32 = 128;
+        pub const ExtraButton6: i32 = 256;
+        pub const ExtraButton7: i32 = 512;
+        pub const ExtraButton8: i32 = 1024;
+        pub const ExtraButton9: i32 = 2048;
+        pub const ExtraButton10: i32 = 4096;
+        pub const ExtraButton11: i32 = 8192;
+        pub const ExtraButton12: i32 = 16384;
+        pub const ExtraButton13: i32 = 32768;
+        pub const ExtraButton14: i32 = 65536;
+        pub const ExtraButton15: i32 = 131072;
+        pub const ExtraButton16: i32 = 262144;
+        pub const ExtraButton17: i32 = 524288;
+        pub const ExtraButton18: i32 = 1048576;
+        pub const ExtraButton19: i32 = 2097152;
+        pub const ExtraButton20: i32 = 4194304;
+        pub const ExtraButton21: i32 = 8388608;
+        pub const ExtraButton22: i32 = 16777216;
+        pub const ExtraButton23: i32 = 33554432;
+        pub const ExtraButton24: i32 = 67108864;
+        pub const AllButtons: i32 = 134217727;
+        pub const MaxMouseButton: i32 = 67108864;
         pub const MouseButtonMask: i64 = 4294967295;
     };
 
@@ -348,43 +390,43 @@ pub const enums = struct {
     };
 
     pub const WindowType = enum {
-        pub const Widget: i64 = 0;
-        pub const Window: i64 = 1;
-        pub const Dialog: i64 = 3;
-        pub const Sheet: i64 = 5;
-        pub const Drawer: i64 = 7;
-        pub const Popup: i64 = 9;
-        pub const Tool: i64 = 11;
-        pub const ToolTip: i64 = 13;
-        pub const SplashScreen: i64 = 15;
-        pub const Desktop: i64 = 17;
-        pub const SubWindow: i64 = 18;
-        pub const ForeignWindow: i64 = 33;
-        pub const CoverWindow: i64 = 65;
-        pub const WindowType_Mask: i64 = 255;
-        pub const MSWindowsFixedSizeDialogHint: i64 = 256;
-        pub const MSWindowsOwnDC: i64 = 512;
-        pub const BypassWindowManagerHint: i64 = 1024;
-        pub const X11BypassWindowManagerHint: i64 = 1024;
-        pub const FramelessWindowHint: i64 = 2048;
-        pub const WindowTitleHint: i64 = 4096;
-        pub const WindowSystemMenuHint: i64 = 8192;
-        pub const WindowMinimizeButtonHint: i64 = 16384;
-        pub const WindowMaximizeButtonHint: i64 = 32768;
-        pub const WindowMinMaxButtonsHint: i64 = 49152;
-        pub const WindowContextHelpButtonHint: i64 = 65536;
-        pub const WindowShadeButtonHint: i64 = 131072;
-        pub const WindowStaysOnTopHint: i64 = 262144;
-        pub const WindowTransparentForInput: i64 = 524288;
-        pub const WindowOverridesSystemGestures: i64 = 1048576;
-        pub const WindowDoesNotAcceptFocus: i64 = 2097152;
-        pub const MaximizeUsingFullscreenGeometryHint: i64 = 4194304;
-        pub const CustomizeWindowHint: i64 = 33554432;
-        pub const WindowStaysOnBottomHint: i64 = 67108864;
-        pub const WindowCloseButtonHint: i64 = 134217728;
-        pub const MacWindowToolBarButtonHint: i64 = 268435456;
-        pub const BypassGraphicsProxyWidget: i64 = 536870912;
-        pub const NoDropShadowWindowHint: i64 = 1073741824;
+        pub const Widget: i32 = 0;
+        pub const Window: i32 = 1;
+        pub const Dialog: i32 = 3;
+        pub const Sheet: i32 = 5;
+        pub const Drawer: i32 = 7;
+        pub const Popup: i32 = 9;
+        pub const Tool: i32 = 11;
+        pub const ToolTip: i32 = 13;
+        pub const SplashScreen: i32 = 15;
+        pub const Desktop: i32 = 17;
+        pub const SubWindow: i32 = 18;
+        pub const ForeignWindow: i32 = 33;
+        pub const CoverWindow: i32 = 65;
+        pub const WindowType_Mask: i32 = 255;
+        pub const MSWindowsFixedSizeDialogHint: i32 = 256;
+        pub const MSWindowsOwnDC: i32 = 512;
+        pub const BypassWindowManagerHint: i32 = 1024;
+        pub const X11BypassWindowManagerHint: i32 = 1024;
+        pub const FramelessWindowHint: i32 = 2048;
+        pub const WindowTitleHint: i32 = 4096;
+        pub const WindowSystemMenuHint: i32 = 8192;
+        pub const WindowMinimizeButtonHint: i32 = 16384;
+        pub const WindowMaximizeButtonHint: i32 = 32768;
+        pub const WindowMinMaxButtonsHint: i32 = 49152;
+        pub const WindowContextHelpButtonHint: i32 = 65536;
+        pub const WindowShadeButtonHint: i32 = 131072;
+        pub const WindowStaysOnTopHint: i32 = 262144;
+        pub const WindowTransparentForInput: i32 = 524288;
+        pub const WindowOverridesSystemGestures: i32 = 1048576;
+        pub const WindowDoesNotAcceptFocus: i32 = 2097152;
+        pub const MaximizeUsingFullscreenGeometryHint: i32 = 4194304;
+        pub const CustomizeWindowHint: i32 = 33554432;
+        pub const WindowStaysOnBottomHint: i32 = 67108864;
+        pub const WindowCloseButtonHint: i32 = 134217728;
+        pub const MacWindowToolBarButtonHint: i32 = 268435456;
+        pub const BypassGraphicsProxyWidget: i32 = 536870912;
+        pub const NoDropShadowWindowHint: i32 = 1073741824;
         pub const WindowFullscreenButtonHint: i64 = 2147483648;
     };
 
@@ -1052,13 +1094,13 @@ pub const enums = struct {
     };
 
     pub const KeyboardModifier = enum {
-        pub const NoModifier: i64 = 0;
-        pub const ShiftModifier: i64 = 33554432;
-        pub const ControlModifier: i64 = 67108864;
-        pub const AltModifier: i64 = 134217728;
-        pub const MetaModifier: i64 = 268435456;
-        pub const KeypadModifier: i64 = 536870912;
-        pub const GroupSwitchModifier: i64 = 1073741824;
+        pub const NoModifier: i32 = 0;
+        pub const ShiftModifier: i32 = 33554432;
+        pub const ControlModifier: i32 = 67108864;
+        pub const AltModifier: i32 = 134217728;
+        pub const MetaModifier: i32 = 268435456;
+        pub const KeypadModifier: i32 = 536870912;
+        pub const GroupSwitchModifier: i32 = 1073741824;
         pub const KeyboardModifierMask: i64 = 4261412864;
     };
 
@@ -1067,7 +1109,7 @@ pub const enums = struct {
         pub const SHIFT: i32 = 33554432;
         pub const CTRL: i32 = 67108864;
         pub const ALT: i32 = 134217728;
-        pub const MODIFIER_MASK: i32 = -33554432;
+        pub const MODIFIER_MASK: i64 = 4261412864;
     };
 
     pub const ArrowType = enum {
@@ -1340,51 +1382,51 @@ pub const enums = struct {
     };
 
     pub const InputMethodQuery = enum {
-        pub const ImEnabled: i64 = 1;
-        pub const ImCursorRectangle: i64 = 2;
-        pub const ImFont: i64 = 4;
-        pub const ImCursorPosition: i64 = 8;
-        pub const ImSurroundingText: i64 = 16;
-        pub const ImCurrentSelection: i64 = 32;
-        pub const ImMaximumTextLength: i64 = 64;
-        pub const ImAnchorPosition: i64 = 128;
-        pub const ImHints: i64 = 256;
-        pub const ImPreferredLanguage: i64 = 512;
-        pub const ImAbsolutePosition: i64 = 1024;
-        pub const ImTextBeforeCursor: i64 = 2048;
-        pub const ImTextAfterCursor: i64 = 4096;
-        pub const ImEnterKeyType: i64 = 8192;
-        pub const ImAnchorRectangle: i64 = 16384;
-        pub const ImInputItemClipRectangle: i64 = 32768;
-        pub const ImReadOnly: i64 = 65536;
+        pub const ImEnabled: i32 = 1;
+        pub const ImCursorRectangle: i32 = 2;
+        pub const ImFont: i32 = 4;
+        pub const ImCursorPosition: i32 = 8;
+        pub const ImSurroundingText: i32 = 16;
+        pub const ImCurrentSelection: i32 = 32;
+        pub const ImMaximumTextLength: i32 = 64;
+        pub const ImAnchorPosition: i32 = 128;
+        pub const ImHints: i32 = 256;
+        pub const ImPreferredLanguage: i32 = 512;
+        pub const ImAbsolutePosition: i32 = 1024;
+        pub const ImTextBeforeCursor: i32 = 2048;
+        pub const ImTextAfterCursor: i32 = 4096;
+        pub const ImEnterKeyType: i32 = 8192;
+        pub const ImAnchorRectangle: i32 = 16384;
+        pub const ImInputItemClipRectangle: i32 = 32768;
+        pub const ImReadOnly: i32 = 65536;
         pub const ImPlatformData: i64 = 2147483648;
-        pub const ImQueryInput: i64 = 16570;
+        pub const ImQueryInput: i32 = 16570;
         pub const ImQueryAll: i64 = 4294967295;
     };
 
     pub const InputMethodHint = enum {
-        pub const ImhNone: i64 = 0;
-        pub const ImhHiddenText: i64 = 1;
-        pub const ImhSensitiveData: i64 = 2;
-        pub const ImhNoAutoUppercase: i64 = 4;
-        pub const ImhPreferNumbers: i64 = 8;
-        pub const ImhPreferUppercase: i64 = 16;
-        pub const ImhPreferLowercase: i64 = 32;
-        pub const ImhNoPredictiveText: i64 = 64;
-        pub const ImhDate: i64 = 128;
-        pub const ImhTime: i64 = 256;
-        pub const ImhPreferLatin: i64 = 512;
-        pub const ImhMultiLine: i64 = 1024;
-        pub const ImhNoEditMenu: i64 = 2048;
-        pub const ImhNoTextHandles: i64 = 4096;
-        pub const ImhDigitsOnly: i64 = 65536;
-        pub const ImhFormattedNumbersOnly: i64 = 131072;
-        pub const ImhUppercaseOnly: i64 = 262144;
-        pub const ImhLowercaseOnly: i64 = 524288;
-        pub const ImhDialableCharactersOnly: i64 = 1048576;
-        pub const ImhEmailCharactersOnly: i64 = 2097152;
-        pub const ImhUrlCharactersOnly: i64 = 4194304;
-        pub const ImhLatinOnly: i64 = 8388608;
+        pub const ImhNone: i32 = 0;
+        pub const ImhHiddenText: i32 = 1;
+        pub const ImhSensitiveData: i32 = 2;
+        pub const ImhNoAutoUppercase: i32 = 4;
+        pub const ImhPreferNumbers: i32 = 8;
+        pub const ImhPreferUppercase: i32 = 16;
+        pub const ImhPreferLowercase: i32 = 32;
+        pub const ImhNoPredictiveText: i32 = 64;
+        pub const ImhDate: i32 = 128;
+        pub const ImhTime: i32 = 256;
+        pub const ImhPreferLatin: i32 = 512;
+        pub const ImhMultiLine: i32 = 1024;
+        pub const ImhNoEditMenu: i32 = 2048;
+        pub const ImhNoTextHandles: i32 = 4096;
+        pub const ImhDigitsOnly: i32 = 65536;
+        pub const ImhFormattedNumbersOnly: i32 = 131072;
+        pub const ImhUppercaseOnly: i32 = 262144;
+        pub const ImhLowercaseOnly: i32 = 524288;
+        pub const ImhDialableCharactersOnly: i32 = 1048576;
+        pub const ImhEmailCharactersOnly: i32 = 2097152;
+        pub const ImhUrlCharactersOnly: i32 = 4194304;
+        pub const ImhLatinOnly: i32 = 8388608;
         pub const ImhExclusiveInputMask: i64 = 4294901760;
     };
 
@@ -1563,12 +1605,12 @@ pub const enums = struct {
     };
 
     pub const GestureType = enum {
-        pub const TapGesture: i64 = 1;
-        pub const TapAndHoldGesture: i64 = 2;
-        pub const PanGesture: i64 = 3;
-        pub const PinchGesture: i64 = 4;
-        pub const SwipeGesture: i64 = 5;
-        pub const CustomGesture: i64 = 256;
+        pub const TapGesture: i32 = 1;
+        pub const TapAndHoldGesture: i32 = 2;
+        pub const PanGesture: i32 = 3;
+        pub const PinchGesture: i32 = 4;
+        pub const SwipeGesture: i32 = 5;
+        pub const CustomGesture: i32 = 256;
         pub const LastGestureType: i64 = 4294967295;
     };
 
@@ -1688,5 +1730,4 @@ pub const enums = struct {
         pub const EventNotifyCallback: i32 = 0;
         pub const LastCallback: i32 = 1;
     };
-
 };

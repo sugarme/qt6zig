@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QKEYSEQUENCE_H_C_LIB
-#define QKEYSEQUENCE_H_C_LIB
+#ifndef SRCC_LIBQKEYSEQUENCE_H
+#define SRCC_LIBQKEYSEQUENCE_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -18,11 +18,7 @@ extern "C" {
 typedef struct QKeyCombination QKeyCombination;
 typedef struct QKeySequence QKeySequence;
 typedef struct QVariant QVariant;
-typedef struct _GUID _GUID;
-typedef struct type_info type_info;
 #endif
-
-
 
 QKeySequence* QKeySequence_new();
 QKeySequence* QKeySequence_new2(const libqt_string key);
@@ -41,12 +37,12 @@ int QKeySequence_Count(const QKeySequence* self);
 bool QKeySequence_IsEmpty(const QKeySequence* self);
 libqt_string QKeySequence_ToString(const QKeySequence* self);
 QKeySequence* QKeySequence_FromString(const libqt_string str);
-libqt_list QKeySequence_ListFromString(const libqt_string str);
-libqt_string QKeySequence_ListToString(const libqt_list list);
+libqt_list /* of QKeySequence* */ QKeySequence_ListFromString(const libqt_string str);
+libqt_string QKeySequence_ListToString(const libqt_list /* of QKeySequence* */ list);
 int QKeySequence_Matches(const QKeySequence* self, const QKeySequence* seq);
 QKeySequence* QKeySequence_Mnemonic(const libqt_string text);
-libqt_list QKeySequence_KeyBindings(int key);
-QVariant* QKeySequence_OperatorQVariant(const QKeySequence* self);
+libqt_list /* of QKeySequence* */ QKeySequence_KeyBindings(int key);
+QVariant* QKeySequence_ToQVariant(const QKeySequence* self);
 QKeyCombination* QKeySequence_OperatorSubscript(const QKeySequence* self, unsigned int i);
 void QKeySequence_OperatorAssign(QKeySequence* self, const QKeySequence* other);
 void QKeySequence_Swap(QKeySequence* self, QKeySequence* other);
@@ -59,8 +55,8 @@ bool QKeySequence_OperatorGreaterOrEqual(const QKeySequence* self, const QKeySeq
 bool QKeySequence_IsDetached(const QKeySequence* self);
 libqt_string QKeySequence_ToString1(const QKeySequence* self, int format);
 QKeySequence* QKeySequence_FromString2(const libqt_string str, int format);
-libqt_list QKeySequence_ListFromString2(const libqt_string str, int format);
-libqt_string QKeySequence_ListToString2(const libqt_list list, int format);
+libqt_list /* of QKeySequence* */ QKeySequence_ListFromString2(const libqt_string str, int format);
+libqt_string QKeySequence_ListToString2(const libqt_list /* of QKeySequence* */ list, int format);
 void QKeySequence_Delete(QKeySequence* self);
 
 #ifdef __cplusplus
