@@ -345,6 +345,17 @@ fn emitSingleParamForwarding(alloc: Allocator, p: CppParameter, state: *const Gl
         return try std.fmt.allocPrint(alloc, "static_cast<{s}>({s})", .{ qualified_name, p.parameter_name });
     }
 
+    // QList/QStringList: C ABI receives libqt_list, need to reconstruct QList
+    if (cabi_header.isQListType(pt)) {
+        // For now, pass a default-constructed list (full conversion TODO)
+        return try std.fmt.allocPrint(alloc, "{s}()", .{pt});
+    }
+
+    // QMap/QHash: C ABI receives libqt_map
+    if (cabi_header.isQMapType(pt)) {
+        return try std.fmt.allocPrint(alloc, "{s}()", .{pt});
+    }
+
     // By-reference: dereference the pointer we received
     if (p.by_ref and !p.pointer) {
         if (state.isKnownClass(pt)) {
