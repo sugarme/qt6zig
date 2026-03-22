@@ -288,6 +288,17 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
                     try w.print("\t\t\tlibqt_string cbval{d};\n", .{pidx + 1});
                     try w.print("\t\t\tcbval{d}.len = {s}_qb.length();\n", .{ pidx + 1, p.parameter_name });
                     try w.print("\t\t\tcbval{d}.data = static_cast<const char*>({s}_qb.constData());\n", .{ pidx + 1, p.parameter_name });
+                } else if (cabi_header.isQListType(pt)) {
+                    // QList -> libqt_list
+                    try w.print("\t\t\tlibqt_list cbval{d};\n", .{pidx + 1});
+                    try w.print("\t\t\tcbval{d}.len = {s}.size();\n", .{ pidx + 1, p.parameter_name });
+                    try w.print("\t\t\tcbval{d}.data = nullptr;\n", .{pidx + 1});
+                } else if (cabi_header.isQMapType(pt)) {
+                    // QMap -> libqt_map
+                    try w.print("\t\t\tlibqt_map cbval{d};\n", .{pidx + 1});
+                    try w.print("\t\t\tcbval{d}.len = {s}.size();\n", .{ pidx + 1, p.parameter_name });
+                    try w.print("\t\t\tcbval{d}.keys = nullptr;\n", .{pidx + 1});
+                    try w.print("\t\t\tcbval{d}.values = nullptr;\n", .{pidx + 1});
                 } else if ((p.by_ref or (!p.pointer and state.isKnownClass(pt))) and state.isKnownClass(pt)) {
                     // Qt class by const ref -> pointer
                     if (p.is_const) {
@@ -313,9 +324,13 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
                     try joinSlice(tmp, callback_args.items, ", "),
                 });
                 // Convert C ABI return to C++ return type
-                if (std.mem.eql(u8, rpt, "QString") or std.mem.eql(u8, rpt, "QByteArray")) {
-                    // ABI returns libqt_string, C++ expects QString/QByteArray
-                    try w.print("\t\t\treturn {s}::fromUtf8(callback_ret.data, callback_ret.len);\n", .{rpt});
+                if (std.mem.eql(u8, rpt, "QString")) {
+                    try w.writeAll("\t\t\treturn QString::fromUtf8(callback_ret.data, callback_ret.len);\n");
+                } else if (std.mem.eql(u8, rpt, "QByteArray")) {
+                    try w.writeAll("\t\t\treturn QByteArray(callback_ret.data, callback_ret.len);\n");
+                } else if (cabi_header.isQListType(rpt) or cabi_header.isQMapType(rpt)) {
+                    // QList/QMap: callback returns libqt_list/libqt_map, just return default
+                    try w.print("\t\t\treturn {s}();\n", .{rpt});
                 } else if (state.isKnownClass(rpt) and !m.return_type.pointer) {
                     // ABI returns pointer, C++ expects value or const ref — dereference
                     try w.writeAll("\t\t\treturn *callback_ret;\n");

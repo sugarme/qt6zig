@@ -39,6 +39,11 @@ fn allowType(p: ir.CppParameter, is_return_type: bool) bool {
 
     const ptype = p.parameter_type;
 
+    // Check config-level blocked types (comprehensive list)
+    if (config.isBlockedType(ptype)) {
+        return false;
+    }
+
     // Check for blocked types (exact match or prefix match for template types)
     for (&blocked_types) |blocked| {
         if (std.mem.eql(u8, ptype, blocked)) {

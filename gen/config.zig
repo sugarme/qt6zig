@@ -361,8 +361,8 @@ pub fn isBlockedType(type_name: []const u8) bool {
     if (startsWith(type_name, "QOpenGL") and contains(type_name, "Backend::"))
         return true;
 
-    // QCP const_iterator
-    if (contains(type_name, "QCP") and contains(type_name, "const_iterator"))
+    // Iterators (not projectable to C ABI)
+    if (contains(type_name, "const_iterator") or contains(type_name, "iterator"))
         return true;
 
     // Exact blocked type names
@@ -440,6 +440,15 @@ pub fn isBlockedType(type_name: []const u8) bool {
         "KateInlineNoteData",
         "QVersionNumber::It",
         "QFormLayout::ItemRole",
+        "QtMetaContainerPrivate::QMetaSequenceInterface",
+        "QtMetaContainerPrivate::QMetaAssociationInterface",
+        "QtMetaContainerPrivate::QMetaContainerInterface",
+        "QtPrivate::QMetaTypeInterface",
+        "QtPrivate::RefCounted",
+        "QAnyStringView",
+        "DataPtr",
+        "StringResult",
+        "Qt::TimerId",
     };
     for (blocked_types) |blocked| {
         if (eql(type_name, blocked)) return true;

@@ -554,6 +554,11 @@ fn isQListOf(pt: []const u8) bool {
         std.mem.startsWith(u8, pt, "QSpan<");
 }
 
+/// Check if type is QList/QStringList/QVector (public for use by cabi_impl)
+pub fn isQListType(pt: []const u8) bool {
+    return isQListOf(pt) or std.mem.eql(u8, pt, "QStringList");
+}
+
 fn isQSetOf(pt: []const u8) bool {
     return std.mem.startsWith(u8, pt, "QSet<");
 }
@@ -563,6 +568,11 @@ fn isQMapOf(pt: []const u8) bool {
         std.mem.startsWith(u8, pt, "QHash<") or
         std.mem.startsWith(u8, pt, "QMultiMap<") or
         std.mem.startsWith(u8, pt, "QMultiHash<");
+}
+
+/// Check if type is QMap/QHash (public for use by cabi_impl)
+pub fn isQMapType(pt: []const u8) bool {
+    return isQMapOf(pt);
 }
 
 fn isQPairOf(pt: []const u8) bool {

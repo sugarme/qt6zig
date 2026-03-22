@@ -138,6 +138,8 @@ fn openglAllowHeader(fullpath: []const u8) bool {
     // Block OpenGL extension header (massive, not useful for bindings)
     if (std.mem.eql(u8, fname, "qopenglext.h")) return false;
     if (std.mem.eql(u8, fname, "qopengles2ext.h")) return false;
+    // Block versioned OpenGL function files (reference GL* types needing platform headers)
+    if (std.mem.startsWith(u8, fname, "qopenglfunctions_")) return false;
     return true;
 }
 

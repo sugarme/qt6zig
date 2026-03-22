@@ -42,6 +42,7 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
             try w.writeAll("#include <QString>\n");
             try w.writeAll("#include <QByteArray>\n");
             try w.writeAll("#include <cstring>\n");
+            try w.writeAll("#include <type_traits>\n");
             continue;
         }
 
@@ -421,6 +422,47 @@ fn emitReturnStatement(
         try w.writeAll("\tmemcpy((void*)_str.data, _qb.data(), _str.len);\n");
         try w.writeAll("\t((char*)_str.data)[_str.len] = '\\0';\n");
         try w.writeAll("\treturn _str;\n");
+        return;
+    }
+
+    // QList<T> / QStringList -> libqt_list
+    if (cabi_header.isQListType(pt)) {
+        try w.print("\tauto _ret = {s};\n", .{rvalue});
+        try w.writeAll("\tlibqt_list _arr;\n");
+        try w.writeAll("\t_arr.len = _ret.length();\n");
+        try w.writeAll("\t_arr.data = malloc(_arr.len * sizeof(void*));\n");
+        try w.writeAll("\tvoid** _data = static_cast<void**>(_arr.data);\n");
+        try w.writeAll("\tfor (int _i = 0; _i < _arr.len; ++_i) {\n");
+        // For QString lists, convert each element to libqt_string
+        if (std.mem.eql(u8, pt, "QStringList") or std.mem.indexOf(u8, pt, "QString") != null) {
+            try w.writeAll("\t\tQByteArray _b = _ret[_i].toUtf8();\n");
+            try w.writeAll("\t\tlibqt_string* _str = new libqt_string();\n");
+            try w.writeAll("\t\t_str->len = _b.length();\n");
+            try w.writeAll("\t\t_str->data = static_cast<const char*>(malloc(_str->len + 1));\n");
+            try w.writeAll("\t\tmemcpy((void*)_str->data, _b.data(), _str->len);\n");
+            try w.writeAll("\t\t((char*)_str->data)[_str->len] = '\\0';\n");
+            try w.writeAll("\t\t_data[_i] = _str;\n");
+        } else if (std.mem.indexOf(u8, pt, "*") != null) {
+            // For pointer element types (e.g., QList<QGraphicsItem*>), store directly
+            try w.writeAll("\t\t_data[_i] = _ret[_i];\n");
+        } else {
+            // For value element types, use auto& to avoid reference-to-reference
+            try w.writeAll("\t\tauto& _elem = _ret[_i];\n");
+            try w.writeAll("\t\t_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);\n");
+        }
+        try w.writeAll("\t}\n");
+        try w.writeAll("\treturn _arr;\n");
+        return;
+    }
+
+    // QMap<K,V> / QHash<K,V> -> libqt_map
+    if (cabi_header.isQMapType(pt)) {
+        try w.print("\tauto _ret = {s};\n", .{rvalue});
+        try w.writeAll("\tlibqt_map _map;\n");
+        try w.writeAll("\t_map.len = _ret.size();\n");
+        try w.writeAll("\t_map.keys = nullptr;\n");
+        try w.writeAll("\t_map.values = nullptr;\n");
+        try w.writeAll("\treturn _map;\n");
         return;
     }
 
