@@ -1,0 +1,376 @@
+const QtC = @import("qt6zig");
+const qtc = @import("qt6c");%%_IMPORTLIBS_%%
+%%_STRUCTDEFS_%%
+
+/// https://doc.qt.io/qt-6/qdirlisting.html
+pub const qdirlisting = struct {
+
+    /// New constructs a new QDirListing object.
+    pub fn New(path: []const u8) QtC.QDirListing {
+        const path_str = qtc.libqt_string{
+    .len = path.len,
+    .data = path.ptr,
+};
+return qtc.QDirListing_new(path_str);
+    }
+
+
+    /// New2 constructs a new QDirListing object.
+    pub fn New2(path: []const u8, nameFilters: []const u8) QtC.QDirListing {
+        const path_str = qtc.libqt_string{
+    .len = path.len,
+    .data = path.ptr,
+};
+return qtc.QDirListing_new2(path_str, @ptrCast(nameFilters));
+    }
+
+
+    /// New3 constructs a new QDirListing object.
+    pub fn New3(path: []const u8, flags: i32) QtC.QDirListing {
+        const path_str = qtc.libqt_string{
+    .len = path.len,
+    .data = path.ptr,
+};
+return qtc.QDirListing_new3(path_str, @intCast(flags));
+    }
+
+
+    /// New4 constructs a new QDirListing object.
+    pub fn New4(path: []const u8, nameFilters: []const u8, flags: i32) QtC.QDirListing {
+        const path_str = qtc.libqt_string{
+    .len = path.len,
+    .data = path.ptr,
+};
+return qtc.QDirListing_new4(path_str, @ptrCast(nameFilters), @intCast(flags));
+    }
+
+
+    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDirListing_Swap(@ptrCast(self), @ptrCast(other));
+    }
+
+    pub fn IteratorPath(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing_IteratorPath(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting.IteratorPath: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn IteratorFlags(self: ?*anyopaque, ) i32 {
+        return qtc.QDirListing_IteratorFlags(@ptrCast(self));
+    }
+
+    pub fn NameFilters(self: ?*anyopaque, ) []const u8 {
+        return qtc.QDirListing_NameFilters(@ptrCast(self));
+    }
+
+    pub fn Begin(self: ?*anyopaque, ) QtC.QRect {
+        return qtc.QDirListing_Begin(@ptrCast(self));
+    }
+
+    pub fn Cbegin(self: ?*anyopaque, ) QtC.QRect {
+        return qtc.QDirListing_Cbegin(@ptrCast(self));
+    }
+
+    pub fn End(self: ?*anyopaque, ) QtC.QDirListing__sentinel {
+        return qtc.QDirListing_End(@ptrCast(self));
+    }
+
+    pub fn Cend(self: ?*anyopaque, ) QtC.QDirListing__sentinel {
+        return qtc.QDirListing_Cend(@ptrCast(self));
+    }
+
+    pub fn ConstBegin(self: ?*anyopaque, ) QtC.QRect {
+        return qtc.QDirListing_ConstBegin(@ptrCast(self));
+    }
+
+    pub fn ConstEnd(self: ?*anyopaque, ) QtC.QDirListing__sentinel {
+        return qtc.QDirListing_ConstEnd(@ptrCast(self));
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QDirListing_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/qdirlisting-direntry.html
+pub const qdirlisting__direntry = struct {
+
+    /// New constructs a new QDirListing::DirEntry object.
+    pub fn New(other: ?*anyopaque) QtC.QDirListing__DirEntry {
+        return qtc.QDirListing__DirEntry_new(@ptrCast(other));
+    }
+
+
+    /// New2 constructs a new QDirListing::DirEntry object.
+    pub fn New2(other: ?*anyopaque) QtC.QDirListing__DirEntry {
+        return qtc.QDirListing__DirEntry_new2(@ptrCast(other));
+    }
+
+
+    /// New3 constructs a new QDirListing::DirEntry object.
+    pub fn New3(param1: ?*anyopaque) QtC.QDirListing__DirEntry {
+        return qtc.QDirListing__DirEntry_new3(@ptrCast(param1));
+    }
+
+
+    /// New4 constructs a new QDirListing::DirEntry object.
+    pub fn New4() QtC.QDirListing__DirEntry {
+        return qtc.QDirListing__DirEntry_new4();
+    }
+
+    /// CopyAssign shallow copies `other` into `self`.
+    pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDirListing__DirEntry_CopyAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+    /// MoveAssign moves `other` into `self` and invalidates `other`.
+    pub fn MoveAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDirListing__DirEntry_MoveAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+
+    pub fn FileName(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_FileName(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.FileName: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn BaseName(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_BaseName(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.BaseName: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn CompleteBaseName(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_CompleteBaseName(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.CompleteBaseName: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn Suffix(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_Suffix(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.Suffix: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn BundleName(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_BundleName(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.BundleName: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn CompleteSuffix(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_CompleteSuffix(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.CompleteSuffix: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn FilePath(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_FilePath(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.FilePath: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn IsDir(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsDir(@ptrCast(self));
+    }
+
+    pub fn IsFile(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsFile(@ptrCast(self));
+    }
+
+    pub fn IsSymLink(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsSymLink(@ptrCast(self));
+    }
+
+    pub fn Exists(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_Exists(@ptrCast(self));
+    }
+
+    pub fn IsHidden(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsHidden(@ptrCast(self));
+    }
+
+    pub fn IsReadable(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsReadable(@ptrCast(self));
+    }
+
+    pub fn IsWritable(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsWritable(@ptrCast(self));
+    }
+
+    pub fn IsExecutable(self: ?*anyopaque, ) bool {
+        return qtc.QDirListing__DirEntry_IsExecutable(@ptrCast(self));
+    }
+
+    pub fn FileInfo(self: ?*anyopaque, ) QtC.QFileInfo {
+        return qtc.QDirListing__DirEntry_FileInfo(@ptrCast(self));
+    }
+
+    pub fn CanonicalFilePath(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_CanonicalFilePath(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.CanonicalFilePath: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn AbsoluteFilePath(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_AbsoluteFilePath(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.AbsoluteFilePath: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn AbsolutePath(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
+        const _str = qtc.QDirListing__DirEntry_AbsolutePath(@ptrCast(self));
+defer qtc.libqt_string_free(&_str);
+const _ret = allocator.alloc(u8, _str.len) catch @panic("qdirlisting::direntry.AbsolutePath: Memory allocation failed");
+@memcpy(_ret, _str.data[0.._str.len]);
+return  _ret;
+    }
+
+    pub fn Size(self: ?*anyopaque, ) i64 {
+        return qtc.QDirListing__DirEntry_Size(@ptrCast(self));
+    }
+
+    pub fn BirthTime(self: ?*anyopaque, tz: ?*anyopaque) QtC.QDateTime {
+        return qtc.QDirListing__DirEntry_BirthTime(@ptrCast(self), @ptrCast(tz));
+    }
+
+    pub fn MetadataChangeTime(self: ?*anyopaque, tz: ?*anyopaque) QtC.QDateTime {
+        return qtc.QDirListing__DirEntry_MetadataChangeTime(@ptrCast(self), @ptrCast(tz));
+    }
+
+    pub fn LastModified(self: ?*anyopaque, tz: ?*anyopaque) QtC.QDateTime {
+        return qtc.QDirListing__DirEntry_LastModified(@ptrCast(self), @ptrCast(tz));
+    }
+
+    pub fn LastRead(self: ?*anyopaque, tz: ?*anyopaque) QtC.QDateTime {
+        return qtc.QDirListing__DirEntry_LastRead(@ptrCast(self), @ptrCast(tz));
+    }
+
+    pub fn FileTime(self: ?*anyopaque, typeVal: i32, tz: ?*anyopaque) QtC.QDateTime {
+        return qtc.QDirListing__DirEntry_FileTime(@ptrCast(self), @intCast(typeVal), @ptrCast(tz));
+    }
+
+    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
+        qtc.QDirListing__DirEntry_OperatorAssign(@ptrCast(self), @ptrCast(param1));
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QDirListing__DirEntry_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/qdirlisting-sentinel.html
+pub const qdirlisting__sentinel = struct {
+
+    /// New constructs a new QDirListing::sentinel object.
+    pub fn New(other: ?*anyopaque) QtC.QDirListing__sentinel {
+        return qtc.QDirListing__sentinel_new(@ptrCast(other));
+    }
+
+
+    /// New2 constructs a new QDirListing::sentinel object.
+    pub fn New2(other: ?*anyopaque) QtC.QDirListing__sentinel {
+        return qtc.QDirListing__sentinel_new2(@ptrCast(other));
+    }
+
+
+    /// New3 constructs a new QDirListing::sentinel object.
+    pub fn New3() QtC.QDirListing__sentinel {
+        return qtc.QDirListing__sentinel_new3();
+    }
+
+
+    /// New4 constructs a new QDirListing::sentinel object.
+    pub fn New4(param1: ?*anyopaque) QtC.QDirListing__sentinel {
+        return qtc.QDirListing__sentinel_new4(@ptrCast(param1));
+    }
+
+    /// CopyAssign shallow copies `other` into `self`.
+    pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDirListing__sentinel_CopyAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+    /// MoveAssign moves `other` into `self` and invalidates `other`.
+    pub fn MoveAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDirListing__sentinel_MoveAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QDirListing__sentinel_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/qdirlisting-const_iterator.html
+pub const qdirlisting__const_iterator = struct {
+
+    /// New constructs a new QDirListing::const_iterator object.
+    pub fn New() QtC.QDirListing__const_iterator {
+        return qtc.QDirListing__const_iterator_new();
+    }
+
+
+    pub fn OperatorMultiply(self: ?*anyopaque, ) It::value_type {
+        return @ptrCast(qtc.QDirListing__const_iterator_OperatorMultiply(@ptrCast(self)));
+    }
+
+    pub fn OperatorMinusGreater(self: ?*anyopaque, ) It::value_type {
+        return @ptrCast(qtc.QDirListing__const_iterator_OperatorMinusGreater(@ptrCast(self)));
+    }
+
+    pub fn OperatorPlusPlus(self: ?*anyopaque, ) QtC.QRect {
+        return qtc.QDirListing__const_iterator_OperatorPlusPlus(@ptrCast(self));
+    }
+
+    pub fn OperatorPlusPlus2(self: ?*anyopaque, param1: i32) void {
+        qtc.QDirListing__const_iterator_OperatorPlusPlus2(@ptrCast(self), param1);
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QDirListing__const_iterator_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/dirlisting.html#types
+pub const enums = struct {
+    pub const IteratorFlag = enum {
+        pub const Default: i32 = 0;
+        pub const ExcludeFiles: i32 = 4;
+        pub const ExcludeDirs: i32 = 8;
+        pub const ExcludeSpecial: i32 = 16;
+        pub const ResolveSymlinks: i32 = 32;
+        pub const FilesOnly: i32 = 24;
+        pub const DirsOnly: i32 = 20;
+        pub const IncludeHidden: i32 = 64;
+        pub const IncludeDotAndDotDot: i32 = 128;
+        pub const CaseSensitive: i32 = 256;
+        pub const Recursive: i32 = 1024;
+        pub const FollowDirSymlinks: i32 = 2048;
+    };
+
+};

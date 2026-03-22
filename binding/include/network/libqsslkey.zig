@@ -1,0 +1,188 @@
+const QtC = @import("qt6zig");
+const qtc = @import("qt6c");%%_IMPORTLIBS_%%
+%%_STRUCTDEFS_%%
+
+/// https://doc.qt.io/qt-6/qsslkey.html
+pub const qsslkey = struct {
+
+    /// New constructs a new QSslKey object.
+    pub fn New() QtC.QSslKey {
+        return qtc.QSslKey_new();
+    }
+
+
+    /// New2 constructs a new QSslKey object.
+    pub fn New2(encoded: []u8, algorithm: i32) QtC.QSslKey {
+        const encoded_str = qtc.libqt_string{
+    .len = encoded.len,
+    .data = encoded.ptr,
+};
+return qtc.QSslKey_new2(encoded_str, @intCast(algorithm));
+    }
+
+
+    /// New3 constructs a new QSslKey object.
+    pub fn New3(device: ?*anyopaque, algorithm: i32) QtC.QSslKey {
+        return qtc.QSslKey_new3(@ptrCast(device), @intCast(algorithm));
+    }
+
+
+    /// New4 constructs a new QSslKey object.
+    pub fn New4(handle: ?*anyopaque) QtC.QSslKey {
+        return qtc.QSslKey_new4(@ptrCast(handle));
+    }
+
+
+    /// New5 constructs a new QSslKey object.
+    pub fn New5(other: ?*anyopaque) QtC.QSslKey {
+        return qtc.QSslKey_new5(@ptrCast(other));
+    }
+
+
+    /// New6 constructs a new QSslKey object.
+    pub fn New6(encoded: []u8, algorithm: i32, format: i32) QtC.QSslKey {
+        const encoded_str = qtc.libqt_string{
+    .len = encoded.len,
+    .data = encoded.ptr,
+};
+return qtc.QSslKey_new6(encoded_str, @intCast(algorithm), @intCast(format));
+    }
+
+
+    /// New7 constructs a new QSslKey object.
+    pub fn New7(encoded: []u8, algorithm: i32, format: i32, typeVal: i32) QtC.QSslKey {
+        const encoded_str = qtc.libqt_string{
+    .len = encoded.len,
+    .data = encoded.ptr,
+};
+return qtc.QSslKey_new7(encoded_str, @intCast(algorithm), @intCast(format), @intCast(typeVal));
+    }
+
+
+    /// New8 constructs a new QSslKey object.
+    pub fn New8(encoded: []u8, algorithm: i32, format: i32, typeVal: i32, passPhrase: []u8) QtC.QSslKey {
+        const encoded_str = qtc.libqt_string{
+    .len = encoded.len,
+    .data = encoded.ptr,
+};
+const passPhrase_str = qtc.libqt_string{
+    .len = passPhrase.len,
+    .data = passPhrase.ptr,
+};
+return qtc.QSslKey_new8(encoded_str, @intCast(algorithm), @intCast(format), @intCast(typeVal), passPhrase_str);
+    }
+
+
+    /// New9 constructs a new QSslKey object.
+    pub fn New9(device: ?*anyopaque, algorithm: i32, format: i32) QtC.QSslKey {
+        return qtc.QSslKey_new9(@ptrCast(device), @intCast(algorithm), @intCast(format));
+    }
+
+
+    /// New10 constructs a new QSslKey object.
+    pub fn New10(device: ?*anyopaque, algorithm: i32, format: i32, typeVal: i32) QtC.QSslKey {
+        return qtc.QSslKey_new10(@ptrCast(device), @intCast(algorithm), @intCast(format), @intCast(typeVal));
+    }
+
+
+    /// New11 constructs a new QSslKey object.
+    pub fn New11(device: ?*anyopaque, algorithm: i32, format: i32, typeVal: i32, passPhrase: []u8) QtC.QSslKey {
+        const passPhrase_str = qtc.libqt_string{
+    .len = passPhrase.len,
+    .data = passPhrase.ptr,
+};
+return qtc.QSslKey_new11(@ptrCast(device), @intCast(algorithm), @intCast(format), @intCast(typeVal), passPhrase_str);
+    }
+
+
+    /// New12 constructs a new QSslKey object.
+    pub fn New12(handle: ?*anyopaque, typeVal: i32) QtC.QSslKey {
+        return qtc.QSslKey_new12(@ptrCast(handle), @intCast(typeVal));
+    }
+
+
+    pub fn OperatorAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QSslKey_OperatorAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QSslKey_Swap(@ptrCast(self), @ptrCast(other));
+    }
+
+    pub fn IsNull(self: ?*anyopaque, ) bool {
+        return qtc.QSslKey_IsNull(@ptrCast(self));
+    }
+
+    pub fn Clear(self: ?*anyopaque, ) void {
+        qtc.QSslKey_Clear(@ptrCast(self));
+    }
+
+    pub fn Length(self: ?*anyopaque, ) i32 {
+        return qtc.QSslKey_Length(@ptrCast(self));
+    }
+
+    pub fn Type(self: ?*anyopaque, ) i32 {
+        return qtc.QSslKey_Type(@ptrCast(self));
+    }
+
+    pub fn Algorithm(self: ?*anyopaque, ) i32 {
+        return qtc.QSslKey_Algorithm(@ptrCast(self));
+    }
+
+    pub fn ToPem(self: ?*anyopaque, , allocator: std.mem.Allocator) []u8 {
+        const _bytearray: qtc.libqt_string = qtc.QSslKey_ToPem(@ptrCast(self));
+defer qtc.libqt_string_free(&_bytearray);
+const _ret = allocator.alloc(u8, _bytearray.len) catch @panic("qsslkey.ToPem: Memory allocation failed");
+@memcpy(_ret, _bytearray.data[0.._bytearray.len]);
+return  _ret;
+    }
+
+    pub fn ToDer(self: ?*anyopaque, , allocator: std.mem.Allocator) []u8 {
+        const _bytearray: qtc.libqt_string = qtc.QSslKey_ToDer(@ptrCast(self));
+defer qtc.libqt_string_free(&_bytearray);
+const _ret = allocator.alloc(u8, _bytearray.len) catch @panic("qsslkey.ToDer: Memory allocation failed");
+@memcpy(_ret, _bytearray.data[0.._bytearray.len]);
+return  _ret;
+    }
+
+    pub fn Handle(self: ?*anyopaque, ) ?*anyopaque {
+        return qtc.QSslKey_Handle(@ptrCast(self));
+    }
+
+    pub fn OperatorEqual(self: ?*anyopaque, key: ?*anyopaque) bool {
+        return qtc.QSslKey_OperatorEqual(@ptrCast(self), @ptrCast(key));
+    }
+
+    pub fn OperatorNotEqual(self: ?*anyopaque, key: ?*anyopaque) bool {
+        return qtc.QSslKey_OperatorNotEqual(@ptrCast(self), @ptrCast(key));
+    }
+
+    pub fn ToPem1(self: ?*anyopaque, passPhrase: []u8, allocator: std.mem.Allocator) []u8 {
+        const passPhrase_str = qtc.libqt_string{
+    .len = passPhrase.len,
+    .data = passPhrase.ptr,
+};
+const _bytearray: qtc.libqt_string = qtc.QSslKey_ToPem1(@ptrCast(self), passPhrase_str);
+defer qtc.libqt_string_free(&_bytearray);
+const _ret = allocator.alloc(u8, _bytearray.len) catch @panic("qsslkey.ToPem1: Memory allocation failed");
+@memcpy(_ret, _bytearray.data[0.._bytearray.len]);
+return  _ret;
+    }
+
+    pub fn ToDer1(self: ?*anyopaque, passPhrase: []u8, allocator: std.mem.Allocator) []u8 {
+        const passPhrase_str = qtc.libqt_string{
+    .len = passPhrase.len,
+    .data = passPhrase.ptr,
+};
+const _bytearray: qtc.libqt_string = qtc.QSslKey_ToDer1(@ptrCast(self), passPhrase_str);
+defer qtc.libqt_string_free(&_bytearray);
+const _ret = allocator.alloc(u8, _bytearray.len) catch @panic("qsslkey.ToDer1: Memory allocation failed");
+@memcpy(_ret, _bytearray.data[0.._bytearray.len]);
+return  _ret;
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QSslKey_Delete(@ptrCast(self));
+    }
+};

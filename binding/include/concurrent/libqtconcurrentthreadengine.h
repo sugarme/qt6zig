@@ -1,0 +1,73 @@
+#pragma once
+#ifndef QTCONCURRENTTHREADENGINE_H_C_LIB
+#define QTCONCURRENTTHREADENGINE_H_C_LIB
+
+#include <stdbool.h>
+#include <stddef.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "qtlibc.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QtConcurrent__ThreadEngineBarrier)
+typedef QtConcurrent::ThreadEngineBarrier QtConcurrent__ThreadEngineBarrier;
+#endif
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QtConcurrent__ThreadEngineBase)
+typedef QtConcurrent::ThreadEngineBase QtConcurrent__ThreadEngineBase;
+#endif
+#else
+typedef struct QRunnable QRunnable;
+typedef struct QThreadPool QThreadPool;
+typedef struct QtConcurrent__ThreadEngineBarrier QtConcurrent__ThreadEngineBarrier;
+typedef struct QtConcurrent__ThreadEngineBase QtConcurrent__ThreadEngineBase;
+typedef struct _GUID _GUID;
+typedef struct type_info type_info;
+#endif
+
+
+
+QtConcurrent__ThreadEngineBarrier* QtConcurrent__ThreadEngineBarrier_new();
+void QtConcurrent__ThreadEngineBarrier_Acquire(QtConcurrent__ThreadEngineBarrier* self);
+int QtConcurrent__ThreadEngineBarrier_Release(QtConcurrent__ThreadEngineBarrier* self);
+void QtConcurrent__ThreadEngineBarrier_Wait(QtConcurrent__ThreadEngineBarrier* self);
+int QtConcurrent__ThreadEngineBarrier_CurrentCount(QtConcurrent__ThreadEngineBarrier* self);
+bool QtConcurrent__ThreadEngineBarrier_ReleaseUnlessLast(QtConcurrent__ThreadEngineBarrier* self);
+void QtConcurrent__ThreadEngineBarrier_Delete(QtConcurrent__ThreadEngineBarrier* self);
+
+QtConcurrent__ThreadEngineBase* QtConcurrent__ThreadEngineBase_new(QThreadPool* pool);
+void QtConcurrent__ThreadEngineBase_StartSingleThreaded(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_StartThread(QtConcurrent__ThreadEngineBase* self);
+bool QtConcurrent__ThreadEngineBase_IsCanceled(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_WaitForResume(QtConcurrent__ThreadEngineBase* self);
+bool QtConcurrent__ThreadEngineBase_IsProgressReportingEnabled(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_SetProgressValue(QtConcurrent__ThreadEngineBase* self, int progress);
+void QtConcurrent__ThreadEngineBase_SetProgressRange(QtConcurrent__ThreadEngineBase* self, int minimum, int maximum);
+void QtConcurrent__ThreadEngineBase_AcquireBarrierSemaphore(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_ReportIfSuspensionDone(const QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_Start(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_Finish(QtConcurrent__ThreadEngineBase* self);
+int QtConcurrent__ThreadEngineBase_ThreadFunction(QtConcurrent__ThreadEngineBase* self);
+bool QtConcurrent__ThreadEngineBase_ShouldStartThread(QtConcurrent__ThreadEngineBase* self);
+bool QtConcurrent__ThreadEngineBase_ShouldThrottleThread(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_OnStart(QtConcurrent__ThreadEngineBase* self, intptr_t slot);
+void QtConcurrent__ThreadEngineBase_QBaseStart(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_OnFinish(QtConcurrent__ThreadEngineBase* self, intptr_t slot);
+void QtConcurrent__ThreadEngineBase_QBaseFinish(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_OnThreadFunction(QtConcurrent__ThreadEngineBase* self, intptr_t slot);
+int QtConcurrent__ThreadEngineBase_QBaseThreadFunction(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_OnShouldStartThread(QtConcurrent__ThreadEngineBase* self, intptr_t slot);
+bool QtConcurrent__ThreadEngineBase_QBaseShouldStartThread(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_OnShouldThrottleThread(QtConcurrent__ThreadEngineBase* self, intptr_t slot);
+bool QtConcurrent__ThreadEngineBase_QBaseShouldThrottleThread(QtConcurrent__ThreadEngineBase* self);
+void QtConcurrent__ThreadEngineBase_Delete(QtConcurrent__ThreadEngineBase* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

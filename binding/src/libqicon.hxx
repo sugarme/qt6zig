@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SRCC_LIBVIRTUALQICON_H
-#define SRCC_LIBVIRTUALQICON_H
+#ifndef QICON_H_C_LIBVIRTUAL
+#define QICON_H_C_LIBVIRTUAL
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -9,4 +9,7 @@
 
 #include "qtlibc.h"
 
+
 #endif
+
+

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SRCC_LIBVIRTUALQFONT_H
-#define SRCC_LIBVIRTUALQFONT_H
+#ifndef QFONT_H_C_LIBVIRTUAL
+#define QFONT_H_C_LIBVIRTUAL
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -9,4 +9,7 @@
 
 #include "qtlibc.h"
 
+
 #endif
+
+

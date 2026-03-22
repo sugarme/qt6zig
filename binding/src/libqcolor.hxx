@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SRCC_LIBVIRTUALQCOLOR_H
-#define SRCC_LIBVIRTUALQCOLOR_H
+#ifndef QCOLOR_H_C_LIBVIRTUAL
+#define QCOLOR_H_C_LIBVIRTUAL
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -9,4 +9,7 @@
 
 #include "qtlibc.h"
 
+
 #endif
+
+

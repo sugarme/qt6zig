@@ -4,13 +4,13 @@ Pure Zig bindings for Qt 6.8.3. Build standalone desktop applications with Zig a
 
 ## Features
 
+- **760 generated bindings** across 13 Qt modules (722 compile, 95% success)
 - **Static linking**: Produces standalone executables with no Qt6 DLL dependencies
 - **Self-contained**: Qt 6.8.3 source bundled in submodule — no external Qt installation needed
-- **15 Qt modules**: Core, Gui, Widgets, Network, Concurrent, Xml, Sql, OpenGL, PrintSupport, Svg, WebChannel, Charts, Multimedia, SpatialAudio, and more
 - **Three-layer binding**: Zig wrappers → C ABI wrappers → Qt6 C++ (static libs)
 - **Zig-native build**: Uses `zig build` for everything, including C++ compilation
 - **Pre-generated bindings**: No Clang needed to build — bindings are checked in
-- **Pure Zig generator**: Binding generator written in Zig (replaces Go-based tool)
+- **Pure Zig generator**: Binding generator written in Zig with streaming AST filter
 - **Signal/slot support**: Connect Qt signals to Zig callback functions
 - **Virtual method overrides**: Override Qt virtual methods from Zig code
 - **Zig 0.16-dev compatible**: Works with latest Zig development builds
@@ -86,46 +86,38 @@ Qt6 Static Libraries (qt6-zig-build/zig-out/lib/)
 
 ```
 binding/
-├── libqt6.zig    # Root Zig module (re-exports all)
-├── src/          # Per-class files (.cpp, .h, .hxx, .zig)
-│   ├── qtlibc.h              # Base C structures (libqt_string, etc.)
-│   ├── libqwidget.cpp/.h/.hxx/.zig   # Per-class bindings
-│   ├── qt_static_plugins.cpp # Platform plugin registration
-│   └── ubsan_stubs.c         # UBSAN runtime stubs
-└── include/      # Module aggregators
-    ├── libqtc.zig      # Type aliases
-    └── libqt6c.h       # Aggregate C header
+├── libqt6.zig              # Root Zig module (re-exports all)
+├── src/                    # Per-class files (.cpp, .h, .hxx, .zig)
+│   ├── qtlibc.h            # Base C structures (libqt_string, etc.)
+│   ├── libqwidget.cpp/.h/.hxx/.zig   # Per-class bindings (4 files each)
+│   ├── qt_static_plugins.cpp          # Platform plugin registration
+│   ├── qt_rhi_stubs.cpp              # OpenGL/RHI symbol stubs
+│   ├── ubsan_stubs.c                 # UBSAN runtime stubs
+│   ├── network/            # QtNetwork module bindings
+│   ├── concurrent/         # QtConcurrent module bindings
+│   ├── charts/             # QtCharts module bindings
+│   ├── multimedia/         # QtMultimedia module bindings
+│   ├── opengl/             # QtOpenGL module bindings
+│   ├── sql/                # QtSql module bindings
+│   ├── xml/                # QtXml module bindings
+│   ├── svg/                # QtSvg module bindings
+│   ├── printsupport/       # QtPrintSupport module bindings
+│   ├── webchannel/         # QtWebChannel module bindings
+│   └── spatialaudio/       # QtSpatialAudio module bindings
+└── include/                # Module aggregators
+    ├── libqtc.zig          # Type aliases
+    └── libqt6c.h           # Aggregate C header
 ```
 
 ## Qt Modules
 
-### Generated Bindings (760 classes across 13 modules)
-
-**QtCore**
-- QCoreApplication, QObject, QTimer, QDir, QEventLoop, QKeySequence, QItemSelectionModel, QIODeviceBase, QNamespace, QObjectDefs, QCoreEvent
-
-**QtGui**
-- QGuiApplication, QColor, QFont, QIcon, QImage, QPaintDevice, QPalette, QPixmap, QPointingDevice, QInputDevice, QEventPoint
-- Events: QEvent (and 30+ event subclasses including QKeyEvent, QMouseEvent, QPaintEvent, etc.)
-- Validators: QValidator, QIntValidator, QDoubleValidator, QRegularExpressionValidator
-
-**QtWidgets**
-- Application: QApplication
-- Buttons: QAbstractButton, QPushButton, QCheckBox
-- Input: QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QAbstractSpinBox
-- Text: QTextEdit, QTextCursor, QTextDocument, QTextFormat, QTextOption
-- Layout: QBoxLayout, QHBoxLayout, QVBoxLayout, QGridLayout, QLayout
-- Containers: QFrame, QScrollArea, QSplitter, QStackedWidget, QTabWidget
-- Dialogs: QDialog, QFileDialog, QMessageBox
-- Views: QAbstractItemView, QAbstractItemDelegate, QAbstractScrollArea, QTableWidget
-- Display: QLabel, QProgressBar, QSizePolicy
-- Actions: QAction, QWidgetAction
+### Generated Bindings: 760 classes across 13 modules
 
 | Module | Bindings | Description |
 |--------|----------|-------------|
 | **QtCore + QtGui + QtWidgets** | 495 | Core, GUI, and widget classes |
 | **QtCharts** | 57 | Charts (line, bar, pie, scatter, area, box plot, candlestick) |
-| **QtNetwork** | 49 | Networking (HTTP, TCP/UDP sockets, DNS, cookies) |
+| **QtNetwork** | 49 | Networking (HTTP, TCP/UDP sockets, DNS, SSL, cookies) |
 | **QtOpenGL** | 47 | OpenGL wrappers, paint engine, shader programs |
 | **QtMultimedia** | 37 | Audio/video playback, capture, devices |
 | **QtConcurrent** | 18 | Thread pool and parallel execution |
@@ -136,19 +128,37 @@ binding/
 | **QtWebChannel** | 5 | Qt/web bridge communication |
 | **QtXml** | 5 | XML DOM parser |
 
-### Static Libraries Linked
+**Compilation status**: 722/760 (95%) compile successfully. The remaining 38 failures are due to QList/QMap C ABI type conversions and OpenGL GL type dependencies.
+
+### Key Classes by Category
+
+**Core**: QObject, QCoreApplication, QTimer, QEventLoop, QDir, QFile, QProcess, QThread, QSettings, QJsonDocument, QRegularExpression, QUrl, QDateTime, QVariant, QStringList, QByteArray
+
+**GUI**: QGuiApplication, QColor, QFont, QIcon, QImage, QPixmap, QPainter, QPalette, QScreen, QWindow, QClipboard, QCursor, QEvent (30+ subclasses), QValidator
+
+**Widgets**: QApplication, QWidget, QPushButton, QLabel, QLineEdit, QTextEdit, QComboBox, QCheckBox, QRadioButton, QSpinBox, QSlider, QProgressBar, QTableWidget, QTreeWidget, QListWidget, QMainWindow, QDialog, QFileDialog, QMessageBox, QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget, QTabWidget, QSplitter, QScrollArea, QGroupBox, QBoxLayout, QGridLayout, QFormLayout, QGraphicsView, QGraphicsScene
+
+**Network**: QNetworkAccessManager, QNetworkReply, QNetworkRequest, QTcpSocket, QTcpServer, QUdpSocket, QHostAddress, QNetworkProxy, QSslSocket
+
+**Charts**: QChart, QChartView, QLineSeries, QBarSeries, QPieSeries, QScatterSeries, QAreaSeries, QValueAxis, QBarCategoryAxis
+
+**Multimedia**: QMediaPlayer, QAudioOutput, QCamera, QMediaRecorder, QVideoSink, QSoundEffect
+
+**SQL**: QSqlDatabase, QSqlQuery, QSqlTableModel, QSqlRecord
+
+### Static Libraries
 
 | Library | Description |
 |---------|-------------|
 | Qt6Core, Qt6Gui, Qt6Widgets | Core Qt modules |
-| Qt6Network, Qt6Concurrent | Networking and threading |
-| Qt6Xml, Qt6Sql, Qt6OpenGL | Data and graphics |
-| Qt6PrintSupport, Qt6Svg, Qt6SvgWidgets | Output and SVG |
-| Qt6WebChannel, Qt6Charts | Communication and charting |
-| Qt6Multimedia, Qt6SpatialAudio | Media and audio |
+| Qt6Network, Qt6Concurrent, Qt6OpenGL | Networking, threading, OpenGL |
+| Qt6Xml, Qt6Sql, Qt6PrintSupport | Data, database, printing |
+| Qt6Svg, Qt6SvgWidgets | SVG rendering |
+| Qt6WebChannel, Qt6Charts | Web bridge, charting |
+| Qt6Multimedia, Qt6SpatialAudio | Media and 3D audio |
 | Qt6FFmpegMediaPlugin | FFmpeg media backend |
 | qwindows | Windows platform plugin |
-| qtHarfbuzz, qtFreetype | Text shaping and font rendering |
+| qtHarfbuzz, qtFreetype | Text shaping, font rendering |
 | qtLibpng, qtLibjpeg | Image codecs |
 | qtZlib, qtPcre2, qtDoubleConversion | Compression, regex, float conversion |
 
@@ -161,40 +171,62 @@ binding/
 
 ## Binding Generator
 
-The `gen/` directory contains a Zig-based binding generator that parses Qt headers via Clang AST JSON output and generates the four-file-per-class binding set (.h, .cpp, .hxx, .zig).
+The `gen/` directory contains a Zig-based binding generator that parses Qt headers via Clang AST JSON output and generates four files per class (.h, .cpp, .hxx, .zig).
 
 ```bash
 # Build the generator
 zig build gen
 
-# Run it to regenerate bindings (requires clang or zig cc)
-./zig-out/bin/qt6zig-gen
+# Run it to regenerate bindings (uses cached AST from cachedir/)
+zig-out/bin/qt6zig-gen
 ```
 
-The generator processes all Qt modules defined in `gen/modules.zig` and outputs to `binding/src/`. On Windows, it uses `gen/zig-cc.bat` as a clang wrapper (sets `ZIG_GLOBAL_CACHE_DIR` and uses MSVC target for C++ headers).
+### Key Features
+
+- **Streaming AST filter**: Processes 500-800 MB clang JSON per header without loading entire DOM into memory. Writes clang output to temp file, scans for top-level AST nodes matching the target header, keeps only relevant nodes (~100KB-5MB per header)
+- **AST caching**: Filtered results cached in `cachedir/` — first run takes ~45 min, subsequent runs are instant
+- **zig cc backend**: Uses `zig cc -target x86_64-windows-msvc` as clang for AST dumping (bundled with Zig, no separate clang installation needed)
+- **13 Qt modules**: Processes QtCore, QtGui, QtWidgets, QtNetwork, QtConcurrent, QtXml, QtSql, QtOpenGL, QtPrintSupport, QtSvg, QtWebChannel, QtCharts, QtMultimedia, QtSpatialAudio
 
 ### Generator Architecture
 
 ```
 Qt Headers (qt6-zig-build/Qt/6.8.3/include/)
-    ↓ clang -ast-dump=json
-JSON AST
+    ↓ zig cc -Xclang -ast-dump=json (via gen/run-clang.bat)
+Raw JSON AST (~500-800 MB per header)
+    ↓ streaming filter (gen/clang.zig)
+Filtered JSON (~100KB-5MB, only target header nodes)
     ↓ parse (gen/ast_parser.zig)
 Intermediate Representation (gen/intermediate.zig)
     ↓ transform passes (gen/transforms/*.zig)
-Filtered/Transformed IR
+    │  - child_classes: nested class detection
+    │  - enums: scope resolution
+    │  - structs: struct processing
+    │  - overloads: method renaming (operators, collisions)
+    │  - blocklist: filter blocked methods/types
     ↓ emit (gen/emit/*.zig)
+    │  - cabi_header.zig  → .h   (C ABI declarations)
+    │  - cabi_impl.zig    → .cpp (C ABI implementations)
+    │  - cabi_virtual.zig → .hxx (virtual method callbacks)
+    │  - zig_wrapper.zig  → .zig (idiomatic Zig wrappers)
 binding/src/*.{h,cpp,hxx,zig}
 ```
+
+### Known Generator Issues
+
+The following patterns produce C++ code that doesn't compile (~38/760 classes):
+
+- **QList/QMap/QPair C ABI**: No implicit conversion between Qt container types and `libqt_list`/`libqt_map` C ABI structs. Methods returning or accepting these types fail.
+- **OpenGL GL types**: QtOpenGL versioned function files (e.g., `qopenglfunctions_4_5_core`) reference `GL*` types that require platform GL headers.
+- **Template iterators**: Types like `QVersionNumber::It` and `const_iterator` don't map to C ABI.
 
 ## Platform Support
 
 Currently targets **Windows x86_64** only. The build uses:
 - Zig/Clang compiler toolchain (no MSVC or MinGW required)
 - DirectWrite for font rendering
-- Direct3D 11/12 for RHI backend
+- Direct3D 11/12 for RHI backend (primary), OpenGL as fallback
 - Windows UI Automation for accessibility
-- OpenGL (desktop, dynamic GL)
 - Windows Media Foundation for multimedia
 - FFmpeg 7.0.1 bundled for media codecs
 

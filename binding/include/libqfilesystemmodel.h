@@ -1,0 +1,152 @@
+#pragma once
+#ifndef QFILESYSTEMMODEL_H_C_LIB
+#define QFILESYSTEMMODEL_H_C_LIB
+
+#include <stdbool.h>
+#include <stddef.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "qtlibc.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+#else
+typedef struct QAbstractFileIconProvider QAbstractFileIconProvider;
+typedef struct QAbstractItemModel QAbstractItemModel;
+typedef struct QDateTime QDateTime;
+typedef struct QDir QDir;
+typedef struct QEvent QEvent;
+typedef struct QFileInfo QFileInfo;
+typedef struct QFileSystemModel QFileSystemModel;
+typedef struct QIcon QIcon;
+typedef struct QMimeData QMimeData;
+typedef struct QModelIndex QModelIndex;
+typedef struct QObject QObject;
+typedef struct QTimeZone QTimeZone;
+typedef struct QTimerEvent QTimerEvent;
+typedef struct QVariant QVariant;
+typedef struct _GUID _GUID;
+typedef struct type_info type_info;
+#endif
+
+
+
+QFileSystemModel* QFileSystemModel_new();
+QFileSystemModel* QFileSystemModel_new2(QObject* parent);
+libqt_string QFileSystemModel_Tr(const char* s);
+void QFileSystemModel_RootPathChanged(QFileSystemModel* self, const libqt_string newPath);
+void QFileSystemModel_Connect_RootPathChanged(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_FileRenamed(QFileSystemModel* self, const libqt_string path, const libqt_string oldName, const libqt_string newName);
+void QFileSystemModel_Connect_FileRenamed(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_DirectoryLoaded(QFileSystemModel* self, const libqt_string path);
+void QFileSystemModel_Connect_DirectoryLoaded(QFileSystemModel* self, intptr_t slot);
+QModelIndex* QFileSystemModel_Index(const QFileSystemModel* self, int row, int column, const QModelIndex* parent);
+QModelIndex* QFileSystemModel_Index2(const QFileSystemModel* self, const libqt_string path);
+QModelIndex* QFileSystemModel_Parent(const QFileSystemModel* self, const QModelIndex* child);
+QModelIndex* QFileSystemModel_Sibling(const QFileSystemModel* self, int row, int column, const QModelIndex* idx);
+bool QFileSystemModel_HasChildren(const QFileSystemModel* self, const QModelIndex* parent);
+bool QFileSystemModel_CanFetchMore(const QFileSystemModel* self, const QModelIndex* parent);
+void QFileSystemModel_FetchMore(QFileSystemModel* self, const QModelIndex* parent);
+int QFileSystemModel_RowCount(const QFileSystemModel* self, const QModelIndex* parent);
+int QFileSystemModel_ColumnCount(const QFileSystemModel* self, const QModelIndex* parent);
+QVariant* QFileSystemModel_MyComputer(const QFileSystemModel* self);
+QVariant* QFileSystemModel_Data(const QFileSystemModel* self, const QModelIndex* index, int role);
+bool QFileSystemModel_SetData(QFileSystemModel* self, const QModelIndex* index, const QVariant* value, int role);
+QVariant* QFileSystemModel_HeaderData(const QFileSystemModel* self, int section, int orientation, int role);
+int QFileSystemModel_Flags(const QFileSystemModel* self, const QModelIndex* index);
+void QFileSystemModel_Sort(QFileSystemModel* self, int column, int order);
+libqt_list QFileSystemModel_MimeTypes(const QFileSystemModel* self);
+QMimeData* QFileSystemModel_MimeData(const QFileSystemModel* self, const libqt_list indexes);
+bool QFileSystemModel_DropMimeData(QFileSystemModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent);
+int QFileSystemModel_SupportedDropActions(const QFileSystemModel* self);
+libqt_map QFileSystemModel_RoleNames(const QFileSystemModel* self);
+QModelIndex* QFileSystemModel_SetRootPath(QFileSystemModel* self, const libqt_string path);
+libqt_string QFileSystemModel_RootPath(const QFileSystemModel* self);
+QDir* QFileSystemModel_RootDirectory(const QFileSystemModel* self);
+void QFileSystemModel_SetIconProvider(QFileSystemModel* self, QAbstractFileIconProvider* provider);
+QAbstractFileIconProvider* QFileSystemModel_IconProvider(const QFileSystemModel* self);
+void QFileSystemModel_SetFilter(QFileSystemModel* self, int filters);
+int QFileSystemModel_Filter(const QFileSystemModel* self);
+void QFileSystemModel_SetResolveSymlinks(QFileSystemModel* self, bool enable);
+bool QFileSystemModel_ResolveSymlinks(const QFileSystemModel* self);
+void QFileSystemModel_SetReadOnly(QFileSystemModel* self, bool enable);
+bool QFileSystemModel_IsReadOnly(const QFileSystemModel* self);
+void QFileSystemModel_SetNameFilterDisables(QFileSystemModel* self, bool enable);
+bool QFileSystemModel_NameFilterDisables(const QFileSystemModel* self);
+void QFileSystemModel_SetNameFilters(QFileSystemModel* self, const libqt_list filters);
+libqt_list QFileSystemModel_NameFilters(const QFileSystemModel* self);
+void QFileSystemModel_SetOption(QFileSystemModel* self, int option);
+bool QFileSystemModel_TestOption(const QFileSystemModel* self, int option);
+void QFileSystemModel_SetOptions(QFileSystemModel* self, int options);
+int QFileSystemModel_Options(const QFileSystemModel* self);
+libqt_string QFileSystemModel_FilePath(const QFileSystemModel* self, const QModelIndex* index);
+bool QFileSystemModel_IsDir(const QFileSystemModel* self, const QModelIndex* index);
+long long QFileSystemModel_Size(const QFileSystemModel* self, const QModelIndex* index);
+libqt_string QFileSystemModel_Type(const QFileSystemModel* self, const QModelIndex* index);
+QDateTime* QFileSystemModel_LastModified(const QFileSystemModel* self, const QModelIndex* index);
+QDateTime* QFileSystemModel_LastModified2(const QFileSystemModel* self, const QModelIndex* index, const QTimeZone* tz);
+QModelIndex* QFileSystemModel_Mkdir(QFileSystemModel* self, const QModelIndex* parent, const libqt_string name);
+bool QFileSystemModel_Rmdir(QFileSystemModel* self, const QModelIndex* index);
+libqt_string QFileSystemModel_FileName(const QFileSystemModel* self, const QModelIndex* index);
+QIcon* QFileSystemModel_FileIcon(const QFileSystemModel* self, const QModelIndex* index);
+QFile::Permissions QFileSystemModel_Permissions(const QFileSystemModel* self, const QModelIndex* index);
+QFileInfo* QFileSystemModel_FileInfo(const QFileSystemModel* self, const QModelIndex* index);
+bool QFileSystemModel_Remove(QFileSystemModel* self, const QModelIndex* index);
+void QFileSystemModel_TimerEvent(QFileSystemModel* self, QTimerEvent* event);
+bool QFileSystemModel_Event(QFileSystemModel* self, QEvent* event);
+libqt_string QFileSystemModel_Tr2(const char* s, const char* c);
+libqt_string QFileSystemModel_Tr3(const char* s, const char* c, int n);
+QModelIndex* QFileSystemModel_Index22(const QFileSystemModel* self, const libqt_string path, int column);
+QVariant* QFileSystemModel_MyComputer1(const QFileSystemModel* self, int role);
+void QFileSystemModel_SetOption2(QFileSystemModel* self, int option, bool on);
+void QFileSystemModel_OnIndex(const QFileSystemModel* self, intptr_t slot);
+QModelIndex* QFileSystemModel_QBaseIndex(const QFileSystemModel* self, int row, int column, const QModelIndex* parent);
+void QFileSystemModel_OnParent(const QFileSystemModel* self, intptr_t slot);
+QModelIndex* QFileSystemModel_QBaseParent(const QFileSystemModel* self, const QModelIndex* child);
+void QFileSystemModel_OnSibling(const QFileSystemModel* self, intptr_t slot);
+QModelIndex* QFileSystemModel_QBaseSibling(const QFileSystemModel* self, int row, int column, const QModelIndex* idx);
+void QFileSystemModel_OnHasChildren(const QFileSystemModel* self, intptr_t slot);
+bool QFileSystemModel_QBaseHasChildren(const QFileSystemModel* self, const QModelIndex* parent);
+void QFileSystemModel_OnCanFetchMore(const QFileSystemModel* self, intptr_t slot);
+bool QFileSystemModel_QBaseCanFetchMore(const QFileSystemModel* self, const QModelIndex* parent);
+void QFileSystemModel_OnFetchMore(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_QBaseFetchMore(QFileSystemModel* self, const QModelIndex* parent);
+void QFileSystemModel_OnRowCount(const QFileSystemModel* self, intptr_t slot);
+int QFileSystemModel_QBaseRowCount(const QFileSystemModel* self, const QModelIndex* parent);
+void QFileSystemModel_OnColumnCount(const QFileSystemModel* self, intptr_t slot);
+int QFileSystemModel_QBaseColumnCount(const QFileSystemModel* self, const QModelIndex* parent);
+void QFileSystemModel_OnData(const QFileSystemModel* self, intptr_t slot);
+QVariant* QFileSystemModel_QBaseData(const QFileSystemModel* self, const QModelIndex* index, int role);
+void QFileSystemModel_OnSetData(QFileSystemModel* self, intptr_t slot);
+bool QFileSystemModel_QBaseSetData(QFileSystemModel* self, const QModelIndex* index, const QVariant* value, int role);
+void QFileSystemModel_OnHeaderData(const QFileSystemModel* self, intptr_t slot);
+QVariant* QFileSystemModel_QBaseHeaderData(const QFileSystemModel* self, int section, int orientation, int role);
+void QFileSystemModel_OnFlags(const QFileSystemModel* self, intptr_t slot);
+int QFileSystemModel_QBaseFlags(const QFileSystemModel* self, const QModelIndex* index);
+void QFileSystemModel_OnSort(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_QBaseSort(QFileSystemModel* self, int column, int order);
+void QFileSystemModel_OnMimeTypes(const QFileSystemModel* self, intptr_t slot);
+libqt_list QFileSystemModel_QBaseMimeTypes(const QFileSystemModel* self);
+void QFileSystemModel_OnMimeData(const QFileSystemModel* self, intptr_t slot);
+QMimeData* QFileSystemModel_QBaseMimeData(const QFileSystemModel* self, const libqt_list indexes);
+void QFileSystemModel_OnDropMimeData(QFileSystemModel* self, intptr_t slot);
+bool QFileSystemModel_QBaseDropMimeData(QFileSystemModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent);
+void QFileSystemModel_OnSupportedDropActions(const QFileSystemModel* self, intptr_t slot);
+int QFileSystemModel_QBaseSupportedDropActions(const QFileSystemModel* self);
+void QFileSystemModel_OnRoleNames(const QFileSystemModel* self, intptr_t slot);
+libqt_map QFileSystemModel_QBaseRoleNames(const QFileSystemModel* self);
+void QFileSystemModel_OnTimerEvent(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_QBaseTimerEvent(QFileSystemModel* self, QTimerEvent* event);
+void QFileSystemModel_OnEvent(QFileSystemModel* self, intptr_t slot);
+bool QFileSystemModel_QBaseEvent(QFileSystemModel* self, QEvent* event);
+void QFileSystemModel_Delete(QFileSystemModel* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

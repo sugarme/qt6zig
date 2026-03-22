@@ -1,0 +1,44 @@
+#pragma once
+#ifndef QLOGGINGCATEGORY_H_C_LIB
+#define QLOGGINGCATEGORY_H_C_LIB
+
+#include <stdbool.h>
+#include <stddef.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "qtlibc.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+#else
+typedef struct QLoggingCategory QLoggingCategory;
+typedef struct _GUID _GUID;
+typedef struct type_info type_info;
+#endif
+
+
+
+QLoggingCategory* QLoggingCategory_new(const char* category);
+QLoggingCategory* QLoggingCategory_new2(const char* category, int severityLevel);
+bool QLoggingCategory_IsEnabled(const QLoggingCategory* self, int typeVal);
+void QLoggingCategory_SetEnabled(QLoggingCategory* self, int typeVal, bool enable);
+bool QLoggingCategory_IsDebugEnabled(const QLoggingCategory* self);
+bool QLoggingCategory_IsInfoEnabled(const QLoggingCategory* self);
+bool QLoggingCategory_IsWarningEnabled(const QLoggingCategory* self);
+bool QLoggingCategory_IsCriticalEnabled(const QLoggingCategory* self);
+const char* QLoggingCategory_CategoryName(const QLoggingCategory* self);
+QLoggingCategory* QLoggingCategory_OperatorCall(QLoggingCategory* self);
+const QLoggingCategory* QLoggingCategory_OperatorCall2(const QLoggingCategory* self);
+QLoggingCategory* QLoggingCategory_DefaultCategory();
+void QLoggingCategory_SetFilterRules(const libqt_string rules);
+void QLoggingCategory_Delete(QLoggingCategory* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

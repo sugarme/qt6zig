@@ -1,0 +1,180 @@
+const QtC = @import("qt6zig");
+const qtc = @import("qt6c");%%_IMPORTLIBS_%%
+%%_STRUCTDEFS_%%
+
+/// https://doc.qt.io/qt-6/qdeadlinetimer.html
+pub const qdeadlinetimer = struct {
+
+    /// New constructs a new QDeadlineTimer object.
+    pub fn New(other: ?*anyopaque) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new(@ptrCast(other));
+    }
+
+
+    /// New2 constructs a new QDeadlineTimer object.
+    pub fn New2(other: ?*anyopaque) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new2(@ptrCast(other));
+    }
+
+
+    /// New3 constructs a new QDeadlineTimer object.
+    pub fn New3() QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new3();
+    }
+
+
+    /// New4 constructs a new QDeadlineTimer object.
+    pub fn New4(type_: i32) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new4(@intCast(type_));
+    }
+
+
+    /// New5 constructs a new QDeadlineTimer object.
+    pub fn New5(param1: i32) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new5(@intCast(param1));
+    }
+
+
+    /// New6 constructs a new QDeadlineTimer object.
+    pub fn New6(msecs: i64) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new6(msecs);
+    }
+
+
+    /// New7 constructs a new QDeadlineTimer object.
+    pub fn New7(param1: ?*anyopaque) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new7(@ptrCast(param1));
+    }
+
+
+    /// New8 constructs a new QDeadlineTimer object.
+    pub fn New8(param1: i32, type_: i32) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new8(@intCast(param1), @intCast(type_));
+    }
+
+
+    /// New9 constructs a new QDeadlineTimer object.
+    pub fn New9(msecs: i64, typeVal: i32) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_new9(msecs, @intCast(typeVal));
+    }
+
+    /// CopyAssign shallow copies `other` into `self`.
+    pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDeadlineTimer_CopyAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+    /// MoveAssign moves `other` into `self` and invalidates `other`.
+    pub fn MoveAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDeadlineTimer_MoveAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+
+    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QDeadlineTimer_Swap(@ptrCast(self), @ptrCast(other));
+    }
+
+    pub fn IsForever(self: ?*anyopaque, ) bool {
+        return qtc.QDeadlineTimer_IsForever(@ptrCast(self));
+    }
+
+    pub fn HasExpired(self: ?*anyopaque, ) bool {
+        return qtc.QDeadlineTimer_HasExpired(@ptrCast(self));
+    }
+
+    pub fn TimerType(self: ?*anyopaque, ) i32 {
+        return qtc.QDeadlineTimer_TimerType(@ptrCast(self));
+    }
+
+    pub fn SetTimerType(self: ?*anyopaque, typeVal: i32) void {
+        qtc.QDeadlineTimer_SetTimerType(@ptrCast(self), @intCast(typeVal));
+    }
+
+    pub fn RemainingTime(self: ?*anyopaque, ) i64 {
+        return qtc.QDeadlineTimer_RemainingTime(@ptrCast(self));
+    }
+
+    pub fn RemainingTimeNSecs(self: ?*anyopaque, ) i64 {
+        return qtc.QDeadlineTimer_RemainingTimeNSecs(@ptrCast(self));
+    }
+
+    pub fn SetRemainingTime(self: ?*anyopaque, msecs: i64) void {
+        qtc.QDeadlineTimer_SetRemainingTime(@ptrCast(self), msecs);
+    }
+
+    pub fn SetPreciseRemainingTime(self: ?*anyopaque, secs: i64) void {
+        qtc.QDeadlineTimer_SetPreciseRemainingTime(@ptrCast(self), secs);
+    }
+
+    pub fn Deadline(self: ?*anyopaque, ) i64 {
+        return qtc.QDeadlineTimer_Deadline(@ptrCast(self));
+    }
+
+    pub fn DeadlineNSecs(self: ?*anyopaque, ) i64 {
+        return qtc.QDeadlineTimer_DeadlineNSecs(@ptrCast(self));
+    }
+
+    pub fn SetDeadline(self: ?*anyopaque, msecs: i64) void {
+        qtc.QDeadlineTimer_SetDeadline(@ptrCast(self), msecs);
+    }
+
+    pub fn SetPreciseDeadline(self: ?*anyopaque, secs: i64) void {
+        qtc.QDeadlineTimer_SetPreciseDeadline(@ptrCast(self), secs);
+    }
+
+    pub fn AddNSecs(dt: QtC.QDeadlineTimer, nsecs: i64) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_AddNSecs(@ptrCast(dt), nsecs);
+    }
+
+    pub fn Current() QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_Current();
+    }
+
+    pub fn OperatorPlusAssign(self: ?*anyopaque, msecs: i64) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_OperatorPlusAssign(@ptrCast(self), msecs);
+    }
+
+    pub fn OperatorMinusAssign(self: ?*anyopaque, msecs: i64) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_OperatorMinusAssign(@ptrCast(self), msecs);
+    }
+
+    pub fn SetRemainingTime2(self: ?*anyopaque, msecs: i64, typeVal: i32) void {
+        qtc.QDeadlineTimer_SetRemainingTime2(@ptrCast(self), msecs, @intCast(typeVal));
+    }
+
+    pub fn SetPreciseRemainingTime2(self: ?*anyopaque, secs: i64, nsecs: i64) void {
+        qtc.QDeadlineTimer_SetPreciseRemainingTime2(@ptrCast(self), secs, nsecs);
+    }
+
+    pub fn SetPreciseRemainingTime3(self: ?*anyopaque, secs: i64, nsecs: i64, typeVal: i32) void {
+        qtc.QDeadlineTimer_SetPreciseRemainingTime3(@ptrCast(self), secs, nsecs, @intCast(typeVal));
+    }
+
+    pub fn SetDeadline2(self: ?*anyopaque, msecs: i64, timerType: i32) void {
+        qtc.QDeadlineTimer_SetDeadline2(@ptrCast(self), msecs, @intCast(timerType));
+    }
+
+    pub fn SetPreciseDeadline2(self: ?*anyopaque, secs: i64, nsecs: i64) void {
+        qtc.QDeadlineTimer_SetPreciseDeadline2(@ptrCast(self), secs, nsecs);
+    }
+
+    pub fn SetPreciseDeadline3(self: ?*anyopaque, secs: i64, nsecs: i64, typeVal: i32) void {
+        qtc.QDeadlineTimer_SetPreciseDeadline3(@ptrCast(self), secs, nsecs, @intCast(typeVal));
+    }
+
+    pub fn Current1(timerType: i32) QtC.QDeadlineTimer {
+        return qtc.QDeadlineTimer_Current1(@intCast(timerType));
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QDeadlineTimer_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/deadlinetimer.html#types
+pub const enums = struct {
+    pub const ForeverConstant = enum {
+        pub const Forever: i32 = 0;
+    };
+
+};

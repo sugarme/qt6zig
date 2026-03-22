@@ -1,0 +1,37 @@
+#pragma once
+#ifndef QCAPTURABLEWINDOW_H_C_LIB
+#define QCAPTURABLEWINDOW_H_C_LIB
+
+#include <stdbool.h>
+#include <stddef.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "qtlibc.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+#else
+typedef struct QCapturableWindow QCapturableWindow;
+typedef struct _GUID _GUID;
+typedef struct type_info type_info;
+#endif
+
+
+
+QCapturableWindow* QCapturableWindow_new();
+QCapturableWindow* QCapturableWindow_new2(const QCapturableWindow* other);
+void QCapturableWindow_OperatorAssign(QCapturableWindow* self, const QCapturableWindow* other);
+void QCapturableWindow_Swap(QCapturableWindow* self, QCapturableWindow* other);
+bool QCapturableWindow_IsValid(const QCapturableWindow* self);
+libqt_string QCapturableWindow_Description(const QCapturableWindow* self);
+void QCapturableWindow_Delete(QCapturableWindow* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

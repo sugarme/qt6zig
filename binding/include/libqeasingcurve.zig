@@ -1,0 +1,142 @@
+const QtC = @import("qt6zig");
+const qtc = @import("qt6c");%%_IMPORTLIBS_%%
+%%_STRUCTDEFS_%%
+
+/// https://doc.qt.io/qt-6/qeasingcurve.html
+pub const qeasingcurve = struct {
+
+    /// New constructs a new QEasingCurve object.
+    pub fn New() QtC.QEasingCurve {
+        return qtc.QEasingCurve_new();
+    }
+
+
+    /// New2 constructs a new QEasingCurve object.
+    pub fn New2(other: ?*anyopaque) QtC.QEasingCurve {
+        return qtc.QEasingCurve_new2(@ptrCast(other));
+    }
+
+
+    /// New3 constructs a new QEasingCurve object.
+    pub fn New3(typeVal: i32) QtC.QEasingCurve {
+        return qtc.QEasingCurve_new3(@intCast(typeVal));
+    }
+
+
+    pub fn OperatorAssign(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QEasingCurve_OperatorAssign(@ptrCast(self), @ptrCast(other));
+    }
+
+    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
+        qtc.QEasingCurve_Swap(@ptrCast(self), @ptrCast(other));
+    }
+
+    pub fn Amplitude(self: ?*anyopaque, ) f64 {
+        return qtc.QEasingCurve_Amplitude(@ptrCast(self));
+    }
+
+    pub fn SetAmplitude(self: ?*anyopaque, amplitude: f64) void {
+        qtc.QEasingCurve_SetAmplitude(@ptrCast(self), amplitude);
+    }
+
+    pub fn Period(self: ?*anyopaque, ) f64 {
+        return qtc.QEasingCurve_Period(@ptrCast(self));
+    }
+
+    pub fn SetPeriod(self: ?*anyopaque, period: f64) void {
+        qtc.QEasingCurve_SetPeriod(@ptrCast(self), period);
+    }
+
+    pub fn Overshoot(self: ?*anyopaque, ) f64 {
+        return qtc.QEasingCurve_Overshoot(@ptrCast(self));
+    }
+
+    pub fn SetOvershoot(self: ?*anyopaque, overshoot: f64) void {
+        qtc.QEasingCurve_SetOvershoot(@ptrCast(self), overshoot);
+    }
+
+    pub fn AddCubicBezierSegment(self: ?*anyopaque, c1: ?*anyopaque, c2: ?*anyopaque, endPoint: ?*anyopaque) void {
+        qtc.QEasingCurve_AddCubicBezierSegment(@ptrCast(self), @ptrCast(c1), @ptrCast(c2), @ptrCast(endPoint));
+    }
+
+    pub fn AddTCBSegment(self: ?*anyopaque, nextPoint: ?*anyopaque, t: f64, c: f64, b: f64) void {
+        qtc.QEasingCurve_AddTCBSegment(@ptrCast(self), @ptrCast(nextPoint), t, c, b);
+    }
+
+    pub fn ToCubicSpline(self: ?*anyopaque, ) []const u8 {
+        return qtc.QEasingCurve_ToCubicSpline(@ptrCast(self));
+    }
+
+    pub fn Type(self: ?*anyopaque, ) i32 {
+        return qtc.QEasingCurve_Type(@ptrCast(self));
+    }
+
+    pub fn SetType(self: ?*anyopaque, typeVal: i32) void {
+        qtc.QEasingCurve_SetType(@ptrCast(self), @intCast(typeVal));
+    }
+
+    pub fn ValueForProgress(self: ?*anyopaque, progress: f64) f64 {
+        return qtc.QEasingCurve_ValueForProgress(@ptrCast(self), progress);
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QEasingCurve_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/easingcurve.html#types
+pub const enums = struct {
+    pub const Type = enum {
+        pub const Linear: i32 = 0;
+        pub const InQuad: i32 = 1;
+        pub const OutQuad: i32 = 2;
+        pub const InOutQuad: i32 = 3;
+        pub const OutInQuad: i32 = 4;
+        pub const InCubic: i32 = 5;
+        pub const OutCubic: i32 = 6;
+        pub const InOutCubic: i32 = 7;
+        pub const OutInCubic: i32 = 8;
+        pub const InQuart: i32 = 9;
+        pub const OutQuart: i32 = 10;
+        pub const InOutQuart: i32 = 11;
+        pub const OutInQuart: i32 = 12;
+        pub const InQuint: i32 = 13;
+        pub const OutQuint: i32 = 14;
+        pub const InOutQuint: i32 = 15;
+        pub const OutInQuint: i32 = 16;
+        pub const InSine: i32 = 17;
+        pub const OutSine: i32 = 18;
+        pub const InOutSine: i32 = 19;
+        pub const OutInSine: i32 = 20;
+        pub const InExpo: i32 = 21;
+        pub const OutExpo: i32 = 22;
+        pub const InOutExpo: i32 = 23;
+        pub const OutInExpo: i32 = 24;
+        pub const InCirc: i32 = 25;
+        pub const OutCirc: i32 = 26;
+        pub const InOutCirc: i32 = 27;
+        pub const OutInCirc: i32 = 28;
+        pub const InElastic: i32 = 29;
+        pub const OutElastic: i32 = 30;
+        pub const InOutElastic: i32 = 31;
+        pub const OutInElastic: i32 = 32;
+        pub const InBack: i32 = 33;
+        pub const OutBack: i32 = 34;
+        pub const InOutBack: i32 = 35;
+        pub const OutInBack: i32 = 36;
+        pub const InBounce: i32 = 37;
+        pub const OutBounce: i32 = 38;
+        pub const InOutBounce: i32 = 39;
+        pub const OutInBounce: i32 = 40;
+        pub const InCurve: i32 = 41;
+        pub const OutCurve: i32 = 42;
+        pub const SineCurve: i32 = 43;
+        pub const CosineCurve: i32 = 44;
+        pub const BezierSpline: i32 = 45;
+        pub const TCBSpline: i32 = 46;
+        pub const Custom: i32 = 47;
+        pub const NCurveTypes: i32 = 48;
+    };
+
+};

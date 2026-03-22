@@ -1,0 +1,151 @@
+const QtC = @import("qt6zig");
+const qtc = @import("qt6c");%%_IMPORTLIBS_%%
+%%_STRUCTDEFS_%%
+
+/// https://doc.qt.io/qt-6/qprintengine.html
+pub const qprintengine = struct {
+
+    /// New constructs a new QPrintEngine object.
+    pub fn New() QtC.QPrintEngine {
+        return qtc.QPrintEngine_new();
+    }
+
+
+    /// New2 constructs a new QPrintEngine object.
+    pub fn New2(param1: ?*anyopaque) QtC.QPrintEngine {
+        return qtc.QPrintEngine_new2(@ptrCast(param1));
+    }
+
+
+    pub fn SetProperty(self: ?*anyopaque, key: i32, value: ?*anyopaque) void {
+        qtc.QPrintEngine_SetProperty(@ptrCast(self), @intCast(key), @ptrCast(value));
+    }
+
+    /// Allows for overriding the related default method
+    pub fn OnSetProperty(self: ?*anyopaque, callback: *const fn (?*anyopaque, i32, ?*anyopaque) callconv(.c) void) void {
+        qtc.QPrintEngine_OnSetProperty(@ptrCast(self), @intCast(@intFromPtr(callback)));
+    }
+
+    /// Base class method implementation
+    pub fn QBaseSetProperty(self: ?*anyopaque, key: i32, value: ?*anyopaque) void {
+        qtc.QPrintEngine_QBaseSetProperty(@ptrCast(self), @intCast(key), @ptrCast(value));
+    }
+
+    pub fn Property(self: ?*anyopaque, key: i32) QtC.QVariant {
+        return qtc.QPrintEngine_Property(@ptrCast(self), @intCast(key));
+    }
+
+    /// Allows for overriding the related default method
+    pub fn OnProperty(self: ?*anyopaque, callback: *const fn (?*anyopaque, i32) callconv(.c) QtC.QVariant) void {
+        qtc.QPrintEngine_OnProperty(@ptrCast(self), @intCast(@intFromPtr(callback)));
+    }
+
+    /// Base class method implementation
+    pub fn QBaseProperty(self: ?*anyopaque, key: i32) QtC.QVariant {
+        return qtc.QPrintEngine_QBaseProperty(@ptrCast(self), @intCast(key));
+    }
+
+    pub fn NewPage(self: ?*anyopaque, ) bool {
+        return qtc.QPrintEngine_NewPage(@ptrCast(self));
+    }
+
+    /// Allows for overriding the related default method
+    pub fn OnNewPage(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) bool) void {
+        qtc.QPrintEngine_OnNewPage(@ptrCast(self), @intCast(@intFromPtr(callback)));
+    }
+
+    /// Base class method implementation
+    pub fn QBaseNewPage(self: ?*anyopaque, ) bool {
+        return qtc.QPrintEngine_QBaseNewPage(@ptrCast(self));
+    }
+
+    pub fn Abort(self: ?*anyopaque, ) bool {
+        return qtc.QPrintEngine_Abort(@ptrCast(self));
+    }
+
+    /// Allows for overriding the related default method
+    pub fn OnAbort(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) bool) void {
+        qtc.QPrintEngine_OnAbort(@ptrCast(self), @intCast(@intFromPtr(callback)));
+    }
+
+    /// Base class method implementation
+    pub fn QBaseAbort(self: ?*anyopaque, ) bool {
+        return qtc.QPrintEngine_QBaseAbort(@ptrCast(self));
+    }
+
+    pub fn Metric(self: ?*anyopaque, param1: i32) i32 {
+        return qtc.QPrintEngine_Metric(@ptrCast(self), @intCast(param1));
+    }
+
+    /// Allows for overriding the related default method
+    pub fn OnMetric(self: ?*anyopaque, callback: *const fn (?*anyopaque, i32) callconv(.c) i32) void {
+        qtc.QPrintEngine_OnMetric(@ptrCast(self), @intCast(@intFromPtr(callback)));
+    }
+
+    /// Base class method implementation
+    pub fn QBaseMetric(self: ?*anyopaque, param1: i32) i32 {
+        return qtc.QPrintEngine_QBaseMetric(@ptrCast(self), @intCast(param1));
+    }
+
+    pub fn PrinterState(self: ?*anyopaque, ) i32 {
+        return qtc.QPrintEngine_PrinterState(@ptrCast(self));
+    }
+
+    /// Allows for overriding the related default method
+    pub fn OnPrinterState(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) i32) void {
+        qtc.QPrintEngine_OnPrinterState(@ptrCast(self), @intCast(@intFromPtr(callback)));
+    }
+
+    /// Base class method implementation
+    pub fn QBasePrinterState(self: ?*anyopaque, ) i32 {
+        return qtc.QPrintEngine_QBasePrinterState(@ptrCast(self));
+    }
+
+    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
+        qtc.QPrintEngine_OperatorAssign(@ptrCast(self), @ptrCast(param1));
+    }
+
+    /// Delete this object from C++ memory.
+    pub fn QDelete(self: ?*anyopaque) void {
+        qtc.QPrintEngine_Delete(@ptrCast(self));
+    }
+};
+
+/// https://doc.qt.io/qt-6/printengine.html#types
+pub const enums = struct {
+    pub const PrintEnginePropertyKey = enum {
+        pub const PPK_CollateCopies: i32 = 0;
+        pub const PPK_ColorMode: i32 = 1;
+        pub const PPK_Creator: i32 = 2;
+        pub const PPK_DocumentName: i32 = 3;
+        pub const PPK_FullPage: i32 = 4;
+        pub const PPK_NumberOfCopies: i32 = 5;
+        pub const PPK_Orientation: i32 = 6;
+        pub const PPK_OutputFileName: i32 = 7;
+        pub const PPK_PageOrder: i32 = 8;
+        pub const PPK_PageRect: i32 = 9;
+        pub const PPK_PageSize: i32 = 10;
+        pub const PPK_PaperRect: i32 = 11;
+        pub const PPK_PaperSource: i32 = 12;
+        pub const PPK_PrinterName: i32 = 13;
+        pub const PPK_PrinterProgram: i32 = 14;
+        pub const PPK_Resolution: i32 = 15;
+        pub const PPK_SelectionOption: i32 = 16;
+        pub const PPK_SupportedResolutions: i32 = 17;
+        pub const PPK_WindowsPageSize: i32 = 18;
+        pub const PPK_FontEmbedding: i32 = 19;
+        pub const PPK_Duplex: i32 = 20;
+        pub const PPK_PaperSources: i32 = 21;
+        pub const PPK_CustomPaperSize: i32 = 22;
+        pub const PPK_PageMargins: i32 = 23;
+        pub const PPK_CopyCount: i32 = 24;
+        pub const PPK_SupportsMultipleCopies: i32 = 25;
+        pub const PPK_PaperName: i32 = 26;
+        pub const PPK_QPageSize: i32 = 27;
+        pub const PPK_QPageMargins: i32 = 28;
+        pub const PPK_QPageLayout: i32 = 29;
+        pub const PPK_PaperSize: i32 = 10;
+        pub const PPK_CustomBase: i32 = 65280;
+    };
+
+};

@@ -1,0 +1,122 @@
+#include <QDialog>
+#include <QErrorMessage>
+#include <QEvent>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QWidget>
+#include <qerrormessage.h>
+#include "libqerrormessage.h"
+#include "libqerrormessage.hxx"
+
+QErrorMessage* QErrorMessage_new(QWidget* parent) {
+	 return new VirtualQErrorMessage(parent);
+}
+
+QErrorMessage* QErrorMessage_new2() {
+	 return new VirtualQErrorMessage();
+}
+
+libqt_string QErrorMessage_Tr(const char* s) {
+	QString _ret = QErrorMessage::tr(s);
+	QByteArray _b = _ret.toUtf8();
+	libqt_string _str;
+	_str.len = _b.length();
+	_str.data = static_cast<const char*>(malloc(_str.len + 1));
+	memcpy((void*)_str.data, _b.data(), _str.len);
+	((char*)_str.data)[_str.len] = '\0';
+	return _str;
+}
+
+QErrorMessage* QErrorMessage_QtHandler() {
+	return QErrorMessage::qtHandler();
+}
+
+void QErrorMessage_ShowMessage(QErrorMessage* self, const libqt_string message) {
+	self->showMessage(QString::fromUtf8(message.data, message.len));
+}
+
+void QErrorMessage_ShowMessage2(QErrorMessage* self, const libqt_string message, const libqt_string typeVal) {
+	self->showMessage(QString::fromUtf8(message.data, message.len), QString::fromUtf8(typeVal.data, typeVal.len));
+}
+
+libqt_string QErrorMessage_Tr2(const char* s, const char* c) {
+	QString _ret = QErrorMessage::tr(s, c);
+	QByteArray _b = _ret.toUtf8();
+	libqt_string _str;
+	_str.len = _b.length();
+	_str.data = static_cast<const char*>(malloc(_str.len + 1));
+	memcpy((void*)_str.data, _b.data(), _str.len);
+	((char*)_str.data)[_str.len] = '\0';
+	return _str;
+}
+
+libqt_string QErrorMessage_Tr3(const char* s, const char* c, int n) {
+	QString _ret = QErrorMessage::tr(s, c, n);
+	QByteArray _b = _ret.toUtf8();
+	libqt_string _str;
+	_str.len = _b.length();
+	_str.data = static_cast<const char*>(malloc(_str.len + 1));
+	memcpy((void*)_str.data, _b.data(), _str.len);
+	((char*)_str.data)[_str.len] = '\0';
+	return _str;
+}
+
+// Derived class handler implementation
+void QErrorMessage_Done(QErrorMessage* self, int param1) {
+	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
+	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
+	vqerrormessage->done(param1);
+	} else {
+	self->QErrorMessage::done(param1);
+}
+}
+
+// Base class handler implementation
+void QErrorMessage_QBaseDone(QErrorMessage* self, int param1) {
+	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
+	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
+vqerrormessage->setQErrorMessage_Done_IsBase(true);
+	vqerrormessage->done(param1);
+}
+}
+
+// Auxiliary method to allow providing re-implementation
+void QErrorMessage_OnDone(QErrorMessage* self, intptr_t slot) {
+	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
+	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
+vqerrormessage->setQErrorMessage_Done_Callback(reinterpret_cast<VirtualQErrorMessage::QErrorMessage_Done_Callback>(slot));
+}
+}
+
+// Derived class handler implementation
+void QErrorMessage_ChangeEvent(QErrorMessage* self, QEvent* e) {
+	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
+	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
+	vqerrormessage->changeEvent(e);
+	} else {
+	self->QErrorMessage::changeEvent(e);
+}
+}
+
+// Base class handler implementation
+void QErrorMessage_QBaseChangeEvent(QErrorMessage* self, QEvent* e) {
+	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
+	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
+vqerrormessage->setQErrorMessage_ChangeEvent_IsBase(true);
+	vqerrormessage->changeEvent(e);
+}
+}
+
+// Auxiliary method to allow providing re-implementation
+void QErrorMessage_OnChangeEvent(QErrorMessage* self, intptr_t slot) {
+	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
+	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
+vqerrormessage->setQErrorMessage_ChangeEvent_Callback(reinterpret_cast<VirtualQErrorMessage::QErrorMessage_ChangeEvent_Callback>(slot));
+}
+}
+
+void QErrorMessage_Delete(QErrorMessage* self) {
+    delete self;
+}
+

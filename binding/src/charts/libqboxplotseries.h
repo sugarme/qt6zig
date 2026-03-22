@@ -1,0 +1,84 @@
+#pragma once
+#ifndef QBOXPLOTSERIES_H_C_LIB
+#define QBOXPLOTSERIES_H_C_LIB
+
+#include <stdbool.h>
+#include <stddef.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../qtlibc.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+#else
+typedef struct QAbstractSeries QAbstractSeries;
+typedef struct QBoxPlotSeries QBoxPlotSeries;
+typedef struct QBoxSet QBoxSet;
+typedef struct QBrush QBrush;
+typedef struct QObject QObject;
+typedef struct QPen QPen;
+typedef struct _GUID _GUID;
+typedef struct type_info type_info;
+#endif
+
+
+
+QBoxPlotSeries* QBoxPlotSeries_new();
+QBoxPlotSeries* QBoxPlotSeries_new2(QObject* parent);
+libqt_string QBoxPlotSeries_Tr(const char* s);
+bool QBoxPlotSeries_Append(QBoxPlotSeries* self, QBoxSet* box);
+bool QBoxPlotSeries_Remove(QBoxPlotSeries* self, QBoxSet* box);
+bool QBoxPlotSeries_Take(QBoxPlotSeries* self, QBoxSet* box);
+bool QBoxPlotSeries_Append2(QBoxPlotSeries* self, const libqt_list boxes);
+bool QBoxPlotSeries_Insert(QBoxPlotSeries* self, int index, QBoxSet* box);
+int QBoxPlotSeries_Count(const QBoxPlotSeries* self);
+libqt_list QBoxPlotSeries_BoxSets(const QBoxPlotSeries* self);
+void QBoxPlotSeries_Clear(QBoxPlotSeries* self);
+int QBoxPlotSeries_Type(const QBoxPlotSeries* self);
+void QBoxPlotSeries_SetBoxOutlineVisible(QBoxPlotSeries* self, bool visible);
+bool QBoxPlotSeries_BoxOutlineVisible(QBoxPlotSeries* self);
+void QBoxPlotSeries_SetBoxWidth(QBoxPlotSeries* self, double width);
+double QBoxPlotSeries_BoxWidth(QBoxPlotSeries* self);
+void QBoxPlotSeries_SetBrush(QBoxPlotSeries* self, const QBrush* brush);
+QBrush* QBoxPlotSeries_Brush(const QBoxPlotSeries* self);
+void QBoxPlotSeries_SetPen(QBoxPlotSeries* self, const QPen* pen);
+QPen* QBoxPlotSeries_Pen(const QBoxPlotSeries* self);
+void QBoxPlotSeries_Clicked(QBoxPlotSeries* self, QBoxSet* boxset);
+void QBoxPlotSeries_Connect_Clicked(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_Hovered(QBoxPlotSeries* self, bool status, QBoxSet* boxset);
+void QBoxPlotSeries_Connect_Hovered(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_Pressed(QBoxPlotSeries* self, QBoxSet* boxset);
+void QBoxPlotSeries_Connect_Pressed(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_Released(QBoxPlotSeries* self, QBoxSet* boxset);
+void QBoxPlotSeries_Connect_Released(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_DoubleClicked(QBoxPlotSeries* self, QBoxSet* boxset);
+void QBoxPlotSeries_Connect_DoubleClicked(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_CountChanged(QBoxPlotSeries* self);
+void QBoxPlotSeries_Connect_CountChanged(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_PenChanged(QBoxPlotSeries* self);
+void QBoxPlotSeries_Connect_PenChanged(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_BrushChanged(QBoxPlotSeries* self);
+void QBoxPlotSeries_Connect_BrushChanged(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_BoxOutlineVisibilityChanged(QBoxPlotSeries* self);
+void QBoxPlotSeries_Connect_BoxOutlineVisibilityChanged(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_BoxWidthChanged(QBoxPlotSeries* self);
+void QBoxPlotSeries_Connect_BoxWidthChanged(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_BoxsetsAdded(QBoxPlotSeries* self, const libqt_list sets);
+void QBoxPlotSeries_Connect_BoxsetsAdded(QBoxPlotSeries* self, intptr_t slot);
+void QBoxPlotSeries_BoxsetsRemoved(QBoxPlotSeries* self, const libqt_list sets);
+void QBoxPlotSeries_Connect_BoxsetsRemoved(QBoxPlotSeries* self, intptr_t slot);
+libqt_string QBoxPlotSeries_Tr2(const char* s, const char* c);
+libqt_string QBoxPlotSeries_Tr3(const char* s, const char* c, int n);
+void QBoxPlotSeries_OnType(const QBoxPlotSeries* self, intptr_t slot);
+int QBoxPlotSeries_QBaseType(const QBoxPlotSeries* self);
+void QBoxPlotSeries_Delete(QBoxPlotSeries* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif
