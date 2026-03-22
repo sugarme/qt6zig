@@ -4,7 +4,7 @@ Pure Zig bindings for Qt 6.8.3. Build standalone desktop applications with Zig a
 
 ## Features
 
-- **760 generated bindings** across 13 Qt modules (722 compile, 95% success)
+- **760 generated bindings** across 13 Qt modules (747 compile, 98%+ success)
 - **Static linking**: Produces standalone executables with no Qt6 DLL dependencies
 - **Self-contained**: Qt 6.8.3 source bundled in submodule — no external Qt installation needed
 - **Three-layer binding**: Zig wrappers → C ABI wrappers → Qt6 C++ (static libs)
@@ -128,7 +128,7 @@ binding/
 | **QtWebChannel** | 5 | Qt/web bridge communication |
 | **QtXml** | 5 | XML DOM parser |
 
-**Compilation status**: 722/760 (95%) compile successfully. The remaining 38 failures are due to QList/QMap C ABI type conversions and OpenGL GL type dependencies.
+**Compilation status**: 747/760 (98%) compile successfully. The remaining 13 failures are due to QUrl incomplete type in QList element conversion and QGenericRunnable references.
 
 ### Key Classes by Category
 
@@ -214,11 +214,20 @@ binding/src/*.{h,cpp,hxx,zig}
 
 ### Known Generator Issues
 
-The following patterns produce C++ code that doesn't compile (~38/760 classes):
+The following patterns produce C++ code that doesn't compile (~13/760 classes):
 
-- **QList/QMap/QPair C ABI**: No implicit conversion between Qt container types and `libqt_list`/`libqt_map` C ABI structs. Methods returning or accepting these types fail.
-- **OpenGL GL types**: QtOpenGL versioned function files (e.g., `qopenglfunctions_4_5_core`) reference `GL*` types that require platform GL headers.
-- **Template iterators**: Types like `QVersionNumber::It` and `const_iterator` don't map to C ABI.
+- **QUrl incomplete type**: QList<QUrl> return conversion tries to heap-allocate QUrl elements without a complete type definition in scope.
+- **QGenericRunnable**: Referenced by some files but blocked from inclusion — causes undeclared identifier errors.
+- **QList/QMap parameter round-trip**: Parameters accepting QList/QMap pass a default-constructed container (data not forwarded from C ABI struct yet).
+
+Resolved issues (previously failing, now fixed):
+- OpenGL versioned function files (blocked at header filter level)
+- Iterator types (blocked in config)
+- QBindable/QProperty templates (blocked in config)
+- Operator naming (+=, -=, etc. properly renamed)
+- Virtual callback type mismatches (const, QString, enum, QList/QMap)
+- Protected member access (skipped in C ABI, handled via virtual callbacks)
+- metaObject/qt_metacast/qt_metacall overloads (blocked in transform)
 
 ## Platform Support
 
