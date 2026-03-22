@@ -128,6 +128,9 @@ pub fn allowMethod(class_name: []const u8, method_name: []const u8) bool {
     if (eql(class_name, "QAbstractVideoBuffer") and eql(method_name, "map"))
         return false;
 
+    if (eql(class_name, "QLoggingCategory") and eql(method_name, "categoryFilter"))
+        return false;
+
     if (eql(class_name, "QChronoTimer") and eql(method_name, "id"))
         return false;
 
@@ -216,7 +219,7 @@ pub fn allowMethod(class_name: []const u8, method_name: []const u8) bool {
         return false;
 
     // Method-name-only blocks (signals)
-    if (eql(method_name, "metaObject") or eql(method_name, "qt_metacast") or eql(method_name, "qt_metacall") or eql(method_name, "clone"))
+    if (eql(method_name, "metaObject") or eql(method_name, "qt_metacast") or eql(method_name, "qt_metacall") or eql(method_name, "clone") or eql(method_name, "qt_check_for_QGADGET_macro"))
         return false;
 
     // Methods containing QGADGET
@@ -233,6 +236,8 @@ pub fn allowMethod(class_name: []const u8, method_name: []const u8) bool {
 /// Returns true if virtual method overrides should be generated for this class.
 pub fn allowVirtualForClass(class_name: []const u8) bool {
     if (eql(class_name, "QFutureWatcherBase")) return false;
+    if (eql(class_name, "QCborError")) return false;
+    if (eql(class_name, "QCborParserError")) return false;
     if (eql(class_name, "QObjectData")) return false;
     if (startsWith(class_name, "QAbstractEventDispatcher")) return false;
     if (eql(class_name, "KJobTrackerInterface")) return false;
@@ -261,6 +266,7 @@ pub fn allowVirtualForClass(class_name: []const u8) bool {
 pub fn allowCtor(class_name: []const u8) bool {
     if (eql(class_name, "QStringConverterBase")) return false;
     if (eql(class_name, "QBrushData")) return false;
+    if (eql(class_name, "QObjectData")) return false;
     if (eql(class_name, "QNativeInterface::QGLXContext")) return false;
     if (eql(class_name, "QNativeInterface::QEGLContext")) return false;
 
@@ -297,7 +303,9 @@ pub fn isBlockedType(type_name: []const u8) bool {
         "QUrlTwoFlags<",
         "struct __",
         "FillResult<",
+        "QProperty<",
         "QBindable<",
+        "QNotifiedProperty<",
         "QRgbaFloat<",
         "QPointer<",
         "EncodedData<",

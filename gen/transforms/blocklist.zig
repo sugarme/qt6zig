@@ -1,5 +1,6 @@
 const std = @import("std");
 const ir = @import("../intermediate.zig");
+const config = @import("../config.zig");
 
 /// Types that are too complex or unsupported for binding generation.
 /// If a method's parameter or return type matches any of these, the
@@ -93,8 +94,24 @@ fn allowVirtualForClass(class_name: []const u8) bool {
     return true;
 }
 
+/// Methods that are always blocked regardless of class.
+const globally_blocked_methods = [_][]const u8{
+    "metaObject",
+    "qt_metacast",
+    "qt_metacall",
+    "clone",
+    "qt_check_for_QGADGET_macro",
+};
+
 /// Check if all parameters and return type of a method are allowed.
-fn methodAllowed(m: ir.CppMethod) bool {
+fn methodAllowed(class_name: []const u8, m: ir.CppMethod) bool {
+    _ = class_name;
+    // Block globally problematic methods
+    for (&globally_blocked_methods) |blocked| {
+        if (std.mem.eql(u8, m.method_name, blocked)) return false;
+    }
+    // Block methods containing QGADGET in name
+    if (std.mem.indexOf(u8, m.method_name, "QGADGET") != null) return false;
     if (!allowType(m.return_type, true)) {
         return false;
     }
@@ -133,7 +150,7 @@ pub fn transform(parsed: *ir.CppParsedHeader) void {
         // --- Filter constructors ---
         var kept_ctors: std.ArrayList(ir.CppMethod) = .empty;
         for (class.ctors) |ctor| {
-            if (methodAllowed(ctor)) {
+            if (methodAllowed(class.class_name, ctor)) {
                 kept_ctors.append(alloc, ctor) catch {};
             }
         }
@@ -142,7 +159,7 @@ pub fn transform(parsed: *ir.CppParsedHeader) void {
         // --- Filter methods ---
         var kept_methods: std.ArrayList(ir.CppMethod) = .empty;
         for (class.methods) |method| {
-            if (methodAllowed(method)) {
+            if (methodAllowed(class.class_name, method)) {
                 kept_methods.append(alloc, method) catch {};
             }
         }

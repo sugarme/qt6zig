@@ -120,13 +120,13 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
                 callback_type, return_cabi, param_types,
             }));
 
-            // Instance callback storage
-            try private_callbacks.append(tmp, try std.fmt.allocPrint(tmp, "\t{s} {s} = nullptr;\n", .{
+            // Instance callback storage (mutable for const virtual overrides)
+            try private_callbacks.append(tmp, try std.fmt.allocPrint(tmp, "\tmutable {s} {s} = nullptr;\n", .{
                 callback_type, callback_name,
             }));
 
-            // Callback setter
-            try callback_setters.append(tmp, try std.fmt.allocPrint(tmp, "\tinline void set{s}({s} cb) {{ {s} = cb; }}\n", .{
+            // Callback setter (const to allow setting from const virtual overrides)
+            try callback_setters.append(tmp, try std.fmt.allocPrint(tmp, "\tinline void set{s}({s} cb) const {{ {s} = cb; }}\n", .{
                 callback_type, callback_type, callback_name,
             }));
 
