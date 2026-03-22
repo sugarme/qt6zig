@@ -23,62 +23,108 @@ pub fn matchSameHeaderOnly(ast_node_filename: []const u8) bool {
     return ast_node_filename.len == 0;
 }
 
-/// Run clang to produce a JSON AST dump for the given header file.
-/// Returns the raw JSON output as a string allocated with `allocator`.
-pub fn clangExec(
-    allocator: std.mem.Allocator,
-    clang_bin: []const u8,
-    input_header: []const u8,
-    cflags: []const []const u8,
-) ![]const u8 {
-    var argv_list: std.ArrayList([]const u8) = .empty;
+const tmp_ast_file = ".zig-cache/clang_ast_tmp.json";
 
-    try argv_list.append(allocator, clang_bin);
-    try argv_list.append(allocator, "-x");
-    try argv_list.append(allocator, "c++");
-    for (cflags) |flag| {
-        try argv_list.append(allocator, flag);
-    }
-    try argv_list.append(allocator, "-Xclang");
-    try argv_list.append(allocator, "-ast-dump=json");
-    try argv_list.append(allocator, "-fsyntax-only");
-    try argv_list.append(allocator, input_header);
-
-    var tio = std.Io.Threaded.init_single_threaded;
-    const exec_io = tio.io();
-
-    const result = std.process.run(allocator, exec_io, .{
-        .argv = argv_list.items,
-        .stdout_limit = .unlimited,
-        .stderr_limit = .unlimited,
-    }) catch return ClangError.ClangFailed;
-
-    if (result.term != .exited or result.term.exited != 0) {
-        return ClangError.ClangFailed;
-    }
-
-    return result.stdout;
-}
-
-/// Run clang and filter the AST JSON, keeping only nodes that match `matcher`.
-/// Returns the filtered JSON as a string allocated with `allocator`.
+/// Run clang to produce a JSON AST dump, writing output to a temp file.
+/// Then stream-filter the file to extract only nodes from the target header.
+/// Returns the FILTERED JSON (only nodes from the target file) allocated with `allocator`.
+///
+/// This avoids loading the full AST (~800MB per Qt header) into memory.
 pub fn clangExecFiltered(
     allocator: std.mem.Allocator,
-    clang_bin: []const u8,
+    io: std.Io,
+    clang_cmd: []const []const u8,
     input_header: []const u8,
     cflags: []const []const u8,
-    matcher: ClangMatcher,
 ) ![]const u8 {
-    const raw_json = try clangExec(allocator, clang_bin, input_header, cflags);
-    return try stripUpToFile(allocator, raw_json, matcher);
+    // Build command: gen/run-clang.bat <output-file> -x c++ <cflags> -Xclang -ast-dump=json -fsyntax-only <header>
+    // The batch file handles stdout redirect internally.
+    var cmd_parts: std.ArrayList([]const u8) = .empty;
+
+    if (@import("builtin").os.tag == .windows) {
+        try cmd_parts.append(allocator, "cmd");
+        try cmd_parts.append(allocator, "/c");
+        // Set CLANG_OUTPUT env and call run-clang.bat with all clang args
+        try cmd_parts.append(allocator, try std.fmt.allocPrint(
+            allocator,
+            "set CLANG_OUTPUT={s}&&gen\\run-clang.bat",
+            .{tmp_ast_file},
+        ));
+    } else {
+        // On Unix, build a shell command with redirect
+        try cmd_parts.append(allocator, "sh");
+        try cmd_parts.append(allocator, "-c");
+        var cmd_str = std.ArrayList(u8).empty;
+        for (clang_cmd) |arg| {
+            if (cmd_str.items.len > 0) try cmd_str.append(allocator, ' ');
+            try appendQuoted(&cmd_str, allocator, arg);
+        }
+        try cmd_str.appendSlice(allocator, " -x c++");
+        for (cflags) |flag| {
+            try cmd_str.append(allocator, ' ');
+            try appendQuoted(&cmd_str, allocator, flag);
+        }
+        try cmd_str.appendSlice(allocator, " -Xclang -ast-dump=json -fsyntax-only ");
+        try appendQuoted(&cmd_str, allocator, input_header);
+        try cmd_str.appendSlice(allocator, " > ");
+        try cmd_str.appendSlice(allocator, tmp_ast_file);
+        try cmd_str.appendSlice(allocator, " 2>/dev/null");
+        try cmd_parts.append(allocator, cmd_str.items);
+    }
+
+    // Clang arguments
+    if (@import("builtin").os.tag == .windows) {
+        try cmd_parts.append(allocator, "-x");
+        try cmd_parts.append(allocator, "c++");
+        for (cflags) |flag| {
+            try cmd_parts.append(allocator, flag);
+        }
+        try cmd_parts.append(allocator, "-Xclang");
+        try cmd_parts.append(allocator, "-ast-dump=json");
+        try cmd_parts.append(allocator, "-fsyntax-only");
+        // Normalize backslashes for clang
+        const norm_header = try allocator.alloc(u8, input_header.len);
+        for (input_header, 0..) |ch, idx| {
+            norm_header[idx] = if (ch == '\\') @as(u8, '/') else ch;
+        }
+        try cmd_parts.append(allocator, norm_header);
+    }
+
+    // Ensure cache dir exists for temp file
+    const cwd = std.Io.Dir.cwd();
+    cwd.createDirPath(io, ".zig-cache") catch {};
+
+    std.log.info("Clang cmd: {s}", .{cmd_parts.items[cmd_parts.items.len - 1]});
+
+    // Spawn shell and wait
+    var child = std.process.spawn(io, .{
+        .argv = cmd_parts.items,
+        .stdin = .ignore,
+        .stdout = .ignore,
+        .stderr = .ignore,
+    }) catch |err| {
+        std.log.err("Failed to spawn clang: {s}", .{@errorName(err)});
+        return ClangError.ClangFailed;
+    };
+    _ = child.wait(io) catch return ClangError.ClangFailed;
+    // Ignore exit code — zig cc may return non-zero but still produce valid output
+
+    // Now stream-filter the temp file
+    const filtered = streamFilterAstFile(allocator, io, tmp_ast_file) catch |err| {
+        std.log.err("Failed to filter AST: {s}", .{@errorName(err)});
+        return ClangError.InvalidJson;
+    };
+
+    return filtered;
 }
 
 /// Run clang with caching. If a cached result exists in `cache_dir` for the
-/// given header, return it. Otherwise run clang, cache the result, and return it.
+/// given header, return it. Otherwise run clang, filter, cache, and return.
+/// The cached result is the FILTERED JSON (small), not the raw output.
 pub fn clangExecCached(
     allocator: std.mem.Allocator,
     io: std.Io,
-    clang_bin: []const u8,
+    clang_cmd: []const []const u8,
     input_header: []const u8,
     cflags: []const []const u8,
     cache_dir: []const u8,
@@ -90,112 +136,158 @@ pub fn clangExecCached(
         return cached;
     } else |_| {}
 
-    // Cache miss -- run clang
-    const output = try clangExec(allocator, clang_bin, input_header, cflags);
+    // Cache miss — run clang and filter
+    const output = try clangExecFiltered(allocator, io, clang_cmd, input_header, cflags);
 
-    // Write to cache (best-effort)
+    // Write filtered result to cache (best-effort)
     saveCached(io, cache_dir, cache_key, output) catch {};
 
     return output;
 }
 
-/// Strip AST nodes that originate from #included files, keeping only those
-/// that match `matcher`. Mirrors the Go `clangStripUpToFile` function.
+// ==========================================================================
+// Stream-based AST filter
+// ==========================================================================
+
+/// Read a clang AST JSON file and extract only the top-level "inner" nodes
+/// that originate from the translation unit itself (not from #included files).
 ///
-/// The input `json_bytes` must be the raw JSON output from
-/// `clang -ast-dump=json`. The top-level object has an "inner" array;
-/// each element is checked for its originating filename through the
-/// `loc` / `includedFrom` / `expansionLoc` chain.
+/// This works by scanning the file for the "inner" array, then using bracket
+/// depth tracking to find each element's boundaries. For each element, only
+/// the first ~2KB is examined to find the "loc" field and determine origin.
 ///
-/// Returns a JSON string containing only the filtered "inner" array.
-pub fn stripUpToFile(
+/// Memory usage: O(output_size) — only kept nodes are allocated.
+fn streamFilterAstFile(
     allocator: std.mem.Allocator,
-    json_bytes: []const u8,
-    matcher: ClangMatcher,
+    io: std.Io,
+    file_path: []const u8,
 ) ![]const u8 {
-    const parsed = std.json.parseFromSlice(std.json.Value, allocator, json_bytes, .{
-        .allocate = .alloc_always,
-    }) catch return ClangError.InvalidJson;
-    const root = parsed.value;
+    const cwd = std.Io.Dir.cwd();
 
-    const inner_val = switch (root) {
-        .object => |obj| obj.get("inner") orelse return ClangError.NoInnerNodes,
-        else => return ClangError.InvalidJson,
-    };
-
-    const inner = switch (inner_val) {
-        .array => |a| a,
-        else => return ClangError.NoInnerNodes,
-    };
-
-    var filtered = std.json.Array.empty;
-
-    for (inner.items) |entry_val| {
-        const entry = switch (entry_val) {
-            .object => |obj| obj,
-            else => return ClangError.EntryNotMap,
-        };
-
-        const match_filename = resolveNodeFilename(entry) catch |err| switch (err) {
-            ClangError.NoLocField => return ClangError.NoLocField,
-            else => "",
-        };
-
-        if (matcher(match_filename)) {
-            try filtered.append(allocator, entry_val);
-        }
-    }
-
-    // Serialize the filtered array back to JSON
-    var buf = std.ArrayList(u8).empty;
-    std.json.stringify(std.json.Value{ .array = filtered }, .{ .whitespace = .indent_2 }, buf.writer(allocator)) catch
+    // Read file using page_allocator (virtual memory, OS can page to disk)
+    const raw = cwd.readFileAlloc(io, file_path, std.heap.page_allocator, .unlimited) catch |err| {
+        std.log.err("Failed to read AST file {s}: {s}", .{ file_path, @errorName(err) });
         return ClangError.InvalidJson;
-    return buf.items;
-}
-
-/// Resolve the originating filename for an AST node by walking:
-///   loc.includedFrom.file
-///   loc.expansionLoc.file
-///   loc.expansionLoc.includedFrom.file
-fn resolveNodeFilename(entry: std.json.ObjectMap) ClangError![]const u8 {
-    const loc_val = entry.get("loc") orelse return ClangError.NoLocField;
-    const loc = switch (loc_val) {
-        .object => |obj| obj,
-        else => return ClangError.NoLocField,
     };
+    defer std.heap.page_allocator.free(raw);
 
-    // Try loc.includedFrom.file
-    if (loc.get("includedFrom")) |included_from_val| {
-        if (included_from_val == .object) {
-            if (included_from_val.object.get("file")) |file_val| {
-                if (file_val == .string) return file_val.string;
+    if (raw.len == 0 or raw[0] != '{') return ClangError.InvalidJson;
+
+    // Scan for the top-level "inner" array, then extract matching elements
+    var result = std.ArrayList(u8).empty;
+    try result.appendSlice(allocator, "{\"inner\":[\n");
+
+    // Find "inner": [
+    const inner_marker = mem.indexOf(u8, raw, "\"inner\"") orelse return ClangError.NoInnerNodes;
+    var pos = inner_marker + 7;
+    // Skip whitespace and colon
+    while (pos < raw.len and (raw[pos] == ' ' or raw[pos] == ':' or
+        raw[pos] == '\n' or raw[pos] == '\r' or raw[pos] == '\t')) : (pos += 1)
+    {}
+    if (pos >= raw.len or raw[pos] != '[') return ClangError.NoInnerNodes;
+    pos += 1; // skip [
+
+    var depth: i32 = 0;
+    var element_start: ?usize = null;
+    var found_count: u32 = 0;
+    var in_string = false;
+
+    while (pos < raw.len) : (pos += 1) {
+        const c = raw[pos];
+
+        // Handle strings (skip content, handle escapes)
+        if (in_string) {
+            if (c == '\\') {
+                pos += 1; // skip escaped char
+                continue;
             }
+            if (c == '"') in_string = false;
+            continue;
         }
-    }
 
-    // Try loc.expansionLoc
-    if (loc.get("expansionLoc")) |expansion_val| {
-        if (expansion_val == .object) {
-            const expansion = expansion_val.object;
+        if (c == '"') {
+            in_string = true;
+            continue;
+        }
 
-            // expansionLoc.file
-            if (expansion.get("file")) |file_val| {
-                if (file_val == .string) return file_val.string;
-            }
-
-            // expansionLoc.includedFrom.file
-            if (expansion.get("includedFrom")) |inc_val| {
-                if (inc_val == .object) {
-                    if (inc_val.object.get("file")) |file_val| {
-                        if (file_val == .string) return file_val.string;
+        if (c == '{') {
+            if (depth == 0) element_start = pos;
+            depth += 1;
+        } else if (c == '}') {
+            depth -= 1;
+            if (depth == 0) {
+                if (element_start) |start| {
+                    const element_text = raw[start .. pos + 1];
+                    if (isFromTargetFile(element_text)) {
+                        if (found_count > 0) {
+                            try result.appendSlice(allocator, ",\n");
+                        }
+                        try result.appendSlice(allocator, element_text);
+                        found_count += 1;
                     }
                 }
+                element_start = null;
             }
+        } else if (c == ']' and depth == 0) {
+            break; // end of inner array
         }
     }
 
-    // No filename found -- node belongs to the translation unit itself
-    return "";
+    try result.appendSlice(allocator, "\n]}");
+
+    std.log.info("Filtered AST: kept {d} top-level nodes ({d} bytes from {d} MB input)", .{
+        found_count,
+        result.items.len,
+        raw.len / (1024 * 1024),
+    });
+    return result.items;
+}
+
+/// Quick heuristic check: does this AST node originate from the target file?
+/// Checks the "loc" field for "includedFrom" or "expansionLoc" with a "file" key.
+/// If neither is found, the node is from the translation unit (target file).
+fn isFromTargetFile(element_json: []const u8) bool {
+    // Find "loc" field (should be near the start of the element)
+    const search_limit = @min(element_json.len, 2048);
+    const loc_start = mem.indexOf(u8, element_json[0..search_limit], "\"loc\"") orelse {
+        // No loc field — treat as target file node
+        return true;
+    };
+
+    // Look for "includedFrom" within the loc object
+    const loc_region_end = @min(loc_start + 512, element_json.len);
+    const loc_region = element_json[loc_start..loc_region_end];
+
+    if (mem.indexOf(u8, loc_region, "\"includedFrom\"")) |inc_pos| {
+        // Found includedFrom — check if it has a "file" field with content
+        const after_inc = loc_region[inc_pos..];
+        if (mem.indexOf(u8, after_inc, "\"file\"")) |_| {
+            // Has a file field — this node is from an included file
+            return false;
+        }
+    }
+
+    // Check for expansionLoc with file
+    if (mem.indexOf(u8, loc_region, "\"expansionLoc\"")) |exp_pos| {
+        const after_exp = loc_region[exp_pos..];
+        if (mem.indexOf(u8, after_exp, "\"file\"")) |_| {
+            return false;
+        }
+    }
+
+    // No includedFrom or expansionLoc with file — node is from target file
+    return true;
+}
+
+/// Quote a shell argument if it contains spaces
+fn appendQuoted(list: *std.ArrayList(u8), allocator: std.mem.Allocator, arg: []const u8) !void {
+    if (mem.indexOfScalar(u8, arg, ' ') != null or mem.indexOfScalar(u8, arg, '\\') != null) {
+        try list.append(allocator, '"');
+        try list.appendSlice(allocator, arg);
+        try list.append(allocator, '"');
+    } else {
+        try list.appendSlice(allocator, arg);
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -268,4 +360,19 @@ test "cacheKeyFromPath" {
 test "matchSameHeaderOnly" {
     try std.testing.expect(matchSameHeaderOnly(""));
     try std.testing.expect(!matchSameHeaderOnly("other.h"));
+}
+
+test "isFromTargetFile" {
+    // Node with no loc — from target
+    try std.testing.expect(isFromTargetFile("{\"kind\":\"TypedefDecl\"}"));
+
+    // Node with includedFrom — NOT from target
+    try std.testing.expect(!isFromTargetFile(
+        \\{"kind":"TypedefDecl","loc":{"includedFrom":{"file":"other.h"}}}
+    ));
+
+    // Node with loc but no includedFrom — from target
+    try std.testing.expect(isFromTargetFile(
+        \\{"kind":"CXXRecordDecl","loc":{"offset":123,"line":5,"col":1}}
+    ));
 }

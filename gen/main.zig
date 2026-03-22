@@ -29,6 +29,7 @@ const zig_wrapper = @import("emit/zig_wrapper.zig");
 const ClangSubprocessCount = 4;
 
 pub fn main() !void {
+
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
 
@@ -38,10 +39,34 @@ pub fn main() !void {
 
     // Configuration
     const out_dir: []const u8 = "binding";
-    const clang_bin: []const u8 = "clang";
+    const include_base: []const u8 = "qt6-zig-build/Qt/6.8.3/include";
 
-    // IO context for filesystem operations
-    var threaded_io = Io.Threaded.init_single_threaded;
+    // Clang command for AST dumping.
+    // On Windows, uses gen/zig-cc.bat wrapper which sets ZIG_GLOBAL_CACHE_DIR
+    // before invoking "zig cc -target x86_64-windows-msvc" to ensure:
+    //   1. zig can find its cache directory (avoids AppDataDirUnavailable)
+    //   2. C++ standard library headers are found (via MSVC)
+    // On other platforms, use "clang" directly.
+    const clang_cmd: []const []const u8 = if (@import("builtin").os.tag == .windows)
+        &.{"gen\\zig-cc.bat"}
+    else
+        &.{"clang"};
+
+    // Verify include_base exists
+    {
+        const cwd = Io.Dir.cwd();
+        var tio2 = Io.Threaded.init_single_threaded;
+        const check_io = tio2.io();
+        cwd.access(check_io, include_base, .{}) catch {
+            std.log.err("Include base directory not found: {s}", .{include_base});
+            std.log.err("Ensure qt6-zig-build submodule has Qt source at Qt/6.8.3/include/", .{});
+            return error.IncludeBaseNotFound;
+        };
+    }
+
+    // IO context - needs full threading support for process spawning
+    var threaded_io = Io.Threaded.init(gpa.allocator(), .{});
+    defer threaded_io.deinit();
     const io = threaded_io.io();
 
     // Initialize global state
@@ -51,13 +76,13 @@ pub fn main() !void {
     const module_list = modules.getModules();
     for (module_list) |mod| {
         std.log.info("Processing module: {s}", .{mod.path});
-        try gatherTypes(allocator, io, &global_state, mod, clang_bin);
+        try gatherTypes(allocator, io, &global_state, mod, clang_cmd, include_base);
     }
 
     // Generate bindings for each module
     for (module_list) |mod| {
         std.log.info("Generating bindings for: {s}", .{mod.path});
-        try generate(allocator, io, &global_state, mod, out_dir, clang_bin);
+        try generate(allocator, io, &global_state, mod, out_dir, clang_cmd, include_base);
     }
 
     // Format output files
@@ -66,35 +91,65 @@ pub fn main() !void {
     std.log.info("Binding generation complete.", .{});
 }
 
-/// PASS 0: Gather types from all headers to build global type registry
+/// PASS 0: Gather types from all headers to build global type registry.
+/// Uses an uber-header approach: creates a single header that includes all
+/// module headers, runs clang ONCE, then registers all discovered types.
 fn gatherTypes(
     allocator: std.mem.Allocator,
     io: Io,
     global_state: *state.StateTracker,
     mod: modules.Module,
-    clang_bin: []const u8,
+    clang_cmd: []const []const u8,
+    include_base: []const u8,
 ) !void {
     var include_files: std.ArrayList([]const u8) = .empty;
 
     for (mod.dirs) |dir| {
+        const full_dir = try std.fs.path.join(allocator, &.{ include_base, dir });
         if (std.mem.endsWith(u8, dir, ".h")) {
-            try include_files.append(allocator, dir);
+            try include_files.append(allocator, full_dir);
         } else {
-            const headers = try findHeadersInDir(allocator, dir, mod.allow_header);
+            const headers = try findHeadersInDir(allocator, full_dir, mod.allow_header);
             try include_files.appendSlice(allocator, headers);
         }
     }
 
-    // Split cflags string into array
-    const cflags = try splitCflags(allocator, mod.cflags);
+    if (include_files.items.len == 0) return;
 
-    // Parse headers and register types
-    for (include_files.items) |header| {
-        const ast_json = try clang.clangExecCached(allocator, io, clang_bin, header, cflags, "cachedir");
-        const parsed = try allocator.create(ir.CppParsedHeader);
-        parsed.* = try ast_parser.parseJsonAst(allocator, ast_json);
-        try global_state.addKnownTypes(mod.path, parsed);
+    // Create uber-header that includes all module headers
+    const uber_path = ".zig-cache/uber_header.h";
+    {
+        var uber_content = std.ArrayList(u8).empty;
+        for (include_files.items) |header| {
+            try uber_content.appendSlice(allocator, "#include \"");
+            // Normalize backslashes to forward slashes for clang
+            for (header) |ch| {
+                try uber_content.append(allocator, if (ch == '\\') @as(u8, '/') else ch);
+            }
+            try uber_content.appendSlice(allocator, "\"\n");
+        }
+        try writeFile(uber_path, uber_content.items);
     }
+
+    // Split cflags string into array and add include base path
+    const base_cflags = try splitCflags(allocator, mod.cflags);
+    var cflags_list: std.ArrayList([]const u8) = .empty;
+    try cflags_list.appendSlice(allocator, base_cflags);
+    try cflags_list.append(allocator, try std.fmt.allocPrint(allocator, "-I{s}", .{include_base}));
+
+    // Run clang ONCE on the uber-header
+    std.log.info("PASS 0: Running clang on {d} headers for module '{s}'...", .{ include_files.items.len, mod.path });
+    const ast_json = clang.clangExecCached(allocator, io, clang_cmd, uber_path, cflags_list.items, "cachedir") catch |err| {
+        std.log.warn("PASS 0 clang failed for module '{s}': {s}, skipping type gathering", .{ mod.path, @errorName(err) });
+        return;
+    };
+
+    const parsed = try allocator.create(ir.CppParsedHeader);
+    parsed.* = ast_parser.parseJsonAst(allocator, ast_json) catch |err| {
+        std.log.warn("PASS 0 parse failed for module '{s}': {s}", .{ mod.path, @errorName(err) });
+        return;
+    };
+    try global_state.addKnownTypes(mod.path, parsed);
 }
 
 /// PASS 1 & 2: Parse headers, apply transforms, emit code
@@ -104,15 +159,17 @@ fn generate(
     global_state: *state.StateTracker,
     mod: modules.Module,
     out_dir: []const u8,
-    clang_bin: []const u8,
+    clang_cmd: []const []const u8,
+    include_base: []const u8,
 ) !void {
     var include_files: std.ArrayList([]const u8) = .empty;
 
     for (mod.dirs) |dir| {
+        const full_dir = try std.fs.path.join(allocator, &.{ include_base, dir });
         if (std.mem.endsWith(u8, dir, ".h")) {
-            try include_files.append(allocator, dir);
+            try include_files.append(allocator, full_dir);
         } else {
-            const headers = try findHeadersInDir(allocator, dir, mod.allow_header);
+            const headers = try findHeadersInDir(allocator, full_dir, mod.allow_header);
             try include_files.appendSlice(allocator, headers);
         }
     }
@@ -139,11 +196,14 @@ fn generate(
     var process_headers: std.ArrayList(*ir.CppParsedHeader) = .empty;
     var redundant = redundant_transform.AstTransformRedundant.init(allocator);
 
-    // Split cflags string into array
-    const cflags = try splitCflags(allocator, mod.cflags);
+    // Split cflags string into array and add include base path
+    const base_cflags = try splitCflags(allocator, mod.cflags);
+    var cflags_list: std.ArrayList([]const u8) = .empty;
+    try cflags_list.appendSlice(allocator, base_cflags);
+    try cflags_list.append(allocator, try std.fmt.allocPrint(allocator, "-I{s}", .{include_base}));
 
     for (include_files.items) |header| {
-        const ast_json = try clang.clangExecCached(allocator, io, clang_bin, header, cflags, "cachedir");
+        const ast_json = try clang.clangExecCached(allocator, io, clang_cmd, header, cflags_list.items, "cachedir");
         const parsed = try allocator.create(ir.CppParsedHeader);
         parsed.* = try ast_parser.parseJsonAst(allocator, ast_json);
 

@@ -27,8 +27,13 @@ pub fn build(b: *std.Build) !void {
     // =====================================================================
     // Discover Qt include paths
     // =====================================================================
-    const qt_include_base = try std.fs.path.join(allocator, &.{ qt6_build_path, "qt-sources", "6.8.3", "include" });
-    const qt_modules = [_][]const u8{ "QtCore", "QtGui", "QtWidgets" };
+    const qt_include_base = try std.fs.path.join(allocator, &.{ qt6_build_path, "Qt", "6.8.3", "include" });
+    const qt_modules = [_][]const u8{
+        "QtCore",        "QtGui",          "QtWidgets",      "QtNetwork",
+        "QtConcurrent",  "QtXml",          "QtSql",          "QtOpenGL",
+        "QtOpenGLWidgets", "QtPrintSupport", "QtSvg",        "QtSvgWidgets",
+        "QtWebChannel",  "QtCharts",       "QtMultimedia",   "QtSpatialAudio",
+    };
 
     if (pathExists(cwd, io, qt_include_base)) {
         try qt_include_paths.append(allocator, qt_include_base);
@@ -43,7 +48,7 @@ pub fn build(b: *std.Build) !void {
 
     // Fallback: check qt6-zig-build's bundled Qt sources for headers
     if (qt_include_paths.items.len == 0) {
-        const fallback_base = try std.fs.path.join(allocator, &.{ qt6_build_path, "qt-sources", "6.8.3", "include" });
+        const fallback_base = try std.fs.path.join(allocator, &.{ qt6_build_path, "Qt", "6.8.3", "include" });
         if (pathExists(cwd, io, fallback_base)) {
             try qt_include_paths.append(allocator, fallback_base);
             for (qt_modules) |mod| {
@@ -198,12 +203,17 @@ pub fn build(b: *std.Build) !void {
             exe.root_module.addLibraryPath(std.Build.LazyPath{ .cwd_relative = qt_lib_path });
         }
 
-        // Qt static libs
+        // Qt static libs (core modules always linked)
         for ([_][]const u8{
             "Qt6Widgets",
             "Qt6Gui",
             "Qt6Core",
+            "Qt6Network",
+            "Qt6Concurrent",
+            "Qt6OpenGL",
+            // Platform plugin
             "qwindows",
+            // 3rd party
             "qtHarfbuzz",
             "qtFreetype",
             "qtLibpng",
@@ -253,6 +263,22 @@ pub fn build(b: *std.Build) !void {
             "opengl32",
             "shcore",
             "d3d9",
+            // Network
+            "dnsapi",
+            "iphlpapi",
+            "secur32",
+            "winhttp",
+            // Multimedia (WMF)
+            "mf",
+            "mfplat",
+            "mfreadwrite",
+            "mfuuid",
+            "strmiids",
+            "dxva2",
+            "evr",
+            "wmcodecdspuuid",
+            // Misc
+            "mpr",
         }) |lib_name| {
             exe.root_module.linkSystemLibrary(lib_name, .{});
         }
@@ -286,10 +312,10 @@ pub fn build(b: *std.Build) !void {
             .optimize = optimize,
         }),
     });
-    b.installArtifact(gen_exe);
+    const install_gen = b.addInstallArtifact(gen_exe, .{});
 
     const gen_step = b.step("gen", "Build the binding generator");
-    gen_step.dependOn(&gen_exe.step);
+    gen_step.dependOn(&install_gen.step);
 }
 
 fn pathExists(cwd: Io.Dir, io: Io, path: []const u8) bool {

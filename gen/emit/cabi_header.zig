@@ -290,14 +290,16 @@ pub fn renderTypeCabi(alloc: Allocator, p: CppParameter, is_slot: bool, state: *
     // Qt class types
     if (state.isKnownClass(pt)) {
         const cabi_name = try cabiClassName(alloc, pt);
+        const const_prefix: []const u8 = if (p.is_const) "const " else "";
         if (p.pointer or p.by_ref) {
             if (p.pointer_count > 1) {
-                return try std.fmt.allocPrint(alloc, "{s}{s}", .{
+                return try std.fmt.allocPrint(alloc, "{s}{s}{s}", .{
+                    const_prefix,
                     cabi_name,
                     try repeatChar(alloc, '*', @intCast(p.pointer_count)),
                 });
             }
-            return try std.fmt.allocPrint(alloc, "{s}*", .{cabi_name});
+            return try std.fmt.allocPrint(alloc, "{s}{s}*", .{ const_prefix, cabi_name });
         }
         // Even by-value returns become heap-allocated pointers in CABI
         return try std.fmt.allocPrint(alloc, "{s}*", .{cabi_name});

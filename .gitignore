@@ -17,3 +17,9 @@ Desktop.ini
 
 # Clang AST cache (generator)
 gen/cachedir/
+cachedir/
+
+# Generator temp files (contain hardcoded local paths)
+gen/zig-cc.bat
+gen/run-clang.bat
+run-gen.bat

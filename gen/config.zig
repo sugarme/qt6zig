@@ -216,7 +216,7 @@ pub fn allowMethod(class_name: []const u8, method_name: []const u8) bool {
         return false;
 
     // Method-name-only blocks (signals)
-    if (eql(method_name, "metaObject") or eql(method_name, "qt_metacast") or eql(method_name, "clone"))
+    if (eql(method_name, "metaObject") or eql(method_name, "qt_metacast") or eql(method_name, "qt_metacall") or eql(method_name, "clone"))
         return false;
 
     // Methods containing QGADGET
@@ -522,6 +522,12 @@ pub fn allowInnerClassDef(class_name: []const u8) bool {
 
 /// Returns true if the class requires a `#include <ClassName>` in generated C++ code.
 pub fn importHeaderForClass(class_name: []const u8) bool {
+    // MSVC built-in types that appear in AST but have no header
+    if (eql(class_name, "_GUID") or eql(class_name, "type_info")) return false;
+
+    // OpenGL types that require platform-specific GL headers
+    if (eql(class_name, "QOpenGLExtraFunctions") or eql(class_name, "QAbstractOpenGLFunctions")) return false;
+
     if (startsWith(class_name, "QPlatform")) return false;
 
     if (startsWith(class_name, "QOpenGLFunctions_") and endsWith(class_name, "Backend"))

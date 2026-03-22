@@ -337,10 +337,11 @@ fn emitSingleParamForwarding(alloc: Allocator, p: CppParameter, state: *const Gl
         return try std.fmt.allocPrint(alloc, "QAnyStringView(QString::fromUtf8({s}.data, {s}.len))", .{ p.parameter_name, p.parameter_name });
     }
 
-    // Enum / flag types need a static_cast
+    // Enum / flag types need a static_cast with fully qualified name
     if (state.isKnownEnum(pt)) {
-        const qt_type = try renderTypeQtCpp(alloc, p);
-        return try std.fmt.allocPrint(alloc, "static_cast<{s}>({s})", .{ qt_type, p.parameter_name });
+        // Resolve the full qualified enum name (e.g., "StandardPixmap" -> "QStyle::StandardPixmap")
+        const qualified_name = if (state.getEnum(pt)) |e| e.enum_.enum_name else pt;
+        return try std.fmt.allocPrint(alloc, "static_cast<{s}>({s})", .{ qualified_name, p.parameter_name });
     }
 
     // By-reference: dereference the pointer we received
@@ -474,10 +475,9 @@ fn emitSignalConnection(
     var param_defs: ArrayList([]const u8) = .empty;
     var callback_args: ArrayList([]const u8) = .empty;
 
-    for (m.parameters, 0..) |p, i| {
-        const idx = i + 1;
-        const sigval = try std.fmt.allocPrint(alloc, "sigval{d}", .{idx});
-        try callback_args.append(alloc, sigval);
+    for (m.parameters) |p| {
+        // Use same name for lambda param and callback arg (param1, param2, etc.)
+        try callback_args.append(alloc, p.parameter_name);
 
         const p_type = try cabi_header.renderTypeCabi(alloc, p, true, state);
         try param_names.append(alloc, p.parameter_name);

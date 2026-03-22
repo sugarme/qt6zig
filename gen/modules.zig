@@ -113,22 +113,38 @@ fn cborAllowHeader(fullpath: []const u8) bool {
 
 fn networkAllowHeader(fullpath: []const u8) bool {
     const fname = basename(fullpath);
-    return !std.mem.eql(u8, fname, "qtnetwork-config.h");
+    if (std.mem.eql(u8, fname, "qtnetwork-config.h")) return false;
+    // Block SSL headers (SSL/TLS disabled in static build)
+    if (std.mem.startsWith(u8, fname, "qssl")) return false;
+    if (std.mem.eql(u8, fname, "qdtls.h")) return false;
+    if (std.mem.eql(u8, fname, "qocspresponse.h")) return false;
+    return true;
 }
 
-fn webengineAllowHeader(fullpath: []const u8) bool {
+fn chartsAllowHeader(fullpath: []const u8) bool {
     const fname = basename(fullpath);
-    return !std.mem.eql(u8, fname, "qtwebenginewidgets-config.h");
+    if (std.mem.eql(u8, fname, "qtcharts-config.h")) return false;
+    return true;
 }
 
-fn kwindowsystemAllowHeader(fullpath: []const u8) bool {
+fn multimediaAllowHeader(fullpath: []const u8) bool {
     const fname = basename(fullpath);
-    return !std.mem.eql(u8, fname, "kx11extras.h");
+    if (std.mem.eql(u8, fname, "qtmultimedia-config.h")) return false;
+    return true;
 }
 
-fn qcustomplotAllowHeader(fullpath: []const u8) bool {
+fn openglAllowHeader(fullpath: []const u8) bool {
     const fname = basename(fullpath);
-    return std.mem.eql(u8, fname, "qcustomplot.h");
+    // Block OpenGL extension header (massive, not useful for bindings)
+    if (std.mem.eql(u8, fname, "qopenglext.h")) return false;
+    if (std.mem.eql(u8, fname, "qopengles2ext.h")) return false;
+    return true;
+}
+
+fn concurrentAllowHeader(fullpath: []const u8) bool {
+    const fname = basename(fullpath);
+    if (std.mem.eql(u8, fname, "qtconcurrent-config.h")) return false;
+    return true;
 }
 
 // ---------------------------------------------------------------------------
@@ -141,7 +157,7 @@ pub fn getModules() []const Module {
     return &modules;
 }
 
-/// Returns only the core Qt modules (QtCore, QtGui, QtWidgets, and CBOR).
+/// Returns only the core Qt modules (QtCore/Gui/Widgets, CBOR, Network, Concurrent).
 pub fn getCoreModules() []const Module {
     return modules[0..4];
 }
@@ -174,19 +190,6 @@ const modules = [_]Module{
     },
 
     // -----------------------------------------------------------------------
-    // Qt 6 Multimedia (depends on QtCore, QtGui, QtWidgets)
-    // -----------------------------------------------------------------------
-    .{
-        .path = "multimedia",
-        .dirs = &.{
-            "QtMultimedia",
-            "QtMultimediaWidgets",
-        },
-        .allow_header = &allowAllHeaders,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
     // Qt 6 Network (depends on QtCore)
     // -----------------------------------------------------------------------
     .{
@@ -199,50 +202,24 @@ const modules = [_]Module{
     },
 
     // -----------------------------------------------------------------------
-    // Qt 6 OpenGL (depends on QtCore, QtGui, QtWidgets)
+    // Qt 6 Concurrent (depends on QtCore)
     // -----------------------------------------------------------------------
     .{
-        .path = "opengl",
+        .path = "concurrent",
         .dirs = &.{
-            "QtOpenGL",
-            "QtOpenGLWidgets",
+            "QtConcurrent",
         },
-        .allow_header = &allowAllHeaders,
+        .allow_header = &concurrentAllowHeader,
         .cflags = "--std=c++17",
     },
 
     // -----------------------------------------------------------------------
-    // Qt 6 PDF (depends on QtCore, QtGui, QtWidgets)
+    // Qt 6 XML (depends on QtCore)
     // -----------------------------------------------------------------------
     .{
-        .path = "pdf",
+        .path = "xml",
         .dirs = &.{
-            "QtPdf",
-            "QtPdfWidgets",
-        },
-        .allow_header = &allowAllHeaders,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
-    // Qt 6 Print Support (depends on QtCore, QtGui, QtWidgets)
-    // -----------------------------------------------------------------------
-    .{
-        .path = "printsupport",
-        .dirs = &.{
-            "QtPrintSupport",
-        },
-        .allow_header = &allowAllHeaders,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
-    // Qt 6 Spatial Audio (depends on QtCore, Multimedia)
-    // -----------------------------------------------------------------------
-    .{
-        .path = "spatialaudio",
-        .dirs = &.{
-            "QtSpatialAudio",
+            "QtXml",
         },
         .allow_header = &allowAllHeaders,
         .cflags = "--std=c++17",
@@ -261,25 +238,38 @@ const modules = [_]Module{
     },
 
     // -----------------------------------------------------------------------
-    // Qt 6 SVG (depends on QtCore, QtGui, QtWidgets)
+    // Qt 6 OpenGL (depends on QtCore, QtGui)
     // -----------------------------------------------------------------------
     .{
-        .path = "svg",
+        .path = "opengl",
         .dirs = &.{
-            "QtSvg",
-            "QtSvgWidgets",
+            "QtOpenGL",
+            "QtOpenGLWidgets",
+        },
+        .allow_header = &openglAllowHeader,
+        .cflags = "--std=c++17",
+    },
+
+    // -----------------------------------------------------------------------
+    // Qt 6 Print Support (depends on QtCore, QtGui, QtWidgets)
+    // -----------------------------------------------------------------------
+    .{
+        .path = "printsupport",
+        .dirs = &.{
+            "QtPrintSupport",
         },
         .allow_header = &allowAllHeaders,
         .cflags = "--std=c++17",
     },
 
     // -----------------------------------------------------------------------
-    // Qt 6 XML (depends on QtCore)
+    // Qt 6 SVG (depends on QtCore, QtGui)
     // -----------------------------------------------------------------------
     .{
-        .path = "xml",
+        .path = "svg",
         .dirs = &.{
-            "QtXml",
+            "QtSvg",
+            "QtSvgWidgets",
         },
         .allow_header = &allowAllHeaders,
         .cflags = "--std=c++17",
@@ -298,75 +288,38 @@ const modules = [_]Module{
     },
 
     // -----------------------------------------------------------------------
-    // Qt 6 WebEngine (depends on QtCore, QtGui, QtWidgets)
+    // Qt 6 Charts (depends on QtCore, QtGui, QtWidgets)
     // -----------------------------------------------------------------------
     .{
-        .path = "webengine",
-        .dirs = &.{
-            "QtWebEngineCore",
-            "QtWebEngineWidgets",
-        },
-        .allow_header = &webengineAllowHeader,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
-    // Qt 6 D-Bus (depends on QtCore) -- POSIX only
-    // -----------------------------------------------------------------------
-    .{
-        .path = "posix-extras-dbus",
-        .dirs = &.{
-            "QtDBus",
-        },
-        .allow_header = &allowAllHeaders,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
-    // Qt 6 Charts (depends on QtCore, QtGui, QtWidgets) -- restricted
-    // -----------------------------------------------------------------------
-    .{
-        .path = "restricted-extras-charts",
+        .path = "charts",
         .dirs = &.{
             "QtCharts",
         },
-        .allow_header = &allowAllHeaders,
+        .allow_header = &chartsAllowHeader,
         .cflags = "--std=c++17",
     },
 
     // -----------------------------------------------------------------------
-    // QScintilla (depends on QtCore, QtGui, QtWidgets, PrintSupport) -- restricted
+    // Qt 6 Multimedia (depends on QtCore, QtGui, QtNetwork)
     // -----------------------------------------------------------------------
     .{
-        .path = "restricted-extras-qscintilla",
+        .path = "multimedia",
         .dirs = &.{
-            "Qsci",
+            "QtMultimedia",
+        },
+        .allow_header = &multimediaAllowHeader,
+        .cflags = "--std=c++17",
+    },
+
+    // -----------------------------------------------------------------------
+    // Qt 6 Spatial Audio (depends on QtCore, Multimedia)
+    // -----------------------------------------------------------------------
+    .{
+        .path = "spatialaudio",
+        .dirs = &.{
+            "QtSpatialAudio",
         },
         .allow_header = &allowAllHeaders,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
-    // KF6 extras -- KWindowSystem (depends on QtCore, QtGui, QtWidgets)
-    // -----------------------------------------------------------------------
-    .{
-        .path = "foss-extras-kwindowsystem",
-        .dirs = &.{
-            "KF6/KWindowSystem",
-        },
-        .allow_header = &kwindowsystemAllowHeader,
-        .cflags = "--std=c++17",
-    },
-
-    // -----------------------------------------------------------------------
-    // QCustomPlot (depends on QtCore, QtGui, QtWidgets) -- restricted
-    // -----------------------------------------------------------------------
-    .{
-        .path = "restricted-extras-qcustomplot",
-        .dirs = &.{
-            "/usr/include/",
-        },
-        .allow_header = &qcustomplotAllowHeader,
         .cflags = "--std=c++17",
     },
 };
@@ -410,6 +363,23 @@ test "getCoreModules returns first four" {
     try std.testing.expectEqual(@as(usize, 4), core.len);
     try std.testing.expectEqualStrings("", core[0].path);
     try std.testing.expectEqualStrings("cbor", core[1].path);
-    try std.testing.expectEqualStrings("multimedia", core[2].path);
-    try std.testing.expectEqualStrings("network", core[3].path);
+    try std.testing.expectEqualStrings("network", core[2].path);
+    try std.testing.expectEqualStrings("concurrent", core[3].path);
+}
+
+test "networkAllowHeader blocks SSL and config" {
+    try std.testing.expect(!networkAllowHeader("qtnetwork-config.h"));
+    try std.testing.expect(!networkAllowHeader("/path/to/qsslsocket.h"));
+    try std.testing.expect(!networkAllowHeader("/path/to/qdtls.h"));
+    try std.testing.expect(networkAllowHeader("/path/to/qtcpsocket.h"));
+}
+
+test "chartsAllowHeader blocks config" {
+    try std.testing.expect(!chartsAllowHeader("qtcharts-config.h"));
+    try std.testing.expect(chartsAllowHeader("qchart.h"));
+}
+
+test "concurrentAllowHeader blocks config" {
+    try std.testing.expect(!concurrentAllowHeader("qtconcurrent-config.h"));
+    try std.testing.expect(concurrentAllowHeader("qtconcurrentrun.h"));
 }
