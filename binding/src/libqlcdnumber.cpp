@@ -169,60 +169,6 @@ vqlcdnumber->setQLCDNumber_SizeHint_Callback(reinterpret_cast<VirtualQLCDNumber:
 }
 }
 
-// Derived class handler implementation
-bool QLCDNumber_Event(QLCDNumber* self, QEvent* e) {
-	auto* vqlcdnumber = dynamic_cast<VirtualQLCDNumber*>(self);
-	if (vqlcdnumber && vqlcdnumber->isVirtualQLCDNumber) {
-	return vqlcdnumber->event(e);
-	} else {
-	return self->QLCDNumber::event(e);
-}
-}
-
-// Base class handler implementation
-bool QLCDNumber_QBaseEvent(QLCDNumber* self, QEvent* e) {
-	auto* vqlcdnumber = dynamic_cast<VirtualQLCDNumber*>(self);
-	if (vqlcdnumber && vqlcdnumber->isVirtualQLCDNumber) {
-vqlcdnumber->setQLCDNumber_Event_IsBase(true);
-	return vqlcdnumber->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QLCDNumber_OnEvent(QLCDNumber* self, intptr_t slot) {
-	auto* vqlcdnumber = dynamic_cast<VirtualQLCDNumber*>(self);
-	if (vqlcdnumber && vqlcdnumber->isVirtualQLCDNumber) {
-vqlcdnumber->setQLCDNumber_Event_Callback(reinterpret_cast<VirtualQLCDNumber::QLCDNumber_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QLCDNumber_PaintEvent(QLCDNumber* self, QPaintEvent* param1) {
-	auto* vqlcdnumber = dynamic_cast<VirtualQLCDNumber*>(self);
-	if (vqlcdnumber && vqlcdnumber->isVirtualQLCDNumber) {
-	vqlcdnumber->paintEvent(param1);
-	} else {
-	self->QLCDNumber::paintEvent(param1);
-}
-}
-
-// Base class handler implementation
-void QLCDNumber_QBasePaintEvent(QLCDNumber* self, QPaintEvent* param1) {
-	auto* vqlcdnumber = dynamic_cast<VirtualQLCDNumber*>(self);
-	if (vqlcdnumber && vqlcdnumber->isVirtualQLCDNumber) {
-vqlcdnumber->setQLCDNumber_PaintEvent_IsBase(true);
-	vqlcdnumber->paintEvent(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QLCDNumber_OnPaintEvent(QLCDNumber* self, intptr_t slot) {
-	auto* vqlcdnumber = dynamic_cast<VirtualQLCDNumber*>(self);
-	if (vqlcdnumber && vqlcdnumber->isVirtualQLCDNumber) {
-vqlcdnumber->setQLCDNumber_PaintEvent_Callback(reinterpret_cast<VirtualQLCDNumber::QLCDNumber_PaintEvent_Callback>(slot));
-}
-}
-
 void QLCDNumber_Delete(QLCDNumber* self) {
     delete self;
 }

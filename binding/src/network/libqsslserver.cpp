@@ -158,33 +158,6 @@ libqt_string QSslServer_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QSslServer_IncomingConnection(QSslServer* self, intptr_t socket) {
-	auto* vqsslserver = dynamic_cast<VirtualQSslServer*>(self);
-	if (vqsslserver && vqsslserver->isVirtualQSslServer) {
-	vqsslserver->incomingConnection(socket);
-	} else {
-	self->QSslServer::incomingConnection(socket);
-}
-}
-
-// Base class handler implementation
-void QSslServer_QBaseIncomingConnection(QSslServer* self, intptr_t socket) {
-	auto* vqsslserver = dynamic_cast<VirtualQSslServer*>(self);
-	if (vqsslserver && vqsslserver->isVirtualQSslServer) {
-vqsslserver->setQSslServer_IncomingConnection_IsBase(true);
-	vqsslserver->incomingConnection(socket);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSslServer_OnIncomingConnection(QSslServer* self, intptr_t slot) {
-	auto* vqsslserver = dynamic_cast<VirtualQSslServer*>(self);
-	if (vqsslserver && vqsslserver->isVirtualQSslServer) {
-vqsslserver->setQSslServer_IncomingConnection_Callback(reinterpret_cast<VirtualQSslServer::QSslServer_IncomingConnection_Callback>(slot));
-}
-}
-
 void QSslServer_Delete(QSslServer* self) {
     delete self;
 }

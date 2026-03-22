@@ -74,33 +74,6 @@ libqt_string QWinEventNotifier_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-bool QWinEventNotifier_Event(QWinEventNotifier* self, QEvent* e) {
-	auto* vqwineventnotifier = dynamic_cast<VirtualQWinEventNotifier*>(self);
-	if (vqwineventnotifier && vqwineventnotifier->isVirtualQWinEventNotifier) {
-	return vqwineventnotifier->event(e);
-	} else {
-	return self->QWinEventNotifier::event(e);
-}
-}
-
-// Base class handler implementation
-bool QWinEventNotifier_QBaseEvent(QWinEventNotifier* self, QEvent* e) {
-	auto* vqwineventnotifier = dynamic_cast<VirtualQWinEventNotifier*>(self);
-	if (vqwineventnotifier && vqwineventnotifier->isVirtualQWinEventNotifier) {
-vqwineventnotifier->setQWinEventNotifier_Event_IsBase(true);
-	return vqwineventnotifier->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QWinEventNotifier_OnEvent(QWinEventNotifier* self, intptr_t slot) {
-	auto* vqwineventnotifier = dynamic_cast<VirtualQWinEventNotifier*>(self);
-	if (vqwineventnotifier && vqwineventnotifier->isVirtualQWinEventNotifier) {
-vqwineventnotifier->setQWinEventNotifier_Event_Callback(reinterpret_cast<VirtualQWinEventNotifier::QWinEventNotifier_Event_Callback>(slot));
-}
-}
-
 void QWinEventNotifier_Connect_activated(QWinEventNotifier* self, intptr_t slot) {
     void (*slotFunc)(QWinEventNotifier*, HANDLE) = reinterpret_cast<void (*)(QWinEventNotifier*, HANDLE)>(slot);
     QWinEventNotifier::connect(self, &QWinEventNotifier::activated, [self, slotFunc](HANDLE hEvent) {

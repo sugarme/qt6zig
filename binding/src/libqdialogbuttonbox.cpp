@@ -188,60 +188,6 @@ libqt_string QDialogButtonBox_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QDialogButtonBox_ChangeEvent(QDialogButtonBox* self, QEvent* event) {
-	auto* vqdialogbuttonbox = dynamic_cast<VirtualQDialogButtonBox*>(self);
-	if (vqdialogbuttonbox && vqdialogbuttonbox->isVirtualQDialogButtonBox) {
-	vqdialogbuttonbox->changeEvent(event);
-	} else {
-	self->QDialogButtonBox::changeEvent(event);
-}
-}
-
-// Base class handler implementation
-void QDialogButtonBox_QBaseChangeEvent(QDialogButtonBox* self, QEvent* event) {
-	auto* vqdialogbuttonbox = dynamic_cast<VirtualQDialogButtonBox*>(self);
-	if (vqdialogbuttonbox && vqdialogbuttonbox->isVirtualQDialogButtonBox) {
-vqdialogbuttonbox->setQDialogButtonBox_ChangeEvent_IsBase(true);
-	vqdialogbuttonbox->changeEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QDialogButtonBox_OnChangeEvent(QDialogButtonBox* self, intptr_t slot) {
-	auto* vqdialogbuttonbox = dynamic_cast<VirtualQDialogButtonBox*>(self);
-	if (vqdialogbuttonbox && vqdialogbuttonbox->isVirtualQDialogButtonBox) {
-vqdialogbuttonbox->setQDialogButtonBox_ChangeEvent_Callback(reinterpret_cast<VirtualQDialogButtonBox::QDialogButtonBox_ChangeEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QDialogButtonBox_Event(QDialogButtonBox* self, QEvent* event) {
-	auto* vqdialogbuttonbox = dynamic_cast<VirtualQDialogButtonBox*>(self);
-	if (vqdialogbuttonbox && vqdialogbuttonbox->isVirtualQDialogButtonBox) {
-	return vqdialogbuttonbox->event(event);
-	} else {
-	return self->QDialogButtonBox::event(event);
-}
-}
-
-// Base class handler implementation
-bool QDialogButtonBox_QBaseEvent(QDialogButtonBox* self, QEvent* event) {
-	auto* vqdialogbuttonbox = dynamic_cast<VirtualQDialogButtonBox*>(self);
-	if (vqdialogbuttonbox && vqdialogbuttonbox->isVirtualQDialogButtonBox) {
-vqdialogbuttonbox->setQDialogButtonBox_Event_IsBase(true);
-	return vqdialogbuttonbox->event(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QDialogButtonBox_OnEvent(QDialogButtonBox* self, intptr_t slot) {
-	auto* vqdialogbuttonbox = dynamic_cast<VirtualQDialogButtonBox*>(self);
-	if (vqdialogbuttonbox && vqdialogbuttonbox->isVirtualQDialogButtonBox) {
-vqdialogbuttonbox->setQDialogButtonBox_Event_Callback(reinterpret_cast<VirtualQDialogButtonBox::QDialogButtonBox_Event_Callback>(slot));
-}
-}
-
 void QDialogButtonBox_Delete(QDialogButtonBox* self) {
     delete self;
 }

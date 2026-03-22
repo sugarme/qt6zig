@@ -159,33 +159,6 @@ vqoffscreensurface->setQOffscreenSurface_Size_Callback(reinterpret_cast<VirtualQ
 }
 }
 
-// Derived class handler implementation
-void* QOffscreenSurface_ResolveInterface(const QOffscreenSurface* self, const char* name, int revision) {
-	auto* vqoffscreensurface = dynamic_cast<const VirtualQOffscreenSurface*>(self);
-	if (vqoffscreensurface && vqoffscreensurface->isVirtualQOffscreenSurface) {
-	return vqoffscreensurface->resolveInterface(name, revision);
-	} else {
-	return self->QOffscreenSurface::resolveInterface(name, revision);
-}
-}
-
-// Base class handler implementation
-void* QOffscreenSurface_QBaseResolveInterface(const QOffscreenSurface* self, const char* name, int revision) {
-	auto* vqoffscreensurface = dynamic_cast<const VirtualQOffscreenSurface*>(self);
-	if (vqoffscreensurface && vqoffscreensurface->isVirtualQOffscreenSurface) {
-vqoffscreensurface->setQOffscreenSurface_ResolveInterface_IsBase(true);
-	return vqoffscreensurface->resolveInterface(name, revision);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QOffscreenSurface_OnResolveInterface(const QOffscreenSurface* self, intptr_t slot) {
-	auto* vqoffscreensurface = dynamic_cast<const VirtualQOffscreenSurface*>(self);
-	if (vqoffscreensurface && vqoffscreensurface->isVirtualQOffscreenSurface) {
-vqoffscreensurface->setQOffscreenSurface_ResolveInterface_Callback(reinterpret_cast<VirtualQOffscreenSurface::QOffscreenSurface_ResolveInterface_Callback>(slot));
-}
-}
-
 void QOffscreenSurface_Delete(QOffscreenSurface* self) {
     delete self;
 }

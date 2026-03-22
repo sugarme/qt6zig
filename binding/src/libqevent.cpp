@@ -118,33 +118,6 @@ vqinputevent->setQInputEvent_SetTimestamp_Callback(reinterpret_cast<VirtualQInpu
 }
 }
 
-// Derived class handler implementation
-void QInputEvent_OperatorAssign(QInputEvent* self, const QInputEvent* other) {
-	auto* vqinputevent = dynamic_cast<VirtualQInputEvent*>(self);
-	if (vqinputevent && vqinputevent->isVirtualQInputEvent) {
-	vqinputevent->operator=(*other);
-	} else {
-	self->QInputEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QInputEvent_QBaseOperatorAssign(QInputEvent* self, const QInputEvent* other) {
-	auto* vqinputevent = dynamic_cast<VirtualQInputEvent*>(self);
-	if (vqinputevent && vqinputevent->isVirtualQInputEvent) {
-vqinputevent->setQInputEvent_OperatorAssign_IsBase(true);
-	vqinputevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QInputEvent_OnOperatorAssign(QInputEvent* self, intptr_t slot) {
-	auto* vqinputevent = dynamic_cast<VirtualQInputEvent*>(self);
-	if (vqinputevent && vqinputevent->isVirtualQInputEvent) {
-vqinputevent->setQInputEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQInputEvent::QInputEvent_OperatorAssign_Callback>(slot));
-}
-}
-
 void QInputEvent_Delete(QInputEvent* self) {
     delete self;
 }
@@ -340,33 +313,6 @@ vqpointerevent->setQPointerEvent_SetAccepted_Callback(reinterpret_cast<VirtualQP
 }
 }
 
-// Derived class handler implementation
-void QPointerEvent_OperatorAssign(QPointerEvent* self, const QPointerEvent* other) {
-	auto* vqpointerevent = dynamic_cast<VirtualQPointerEvent*>(self);
-	if (vqpointerevent && vqpointerevent->isVirtualQPointerEvent) {
-	vqpointerevent->operator=(*other);
-	} else {
-	self->QPointerEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QPointerEvent_QBaseOperatorAssign(QPointerEvent* self, const QPointerEvent* other) {
-	auto* vqpointerevent = dynamic_cast<VirtualQPointerEvent*>(self);
-	if (vqpointerevent && vqpointerevent->isVirtualQPointerEvent) {
-vqpointerevent->setQPointerEvent_OperatorAssign_IsBase(true);
-	vqpointerevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPointerEvent_OnOperatorAssign(QPointerEvent* self, intptr_t slot) {
-	auto* vqpointerevent = dynamic_cast<VirtualQPointerEvent*>(self);
-	if (vqpointerevent && vqpointerevent->isVirtualQPointerEvent) {
-vqpointerevent->setQPointerEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQPointerEvent::QPointerEvent_OperatorAssign_Callback>(slot));
-}
-}
-
 void QPointerEvent_Delete(QPointerEvent* self) {
     delete self;
 }
@@ -459,33 +405,6 @@ void QSinglePointEvent_OnIsEndEvent(const QSinglePointEvent* self, intptr_t slot
 	auto* vqsinglepointevent = dynamic_cast<const VirtualQSinglePointEvent*>(self);
 	if (vqsinglepointevent && vqsinglepointevent->isVirtualQSinglePointEvent) {
 vqsinglepointevent->setQSinglePointEvent_IsEndEvent_Callback(reinterpret_cast<VirtualQSinglePointEvent::QSinglePointEvent_IsEndEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QSinglePointEvent_OperatorAssign(QSinglePointEvent* self, const QSinglePointEvent* other) {
-	auto* vqsinglepointevent = dynamic_cast<VirtualQSinglePointEvent*>(self);
-	if (vqsinglepointevent && vqsinglepointevent->isVirtualQSinglePointEvent) {
-	vqsinglepointevent->operator=(*other);
-	} else {
-	self->QSinglePointEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QSinglePointEvent_QBaseOperatorAssign(QSinglePointEvent* self, const QSinglePointEvent* other) {
-	auto* vqsinglepointevent = dynamic_cast<VirtualQSinglePointEvent*>(self);
-	if (vqsinglepointevent && vqsinglepointevent->isVirtualQSinglePointEvent) {
-vqsinglepointevent->setQSinglePointEvent_OperatorAssign_IsBase(true);
-	vqsinglepointevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSinglePointEvent_OnOperatorAssign(QSinglePointEvent* self, intptr_t slot) {
-	auto* vqsinglepointevent = dynamic_cast<VirtualQSinglePointEvent*>(self);
-	if (vqsinglepointevent && vqsinglepointevent->isVirtualQSinglePointEvent) {
-vqsinglepointevent->setQSinglePointEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQSinglePointEvent::QSinglePointEvent_OperatorAssign_Callback>(slot));
 }
 }
 
@@ -682,33 +601,6 @@ vqhoverevent->setQHoverEvent_IsUpdateEvent_Callback(reinterpret_cast<VirtualQHov
 }
 }
 
-// Derived class handler implementation
-void QHoverEvent_OperatorAssign(QHoverEvent* self, const QHoverEvent* other) {
-	auto* vqhoverevent = dynamic_cast<VirtualQHoverEvent*>(self);
-	if (vqhoverevent && vqhoverevent->isVirtualQHoverEvent) {
-	vqhoverevent->operator=(*other);
-	} else {
-	self->QHoverEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QHoverEvent_QBaseOperatorAssign(QHoverEvent* self, const QHoverEvent* other) {
-	auto* vqhoverevent = dynamic_cast<VirtualQHoverEvent*>(self);
-	if (vqhoverevent && vqhoverevent->isVirtualQHoverEvent) {
-vqhoverevent->setQHoverEvent_OperatorAssign_IsBase(true);
-	vqhoverevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QHoverEvent_OnOperatorAssign(QHoverEvent* self, intptr_t slot) {
-	auto* vqhoverevent = dynamic_cast<VirtualQHoverEvent*>(self);
-	if (vqhoverevent && vqhoverevent->isVirtualQHoverEvent) {
-vqhoverevent->setQHoverEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQHoverEvent::QHoverEvent_OperatorAssign_Callback>(slot));
-}
-}
-
 void QHoverEvent_Delete(QHoverEvent* self) {
     delete self;
 }
@@ -813,33 +705,6 @@ void QWheelEvent_OnIsEndEvent(const QWheelEvent* self, intptr_t slot) {
 	auto* vqwheelevent = dynamic_cast<const VirtualQWheelEvent*>(self);
 	if (vqwheelevent && vqwheelevent->isVirtualQWheelEvent) {
 vqwheelevent->setQWheelEvent_IsEndEvent_Callback(reinterpret_cast<VirtualQWheelEvent::QWheelEvent_IsEndEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QWheelEvent_OperatorAssign(QWheelEvent* self, const QWheelEvent* other) {
-	auto* vqwheelevent = dynamic_cast<VirtualQWheelEvent*>(self);
-	if (vqwheelevent && vqwheelevent->isVirtualQWheelEvent) {
-	vqwheelevent->operator=(*other);
-	} else {
-	self->QWheelEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QWheelEvent_QBaseOperatorAssign(QWheelEvent* self, const QWheelEvent* other) {
-	auto* vqwheelevent = dynamic_cast<VirtualQWheelEvent*>(self);
-	if (vqwheelevent && vqwheelevent->isVirtualQWheelEvent) {
-vqwheelevent->setQWheelEvent_OperatorAssign_IsBase(true);
-	vqwheelevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QWheelEvent_OnOperatorAssign(QWheelEvent* self, intptr_t slot) {
-	auto* vqwheelevent = dynamic_cast<VirtualQWheelEvent*>(self);
-	if (vqwheelevent && vqwheelevent->isVirtualQWheelEvent) {
-vqwheelevent->setQWheelEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQWheelEvent::QWheelEvent_OperatorAssign_Callback>(slot));
 }
 }
 
@@ -1759,33 +1624,6 @@ void QTouchEvent_OnIsEndEvent(const QTouchEvent* self, intptr_t slot) {
 	auto* vqtouchevent = dynamic_cast<const VirtualQTouchEvent*>(self);
 	if (vqtouchevent && vqtouchevent->isVirtualQTouchEvent) {
 vqtouchevent->setQTouchEvent_IsEndEvent_Callback(reinterpret_cast<VirtualQTouchEvent::QTouchEvent_IsEndEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QTouchEvent_OperatorAssign(QTouchEvent* self, const QTouchEvent* other) {
-	auto* vqtouchevent = dynamic_cast<VirtualQTouchEvent*>(self);
-	if (vqtouchevent && vqtouchevent->isVirtualQTouchEvent) {
-	vqtouchevent->operator=(*other);
-	} else {
-	self->QTouchEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QTouchEvent_QBaseOperatorAssign(QTouchEvent* self, const QTouchEvent* other) {
-	auto* vqtouchevent = dynamic_cast<VirtualQTouchEvent*>(self);
-	if (vqtouchevent && vqtouchevent->isVirtualQTouchEvent) {
-vqtouchevent->setQTouchEvent_OperatorAssign_IsBase(true);
-	vqtouchevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTouchEvent_OnOperatorAssign(QTouchEvent* self, intptr_t slot) {
-	auto* vqtouchevent = dynamic_cast<VirtualQTouchEvent*>(self);
-	if (vqtouchevent && vqtouchevent->isVirtualQTouchEvent) {
-vqtouchevent->setQTouchEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQTouchEvent::QTouchEvent_OperatorAssign_Callback>(slot));
 }
 }
 

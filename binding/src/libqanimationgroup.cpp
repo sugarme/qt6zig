@@ -83,33 +83,6 @@ libqt_string QAnimationGroup_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-bool QAnimationGroup_Event(QAnimationGroup* self, QEvent* event) {
-	auto* vqanimationgroup = dynamic_cast<VirtualQAnimationGroup*>(self);
-	if (vqanimationgroup && vqanimationgroup->isVirtualQAnimationGroup) {
-	return vqanimationgroup->event(event);
-	} else {
-	return self->QAnimationGroup::event(event);
-}
-}
-
-// Base class handler implementation
-bool QAnimationGroup_QBaseEvent(QAnimationGroup* self, QEvent* event) {
-	auto* vqanimationgroup = dynamic_cast<VirtualQAnimationGroup*>(self);
-	if (vqanimationgroup && vqanimationgroup->isVirtualQAnimationGroup) {
-vqanimationgroup->setQAnimationGroup_Event_IsBase(true);
-	return vqanimationgroup->event(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QAnimationGroup_OnEvent(QAnimationGroup* self, intptr_t slot) {
-	auto* vqanimationgroup = dynamic_cast<VirtualQAnimationGroup*>(self);
-	if (vqanimationgroup && vqanimationgroup->isVirtualQAnimationGroup) {
-vqanimationgroup->setQAnimationGroup_Event_Callback(reinterpret_cast<VirtualQAnimationGroup::QAnimationGroup_Event_Callback>(slot));
-}
-}
-
 void QAnimationGroup_Delete(QAnimationGroup* self) {
     delete self;
 }

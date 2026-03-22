@@ -223,33 +223,6 @@ vqgraphicsanchorlayout->setQGraphicsAnchorLayout_Invalidate_Callback(reinterpret
 }
 }
 
-// Derived class handler implementation
-QSizeF* QGraphicsAnchorLayout_SizeHint(const QGraphicsAnchorLayout* self, int which, const QSizeF* constraint) {
-	auto* vqgraphicsanchorlayout = dynamic_cast<const VirtualQGraphicsAnchorLayout*>(self);
-	if (vqgraphicsanchorlayout && vqgraphicsanchorlayout->isVirtualQGraphicsAnchorLayout) {
-	return new QSizeF(vqgraphicsanchorlayout->sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
-	} else {
-	return new QSizeF(self->QGraphicsAnchorLayout::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
-}
-}
-
-// Base class handler implementation
-QSizeF* QGraphicsAnchorLayout_QBaseSizeHint(const QGraphicsAnchorLayout* self, int which, const QSizeF* constraint) {
-	auto* vqgraphicsanchorlayout = dynamic_cast<const VirtualQGraphicsAnchorLayout*>(self);
-	if (vqgraphicsanchorlayout && vqgraphicsanchorlayout->isVirtualQGraphicsAnchorLayout) {
-vqgraphicsanchorlayout->setQGraphicsAnchorLayout_SizeHint_IsBase(true);
-	return new QSizeF(vqgraphicsanchorlayout->sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGraphicsAnchorLayout_OnSizeHint(const QGraphicsAnchorLayout* self, intptr_t slot) {
-	auto* vqgraphicsanchorlayout = dynamic_cast<const VirtualQGraphicsAnchorLayout*>(self);
-	if (vqgraphicsanchorlayout && vqgraphicsanchorlayout->isVirtualQGraphicsAnchorLayout) {
-vqgraphicsanchorlayout->setQGraphicsAnchorLayout_SizeHint_Callback(reinterpret_cast<VirtualQGraphicsAnchorLayout::QGraphicsAnchorLayout_SizeHint_Callback>(slot));
-}
-}
-
 void QGraphicsAnchorLayout_Delete(QGraphicsAnchorLayout* self) {
     delete self;
 }

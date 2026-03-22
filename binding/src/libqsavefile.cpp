@@ -134,33 +134,6 @@ vqsavefile->setQSaveFile_Open_Callback(reinterpret_cast<VirtualQSaveFile::QSaveF
 }
 }
 
-// Derived class handler implementation
-long long QSaveFile_WriteData(QSaveFile* self, const char* data, long long lenVal) {
-	auto* vqsavefile = dynamic_cast<VirtualQSaveFile*>(self);
-	if (vqsavefile && vqsavefile->isVirtualQSaveFile) {
-	return vqsavefile->writeData(data, lenVal);
-	} else {
-	return self->QSaveFile::writeData(data, lenVal);
-}
-}
-
-// Base class handler implementation
-long long QSaveFile_QBaseWriteData(QSaveFile* self, const char* data, long long lenVal) {
-	auto* vqsavefile = dynamic_cast<VirtualQSaveFile*>(self);
-	if (vqsavefile && vqsavefile->isVirtualQSaveFile) {
-vqsavefile->setQSaveFile_WriteData_IsBase(true);
-	return vqsavefile->writeData(data, lenVal);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSaveFile_OnWriteData(QSaveFile* self, intptr_t slot) {
-	auto* vqsavefile = dynamic_cast<VirtualQSaveFile*>(self);
-	if (vqsavefile && vqsavefile->isVirtualQSaveFile) {
-vqsavefile->setQSaveFile_WriteData_Callback(reinterpret_cast<VirtualQSaveFile::QSaveFile_WriteData_Callback>(slot));
-}
-}
-
 void QSaveFile_Delete(QSaveFile* self) {
     delete self;
 }

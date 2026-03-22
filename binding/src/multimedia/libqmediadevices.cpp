@@ -136,33 +136,6 @@ libqt_string QMediaDevices_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QMediaDevices_ConnectNotify(QMediaDevices* self, const QMetaMethod* signal) {
-	auto* vqmediadevices = dynamic_cast<VirtualQMediaDevices*>(self);
-	if (vqmediadevices && vqmediadevices->isVirtualQMediaDevices) {
-	vqmediadevices->connectNotify(*signal);
-	} else {
-	self->QMediaDevices::connectNotify(*signal);
-}
-}
-
-// Base class handler implementation
-void QMediaDevices_QBaseConnectNotify(QMediaDevices* self, const QMetaMethod* signal) {
-	auto* vqmediadevices = dynamic_cast<VirtualQMediaDevices*>(self);
-	if (vqmediadevices && vqmediadevices->isVirtualQMediaDevices) {
-vqmediadevices->setQMediaDevices_ConnectNotify_IsBase(true);
-	vqmediadevices->connectNotify(*signal);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QMediaDevices_OnConnectNotify(QMediaDevices* self, intptr_t slot) {
-	auto* vqmediadevices = dynamic_cast<VirtualQMediaDevices*>(self);
-	if (vqmediadevices && vqmediadevices->isVirtualQMediaDevices) {
-vqmediadevices->setQMediaDevices_ConnectNotify_Callback(reinterpret_cast<VirtualQMediaDevices::QMediaDevices_ConnectNotify_Callback>(slot));
-}
-}
-
 void QMediaDevices_Delete(QMediaDevices* self) {
     delete self;
 }

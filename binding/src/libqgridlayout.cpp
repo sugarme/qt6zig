@@ -479,33 +479,6 @@ vqgridlayout->setQGridLayout_SetGeometry_Callback(reinterpret_cast<VirtualQGridL
 }
 }
 
-// Derived class handler implementation
-void QGridLayout_AddItem2(QGridLayout* self, QLayoutItem* param1) {
-	auto* vqgridlayout = dynamic_cast<VirtualQGridLayout*>(self);
-	if (vqgridlayout && vqgridlayout->isVirtualQGridLayout) {
-	vqgridlayout->addItem(param1);
-	} else {
-	self->QGridLayout::addItem(param1);
-}
-}
-
-// Base class handler implementation
-void QGridLayout_QBaseAddItem2(QGridLayout* self, QLayoutItem* param1) {
-	auto* vqgridlayout = dynamic_cast<VirtualQGridLayout*>(self);
-	if (vqgridlayout && vqgridlayout->isVirtualQGridLayout) {
-vqgridlayout->setQGridLayout_AddItem2_IsBase(true);
-	vqgridlayout->addItem(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGridLayout_OnAddItem2(QGridLayout* self, intptr_t slot) {
-	auto* vqgridlayout = dynamic_cast<VirtualQGridLayout*>(self);
-	if (vqgridlayout && vqgridlayout->isVirtualQGridLayout) {
-vqgridlayout->setQGridLayout_AddItem2_Callback(reinterpret_cast<VirtualQGridLayout::QGridLayout_AddItem2_Callback>(slot));
-}
-}
-
 void QGridLayout_Delete(QGridLayout* self) {
     delete self;
 }

@@ -224,6 +224,7 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
         // Virtual method implementations
         for (all_virtual.items) |m| {
             if (!virtual_eligible) continue;
+            if (m.is_protected) continue; // Protected virtual methods handled via .hxx callbacks
 
             const safe_name = try cabi_header.safeMethodName(tmp, m);
             const cabi_full_name = try std.fmt.allocPrint(tmp, "{s}_{s}", .{ method_prefix, safe_name });

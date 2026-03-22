@@ -313,60 +313,6 @@ vqcompleter->setQCompleter_SplitPath_Callback(reinterpret_cast<VirtualQCompleter
 }
 }
 
-// Derived class handler implementation
-bool QCompleter_EventFilter(QCompleter* self, QObject* o, QEvent* e) {
-	auto* vqcompleter = dynamic_cast<VirtualQCompleter*>(self);
-	if (vqcompleter && vqcompleter->isVirtualQCompleter) {
-	return vqcompleter->eventFilter(o, e);
-	} else {
-	return self->QCompleter::eventFilter(o, e);
-}
-}
-
-// Base class handler implementation
-bool QCompleter_QBaseEventFilter(QCompleter* self, QObject* o, QEvent* e) {
-	auto* vqcompleter = dynamic_cast<VirtualQCompleter*>(self);
-	if (vqcompleter && vqcompleter->isVirtualQCompleter) {
-vqcompleter->setQCompleter_EventFilter_IsBase(true);
-	return vqcompleter->eventFilter(o, e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCompleter_OnEventFilter(QCompleter* self, intptr_t slot) {
-	auto* vqcompleter = dynamic_cast<VirtualQCompleter*>(self);
-	if (vqcompleter && vqcompleter->isVirtualQCompleter) {
-vqcompleter->setQCompleter_EventFilter_Callback(reinterpret_cast<VirtualQCompleter::QCompleter_EventFilter_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QCompleter_Event(QCompleter* self, QEvent* param1) {
-	auto* vqcompleter = dynamic_cast<VirtualQCompleter*>(self);
-	if (vqcompleter && vqcompleter->isVirtualQCompleter) {
-	return vqcompleter->event(param1);
-	} else {
-	return self->QCompleter::event(param1);
-}
-}
-
-// Base class handler implementation
-bool QCompleter_QBaseEvent(QCompleter* self, QEvent* param1) {
-	auto* vqcompleter = dynamic_cast<VirtualQCompleter*>(self);
-	if (vqcompleter && vqcompleter->isVirtualQCompleter) {
-vqcompleter->setQCompleter_Event_IsBase(true);
-	return vqcompleter->event(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCompleter_OnEvent(QCompleter* self, intptr_t slot) {
-	auto* vqcompleter = dynamic_cast<VirtualQCompleter*>(self);
-	if (vqcompleter && vqcompleter->isVirtualQCompleter) {
-vqcompleter->setQCompleter_Event_Callback(reinterpret_cast<VirtualQCompleter::QCompleter_Event_Callback>(slot));
-}
-}
-
 void QCompleter_Delete(QCompleter* self) {
     delete self;
 }

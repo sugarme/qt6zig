@@ -78,33 +78,6 @@ libqt_string QChronoTimer_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QChronoTimer_TimerEvent(QChronoTimer* self, QTimerEvent* param1) {
-	auto* vqchronotimer = dynamic_cast<VirtualQChronoTimer*>(self);
-	if (vqchronotimer && vqchronotimer->isVirtualQChronoTimer) {
-	vqchronotimer->timerEvent(param1);
-	} else {
-	self->QChronoTimer::timerEvent(param1);
-}
-}
-
-// Base class handler implementation
-void QChronoTimer_QBaseTimerEvent(QChronoTimer* self, QTimerEvent* param1) {
-	auto* vqchronotimer = dynamic_cast<VirtualQChronoTimer*>(self);
-	if (vqchronotimer && vqchronotimer->isVirtualQChronoTimer) {
-vqchronotimer->setQChronoTimer_TimerEvent_IsBase(true);
-	vqchronotimer->timerEvent(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QChronoTimer_OnTimerEvent(QChronoTimer* self, intptr_t slot) {
-	auto* vqchronotimer = dynamic_cast<VirtualQChronoTimer*>(self);
-	if (vqchronotimer && vqchronotimer->isVirtualQChronoTimer) {
-vqchronotimer->setQChronoTimer_TimerEvent_Callback(reinterpret_cast<VirtualQChronoTimer::QChronoTimer_TimerEvent_Callback>(slot));
-}
-}
-
 void QChronoTimer_Connect_timeout(QChronoTimer* self, intptr_t slot) {
     void (*slotFunc)(QChronoTimer*) = reinterpret_cast<void (*)(QChronoTimer*)>(slot);
     QChronoTimer::connect(self, &QChronoTimer::timeout, [self, slotFunc]() {

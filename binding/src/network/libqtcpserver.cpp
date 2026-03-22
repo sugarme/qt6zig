@@ -211,60 +211,6 @@ vqtcpserver->setQTcpServer_NextPendingConnection_Callback(reinterpret_cast<Virtu
 }
 }
 
-// Derived class handler implementation
-void QTcpServer_IncomingConnection(QTcpServer* self, intptr_t handle) {
-	auto* vqtcpserver = dynamic_cast<VirtualQTcpServer*>(self);
-	if (vqtcpserver && vqtcpserver->isVirtualQTcpServer) {
-	vqtcpserver->incomingConnection(handle);
-	} else {
-	self->QTcpServer::incomingConnection(handle);
-}
-}
-
-// Base class handler implementation
-void QTcpServer_QBaseIncomingConnection(QTcpServer* self, intptr_t handle) {
-	auto* vqtcpserver = dynamic_cast<VirtualQTcpServer*>(self);
-	if (vqtcpserver && vqtcpserver->isVirtualQTcpServer) {
-vqtcpserver->setQTcpServer_IncomingConnection_IsBase(true);
-	vqtcpserver->incomingConnection(handle);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTcpServer_OnIncomingConnection(QTcpServer* self, intptr_t slot) {
-	auto* vqtcpserver = dynamic_cast<VirtualQTcpServer*>(self);
-	if (vqtcpserver && vqtcpserver->isVirtualQTcpServer) {
-vqtcpserver->setQTcpServer_IncomingConnection_Callback(reinterpret_cast<VirtualQTcpServer::QTcpServer_IncomingConnection_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QTcpServer_AddPendingConnection(QTcpServer* self, QTcpSocket* socket) {
-	auto* vqtcpserver = dynamic_cast<VirtualQTcpServer*>(self);
-	if (vqtcpserver && vqtcpserver->isVirtualQTcpServer) {
-	vqtcpserver->addPendingConnection(socket);
-	} else {
-	self->QTcpServer::addPendingConnection(socket);
-}
-}
-
-// Base class handler implementation
-void QTcpServer_QBaseAddPendingConnection(QTcpServer* self, QTcpSocket* socket) {
-	auto* vqtcpserver = dynamic_cast<VirtualQTcpServer*>(self);
-	if (vqtcpserver && vqtcpserver->isVirtualQTcpServer) {
-vqtcpserver->setQTcpServer_AddPendingConnection_IsBase(true);
-	vqtcpserver->addPendingConnection(socket);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTcpServer_OnAddPendingConnection(QTcpServer* self, intptr_t slot) {
-	auto* vqtcpserver = dynamic_cast<VirtualQTcpServer*>(self);
-	if (vqtcpserver && vqtcpserver->isVirtualQTcpServer) {
-vqtcpserver->setQTcpServer_AddPendingConnection_Callback(reinterpret_cast<VirtualQTcpServer::QTcpServer_AddPendingConnection_Callback>(slot));
-}
-}
-
 void QTcpServer_Connect_pendingConnectionAvailable(QTcpServer* self, intptr_t slot) {
     void (*slotFunc)(QTcpServer*) = reinterpret_cast<void (*)(QTcpServer*)>(slot);
     QTcpServer::connect(self, &QTcpServer::pendingConnectionAvailable, [self, slotFunc]() {

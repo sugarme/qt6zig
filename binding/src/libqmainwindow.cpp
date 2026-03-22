@@ -353,60 +353,6 @@ vqmainwindow->setQMainWindow_CreatePopupMenu_Callback(reinterpret_cast<VirtualQM
 }
 }
 
-// Derived class handler implementation
-void QMainWindow_ContextMenuEvent(QMainWindow* self, QContextMenuEvent* event) {
-	auto* vqmainwindow = dynamic_cast<VirtualQMainWindow*>(self);
-	if (vqmainwindow && vqmainwindow->isVirtualQMainWindow) {
-	vqmainwindow->contextMenuEvent(event);
-	} else {
-	self->QMainWindow::contextMenuEvent(event);
-}
-}
-
-// Base class handler implementation
-void QMainWindow_QBaseContextMenuEvent(QMainWindow* self, QContextMenuEvent* event) {
-	auto* vqmainwindow = dynamic_cast<VirtualQMainWindow*>(self);
-	if (vqmainwindow && vqmainwindow->isVirtualQMainWindow) {
-vqmainwindow->setQMainWindow_ContextMenuEvent_IsBase(true);
-	vqmainwindow->contextMenuEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QMainWindow_OnContextMenuEvent(QMainWindow* self, intptr_t slot) {
-	auto* vqmainwindow = dynamic_cast<VirtualQMainWindow*>(self);
-	if (vqmainwindow && vqmainwindow->isVirtualQMainWindow) {
-vqmainwindow->setQMainWindow_ContextMenuEvent_Callback(reinterpret_cast<VirtualQMainWindow::QMainWindow_ContextMenuEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QMainWindow_Event(QMainWindow* self, QEvent* event) {
-	auto* vqmainwindow = dynamic_cast<VirtualQMainWindow*>(self);
-	if (vqmainwindow && vqmainwindow->isVirtualQMainWindow) {
-	return vqmainwindow->event(event);
-	} else {
-	return self->QMainWindow::event(event);
-}
-}
-
-// Base class handler implementation
-bool QMainWindow_QBaseEvent(QMainWindow* self, QEvent* event) {
-	auto* vqmainwindow = dynamic_cast<VirtualQMainWindow*>(self);
-	if (vqmainwindow && vqmainwindow->isVirtualQMainWindow) {
-vqmainwindow->setQMainWindow_Event_IsBase(true);
-	return vqmainwindow->event(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QMainWindow_OnEvent(QMainWindow* self, intptr_t slot) {
-	auto* vqmainwindow = dynamic_cast<VirtualQMainWindow*>(self);
-	if (vqmainwindow && vqmainwindow->isVirtualQMainWindow) {
-vqmainwindow->setQMainWindow_Event_Callback(reinterpret_cast<VirtualQMainWindow::QMainWindow_Event_Callback>(slot));
-}
-}
-
 void QMainWindow_Delete(QMainWindow* self) {
     delete self;
 }

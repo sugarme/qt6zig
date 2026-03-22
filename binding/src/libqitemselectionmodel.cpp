@@ -469,33 +469,6 @@ vqitemselectionmodel->setQItemSelectionModel_ClearCurrentIndex_Callback(reinterp
 }
 }
 
-// Derived class handler implementation
-void QItemSelectionModel_EmitSelectionChanged(QItemSelectionModel* self, const QItemSelection* newSelection, const QItemSelection* oldSelection) {
-	auto* vqitemselectionmodel = dynamic_cast<VirtualQItemSelectionModel*>(self);
-	if (vqitemselectionmodel && vqitemselectionmodel->isVirtualQItemSelectionModel) {
-	vqitemselectionmodel->emitSelectionChanged(*newSelection, *oldSelection);
-	} else {
-	self->QItemSelectionModel::emitSelectionChanged(*newSelection, *oldSelection);
-}
-}
-
-// Base class handler implementation
-void QItemSelectionModel_QBaseEmitSelectionChanged(QItemSelectionModel* self, const QItemSelection* newSelection, const QItemSelection* oldSelection) {
-	auto* vqitemselectionmodel = dynamic_cast<VirtualQItemSelectionModel*>(self);
-	if (vqitemselectionmodel && vqitemselectionmodel->isVirtualQItemSelectionModel) {
-vqitemselectionmodel->setQItemSelectionModel_EmitSelectionChanged_IsBase(true);
-	vqitemselectionmodel->emitSelectionChanged(*newSelection, *oldSelection);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QItemSelectionModel_OnEmitSelectionChanged(QItemSelectionModel* self, intptr_t slot) {
-	auto* vqitemselectionmodel = dynamic_cast<VirtualQItemSelectionModel*>(self);
-	if (vqitemselectionmodel && vqitemselectionmodel->isVirtualQItemSelectionModel) {
-vqitemselectionmodel->setQItemSelectionModel_EmitSelectionChanged_Callback(reinterpret_cast<VirtualQItemSelectionModel::QItemSelectionModel_EmitSelectionChanged_Callback>(slot));
-}
-}
-
 void QItemSelectionModel_Delete(QItemSelectionModel* self) {
     delete self;
 }

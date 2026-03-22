@@ -143,33 +143,6 @@ vqfontcombobox->setQFontComboBox_SizeHint_Callback(reinterpret_cast<VirtualQFont
 }
 }
 
-// Derived class handler implementation
-bool QFontComboBox_Event(QFontComboBox* self, QEvent* e) {
-	auto* vqfontcombobox = dynamic_cast<VirtualQFontComboBox*>(self);
-	if (vqfontcombobox && vqfontcombobox->isVirtualQFontComboBox) {
-	return vqfontcombobox->event(e);
-	} else {
-	return self->QFontComboBox::event(e);
-}
-}
-
-// Base class handler implementation
-bool QFontComboBox_QBaseEvent(QFontComboBox* self, QEvent* e) {
-	auto* vqfontcombobox = dynamic_cast<VirtualQFontComboBox*>(self);
-	if (vqfontcombobox && vqfontcombobox->isVirtualQFontComboBox) {
-vqfontcombobox->setQFontComboBox_Event_IsBase(true);
-	return vqfontcombobox->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QFontComboBox_OnEvent(QFontComboBox* self, intptr_t slot) {
-	auto* vqfontcombobox = dynamic_cast<VirtualQFontComboBox*>(self);
-	if (vqfontcombobox && vqfontcombobox->isVirtualQFontComboBox) {
-vqfontcombobox->setQFontComboBox_Event_Callback(reinterpret_cast<VirtualQFontComboBox::QFontComboBox_Event_Callback>(slot));
-}
-}
-
 void QFontComboBox_Delete(QFontComboBox* self) {
     delete self;
 }

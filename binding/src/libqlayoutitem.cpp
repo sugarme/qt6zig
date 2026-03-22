@@ -346,33 +346,6 @@ vqlayoutitem->setQLayoutItem_ControlTypes_Callback(reinterpret_cast<VirtualQLayo
 }
 }
 
-// Derived class handler implementation
-void QLayoutItem_OperatorAssign(QLayoutItem* self, const QLayoutItem* param1) {
-	auto* vqlayoutitem = dynamic_cast<VirtualQLayoutItem*>(self);
-	if (vqlayoutitem && vqlayoutitem->isVirtualQLayoutItem) {
-	vqlayoutitem->operator=(*param1);
-	} else {
-	self->QLayoutItem::operator=(*param1);
-}
-}
-
-// Base class handler implementation
-void QLayoutItem_QBaseOperatorAssign(QLayoutItem* self, const QLayoutItem* param1) {
-	auto* vqlayoutitem = dynamic_cast<VirtualQLayoutItem*>(self);
-	if (vqlayoutitem && vqlayoutitem->isVirtualQLayoutItem) {
-vqlayoutitem->setQLayoutItem_OperatorAssign_IsBase(true);
-	vqlayoutitem->operator=(*param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QLayoutItem_OnOperatorAssign(QLayoutItem* self, intptr_t slot) {
-	auto* vqlayoutitem = dynamic_cast<VirtualQLayoutItem*>(self);
-	if (vqlayoutitem && vqlayoutitem->isVirtualQLayoutItem) {
-vqlayoutitem->setQLayoutItem_OperatorAssign_Callback(reinterpret_cast<VirtualQLayoutItem::QLayoutItem_OperatorAssign_Callback>(slot));
-}
-}
-
 void QLayoutItem_Delete(QLayoutItem* self) {
     delete self;
 }

@@ -512,33 +512,6 @@ vqaccessibleinterface->setQAccessibleInterface_InterfaceCast_Callback(reinterpre
 }
 }
 
-// Derived class handler implementation
-void QAccessibleInterface_OperatorAssign(QAccessibleInterface* self, const QAccessibleInterface* param1) {
-	auto* vqaccessibleinterface = dynamic_cast<VirtualQAccessibleInterface*>(self);
-	if (vqaccessibleinterface && vqaccessibleinterface->isVirtualQAccessibleInterface) {
-	vqaccessibleinterface->operator=(*param1);
-	} else {
-	self->QAccessibleInterface::operator=(*param1);
-}
-}
-
-// Base class handler implementation
-void QAccessibleInterface_QBaseOperatorAssign(QAccessibleInterface* self, const QAccessibleInterface* param1) {
-	auto* vqaccessibleinterface = dynamic_cast<VirtualQAccessibleInterface*>(self);
-	if (vqaccessibleinterface && vqaccessibleinterface->isVirtualQAccessibleInterface) {
-vqaccessibleinterface->setQAccessibleInterface_OperatorAssign_IsBase(true);
-	vqaccessibleinterface->operator=(*param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QAccessibleInterface_OnOperatorAssign(QAccessibleInterface* self, intptr_t slot) {
-	auto* vqaccessibleinterface = dynamic_cast<VirtualQAccessibleInterface*>(self);
-	if (vqaccessibleinterface && vqaccessibleinterface->isVirtualQAccessibleInterface) {
-vqaccessibleinterface->setQAccessibleInterface_OperatorAssign_Callback(reinterpret_cast<VirtualQAccessibleInterface::QAccessibleInterface_OperatorAssign_Callback>(slot));
-}
-}
-
 QAccessibleTextInterface* QAccessibleTextInterface_new() {
 	 return new VirtualQAccessibleTextInterface();
 }
@@ -1882,33 +1855,6 @@ void QAccessibleTableInterface_OnModelChange(QAccessibleTableInterface* self, in
 	auto* vqaccessibletableinterface = dynamic_cast<VirtualQAccessibleTableInterface*>(self);
 	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
 vqaccessibletableinterface->setQAccessibleTableInterface_ModelChange_Callback(reinterpret_cast<VirtualQAccessibleTableInterface::QAccessibleTableInterface_ModelChange_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QAccessibleTableInterface_OperatorAssign(QAccessibleTableInterface* self, const QAccessibleTableInterface* param1) {
-	auto* vqaccessibletableinterface = dynamic_cast<VirtualQAccessibleTableInterface*>(self);
-	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
-	vqaccessibletableinterface->operator=(*param1);
-	} else {
-	self->QAccessibleTableInterface::operator=(*param1);
-}
-}
-
-// Base class handler implementation
-void QAccessibleTableInterface_QBaseOperatorAssign(QAccessibleTableInterface* self, const QAccessibleTableInterface* param1) {
-	auto* vqaccessibletableinterface = dynamic_cast<VirtualQAccessibleTableInterface*>(self);
-	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
-vqaccessibletableinterface->setQAccessibleTableInterface_OperatorAssign_IsBase(true);
-	vqaccessibletableinterface->operator=(*param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QAccessibleTableInterface_OnOperatorAssign(QAccessibleTableInterface* self, intptr_t slot) {
-	auto* vqaccessibletableinterface = dynamic_cast<VirtualQAccessibleTableInterface*>(self);
-	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
-vqaccessibletableinterface->setQAccessibleTableInterface_OperatorAssign_Callback(reinterpret_cast<VirtualQAccessibleTableInterface::QAccessibleTableInterface_OperatorAssign_Callback>(slot));
 }
 }
 

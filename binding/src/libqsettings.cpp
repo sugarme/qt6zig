@@ -264,33 +264,6 @@ libqt_string QSettings_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-bool QSettings_Event(QSettings* self, QEvent* event) {
-	auto* vqsettings = dynamic_cast<VirtualQSettings*>(self);
-	if (vqsettings && vqsettings->isVirtualQSettings) {
-	return vqsettings->event(event);
-	} else {
-	return self->QSettings::event(event);
-}
-}
-
-// Base class handler implementation
-bool QSettings_QBaseEvent(QSettings* self, QEvent* event) {
-	auto* vqsettings = dynamic_cast<VirtualQSettings*>(self);
-	if (vqsettings && vqsettings->isVirtualQSettings) {
-vqsettings->setQSettings_Event_IsBase(true);
-	return vqsettings->event(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSettings_OnEvent(QSettings* self, intptr_t slot) {
-	auto* vqsettings = dynamic_cast<VirtualQSettings*>(self);
-	if (vqsettings && vqsettings->isVirtualQSettings) {
-vqsettings->setQSettings_Event_Callback(reinterpret_cast<VirtualQSettings::QSettings_Event_Callback>(slot));
-}
-}
-
 void QSettings_Delete(QSettings* self) {
     delete self;
 }

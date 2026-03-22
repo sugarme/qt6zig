@@ -716,33 +716,6 @@ vqabstractproxymodel->setQAbstractProxyModel_RoleNames_Callback(reinterpret_cast
 }
 }
 
-// Derived class handler implementation
-QModelIndex* QAbstractProxyModel_CreateSourceIndex(const QAbstractProxyModel* self, int row, int col, void* internalPtr) {
-	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
-	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
-	return new QModelIndex(vqabstractproxymodel->createSourceIndex(row, col, internalPtr));
-	} else {
-	return new QModelIndex(self->QAbstractProxyModel::createSourceIndex(row, col, internalPtr));
-}
-}
-
-// Base class handler implementation
-QModelIndex* QAbstractProxyModel_QBaseCreateSourceIndex(const QAbstractProxyModel* self, int row, int col, void* internalPtr) {
-	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
-	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
-vqabstractproxymodel->setQAbstractProxyModel_CreateSourceIndex_IsBase(true);
-	return new QModelIndex(vqabstractproxymodel->createSourceIndex(row, col, internalPtr));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QAbstractProxyModel_OnCreateSourceIndex(const QAbstractProxyModel* self, intptr_t slot) {
-	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
-	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
-vqabstractproxymodel->setQAbstractProxyModel_CreateSourceIndex_Callback(reinterpret_cast<VirtualQAbstractProxyModel::QAbstractProxyModel_CreateSourceIndex_Callback>(slot));
-}
-}
-
 void QAbstractProxyModel_Connect_sourceModelChanged(QAbstractProxyModel* self, intptr_t slot) {
     void (*slotFunc)(QAbstractProxyModel*) = reinterpret_cast<void (*)(QAbstractProxyModel*)>(slot);
     QAbstractProxyModel::connect(self, &QAbstractProxyModel::sourceModelChanged, [self, slotFunc]() {

@@ -143,33 +143,6 @@ vqpicture->setQPicture_PaintEngine_Callback(reinterpret_cast<VirtualQPicture::QP
 }
 }
 
-// Derived class handler implementation
-int QPicture_Metric(const QPicture* self, int m) {
-	auto* vqpicture = dynamic_cast<const VirtualQPicture*>(self);
-	if (vqpicture && vqpicture->isVirtualQPicture) {
-	return vqpicture->metric(static_cast<QPaintDevice::PaintDeviceMetric>(m));
-	} else {
-	return self->QPicture::metric(static_cast<QPaintDevice::PaintDeviceMetric>(m));
-}
-}
-
-// Base class handler implementation
-int QPicture_QBaseMetric(const QPicture* self, int m) {
-	auto* vqpicture = dynamic_cast<const VirtualQPicture*>(self);
-	if (vqpicture && vqpicture->isVirtualQPicture) {
-vqpicture->setQPicture_Metric_IsBase(true);
-	return vqpicture->metric(static_cast<QPaintDevice::PaintDeviceMetric>(m));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPicture_OnMetric(const QPicture* self, intptr_t slot) {
-	auto* vqpicture = dynamic_cast<const VirtualQPicture*>(self);
-	if (vqpicture && vqpicture->isVirtualQPicture) {
-vqpicture->setQPicture_Metric_Callback(reinterpret_cast<VirtualQPicture::QPicture_Metric_Callback>(slot));
-}
-}
-
 void QPicture_Delete(QPicture* self) {
     delete self;
 }

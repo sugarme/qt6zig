@@ -480,60 +480,6 @@ vqidentityproxymodel->setQIdentityProxyModel_MoveColumns_Callback(reinterpret_ca
 }
 }
 
-// Derived class handler implementation
-void QIdentityProxyModel_SetHandleSourceLayoutChanges(QIdentityProxyModel* self, bool handleSourceLayoutChanges) {
-	auto* vqidentityproxymodel = dynamic_cast<VirtualQIdentityProxyModel*>(self);
-	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
-	vqidentityproxymodel->setHandleSourceLayoutChanges(handleSourceLayoutChanges);
-	} else {
-	self->QIdentityProxyModel::setHandleSourceLayoutChanges(handleSourceLayoutChanges);
-}
-}
-
-// Base class handler implementation
-void QIdentityProxyModel_QBaseSetHandleSourceLayoutChanges(QIdentityProxyModel* self, bool handleSourceLayoutChanges) {
-	auto* vqidentityproxymodel = dynamic_cast<VirtualQIdentityProxyModel*>(self);
-	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
-vqidentityproxymodel->setQIdentityProxyModel_SetHandleSourceLayoutChanges_IsBase(true);
-	vqidentityproxymodel->setHandleSourceLayoutChanges(handleSourceLayoutChanges);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QIdentityProxyModel_OnSetHandleSourceLayoutChanges(QIdentityProxyModel* self, intptr_t slot) {
-	auto* vqidentityproxymodel = dynamic_cast<VirtualQIdentityProxyModel*>(self);
-	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
-vqidentityproxymodel->setQIdentityProxyModel_SetHandleSourceLayoutChanges_Callback(reinterpret_cast<VirtualQIdentityProxyModel::QIdentityProxyModel_SetHandleSourceLayoutChanges_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QIdentityProxyModel_SetHandleSourceDataChanges(QIdentityProxyModel* self, bool handleSourceDataChanges) {
-	auto* vqidentityproxymodel = dynamic_cast<VirtualQIdentityProxyModel*>(self);
-	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
-	vqidentityproxymodel->setHandleSourceDataChanges(handleSourceDataChanges);
-	} else {
-	self->QIdentityProxyModel::setHandleSourceDataChanges(handleSourceDataChanges);
-}
-}
-
-// Base class handler implementation
-void QIdentityProxyModel_QBaseSetHandleSourceDataChanges(QIdentityProxyModel* self, bool handleSourceDataChanges) {
-	auto* vqidentityproxymodel = dynamic_cast<VirtualQIdentityProxyModel*>(self);
-	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
-vqidentityproxymodel->setQIdentityProxyModel_SetHandleSourceDataChanges_IsBase(true);
-	vqidentityproxymodel->setHandleSourceDataChanges(handleSourceDataChanges);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QIdentityProxyModel_OnSetHandleSourceDataChanges(QIdentityProxyModel* self, intptr_t slot) {
-	auto* vqidentityproxymodel = dynamic_cast<VirtualQIdentityProxyModel*>(self);
-	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
-vqidentityproxymodel->setQIdentityProxyModel_SetHandleSourceDataChanges_Callback(reinterpret_cast<VirtualQIdentityProxyModel::QIdentityProxyModel_SetHandleSourceDataChanges_Callback>(slot));
-}
-}
-
 void QIdentityProxyModel_Delete(QIdentityProxyModel* self) {
     delete self;
 }

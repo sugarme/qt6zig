@@ -106,33 +106,6 @@ libqt_string QTimer_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QTimer_TimerEvent(QTimer* self, QTimerEvent* param1) {
-	auto* vqtimer = dynamic_cast<VirtualQTimer*>(self);
-	if (vqtimer && vqtimer->isVirtualQTimer) {
-	vqtimer->timerEvent(param1);
-	} else {
-	self->QTimer::timerEvent(param1);
-}
-}
-
-// Base class handler implementation
-void QTimer_QBaseTimerEvent(QTimer* self, QTimerEvent* param1) {
-	auto* vqtimer = dynamic_cast<VirtualQTimer*>(self);
-	if (vqtimer && vqtimer->isVirtualQTimer) {
-vqtimer->setQTimer_TimerEvent_IsBase(true);
-	vqtimer->timerEvent(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTimer_OnTimerEvent(QTimer* self, intptr_t slot) {
-	auto* vqtimer = dynamic_cast<VirtualQTimer*>(self);
-	if (vqtimer && vqtimer->isVirtualQTimer) {
-vqtimer->setQTimer_TimerEvent_Callback(reinterpret_cast<VirtualQTimer::QTimer_TimerEvent_Callback>(slot));
-}
-}
-
 void QTimer_Connect_timeout(QTimer* self, intptr_t slot) {
     void (*slotFunc)(QTimer*) = reinterpret_cast<void (*)(QTimer*)>(slot);
     QTimer::connect(self, &QTimer::timeout, [self, slotFunc]() {

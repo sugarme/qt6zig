@@ -310,60 +310,6 @@ vqapplication->setQApplication_Notify_Callback(reinterpret_cast<VirtualQApplicat
 }
 }
 
-// Derived class handler implementation
-bool QApplication_Event(QApplication* self, QEvent* param1) {
-	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-	return vqapplication->event(param1);
-	} else {
-	return self->QApplication::event(param1);
-}
-}
-
-// Base class handler implementation
-bool QApplication_QBaseEvent(QApplication* self, QEvent* param1) {
-	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-vqapplication->setQApplication_Event_IsBase(true);
-	return vqapplication->event(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QApplication_OnEvent(QApplication* self, intptr_t slot) {
-	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-vqapplication->setQApplication_Event_Callback(reinterpret_cast<VirtualQApplication::QApplication_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void* QApplication_ResolveInterface(const QApplication* self, const char* name, int revision) {
-	auto* vqapplication = dynamic_cast<const VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-	return vqapplication->resolveInterface(name, revision);
-	} else {
-	return self->QApplication::resolveInterface(name, revision);
-}
-}
-
-// Base class handler implementation
-void* QApplication_QBaseResolveInterface(const QApplication* self, const char* name, int revision) {
-	auto* vqapplication = dynamic_cast<const VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-vqapplication->setQApplication_ResolveInterface_IsBase(true);
-	return vqapplication->resolveInterface(name, revision);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QApplication_OnResolveInterface(const QApplication* self, intptr_t slot) {
-	auto* vqapplication = dynamic_cast<const VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-vqapplication->setQApplication_ResolveInterface_Callback(reinterpret_cast<VirtualQApplication::QApplication_ResolveInterface_Callback>(slot));
-}
-}
-
 void QApplication_Delete(QApplication* self) {
     delete self;
 }

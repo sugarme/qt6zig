@@ -113,33 +113,6 @@ libqt_string QStackedWidget_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-bool QStackedWidget_Event(QStackedWidget* self, QEvent* e) {
-	auto* vqstackedwidget = dynamic_cast<VirtualQStackedWidget*>(self);
-	if (vqstackedwidget && vqstackedwidget->isVirtualQStackedWidget) {
-	return vqstackedwidget->event(e);
-	} else {
-	return self->QStackedWidget::event(e);
-}
-}
-
-// Base class handler implementation
-bool QStackedWidget_QBaseEvent(QStackedWidget* self, QEvent* e) {
-	auto* vqstackedwidget = dynamic_cast<VirtualQStackedWidget*>(self);
-	if (vqstackedwidget && vqstackedwidget->isVirtualQStackedWidget) {
-vqstackedwidget->setQStackedWidget_Event_IsBase(true);
-	return vqstackedwidget->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QStackedWidget_OnEvent(QStackedWidget* self, intptr_t slot) {
-	auto* vqstackedwidget = dynamic_cast<VirtualQStackedWidget*>(self);
-	if (vqstackedwidget && vqstackedwidget->isVirtualQStackedWidget) {
-vqstackedwidget->setQStackedWidget_Event_Callback(reinterpret_cast<VirtualQStackedWidget::QStackedWidget_Event_Callback>(slot));
-}
-}
-
 void QStackedWidget_Delete(QStackedWidget* self) {
     delete self;
 }

@@ -330,60 +330,6 @@ vqlegend->setQLegend_Paint_Callback(reinterpret_cast<VirtualQLegend::QLegend_Pai
 }
 }
 
-// Derived class handler implementation
-void QLegend_HideEvent(QLegend* self, QHideEvent* event) {
-	auto* vqlegend = dynamic_cast<VirtualQLegend*>(self);
-	if (vqlegend && vqlegend->isVirtualQLegend) {
-	vqlegend->hideEvent(event);
-	} else {
-	self->QLegend::hideEvent(event);
-}
-}
-
-// Base class handler implementation
-void QLegend_QBaseHideEvent(QLegend* self, QHideEvent* event) {
-	auto* vqlegend = dynamic_cast<VirtualQLegend*>(self);
-	if (vqlegend && vqlegend->isVirtualQLegend) {
-vqlegend->setQLegend_HideEvent_IsBase(true);
-	vqlegend->hideEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QLegend_OnHideEvent(QLegend* self, intptr_t slot) {
-	auto* vqlegend = dynamic_cast<VirtualQLegend*>(self);
-	if (vqlegend && vqlegend->isVirtualQLegend) {
-vqlegend->setQLegend_HideEvent_Callback(reinterpret_cast<VirtualQLegend::QLegend_HideEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QLegend_ShowEvent(QLegend* self, QShowEvent* event) {
-	auto* vqlegend = dynamic_cast<VirtualQLegend*>(self);
-	if (vqlegend && vqlegend->isVirtualQLegend) {
-	vqlegend->showEvent(event);
-	} else {
-	self->QLegend::showEvent(event);
-}
-}
-
-// Base class handler implementation
-void QLegend_QBaseShowEvent(QLegend* self, QShowEvent* event) {
-	auto* vqlegend = dynamic_cast<VirtualQLegend*>(self);
-	if (vqlegend && vqlegend->isVirtualQLegend) {
-vqlegend->setQLegend_ShowEvent_IsBase(true);
-	vqlegend->showEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QLegend_OnShowEvent(QLegend* self, intptr_t slot) {
-	auto* vqlegend = dynamic_cast<VirtualQLegend*>(self);
-	if (vqlegend && vqlegend->isVirtualQLegend) {
-vqlegend->setQLegend_ShowEvent_Callback(reinterpret_cast<VirtualQLegend::QLegend_ShowEvent_Callback>(slot));
-}
-}
-
 void QLegend_Delete(QLegend* self) {
     delete self;
 }

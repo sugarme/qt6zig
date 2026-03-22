@@ -84,60 +84,6 @@ vqpauseanimation->setQPauseAnimation_Duration_Callback(reinterpret_cast<VirtualQ
 }
 }
 
-// Derived class handler implementation
-bool QPauseAnimation_Event(QPauseAnimation* self, QEvent* e) {
-	auto* vqpauseanimation = dynamic_cast<VirtualQPauseAnimation*>(self);
-	if (vqpauseanimation && vqpauseanimation->isVirtualQPauseAnimation) {
-	return vqpauseanimation->event(e);
-	} else {
-	return self->QPauseAnimation::event(e);
-}
-}
-
-// Base class handler implementation
-bool QPauseAnimation_QBaseEvent(QPauseAnimation* self, QEvent* e) {
-	auto* vqpauseanimation = dynamic_cast<VirtualQPauseAnimation*>(self);
-	if (vqpauseanimation && vqpauseanimation->isVirtualQPauseAnimation) {
-vqpauseanimation->setQPauseAnimation_Event_IsBase(true);
-	return vqpauseanimation->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPauseAnimation_OnEvent(QPauseAnimation* self, intptr_t slot) {
-	auto* vqpauseanimation = dynamic_cast<VirtualQPauseAnimation*>(self);
-	if (vqpauseanimation && vqpauseanimation->isVirtualQPauseAnimation) {
-vqpauseanimation->setQPauseAnimation_Event_Callback(reinterpret_cast<VirtualQPauseAnimation::QPauseAnimation_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QPauseAnimation_UpdateCurrentTime(QPauseAnimation* self, int param1) {
-	auto* vqpauseanimation = dynamic_cast<VirtualQPauseAnimation*>(self);
-	if (vqpauseanimation && vqpauseanimation->isVirtualQPauseAnimation) {
-	vqpauseanimation->updateCurrentTime(param1);
-	} else {
-	self->QPauseAnimation::updateCurrentTime(param1);
-}
-}
-
-// Base class handler implementation
-void QPauseAnimation_QBaseUpdateCurrentTime(QPauseAnimation* self, int param1) {
-	auto* vqpauseanimation = dynamic_cast<VirtualQPauseAnimation*>(self);
-	if (vqpauseanimation && vqpauseanimation->isVirtualQPauseAnimation) {
-vqpauseanimation->setQPauseAnimation_UpdateCurrentTime_IsBase(true);
-	vqpauseanimation->updateCurrentTime(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPauseAnimation_OnUpdateCurrentTime(QPauseAnimation* self, intptr_t slot) {
-	auto* vqpauseanimation = dynamic_cast<VirtualQPauseAnimation*>(self);
-	if (vqpauseanimation && vqpauseanimation->isVirtualQPauseAnimation) {
-vqpauseanimation->setQPauseAnimation_UpdateCurrentTime_Callback(reinterpret_cast<VirtualQPauseAnimation::QPauseAnimation_UpdateCurrentTime_Callback>(slot));
-}
-}
-
 void QPauseAnimation_Delete(QPauseAnimation* self) {
     delete self;
 }

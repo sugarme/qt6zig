@@ -80,33 +80,6 @@ vqsurface->setQSurface_Size_Callback(reinterpret_cast<VirtualQSurface::QSurface_
 }
 }
 
-// Derived class handler implementation
-void QSurface_OperatorAssign(QSurface* self, const QSurface* param1) {
-	auto* vqsurface = dynamic_cast<VirtualQSurface*>(self);
-	if (vqsurface && vqsurface->isVirtualQSurface) {
-	vqsurface->operator=(*param1);
-	} else {
-	self->QSurface::operator=(*param1);
-}
-}
-
-// Base class handler implementation
-void QSurface_QBaseOperatorAssign(QSurface* self, const QSurface* param1) {
-	auto* vqsurface = dynamic_cast<VirtualQSurface*>(self);
-	if (vqsurface && vqsurface->isVirtualQSurface) {
-vqsurface->setQSurface_OperatorAssign_IsBase(true);
-	vqsurface->operator=(*param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSurface_OnOperatorAssign(QSurface* self, intptr_t slot) {
-	auto* vqsurface = dynamic_cast<VirtualQSurface*>(self);
-	if (vqsurface && vqsurface->isVirtualQSurface) {
-vqsurface->setQSurface_OperatorAssign_Callback(reinterpret_cast<VirtualQSurface::QSurface_OperatorAssign_Callback>(slot));
-}
-}
-
 void QSurface_Delete(QSurface* self) {
     delete self;
 }

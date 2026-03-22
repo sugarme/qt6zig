@@ -73,33 +73,6 @@ vqevent->setQEvent_SetAccepted_Callback(reinterpret_cast<VirtualQEvent::QEvent_S
 }
 }
 
-// Derived class handler implementation
-void QEvent_OperatorAssign(QEvent* self, const QEvent* other) {
-	auto* vqevent = dynamic_cast<VirtualQEvent*>(self);
-	if (vqevent && vqevent->isVirtualQEvent) {
-	vqevent->operator=(*other);
-	} else {
-	self->QEvent::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QEvent_QBaseOperatorAssign(QEvent* self, const QEvent* other) {
-	auto* vqevent = dynamic_cast<VirtualQEvent*>(self);
-	if (vqevent && vqevent->isVirtualQEvent) {
-vqevent->setQEvent_OperatorAssign_IsBase(true);
-	vqevent->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QEvent_OnOperatorAssign(QEvent* self, intptr_t slot) {
-	auto* vqevent = dynamic_cast<VirtualQEvent*>(self);
-	if (vqevent && vqevent->isVirtualQEvent) {
-vqevent->setQEvent_OperatorAssign_Callback(reinterpret_cast<VirtualQEvent::QEvent_OperatorAssign_Callback>(slot));
-}
-}
-
 void QEvent_Delete(QEvent* self) {
     delete self;
 }

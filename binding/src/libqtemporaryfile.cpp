@@ -132,33 +132,6 @@ vqtemporaryfile->setQTemporaryFile_FileName_Callback(reinterpret_cast<VirtualQTe
 }
 }
 
-// Derived class handler implementation
-bool QTemporaryFile_Open2(QTemporaryFile* self, int flags) {
-	auto* vqtemporaryfile = dynamic_cast<VirtualQTemporaryFile*>(self);
-	if (vqtemporaryfile && vqtemporaryfile->isVirtualQTemporaryFile) {
-	return vqtemporaryfile->open(static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(flags));
-	} else {
-	return self->QTemporaryFile::open(static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(flags));
-}
-}
-
-// Base class handler implementation
-bool QTemporaryFile_QBaseOpen2(QTemporaryFile* self, int flags) {
-	auto* vqtemporaryfile = dynamic_cast<VirtualQTemporaryFile*>(self);
-	if (vqtemporaryfile && vqtemporaryfile->isVirtualQTemporaryFile) {
-vqtemporaryfile->setQTemporaryFile_Open2_IsBase(true);
-	return vqtemporaryfile->open(static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(flags));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTemporaryFile_OnOpen2(QTemporaryFile* self, intptr_t slot) {
-	auto* vqtemporaryfile = dynamic_cast<VirtualQTemporaryFile*>(self);
-	if (vqtemporaryfile && vqtemporaryfile->isVirtualQTemporaryFile) {
-vqtemporaryfile->setQTemporaryFile_Open2_Callback(reinterpret_cast<VirtualQTemporaryFile::QTemporaryFile_Open2_Callback>(slot));
-}
-}
-
 void QTemporaryFile_Delete(QTemporaryFile* self) {
     delete self;
 }

@@ -560,60 +560,6 @@ vqstandarditem->setQStandardItem_OperatorLesser_Callback(reinterpret_cast<Virtua
 }
 }
 
-// Derived class handler implementation
-void QStandardItem_OperatorAssign(QStandardItem* self, const QStandardItem* other) {
-	auto* vqstandarditem = dynamic_cast<VirtualQStandardItem*>(self);
-	if (vqstandarditem && vqstandarditem->isVirtualQStandardItem) {
-	vqstandarditem->operator=(*other);
-	} else {
-	self->QStandardItem::operator=(*other);
-}
-}
-
-// Base class handler implementation
-void QStandardItem_QBaseOperatorAssign(QStandardItem* self, const QStandardItem* other) {
-	auto* vqstandarditem = dynamic_cast<VirtualQStandardItem*>(self);
-	if (vqstandarditem && vqstandarditem->isVirtualQStandardItem) {
-vqstandarditem->setQStandardItem_OperatorAssign_IsBase(true);
-	vqstandarditem->operator=(*other);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QStandardItem_OnOperatorAssign(QStandardItem* self, intptr_t slot) {
-	auto* vqstandarditem = dynamic_cast<VirtualQStandardItem*>(self);
-	if (vqstandarditem && vqstandarditem->isVirtualQStandardItem) {
-vqstandarditem->setQStandardItem_OperatorAssign_Callback(reinterpret_cast<VirtualQStandardItem::QStandardItem_OperatorAssign_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QStandardItem_EmitDataChanged(QStandardItem* self) {
-	auto* vqstandarditem = dynamic_cast<VirtualQStandardItem*>(self);
-	if (vqstandarditem && vqstandarditem->isVirtualQStandardItem) {
-	vqstandarditem->emitDataChanged();
-	} else {
-	self->QStandardItem::emitDataChanged();
-}
-}
-
-// Base class handler implementation
-void QStandardItem_QBaseEmitDataChanged(QStandardItem* self) {
-	auto* vqstandarditem = dynamic_cast<VirtualQStandardItem*>(self);
-	if (vqstandarditem && vqstandarditem->isVirtualQStandardItem) {
-vqstandarditem->setQStandardItem_EmitDataChanged_IsBase(true);
-	vqstandarditem->emitDataChanged();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QStandardItem_OnEmitDataChanged(QStandardItem* self, intptr_t slot) {
-	auto* vqstandarditem = dynamic_cast<VirtualQStandardItem*>(self);
-	if (vqstandarditem && vqstandarditem->isVirtualQStandardItem) {
-vqstandarditem->setQStandardItem_EmitDataChanged_Callback(reinterpret_cast<VirtualQStandardItem::QStandardItem_EmitDataChanged_Callback>(slot));
-}
-}
-
 void QStandardItem_Delete(QStandardItem* self) {
     delete self;
 }

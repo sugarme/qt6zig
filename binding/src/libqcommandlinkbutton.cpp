@@ -169,60 +169,6 @@ vqcommandlinkbutton->setQCommandLinkButton_InitStyleOption_Callback(reinterpret_
 }
 }
 
-// Derived class handler implementation
-bool QCommandLinkButton_Event(QCommandLinkButton* self, QEvent* e) {
-	auto* vqcommandlinkbutton = dynamic_cast<VirtualQCommandLinkButton*>(self);
-	if (vqcommandlinkbutton && vqcommandlinkbutton->isVirtualQCommandLinkButton) {
-	return vqcommandlinkbutton->event(e);
-	} else {
-	return self->QCommandLinkButton::event(e);
-}
-}
-
-// Base class handler implementation
-bool QCommandLinkButton_QBaseEvent(QCommandLinkButton* self, QEvent* e) {
-	auto* vqcommandlinkbutton = dynamic_cast<VirtualQCommandLinkButton*>(self);
-	if (vqcommandlinkbutton && vqcommandlinkbutton->isVirtualQCommandLinkButton) {
-vqcommandlinkbutton->setQCommandLinkButton_Event_IsBase(true);
-	return vqcommandlinkbutton->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCommandLinkButton_OnEvent(QCommandLinkButton* self, intptr_t slot) {
-	auto* vqcommandlinkbutton = dynamic_cast<VirtualQCommandLinkButton*>(self);
-	if (vqcommandlinkbutton && vqcommandlinkbutton->isVirtualQCommandLinkButton) {
-vqcommandlinkbutton->setQCommandLinkButton_Event_Callback(reinterpret_cast<VirtualQCommandLinkButton::QCommandLinkButton_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QCommandLinkButton_PaintEvent(QCommandLinkButton* self, QPaintEvent* param1) {
-	auto* vqcommandlinkbutton = dynamic_cast<VirtualQCommandLinkButton*>(self);
-	if (vqcommandlinkbutton && vqcommandlinkbutton->isVirtualQCommandLinkButton) {
-	vqcommandlinkbutton->paintEvent(param1);
-	} else {
-	self->QCommandLinkButton::paintEvent(param1);
-}
-}
-
-// Base class handler implementation
-void QCommandLinkButton_QBasePaintEvent(QCommandLinkButton* self, QPaintEvent* param1) {
-	auto* vqcommandlinkbutton = dynamic_cast<VirtualQCommandLinkButton*>(self);
-	if (vqcommandlinkbutton && vqcommandlinkbutton->isVirtualQCommandLinkButton) {
-vqcommandlinkbutton->setQCommandLinkButton_PaintEvent_IsBase(true);
-	vqcommandlinkbutton->paintEvent(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCommandLinkButton_OnPaintEvent(QCommandLinkButton* self, intptr_t slot) {
-	auto* vqcommandlinkbutton = dynamic_cast<VirtualQCommandLinkButton*>(self);
-	if (vqcommandlinkbutton && vqcommandlinkbutton->isVirtualQCommandLinkButton) {
-vqcommandlinkbutton->setQCommandLinkButton_PaintEvent_Callback(reinterpret_cast<VirtualQCommandLinkButton::QCommandLinkButton_PaintEvent_Callback>(slot));
-}
-}
-
 void QCommandLinkButton_Delete(QCommandLinkButton* self) {
     delete self;
 }

@@ -63,60 +63,6 @@ libqt_string QErrorMessage_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QErrorMessage_Done(QErrorMessage* self, int param1) {
-	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
-	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
-	vqerrormessage->done(param1);
-	} else {
-	self->QErrorMessage::done(param1);
-}
-}
-
-// Base class handler implementation
-void QErrorMessage_QBaseDone(QErrorMessage* self, int param1) {
-	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
-	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
-vqerrormessage->setQErrorMessage_Done_IsBase(true);
-	vqerrormessage->done(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QErrorMessage_OnDone(QErrorMessage* self, intptr_t slot) {
-	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
-	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
-vqerrormessage->setQErrorMessage_Done_Callback(reinterpret_cast<VirtualQErrorMessage::QErrorMessage_Done_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QErrorMessage_ChangeEvent(QErrorMessage* self, QEvent* e) {
-	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
-	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
-	vqerrormessage->changeEvent(e);
-	} else {
-	self->QErrorMessage::changeEvent(e);
-}
-}
-
-// Base class handler implementation
-void QErrorMessage_QBaseChangeEvent(QErrorMessage* self, QEvent* e) {
-	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
-	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
-vqerrormessage->setQErrorMessage_ChangeEvent_IsBase(true);
-	vqerrormessage->changeEvent(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QErrorMessage_OnChangeEvent(QErrorMessage* self, intptr_t slot) {
-	auto* vqerrormessage = dynamic_cast<VirtualQErrorMessage*>(self);
-	if (vqerrormessage && vqerrormessage->isVirtualQErrorMessage) {
-vqerrormessage->setQErrorMessage_ChangeEvent_Callback(reinterpret_cast<VirtualQErrorMessage::QErrorMessage_ChangeEvent_Callback>(slot));
-}
-}
-
 void QErrorMessage_Delete(QErrorMessage* self) {
     delete self;
 }

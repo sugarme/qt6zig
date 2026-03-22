@@ -110,60 +110,6 @@ int QSvgGenerator_SvgVersion(const QSvgGenerator* self) {
 	return self->svgVersion();
 }
 
-// Derived class handler implementation
-QPaintEngine* QSvgGenerator_PaintEngine(const QSvgGenerator* self) {
-	auto* vqsvggenerator = dynamic_cast<const VirtualQSvgGenerator*>(self);
-	if (vqsvggenerator && vqsvggenerator->isVirtualQSvgGenerator) {
-	return vqsvggenerator->paintEngine();
-	} else {
-	return self->QSvgGenerator::paintEngine();
-}
-}
-
-// Base class handler implementation
-QPaintEngine* QSvgGenerator_QBasePaintEngine(const QSvgGenerator* self) {
-	auto* vqsvggenerator = dynamic_cast<const VirtualQSvgGenerator*>(self);
-	if (vqsvggenerator && vqsvggenerator->isVirtualQSvgGenerator) {
-vqsvggenerator->setQSvgGenerator_PaintEngine_IsBase(true);
-	return vqsvggenerator->paintEngine();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSvgGenerator_OnPaintEngine(const QSvgGenerator* self, intptr_t slot) {
-	auto* vqsvggenerator = dynamic_cast<const VirtualQSvgGenerator*>(self);
-	if (vqsvggenerator && vqsvggenerator->isVirtualQSvgGenerator) {
-vqsvggenerator->setQSvgGenerator_PaintEngine_Callback(reinterpret_cast<VirtualQSvgGenerator::QSvgGenerator_PaintEngine_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-int QSvgGenerator_Metric(const QSvgGenerator* self, int metric) {
-	auto* vqsvggenerator = dynamic_cast<const VirtualQSvgGenerator*>(self);
-	if (vqsvggenerator && vqsvggenerator->isVirtualQSvgGenerator) {
-	return vqsvggenerator->metric(static_cast<QPaintDevice::PaintDeviceMetric>(metric));
-	} else {
-	return self->QSvgGenerator::metric(static_cast<QPaintDevice::PaintDeviceMetric>(metric));
-}
-}
-
-// Base class handler implementation
-int QSvgGenerator_QBaseMetric(const QSvgGenerator* self, int metric) {
-	auto* vqsvggenerator = dynamic_cast<const VirtualQSvgGenerator*>(self);
-	if (vqsvggenerator && vqsvggenerator->isVirtualQSvgGenerator) {
-vqsvggenerator->setQSvgGenerator_Metric_IsBase(true);
-	return vqsvggenerator->metric(static_cast<QPaintDevice::PaintDeviceMetric>(metric));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSvgGenerator_OnMetric(const QSvgGenerator* self, intptr_t slot) {
-	auto* vqsvggenerator = dynamic_cast<const VirtualQSvgGenerator*>(self);
-	if (vqsvggenerator && vqsvggenerator->isVirtualQSvgGenerator) {
-vqsvggenerator->setQSvgGenerator_Metric_Callback(reinterpret_cast<VirtualQSvgGenerator::QSvgGenerator_Metric_Callback>(slot));
-}
-}
-
 void QSvgGenerator_Delete(QSvgGenerator* self) {
     delete self;
 }

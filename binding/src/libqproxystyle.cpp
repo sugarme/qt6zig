@@ -559,33 +559,6 @@ vqproxystyle->setQProxyStyle_Unpolish2_Callback(reinterpret_cast<VirtualQProxySt
 }
 }
 
-// Derived class handler implementation
-bool QProxyStyle_Event(QProxyStyle* self, QEvent* e) {
-	auto* vqproxystyle = dynamic_cast<VirtualQProxyStyle*>(self);
-	if (vqproxystyle && vqproxystyle->isVirtualQProxyStyle) {
-	return vqproxystyle->event(e);
-	} else {
-	return self->QProxyStyle::event(e);
-}
-}
-
-// Base class handler implementation
-bool QProxyStyle_QBaseEvent(QProxyStyle* self, QEvent* e) {
-	auto* vqproxystyle = dynamic_cast<VirtualQProxyStyle*>(self);
-	if (vqproxystyle && vqproxystyle->isVirtualQProxyStyle) {
-vqproxystyle->setQProxyStyle_Event_IsBase(true);
-	return vqproxystyle->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QProxyStyle_OnEvent(QProxyStyle* self, intptr_t slot) {
-	auto* vqproxystyle = dynamic_cast<VirtualQProxyStyle*>(self);
-	if (vqproxystyle && vqproxystyle->isVirtualQProxyStyle) {
-vqproxystyle->setQProxyStyle_Event_Callback(reinterpret_cast<VirtualQProxyStyle::QProxyStyle_Event_Callback>(slot));
-}
-}
-
 void QProxyStyle_Delete(QProxyStyle* self) {
     delete self;
 }

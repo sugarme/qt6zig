@@ -492,60 +492,6 @@ vqguiapplication->setQGuiApplication_Notify_Callback(reinterpret_cast<VirtualQGu
 }
 }
 
-// Derived class handler implementation
-bool QGuiApplication_Event(QGuiApplication* self, QEvent* param1) {
-	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-	return vqguiapplication->event(param1);
-	} else {
-	return self->QGuiApplication::event(param1);
-}
-}
-
-// Base class handler implementation
-bool QGuiApplication_QBaseEvent(QGuiApplication* self, QEvent* param1) {
-	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-vqguiapplication->setQGuiApplication_Event_IsBase(true);
-	return vqguiapplication->event(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGuiApplication_OnEvent(QGuiApplication* self, intptr_t slot) {
-	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-vqguiapplication->setQGuiApplication_Event_Callback(reinterpret_cast<VirtualQGuiApplication::QGuiApplication_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void* QGuiApplication_ResolveInterface(const QGuiApplication* self, const char* name, int revision) {
-	auto* vqguiapplication = dynamic_cast<const VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-	return vqguiapplication->resolveInterface(name, revision);
-	} else {
-	return self->QGuiApplication::resolveInterface(name, revision);
-}
-}
-
-// Base class handler implementation
-void* QGuiApplication_QBaseResolveInterface(const QGuiApplication* self, const char* name, int revision) {
-	auto* vqguiapplication = dynamic_cast<const VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-vqguiapplication->setQGuiApplication_ResolveInterface_IsBase(true);
-	return vqguiapplication->resolveInterface(name, revision);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGuiApplication_OnResolveInterface(const QGuiApplication* self, intptr_t slot) {
-	auto* vqguiapplication = dynamic_cast<const VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-vqguiapplication->setQGuiApplication_ResolveInterface_Callback(reinterpret_cast<VirtualQGuiApplication::QGuiApplication_ResolveInterface_Callback>(slot));
-}
-}
-
 void QGuiApplication_Delete(QGuiApplication* self) {
     delete self;
 }

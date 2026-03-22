@@ -102,33 +102,6 @@ vqsvgwidget->setQSvgWidget_SizeHint_Callback(reinterpret_cast<VirtualQSvgWidget:
 }
 }
 
-// Derived class handler implementation
-void QSvgWidget_PaintEvent(QSvgWidget* self, QPaintEvent* event) {
-	auto* vqsvgwidget = dynamic_cast<VirtualQSvgWidget*>(self);
-	if (vqsvgwidget && vqsvgwidget->isVirtualQSvgWidget) {
-	vqsvgwidget->paintEvent(event);
-	} else {
-	self->QSvgWidget::paintEvent(event);
-}
-}
-
-// Base class handler implementation
-void QSvgWidget_QBasePaintEvent(QSvgWidget* self, QPaintEvent* event) {
-	auto* vqsvgwidget = dynamic_cast<VirtualQSvgWidget*>(self);
-	if (vqsvgwidget && vqsvgwidget->isVirtualQSvgWidget) {
-vqsvgwidget->setQSvgWidget_PaintEvent_IsBase(true);
-	vqsvgwidget->paintEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSvgWidget_OnPaintEvent(QSvgWidget* self, intptr_t slot) {
-	auto* vqsvgwidget = dynamic_cast<VirtualQSvgWidget*>(self);
-	if (vqsvgwidget && vqsvgwidget->isVirtualQSvgWidget) {
-vqsvgwidget->setQSvgWidget_PaintEvent_Callback(reinterpret_cast<VirtualQSvgWidget::QSvgWidget_PaintEvent_Callback>(slot));
-}
-}
-
 void QSvgWidget_Delete(QSvgWidget* self) {
     delete self;
 }

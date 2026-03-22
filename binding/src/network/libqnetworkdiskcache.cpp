@@ -248,33 +248,6 @@ vqnetworkdiskcache->setQNetworkDiskCache_Clear_Callback(reinterpret_cast<Virtual
 }
 }
 
-// Derived class handler implementation
-long long QNetworkDiskCache_Expire(QNetworkDiskCache* self) {
-	auto* vqnetworkdiskcache = dynamic_cast<VirtualQNetworkDiskCache*>(self);
-	if (vqnetworkdiskcache && vqnetworkdiskcache->isVirtualQNetworkDiskCache) {
-	return vqnetworkdiskcache->expire();
-	} else {
-	return self->QNetworkDiskCache::expire();
-}
-}
-
-// Base class handler implementation
-long long QNetworkDiskCache_QBaseExpire(QNetworkDiskCache* self) {
-	auto* vqnetworkdiskcache = dynamic_cast<VirtualQNetworkDiskCache*>(self);
-	if (vqnetworkdiskcache && vqnetworkdiskcache->isVirtualQNetworkDiskCache) {
-vqnetworkdiskcache->setQNetworkDiskCache_Expire_IsBase(true);
-	return vqnetworkdiskcache->expire();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QNetworkDiskCache_OnExpire(QNetworkDiskCache* self, intptr_t slot) {
-	auto* vqnetworkdiskcache = dynamic_cast<VirtualQNetworkDiskCache*>(self);
-	if (vqnetworkdiskcache && vqnetworkdiskcache->isVirtualQNetworkDiskCache) {
-vqnetworkdiskcache->setQNetworkDiskCache_Expire_Callback(reinterpret_cast<VirtualQNetworkDiskCache::QNetworkDiskCache_Expire_Callback>(slot));
-}
-}
-
 void QNetworkDiskCache_Delete(QNetworkDiskCache* self) {
     delete self;
 }

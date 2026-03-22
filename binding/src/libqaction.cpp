@@ -427,33 +427,6 @@ void QAction_Connect_Triggered1(QAction* self, intptr_t slot) {
     });
 }
 
-// Derived class handler implementation
-bool QAction_Event(QAction* self, QEvent* param1) {
-	auto* vqaction = dynamic_cast<VirtualQAction*>(self);
-	if (vqaction && vqaction->isVirtualQAction) {
-	return vqaction->event(param1);
-	} else {
-	return self->QAction::event(param1);
-}
-}
-
-// Base class handler implementation
-bool QAction_QBaseEvent(QAction* self, QEvent* param1) {
-	auto* vqaction = dynamic_cast<VirtualQAction*>(self);
-	if (vqaction && vqaction->isVirtualQAction) {
-vqaction->setQAction_Event_IsBase(true);
-	return vqaction->event(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QAction_OnEvent(QAction* self, intptr_t slot) {
-	auto* vqaction = dynamic_cast<VirtualQAction*>(self);
-	if (vqaction && vqaction->isVirtualQAction) {
-vqaction->setQAction_Event_Callback(reinterpret_cast<VirtualQAction::QAction_Event_Callback>(slot));
-}
-}
-
 void QAction_Delete(QAction* self) {
     delete self;
 }

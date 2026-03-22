@@ -433,60 +433,6 @@ vqcoreapplication->setQCoreApplication_Notify_Callback(reinterpret_cast<VirtualQ
 }
 }
 
-// Derived class handler implementation
-bool QCoreApplication_Event(QCoreApplication* self, QEvent* param1) {
-	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-	return vqcoreapplication->event(param1);
-	} else {
-	return self->QCoreApplication::event(param1);
-}
-}
-
-// Base class handler implementation
-bool QCoreApplication_QBaseEvent(QCoreApplication* self, QEvent* param1) {
-	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-vqcoreapplication->setQCoreApplication_Event_IsBase(true);
-	return vqcoreapplication->event(param1);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCoreApplication_OnEvent(QCoreApplication* self, intptr_t slot) {
-	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-vqcoreapplication->setQCoreApplication_Event_Callback(reinterpret_cast<VirtualQCoreApplication::QCoreApplication_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void* QCoreApplication_ResolveInterface(const QCoreApplication* self, const char* name, int revision) {
-	auto* vqcoreapplication = dynamic_cast<const VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-	return vqcoreapplication->resolveInterface(name, revision);
-	} else {
-	return self->QCoreApplication::resolveInterface(name, revision);
-}
-}
-
-// Base class handler implementation
-void* QCoreApplication_QBaseResolveInterface(const QCoreApplication* self, const char* name, int revision) {
-	auto* vqcoreapplication = dynamic_cast<const VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-vqcoreapplication->setQCoreApplication_ResolveInterface_IsBase(true);
-	return vqcoreapplication->resolveInterface(name, revision);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCoreApplication_OnResolveInterface(const QCoreApplication* self, intptr_t slot) {
-	auto* vqcoreapplication = dynamic_cast<const VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-vqcoreapplication->setQCoreApplication_ResolveInterface_Callback(reinterpret_cast<VirtualQCoreApplication::QCoreApplication_ResolveInterface_Callback>(slot));
-}
-}
-
 void QCoreApplication_Connect_aboutToQuit(QCoreApplication* self, intptr_t slot) {
     void (*slotFunc)(QCoreApplication*) = reinterpret_cast<void (*)(QCoreApplication*)>(slot);
     QCoreApplication::connect(self, &QCoreApplication::aboutToQuit, [self, slotFunc]() {

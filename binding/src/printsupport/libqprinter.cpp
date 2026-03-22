@@ -344,60 +344,6 @@ vqprinter->setQPrinter_PaintEngine_Callback(reinterpret_cast<VirtualQPrinter::QP
 }
 }
 
-// Derived class handler implementation
-int QPrinter_Metric(const QPrinter* self, int param1) {
-	auto* vqprinter = dynamic_cast<const VirtualQPrinter*>(self);
-	if (vqprinter && vqprinter->isVirtualQPrinter) {
-	return vqprinter->metric(static_cast<QPaintDevice::PaintDeviceMetric>(param1));
-	} else {
-	return self->QPrinter::metric(static_cast<QPaintDevice::PaintDeviceMetric>(param1));
-}
-}
-
-// Base class handler implementation
-int QPrinter_QBaseMetric(const QPrinter* self, int param1) {
-	auto* vqprinter = dynamic_cast<const VirtualQPrinter*>(self);
-	if (vqprinter && vqprinter->isVirtualQPrinter) {
-vqprinter->setQPrinter_Metric_IsBase(true);
-	return vqprinter->metric(static_cast<QPaintDevice::PaintDeviceMetric>(param1));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPrinter_OnMetric(const QPrinter* self, intptr_t slot) {
-	auto* vqprinter = dynamic_cast<const VirtualQPrinter*>(self);
-	if (vqprinter && vqprinter->isVirtualQPrinter) {
-vqprinter->setQPrinter_Metric_Callback(reinterpret_cast<VirtualQPrinter::QPrinter_Metric_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QPrinter_SetEngines(QPrinter* self, QPrintEngine* printEngine, QPaintEngine* paintEngine) {
-	auto* vqprinter = dynamic_cast<VirtualQPrinter*>(self);
-	if (vqprinter && vqprinter->isVirtualQPrinter) {
-	vqprinter->setEngines(printEngine, paintEngine);
-	} else {
-	self->QPrinter::setEngines(printEngine, paintEngine);
-}
-}
-
-// Base class handler implementation
-void QPrinter_QBaseSetEngines(QPrinter* self, QPrintEngine* printEngine, QPaintEngine* paintEngine) {
-	auto* vqprinter = dynamic_cast<VirtualQPrinter*>(self);
-	if (vqprinter && vqprinter->isVirtualQPrinter) {
-vqprinter->setQPrinter_SetEngines_IsBase(true);
-	vqprinter->setEngines(printEngine, paintEngine);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPrinter_OnSetEngines(QPrinter* self, intptr_t slot) {
-	auto* vqprinter = dynamic_cast<VirtualQPrinter*>(self);
-	if (vqprinter && vqprinter->isVirtualQPrinter) {
-vqprinter->setQPrinter_SetEngines_Callback(reinterpret_cast<VirtualQPrinter::QPrinter_SetEngines_Callback>(slot));
-}
-}
-
 void QPrinter_Delete(QPrinter* self) {
     delete self;
 }

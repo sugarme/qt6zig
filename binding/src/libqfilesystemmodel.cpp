@@ -700,60 +700,6 @@ vqfilesystemmodel->setQFileSystemModel_RoleNames_Callback(reinterpret_cast<Virtu
 }
 }
 
-// Derived class handler implementation
-void QFileSystemModel_TimerEvent(QFileSystemModel* self, QTimerEvent* event) {
-	auto* vqfilesystemmodel = dynamic_cast<VirtualQFileSystemModel*>(self);
-	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
-	vqfilesystemmodel->timerEvent(event);
-	} else {
-	self->QFileSystemModel::timerEvent(event);
-}
-}
-
-// Base class handler implementation
-void QFileSystemModel_QBaseTimerEvent(QFileSystemModel* self, QTimerEvent* event) {
-	auto* vqfilesystemmodel = dynamic_cast<VirtualQFileSystemModel*>(self);
-	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
-vqfilesystemmodel->setQFileSystemModel_TimerEvent_IsBase(true);
-	vqfilesystemmodel->timerEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QFileSystemModel_OnTimerEvent(QFileSystemModel* self, intptr_t slot) {
-	auto* vqfilesystemmodel = dynamic_cast<VirtualQFileSystemModel*>(self);
-	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
-vqfilesystemmodel->setQFileSystemModel_TimerEvent_Callback(reinterpret_cast<VirtualQFileSystemModel::QFileSystemModel_TimerEvent_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QFileSystemModel_Event(QFileSystemModel* self, QEvent* event) {
-	auto* vqfilesystemmodel = dynamic_cast<VirtualQFileSystemModel*>(self);
-	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
-	return vqfilesystemmodel->event(event);
-	} else {
-	return self->QFileSystemModel::event(event);
-}
-}
-
-// Base class handler implementation
-bool QFileSystemModel_QBaseEvent(QFileSystemModel* self, QEvent* event) {
-	auto* vqfilesystemmodel = dynamic_cast<VirtualQFileSystemModel*>(self);
-	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
-vqfilesystemmodel->setQFileSystemModel_Event_IsBase(true);
-	return vqfilesystemmodel->event(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QFileSystemModel_OnEvent(QFileSystemModel* self, intptr_t slot) {
-	auto* vqfilesystemmodel = dynamic_cast<VirtualQFileSystemModel*>(self);
-	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
-vqfilesystemmodel->setQFileSystemModel_Event_Callback(reinterpret_cast<VirtualQFileSystemModel::QFileSystemModel_Event_Callback>(slot));
-}
-}
-
 void QFileSystemModel_Delete(QFileSystemModel* self) {
     delete self;
 }

@@ -198,60 +198,6 @@ libqt_string QGraphicsItemAnimation_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-void QGraphicsItemAnimation_BeforeAnimationStep(QGraphicsItemAnimation* self, double step) {
-	auto* vqgraphicsitemanimation = dynamic_cast<VirtualQGraphicsItemAnimation*>(self);
-	if (vqgraphicsitemanimation && vqgraphicsitemanimation->isVirtualQGraphicsItemAnimation) {
-	vqgraphicsitemanimation->beforeAnimationStep(step);
-	} else {
-	self->QGraphicsItemAnimation::beforeAnimationStep(step);
-}
-}
-
-// Base class handler implementation
-void QGraphicsItemAnimation_QBaseBeforeAnimationStep(QGraphicsItemAnimation* self, double step) {
-	auto* vqgraphicsitemanimation = dynamic_cast<VirtualQGraphicsItemAnimation*>(self);
-	if (vqgraphicsitemanimation && vqgraphicsitemanimation->isVirtualQGraphicsItemAnimation) {
-vqgraphicsitemanimation->setQGraphicsItemAnimation_BeforeAnimationStep_IsBase(true);
-	vqgraphicsitemanimation->beforeAnimationStep(step);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGraphicsItemAnimation_OnBeforeAnimationStep(QGraphicsItemAnimation* self, intptr_t slot) {
-	auto* vqgraphicsitemanimation = dynamic_cast<VirtualQGraphicsItemAnimation*>(self);
-	if (vqgraphicsitemanimation && vqgraphicsitemanimation->isVirtualQGraphicsItemAnimation) {
-vqgraphicsitemanimation->setQGraphicsItemAnimation_BeforeAnimationStep_Callback(reinterpret_cast<VirtualQGraphicsItemAnimation::QGraphicsItemAnimation_BeforeAnimationStep_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-void QGraphicsItemAnimation_AfterAnimationStep(QGraphicsItemAnimation* self, double step) {
-	auto* vqgraphicsitemanimation = dynamic_cast<VirtualQGraphicsItemAnimation*>(self);
-	if (vqgraphicsitemanimation && vqgraphicsitemanimation->isVirtualQGraphicsItemAnimation) {
-	vqgraphicsitemanimation->afterAnimationStep(step);
-	} else {
-	self->QGraphicsItemAnimation::afterAnimationStep(step);
-}
-}
-
-// Base class handler implementation
-void QGraphicsItemAnimation_QBaseAfterAnimationStep(QGraphicsItemAnimation* self, double step) {
-	auto* vqgraphicsitemanimation = dynamic_cast<VirtualQGraphicsItemAnimation*>(self);
-	if (vqgraphicsitemanimation && vqgraphicsitemanimation->isVirtualQGraphicsItemAnimation) {
-vqgraphicsitemanimation->setQGraphicsItemAnimation_AfterAnimationStep_IsBase(true);
-	vqgraphicsitemanimation->afterAnimationStep(step);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGraphicsItemAnimation_OnAfterAnimationStep(QGraphicsItemAnimation* self, intptr_t slot) {
-	auto* vqgraphicsitemanimation = dynamic_cast<VirtualQGraphicsItemAnimation*>(self);
-	if (vqgraphicsitemanimation && vqgraphicsitemanimation->isVirtualQGraphicsItemAnimation) {
-vqgraphicsitemanimation->setQGraphicsItemAnimation_AfterAnimationStep_Callback(reinterpret_cast<VirtualQGraphicsItemAnimation::QGraphicsItemAnimation_AfterAnimationStep_Callback>(slot));
-}
-}
-
 void QGraphicsItemAnimation_Delete(QGraphicsItemAnimation* self) {
     delete self;
 }

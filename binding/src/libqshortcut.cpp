@@ -173,33 +173,6 @@ libqt_string QShortcut_Tr3(const char* s, const char* c, int n) {
 	return _str;
 }
 
-// Derived class handler implementation
-bool QShortcut_Event(QShortcut* self, QEvent* e) {
-	auto* vqshortcut = dynamic_cast<VirtualQShortcut*>(self);
-	if (vqshortcut && vqshortcut->isVirtualQShortcut) {
-	return vqshortcut->event(e);
-	} else {
-	return self->QShortcut::event(e);
-}
-}
-
-// Base class handler implementation
-bool QShortcut_QBaseEvent(QShortcut* self, QEvent* e) {
-	auto* vqshortcut = dynamic_cast<VirtualQShortcut*>(self);
-	if (vqshortcut && vqshortcut->isVirtualQShortcut) {
-vqshortcut->setQShortcut_Event_IsBase(true);
-	return vqshortcut->event(e);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QShortcut_OnEvent(QShortcut* self, intptr_t slot) {
-	auto* vqshortcut = dynamic_cast<VirtualQShortcut*>(self);
-	if (vqshortcut && vqshortcut->isVirtualQShortcut) {
-vqshortcut->setQShortcut_Event_Callback(reinterpret_cast<VirtualQShortcut::QShortcut_Event_Callback>(slot));
-}
-}
-
 void QShortcut_Delete(QShortcut* self) {
     delete self;
 }

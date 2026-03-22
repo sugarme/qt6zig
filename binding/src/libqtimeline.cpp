@@ -180,33 +180,6 @@ vqtimeline->setQTimeLine_ValueForTime_Callback(reinterpret_cast<VirtualQTimeLine
 }
 }
 
-// Derived class handler implementation
-void QTimeLine_TimerEvent(QTimeLine* self, QTimerEvent* event) {
-	auto* vqtimeline = dynamic_cast<VirtualQTimeLine*>(self);
-	if (vqtimeline && vqtimeline->isVirtualQTimeLine) {
-	vqtimeline->timerEvent(event);
-	} else {
-	self->QTimeLine::timerEvent(event);
-}
-}
-
-// Base class handler implementation
-void QTimeLine_QBaseTimerEvent(QTimeLine* self, QTimerEvent* event) {
-	auto* vqtimeline = dynamic_cast<VirtualQTimeLine*>(self);
-	if (vqtimeline && vqtimeline->isVirtualQTimeLine) {
-vqtimeline->setQTimeLine_TimerEvent_IsBase(true);
-	vqtimeline->timerEvent(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTimeLine_OnTimerEvent(QTimeLine* self, intptr_t slot) {
-	auto* vqtimeline = dynamic_cast<VirtualQTimeLine*>(self);
-	if (vqtimeline && vqtimeline->isVirtualQTimeLine) {
-vqtimeline->setQTimeLine_TimerEvent_Callback(reinterpret_cast<VirtualQTimeLine::QTimeLine_TimerEvent_Callback>(slot));
-}
-}
-
 void QTimeLine_Connect_valueChanged(QTimeLine* self, intptr_t slot) {
     void (*slotFunc)(QTimeLine*, double) = reinterpret_cast<void (*)(QTimeLine*, double)>(slot);
     QTimeLine::connect(self, &QTimeLine::valueChanged, [self, slotFunc](qreal x) {

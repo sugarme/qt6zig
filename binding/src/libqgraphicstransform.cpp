@@ -74,33 +74,6 @@ vqgraphicstransform->setQGraphicsTransform_ApplyTo_Callback(reinterpret_cast<Vir
 }
 }
 
-// Derived class handler implementation
-void QGraphicsTransform_Update(QGraphicsTransform* self) {
-	auto* vqgraphicstransform = dynamic_cast<VirtualQGraphicsTransform*>(self);
-	if (vqgraphicstransform && vqgraphicstransform->isVirtualQGraphicsTransform) {
-	vqgraphicstransform->update();
-	} else {
-	self->QGraphicsTransform::update();
-}
-}
-
-// Base class handler implementation
-void QGraphicsTransform_QBaseUpdate(QGraphicsTransform* self) {
-	auto* vqgraphicstransform = dynamic_cast<VirtualQGraphicsTransform*>(self);
-	if (vqgraphicstransform && vqgraphicstransform->isVirtualQGraphicsTransform) {
-vqgraphicstransform->setQGraphicsTransform_Update_IsBase(true);
-	vqgraphicstransform->update();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGraphicsTransform_OnUpdate(QGraphicsTransform* self, intptr_t slot) {
-	auto* vqgraphicstransform = dynamic_cast<VirtualQGraphicsTransform*>(self);
-	if (vqgraphicstransform && vqgraphicstransform->isVirtualQGraphicsTransform) {
-vqgraphicstransform->setQGraphicsTransform_Update_Callback(reinterpret_cast<VirtualQGraphicsTransform::QGraphicsTransform_Update_Callback>(slot));
-}
-}
-
 void QGraphicsTransform_Delete(QGraphicsTransform* self) {
     delete self;
 }

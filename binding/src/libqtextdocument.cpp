@@ -710,60 +710,6 @@ vqtextdocument->setQTextDocument_Clear_Callback(reinterpret_cast<VirtualQTextDoc
 }
 }
 
-// Derived class handler implementation
-QTextObject* QTextDocument_CreateObject(QTextDocument* self, const QTextFormat* f) {
-	auto* vqtextdocument = dynamic_cast<VirtualQTextDocument*>(self);
-	if (vqtextdocument && vqtextdocument->isVirtualQTextDocument) {
-	return vqtextdocument->createObject(*f);
-	} else {
-	return self->QTextDocument::createObject(*f);
-}
-}
-
-// Base class handler implementation
-QTextObject* QTextDocument_QBaseCreateObject(QTextDocument* self, const QTextFormat* f) {
-	auto* vqtextdocument = dynamic_cast<VirtualQTextDocument*>(self);
-	if (vqtextdocument && vqtextdocument->isVirtualQTextDocument) {
-vqtextdocument->setQTextDocument_CreateObject_IsBase(true);
-	return vqtextdocument->createObject(*f);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTextDocument_OnCreateObject(QTextDocument* self, intptr_t slot) {
-	auto* vqtextdocument = dynamic_cast<VirtualQTextDocument*>(self);
-	if (vqtextdocument && vqtextdocument->isVirtualQTextDocument) {
-vqtextdocument->setQTextDocument_CreateObject_Callback(reinterpret_cast<VirtualQTextDocument::QTextDocument_CreateObject_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-QVariant* QTextDocument_LoadResource(QTextDocument* self, int typeVal, const QUrl* name) {
-	auto* vqtextdocument = dynamic_cast<VirtualQTextDocument*>(self);
-	if (vqtextdocument && vqtextdocument->isVirtualQTextDocument) {
-	return new QVariant(vqtextdocument->loadResource(typeVal, *name));
-	} else {
-	return new QVariant(self->QTextDocument::loadResource(typeVal, *name));
-}
-}
-
-// Base class handler implementation
-QVariant* QTextDocument_QBaseLoadResource(QTextDocument* self, int typeVal, const QUrl* name) {
-	auto* vqtextdocument = dynamic_cast<VirtualQTextDocument*>(self);
-	if (vqtextdocument && vqtextdocument->isVirtualQTextDocument) {
-vqtextdocument->setQTextDocument_LoadResource_IsBase(true);
-	return new QVariant(vqtextdocument->loadResource(typeVal, *name));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QTextDocument_OnLoadResource(QTextDocument* self, intptr_t slot) {
-	auto* vqtextdocument = dynamic_cast<VirtualQTextDocument*>(self);
-	if (vqtextdocument && vqtextdocument->isVirtualQTextDocument) {
-vqtextdocument->setQTextDocument_LoadResource_Callback(reinterpret_cast<VirtualQTextDocument::QTextDocument_LoadResource_Callback>(slot));
-}
-}
-
 void QTextDocument_Delete(QTextDocument* self) {
     delete self;
 }

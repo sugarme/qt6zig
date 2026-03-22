@@ -162,33 +162,6 @@ void QSystemTrayIcon_ShowMessage42(QSystemTrayIcon* self, const libqt_string tit
 	self->showMessage(QString::fromUtf8(title.data, title.len), QString::fromUtf8(msg.data, msg.len), static_cast<QSystemTrayIcon::MessageIcon>(icon), msecs);
 }
 
-// Derived class handler implementation
-bool QSystemTrayIcon_Event(QSystemTrayIcon* self, QEvent* event) {
-	auto* vqsystemtrayicon = dynamic_cast<VirtualQSystemTrayIcon*>(self);
-	if (vqsystemtrayicon && vqsystemtrayicon->isVirtualQSystemTrayIcon) {
-	return vqsystemtrayicon->event(event);
-	} else {
-	return self->QSystemTrayIcon::event(event);
-}
-}
-
-// Base class handler implementation
-bool QSystemTrayIcon_QBaseEvent(QSystemTrayIcon* self, QEvent* event) {
-	auto* vqsystemtrayicon = dynamic_cast<VirtualQSystemTrayIcon*>(self);
-	if (vqsystemtrayicon && vqsystemtrayicon->isVirtualQSystemTrayIcon) {
-vqsystemtrayicon->setQSystemTrayIcon_Event_IsBase(true);
-	return vqsystemtrayicon->event(event);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSystemTrayIcon_OnEvent(QSystemTrayIcon* self, intptr_t slot) {
-	auto* vqsystemtrayicon = dynamic_cast<VirtualQSystemTrayIcon*>(self);
-	if (vqsystemtrayicon && vqsystemtrayicon->isVirtualQSystemTrayIcon) {
-vqsystemtrayicon->setQSystemTrayIcon_Event_Callback(reinterpret_cast<VirtualQSystemTrayIcon::QSystemTrayIcon_Event_Callback>(slot));
-}
-}
-
 void QSystemTrayIcon_Delete(QSystemTrayIcon* self) {
     delete self;
 }

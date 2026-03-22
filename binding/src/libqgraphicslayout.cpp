@@ -180,33 +180,6 @@ vqgraphicslayout->setQGraphicsLayout_RemoveAt_Callback(reinterpret_cast<VirtualQ
 }
 }
 
-// Derived class handler implementation
-void QGraphicsLayout_AddChildLayoutItem(QGraphicsLayout* self, QGraphicsLayoutItem* layoutItem) {
-	auto* vqgraphicslayout = dynamic_cast<VirtualQGraphicsLayout*>(self);
-	if (vqgraphicslayout && vqgraphicslayout->isVirtualQGraphicsLayout) {
-	vqgraphicslayout->addChildLayoutItem(layoutItem);
-	} else {
-	self->QGraphicsLayout::addChildLayoutItem(layoutItem);
-}
-}
-
-// Base class handler implementation
-void QGraphicsLayout_QBaseAddChildLayoutItem(QGraphicsLayout* self, QGraphicsLayoutItem* layoutItem) {
-	auto* vqgraphicslayout = dynamic_cast<VirtualQGraphicsLayout*>(self);
-	if (vqgraphicslayout && vqgraphicslayout->isVirtualQGraphicsLayout) {
-vqgraphicslayout->setQGraphicsLayout_AddChildLayoutItem_IsBase(true);
-	vqgraphicslayout->addChildLayoutItem(layoutItem);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGraphicsLayout_OnAddChildLayoutItem(QGraphicsLayout* self, intptr_t slot) {
-	auto* vqgraphicslayout = dynamic_cast<VirtualQGraphicsLayout*>(self);
-	if (vqgraphicslayout && vqgraphicslayout->isVirtualQGraphicsLayout) {
-vqgraphicslayout->setQGraphicsLayout_AddChildLayoutItem_Callback(reinterpret_cast<VirtualQGraphicsLayout::QGraphicsLayout_AddChildLayoutItem_Callback>(slot));
-}
-}
-
 void QGraphicsLayout_Delete(QGraphicsLayout* self) {
     delete self;
 }

@@ -223,33 +223,6 @@ vqmimedata->setQMimeData_Formats_Callback(reinterpret_cast<VirtualQMimeData::QMi
 }
 }
 
-// Derived class handler implementation
-QVariant* QMimeData_RetrieveData(const QMimeData* self, const libqt_string mimetype, QMetaType* preferredType) {
-	auto* vqmimedata = dynamic_cast<const VirtualQMimeData*>(self);
-	if (vqmimedata && vqmimedata->isVirtualQMimeData) {
-	return new QVariant(vqmimedata->retrieveData(QString::fromUtf8(mimetype.data, mimetype.len), *preferredType));
-	} else {
-	return new QVariant(self->QMimeData::retrieveData(QString::fromUtf8(mimetype.data, mimetype.len), *preferredType));
-}
-}
-
-// Base class handler implementation
-QVariant* QMimeData_QBaseRetrieveData(const QMimeData* self, const libqt_string mimetype, QMetaType* preferredType) {
-	auto* vqmimedata = dynamic_cast<const VirtualQMimeData*>(self);
-	if (vqmimedata && vqmimedata->isVirtualQMimeData) {
-vqmimedata->setQMimeData_RetrieveData_IsBase(true);
-	return new QVariant(vqmimedata->retrieveData(QString::fromUtf8(mimetype.data, mimetype.len), *preferredType));
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QMimeData_OnRetrieveData(const QMimeData* self, intptr_t slot) {
-	auto* vqmimedata = dynamic_cast<const VirtualQMimeData*>(self);
-	if (vqmimedata && vqmimedata->isVirtualQMimeData) {
-vqmimedata->setQMimeData_RetrieveData_Callback(reinterpret_cast<VirtualQMimeData::QMimeData_RetrieveData_Callback>(slot));
-}
-}
-
 void QMimeData_Delete(QMimeData* self) {
     delete self;
 }
