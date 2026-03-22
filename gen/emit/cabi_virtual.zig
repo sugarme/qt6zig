@@ -278,21 +278,54 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
                 try callback_args.append(tmp, try std.fmt.allocPrint(tmp, "cbval{d}", .{pidx + 1}));
             }
 
-            // Emit parameter conversions for callback
+            // Emit parameter conversions for callback (C++ -> C ABI)
             for (m.parameters, 0..) |p, pidx| {
                 const p_type = try cabi_header.renderTypeCabi(tmp, p, false, state);
-                try w.print("\t\t\t{s} cbval{d} = {s};\n", .{ p_type, pidx + 1, p.parameter_name });
+                const pt = p.parameter_type;
+                if (std.mem.eql(u8, pt, "QString") or std.mem.eql(u8, pt, "QByteArray")) {
+                    // QString/QByteArray -> libqt_string
+                    try w.print("\t\t\tQByteArray {s}_qb = {s}.toUtf8();\n", .{ p.parameter_name, p.parameter_name });
+                    try w.print("\t\t\tlibqt_string cbval{d};\n", .{pidx + 1});
+                    try w.print("\t\t\tcbval{d}.len = {s}_qb.length();\n", .{ pidx + 1, p.parameter_name });
+                    try w.print("\t\t\tcbval{d}.data = static_cast<const char*>({s}_qb.constData());\n", .{ pidx + 1, p.parameter_name });
+                } else if ((p.by_ref or (!p.pointer and state.isKnownClass(pt))) and state.isKnownClass(pt)) {
+                    // Qt class by const ref -> pointer
+                    if (p.is_const) {
+                        try w.print("\t\t\t{s} cbval{d} = ({s})&{s};\n", .{ p_type, pidx + 1, p_type, p.parameter_name });
+                    } else {
+                        try w.print("\t\t\t{s} cbval{d} = &{s};\n", .{ p_type, pidx + 1, p.parameter_name });
+                    }
+                } else if (state.isKnownEnum(pt)) {
+                    // Enum -> int via static_cast
+                    try w.print("\t\t\t{s} cbval{d} = static_cast<{s}>({s});\n", .{ p_type, pidx + 1, p_type, p.parameter_name });
+                } else {
+                    try w.print("\t\t\t{s} cbval{d} = {s};\n", .{ p_type, pidx + 1, p.parameter_name });
+                }
             }
 
-            // Call callback and handle return
+            // Call callback and handle return (C ABI -> C++)
             if (!m.return_type.isVoid()) {
                 const ret_cabi = try cabi_header.renderTypeCabi(tmp, m.return_type, true, state);
+                const rpt = m.return_type.parameter_type;
                 try w.print("\t\t\t{s} callback_ret = {s}({s});\n", .{
                     ret_cabi,
                     callback_name,
                     try joinSlice(tmp, callback_args.items, ", "),
                 });
-                try w.writeAll("\t\t\treturn callback_ret;\n");
+                // Convert C ABI return to C++ return type
+                if (std.mem.eql(u8, rpt, "QString") or std.mem.eql(u8, rpt, "QByteArray")) {
+                    // ABI returns libqt_string, C++ expects QString/QByteArray
+                    try w.print("\t\t\treturn {s}::fromUtf8(callback_ret.data, callback_ret.len);\n", .{rpt});
+                } else if (state.isKnownClass(rpt) and !m.return_type.pointer) {
+                    // ABI returns pointer, C++ expects value or const ref — dereference
+                    try w.writeAll("\t\t\treturn *callback_ret;\n");
+                } else if (state.isKnownEnum(rpt)) {
+                    // ABI returns int, C++ expects enum type — static_cast
+                    const qualified_name = if (state.getEnum(rpt)) |e| e.enum_.enum_name else rpt;
+                    try w.print("\t\t\treturn static_cast<{s}>(callback_ret);\n", .{qualified_name});
+                } else {
+                    try w.writeAll("\t\t\treturn callback_ret;\n");
+                }
             } else {
                 try w.print("\t\t\t{s}({s});\n", .{
                     callback_name,

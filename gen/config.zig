@@ -528,6 +528,10 @@ pub fn importHeaderForClass(class_name: []const u8) bool {
     // OpenGL types that require platform-specific GL headers
     if (eql(class_name, "QOpenGLExtraFunctions") or eql(class_name, "QAbstractOpenGLFunctions")) return false;
 
+    // Types that are blocked from class generation but may still appear in #include
+    if (eql(class_name, "QException") or eql(class_name, "QUnhandledException")) return false;
+    if (eql(class_name, "QScopedPointerPodDeleter")) return false;
+
     if (startsWith(class_name, "QPlatform")) return false;
 
     if (startsWith(class_name, "QOpenGLFunctions_") and endsWith(class_name, "Backend"))
