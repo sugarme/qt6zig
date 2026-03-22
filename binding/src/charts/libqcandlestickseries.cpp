@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcandlestickseries.h>
 #include "libqcandlestickseries.h"
 #include "libqcandlestickseries.hxx"
@@ -40,11 +41,11 @@ bool QCandlestickSeries_Remove(QCandlestickSeries* self, QCandlestickSet* set) {
 }
 
 bool QCandlestickSeries_Append2(QCandlestickSeries* self, const libqt_list sets) {
-	return self->append(*sets);
+	return self->append(QList<QCandlestickSet *>());
 }
 
 bool QCandlestickSeries_Remove2(QCandlestickSeries* self, const libqt_list sets) {
-	return self->remove(*sets);
+	return self->remove(QList<QCandlestickSet *>());
 }
 
 bool QCandlestickSeries_Insert(QCandlestickSeries* self, int index, QCandlestickSet* set) {
@@ -60,7 +61,15 @@ void QCandlestickSeries_Clear(QCandlestickSeries* self) {
 }
 
 libqt_list QCandlestickSeries_Sets(const QCandlestickSeries* self) {
-	return self->sets();
+	auto _ret = self->sets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QCandlestickSeries_Count(const QCandlestickSeries* self) {
@@ -207,7 +216,7 @@ void QCandlestickSeries_Connect_DoubleClicked(QCandlestickSeries* self, intptr_t
 }
 
 void QCandlestickSeries_CandlestickSetsAdded(QCandlestickSeries* self, const libqt_list sets) {
-	self->candlestickSetsAdded(*sets);
+	self->candlestickSetsAdded(QList<QCandlestickSet *>());
 }
 
 void QCandlestickSeries_Connect_CandlestickSetsAdded(QCandlestickSeries* self, intptr_t slot) {
@@ -218,7 +227,7 @@ void QCandlestickSeries_Connect_CandlestickSetsAdded(QCandlestickSeries* self, i
 }
 
 void QCandlestickSeries_CandlestickSetsRemoved(QCandlestickSeries* self, const libqt_list sets) {
-	self->candlestickSetsRemoved(*sets);
+	self->candlestickSetsRemoved(QList<QCandlestickSet *>());
 }
 
 void QCandlestickSeries_Connect_CandlestickSetsRemoved(QCandlestickSeries* self, intptr_t slot) {

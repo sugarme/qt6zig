@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qauthenticator.h>
 #include "libqauthenticator.h"
@@ -77,7 +78,12 @@ QVariant* QAuthenticator_Option(const QAuthenticator* self, const libqt_string o
 }
 
 libqt_map QAuthenticator_Options(const QAuthenticator* self) {
-	return self->options();
+	auto _ret = self->options();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 void QAuthenticator_SetOption(QAuthenticator* self, const libqt_string opt, const QVariant* value) {

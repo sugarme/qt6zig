@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcoloraxis.h>
 #include "libqcoloraxis.h"
 #include "libqcoloraxis.hxx"

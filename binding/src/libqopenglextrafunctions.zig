@@ -98,10 +98,6 @@ pub const qopenglextrafunctions = struct {
         qtc.QOpenGLExtraFunctions_GlGetBufferPointerv(@ptrCast(self), target, pname, @ptrCast(params));
     }
 
-    pub fn GlDrawBuffers(self: ?*anyopaque, n: i32, bufs: *const GL) void {
-        qtc.QOpenGLExtraFunctions_GlDrawBuffers(@ptrCast(self), n, @ptrCast(bufs));
-    }
-
     pub fn GlUniformMatrix2x3fv(self: ?*anyopaque, location: i32, count: i32, transpose: u8, value: *const f32) void {
         qtc.QOpenGLExtraFunctions_GlUniformMatrix2x3fv(@ptrCast(self), location, count, transpose, @ptrCast(value));
     }
@@ -184,10 +180,6 @@ pub const qopenglextrafunctions = struct {
 
     pub fn GlTransformFeedbackVaryings(self: ?*anyopaque, program: u32, count: i32, varyings: **const i8, bufferMode: u32) void {
         qtc.QOpenGLExtraFunctions_GlTransformFeedbackVaryings(@ptrCast(self), program, count, @ptrCast(varyings), bufferMode);
-    }
-
-    pub fn GlGetTransformFeedbackVarying(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLExtraFunctions_GlGetTransformFeedbackVarying(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
     }
 
     pub fn GlVertexAttribIPointer(self: ?*anyopaque, index: u32, size: i32, typeVal: u32, stride: i32, pointer: ?*anyopaque) void {
@@ -314,32 +306,8 @@ pub const qopenglextrafunctions = struct {
         qtc.QOpenGLExtraFunctions_GlDrawElementsInstanced(@ptrCast(self), mode, count, typeVal, @ptrCast(indices), instancecount);
     }
 
-    pub fn GlFenceSync(self: ?*anyopaque, condition: u32, flags: u32) GLsync {
-        return qtc.QOpenGLExtraFunctions_GlFenceSync(@ptrCast(self), condition, flags);
-    }
-
-    pub fn GlIsSync(self: ?*anyopaque, sync: GLsync) u8 {
-        return qtc.QOpenGLExtraFunctions_GlIsSync(@ptrCast(self), sync);
-    }
-
-    pub fn GlDeleteSync(self: ?*anyopaque, sync: GLsync) void {
-        qtc.QOpenGLExtraFunctions_GlDeleteSync(@ptrCast(self), sync);
-    }
-
-    pub fn GlClientWaitSync(self: ?*anyopaque, sync: GLsync, flags: u32, timeout: u64) GL {
-        return qtc.QOpenGLExtraFunctions_GlClientWaitSync(@ptrCast(self), sync, flags, timeout);
-    }
-
-    pub fn GlWaitSync(self: ?*anyopaque, sync: GLsync, flags: u32, timeout: u64) void {
-        qtc.QOpenGLExtraFunctions_GlWaitSync(@ptrCast(self), sync, flags, timeout);
-    }
-
     pub fn GlGetInteger64v(self: ?*anyopaque, pname: u32, data: *i64) void {
         qtc.QOpenGLExtraFunctions_GlGetInteger64v(@ptrCast(self), pname, @ptrCast(data));
-    }
-
-    pub fn GlGetSynciv(self: ?*anyopaque, sync: GLsync, pname: u32, bufSize: i32, length: *i32, values: *i32) void {
-        qtc.QOpenGLExtraFunctions_GlGetSynciv(@ptrCast(self), sync, pname, bufSize, @ptrCast(length), @ptrCast(values));
     }
 
     pub fn GlGetInteger64iV(self: ?*anyopaque, target: u32, index: u32, data: *i64) void {
@@ -418,24 +386,12 @@ pub const qopenglextrafunctions = struct {
         qtc.QOpenGLExtraFunctions_GlResumeTransformFeedback(@ptrCast(self));
     }
 
-    pub fn GlGetProgramBinary(self: ?*anyopaque, program: u32, bufSize: i32, length: *i32, binaryFormat: *GL, binary: ?*anyopaque) void {
-        qtc.QOpenGLExtraFunctions_GlGetProgramBinary(@ptrCast(self), program, bufSize, @ptrCast(length), @ptrCast(binaryFormat), @ptrCast(binary));
-    }
-
     pub fn GlProgramBinary(self: ?*anyopaque, program: u32, binaryFormat: u32, binary: ?*anyopaque, length: i32) void {
         qtc.QOpenGLExtraFunctions_GlProgramBinary(@ptrCast(self), program, binaryFormat, @ptrCast(binary), length);
     }
 
     pub fn GlProgramParameteri(self: ?*anyopaque, program: u32, pname: u32, value: i32) void {
         qtc.QOpenGLExtraFunctions_GlProgramParameteri(@ptrCast(self), program, pname, value);
-    }
-
-    pub fn GlInvalidateFramebuffer(self: ?*anyopaque, target: u32, numAttachments: i32, attachments: *const GL) void {
-        qtc.QOpenGLExtraFunctions_GlInvalidateFramebuffer(@ptrCast(self), target, numAttachments, @ptrCast(attachments));
-    }
-
-    pub fn GlInvalidateSubFramebuffer(self: ?*anyopaque, target: u32, numAttachments: i32, attachments: *const GL, x: i32, y: i32, width: i32, height: i32) void {
-        qtc.QOpenGLExtraFunctions_GlInvalidateSubFramebuffer(@ptrCast(self), target, numAttachments, @ptrCast(attachments), x, y, width, height);
     }
 
     pub fn GlTexStorage2D(self: ?*anyopaque, target: u32, levels: i32, internalformat: u32, width: i32, height: i32) void {
@@ -484,10 +440,6 @@ pub const qopenglextrafunctions = struct {
 
     pub fn GlGetProgramResourceName(self: ?*anyopaque, program: u32, programInterface: u32, index: u32, bufSize: i32, length: *i32, name: *i8) void {
         qtc.QOpenGLExtraFunctions_GlGetProgramResourceName(@ptrCast(self), program, programInterface, index, bufSize, @ptrCast(length), @ptrCast(name));
-    }
-
-    pub fn GlGetProgramResourceiv(self: ?*anyopaque, program: u32, programInterface: u32, index: u32, propCount: i32, props: *const GL, bufSize: i32, length: *i32, params: *i32) void {
-        qtc.QOpenGLExtraFunctions_GlGetProgramResourceiv(@ptrCast(self), program, programInterface, index, propCount, @ptrCast(props), bufSize, @ptrCast(length), @ptrCast(params));
     }
 
     pub fn GlGetProgramResourceLocation(self: ?*anyopaque, program: u32, programInterface: u32, name: *const i8) i32 {
@@ -738,14 +690,6 @@ pub const qopenglextrafunctions = struct {
         qtc.QOpenGLExtraFunctions_GlDebugMessageInsert(@ptrCast(self), source, typeVal, id, severity, length, @ptrCast(buf));
     }
 
-    pub fn GlDebugMessageCallback(self: ?*anyopaque, callback: GLDEBUGPROC, userParam: ?*anyopaque) void {
-        qtc.QOpenGLExtraFunctions_GlDebugMessageCallback(@ptrCast(self), callback, @ptrCast(userParam));
-    }
-
-    pub fn GlGetDebugMessageLog(self: ?*anyopaque, count: u32, bufSize: i32, sources: *GL, types: *GL, ids: *u32, severities: *GL, lengths: *i32, messageLog: *i8) u32 {
-        return qtc.QOpenGLExtraFunctions_GlGetDebugMessageLog(@ptrCast(self), count, bufSize, @ptrCast(sources), @ptrCast(types), @ptrCast(ids), @ptrCast(severities), @ptrCast(lengths), @ptrCast(messageLog));
-    }
-
     pub fn GlPushDebugGroup(self: ?*anyopaque, source: u32, id: u32, length: i32, message: *const i8) void {
         qtc.QOpenGLExtraFunctions_GlPushDebugGroup(@ptrCast(self), source, id, length, @ptrCast(message));
     }
@@ -824,10 +768,6 @@ pub const qopenglextrafunctions = struct {
 
     pub fn GlPrimitiveBoundingBox(self: ?*anyopaque, minX: f32, minY: f32, minZ: f32, minW: f32, maxX: f32, maxY: f32, maxZ: f32, maxW: f32) void {
         qtc.QOpenGLExtraFunctions_GlPrimitiveBoundingBox(@ptrCast(self), minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
-    }
-
-    pub fn GlGetGraphicsResetStatus(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLExtraFunctions_GlGetGraphicsResetStatus(@ptrCast(self));
     }
 
     pub fn GlReadnPixels(self: ?*anyopaque, x: i32, y: i32, width: i32, height: i32, format: u32, typeVal: u32, bufSize: i32, data: ?*anyopaque) void {

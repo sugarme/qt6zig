@@ -62,9 +62,7 @@ libqt_string QPropertyBindingError_Description(const QPropertyBindingError* self
 void QPropertyBindingError_Delete(QPropertyBindingError* self);
 
 QUntypedPropertyBinding* QUntypedPropertyBinding_new();
-QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QMetaType* metaType, const QtPrivate__BindingFunctionVTable* vtable, void* function, const QPropertyBindingSourceLocation* location);
-QUntypedPropertyBinding* QUntypedPropertyBinding_new3(const QUntypedPropertyBinding* other);
-QUntypedPropertyBinding* QUntypedPropertyBinding_new4(QPropertyBindingPrivate* priv);
+QUntypedPropertyBinding* QUntypedPropertyBinding_new2(const QUntypedPropertyBinding* other);
 void QUntypedPropertyBinding_OperatorAssign(QUntypedPropertyBinding* self, const QUntypedPropertyBinding* other);
 bool QUntypedPropertyBinding_IsNull(const QUntypedPropertyBinding* self);
 QPropertyBindingError* QUntypedPropertyBinding_Error(const QUntypedPropertyBinding* self);
@@ -80,7 +78,6 @@ void QPropertyObserverBase_MoveAssign(QPropertyObserverBase* self, QPropertyObse
 void QPropertyObserverBase_Delete(QPropertyObserverBase* self);
 
 QPropertyObserver* QPropertyObserver_new();
-void QPropertyObserver_SetSource(QPropertyObserver* self, const QtPrivate__QPropertyBindingData* property);
 void QPropertyObserver_Delete(QPropertyObserver* self);
 
 QPropertyNotifier* QPropertyNotifier_new();

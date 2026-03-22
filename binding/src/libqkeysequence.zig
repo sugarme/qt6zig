@@ -191,10 +191,6 @@ return qtc.QKeySequence_Mnemonic(text_str);
         return qtc.QKeySequence_IsDetached(@ptrCast(self));
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QKeySequencePrivate {
-        return @ptrCast(qtc.QKeySequence_DataPtr(@ptrCast(self)));
-    }
-
     pub fn ToString1(self: ?*anyopaque, format: i32, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QKeySequence_ToString1(@ptrCast(self), @intCast(format));
 defer qtc.libqt_string_free(&_str);

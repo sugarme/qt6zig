@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qhostaddress.h>
 #include "libqhostaddress.h"
 #include "libqhostaddress.hxx"
@@ -47,19 +48,15 @@ QHostAddress* QHostAddress_new4(const QIPv6Address* ip6Addr) {
 	 return new QHostAddress(*ip6Addr);
 }
 
-QHostAddress* QHostAddress_new5(const sockaddr* address) {
-	 return new QHostAddress(address);
-}
-
-QHostAddress* QHostAddress_new6(const libqt_string address) {
+QHostAddress* QHostAddress_new5(const libqt_string address) {
 	 return new QHostAddress(QString::fromUtf8(address.data, address.len));
 }
 
-QHostAddress* QHostAddress_new7(const QHostAddress* copyVal) {
+QHostAddress* QHostAddress_new6(const QHostAddress* copyVal) {
 	 return new QHostAddress(*copyVal);
 }
 
-QHostAddress* QHostAddress_new8(int address) {
+QHostAddress* QHostAddress_new7(int address) {
 	 return new QHostAddress(static_cast<QHostAddress::SpecialAddress>(address));
 }
 
@@ -85,10 +82,6 @@ void QHostAddress_SetAddress2(QHostAddress* self, const unsigned char* ip6Addr) 
 
 void QHostAddress_SetAddress3(QHostAddress* self, const QIPv6Address* ip6Addr) {
 	self->setAddress(*ip6Addr);
-}
-
-void QHostAddress_SetAddress4(QHostAddress* self, const sockaddr* address) {
-	self->setAddress(address);
 }
 
 bool QHostAddress_SetAddress5(QHostAddress* self, const libqt_string address) {

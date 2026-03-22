@@ -57,7 +57,16 @@ void QEasingCurve_AddTCBSegment(QEasingCurve* self, const QPointF* nextPoint, do
 }
 
 libqt_list QEasingCurve_ToCubicSpline(const QEasingCurve* self) {
-	return self->toCubicSpline();
+	auto _ret = self->toCubicSpline();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QEasingCurve_Type(const QEasingCurve* self) {

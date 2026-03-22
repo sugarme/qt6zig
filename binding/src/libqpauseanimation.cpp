@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpauseanimation.h>
 #include "libqpauseanimation.h"
 #include "libqpauseanimation.hxx"
@@ -42,10 +43,6 @@ int QPauseAnimation_Duration(const QPauseAnimation* self) {
 
 void QPauseAnimation_SetDuration(QPauseAnimation* self, int msecs) {
 	self->setDuration(msecs);
-}
-
-QBindable<int> QPauseAnimation_BindableDuration(QPauseAnimation* self) {
-	return self->bindableDuration();
 }
 
 libqt_string QPauseAnimation_Tr2(const char* s, const char* c) {

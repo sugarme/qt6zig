@@ -271,20 +271,6 @@ qtc.QApplication_SetStyleSheet(@ptrCast(self), sheet_str);
         return qtc.QApplication_QBaseEvent(@ptrCast(self), @ptrCast(param1));
     }
 
-    pub fn CompressEvent(self: ?*anyopaque, param1: ?*anyopaque, receiver: ?*anyopaque, param3: *QPostEventList) bool {
-        return qtc.QApplication_CompressEvent(@ptrCast(self), @ptrCast(param1), @ptrCast(receiver), @ptrCast(param3));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnCompressEvent(self: ?*anyopaque, callback: *const fn (?*anyopaque, ?*anyopaque, ?*anyopaque, *QPostEventList) callconv(.c) bool) void {
-        qtc.QApplication_OnCompressEvent(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseCompressEvent(self: ?*anyopaque, param1: ?*anyopaque, receiver: ?*anyopaque, param3: *QPostEventList) bool {
-        return qtc.QApplication_QBaseCompressEvent(@ptrCast(self), @ptrCast(param1), @ptrCast(receiver), @ptrCast(param3));
-    }
-
     pub fn Tr2(s: []const u8, c: []const u8, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QApplication_Tr2(@ptrCast(s), @ptrCast(c));
 defer qtc.libqt_string_free(&_str);

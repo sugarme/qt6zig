@@ -14,6 +14,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QWidget>

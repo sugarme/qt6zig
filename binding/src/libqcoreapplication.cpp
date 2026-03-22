@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTranslator>
 #include <qcoreapplication.h>
 #include "libqcoreapplication.h"
@@ -33,7 +34,21 @@ libqt_string QCoreApplication_Tr(const char* s) {
 }
 
 libqt_list QCoreApplication_Arguments() {
-	return QCoreApplication::arguments();
+	auto _ret = QCoreApplication::arguments();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QCoreApplication_SetAttribute(int attribute) {
@@ -199,11 +214,25 @@ int QCoreApplication_CheckPermission(QCoreApplication* self, const QPermission* 
 }
 
 void QCoreApplication_SetLibraryPaths(const libqt_list libraryPaths) {
-	QCoreApplication::setLibraryPaths(*libraryPaths);
+	QCoreApplication::setLibraryPaths(QList<QString>());
 }
 
 libqt_list QCoreApplication_LibraryPaths() {
-	return QCoreApplication::libraryPaths();
+	auto _ret = QCoreApplication::libraryPaths();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QCoreApplication_AddLibraryPath(const libqt_string param1) {
@@ -428,33 +457,6 @@ void QCoreApplication_OnEvent(QCoreApplication* self, intptr_t slot) {
 	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
 	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
 vqcoreapplication->setQCoreApplication_Event_Callback(reinterpret_cast<VirtualQCoreApplication::QCoreApplication_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QCoreApplication_CompressEvent(QCoreApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3) {
-	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-	return vqcoreapplication->compressEvent(param1, receiver, param3);
-	} else {
-	return self->QCoreApplication::compressEvent(param1, receiver, param3);
-}
-}
-
-// Base class handler implementation
-bool QCoreApplication_QBaseCompressEvent(QCoreApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3) {
-	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-vqcoreapplication->setQCoreApplication_CompressEvent_IsBase(true);
-	return vqcoreapplication->compressEvent(param1, receiver, param3);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QCoreApplication_OnCompressEvent(QCoreApplication* self, intptr_t slot) {
-	auto* vqcoreapplication = dynamic_cast<VirtualQCoreApplication*>(self);
-	if (vqcoreapplication && vqcoreapplication->isVirtualQCoreApplication) {
-vqcoreapplication->setQCoreApplication_CompressEvent_Callback(reinterpret_cast<VirtualQCoreApplication::QCoreApplication_CompressEvent_Callback>(slot));
 }
 }
 

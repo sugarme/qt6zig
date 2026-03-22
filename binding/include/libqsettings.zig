@@ -191,14 +191,6 @@ return  _ret;
         qtc.QSettings_SetAtomicSyncRequired(@ptrCast(self), enable);
     }
 
-    pub fn BeginGroup(self: ?*anyopaque, prefix: []const u8) void {
-        const prefix_str = qtc.libqt_string{
-    .len = prefix.len,
-    .data = prefix.ptr,
-};
-qtc.QSettings_BeginGroup(@ptrCast(self), prefix_str);
-    }
-
     pub fn EndGroup(self: ?*anyopaque, ) void {
         qtc.QSettings_EndGroup(@ptrCast(self));
     }
@@ -209,22 +201,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qsettings.Group: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn BeginReadArray(self: ?*anyopaque, prefix: []const u8) i32 {
-        const prefix_str = qtc.libqt_string{
-    .len = prefix.len,
-    .data = prefix.ptr,
-};
-return qtc.QSettings_BeginReadArray(@ptrCast(self), prefix_str);
-    }
-
-    pub fn BeginWriteArray(self: ?*anyopaque, prefix: []const u8) void {
-        const prefix_str = qtc.libqt_string{
-    .len = prefix.len,
-    .data = prefix.ptr,
-};
-qtc.QSettings_BeginWriteArray(@ptrCast(self), prefix_str);
     }
 
     pub fn EndArray(self: ?*anyopaque, ) void {
@@ -249,46 +225,6 @@ qtc.QSettings_BeginWriteArray(@ptrCast(self), prefix_str);
 
     pub fn IsWritable(self: ?*anyopaque, ) bool {
         return qtc.QSettings_IsWritable(@ptrCast(self));
-    }
-
-    pub fn SetValue(self: ?*anyopaque, key: []const u8, value: ?*anyopaque) void {
-        const key_str = qtc.libqt_string{
-    .len = key.len,
-    .data = key.ptr,
-};
-qtc.QSettings_SetValue(@ptrCast(self), key_str, @ptrCast(value));
-    }
-
-    pub fn Value(self: ?*anyopaque, key: []const u8, defaultValue: ?*anyopaque) QtC.QVariant {
-        const key_str = qtc.libqt_string{
-    .len = key.len,
-    .data = key.ptr,
-};
-return qtc.QSettings_Value(@ptrCast(self), key_str, @ptrCast(defaultValue));
-    }
-
-    pub fn Value2(self: ?*anyopaque, key: []const u8) QtC.QVariant {
-        const key_str = qtc.libqt_string{
-    .len = key.len,
-    .data = key.ptr,
-};
-return qtc.QSettings_Value2(@ptrCast(self), key_str);
-    }
-
-    pub fn Remove(self: ?*anyopaque, key: []const u8) void {
-        const key_str = qtc.libqt_string{
-    .len = key.len,
-    .data = key.ptr,
-};
-qtc.QSettings_Remove(@ptrCast(self), key_str);
-    }
-
-    pub fn Contains(self: ?*anyopaque, key: []const u8) bool {
-        const key_str = qtc.libqt_string{
-    .len = key.len,
-    .data = key.ptr,
-};
-return qtc.QSettings_Contains(@ptrCast(self), key_str);
     }
 
     pub fn SetFallbacksEnabled(self: ?*anyopaque, b: bool) void {
@@ -375,14 +311,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qsettings.Tr3: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn BeginWriteArray2(self: ?*anyopaque, prefix: []const u8, size: i32) void {
-        const prefix_str = qtc.libqt_string{
-    .len = prefix.len,
-    .data = prefix.ptr,
-};
-qtc.QSettings_BeginWriteArray2(@ptrCast(self), prefix_str, size);
     }
 
     /// Delete this object from C++ memory.

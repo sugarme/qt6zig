@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QWindow>
 #include <qicon.h>
@@ -117,7 +118,16 @@ void QIcon_AddFile(QIcon* self, const libqt_string fileName) {
 }
 
 libqt_list QIcon_AvailableSizes(const QIcon* self) {
-	return self->availableSizes();
+	auto _ret = self->availableSizes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QIcon_SetIsMask(QIcon* self, bool isMask) {
@@ -153,19 +163,47 @@ bool QIcon_HasThemeIcon2(int icon) {
 }
 
 libqt_list QIcon_ThemeSearchPaths() {
-	return QIcon::themeSearchPaths();
+	auto _ret = QIcon::themeSearchPaths();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QIcon_SetThemeSearchPaths(const libqt_list searchpath) {
-	QIcon::setThemeSearchPaths(*searchpath);
+	QIcon::setThemeSearchPaths(QList<QString>());
 }
 
 libqt_list QIcon_FallbackSearchPaths() {
-	return QIcon::fallbackSearchPaths();
+	auto _ret = QIcon::fallbackSearchPaths();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QIcon_SetFallbackSearchPaths(const libqt_list paths) {
-	QIcon::setFallbackSearchPaths(*paths);
+	QIcon::setFallbackSearchPaths(QList<QString>());
 }
 
 libqt_string QIcon_ThemeName() {
@@ -196,10 +234,6 @@ libqt_string QIcon_FallbackThemeName() {
 
 void QIcon_SetFallbackThemeName(const libqt_string name) {
 	QIcon::setFallbackThemeName(QString::fromUtf8(name.data, name.len));
-}
-
-QIconPrivate** QIcon_DataPtr(QIcon* self) {
-	return self->data_ptr();
 }
 
 QPixmap* QIcon_Pixmap22(const QIcon* self, const QSize* size, int mode) {
@@ -303,11 +337,29 @@ void QIcon_AddFile4(QIcon* self, const libqt_string fileName, const QSize* size,
 }
 
 libqt_list QIcon_AvailableSizes1(const QIcon* self, int mode) {
-	return self->availableSizes(static_cast<QLCDNumber::Mode>(mode));
+	auto _ret = self->availableSizes(static_cast<QLCDNumber::Mode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QIcon_AvailableSizes2(const QIcon* self, int mode, int state) {
-	return self->availableSizes(static_cast<QLCDNumber::Mode>(mode), static_cast<QFlags<QStyle::StateFlag>>(state));
+	auto _ret = self->availableSizes(static_cast<QLCDNumber::Mode>(mode), static_cast<QFlags<QStyle::StateFlag>>(state));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QIcon_Delete(QIcon* self) {

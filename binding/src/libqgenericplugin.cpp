@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qgenericplugin.h>
 #include "libqgenericplugin.h"
 #include "libqgenericplugin.hxx"

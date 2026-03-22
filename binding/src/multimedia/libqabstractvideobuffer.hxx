@@ -35,7 +35,6 @@ protected:
 
 public:
 	VirtualQAbstractVideoBuffer(): QAbstractVideoBuffer() {};
-	VirtualQAbstractVideoBuffer(const QAbstractVideoBuffer& param1): QAbstractVideoBuffer(param1) {};
 
 	~VirtualQAbstractVideoBuffer() {
 		qabstractvideobuffer_map_callback = nullptr;

@@ -57,8 +57,6 @@ void QOpenGLContext_SwapBuffers(QOpenGLContext* self, QSurface* surface);
 QSurface* QOpenGLContext_Surface(const QOpenGLContext* self);
 QOpenGLContext* QOpenGLContext_CurrentContext();
 bool QOpenGLContext_AreSharing(QOpenGLContext* first, QOpenGLContext* second);
-QPlatformOpenGLContext* QOpenGLContext_Handle(const QOpenGLContext* self);
-QPlatformOpenGLContext* QOpenGLContext_ShareHandle(const QOpenGLContext* self);
 QOpenGLFunctions* QOpenGLContext_Functions(const QOpenGLContext* self);
 QOpenGLExtraFunctions* QOpenGLContext_ExtraFunctions(const QOpenGLContext* self);
 libqt_list QOpenGLContext_Extensions(const QOpenGLContext* self);

@@ -18,20 +18,14 @@ pub const qtextinlineobject = struct {
 
 
     /// New3 constructs a new QTextInlineObject object.
-    pub fn New3(i: i32, e: *QTextEngine) QtC.QTextInlineObject {
-        return qtc.QTextInlineObject_new3(i, @ptrCast(e));
+    pub fn New3() QtC.QTextInlineObject {
+        return qtc.QTextInlineObject_new3();
     }
 
 
     /// New4 constructs a new QTextInlineObject object.
-    pub fn New4() QtC.QTextInlineObject {
-        return qtc.QTextInlineObject_new4();
-    }
-
-
-    /// New5 constructs a new QTextInlineObject object.
-    pub fn New5(param1: ?*anyopaque) QtC.QTextInlineObject {
-        return qtc.QTextInlineObject_new5(@ptrCast(param1));
+    pub fn New4(param1: ?*anyopaque) QtC.QTextInlineObject {
+        return qtc.QTextInlineObject_new4(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -318,10 +312,6 @@ return  _ret;
 
     pub fn GlyphRuns2(self: ?*anyopaque, ) []const u8 {
         return qtc.QTextLayout_GlyphRuns2(@ptrCast(self));
-    }
-
-    pub fn Engine(self: ?*anyopaque, ) QTextEngine {
-        return @ptrCast(qtc.QTextLayout_Engine(@ptrCast(self)));
     }
 
     pub fn SetFlags(self: ?*anyopaque, flags: i32) void {

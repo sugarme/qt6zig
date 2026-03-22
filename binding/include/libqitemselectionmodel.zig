@@ -182,10 +182,6 @@ return  _ret;
         return qtc.QItemSelectionModel_Model2(@ptrCast(self));
     }
 
-    pub fn BindableModel(self: ?*anyopaque, ) QBindable<QAbstractItemModel *> {
-        return qtc.QItemSelectionModel_BindableModel(@ptrCast(self));
-    }
-
     pub fn SetModel(self: ?*anyopaque, model: ?*anyopaque) void {
         qtc.QItemSelectionModel_SetModel(@ptrCast(self), @ptrCast(model));
     }

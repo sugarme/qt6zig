@@ -130,14 +130,6 @@ return  _ret;
         return qtc.QOpenGLContext_AreSharing(@ptrCast(first), @ptrCast(second));
     }
 
-    pub fn Handle(self: ?*anyopaque, ) QPlatformOpenGLContext {
-        return @ptrCast(qtc.QOpenGLContext_Handle(@ptrCast(self)));
-    }
-
-    pub fn ShareHandle(self: ?*anyopaque, ) QPlatformOpenGLContext {
-        return @ptrCast(qtc.QOpenGLContext_ShareHandle(@ptrCast(self)));
-    }
-
     pub fn Functions(self: ?*anyopaque, ) QtC.QOpenGLFunctions {
         return qtc.QOpenGLContext_Functions(@ptrCast(self));
     }

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #define WORKAROUND_INNER_CLASS_DEFINITION_Disambiguated_t
 #include <qsqlresult.h>
@@ -1191,9 +1192,27 @@ vqsqlresult->setQSqlResult_BoundValueCount_Callback(reinterpret_cast<VirtualQSql
 libqt_list QSqlResult_BoundValues(QSqlResult* self) {
 	auto* vqsqlresult = dynamic_cast<VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
-	return vqsqlresult->boundValues();
+	auto _ret = vqsqlresult->boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QSqlResult::boundValues();
+	auto _ret = self->QSqlResult::boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1202,7 +1221,16 @@ libqt_list QSqlResult_QBaseBoundValues(QSqlResult* self) {
 	auto* vqsqlresult = dynamic_cast<VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
 vqsqlresult->setQSqlResult_BoundValues_IsBase(true);
-	return vqsqlresult->boundValues();
+	auto _ret = vqsqlresult->boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1218,9 +1246,27 @@ vqsqlresult->setQSqlResult_BoundValues_Callback(reinterpret_cast<VirtualQSqlResu
 libqt_list QSqlResult_BoundValues2(const QSqlResult* self) {
 	auto* vqsqlresult = dynamic_cast<const VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
-	return vqsqlresult->boundValues();
+	auto _ret = vqsqlresult->boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QSqlResult::boundValues();
+	auto _ret = self->QSqlResult::boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1229,7 +1275,16 @@ libqt_list QSqlResult_QBaseBoundValues2(const QSqlResult* self) {
 	auto* vqsqlresult = dynamic_cast<const VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
 vqsqlresult->setQSqlResult_BoundValues2_IsBase(true);
-	return vqsqlresult->boundValues();
+	auto _ret = vqsqlresult->boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1293,9 +1348,37 @@ vqsqlresult->setQSqlResult_ExecutedQuery_Callback(reinterpret_cast<VirtualQSqlRe
 libqt_list QSqlResult_BoundValueNames(const QSqlResult* self) {
 	auto* vqsqlresult = dynamic_cast<const VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
-	return vqsqlresult->boundValueNames();
+	auto _ret = vqsqlresult->boundValueNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 	} else {
-	return self->QSqlResult::boundValueNames();
+	auto _ret = self->QSqlResult::boundValueNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -1304,7 +1387,21 @@ libqt_list QSqlResult_QBaseBoundValueNames(const QSqlResult* self) {
 	auto* vqsqlresult = dynamic_cast<const VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
 vqsqlresult->setQSqlResult_BoundValueNames_IsBase(true);
-	return vqsqlresult->boundValueNames();
+	auto _ret = vqsqlresult->boundValueNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -1557,9 +1654,27 @@ vqsqlresult->setQSqlResult_ResetBindCount_Callback(reinterpret_cast<VirtualQSqlR
 libqt_list QSqlResult_BoundValues1(QSqlResult* self, Disambiguated_t* param1) {
 	auto* vqsqlresult = dynamic_cast<VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
-	return vqsqlresult->boundValues(*param1);
+	auto _ret = vqsqlresult->boundValues(*param1);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QSqlResult::boundValues(*param1);
+	auto _ret = self->QSqlResult::boundValues(*param1);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1568,7 +1683,16 @@ libqt_list QSqlResult_QBaseBoundValues1(QSqlResult* self, Disambiguated_t* param
 	auto* vqsqlresult = dynamic_cast<VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
 vqsqlresult->setQSqlResult_BoundValues1_IsBase(true);
-	return vqsqlresult->boundValues(*param1);
+	auto _ret = vqsqlresult->boundValues(*param1);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1584,9 +1708,27 @@ vqsqlresult->setQSqlResult_BoundValues1_Callback(reinterpret_cast<VirtualQSqlRes
 libqt_list QSqlResult_BoundValues12(const QSqlResult* self, Disambiguated_t* param1) {
 	auto* vqsqlresult = dynamic_cast<const VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
-	return vqsqlresult->boundValues(*param1);
+	auto _ret = vqsqlresult->boundValues(*param1);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QSqlResult::boundValues(*param1);
+	auto _ret = self->QSqlResult::boundValues(*param1);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1595,7 +1737,16 @@ libqt_list QSqlResult_QBaseBoundValues12(const QSqlResult* self, Disambiguated_t
 	auto* vqsqlresult = dynamic_cast<const VirtualQSqlResult*>(self);
 	if (vqsqlresult && vqsqlresult->isVirtualQSqlResult) {
 vqsqlresult->setQSqlResult_BoundValues12_IsBase(true);
-	return vqsqlresult->boundValues(*param1);
+	auto _ret = vqsqlresult->boundValues(*param1);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

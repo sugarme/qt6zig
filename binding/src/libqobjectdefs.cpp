@@ -17,6 +17,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qobjectdefs.h>
 #include "libqobjectdefs.h"
 #include "libqobjectdefs.hxx"
@@ -77,14 +78,6 @@ void QGenericReturnArgument_Delete(QGenericReturnArgument* self) {
     delete self;
 }
 
-const QtPrivate__QMetaTypeInterface* QMetaMethodArgument_MetaType(const QMetaMethodArgument* self) {
-	return self->metaType;
-}
-
-void QMetaMethodArgument_SetMetaType(QMetaMethodArgument* self, const QtPrivate__QMetaTypeInterface* metaType) {
-	self->metaType;
-}
-
 const char* QMetaMethodArgument_Name(const QMetaMethodArgument* self) {
 	return self->name;
 }
@@ -95,14 +88,6 @@ void QMetaMethodArgument_SetName(QMetaMethodArgument* self, const char* name) {
 
 void QMetaMethodArgument_Delete(QMetaMethodArgument* self) {
     delete self;
-}
-
-const QtPrivate__QMetaTypeInterface* QMetaMethodReturnArgument_MetaType(const QMetaMethodReturnArgument* self) {
-	return self->metaType;
-}
-
-void QMetaMethodReturnArgument_SetMetaType(QMetaMethodReturnArgument* self, const QtPrivate__QMetaTypeInterface* metaType) {
-	self->metaType;
 }
 
 const char* QMetaMethodReturnArgument_Name(const QMetaMethodReturnArgument* self) {
@@ -417,14 +402,6 @@ const QMetaObject__SuperData* QMetaObject__Data_RelatedMetaObjects(const QMetaOb
 
 void QMetaObject__Data_SetRelatedMetaObjects(QMetaObject__Data* self, const QMetaObject__SuperData* relatedMetaObjects) {
 	self->relatedMetaObjects;
-}
-
-const QtPrivate__QMetaTypeInterface** QMetaObject__Data_MetaTypes(const QMetaObject__Data* self) {
-	return self->metaTypes;
-}
-
-void QMetaObject__Data_SetMetaTypes(QMetaObject__Data* self, const QtPrivate__QMetaTypeInterface** metaTypes) {
-	self->metaTypes;
 }
 
 void QMetaObject__Data_OperatorAssign(QMetaObject__Data* self, const QMetaObject__Data* param1) {

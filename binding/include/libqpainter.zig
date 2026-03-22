@@ -293,16 +293,8 @@ pub const qpainter = struct {
         qtc.QPainter_DrawPoints(@ptrCast(self), @ptrCast(points), pointCount);
     }
 
-    pub fn DrawPoints2(self: ?*anyopaque, points: ?*anyopaque) void {
-        qtc.QPainter_DrawPoints2(@ptrCast(self), @ptrCast(points));
-    }
-
     pub fn DrawPoints3(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32) void {
         qtc.QPainter_DrawPoints3(@ptrCast(self), @ptrCast(points), pointCount);
-    }
-
-    pub fn DrawPoints4(self: ?*anyopaque, points: ?*anyopaque) void {
-        qtc.QPainter_DrawPoints4(@ptrCast(self), @ptrCast(points));
     }
 
     pub fn DrawLine(self: ?*anyopaque, line: ?*anyopaque) void {
@@ -409,48 +401,24 @@ pub const qpainter = struct {
         qtc.QPainter_DrawPolyline(@ptrCast(self), @ptrCast(points), pointCount);
     }
 
-    pub fn DrawPolyline2(self: ?*anyopaque, polyline: ?*anyopaque) void {
-        qtc.QPainter_DrawPolyline2(@ptrCast(self), @ptrCast(polyline));
-    }
-
     pub fn DrawPolyline3(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32) void {
         qtc.QPainter_DrawPolyline3(@ptrCast(self), @ptrCast(points), pointCount);
-    }
-
-    pub fn DrawPolyline4(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QPainter_DrawPolyline4(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn DrawPolygon(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32) void {
         qtc.QPainter_DrawPolygon(@ptrCast(self), @ptrCast(points), pointCount);
     }
 
-    pub fn DrawPolygon2(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QPainter_DrawPolygon2(@ptrCast(self), @ptrCast(polygon));
-    }
-
     pub fn DrawPolygon3(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32) void {
         qtc.QPainter_DrawPolygon3(@ptrCast(self), @ptrCast(points), pointCount);
-    }
-
-    pub fn DrawPolygon4(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QPainter_DrawPolygon4(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn DrawConvexPolygon(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32) void {
         qtc.QPainter_DrawConvexPolygon(@ptrCast(self), @ptrCast(points), pointCount);
     }
 
-    pub fn DrawConvexPolygon2(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QPainter_DrawConvexPolygon2(@ptrCast(self), @ptrCast(polygon));
-    }
-
     pub fn DrawConvexPolygon3(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32) void {
         qtc.QPainter_DrawConvexPolygon3(@ptrCast(self), @ptrCast(points), pointCount);
-    }
-
-    pub fn DrawConvexPolygon4(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QPainter_DrawConvexPolygon4(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn DrawArc(self: ?*anyopaque, rect: ?*anyopaque, a: i32, alen: i32) void {
@@ -873,16 +841,8 @@ return qtc.QPainter_BoundingRect4(@ptrCast(self), @ptrCast(rect), text_str);
         qtc.QPainter_DrawPolygon32(@ptrCast(self), @ptrCast(points), pointCount, @intCast(fillRule));
     }
 
-    pub fn DrawPolygon22(self: ?*anyopaque, polygon: ?*anyopaque, fillRule: i32) void {
-        qtc.QPainter_DrawPolygon22(@ptrCast(self), @ptrCast(polygon), @intCast(fillRule));
-    }
-
     pub fn DrawPolygon33(self: ?*anyopaque, points: ?*anyopaque, pointCount: i32, fillRule: i32) void {
         qtc.QPainter_DrawPolygon33(@ptrCast(self), @ptrCast(points), pointCount, @intCast(fillRule));
-    }
-
-    pub fn DrawPolygon23(self: ?*anyopaque, polygon: ?*anyopaque, fillRule: i32) void {
-        qtc.QPainter_DrawPolygon23(@ptrCast(self), @ptrCast(polygon), @intCast(fillRule));
     }
 
     pub fn DrawRoundedRect4(self: ?*anyopaque, rect: ?*anyopaque, xRadius: f64, yRadius: f64, mode: i32) void {

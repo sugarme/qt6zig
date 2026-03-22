@@ -121,10 +121,6 @@ pub const qmatrix4x4 = struct {
         return qtc.QMatrix4x4_Transposed(@ptrCast(self));
     }
 
-    pub fn NormalMatrix(self: ?*anyopaque, ) QGenericMatrix<3, 3, float> {
-        return qtc.QMatrix4x4_NormalMatrix(@ptrCast(self));
-    }
-
     pub fn OperatorPlusAssign(self: ?*anyopaque, other: ?*anyopaque) QtC.QMatrix4x4 {
         return qtc.QMatrix4x4_OperatorPlusAssign(@ptrCast(self), @ptrCast(other));
     }

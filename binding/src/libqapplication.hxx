@@ -20,20 +20,17 @@ public:
 	// Virtual class public types (including callbacks)
 	using QApplication_Notify_Callback = bool (*)(QApplication*, QObject*, QEvent*);
 	using QApplication_Event_Callback = bool (*)(QApplication*, QEvent*);
-	using QApplication_CompressEvent_Callback = bool (*)(QApplication*, QEvent*, QObject*, QPostEventList*);
 	using QApplication_ResolveInterface_Callback = void* (*)(const QApplication*, const char*, int);
 
 protected:
 	// Instance callback storage
 	mutable QApplication_Notify_Callback qapplication_notify_callback = nullptr;
 	mutable QApplication_Event_Callback qapplication_event_callback = nullptr;
-	mutable QApplication_CompressEvent_Callback qapplication_compressevent_callback = nullptr;
 	mutable QApplication_ResolveInterface_Callback qapplication_resolveinterface_callback = nullptr;
 
 	// Instance base flags
     mutable bool qapplication_notify_isbase = false;
     mutable bool qapplication_event_isbase = false;
-    mutable bool qapplication_compressevent_isbase = false;
     mutable bool qapplication_resolveinterface_isbase = false;
 
 public:
@@ -43,20 +40,17 @@ public:
 	~VirtualQApplication() {
 		qapplication_notify_callback = nullptr;
 		qapplication_event_callback = nullptr;
-		qapplication_compressevent_callback = nullptr;
 		qapplication_resolveinterface_callback = nullptr;
 	}
 
 // Callback setters
 	inline void setQApplication_Notify_Callback(QApplication_Notify_Callback cb) const { qapplication_notify_callback = cb; }
 	inline void setQApplication_Event_Callback(QApplication_Event_Callback cb) const { qapplication_event_callback = cb; }
-	inline void setQApplication_CompressEvent_Callback(QApplication_CompressEvent_Callback cb) const { qapplication_compressevent_callback = cb; }
 	inline void setQApplication_ResolveInterface_Callback(QApplication_ResolveInterface_Callback cb) const { qapplication_resolveinterface_callback = cb; }
 
 // Base flag setters
 	inline void setQApplication_Notify_IsBase(bool value) const { qapplication_notify_isbase = value; }
 	inline void setQApplication_Event_IsBase(bool value) const { qapplication_event_isbase = value; }
-	inline void setQApplication_CompressEvent_IsBase(bool value) const { qapplication_compressevent_isbase = value; }
 	inline void setQApplication_ResolveInterface_IsBase(bool value) const { qapplication_resolveinterface_isbase = value; }
 
 
@@ -90,22 +84,6 @@ public:
 	}
 
 	// Virtual method for C ABI access and custom callback
-	virtual bool compressEvent(QEvent* param1, QObject* receiver, QPostEventList* param3) override {
-		if (qapplication_compressevent_isbase) {
-			qapplication_compressevent_isbase = false;
-			return QApplication::compressEvent(param1, receiver, param3);
-		} else if (qapplication_compressevent_callback != nullptr) {
-			QEvent* cbval1 = param1;
-			QObject* cbval2 = receiver;
-			QPostEventList* cbval3 = param3;
-			bool callback_ret = qapplication_compressevent_callback(this, cbval1, cbval2, cbval3);
-			return callback_ret;
-		} else {
-			return QApplication::compressEvent(param1, receiver, param3);
-		}
-	}
-
-	// Virtual method for C ABI access and custom callback
 	void* resolveInterface(const char* name, int revision) const {
 		if (qapplication_resolveinterface_isbase) {
 			qapplication_resolveinterface_isbase = false;
@@ -123,8 +101,6 @@ public:
 	// Friend functions
 	friend bool QApplication_Event(QApplication* self, QEvent* param1);
 	friend bool QApplication_QBaseEvent(QApplication* self, QEvent* param1);
-	friend bool QApplication_CompressEvent(QApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3);
-	friend bool QApplication_QBaseCompressEvent(QApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3);
 	friend void* QApplication_ResolveInterface(const QApplication* self, const char* name, int revision);
 	friend void* QApplication_QBaseResolveInterface(const QApplication* self, const char* name, int revision);
 };

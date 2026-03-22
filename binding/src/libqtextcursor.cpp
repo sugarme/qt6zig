@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextBlock>
 #include <QTextBlockFormat>
 #include <QTextCharFormat>
@@ -27,23 +28,15 @@ QTextCursor* QTextCursor_new2(QTextDocument* document) {
 	 return new QTextCursor(document);
 }
 
-QTextCursor* QTextCursor_new3(QTextDocumentPrivate* p, int pos) {
-	 return new QTextCursor(p, pos);
-}
-
-QTextCursor* QTextCursor_new4(QTextCursorPrivate* d) {
-	 return new QTextCursor(d);
-}
-
-QTextCursor* QTextCursor_new5(QTextFrame* frame) {
+QTextCursor* QTextCursor_new3(QTextFrame* frame) {
 	 return new QTextCursor(frame);
 }
 
-QTextCursor* QTextCursor_new6(const QTextBlock* block) {
+QTextCursor* QTextCursor_new4(const QTextBlock* block) {
 	 return new QTextCursor(*block);
 }
 
-QTextCursor* QTextCursor_new7(const QTextCursor* cursor) {
+QTextCursor* QTextCursor_new5(const QTextCursor* cursor) {
 	 return new QTextCursor(*cursor);
 }
 

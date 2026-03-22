@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsequentialanimationgroup.h>
 #include "libqsequentialanimationgroup.h"
 #include "libqsequentialanimationgroup.hxx"
@@ -40,10 +41,6 @@ QPauseAnimation* QSequentialAnimationGroup_InsertPause(QSequentialAnimationGroup
 
 QAbstractAnimation* QSequentialAnimationGroup_CurrentAnimation(const QSequentialAnimationGroup* self) {
 	return self->currentAnimation();
-}
-
-QBindable<QAbstractAnimation *> QSequentialAnimationGroup_BindableCurrentAnimation(const QSequentialAnimationGroup* self) {
-	return self->bindableCurrentAnimation();
 }
 
 int QSequentialAnimationGroup_Duration(const QSequentialAnimationGroup* self) {

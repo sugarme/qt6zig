@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <QVariant>
 #include <qnetworkproxy.h>
@@ -284,7 +285,16 @@ bool QNetworkProxy_HasRawHeader(const QNetworkProxy* self, const libqt_string he
 }
 
 libqt_list QNetworkProxy_RawHeaderList(const QNetworkProxy* self) {
-	return self->rawHeaderList();
+	auto _ret = self->rawHeaderList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QNetworkProxy_RawHeader(const QNetworkProxy* self, const libqt_string headerName) {
@@ -314,7 +324,16 @@ QNetworkProxyFactory* QNetworkProxyFactory_new2(const QNetworkProxyFactory* para
 }
 
 libqt_list QNetworkProxyFactory_QueryProxy(QNetworkProxyFactory* self, const QNetworkProxyQuery* query) {
-	return self->queryProxy(*query);
+	auto _ret = self->queryProxy(*query);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QNetworkProxyFactory_UsesSystemConfiguration() {
@@ -330,11 +349,29 @@ void QNetworkProxyFactory_SetApplicationProxyFactory(QNetworkProxyFactory* facto
 }
 
 libqt_list QNetworkProxyFactory_ProxyForQuery(const QNetworkProxyQuery* query) {
-	return QNetworkProxyFactory::proxyForQuery(*query);
+	auto _ret = QNetworkProxyFactory::proxyForQuery(*query);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QNetworkProxyFactory_SystemProxyForQuery() {
-	return QNetworkProxyFactory::systemProxyForQuery();
+	auto _ret = QNetworkProxyFactory::systemProxyForQuery();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QNetworkProxyFactory_OperatorAssign(QNetworkProxyFactory* self, const QNetworkProxyFactory* param1) {
@@ -342,7 +379,16 @@ void QNetworkProxyFactory_OperatorAssign(QNetworkProxyFactory* self, const QNetw
 }
 
 libqt_list QNetworkProxyFactory_SystemProxyForQuery1(const QNetworkProxyQuery* query) {
-	return QNetworkProxyFactory::systemProxyForQuery(*query);
+	auto _ret = QNetworkProxyFactory::systemProxyForQuery(*query);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 // Base class handler implementation
@@ -350,7 +396,16 @@ libqt_list QNetworkProxyFactory_QBaseQueryProxy(QNetworkProxyFactory* self, cons
 	auto* vqnetworkproxyfactory = dynamic_cast<VirtualQNetworkProxyFactory*>(self);
 	if (vqnetworkproxyfactory && vqnetworkproxyfactory->isVirtualQNetworkProxyFactory) {
 vqnetworkproxyfactory->setQNetworkProxyFactory_QueryProxy_IsBase(true);
-	return vqnetworkproxyfactory->queryProxy(*query);
+	auto _ret = vqnetworkproxyfactory->queryProxy(*query);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

@@ -14,6 +14,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qgraphicseffect.h>
 #include "libqgraphicseffect.h"
 #include "libqgraphicseffect.hxx"
@@ -66,10 +67,6 @@ void QGraphicsEffect_Connect_EnabledChanged(QGraphicsEffect* self, intptr_t slot
     QGraphicsEffect::connect(self, &QGraphicsEffect::enabledChanged, [self, slotFunc](bool enabled) {
 	slotFunc(self, enabled);
     });
-}
-
-QGraphicsEffectSource* QGraphicsEffect_Source(const QGraphicsEffect* self) {
-	return self->source();
 }
 
 libqt_string QGraphicsEffect_Tr2(const char* s, const char* c) {

@@ -183,32 +183,16 @@ pub const qjsonarray = struct {
 pub const qjsonarray__iterator = struct {
 
     /// New constructs a new QJsonArray::iterator object.
-    pub fn New(other: ?*anyopaque) QtC.QJsonArray__iterator {
-        return qtc.QJsonArray__iterator_new(@ptrCast(other));
+    pub fn New() QtC.QJsonArray__iterator {
+        return qtc.QJsonArray__iterator_new();
     }
 
 
     /// New2 constructs a new QJsonArray::iterator object.
-    pub fn New2() QtC.QJsonArray__iterator {
-        return qtc.QJsonArray__iterator_new2();
+    pub fn New2(array: ?*anyopaque, index: i64) QtC.QJsonArray__iterator {
+        return qtc.QJsonArray__iterator_new2(@ptrCast(array), index);
     }
 
-
-    /// New3 constructs a new QJsonArray::iterator object.
-    pub fn New3(array: ?*anyopaque, index: i64) QtC.QJsonArray__iterator {
-        return qtc.QJsonArray__iterator_new3(@ptrCast(array), index);
-    }
-
-
-    /// New4 constructs a new QJsonArray::iterator object.
-    pub fn New4(other: ?*anyopaque) QtC.QJsonArray__iterator {
-        return qtc.QJsonArray__iterator_new4(@ptrCast(other));
-    }
-
-
-    pub fn OperatorAssign(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QJsonArray__iterator_OperatorAssign(@ptrCast(self), @ptrCast(other));
-    }
 
     pub fn OperatorPlusPlus(self: ?*anyopaque, ) It::value_type {
         return @ptrCast(qtc.QJsonArray__iterator_OperatorPlusPlus(@ptrCast(self)));
@@ -242,10 +226,6 @@ pub const qjsonarray__iterator = struct {
         return @ptrCast(qtc.QJsonArray__iterator_OperatorMinus(@ptrCast(self), j));
     }
 
-    pub fn OperatorMinus2(self: ?*anyopaque, j: QtC.QJsonArray__iterator) i64 {
-        return qtc.QJsonArray__iterator_OperatorMinus2(@ptrCast(self), @ptrCast(j));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QJsonArray__iterator_Delete(@ptrCast(self));
@@ -256,38 +236,22 @@ pub const qjsonarray__iterator = struct {
 pub const qjsonarray__const_iterator = struct {
 
     /// New constructs a new QJsonArray::const_iterator object.
-    pub fn New(other: ?*anyopaque) QtC.QJsonArray__const_iterator {
-        return qtc.QJsonArray__const_iterator_new(@ptrCast(other));
+    pub fn New() QtC.QJsonArray__const_iterator {
+        return qtc.QJsonArray__const_iterator_new();
     }
 
 
     /// New2 constructs a new QJsonArray::const_iterator object.
-    pub fn New2() QtC.QJsonArray__const_iterator {
-        return qtc.QJsonArray__const_iterator_new2();
+    pub fn New2(array: ?*anyopaque, index: i64) QtC.QJsonArray__const_iterator {
+        return qtc.QJsonArray__const_iterator_new2(@ptrCast(array), index);
     }
 
 
     /// New3 constructs a new QJsonArray::const_iterator object.
-    pub fn New3(array: ?*anyopaque, index: i64) QtC.QJsonArray__const_iterator {
-        return qtc.QJsonArray__const_iterator_new3(@ptrCast(array), index);
+    pub fn New3(o: *const It::value_type) QtC.QJsonArray__const_iterator {
+        return qtc.QJsonArray__const_iterator_new3(@ptrCast(o));
     }
 
-
-    /// New4 constructs a new QJsonArray::const_iterator object.
-    pub fn New4(o: *const It::value_type) QtC.QJsonArray__const_iterator {
-        return qtc.QJsonArray__const_iterator_new4(@ptrCast(o));
-    }
-
-
-    /// New5 constructs a new QJsonArray::const_iterator object.
-    pub fn New5(other: ?*anyopaque) QtC.QJsonArray__const_iterator {
-        return qtc.QJsonArray__const_iterator_new5(@ptrCast(other));
-    }
-
-
-    pub fn OperatorAssign(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QJsonArray__const_iterator_OperatorAssign(@ptrCast(self), @ptrCast(other));
-    }
 
     pub fn OperatorPlusPlus(self: ?*anyopaque, ) QtC.QRect {
         return qtc.QJsonArray__const_iterator_OperatorPlusPlus(@ptrCast(self));
@@ -319,10 +283,6 @@ pub const qjsonarray__const_iterator = struct {
 
     pub fn OperatorMinus(self: ?*anyopaque, j: i64) QtC.QRect {
         return qtc.QJsonArray__const_iterator_OperatorMinus(@ptrCast(self), j);
-    }
-
-    pub fn OperatorMinus2(self: ?*anyopaque, j: QtC.QJsonArray__const_iterator) i64 {
-        return qtc.QJsonArray__const_iterator_OperatorMinus2(@ptrCast(self), @ptrCast(j));
     }
 
     /// Delete this object from C++ memory.

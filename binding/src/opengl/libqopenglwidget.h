@@ -40,7 +40,6 @@ void QOpenGLWidget_SetUpdateBehavior(QOpenGLWidget* self, int updateBehavior);
 int QOpenGLWidget_UpdateBehavior(const QOpenGLWidget* self);
 void QOpenGLWidget_SetFormat(QOpenGLWidget* self, const QSurfaceFormat* format);
 QSurfaceFormat* QOpenGLWidget_Format(const QOpenGLWidget* self);
-GL QOpenGLWidget_TextureFormat(const QOpenGLWidget* self);
 void QOpenGLWidget_SetTextureFormat(QOpenGLWidget* self, uint32_t texFormat);
 bool QOpenGLWidget_IsValid(const QOpenGLWidget* self);
 void QOpenGLWidget_MakeCurrent(QOpenGLWidget* self);

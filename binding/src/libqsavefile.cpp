@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsavefile.h>
 #include "libqsavefile.h"
 #include "libqsavefile.hxx"

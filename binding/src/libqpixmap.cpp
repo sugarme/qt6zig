@@ -14,6 +14,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransform>
 #include <QVariant>
 #include <qpixmap.h>
@@ -24,35 +25,31 @@ QPixmap* QPixmap_new() {
 	 return new VirtualQPixmap();
 }
 
-QPixmap* QPixmap_new2(QPlatformPixmap* data) {
-	 return new VirtualQPixmap(data);
-}
-
-QPixmap* QPixmap_new3(int w, int h) {
+QPixmap* QPixmap_new2(int w, int h) {
 	 return new VirtualQPixmap(w, h);
 }
 
-QPixmap* QPixmap_new4(const QSize* param1) {
+QPixmap* QPixmap_new3(const QSize* param1) {
 	 return new VirtualQPixmap(*param1);
 }
 
-QPixmap* QPixmap_new5(const libqt_string fileName) {
+QPixmap* QPixmap_new4(const libqt_string fileName) {
 	 return new VirtualQPixmap(QString::fromUtf8(fileName.data, fileName.len));
 }
 
-QPixmap* QPixmap_new6(const char** xpm) {
+QPixmap* QPixmap_new5(const char** xpm) {
 	 return new VirtualQPixmap(xpm);
 }
 
-QPixmap* QPixmap_new7(const QPixmap* param1) {
+QPixmap* QPixmap_new6(const QPixmap* param1) {
 	 return new VirtualQPixmap(*param1);
 }
 
-QPixmap* QPixmap_new8(const libqt_string fileName, const char* format) {
+QPixmap* QPixmap_new7(const libqt_string fileName, const char* format) {
 	 return new VirtualQPixmap(QString::fromUtf8(fileName.data, fileName.len), format);
 }
 
-QPixmap* QPixmap_new9(const libqt_string fileName, const char* format, int flags) {
+QPixmap* QPixmap_new8(const libqt_string fileName, const char* format, int flags) {
 	 return new VirtualQPixmap(QString::fromUtf8(fileName.data, fileName.len), format, static_cast<QFlags<Qt::ImageConversionFlag>>(flags));
 }
 
@@ -238,14 +235,6 @@ QPaintEngine* QPixmap_PaintEngine(const QPixmap* self) {
 
 bool QPixmap_OperatorNot(const QPixmap* self) {
 	return self->operator!();
-}
-
-QPlatformPixmap* QPixmap_Handle(const QPixmap* self) {
-	return self->handle();
-}
-
-QExplicitlySharedDataPointer<QPlatformPixmap>* QPixmap_DataPtr(QPixmap* self) {
-	return self->data_ptr();
 }
 
 void QPixmap_Fill1(QPixmap* self, const QColor* fillColor) {

@@ -97,7 +97,6 @@ typedef QOpenGLFunctions_4_5_DeprecatedBackend::Functions QOpenGLFunctions_4_5_D
 #endif
 #else
 typedef struct QAbstractOpenGLFunctions QAbstractOpenGLFunctions;
-typedef struct QAtomicInt QAtomicInt;
 typedef struct QOpenGLContext QOpenGLContext;
 typedef struct QOpenGLFunctions_1_0_CoreBackend QOpenGLFunctions_1_0_CoreBackend;
 typedef struct QOpenGLFunctions_1_0_CoreBackend__Functions QOpenGLFunctions_1_0_CoreBackend__Functions;
@@ -178,21 +177,16 @@ QOpenGLVersionFunctionsBackend* QOpenGLVersionFunctionsBackend_new(QOpenGLContex
 QOpenGLVersionFunctionsBackend* QOpenGLVersionFunctionsBackend_new2(const QOpenGLVersionFunctionsBackend* param1);
 QOpenGLContext* QOpenGLVersionFunctionsBackend_Context(const QOpenGLVersionFunctionsBackend* self);
 void QOpenGLVersionFunctionsBackend_SetContext(QOpenGLVersionFunctionsBackend* self, QOpenGLContext* context);
-QAtomicInt* QOpenGLVersionFunctionsBackend_Refs(const QOpenGLVersionFunctionsBackend* self);
-void QOpenGLVersionFunctionsBackend_SetRefs(QOpenGLVersionFunctionsBackend* self, QAtomicInt* refs);
 void QOpenGLVersionFunctionsBackend_Delete(QOpenGLVersionFunctionsBackend* self);
 
 QOpenGLVersionFunctionsStorage* QOpenGLVersionFunctionsStorage_new(const QOpenGLVersionFunctionsStorage* other);
 QOpenGLVersionFunctionsStorage* QOpenGLVersionFunctionsStorage_new2();
 void QOpenGLVersionFunctionsStorage_CopyAssign(QOpenGLVersionFunctionsStorage* self, QOpenGLVersionFunctionsStorage* other);
-QOpenGLVersionFunctionsBackend* QOpenGLVersionFunctionsStorage_Backend(QOpenGLVersionFunctionsStorage* self, QOpenGLContext* context, int v);
 QOpenGLVersionFunctionsBackend** QOpenGLVersionFunctionsStorage_Backends(const QOpenGLVersionFunctionsStorage* self);
 void QOpenGLVersionFunctionsStorage_SetBackends(QOpenGLVersionFunctionsStorage* self, QOpenGLVersionFunctionsBackend** backends);
 void QOpenGLVersionFunctionsStorage_Delete(QOpenGLVersionFunctionsStorage* self);
 
 bool QAbstractOpenGLFunctions_InitializeOpenGLFunctions(QAbstractOpenGLFunctions* self);
-QAbstractOpenGLFunctionsPrivate* QAbstractOpenGLFunctions_DFunc(QAbstractOpenGLFunctions* self);
-const QAbstractOpenGLFunctionsPrivate* QAbstractOpenGLFunctions_DFunc2(const QAbstractOpenGLFunctions* self);
 void QAbstractOpenGLFunctions_OnInitializeOpenGLFunctions(QAbstractOpenGLFunctions* self, intptr_t slot);
 bool QAbstractOpenGLFunctions_QBaseInitializeOpenGLFunctions(QAbstractOpenGLFunctions* self);
 bool QAbstractOpenGLFunctions_IsInitialized(const QAbstractOpenGLFunctions* self);

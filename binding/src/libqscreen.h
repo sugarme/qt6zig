@@ -31,7 +31,6 @@ typedef struct type_info type_info;
 
 
 libqt_string QScreen_Tr(const char* s);
-QPlatformScreen* QScreen_Handle(const QScreen* self);
 libqt_string QScreen_Name(const QScreen* self);
 libqt_string QScreen_Manufacturer(const QScreen* self);
 libqt_string QScreen_Model(const QScreen* self);

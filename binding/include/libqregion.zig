@@ -24,38 +24,26 @@ pub const qregion = struct {
 
 
     /// New4 constructs a new QRegion object.
-    pub fn New4(pa: ?*anyopaque) QtC.QRegion {
-        return qtc.QRegion_new4(@ptrCast(pa));
+    pub fn New4(region: ?*anyopaque) QtC.QRegion {
+        return qtc.QRegion_new4(@ptrCast(region));
     }
 
 
     /// New5 constructs a new QRegion object.
-    pub fn New5(region: ?*anyopaque) QtC.QRegion {
-        return qtc.QRegion_new5(@ptrCast(region));
+    pub fn New5(bitmap: ?*anyopaque) QtC.QRegion {
+        return qtc.QRegion_new5(@ptrCast(bitmap));
     }
 
 
     /// New6 constructs a new QRegion object.
-    pub fn New6(bitmap: ?*anyopaque) QtC.QRegion {
-        return qtc.QRegion_new6(@ptrCast(bitmap));
+    pub fn New6(x: i32, y: i32, w: i32, h: i32, t: i32) QtC.QRegion {
+        return qtc.QRegion_new6(x, y, w, h, @intCast(t));
     }
 
 
     /// New7 constructs a new QRegion object.
-    pub fn New7(x: i32, y: i32, w: i32, h: i32, t: i32) QtC.QRegion {
-        return qtc.QRegion_new7(x, y, w, h, @intCast(t));
-    }
-
-
-    /// New8 constructs a new QRegion object.
-    pub fn New8(r: ?*anyopaque, t: i32) QtC.QRegion {
-        return qtc.QRegion_new8(@ptrCast(r), @intCast(t));
-    }
-
-
-    /// New9 constructs a new QRegion object.
-    pub fn New9(pa: ?*anyopaque, fillRule: i32) QtC.QRegion {
-        return qtc.QRegion_new9(@ptrCast(pa), @intCast(fillRule));
+    pub fn New7(r: ?*anyopaque, t: i32) QtC.QRegion {
+        return qtc.QRegion_new7(@ptrCast(r), @intCast(t));
     }
 
 
@@ -89,22 +77,6 @@ pub const qregion = struct {
 
     pub fn Cend(self: ?*anyopaque, ) QtC.QRect {
         return qtc.QRegion_Cend(@ptrCast(self));
-    }
-
-    pub fn Rbegin(self: ?*anyopaque, ) std::reverse_iterator<const QRect *> {
-        return qtc.QRegion_Rbegin(@ptrCast(self));
-    }
-
-    pub fn Crbegin(self: ?*anyopaque, ) std::reverse_iterator<const QRect *> {
-        return qtc.QRegion_Crbegin(@ptrCast(self));
-    }
-
-    pub fn Rend(self: ?*anyopaque, ) std::reverse_iterator<const QRect *> {
-        return qtc.QRegion_Rend(@ptrCast(self));
-    }
-
-    pub fn Crend(self: ?*anyopaque, ) std::reverse_iterator<const QRect *> {
-        return qtc.QRegion_Crend(@ptrCast(self));
     }
 
     pub fn Contains(self: ?*anyopaque, p: ?*anyopaque) bool {

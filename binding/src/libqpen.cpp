@@ -55,11 +55,20 @@ void QPen_SetStyle(QPen* self, int style) {
 }
 
 libqt_list QPen_DashPattern(const QPen* self) {
-	return self->dashPattern();
+	auto _ret = self->dashPattern();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QPen_SetDashPattern(QPen* self, const libqt_list pattern) {
-	self->setDashPattern(*pattern);
+	self->setDashPattern(QList<double>());
 }
 
 double QPen_DashOffset(const QPen* self) {
@@ -152,10 +161,6 @@ QVariant* QPen_OperatorQVariant(const QPen* self) {
 
 bool QPen_IsDetached(QPen* self) {
 	return self->isDetached();
-}
-
-QExplicitlySharedDataPointer<QPenPrivate>* QPen_DataPtr(QPen* self) {
-	return self->data_ptr();
 }
 
 void QPen_Delete(QPen* self) {

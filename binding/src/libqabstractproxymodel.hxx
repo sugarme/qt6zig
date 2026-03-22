@@ -343,7 +343,7 @@ public:
 		} else if (qabstractproxymodel_itemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
 			libqt_map callback_ret = qabstractproxymodel_itemdata_callback(this, cbval1);
-			return callback_ret;
+			return QMap<int, QVariant>();
 		} else {
 			return QAbstractProxyModel::itemData(index);
 		}
@@ -386,7 +386,10 @@ public:
 			return QAbstractProxyModel::setItemData(index, roles);
 		} else if (qabstractproxymodel_setitemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
-			libqt_map cbval2 = roles;
+			libqt_map cbval2;
+			cbval2.len = roles.size();
+			cbval2.keys = nullptr;
+			cbval2.values = nullptr;
 			bool callback_ret = qabstractproxymodel_setitemdata_callback(this, cbval1, cbval2);
 			return callback_ret;
 		} else {
@@ -530,7 +533,9 @@ public:
 			qabstractproxymodel_mimedata_isbase = false;
 			return QAbstractProxyModel::mimeData(indexes);
 		} else if (qabstractproxymodel_mimedata_callback != nullptr) {
-			libqt_list cbval1 = indexes;
+			libqt_list cbval1;
+			cbval1.len = indexes.size();
+			cbval1.data = nullptr;
 			QMimeData* callback_ret = qabstractproxymodel_mimedata_callback(this, cbval1);
 			return callback_ret;
 		} else {
@@ -581,7 +586,7 @@ public:
 			return QAbstractProxyModel::mimeTypes();
 		} else if (qabstractproxymodel_mimetypes_callback != nullptr) {
 			libqt_list callback_ret = qabstractproxymodel_mimetypes_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QAbstractProxyModel::mimeTypes();
 		}
@@ -620,7 +625,7 @@ public:
 			return QAbstractProxyModel::roleNames();
 		} else if (qabstractproxymodel_rolenames_callback != nullptr) {
 			libqt_map callback_ret = qabstractproxymodel_rolenames_callback();
-			return callback_ret;
+			return QHash<int, QByteArray>();
 		} else {
 			return QAbstractProxyModel::roleNames();
 		}

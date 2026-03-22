@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qlegendmarker.h>
 #include "libqlegendmarker.h"
 #include "libqlegendmarker.hxx"

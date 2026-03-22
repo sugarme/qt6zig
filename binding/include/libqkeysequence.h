@@ -57,7 +57,6 @@ bool QKeySequence_OperatorGreater(const QKeySequence* self, const QKeySequence* 
 bool QKeySequence_OperatorLesserOrEqual(const QKeySequence* self, const QKeySequence* other);
 bool QKeySequence_OperatorGreaterOrEqual(const QKeySequence* self, const QKeySequence* other);
 bool QKeySequence_IsDetached(const QKeySequence* self);
-QKeySequencePrivate** QKeySequence_DataPtr(QKeySequence* self);
 libqt_string QKeySequence_ToString1(const QKeySequence* self, int format);
 QKeySequence* QKeySequence_FromString2(const libqt_string str, int format);
 libqt_list QKeySequence_ListFromString2(const libqt_string str, int format);

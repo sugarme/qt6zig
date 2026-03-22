@@ -55,10 +55,6 @@ void QOpenGLFunctions_3_3_Core_GlGetFloatv(QOpenGLFunctions_3_3_Core* self, uint
 	self->glGetFloatv(pname, params);
 }
 
-GL QOpenGLFunctions_3_3_Core_GlGetError(QOpenGLFunctions_3_3_Core* self) {
-	return self->glGetError();
-}
-
 void QOpenGLFunctions_3_3_Core_GlGetDoublev(QOpenGLFunctions_3_3_Core* self, uint32_t pname, double* params) {
 	self->glGetDoublev(pname, params);
 }
@@ -579,14 +575,6 @@ void QOpenGLFunctions_3_3_Core_GlGetAttachedShaders(QOpenGLFunctions_3_3_Core* s
 	self->glGetAttachedShaders(program, maxCount, count, obj);
 }
 
-void QOpenGLFunctions_3_3_Core_GlGetActiveUniform(QOpenGLFunctions_3_3_Core* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name) {
-	self->glGetActiveUniform(program, index, bufSize, length, size, typeVal, name);
-}
-
-void QOpenGLFunctions_3_3_Core_GlGetActiveAttrib(QOpenGLFunctions_3_3_Core* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name) {
-	self->glGetActiveAttrib(program, index, bufSize, length, size, typeVal, name);
-}
-
 void QOpenGLFunctions_3_3_Core_GlEnableVertexAttribArray(QOpenGLFunctions_3_3_Core* self, uint32_t index) {
 	self->glEnableVertexAttribArray(index);
 }
@@ -637,10 +625,6 @@ void QOpenGLFunctions_3_3_Core_GlStencilFuncSeparate(QOpenGLFunctions_3_3_Core* 
 
 void QOpenGLFunctions_3_3_Core_GlStencilOpSeparate(QOpenGLFunctions_3_3_Core* self, uint32_t face, uint32_t sfail, uint32_t dpfail, uint32_t dppass) {
 	self->glStencilOpSeparate(face, sfail, dpfail, dppass);
-}
-
-void QOpenGLFunctions_3_3_Core_GlDrawBuffers(QOpenGLFunctions_3_3_Core* self, int32_t n, const GL* bufs) {
-	self->glDrawBuffers(n, bufs);
 }
 
 void QOpenGLFunctions_3_3_Core_GlBlendEquationSeparate(QOpenGLFunctions_3_3_Core* self, uint32_t modeRGB, uint32_t modeAlpha) {
@@ -729,10 +713,6 @@ void QOpenGLFunctions_3_3_Core_GlFramebufferTexture2D(QOpenGLFunctions_3_3_Core*
 
 void QOpenGLFunctions_3_3_Core_GlFramebufferTexture1D(QOpenGLFunctions_3_3_Core* self, uint32_t target, uint32_t attachment, uint32_t textarget, uint32_t texture, int32_t level) {
 	self->glFramebufferTexture1D(target, attachment, textarget, texture, level);
-}
-
-GL QOpenGLFunctions_3_3_Core_GlCheckFramebufferStatus(QOpenGLFunctions_3_3_Core* self, uint32_t target) {
-	return self->glCheckFramebufferStatus(target);
 }
 
 void QOpenGLFunctions_3_3_Core_GlGenFramebuffers(QOpenGLFunctions_3_3_Core* self, int32_t n, uint32_t* framebuffers) {
@@ -879,10 +859,6 @@ void QOpenGLFunctions_3_3_Core_GlClampColor(QOpenGLFunctions_3_3_Core* self, uin
 	self->glClampColor(target, clamp);
 }
 
-void QOpenGLFunctions_3_3_Core_GlGetTransformFeedbackVarying(QOpenGLFunctions_3_3_Core* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name) {
-	self->glGetTransformFeedbackVarying(program, index, bufSize, length, size, typeVal, name);
-}
-
 void QOpenGLFunctions_3_3_Core_GlTransformFeedbackVaryings(QOpenGLFunctions_3_3_Core* self, uint32_t program, int32_t count, const GLchar** varyings, uint32_t bufferMode) {
 	self->glTransformFeedbackVaryings(program, count, varyings, bufferMode);
 }
@@ -991,32 +967,8 @@ void QOpenGLFunctions_3_3_Core_GlTexImage2DMultisample(QOpenGLFunctions_3_3_Core
 	self->glTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
 }
 
-void QOpenGLFunctions_3_3_Core_GlGetSynciv(QOpenGLFunctions_3_3_Core* self, GLsync sync, uint32_t pname, int32_t bufSize, int32_t* length, int32_t* values) {
-	self->glGetSynciv(sync, pname, bufSize, length, values);
-}
-
 void QOpenGLFunctions_3_3_Core_GlGetInteger64v(QOpenGLFunctions_3_3_Core* self, uint32_t pname, int64_t* params) {
 	self->glGetInteger64v(pname, params);
-}
-
-void QOpenGLFunctions_3_3_Core_GlWaitSync(QOpenGLFunctions_3_3_Core* self, GLsync sync, uint32_t flags, uint64_t timeout) {
-	self->glWaitSync(sync, flags, timeout);
-}
-
-GL QOpenGLFunctions_3_3_Core_GlClientWaitSync(QOpenGLFunctions_3_3_Core* self, GLsync sync, uint32_t flags, uint64_t timeout) {
-	return self->glClientWaitSync(sync, flags, timeout);
-}
-
-void QOpenGLFunctions_3_3_Core_GlDeleteSync(QOpenGLFunctions_3_3_Core* self, GLsync sync) {
-	self->glDeleteSync(sync);
-}
-
-unsigned char QOpenGLFunctions_3_3_Core_GlIsSync(QOpenGLFunctions_3_3_Core* self, GLsync sync) {
-	return self->glIsSync(sync);
-}
-
-GLsync QOpenGLFunctions_3_3_Core_GlFenceSync(QOpenGLFunctions_3_3_Core* self, uint32_t condition, uint32_t flags) {
-	return self->glFenceSync(condition, flags);
 }
 
 void QOpenGLFunctions_3_3_Core_GlProvokingVertex(QOpenGLFunctions_3_3_Core* self, uint32_t mode) {

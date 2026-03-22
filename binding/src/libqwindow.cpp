@@ -24,6 +24,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSurface>
 #include <QSurfaceFormat>
 #include <QTabletEvent>
@@ -347,10 +348,6 @@ void QWindow_Destroy(QWindow* self) {
 	self->destroy();
 }
 
-QPlatformWindow* QWindow_Handle(const QWindow* self) {
-	return self->handle();
-}
-
 bool QWindow_SetKeyboardGrabEnabled(QWindow* self, bool grab) {
 	return self->setKeyboardGrabEnabled(grab);
 }
@@ -405,14 +402,6 @@ void QWindow_UnsetCursor(QWindow* self) {
 
 QWindow* QWindow_FromWinId(uintptr_t id) {
 	return QWindow::fromWinId(id);
-}
-
-void QWindow_SetVulkanInstance(QWindow* self, QVulkanInstance* instance) {
-	self->setVulkanInstance(instance);
-}
-
-QVulkanInstance* QWindow_VulkanInstance(const QWindow* self) {
-	return self->vulkanInstance();
 }
 
 void QWindow_RequestActivate(QWindow* self) {

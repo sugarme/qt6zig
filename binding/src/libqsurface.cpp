@@ -17,10 +17,6 @@ QSurfaceFormat* QSurface_Format(const QSurface* self) {
 	return new QSurfaceFormat(self->format());
 }
 
-QPlatformSurface* QSurface_SurfaceHandle(const QSurface* self) {
-	return self->surfaceHandle();
-}
-
 int QSurface_SurfaceType(const QSurface* self) {
 	return self->surfaceType();
 }
@@ -47,23 +43,6 @@ void QSurface_OnFormat(const QSurface* self, intptr_t slot) {
 	auto* vqsurface = dynamic_cast<const VirtualQSurface*>(self);
 	if (vqsurface && vqsurface->isVirtualQSurface) {
 vqsurface->setQSurface_Format_Callback(reinterpret_cast<VirtualQSurface::QSurface_Format_Callback>(slot));
-}
-}
-
-// Base class handler implementation
-QPlatformSurface* QSurface_QBaseSurfaceHandle(const QSurface* self) {
-	auto* vqsurface = dynamic_cast<const VirtualQSurface*>(self);
-	if (vqsurface && vqsurface->isVirtualQSurface) {
-vqsurface->setQSurface_SurfaceHandle_IsBase(true);
-	return vqsurface->surfaceHandle();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QSurface_OnSurfaceHandle(const QSurface* self, intptr_t slot) {
-	auto* vqsurface = dynamic_cast<const VirtualQSurface*>(self);
-	if (vqsurface && vqsurface->isVirtualQSurface) {
-vqsurface->setQSurface_SurfaceHandle_Callback(reinterpret_cast<VirtualQSurface::QSurface_SurfaceHandle_Callback>(slot));
 }
 }
 

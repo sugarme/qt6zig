@@ -23,8 +23,6 @@ typedef struct type_info type_info;
 
 
 QContiguousCacheData* QContiguousCacheData_new();
-QBasicAtomicInteger<int> QContiguousCacheData_Ref(const QContiguousCacheData* self);
-void QContiguousCacheData_SetRef(QContiguousCacheData* self, QBasicAtomicInteger<int> ref);
 ptrdiff_t QContiguousCacheData_Alloc(const QContiguousCacheData* self);
 void QContiguousCacheData_SetAlloc(QContiguousCacheData* self, ptrdiff_t alloc);
 ptrdiff_t QContiguousCacheData_Count(const QContiguousCacheData* self);

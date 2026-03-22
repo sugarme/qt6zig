@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QVariantAnimation>
 #include <qvariantanimation.h>
@@ -55,11 +56,20 @@ void QVariantAnimation_SetKeyValueAt(QVariantAnimation* self, double step, const
 }
 
 libqt_list QVariantAnimation_KeyValues(const QVariantAnimation* self) {
-	return self->keyValues();
+	auto _ret = self->keyValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QVariantAnimation_SetKeyValues(QVariantAnimation* self, const libqt_list values) {
-	self->setKeyValues(*values);
+	self->setKeyValues(QList<QPair<double, QVariant>>());
 }
 
 QVariant* QVariantAnimation_CurrentValue(const QVariantAnimation* self) {
@@ -74,20 +84,12 @@ void QVariantAnimation_SetDuration(QVariantAnimation* self, int msecs) {
 	self->setDuration(msecs);
 }
 
-QBindable<int> QVariantAnimation_BindableDuration(QVariantAnimation* self) {
-	return self->bindableDuration();
-}
-
 QEasingCurve* QVariantAnimation_EasingCurve(const QVariantAnimation* self) {
 	return new QEasingCurve(self->easingCurve());
 }
 
 void QVariantAnimation_SetEasingCurve(QVariantAnimation* self, const QEasingCurve* easing) {
 	self->setEasingCurve(*easing);
-}
-
-QBindable<QEasingCurve> QVariantAnimation_BindableEasingCurve(QVariantAnimation* self) {
-	return self->bindableEasingCurve();
 }
 
 void QVariantAnimation_ValueChanged(QVariantAnimation* self, const QVariant* value) {

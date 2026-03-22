@@ -29,20 +29,6 @@ pub const qsurface = struct {
         return qtc.QSurface_QBaseFormat(@ptrCast(self));
     }
 
-    pub fn SurfaceHandle(self: ?*anyopaque, ) QPlatformSurface {
-        return @ptrCast(qtc.QSurface_SurfaceHandle(@ptrCast(self)));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnSurfaceHandle(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) QPlatformSurface) void {
-        qtc.QSurface_OnSurfaceHandle(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseSurfaceHandle(self: ?*anyopaque, ) QPlatformSurface {
-        return @ptrCast(qtc.QSurface_QBaseSurfaceHandle(@ptrCast(self)));
-    }
-
     pub fn SurfaceType(self: ?*anyopaque, ) i32 {
         return qtc.QSurface_SurfaceType(@ptrCast(self));
     }

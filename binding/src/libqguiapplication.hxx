@@ -20,20 +20,17 @@ public:
 	// Virtual class public types (including callbacks)
 	using QGuiApplication_Notify_Callback = bool (*)(QGuiApplication*, QObject*, QEvent*);
 	using QGuiApplication_Event_Callback = bool (*)(QGuiApplication*, QEvent*);
-	using QGuiApplication_CompressEvent_Callback = bool (*)(QGuiApplication*, QEvent*, QObject*, QPostEventList*);
 	using QGuiApplication_ResolveInterface_Callback = void* (*)(const QGuiApplication*, const char*, int);
 
 protected:
 	// Instance callback storage
 	mutable QGuiApplication_Notify_Callback qguiapplication_notify_callback = nullptr;
 	mutable QGuiApplication_Event_Callback qguiapplication_event_callback = nullptr;
-	mutable QGuiApplication_CompressEvent_Callback qguiapplication_compressevent_callback = nullptr;
 	mutable QGuiApplication_ResolveInterface_Callback qguiapplication_resolveinterface_callback = nullptr;
 
 	// Instance base flags
     mutable bool qguiapplication_notify_isbase = false;
     mutable bool qguiapplication_event_isbase = false;
-    mutable bool qguiapplication_compressevent_isbase = false;
     mutable bool qguiapplication_resolveinterface_isbase = false;
 
 public:
@@ -43,20 +40,17 @@ public:
 	~VirtualQGuiApplication() {
 		qguiapplication_notify_callback = nullptr;
 		qguiapplication_event_callback = nullptr;
-		qguiapplication_compressevent_callback = nullptr;
 		qguiapplication_resolveinterface_callback = nullptr;
 	}
 
 // Callback setters
 	inline void setQGuiApplication_Notify_Callback(QGuiApplication_Notify_Callback cb) const { qguiapplication_notify_callback = cb; }
 	inline void setQGuiApplication_Event_Callback(QGuiApplication_Event_Callback cb) const { qguiapplication_event_callback = cb; }
-	inline void setQGuiApplication_CompressEvent_Callback(QGuiApplication_CompressEvent_Callback cb) const { qguiapplication_compressevent_callback = cb; }
 	inline void setQGuiApplication_ResolveInterface_Callback(QGuiApplication_ResolveInterface_Callback cb) const { qguiapplication_resolveinterface_callback = cb; }
 
 // Base flag setters
 	inline void setQGuiApplication_Notify_IsBase(bool value) const { qguiapplication_notify_isbase = value; }
 	inline void setQGuiApplication_Event_IsBase(bool value) const { qguiapplication_event_isbase = value; }
-	inline void setQGuiApplication_CompressEvent_IsBase(bool value) const { qguiapplication_compressevent_isbase = value; }
 	inline void setQGuiApplication_ResolveInterface_IsBase(bool value) const { qguiapplication_resolveinterface_isbase = value; }
 
 
@@ -90,22 +84,6 @@ public:
 	}
 
 	// Virtual method for C ABI access and custom callback
-	virtual bool compressEvent(QEvent* param1, QObject* receiver, QPostEventList* param3) override {
-		if (qguiapplication_compressevent_isbase) {
-			qguiapplication_compressevent_isbase = false;
-			return QGuiApplication::compressEvent(param1, receiver, param3);
-		} else if (qguiapplication_compressevent_callback != nullptr) {
-			QEvent* cbval1 = param1;
-			QObject* cbval2 = receiver;
-			QPostEventList* cbval3 = param3;
-			bool callback_ret = qguiapplication_compressevent_callback(this, cbval1, cbval2, cbval3);
-			return callback_ret;
-		} else {
-			return QGuiApplication::compressEvent(param1, receiver, param3);
-		}
-	}
-
-	// Virtual method for C ABI access and custom callback
 	void* resolveInterface(const char* name, int revision) const {
 		if (qguiapplication_resolveinterface_isbase) {
 			qguiapplication_resolveinterface_isbase = false;
@@ -123,8 +101,6 @@ public:
 	// Friend functions
 	friend bool QGuiApplication_Event(QGuiApplication* self, QEvent* param1);
 	friend bool QGuiApplication_QBaseEvent(QGuiApplication* self, QEvent* param1);
-	friend bool QGuiApplication_CompressEvent(QGuiApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3);
-	friend bool QGuiApplication_QBaseCompressEvent(QGuiApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3);
 	friend void* QGuiApplication_ResolveInterface(const QGuiApplication* self, const char* name, int revision);
 	friend void* QGuiApplication_QBaseResolveInterface(const QGuiApplication* self, const char* name, int revision);
 };

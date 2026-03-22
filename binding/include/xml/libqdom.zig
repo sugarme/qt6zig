@@ -849,14 +849,6 @@ return qtc.QDomDocument_SetContent6(@ptrCast(self), @ptrCast(dev), errorMsg_str)
         return qtc.QDomDocument_SetContent7(@ptrCast(self), @ptrCast(reader), namespaceProcessing);
     }
 
-    pub fn SetContent8(self: ?*anyopaque, data: []const u8) QtC.QDomDocument__ParseResult {
-        const data_str = qtc.libqt_string{
-    .len = data.len,
-    .data = data.ptr,
-};
-return qtc.QDomDocument_SetContent8(@ptrCast(self), data_str);
-    }
-
     pub fn SetContent9(self: ?*anyopaque, device: ?*anyopaque) QtC.QDomDocument__ParseResult {
         return qtc.QDomDocument_SetContent9(@ptrCast(self), @ptrCast(device));
     }
@@ -1063,14 +1055,6 @@ return qtc.QDomDocument_SetContent48(@ptrCast(self), @ptrCast(reader), namespace
     .data = errorMsg.ptr,
 };
 return qtc.QDomDocument_SetContent55(@ptrCast(self), @ptrCast(reader), namespaceProcessing, errorMsg_str, @ptrCast(errorLine), @ptrCast(errorColumn));
-    }
-
-    pub fn SetContent22(self: ?*anyopaque, data: []const u8, options: i32) QtC.QDomDocument__ParseResult {
-        const data_str = qtc.libqt_string{
-    .len = data.len,
-    .data = data.ptr,
-};
-return qtc.QDomDocument_SetContent22(@ptrCast(self), data_str, @intCast(options));
     }
 
     pub fn SetContent23(self: ?*anyopaque, device: ?*anyopaque, options: i32) QtC.QDomDocument__ParseResult {

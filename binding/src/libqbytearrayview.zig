@@ -279,22 +279,6 @@ return  _ret;
         return @ptrCast(qtc.QByteArrayView_Cend(@ptrCast(self)));
     }
 
-    pub fn Rbegin(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArrayView_Rbegin(@ptrCast(self));
-    }
-
-    pub fn Rend(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArrayView_Rend(@ptrCast(self));
-    }
-
-    pub fn Crbegin(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArrayView_Crbegin(@ptrCast(self));
-    }
-
-    pub fn Crend(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArrayView_Crend(@ptrCast(self));
-    }
-
     pub fn Empty(self: ?*anyopaque, ) bool {
         return qtc.QByteArrayView_Empty(@ptrCast(self));
     }

@@ -87,7 +87,6 @@ void QCoreApplication_Connect_ApplicationNameChanged(QCoreApplication* self, int
 void QCoreApplication_ApplicationVersionChanged(QCoreApplication* self);
 void QCoreApplication_Connect_ApplicationVersionChanged(QCoreApplication* self, intptr_t slot);
 bool QCoreApplication_Event(QCoreApplication* self, QEvent* param1);
-bool QCoreApplication_CompressEvent(QCoreApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3);
 libqt_string QCoreApplication_Tr2(const char* s, const char* c);
 libqt_string QCoreApplication_Tr3(const char* s, const char* c, int n);
 void QCoreApplication_SetAttribute2(int attribute, bool on);
@@ -103,8 +102,6 @@ void QCoreApplication_OnNotify(QCoreApplication* self, intptr_t slot);
 bool QCoreApplication_QBaseNotify(QCoreApplication* self, QObject* param1, QEvent* param2);
 void QCoreApplication_OnEvent(QCoreApplication* self, intptr_t slot);
 bool QCoreApplication_QBaseEvent(QCoreApplication* self, QEvent* param1);
-void QCoreApplication_OnCompressEvent(QCoreApplication* self, intptr_t slot);
-bool QCoreApplication_QBaseCompressEvent(QCoreApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3);
 void* QCoreApplication_ResolveInterface(const QCoreApplication* self, const char* name, int revision);
 void QCoreApplication_OnResolveInterface(const QCoreApplication* self, intptr_t slot);
 void* QCoreApplication_QBaseResolveInterface(const QCoreApplication* self, const char* name, int revision);

@@ -1,4 +1,3 @@
-#include <QAnyStringView>
 #include <QByteArray>
 #include <QByteArrayView>
 #include <QChar>
@@ -7,7 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <qstring.h>
 #include "libqstring.h"
 #include "libqstring.hxx"
@@ -28,31 +27,23 @@ QString* QString_new4(ptrdiff_t size, QChar* c) {
 	 return new QString(size, *c);
 }
 
-QString* QString_new5(QLatin1StringView latin1) {
-	 return new QString(latin1);
-}
-
-QString* QString_new6(QStringView* sv) {
-	 return new QString(*sv);
-}
-
-QString* QString_new7(const libqt_string param1) {
+QString* QString_new5(const libqt_string param1) {
 	 return new QString(QString::fromUtf8(param1.data, param1.len));
 }
 
-QString* QString_new8(const char* ch) {
+QString* QString_new6(const char* ch) {
 	 return new QString(ch);
 }
 
-QString* QString_new9(const libqt_string a) {
+QString* QString_new7(const libqt_string a) {
 	 return new QString(QByteArray(a.data, a.len));
 }
 
-QString* QString_new10(ptrdiff_t size, int param2) {
+QString* QString_new8(ptrdiff_t size, int param2) {
 	 return new QString(size, static_cast<Qt::Initialization>(param2));
 }
 
-QString* QString_new11(const QChar* unicode, ptrdiff_t size) {
+QString* QString_new9(const QChar* unicode, ptrdiff_t size) {
 	 return new QString(unicode, size);
 }
 
@@ -62,10 +53,6 @@ void QString_OperatorAssign(QString* self, QChar* c) {
 
 void QString_OperatorAssign2(QString* self, const libqt_string param1) {
 	self->operator=(QString::fromUtf8(param1.data, param1.len));
-}
-
-void QString_OperatorAssign3(QString* self, QLatin1StringView latin1) {
-	self->operator=(latin1);
 }
 
 void QString_Swap(QString* self, libqt_string other) {
@@ -349,28 +336,6 @@ libqt_string QString_Arg12(const QString* self, const libqt_string a) {
 	return _str;
 }
 
-libqt_string QString_Arg13(const QString* self, QStringView* a) {
-	QString _ret = self->arg(*a);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Arg14(const QString* self, QLatin1StringView a) {
-	QString _ret = self->arg(a);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Asprintf(const char* format, ... ) {
 	QString _ret = QString::asprintf(format, );
 	QByteArray _b = _ret.toUtf8();
@@ -386,16 +351,8 @@ ptrdiff_t QString_IndexOf(const QString* self, QChar* c) {
 	return self->indexOf(*c);
 }
 
-ptrdiff_t QString_IndexOf2(const QString* self, QLatin1StringView s) {
-	return self->indexOf(s);
-}
-
 ptrdiff_t QString_IndexOf3(const QString* self, const libqt_string s) {
 	return self->indexOf(QString::fromUtf8(s.data, s.len));
-}
-
-ptrdiff_t QString_IndexOf4(const QString* self, QStringView* s) {
-	return self->indexOf(*s);
 }
 
 ptrdiff_t QString_LastIndexOf(const QString* self, QChar* c) {
@@ -406,28 +363,12 @@ ptrdiff_t QString_LastIndexOf2(const QString* self, QChar* c, ptrdiff_t from) {
 	return self->lastIndexOf(*c, from);
 }
 
-ptrdiff_t QString_LastIndexOf3(const QString* self, QLatin1StringView s) {
-	return self->lastIndexOf(s);
-}
-
-ptrdiff_t QString_LastIndexOf4(const QString* self, QLatin1StringView s, ptrdiff_t from) {
-	return self->lastIndexOf(s, from);
-}
-
 ptrdiff_t QString_LastIndexOf5(const QString* self, const libqt_string s) {
 	return self->lastIndexOf(QString::fromUtf8(s.data, s.len));
 }
 
 ptrdiff_t QString_LastIndexOf6(const QString* self, const libqt_string s, ptrdiff_t from) {
 	return self->lastIndexOf(QString::fromUtf8(s.data, s.len), from);
-}
-
-ptrdiff_t QString_LastIndexOf7(const QString* self, QStringView* s) {
-	return self->lastIndexOf(*s);
-}
-
-ptrdiff_t QString_LastIndexOf8(const QString* self, QStringView* s, ptrdiff_t from) {
-	return self->lastIndexOf(*s, from);
 }
 
 bool QString_Contains(const QString* self, QChar* c) {
@@ -438,24 +379,12 @@ bool QString_Contains2(const QString* self, const libqt_string s) {
 	return self->contains(QString::fromUtf8(s.data, s.len));
 }
 
-bool QString_Contains3(const QString* self, QLatin1StringView s) {
-	return self->contains(s);
-}
-
-bool QString_Contains4(const QString* self, QStringView* s) {
-	return self->contains(*s);
-}
-
 ptrdiff_t QString_Count2(const QString* self, QChar* c) {
 	return self->count(*c);
 }
 
 ptrdiff_t QString_Count3(const QString* self, const libqt_string s) {
 	return self->count(QString::fromUtf8(s.data, s.len));
-}
-
-ptrdiff_t QString_Count4(const QString* self, QStringView* s) {
-	return self->count(*s);
 }
 
 ptrdiff_t QString_IndexOf5(const QString* self, const QRegularExpression* re) {
@@ -599,28 +528,12 @@ bool QString_StartsWith(const QString* self, const libqt_string s) {
 	return self->startsWith(QString::fromUtf8(s.data, s.len));
 }
 
-bool QString_StartsWith2(const QString* self, QStringView* s) {
-	return self->startsWith(*s);
-}
-
-bool QString_StartsWith3(const QString* self, QLatin1StringView s) {
-	return self->startsWith(s);
-}
-
 bool QString_StartsWith4(const QString* self, QChar* c) {
 	return self->startsWith(*c);
 }
 
 bool QString_EndsWith(const QString* self, const libqt_string s) {
 	return self->endsWith(QString::fromUtf8(s.data, s.len));
-}
-
-bool QString_EndsWith2(const QString* self, QStringView* s) {
-	return self->endsWith(*s);
-}
-
-bool QString_EndsWith3(const QString* self, QLatin1StringView s) {
-	return self->endsWith(s);
 }
 
 bool QString_EndsWith4(const QString* self, QChar* c) {
@@ -756,39 +669,6 @@ libqt_string QString_Insert3(QString* self, ptrdiff_t i, const libqt_string s) {
 	return _str;
 }
 
-libqt_string QString_Insert4(QString* self, ptrdiff_t i, QStringView* v) {
-	QString _ret = self->insert(i, *v);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Insert5(QString* self, ptrdiff_t i, QLatin1StringView s) {
-	QString _ret = self->insert(i, s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Insert6(QString* self, ptrdiff_t i, QUtf8StringView s) {
-	QString _ret = self->insert(i, s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Append(QString* self, QChar* c) {
 	QString _ret = self->append(*c);
 	QByteArray _b = _ret.toUtf8();
@@ -813,39 +693,6 @@ libqt_string QString_Append2(QString* self, const QChar* uc, ptrdiff_t lenVal) {
 
 libqt_string QString_Append3(QString* self, const libqt_string s) {
 	QString _ret = self->append(QString::fromUtf8(s.data, s.len));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Append4(QString* self, QStringView* v) {
-	QString _ret = self->append(*v);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Append5(QString* self, QLatin1StringView s) {
-	QString _ret = self->append(s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Append6(QString* self, QUtf8StringView s) {
-	QString _ret = self->append(s);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -888,50 +735,6 @@ libqt_string QString_Prepend3(QString* self, const libqt_string s) {
 	return _str;
 }
 
-libqt_string QString_Prepend4(QString* self, QStringView* v) {
-	QString _ret = self->prepend(*v);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Prepend5(QString* self, QLatin1StringView s) {
-	QString _ret = self->prepend(s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Prepend6(QString* self, QUtf8StringView s) {
-	QString _ret = self->prepend(s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Assign(QString* self, libqt_string s) {
-	QString _ret = self->assign(QAnyStringView(QString::fromUtf8(s.data, s.len)));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Assign2(QString* self, ptrdiff_t n, QChar* c) {
 	QString _ret = self->assign(n, *c);
 	QByteArray _b = _ret.toUtf8();
@@ -965,39 +768,6 @@ libqt_string QString_OperatorPlusAssign2(QString* self, const libqt_string s) {
 	return _str;
 }
 
-libqt_string QString_OperatorPlusAssign3(QString* self, QStringView* v) {
-	QString _ret = self->operator+=(*v);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_OperatorPlusAssign4(QString* self, QLatin1StringView s) {
-	QString _ret = self->operator+=(s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_OperatorPlusAssign5(QString* self, QUtf8StringView s) {
-	QString _ret = self->operator+=(s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Remove(QString* self, ptrdiff_t i, ptrdiff_t lenVal) {
 	QString _ret = self->remove(i, lenVal);
 	QByteArray _b = _ret.toUtf8();
@@ -1011,17 +781,6 @@ libqt_string QString_Remove(QString* self, ptrdiff_t i, ptrdiff_t lenVal) {
 
 libqt_string QString_Remove2(QString* self, QChar* c) {
 	QString _ret = self->remove(*c);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Remove3(QString* self, QLatin1StringView s) {
-	QString _ret = self->remove(s);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -1130,39 +889,6 @@ libqt_string QString_Replace5(QString* self, const QChar* before, ptrdiff_t blen
 	return _str;
 }
 
-libqt_string QString_Replace6(QString* self, QLatin1StringView before, QLatin1StringView after) {
-	QString _ret = self->replace(before, after);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Replace7(QString* self, QLatin1StringView before, const libqt_string after) {
-	QString _ret = self->replace(before, QString::fromUtf8(after.data, after.len));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Replace8(QString* self, const libqt_string before, QLatin1StringView after) {
-	QString _ret = self->replace(QString::fromUtf8(before.data, before.len), after);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Replace9(QString* self, const libqt_string before, const libqt_string after) {
 	QString _ret = self->replace(QString::fromUtf8(before.data, before.len), QString::fromUtf8(after.data, after.len));
 	QByteArray _b = _ret.toUtf8();
@@ -1176,17 +902,6 @@ libqt_string QString_Replace9(QString* self, const libqt_string before, const li
 
 libqt_string QString_Replace10(QString* self, QChar* c, const libqt_string after) {
 	QString _ret = self->replace(*c, QString::fromUtf8(after.data, after.len));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Replace11(QString* self, QChar* c, QLatin1StringView after) {
-	QString _ret = self->replace(*c, after);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -1219,15 +934,57 @@ libqt_string QString_Remove5(QString* self, const QRegularExpression* re) {
 }
 
 libqt_list QString_Split(const QString* self, const libqt_string sep) {
-	return self->split(QString::fromUtf8(sep.data, sep.len));
+	auto _ret = self->split(QString::fromUtf8(sep.data, sep.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QString_Split2(const QString* self, QChar* sep) {
-	return self->split(*sep);
+	auto _ret = self->split(*sep);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QString_Split3(const QString* self, const QRegularExpression* sep) {
-	return self->split(*sep);
+	auto _ret = self->split(*sep);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QString_Normalized(const QString* self, int mode) {
@@ -1287,7 +1044,16 @@ libqt_string QString_ToLocal8Bit(const QString* self) {
 }
 
 libqt_list QString_ToUcs4(const QString* self) {
-	return self->toUcs4();
+	auto _ret = self->toUcs4();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QString_FromLatin1(QByteArrayView* ba) {
@@ -1426,14 +1192,6 @@ int QString_Compare(const QString* self, const libqt_string s) {
 	return self->compare(QString::fromUtf8(s.data, s.len));
 }
 
-int QString_Compare2(const QString* self, QLatin1StringView other) {
-	return self->compare(other);
-}
-
-int QString_Compare3(const QString* self, QStringView* s) {
-	return self->compare(*s);
-}
-
 int QString_Compare4(const QString* self, QChar* ch) {
 	return self->compare(*ch);
 }
@@ -1442,36 +1200,12 @@ int QString_Compare5(const libqt_string s1, const libqt_string s2) {
 	return QString::compare(QString::fromUtf8(s1.data, s1.len), QString::fromUtf8(s2.data, s2.len));
 }
 
-int QString_Compare6(const libqt_string s1, QLatin1StringView s2) {
-	return QString::compare(QString::fromUtf8(s1.data, s1.len), s2);
-}
-
-int QString_Compare7(QLatin1StringView s1, const libqt_string s2) {
-	return QString::compare(s1, QString::fromUtf8(s2.data, s2.len));
-}
-
-int QString_Compare8(const libqt_string s1, QStringView* s2) {
-	return QString::compare(QString::fromUtf8(s1.data, s1.len), *s2);
-}
-
-int QString_Compare9(QStringView* s1, const libqt_string s2) {
-	return QString::compare(*s1, QString::fromUtf8(s2.data, s2.len));
-}
-
 int QString_LocaleAwareCompare(const QString* self, const libqt_string s) {
 	return self->localeAwareCompare(QString::fromUtf8(s.data, s.len));
 }
 
-int QString_LocaleAwareCompare2(const QString* self, QStringView* s) {
-	return self->localeAwareCompare(*s);
-}
-
 int QString_LocaleAwareCompare3(const libqt_string s1, const libqt_string s2) {
 	return QString::localeAwareCompare(QString::fromUtf8(s1.data, s1.len), QString::fromUtf8(s2.data, s2.len));
-}
-
-int QString_LocaleAwareCompare4(QStringView* s1, QStringView* s2) {
-	return QString::localeAwareCompare(*s1, *s2);
 }
 
 int16_t QString_ToShort(const QString* self) {
@@ -1829,30 +1563,6 @@ const QChar** QString_ConstEnd(const QString* self) {
 	return self->constEnd();
 }
 
-std::reverse_iterator<QChar *> QString_Rbegin(QString* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<QChar *> QString_Rend(QString* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const QChar *> QString_Rbegin2(const QString* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<const QChar *> QString_Rend2(const QString* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const QChar *> QString_Crbegin(const QString* self) {
-	return self->crbegin();
-}
-
-std::reverse_iterator<const QChar *> QString_Crend(const QString* self) {
-	return self->crend();
-}
-
 void QString_PushBack(QString* self, QChar* c) {
 	self->push_back(*c);
 }
@@ -1883,55 +1593,6 @@ QChar** QString_Erase2(QString* self, const QChar** it) {
 
 ptrdiff_t QString_MaxSize2(const QString* self) {
 	return self->max_size();
-}
-
-libqt_string QString_FromStdWString(const std::wstring* s) {
-	QString _ret = QString::fromStdWString(*s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-std::wstring QString_ToStdWString(const QString* self) {
-	return self->toStdWString();
-}
-
-libqt_string QString_FromStdU16String(const std::u16string* s) {
-	QString _ret = QString::fromStdU16String(*s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-std::u16string QString_ToStdU16String(const QString* self) {
-	return self->toStdU16String();
-}
-
-libqt_string QString_FromStdU32String(const std::u32string* s) {
-	QString _ret = QString::fromStdU32String(*s);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-std::u32string QString_ToStdU32String(const QString* self) {
-	return self->toStdU32String();
-}
-
-std::u16string_view QString_OperatorbasicStringView(const QString* self) {
-	return self->operator basic_string_view();
 }
 
 bool QString_IsNull(const QString* self) {
@@ -2331,64 +1992,12 @@ libqt_string QString_Arg313(const QString* self, const libqt_string a, int field
 	return _str;
 }
 
-libqt_string QString_Arg214(const QString* self, QStringView* a, int fieldWidth) {
-	QString _ret = self->arg(*a, fieldWidth);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Arg314(const QString* self, QStringView* a, int fieldWidth, QChar* fillChar) {
-	QString _ret = self->arg(*a, fieldWidth, *fillChar);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Arg215(const QString* self, QLatin1StringView a, int fieldWidth) {
-	QString _ret = self->arg(a, fieldWidth);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Arg315(const QString* self, QLatin1StringView a, int fieldWidth, QChar* fillChar) {
-	QString _ret = self->arg(a, fieldWidth, *fillChar);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 ptrdiff_t QString_IndexOf22(const QString* self, QChar* c, ptrdiff_t from) {
 	return self->indexOf(*c, from);
 }
 
 ptrdiff_t QString_IndexOf32(const QString* self, QChar* c, ptrdiff_t from, int cs) {
 	return self->indexOf(*c, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QString_IndexOf23(const QString* self, QLatin1StringView s, ptrdiff_t from) {
-	return self->indexOf(s, from);
-}
-
-ptrdiff_t QString_IndexOf33(const QString* self, QLatin1StringView s, ptrdiff_t from, int cs) {
-	return self->indexOf(s, from, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QString_IndexOf24(const QString* self, const libqt_string s, ptrdiff_t from) {
@@ -2399,28 +2008,12 @@ ptrdiff_t QString_IndexOf34(const QString* self, const libqt_string s, ptrdiff_t
 	return self->indexOf(QString::fromUtf8(s.data, s.len), from, static_cast<Qt::CaseSensitivity>(cs));
 }
 
-ptrdiff_t QString_IndexOf25(const QString* self, QStringView* s, ptrdiff_t from) {
-	return self->indexOf(*s, from);
-}
-
-ptrdiff_t QString_IndexOf35(const QString* self, QStringView* s, ptrdiff_t from, int cs) {
-	return self->indexOf(*s, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 ptrdiff_t QString_LastIndexOf22(const QString* self, QChar* c, int cs) {
 	return self->lastIndexOf(*c, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QString_LastIndexOf32(const QString* self, QChar* c, ptrdiff_t from, int cs) {
 	return self->lastIndexOf(*c, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QString_LastIndexOf23(const QString* self, QLatin1StringView s, int cs) {
-	return self->lastIndexOf(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QString_LastIndexOf33(const QString* self, QLatin1StringView s, ptrdiff_t from, int cs) {
-	return self->lastIndexOf(s, from, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QString_LastIndexOf24(const QString* self, const libqt_string s, int cs) {
@@ -2431,14 +2024,6 @@ ptrdiff_t QString_LastIndexOf34(const QString* self, const libqt_string s, ptrdi
 	return self->lastIndexOf(QString::fromUtf8(s.data, s.len), from, static_cast<Qt::CaseSensitivity>(cs));
 }
 
-ptrdiff_t QString_LastIndexOf25(const QString* self, QStringView* s, int cs) {
-	return self->lastIndexOf(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QString_LastIndexOf35(const QString* self, QStringView* s, ptrdiff_t from, int cs) {
-	return self->lastIndexOf(*s, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 bool QString_Contains22(const QString* self, QChar* c, int cs) {
 	return self->contains(*c, static_cast<Qt::CaseSensitivity>(cs));
 }
@@ -2447,24 +2032,12 @@ bool QString_Contains23(const QString* self, const libqt_string s, int cs) {
 	return self->contains(QString::fromUtf8(s.data, s.len), static_cast<Qt::CaseSensitivity>(cs));
 }
 
-bool QString_Contains24(const QString* self, QLatin1StringView s, int cs) {
-	return self->contains(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QString_Contains25(const QString* self, QStringView* s, int cs) {
-	return self->contains(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 ptrdiff_t QString_Count22(const QString* self, QChar* c, int cs) {
 	return self->count(*c, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QString_Count23(const QString* self, const libqt_string s, int cs) {
 	return self->count(QString::fromUtf8(s.data, s.len), static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QString_Count24(const QString* self, QStringView* s, int cs) {
-	return self->count(*s, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QString_IndexOf26(const QString* self, const QRegularExpression* re, ptrdiff_t from) {
@@ -2564,28 +2137,12 @@ bool QString_StartsWith22(const QString* self, const libqt_string s, int cs) {
 	return self->startsWith(QString::fromUtf8(s.data, s.len), static_cast<Qt::CaseSensitivity>(cs));
 }
 
-bool QString_StartsWith23(const QString* self, QStringView* s, int cs) {
-	return self->startsWith(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QString_StartsWith24(const QString* self, QLatin1StringView s, int cs) {
-	return self->startsWith(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 bool QString_StartsWith25(const QString* self, QChar* c, int cs) {
 	return self->startsWith(*c, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 bool QString_EndsWith22(const QString* self, const libqt_string s, int cs) {
 	return self->endsWith(QString::fromUtf8(s.data, s.len), static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QString_EndsWith23(const QString* self, QStringView* s, int cs) {
-	return self->endsWith(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QString_EndsWith24(const QString* self, QLatin1StringView s, int cs) {
-	return self->endsWith(s, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 bool QString_EndsWith25(const QString* self, QChar* c, int cs) {
@@ -2647,17 +2204,6 @@ libqt_string QString_Remove22(QString* self, QChar* c, int cs) {
 	return _str;
 }
 
-libqt_string QString_Remove23(QString* self, QLatin1StringView s, int cs) {
-	QString _ret = self->remove(s, static_cast<Qt::CaseSensitivity>(cs));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Remove24(QString* self, const libqt_string s, int cs) {
 	QString _ret = self->remove(QString::fromUtf8(s.data, s.len), static_cast<Qt::CaseSensitivity>(cs));
 	QByteArray _b = _ret.toUtf8();
@@ -2691,39 +2237,6 @@ libqt_string QString_Replace52(QString* self, const QChar* before, ptrdiff_t ble
 	return _str;
 }
 
-libqt_string QString_Replace33(QString* self, QLatin1StringView before, QLatin1StringView after, int cs) {
-	QString _ret = self->replace(before, after, static_cast<Qt::CaseSensitivity>(cs));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Replace34(QString* self, QLatin1StringView before, const libqt_string after, int cs) {
-	QString _ret = self->replace(before, QString::fromUtf8(after.data, after.len), static_cast<Qt::CaseSensitivity>(cs));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QString_Replace35(QString* self, const libqt_string before, QLatin1StringView after, int cs) {
-	QString _ret = self->replace(QString::fromUtf8(before.data, before.len), after, static_cast<Qt::CaseSensitivity>(cs));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QString_Replace36(QString* self, const libqt_string before, const libqt_string after, int cs) {
 	QString _ret = self->replace(QString::fromUtf8(before.data, before.len), QString::fromUtf8(after.data, after.len), static_cast<Qt::CaseSensitivity>(cs));
 	QByteArray _b = _ret.toUtf8();
@@ -2746,35 +2259,94 @@ libqt_string QString_Replace37(QString* self, QChar* c, const libqt_string after
 	return _str;
 }
 
-libqt_string QString_Replace38(QString* self, QChar* c, QLatin1StringView after, int cs) {
-	QString _ret = self->replace(*c, after, static_cast<Qt::CaseSensitivity>(cs));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_list QString_Split22(const QString* self, const libqt_string sep, int behavior) {
-	return self->split(QString::fromUtf8(sep.data, sep.len), static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	auto _ret = self->split(QString::fromUtf8(sep.data, sep.len), static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QString_Split32(const QString* self, const libqt_string sep, int behavior, int cs) {
-	return self->split(QString::fromUtf8(sep.data, sep.len), static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
+	auto _ret = self->split(QString::fromUtf8(sep.data, sep.len), static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QString_Split23(const QString* self, QChar* sep, int behavior) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	auto _ret = self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QString_Split33(const QString* self, QChar* sep, int behavior, int cs) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
+	auto _ret = self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QString_Split24(const QString* self, const QRegularExpression* sep, int behavior) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	auto _ret = self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QString_Normalized2(const QString* self, int mode, int version) {
@@ -2814,36 +2386,12 @@ int QString_Compare22(const QString* self, const libqt_string s, int cs) {
 	return self->compare(QString::fromUtf8(s.data, s.len), static_cast<Qt::CaseSensitivity>(cs));
 }
 
-int QString_Compare23(const QString* self, QLatin1StringView other, int cs) {
-	return self->compare(other, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QString_Compare24(const QString* self, QStringView* s, int cs) {
-	return self->compare(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 int QString_Compare25(const QString* self, QChar* ch, int cs) {
 	return self->compare(*ch, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 int QString_Compare32(const libqt_string s1, const libqt_string s2, int cs) {
 	return QString::compare(QString::fromUtf8(s1.data, s1.len), QString::fromUtf8(s2.data, s2.len), static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QString_Compare33(const libqt_string s1, QLatin1StringView s2, int cs) {
-	return QString::compare(QString::fromUtf8(s1.data, s1.len), s2, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QString_Compare34(QLatin1StringView s1, const libqt_string s2, int cs) {
-	return QString::compare(s1, QString::fromUtf8(s2.data, s2.len), static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QString_Compare35(const libqt_string s1, QStringView* s2, int cs) {
-	return QString::compare(QString::fromUtf8(s1.data, s1.len), *s2, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QString_Compare36(QStringView* s1, const libqt_string s2, int cs) {
-	return QString::compare(*s1, QString::fromUtf8(s2.data, s2.len), static_cast<Qt::CaseSensitivity>(cs));
 }
 
 int16_t QString_ToShort1(const QString* self, bool* ok) {

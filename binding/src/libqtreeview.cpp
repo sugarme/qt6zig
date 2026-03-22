@@ -17,6 +17,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionViewItem>
 #include <QTimerEvent>
 #include <QTreeView>
@@ -245,7 +246,7 @@ void QTreeView_Reset(QTreeView* self) {
 }
 
 void QTreeView_DataChanged(QTreeView* self, const QModelIndex* topLeft, const QModelIndex* bottomRight, const libqt_list roles) {
-	self->dataChanged(*topLeft, *bottomRight, *roles);
+	self->dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 
 void QTreeView_SelectAll(QTreeView* self) {
@@ -498,7 +499,7 @@ void QTreeView_QBaseDataChanged(QTreeView* self, const QModelIndex* topLeft, con
 	auto* vqtreeview = dynamic_cast<VirtualQTreeView*>(self);
 	if (vqtreeview && vqtreeview->isVirtualQTreeView) {
 vqtreeview->setQTreeView_DataChanged_IsBase(true);
-	vqtreeview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqtreeview->dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 
@@ -774,9 +775,27 @@ vqtreeview->setQTreeView_VisualRegionForSelection_Callback(reinterpret_cast<Virt
 libqt_list QTreeView_SelectedIndexes(const QTreeView* self) {
 	auto* vqtreeview = dynamic_cast<const VirtualQTreeView*>(self);
 	if (vqtreeview && vqtreeview->isVirtualQTreeView) {
-	return vqtreeview->selectedIndexes();
+	auto _ret = vqtreeview->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QTreeView::selectedIndexes();
+	auto _ret = self->QTreeView::selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -785,7 +804,16 @@ libqt_list QTreeView_QBaseSelectedIndexes(const QTreeView* self) {
 	auto* vqtreeview = dynamic_cast<const VirtualQTreeView*>(self);
 	if (vqtreeview && vqtreeview->isVirtualQTreeView) {
 vqtreeview->setQTreeView_SelectedIndexes_IsBase(true);
-	return vqtreeview->selectedIndexes();
+	auto _ret = vqtreeview->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

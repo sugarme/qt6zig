@@ -105,7 +105,7 @@ public:
 			cbval1.data = static_cast<const char*>(mimeType_qb.constData());
 			const QMimeData* cbval2 = mimeData;
 			libqt_list callback_ret = qwindowsmimeconverter_formatsformime_callback(this, cbval1, cbval2);
-			return callback_ret;
+			return QList<tagFORMATETC>();
 		} else {
 			return {};
 		}

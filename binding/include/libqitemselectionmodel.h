@@ -68,7 +68,6 @@ libqt_list QItemSelectionModel_SelectedColumns(const QItemSelectionModel* self);
 QItemSelection* QItemSelectionModel_Selection(const QItemSelectionModel* self);
 const QAbstractItemModel* QItemSelectionModel_Model(const QItemSelectionModel* self);
 QAbstractItemModel* QItemSelectionModel_Model2(QItemSelectionModel* self);
-QBindable<QAbstractItemModel *> QItemSelectionModel_BindableModel(QItemSelectionModel* self);
 void QItemSelectionModel_SetModel(QItemSelectionModel* self, QAbstractItemModel* model);
 void QItemSelectionModel_SetCurrentIndex(QItemSelectionModel* self, const QModelIndex* index, int command);
 void QItemSelectionModel_Select(QItemSelectionModel* self, const QModelIndex* index, int command);

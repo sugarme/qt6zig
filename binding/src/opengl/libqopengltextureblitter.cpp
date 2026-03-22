@@ -2,7 +2,6 @@
 #include <QOpenGLTextureBlitter>
 #include <QRect>
 #include <QRectF>
-#include <QSize>
 #include <qopengltextureblitter.h>
 #include "libqopengltextureblitter.h"
 #include "libqopengltextureblitter.hxx"
@@ -51,16 +50,8 @@ void QOpenGLTextureBlitter_Blit(QOpenGLTextureBlitter* self, uint32_t texture, c
 	self->blit(texture, *targetTransform, static_cast<QOpenGLTextureBlitter::Origin>(sourceOrigin));
 }
 
-void QOpenGLTextureBlitter_Blit2(QOpenGLTextureBlitter* self, uint32_t texture, const QMatrix4x4* targetTransform, const QGenericMatrix<3, 3, float>* sourceTransform) {
-	self->blit(texture, *targetTransform, *sourceTransform);
-}
-
 QMatrix4x4* QOpenGLTextureBlitter_TargetTransform(const QRectF* target, const QRect* viewport) {
 	return new QMatrix4x4(QOpenGLTextureBlitter::targetTransform(*target, *viewport));
-}
-
-QGenericMatrix<3, 3, float> QOpenGLTextureBlitter_SourceTransform(const QRectF* subTexture, const QSize* textureSize, int origin) {
-	return QOpenGLTextureBlitter::sourceTransform(*subTexture, *textureSize, static_cast<QOpenGLTextureBlitter::Origin>(origin));
 }
 
 void QOpenGLTextureBlitter_Bind1(QOpenGLTextureBlitter* self, uint32_t target) {

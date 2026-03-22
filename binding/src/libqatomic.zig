@@ -12,20 +12,10 @@ pub const qatomicint = struct {
 
 
     /// New2 constructs a new QAtomicInt object.
-    pub fn New2(param1: ?*anyopaque) QtC.QAtomicInt {
-        return qtc.QAtomicInt_new2(@ptrCast(param1));
+    pub fn New2(value: i32) QtC.QAtomicInt {
+        return qtc.QAtomicInt_new2(value);
     }
 
-
-    /// New3 constructs a new QAtomicInt object.
-    pub fn New3(value: i32) QtC.QAtomicInt {
-        return qtc.QAtomicInt_new3(value);
-    }
-
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QAtomicInt_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
 
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {

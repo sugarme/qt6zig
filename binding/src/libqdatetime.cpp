@@ -4,7 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <QTime>
 #include <QTimeZone>
 #include <qdatetime.h>
@@ -168,28 +168,6 @@ libqt_string QDate_ToString3(const QDate* self, const libqt_string format, QCale
 	return _str;
 }
 
-libqt_string QDate_ToString4(const QDate* self, QStringView* format) {
-	QString _ret = self->toString(*format);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QDate_ToString5(const QDate* self, QStringView* format, QCalendar* cal) {
-	QString _ret = self->toString(*format, *cal);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 bool QDate_SetDate(QDate* self, int year, int month, int day) {
 	return self->setDate(year, month, day);
 }
@@ -230,40 +208,12 @@ QDate* QDate_CurrentDate() {
 	return new QDate(QDate::currentDate());
 }
 
-QDate* QDate_FromString(QStringView* stringVal) {
-	return new QDate(QDate::fromString(*stringVal));
-}
-
 QDate* QDate_FromString2(const libqt_string stringVal) {
 	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len)));
 }
 
-QDate* QDate_FromString3(QStringView* stringVal, QStringView* format, QCalendar* cal) {
-	return new QDate(QDate::fromString(*stringVal, *format, *cal));
-}
-
-QDate* QDate_FromString4(const libqt_string stringVal, QStringView* format, QCalendar* cal) {
-	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format, *cal));
-}
-
 QDate* QDate_FromString5(const libqt_string stringVal, const libqt_string format, QCalendar* cal) {
 	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len), QString::fromUtf8(format.data, format.len), *cal));
-}
-
-QDate* QDate_FromString6(QStringView* stringVal, QStringView* format) {
-	return new QDate(QDate::fromString(*stringVal, *format));
-}
-
-QDate* QDate_FromString7(QStringView* stringVal, QStringView* format, int baseYear, QCalendar* cal) {
-	return new QDate(QDate::fromString(*stringVal, *format, baseYear, *cal));
-}
-
-QDate* QDate_FromString8(const libqt_string stringVal, QStringView* format) {
-	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format));
-}
-
-QDate* QDate_FromString9(const libqt_string stringVal, QStringView* format, int baseYear, QCalendar* cal) {
-	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format, baseYear, *cal));
 }
 
 QDate* QDate_FromString10(const libqt_string stringVal, const libqt_string format) {
@@ -313,20 +263,8 @@ libqt_string QDate_ToString1(const QDate* self, int format) {
 	return _str;
 }
 
-QDate* QDate_FromString22(QStringView* stringVal, int format) {
-	return new QDate(QDate::fromString(*stringVal, static_cast<Qt::DateFormat>(format)));
-}
-
 QDate* QDate_FromString23(const libqt_string stringVal, int format) {
 	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len), static_cast<Qt::DateFormat>(format)));
-}
-
-QDate* QDate_FromString32(QStringView* stringVal, QStringView* format, int baseYear) {
-	return new QDate(QDate::fromString(*stringVal, *format, baseYear));
-}
-
-QDate* QDate_FromString33(const libqt_string stringVal, QStringView* format, int baseYear) {
-	return new QDate(QDate::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format, baseYear));
 }
 
 QDate* QDate_FromString34(const libqt_string stringVal, const libqt_string format, int baseYear) {
@@ -419,17 +357,6 @@ libqt_string QTime_ToString2(const QTime* self, const libqt_string format) {
 	return _str;
 }
 
-libqt_string QTime_ToString3(const QTime* self, QStringView* format) {
-	QString _ret = self->toString(*format);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 bool QTime_SetHMS(QTime* self, int h, int m, int s) {
 	return self->setHMS(h, m, s);
 }
@@ -462,18 +389,6 @@ QTime* QTime_CurrentTime() {
 	return new QTime(QTime::currentTime());
 }
 
-QTime* QTime_FromString(QStringView* stringVal) {
-	return new QTime(QTime::fromString(*stringVal));
-}
-
-QTime* QTime_FromString2(QStringView* stringVal, QStringView* format) {
-	return new QTime(QTime::fromString(*stringVal, *format));
-}
-
-QTime* QTime_FromString3(const libqt_string stringVal, QStringView* format) {
-	return new QTime(QTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format));
-}
-
 QTime* QTime_FromString4(const libqt_string stringVal) {
 	return new QTime(QTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len)));
 }
@@ -499,10 +414,6 @@ libqt_string QTime_ToString1(const QTime* self, int f) {
 
 bool QTime_SetHMS4(QTime* self, int h, int m, int s, int ms) {
 	return self->setHMS(h, m, s, ms);
-}
-
-QTime* QTime_FromString22(QStringView* stringVal, int format) {
-	return new QTime(QTime::fromString(*stringVal, static_cast<Qt::DateFormat>(format)));
 }
 
 QTime* QTime_FromString23(const libqt_string stringVal, int format) {
@@ -673,28 +584,6 @@ libqt_string QDateTime_ToString3(const QDateTime* self, const libqt_string forma
 	return _str;
 }
 
-libqt_string QDateTime_ToString4(const QDateTime* self, QStringView* format) {
-	QString _ret = self->toString(*format);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QDateTime_ToString5(const QDateTime* self, QStringView* format, QCalendar* cal) {
-	QString _ret = self->toString(*format, *cal);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 QDateTime* QDateTime_AddDays(const QDateTime* self, long long days) {
 	return new QDateTime(self->addDays(days));
 }
@@ -759,40 +648,12 @@ QDateTime* QDateTime_CurrentDateTimeUtc() {
 	return new QDateTime(QDateTime::currentDateTimeUtc());
 }
 
-QDateTime* QDateTime_FromString(QStringView* stringVal) {
-	return new QDateTime(QDateTime::fromString(*stringVal));
-}
-
 QDateTime* QDateTime_FromString2(const libqt_string stringVal) {
 	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len)));
 }
 
-QDateTime* QDateTime_FromString3(QStringView* stringVal, QStringView* format, QCalendar* cal) {
-	return new QDateTime(QDateTime::fromString(*stringVal, *format, *cal));
-}
-
-QDateTime* QDateTime_FromString4(const libqt_string stringVal, QStringView* format, QCalendar* cal) {
-	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format, *cal));
-}
-
 QDateTime* QDateTime_FromString5(const libqt_string stringVal, const libqt_string format, QCalendar* cal) {
 	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), QString::fromUtf8(format.data, format.len), *cal));
-}
-
-QDateTime* QDateTime_FromString6(QStringView* stringVal, QStringView* format) {
-	return new QDateTime(QDateTime::fromString(*stringVal, *format));
-}
-
-QDateTime* QDateTime_FromString7(QStringView* stringVal, QStringView* format, int baseYear, QCalendar* cal) {
-	return new QDateTime(QDateTime::fromString(*stringVal, *format, baseYear, *cal));
-}
-
-QDateTime* QDateTime_FromString8(const libqt_string stringVal, QStringView* format) {
-	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format));
-}
-
-QDateTime* QDateTime_FromString9(const libqt_string stringVal, QStringView* format, int baseYear, QCalendar* cal) {
-	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format, baseYear, *cal));
 }
 
 QDateTime* QDateTime_FromString10(const libqt_string stringVal, const libqt_string format) {
@@ -858,20 +719,8 @@ libqt_string QDateTime_ToString1(const QDateTime* self, int format) {
 	return _str;
 }
 
-QDateTime* QDateTime_FromString22(QStringView* stringVal, int format) {
-	return new QDateTime(QDateTime::fromString(*stringVal, static_cast<Qt::DateFormat>(format)));
-}
-
 QDateTime* QDateTime_FromString23(const libqt_string stringVal, int format) {
 	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), static_cast<Qt::DateFormat>(format)));
-}
-
-QDateTime* QDateTime_FromString32(QStringView* stringVal, QStringView* format, int baseYear) {
-	return new QDateTime(QDateTime::fromString(*stringVal, *format, baseYear));
-}
-
-QDateTime* QDateTime_FromString33(const libqt_string stringVal, QStringView* format, int baseYear) {
-	return new QDateTime(QDateTime::fromString(QString::fromUtf8(stringVal.data, stringVal.len), *format, baseYear));
 }
 
 QDateTime* QDateTime_FromString34(const libqt_string stringVal, const libqt_string format, int baseYear) {

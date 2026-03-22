@@ -17,12 +17,6 @@ pub const qmimetype = struct {
     }
 
 
-    /// New3 constructs a new QMimeType object.
-    pub fn New3(dd: *const QMimeTypePrivate) QtC.QMimeType {
-        return qtc.QMimeType_new3(@ptrCast(dd));
-    }
-
-
     pub fn OperatorAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QMimeType_OperatorAssign(@ptrCast(self), @ptrCast(other));
     }

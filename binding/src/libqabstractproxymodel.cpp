@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qabstractproxymodel.h>
 #include "libqabstractproxymodel.h"
@@ -38,10 +39,6 @@ void QAbstractProxyModel_SetSourceModel(QAbstractProxyModel* self, QAbstractItem
 
 QAbstractItemModel* QAbstractProxyModel_SourceModel(const QAbstractProxyModel* self) {
 	return self->sourceModel();
-}
-
-QBindable<QAbstractItemModel *> QAbstractProxyModel_BindableSourceModel(QAbstractProxyModel* self) {
-	return self->bindableSourceModel();
 }
 
 QModelIndex* QAbstractProxyModel_MapToSource(const QAbstractProxyModel* self, const QModelIndex* proxyIndex) {
@@ -77,7 +74,12 @@ QVariant* QAbstractProxyModel_HeaderData(const QAbstractProxyModel* self, int se
 }
 
 libqt_map QAbstractProxyModel_ItemData(const QAbstractProxyModel* self, const QModelIndex* index) {
-	return self->itemData(*index);
+	auto _ret = self->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 int QAbstractProxyModel_Flags(const QAbstractProxyModel* self, const QModelIndex* index) {
@@ -89,7 +91,7 @@ bool QAbstractProxyModel_SetData(QAbstractProxyModel* self, const QModelIndex* i
 }
 
 bool QAbstractProxyModel_SetItemData(QAbstractProxyModel* self, const QModelIndex* index, const libqt_map roles) {
-	return self->setItemData(*index, *roles);
+	return self->setItemData(*index, QMap<int, QVariant>());
 }
 
 bool QAbstractProxyModel_SetHeaderData(QAbstractProxyModel* self, int section, int orientation, const QVariant* value, int role) {
@@ -129,7 +131,7 @@ QModelIndex* QAbstractProxyModel_Sibling(const QAbstractProxyModel* self, int ro
 }
 
 QMimeData* QAbstractProxyModel_MimeData(const QAbstractProxyModel* self, const libqt_list indexes) {
-	return self->mimeData(*indexes);
+	return self->mimeData(QList<QModelIndex>());
 }
 
 bool QAbstractProxyModel_CanDropMimeData(const QAbstractProxyModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent) {
@@ -141,7 +143,21 @@ bool QAbstractProxyModel_DropMimeData(QAbstractProxyModel* self, const QMimeData
 }
 
 libqt_list QAbstractProxyModel_MimeTypes(const QAbstractProxyModel* self) {
-	return self->mimeTypes();
+	auto _ret = self->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 int QAbstractProxyModel_SupportedDragActions(const QAbstractProxyModel* self) {
@@ -153,7 +169,12 @@ int QAbstractProxyModel_SupportedDropActions(const QAbstractProxyModel* self) {
 }
 
 libqt_map QAbstractProxyModel_RoleNames(const QAbstractProxyModel* self) {
-	return self->roleNames();
+	auto _ret = self->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 libqt_string QAbstractProxyModel_Tr2(const char* s, const char* c) {
@@ -336,7 +357,12 @@ libqt_map QAbstractProxyModel_QBaseItemData(const QAbstractProxyModel* self, con
 	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
 	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
 vqabstractproxymodel->setQAbstractProxyModel_ItemData_IsBase(true);
-	return vqabstractproxymodel->itemData(*index);
+	auto _ret = vqabstractproxymodel->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -387,7 +413,7 @@ bool QAbstractProxyModel_QBaseSetItemData(QAbstractProxyModel* self, const QMode
 	auto* vqabstractproxymodel = dynamic_cast<VirtualQAbstractProxyModel*>(self);
 	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
 vqabstractproxymodel->setQAbstractProxyModel_SetItemData_IsBase(true);
-	return vqabstractproxymodel->setItemData(*index, *roles);
+	return vqabstractproxymodel->setItemData(*index, QMap<int, QVariant>());
 }
 }
 
@@ -557,7 +583,7 @@ QMimeData* QAbstractProxyModel_QBaseMimeData(const QAbstractProxyModel* self, co
 	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
 	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
 vqabstractproxymodel->setQAbstractProxyModel_MimeData_IsBase(true);
-	return vqabstractproxymodel->mimeData(*indexes);
+	return vqabstractproxymodel->mimeData(QList<QModelIndex>());
 }
 }
 
@@ -608,7 +634,21 @@ libqt_list QAbstractProxyModel_QBaseMimeTypes(const QAbstractProxyModel* self) {
 	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
 	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
 vqabstractproxymodel->setQAbstractProxyModel_MimeTypes_IsBase(true);
-	return vqabstractproxymodel->mimeTypes();
+	auto _ret = vqabstractproxymodel->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -659,7 +699,12 @@ libqt_map QAbstractProxyModel_QBaseRoleNames(const QAbstractProxyModel* self) {
 	auto* vqabstractproxymodel = dynamic_cast<const VirtualQAbstractProxyModel*>(self);
 	if (vqabstractproxymodel && vqabstractproxymodel->isVirtualQAbstractProxyModel) {
 vqabstractproxymodel->setQAbstractProxyModel_RoleNames_IsBase(true);
-	return vqabstractproxymodel->roleNames();
+	auto _ret = vqabstractproxymodel->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 

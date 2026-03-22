@@ -17,7 +17,6 @@ extern "C" {
 #else
 typedef struct QNetworkInformation QNetworkInformation;
 typedef struct QObject QObject;
-typedef struct QStringView QStringView;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
 #endif
@@ -33,9 +32,7 @@ libqt_string QNetworkInformation_BackendName(const QNetworkInformation* self);
 bool QNetworkInformation_Supports(const QNetworkInformation* self, int features);
 int QNetworkInformation_SupportedFeatures(const QNetworkInformation* self);
 bool QNetworkInformation_LoadDefaultBackend();
-bool QNetworkInformation_LoadBackendByName(QStringView* backend);
 bool QNetworkInformation_LoadBackendByFeatures(int features);
-bool QNetworkInformation_Load(QStringView* backend);
 bool QNetworkInformation_Load2(int features);
 libqt_list QNetworkInformation_AvailableBackends();
 QNetworkInformation* QNetworkInformation_Instance();

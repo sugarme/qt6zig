@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsocketnotifier.h>
 #include "libqsocketnotifier.h"
 #include "libqsocketnotifier.hxx"

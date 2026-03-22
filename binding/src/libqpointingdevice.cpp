@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpointingdevice.h>
 #include "libqpointingdevice.h"
 #include "libqpointingdevice.hxx"

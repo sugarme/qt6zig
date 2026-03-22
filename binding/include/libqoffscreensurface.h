@@ -41,7 +41,6 @@ QSurfaceFormat* QOffscreenSurface_RequestedFormat(const QOffscreenSurface* self)
 QSize* QOffscreenSurface_Size(const QOffscreenSurface* self);
 QScreen* QOffscreenSurface_Screen(const QOffscreenSurface* self);
 void QOffscreenSurface_SetScreen(QOffscreenSurface* self, QScreen* screen);
-QPlatformOffscreenSurface* QOffscreenSurface_Handle(const QOffscreenSurface* self);
 void QOffscreenSurface_ScreenChanged(QOffscreenSurface* self, QScreen* screen);
 void QOffscreenSurface_Connect_ScreenChanged(QOffscreenSurface* self, intptr_t slot);
 libqt_string QOffscreenSurface_Tr2(const char* s, const char* c);

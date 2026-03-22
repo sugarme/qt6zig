@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qrhiwidget.h>
 #include "libqrhiwidget.h"
@@ -392,33 +393,6 @@ void QRhiWidget_OnSetAutoRenderTarget(QRhiWidget* self, intptr_t slot) {
 	auto* vqrhiwidget = dynamic_cast<VirtualQRhiWidget*>(self);
 	if (vqrhiwidget && vqrhiwidget->isVirtualQRhiWidget) {
 vqrhiwidget->setQRhiWidget_SetAutoRenderTarget_Callback(reinterpret_cast<VirtualQRhiWidget::QRhiWidget_SetAutoRenderTarget_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-QRhi* QRhiWidget_Rhi(const QRhiWidget* self) {
-	auto* vqrhiwidget = dynamic_cast<const VirtualQRhiWidget*>(self);
-	if (vqrhiwidget && vqrhiwidget->isVirtualQRhiWidget) {
-	return vqrhiwidget->rhi();
-	} else {
-	return self->QRhiWidget::rhi();
-}
-}
-
-// Base class handler implementation
-QRhi* QRhiWidget_QBaseRhi(const QRhiWidget* self) {
-	auto* vqrhiwidget = dynamic_cast<const VirtualQRhiWidget*>(self);
-	if (vqrhiwidget && vqrhiwidget->isVirtualQRhiWidget) {
-vqrhiwidget->setQRhiWidget_Rhi_IsBase(true);
-	return vqrhiwidget->rhi();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QRhiWidget_OnRhi(const QRhiWidget* self, intptr_t slot) {
-	auto* vqrhiwidget = dynamic_cast<const VirtualQRhiWidget*>(self);
-	if (vqrhiwidget && vqrhiwidget->isVirtualQRhiWidget) {
-vqrhiwidget->setQRhiWidget_Rhi_Callback(reinterpret_cast<VirtualQRhiWidget::QRhiWidget_Rhi_Callback>(slot));
 }
 }
 

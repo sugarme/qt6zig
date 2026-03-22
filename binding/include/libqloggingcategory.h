@@ -23,9 +23,6 @@ typedef struct type_info type_info;
 
 
 QLoggingCategory* QLoggingCategory_new(const char* category);
-QLoggingCategory* QLoggingCategory_new2(const char* category, int severityLevel);
-bool QLoggingCategory_IsEnabled(const QLoggingCategory* self, int typeVal);
-void QLoggingCategory_SetEnabled(QLoggingCategory* self, int typeVal, bool enable);
 bool QLoggingCategory_IsDebugEnabled(const QLoggingCategory* self);
 bool QLoggingCategory_IsInfoEnabled(const QLoggingCategory* self);
 bool QLoggingCategory_IsWarningEnabled(const QLoggingCategory* self);

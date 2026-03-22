@@ -33,8 +33,6 @@ public:
 	using QCandlestickModelMapper_FirstSetSection_Callback = int (*)();
 	using QCandlestickModelMapper_SetLastSetSection_Callback = void (*)(QCandlestickModelMapper*, int);
 	using QCandlestickModelMapper_LastSetSection_Callback = int (*)();
-	using QCandlestickModelMapper_DFunc_Callback = QCandlestickModelMapperPrivate* (*)();
-	using QCandlestickModelMapper_DFunc2_Callback = const QCandlestickModelMapperPrivate* (*)();
 
 protected:
 	// Instance callback storage
@@ -53,8 +51,6 @@ protected:
 	mutable QCandlestickModelMapper_FirstSetSection_Callback qcandlestickmodelmapper_firstsetsection_callback = nullptr;
 	mutable QCandlestickModelMapper_SetLastSetSection_Callback qcandlestickmodelmapper_setlastsetsection_callback = nullptr;
 	mutable QCandlestickModelMapper_LastSetSection_Callback qcandlestickmodelmapper_lastsetsection_callback = nullptr;
-	mutable QCandlestickModelMapper_DFunc_Callback qcandlestickmodelmapper_dfunc_callback = nullptr;
-	mutable QCandlestickModelMapper_DFunc2_Callback qcandlestickmodelmapper_dfunc2_callback = nullptr;
 
 	// Instance base flags
     mutable bool qcandlestickmodelmapper_orientation_isbase = false;
@@ -72,8 +68,6 @@ protected:
     mutable bool qcandlestickmodelmapper_firstsetsection_isbase = false;
     mutable bool qcandlestickmodelmapper_setlastsetsection_isbase = false;
     mutable bool qcandlestickmodelmapper_lastsetsection_isbase = false;
-    mutable bool qcandlestickmodelmapper_dfunc_isbase = false;
-    mutable bool qcandlestickmodelmapper_dfunc2_isbase = false;
 
 public:
 	VirtualQCandlestickModelMapper(): QCandlestickModelMapper() {};
@@ -95,8 +89,6 @@ public:
 		qcandlestickmodelmapper_firstsetsection_callback = nullptr;
 		qcandlestickmodelmapper_setlastsetsection_callback = nullptr;
 		qcandlestickmodelmapper_lastsetsection_callback = nullptr;
-		qcandlestickmodelmapper_dfunc_callback = nullptr;
-		qcandlestickmodelmapper_dfunc2_callback = nullptr;
 	}
 
 // Callback setters
@@ -115,8 +107,6 @@ public:
 	inline void setQCandlestickModelMapper_FirstSetSection_Callback(QCandlestickModelMapper_FirstSetSection_Callback cb) const { qcandlestickmodelmapper_firstsetsection_callback = cb; }
 	inline void setQCandlestickModelMapper_SetLastSetSection_Callback(QCandlestickModelMapper_SetLastSetSection_Callback cb) const { qcandlestickmodelmapper_setlastsetsection_callback = cb; }
 	inline void setQCandlestickModelMapper_LastSetSection_Callback(QCandlestickModelMapper_LastSetSection_Callback cb) const { qcandlestickmodelmapper_lastsetsection_callback = cb; }
-	inline void setQCandlestickModelMapper_DFunc_Callback(QCandlestickModelMapper_DFunc_Callback cb) const { qcandlestickmodelmapper_dfunc_callback = cb; }
-	inline void setQCandlestickModelMapper_DFunc2_Callback(QCandlestickModelMapper_DFunc2_Callback cb) const { qcandlestickmodelmapper_dfunc2_callback = cb; }
 
 // Base flag setters
 	inline void setQCandlestickModelMapper_Orientation_IsBase(bool value) const { qcandlestickmodelmapper_orientation_isbase = value; }
@@ -134,8 +124,6 @@ public:
 	inline void setQCandlestickModelMapper_FirstSetSection_IsBase(bool value) const { qcandlestickmodelmapper_firstsetsection_isbase = value; }
 	inline void setQCandlestickModelMapper_SetLastSetSection_IsBase(bool value) const { qcandlestickmodelmapper_setlastsetsection_isbase = value; }
 	inline void setQCandlestickModelMapper_LastSetSection_IsBase(bool value) const { qcandlestickmodelmapper_lastsetsection_isbase = value; }
-	inline void setQCandlestickModelMapper_DFunc_IsBase(bool value) const { qcandlestickmodelmapper_dfunc_isbase = value; }
-	inline void setQCandlestickModelMapper_DFunc2_IsBase(bool value) const { qcandlestickmodelmapper_dfunc2_isbase = value; }
 
 
 	// Virtual method for C ABI access and custom callback
@@ -330,32 +318,6 @@ public:
 		}
 	}
 
-	// Virtual method for C ABI access and custom callback
-	QCandlestickModelMapperPrivate* d_func() {
-		if (qcandlestickmodelmapper_dfunc_isbase) {
-			qcandlestickmodelmapper_dfunc_isbase = false;
-			return QCandlestickModelMapper::d_func();
-		} else if (qcandlestickmodelmapper_dfunc_callback != nullptr) {
-			QCandlestickModelMapperPrivate* callback_ret = qcandlestickmodelmapper_dfunc_callback();
-			return callback_ret;
-		} else {
-			return QCandlestickModelMapper::d_func();
-		}
-	}
-
-	// Virtual method for C ABI access and custom callback
-	const QCandlestickModelMapperPrivate* d_func() const {
-		if (qcandlestickmodelmapper_dfunc2_isbase) {
-			qcandlestickmodelmapper_dfunc2_isbase = false;
-			return QCandlestickModelMapper::d_func();
-		} else if (qcandlestickmodelmapper_dfunc2_callback != nullptr) {
-			const QCandlestickModelMapperPrivate* callback_ret = qcandlestickmodelmapper_dfunc2_callback();
-			return callback_ret;
-		} else {
-			return QCandlestickModelMapper::d_func();
-		}
-	}
-
 	// Friend functions
 	friend void QCandlestickModelMapper_SetTimestamp(QCandlestickModelMapper* self, int timestamp);
 	friend void QCandlestickModelMapper_QBaseSetTimestamp(QCandlestickModelMapper* self, int timestamp);
@@ -385,10 +347,6 @@ public:
 	friend void QCandlestickModelMapper_QBaseSetLastSetSection(QCandlestickModelMapper* self, int lastSetSection);
 	friend int QCandlestickModelMapper_LastSetSection(const QCandlestickModelMapper* self);
 	friend int QCandlestickModelMapper_QBaseLastSetSection(const QCandlestickModelMapper* self);
-	friend QCandlestickModelMapperPrivate* QCandlestickModelMapper_DFunc(QCandlestickModelMapper* self);
-	friend QCandlestickModelMapperPrivate* QCandlestickModelMapper_QBaseDFunc(QCandlestickModelMapper* self);
-	friend const QCandlestickModelMapperPrivate* QCandlestickModelMapper_DFunc2(const QCandlestickModelMapper* self);
-	friend const QCandlestickModelMapperPrivate* QCandlestickModelMapper_QBaseDFunc2(const QCandlestickModelMapper* self);
 };
 
 #endif

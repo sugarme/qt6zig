@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsslerror.h>
 #include "libqsslerror.h"
 #include "libqsslerror.hxx"

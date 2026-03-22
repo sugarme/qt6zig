@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qtipccommon.h>
 #include "libqtipccommon.h"
 #include "libqtipccommon.hxx"

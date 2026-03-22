@@ -63,27 +63,27 @@ libqt_string QMessageAuthenticationCode_Hash(QByteArrayView* message, QByteArray
 }
 
 QByteArrayView* QMessageAuthenticationCode_HashInto(libqt_list buffer, QByteArrayView* message, QByteArrayView* key, int method) {
-	return new QByteArrayView(QMessageAuthenticationCode::hashInto(buffer, *message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QMessageAuthenticationCode::hashInto(QSpan<char>(), *message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QMessageAuthenticationCode_HashInto2(libqt_list buffer, QByteArrayView* message, QByteArrayView* key, int method) {
-	return new QByteArrayView(QMessageAuthenticationCode::hashInto(buffer, *message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QMessageAuthenticationCode::hashInto(QSpan<uchar>(), *message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QMessageAuthenticationCode_HashInto3(libqt_list buffer, QByteArrayView* message, QByteArrayView* key, int method) {
-	return new QByteArrayView(QMessageAuthenticationCode::hashInto(buffer, *message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QMessageAuthenticationCode::hashInto(QSpan<std::byte>(), *message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QMessageAuthenticationCode_HashInto4(libqt_list buffer, libqt_list messageParts, QByteArrayView* key, int method) {
-	return new QByteArrayView(QMessageAuthenticationCode::hashInto(buffer, messageParts, *key, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QMessageAuthenticationCode::hashInto(QSpan<char>(), QSpan<const QByteArrayView>(), *key, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QMessageAuthenticationCode_HashInto5(libqt_list buffer, libqt_list messageParts, QByteArrayView* key, int method) {
-	return new QByteArrayView(QMessageAuthenticationCode::hashInto(buffer, messageParts, *key, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QMessageAuthenticationCode::hashInto(QSpan<uchar>(), QSpan<const QByteArrayView>(), *key, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QMessageAuthenticationCode_HashInto6(libqt_list buffer, libqt_list message, QByteArrayView* key, int method) {
-	return new QByteArrayView(QMessageAuthenticationCode::hashInto(buffer, message, *key, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QMessageAuthenticationCode::hashInto(QSpan<std::byte>(), QSpan<const QByteArrayView>(), *key, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 void QMessageAuthenticationCode_Delete(QMessageAuthenticationCode* self) {

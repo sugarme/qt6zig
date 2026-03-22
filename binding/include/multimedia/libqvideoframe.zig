@@ -24,20 +24,8 @@ pub const qvideoframe = struct {
 
 
     /// New4 constructs a new QVideoFrame object.
-    pub fn New4(videoBuffer: std::unique_ptr<QAbstractVideoBuffer>) QtC.QVideoFrame {
-        return qtc.QVideoFrame_new4(videoBuffer);
-    }
-
-
-    /// New5 constructs a new QVideoFrame object.
-    pub fn New5(other: ?*anyopaque) QtC.QVideoFrame {
-        return qtc.QVideoFrame_new5(@ptrCast(other));
-    }
-
-
-    /// New6 constructs a new QVideoFrame object.
-    pub fn New6(buffer: ?*anyopaque, format: ?*anyopaque) QtC.QVideoFrame {
-        return qtc.QVideoFrame_new6(@ptrCast(buffer), @ptrCast(format));
+    pub fn New4(other: ?*anyopaque) QtC.QVideoFrame {
+        return qtc.QVideoFrame_new4(@ptrCast(other));
     }
 
 
@@ -199,10 +187,6 @@ qtc.QVideoFrame_SetSubtitleText(@ptrCast(self), text_str);
 
     pub fn Paint(self: ?*anyopaque, painter: ?*anyopaque, rect: ?*anyopaque, options: ?*anyopaque) void {
         qtc.QVideoFrame_Paint(@ptrCast(self), @ptrCast(painter), @ptrCast(rect), @ptrCast(options));
-    }
-
-    pub fn VideoBuffer(self: ?*anyopaque, ) QtC.QAbstractVideoBuffer {
-        return qtc.QVideoFrame_VideoBuffer(@ptrCast(self));
     }
 
     /// Delete this object from C++ memory.

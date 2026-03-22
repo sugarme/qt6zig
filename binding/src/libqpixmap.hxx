@@ -41,7 +41,6 @@ protected:
 
 public:
 	VirtualQPixmap(): QPixmap() {};
-	VirtualQPixmap(QPlatformPixmap* data): QPixmap(data) {};
 	VirtualQPixmap(int w, int h): QPixmap(w, h) {};
 	VirtualQPixmap(const QSize& param1): QPixmap(param1) {};
 	VirtualQPixmap(const QString& fileName): QPixmap(fileName) {};

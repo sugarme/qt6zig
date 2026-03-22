@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qbarset.h>
 #include "libqbarset.h"
 #include "libqbarset.hxx"
@@ -50,7 +51,7 @@ void QBarSet_Append(QBarSet* self, const double value) {
 }
 
 void QBarSet_Append2(QBarSet* self, const libqt_list values) {
-	self->append(*values);
+	self->append(QList<double>());
 }
 
 QBarSet* QBarSet_OperatorShiftLeft(QBarSet* self, const double* value) {
@@ -174,19 +175,28 @@ void QBarSet_DeselectAllBars(QBarSet* self) {
 }
 
 void QBarSet_SelectBars(QBarSet* self, const libqt_list indexes) {
-	self->selectBars(*indexes);
+	self->selectBars(QList<int>());
 }
 
 void QBarSet_DeselectBars(QBarSet* self, const libqt_list indexes) {
-	self->deselectBars(*indexes);
+	self->deselectBars(QList<int>());
 }
 
 void QBarSet_ToggleSelection(QBarSet* self, const libqt_list indexes) {
-	self->toggleSelection(*indexes);
+	self->toggleSelection(QList<int>());
 }
 
 libqt_list QBarSet_SelectedBars(const QBarSet* self) {
-	return self->selectedBars();
+	auto _ret = self->selectedBars();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QBarSet_Clicked(QBarSet* self, int index) {
@@ -377,7 +387,7 @@ void QBarSet_Connect_ValueChanged(QBarSet* self, intptr_t slot) {
 }
 
 void QBarSet_SelectedBarsChanged(QBarSet* self, const libqt_list indexes) {
-	self->selectedBarsChanged(*indexes);
+	self->selectedBarsChanged(QList<int>());
 }
 
 void QBarSet_Connect_SelectedBarsChanged(QBarSet* self, intptr_t slot) {

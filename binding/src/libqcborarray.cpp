@@ -204,11 +204,11 @@ QCborArray* QCborArray_OperatorShiftLeft(QCborArray* self, const QCborValue* v) 
 }
 
 QCborArray* QCborArray_FromStringList(const libqt_list list) {
-	return new QCborArray(QCborArray::fromStringList(*list));
+	return new QCborArray(QCborArray::fromStringList(QList<QString>()));
 }
 
 QCborArray* QCborArray_FromVariantList(const libqt_list list) {
-	return new QCborArray(QCborArray::fromVariantList(*list));
+	return new QCborArray(QCborArray::fromVariantList(QList<QVariant>()));
 }
 
 QCborArray* QCborArray_FromJsonArray(const QJsonArray* array) {
@@ -216,7 +216,16 @@ QCborArray* QCborArray_FromJsonArray(const QJsonArray* array) {
 }
 
 libqt_list QCborArray_ToVariantList(const QCborArray* self) {
-	return self->toVariantList();
+	auto _ret = self->toVariantList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QJsonArray* QCborArray_ToJsonArray(const QCborArray* self) {

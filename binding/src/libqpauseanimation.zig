@@ -55,10 +55,6 @@ return  _ret;
         qtc.QPauseAnimation_SetDuration(@ptrCast(self), msecs);
     }
 
-    pub fn BindableDuration(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QPauseAnimation_BindableDuration(@ptrCast(self));
-    }
-
     pub fn Event(self: ?*anyopaque, e: ?*anyopaque) bool {
         return qtc.QPauseAnimation_Event(@ptrCast(self), @ptrCast(e));
     }

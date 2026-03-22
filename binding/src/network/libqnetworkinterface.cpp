@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qnetworkinterface.h>
 #include "libqnetworkinterface.h"
 #include "libqnetworkinterface.hxx"
@@ -175,7 +176,16 @@ libqt_string QNetworkInterface_HardwareAddress(const QNetworkInterface* self) {
 }
 
 libqt_list QNetworkInterface_AddressEntries(const QNetworkInterface* self) {
-	return self->addressEntries();
+	auto _ret = self->addressEntries();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QNetworkInterface_InterfaceIndexFromName(const libqt_string name) {
@@ -202,11 +212,29 @@ libqt_string QNetworkInterface_InterfaceNameFromIndex(int index) {
 }
 
 libqt_list QNetworkInterface_AllInterfaces() {
-	return QNetworkInterface::allInterfaces();
+	auto _ret = QNetworkInterface::allInterfaces();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QNetworkInterface_AllAddresses() {
-	return QNetworkInterface::allAddresses();
+	auto _ret = QNetworkInterface::allAddresses();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QNetworkInterface_Delete(QNetworkInterface* self) {

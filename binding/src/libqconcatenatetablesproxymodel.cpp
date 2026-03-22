@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qconcatenatetablesproxymodel.h>
 #include "libqconcatenatetablesproxymodel.h"
@@ -32,7 +33,15 @@ libqt_string QConcatenateTablesProxyModel_Tr(const char* s) {
 }
 
 libqt_list QConcatenateTablesProxyModel_SourceModels(const QConcatenateTablesProxyModel* self) {
-	return self->sourceModels();
+	auto _ret = self->sourceModels();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QConcatenateTablesProxyModel_AddSourceModel(QConcatenateTablesProxyModel* self, QAbstractItemModel* sourceModel) {
@@ -60,11 +69,16 @@ bool QConcatenateTablesProxyModel_SetData(QConcatenateTablesProxyModel* self, co
 }
 
 libqt_map QConcatenateTablesProxyModel_ItemData(const QConcatenateTablesProxyModel* self, const QModelIndex* proxyIndex) {
-	return self->itemData(*proxyIndex);
+	auto _ret = self->itemData(*proxyIndex);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 bool QConcatenateTablesProxyModel_SetItemData(QConcatenateTablesProxyModel* self, const QModelIndex* index, const libqt_map roles) {
-	return self->setItemData(*index, *roles);
+	return self->setItemData(*index, QMap<int, QVariant>());
 }
 
 int QConcatenateTablesProxyModel_Flags(const QConcatenateTablesProxyModel* self, const QModelIndex* index) {
@@ -92,11 +106,25 @@ int QConcatenateTablesProxyModel_ColumnCount(const QConcatenateTablesProxyModel*
 }
 
 libqt_list QConcatenateTablesProxyModel_MimeTypes(const QConcatenateTablesProxyModel* self) {
-	return self->mimeTypes();
+	auto _ret = self->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QMimeData* QConcatenateTablesProxyModel_MimeData(const QConcatenateTablesProxyModel* self, const libqt_list indexes) {
-	return self->mimeData(*indexes);
+	return self->mimeData(QList<QModelIndex>());
 }
 
 bool QConcatenateTablesProxyModel_CanDropMimeData(const QConcatenateTablesProxyModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent) {
@@ -172,7 +200,12 @@ libqt_map QConcatenateTablesProxyModel_QBaseItemData(const QConcatenateTablesPro
 	auto* vqconcatenatetablesproxymodel = dynamic_cast<const VirtualQConcatenateTablesProxyModel*>(self);
 	if (vqconcatenatetablesproxymodel && vqconcatenatetablesproxymodel->isVirtualQConcatenateTablesProxyModel) {
 vqconcatenatetablesproxymodel->setQConcatenateTablesProxyModel_ItemData_IsBase(true);
-	return vqconcatenatetablesproxymodel->itemData(*proxyIndex);
+	auto _ret = vqconcatenatetablesproxymodel->itemData(*proxyIndex);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -189,7 +222,7 @@ bool QConcatenateTablesProxyModel_QBaseSetItemData(QConcatenateTablesProxyModel*
 	auto* vqconcatenatetablesproxymodel = dynamic_cast<VirtualQConcatenateTablesProxyModel*>(self);
 	if (vqconcatenatetablesproxymodel && vqconcatenatetablesproxymodel->isVirtualQConcatenateTablesProxyModel) {
 vqconcatenatetablesproxymodel->setQConcatenateTablesProxyModel_SetItemData_IsBase(true);
-	return vqconcatenatetablesproxymodel->setItemData(*index, *roles);
+	return vqconcatenatetablesproxymodel->setItemData(*index, QMap<int, QVariant>());
 }
 }
 
@@ -308,7 +341,21 @@ libqt_list QConcatenateTablesProxyModel_QBaseMimeTypes(const QConcatenateTablesP
 	auto* vqconcatenatetablesproxymodel = dynamic_cast<const VirtualQConcatenateTablesProxyModel*>(self);
 	if (vqconcatenatetablesproxymodel && vqconcatenatetablesproxymodel->isVirtualQConcatenateTablesProxyModel) {
 vqconcatenatetablesproxymodel->setQConcatenateTablesProxyModel_MimeTypes_IsBase(true);
-	return vqconcatenatetablesproxymodel->mimeTypes();
+	auto _ret = vqconcatenatetablesproxymodel->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -325,7 +372,7 @@ QMimeData* QConcatenateTablesProxyModel_QBaseMimeData(const QConcatenateTablesPr
 	auto* vqconcatenatetablesproxymodel = dynamic_cast<const VirtualQConcatenateTablesProxyModel*>(self);
 	if (vqconcatenatetablesproxymodel && vqconcatenatetablesproxymodel->isVirtualQConcatenateTablesProxyModel) {
 vqconcatenatetablesproxymodel->setQConcatenateTablesProxyModel_MimeData_IsBase(true);
-	return vqconcatenatetablesproxymodel->mimeData(*indexes);
+	return vqconcatenatetablesproxymodel->mimeData(QList<QModelIndex>());
 }
 }
 

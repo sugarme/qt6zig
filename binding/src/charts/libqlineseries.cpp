@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QXYSeries>
 #include <qlineseries.h>
 #include "libqlineseries.h"

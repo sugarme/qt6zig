@@ -55,10 +55,6 @@ pub const qbackingstore = struct {
         return qtc.QBackingStore_HasStaticContents(@ptrCast(self));
     }
 
-    pub fn Handle(self: ?*anyopaque, ) QPlatformBackingStore {
-        return @ptrCast(qtc.QBackingStore_Handle(@ptrCast(self)));
-    }
-
     pub fn Flush2(self: ?*anyopaque, region: ?*anyopaque, window: ?*anyopaque) void {
         qtc.QBackingStore_Flush2(@ptrCast(self), @ptrCast(region), @ptrCast(window));
     }

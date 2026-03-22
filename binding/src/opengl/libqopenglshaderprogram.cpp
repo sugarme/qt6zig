@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransform>
 #include <QVector2D>
 #include <QVector3D>
@@ -150,7 +151,15 @@ void QOpenGLShaderProgram_RemoveShader(QOpenGLShaderProgram* self, QOpenGLShader
 }
 
 libqt_list QOpenGLShaderProgram_Shaders(const QOpenGLShaderProgram* self) {
-	return self->shaders();
+	auto _ret = self->shaders();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 bool QOpenGLShaderProgram_AddShaderFromSourceCode(QOpenGLShaderProgram* self, int typeVal, const char* source) {
@@ -237,19 +246,37 @@ int QOpenGLShaderProgram_PatchVertexCount(const QOpenGLShaderProgram* self) {
 }
 
 void QOpenGLShaderProgram_SetDefaultOuterTessellationLevels(QOpenGLShaderProgram* self, const libqt_list levels) {
-	self->setDefaultOuterTessellationLevels(*levels);
+	self->setDefaultOuterTessellationLevels(QList<float>());
 }
 
 libqt_list QOpenGLShaderProgram_DefaultOuterTessellationLevels(const QOpenGLShaderProgram* self) {
-	return self->defaultOuterTessellationLevels();
+	auto _ret = self->defaultOuterTessellationLevels();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QOpenGLShaderProgram_SetDefaultInnerTessellationLevels(QOpenGLShaderProgram* self, const libqt_list levels) {
-	self->setDefaultInnerTessellationLevels(*levels);
+	self->setDefaultInnerTessellationLevels(QList<float>());
 }
 
 libqt_list QOpenGLShaderProgram_DefaultInnerTessellationLevels(const QOpenGLShaderProgram* self) {
-	return self->defaultInnerTessellationLevels();
+	auto _ret = self->defaultInnerTessellationLevels();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QOpenGLShaderProgram_BindAttributeLocation(QOpenGLShaderProgram* self, const char* name, int location) {
@@ -480,38 +507,6 @@ void QOpenGLShaderProgram_SetUniformValue14(QOpenGLShaderProgram* self, int loca
 	self->setUniformValue(location, *size);
 }
 
-void QOpenGLShaderProgram_SetUniformValue15(QOpenGLShaderProgram* self, int location, const QGenericMatrix<2, 2, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue16(QOpenGLShaderProgram* self, int location, const QGenericMatrix<2, 3, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue17(QOpenGLShaderProgram* self, int location, const QGenericMatrix<2, 4, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue18(QOpenGLShaderProgram* self, int location, const QGenericMatrix<3, 2, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue19(QOpenGLShaderProgram* self, int location, const QGenericMatrix<3, 3, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue20(QOpenGLShaderProgram* self, int location, const QGenericMatrix<3, 4, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue21(QOpenGLShaderProgram* self, int location, const QGenericMatrix<4, 2, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue22(QOpenGLShaderProgram* self, int location, const QGenericMatrix<4, 3, float>* value) {
-	self->setUniformValue(location, *value);
-}
-
 void QOpenGLShaderProgram_SetUniformValue23(QOpenGLShaderProgram* self, int location, const QMatrix4x4* value) {
 	self->setUniformValue(location, *value);
 }
@@ -576,38 +571,6 @@ void QOpenGLShaderProgram_SetUniformValue38(QOpenGLShaderProgram* self, const ch
 	self->setUniformValue(name, *size);
 }
 
-void QOpenGLShaderProgram_SetUniformValue39(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<2, 2, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue40(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<2, 3, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue41(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<2, 4, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue42(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<3, 2, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue43(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<3, 3, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue44(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<3, 4, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue45(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<4, 2, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
-void QOpenGLShaderProgram_SetUniformValue46(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<4, 3, float>* value) {
-	self->setUniformValue(name, *value);
-}
-
 void QOpenGLShaderProgram_SetUniformValue47(QOpenGLShaderProgram* self, const char* name, const QMatrix4x4* value) {
 	self->setUniformValue(name, *value);
 }
@@ -640,38 +603,6 @@ void QOpenGLShaderProgram_SetUniformValueArray6(QOpenGLShaderProgram* self, int 
 	self->setUniformValueArray(location, values, count);
 }
 
-void QOpenGLShaderProgram_SetUniformValueArray7(QOpenGLShaderProgram* self, int location, const QGenericMatrix<2, 2, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray8(QOpenGLShaderProgram* self, int location, const QGenericMatrix<2, 3, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray9(QOpenGLShaderProgram* self, int location, const QGenericMatrix<2, 4, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray10(QOpenGLShaderProgram* self, int location, const QGenericMatrix<3, 2, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray11(QOpenGLShaderProgram* self, int location, const QGenericMatrix<3, 3, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray12(QOpenGLShaderProgram* self, int location, const QGenericMatrix<3, 4, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray13(QOpenGLShaderProgram* self, int location, const QGenericMatrix<4, 2, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray14(QOpenGLShaderProgram* self, int location, const QGenericMatrix<4, 3, float>* values, int count) {
-	self->setUniformValueArray(location, values, count);
-}
-
 void QOpenGLShaderProgram_SetUniformValueArray15(QOpenGLShaderProgram* self, int location, const QMatrix4x4* values, int count) {
 	self->setUniformValueArray(location, values, count);
 }
@@ -697,38 +628,6 @@ void QOpenGLShaderProgram_SetUniformValueArray20(QOpenGLShaderProgram* self, con
 }
 
 void QOpenGLShaderProgram_SetUniformValueArray21(QOpenGLShaderProgram* self, const char* name, const QVector4D* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray22(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<2, 2, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray23(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<2, 3, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray24(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<2, 4, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray25(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<3, 2, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray26(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<3, 3, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray27(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<3, 4, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray28(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<4, 2, float>* values, int count) {
-	self->setUniformValueArray(name, values, count);
-}
-
-void QOpenGLShaderProgram_SetUniformValueArray29(QOpenGLShaderProgram* self, const char* name, const QGenericMatrix<4, 3, float>* values, int count) {
 	self->setUniformValueArray(name, values, count);
 }
 

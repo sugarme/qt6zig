@@ -169,10 +169,6 @@ return  _ret;
         return qtc.QMediaRecorder_CaptureSession(@ptrCast(self));
     }
 
-    pub fn PlatformRecoder(self: ?*anyopaque, ) QPlatformMediaRecorder {
-        return @ptrCast(qtc.QMediaRecorder_PlatformRecoder(@ptrCast(self)));
-    }
-
     pub fn Record(self: ?*anyopaque, ) void {
         qtc.QMediaRecorder_Record(@ptrCast(self));
     }

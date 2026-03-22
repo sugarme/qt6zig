@@ -47,7 +47,6 @@ void QUrlQuery_RemoveQueryItem(QUrlQuery* self, const libqt_string key);
 libqt_string QUrlQuery_QueryItemValue(const QUrlQuery* self, const libqt_string key);
 libqt_list QUrlQuery_AllQueryItemValues(const QUrlQuery* self, const libqt_string key);
 void QUrlQuery_RemoveAllQueryItems(QUrlQuery* self, const libqt_string key);
-QSharedDataPointer<QUrlQueryPrivate>* QUrlQuery_DataPtr(QUrlQuery* self);
 libqt_string QUrlQuery_Query1(const QUrlQuery* self, unsigned int encoding);
 libqt_string QUrlQuery_ToString1(const QUrlQuery* self, unsigned int encoding);
 libqt_list QUrlQuery_QueryItems1(const QUrlQuery* self, unsigned int encoding);

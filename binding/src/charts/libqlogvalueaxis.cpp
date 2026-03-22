@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qlogvalueaxis.h>
 #include "libqlogvalueaxis.h"
 #include "libqlogvalueaxis.hxx"

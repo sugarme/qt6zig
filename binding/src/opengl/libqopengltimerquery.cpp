@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qopengltimerquery.h>
 #include "libqopengltimerquery.h"
 #include "libqopengltimerquery.hxx"
@@ -133,7 +134,16 @@ bool QOpenGLTimeMonitor_IsCreated(const QOpenGLTimeMonitor* self) {
 }
 
 libqt_list QOpenGLTimeMonitor_ObjectIds(const QOpenGLTimeMonitor* self) {
-	return self->objectIds();
+	auto _ret = self->objectIds();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QOpenGLTimeMonitor_RecordSample(QOpenGLTimeMonitor* self) {
@@ -145,11 +155,29 @@ bool QOpenGLTimeMonitor_IsResultAvailable(const QOpenGLTimeMonitor* self) {
 }
 
 libqt_list QOpenGLTimeMonitor_WaitForSamples(const QOpenGLTimeMonitor* self) {
-	return self->waitForSamples();
+	auto _ret = self->waitForSamples();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QOpenGLTimeMonitor_WaitForIntervals(const QOpenGLTimeMonitor* self) {
-	return self->waitForIntervals();
+	auto _ret = self->waitForIntervals();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QOpenGLTimeMonitor_Reset(QOpenGLTimeMonitor* self) {

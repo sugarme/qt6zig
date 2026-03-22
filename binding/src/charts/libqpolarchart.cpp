@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpolarchart.h>
 #include "libqpolarchart.h"
 #include "libqpolarchart.hxx"
@@ -38,7 +39,15 @@ void QPolarChart_AddAxis(QPolarChart* self, QAbstractAxis* axis, int polarOrient
 }
 
 libqt_list QPolarChart_Axes(const QPolarChart* self) {
-	return self->axes();
+	auto _ret = self->axes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QPolarChart_AxisPolarOrientation(QAbstractAxis* axis) {
@@ -68,11 +77,27 @@ libqt_string QPolarChart_Tr3(const char* s, const char* c, int n) {
 }
 
 libqt_list QPolarChart_Axes1(const QPolarChart* self, int polarOrientation) {
-	return self->axes(static_cast<QFlags<QPolarChart::PolarOrientation>>(polarOrientation));
+	auto _ret = self->axes(static_cast<QFlags<QPolarChart::PolarOrientation>>(polarOrientation));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QPolarChart_Axes2(const QPolarChart* self, int polarOrientation, QAbstractSeries* series) {
-	return self->axes(static_cast<QFlags<QPolarChart::PolarOrientation>>(polarOrientation), series);
+	auto _ret = self->axes(static_cast<QFlags<QPolarChart::PolarOrientation>>(polarOrientation), series);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QPolarChart_Delete(QPolarChart* self) {

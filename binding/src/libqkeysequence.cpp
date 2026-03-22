@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qkeysequence.h>
 #include "libqkeysequence.h"
@@ -84,11 +85,20 @@ QKeySequence* QKeySequence_FromString(const libqt_string str) {
 }
 
 libqt_list QKeySequence_ListFromString(const libqt_string str) {
-	return QKeySequence::listFromString(QString::fromUtf8(str.data, str.len));
+	auto _ret = QKeySequence::listFromString(QString::fromUtf8(str.data, str.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QKeySequence_ListToString(const libqt_list list) {
-	QString _ret = QKeySequence::listToString(*list);
+	QString _ret = QKeySequence::listToString(QList<QKeySequence>());
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -107,7 +117,16 @@ QKeySequence* QKeySequence_Mnemonic(const libqt_string text) {
 }
 
 libqt_list QKeySequence_KeyBindings(int key) {
-	return QKeySequence::keyBindings(static_cast<QKeySequence::StandardKey>(key));
+	auto _ret = QKeySequence::keyBindings(static_cast<QKeySequence::StandardKey>(key));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QVariant* QKeySequence_OperatorQVariant(const QKeySequence* self) {
@@ -154,10 +173,6 @@ bool QKeySequence_IsDetached(const QKeySequence* self) {
 	return self->isDetached();
 }
 
-QKeySequencePrivate** QKeySequence_DataPtr(QKeySequence* self) {
-	return self->data_ptr();
-}
-
 libqt_string QKeySequence_ToString1(const QKeySequence* self, int format) {
 	QString _ret = self->toString(static_cast<QKeySequence::SequenceFormat>(format));
 	QByteArray _b = _ret.toUtf8();
@@ -174,11 +189,20 @@ QKeySequence* QKeySequence_FromString2(const libqt_string str, int format) {
 }
 
 libqt_list QKeySequence_ListFromString2(const libqt_string str, int format) {
-	return QKeySequence::listFromString(QString::fromUtf8(str.data, str.len), static_cast<QKeySequence::SequenceFormat>(format));
+	auto _ret = QKeySequence::listFromString(QString::fromUtf8(str.data, str.len), static_cast<QKeySequence::SequenceFormat>(format));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QKeySequence_ListToString2(const libqt_list list, int format) {
-	QString _ret = QKeySequence::listToString(*list, static_cast<QKeySequence::SequenceFormat>(format));
+	QString _ret = QKeySequence::listToString(QList<QKeySequence>(), static_cast<QKeySequence::SequenceFormat>(format));
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();

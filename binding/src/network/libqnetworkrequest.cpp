@@ -1,4 +1,3 @@
-#include <QAnyStringView>
 #include <QByteArray>
 #include <QHttp1Configuration>
 #include <QHttp2Configuration>
@@ -10,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <QVariant>
 #include <qnetworkrequest.h>
@@ -68,22 +68,17 @@ void QNetworkRequest_SetHeader(QNetworkRequest* self, int header, const QVariant
 	self->setHeader(static_cast<QNetworkRequest::KnownHeaders>(header), *value);
 }
 
-bool QNetworkRequest_HasRawHeader(const QNetworkRequest* self, libqt_string headerName) {
-	return self->hasRawHeader(QAnyStringView(QString::fromUtf8(headerName.data, headerName.len)));
-}
-
 libqt_list QNetworkRequest_RawHeaderList(const QNetworkRequest* self) {
-	return self->rawHeaderList();
-}
-
-libqt_string QNetworkRequest_RawHeader(const QNetworkRequest* self, libqt_string headerName) {
-	QByteArray _qb = self->rawHeader(QAnyStringView(QString::fromUtf8(headerName.data, headerName.len)));
-	libqt_string _str;
-	_str.len = _qb.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _qb.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
+	auto _ret = self->rawHeaderList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QNetworkRequest_SetRawHeader(QNetworkRequest* self, const libqt_string headerName, const libqt_string value) {

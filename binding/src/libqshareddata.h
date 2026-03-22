@@ -16,7 +16,6 @@ extern "C" {
 #ifdef __cplusplus
 #else
 typedef struct QAdoptSharedDataTag QAdoptSharedDataTag;
-typedef struct QAtomicInt QAtomicInt;
 typedef struct QSharedData QSharedData;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
@@ -26,8 +25,6 @@ typedef struct type_info type_info;
 
 QSharedData* QSharedData_new();
 QSharedData* QSharedData_new2(const QSharedData* param1);
-QAtomicInt* QSharedData_Ref(const QSharedData* self);
-void QSharedData_SetRef(QSharedData* self, QAtomicInt* ref);
 void QSharedData_Delete(QSharedData* self);
 
 QAdoptSharedDataTag* QAdoptSharedDataTag_new(const QAdoptSharedDataTag* other);

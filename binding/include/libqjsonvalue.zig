@@ -46,38 +46,32 @@ return qtc.QJsonValue_new6(s_str);
 
 
     /// New7 constructs a new QJsonValue object.
-    pub fn New7(s: QLatin1StringView) QtC.QJsonValue {
-        return qtc.QJsonValue_new7(s);
+    pub fn New7(s: []const u8) QtC.QJsonValue {
+        return qtc.QJsonValue_new7(@ptrCast(s));
     }
 
 
     /// New8 constructs a new QJsonValue object.
-    pub fn New8(s: []const u8) QtC.QJsonValue {
-        return qtc.QJsonValue_new8(@ptrCast(s));
+    pub fn New8(a: ?*anyopaque) QtC.QJsonValue {
+        return qtc.QJsonValue_new8(@ptrCast(a));
     }
 
 
     /// New9 constructs a new QJsonValue object.
-    pub fn New9(a: ?*anyopaque) QtC.QJsonValue {
-        return qtc.QJsonValue_new9(@ptrCast(a));
+    pub fn New9(o: ?*anyopaque) QtC.QJsonValue {
+        return qtc.QJsonValue_new9(@ptrCast(o));
     }
 
 
     /// New10 constructs a new QJsonValue object.
-    pub fn New10(o: ?*anyopaque) QtC.QJsonValue {
-        return qtc.QJsonValue_new10(@ptrCast(o));
+    pub fn New10(other: ?*anyopaque) QtC.QJsonValue {
+        return qtc.QJsonValue_new10(@ptrCast(other));
     }
 
 
     /// New11 constructs a new QJsonValue object.
-    pub fn New11(other: ?*anyopaque) QtC.QJsonValue {
-        return qtc.QJsonValue_new11(@ptrCast(other));
-    }
-
-
-    /// New12 constructs a new QJsonValue object.
-    pub fn New12(param1: i32) QtC.QJsonValue {
-        return qtc.QJsonValue_new12(@intCast(param1));
+    pub fn New11(param1: i32) QtC.QJsonValue {
+        return qtc.QJsonValue_new11(@intCast(param1));
     }
 
 
@@ -189,14 +183,6 @@ return  _ret;
 return qtc.QJsonValue_OperatorSubscript(@ptrCast(self), key_str);
     }
 
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: []const u8) QtC.QJsonValue {
-        return qtc.QJsonValue_OperatorSubscript2(@ptrCast(self), @ptrCast(key));
-    }
-
-    pub fn OperatorSubscript3(self: ?*anyopaque, key: QLatin1StringView) QtC.QJsonValue {
-        return qtc.QJsonValue_OperatorSubscript3(@ptrCast(self), key);
-    }
-
     pub fn OperatorSubscript4(self: ?*anyopaque, i: i64) QtC.QJsonValue {
         return qtc.QJsonValue_OperatorSubscript4(@ptrCast(self), i);
     }
@@ -296,14 +282,6 @@ return  _ret;
 
     pub fn ToObject(self: ?*anyopaque, ) QtC.QJsonObject {
         return qtc.QJsonValueConstRef_ToObject(@ptrCast(self));
-    }
-
-    pub fn OperatorSubscript(self: ?*anyopaque, key: []const u8) QtC.QJsonValue {
-        return qtc.QJsonValueConstRef_OperatorSubscript(@ptrCast(self), @ptrCast(key));
-    }
-
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: QLatin1StringView) QtC.QJsonValue {
-        return qtc.QJsonValueConstRef_OperatorSubscript2(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript3(self: ?*anyopaque, i: i64) QtC.QJsonValue {
@@ -433,14 +411,6 @@ return  _ret;
 
     pub fn ToObject(self: ?*anyopaque, ) QtC.QJsonObject {
         return qtc.QJsonValueRef_ToObject(@ptrCast(self));
-    }
-
-    pub fn OperatorSubscript(self: ?*anyopaque, key: []const u8) QtC.QJsonValue {
-        return qtc.QJsonValueRef_OperatorSubscript(@ptrCast(self), @ptrCast(key));
-    }
-
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: QLatin1StringView) QtC.QJsonValue {
-        return qtc.QJsonValueRef_OperatorSubscript2(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript3(self: ?*anyopaque, i: i64) QtC.QJsonValue {

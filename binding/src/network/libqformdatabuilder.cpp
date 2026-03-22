@@ -1,4 +1,3 @@
-#include <QAnyStringView>
 #include <QByteArrayView>
 #include <QDebug>
 #include <QFormDataBuilder>
@@ -33,22 +32,6 @@ QFormDataPartBuilder* QFormDataPartBuilder_SetHeaders(QFormDataPartBuilder* self
 	return new QFormDataPartBuilder(self->setHeaders(*headers));
 }
 
-QFormDataPartBuilder* QFormDataPartBuilder_SetBody2(QFormDataPartBuilder* self, QByteArrayView* data, libqt_string fileName) {
-	return new QFormDataPartBuilder(self->setBody(*data, QAnyStringView(QString::fromUtf8(fileName.data, fileName.len))));
-}
-
-QFormDataPartBuilder* QFormDataPartBuilder_SetBody3(QFormDataPartBuilder* self, QByteArrayView* data, libqt_string fileName, libqt_string mimeType) {
-	return new QFormDataPartBuilder(self->setBody(*data, QAnyStringView(QString::fromUtf8(fileName.data, fileName.len)), QAnyStringView(QString::fromUtf8(mimeType.data, mimeType.len))));
-}
-
-QFormDataPartBuilder* QFormDataPartBuilder_SetBodyDevice2(QFormDataPartBuilder* self, QIODevice* body, libqt_string fileName) {
-	return new QFormDataPartBuilder(self->setBodyDevice(body, QAnyStringView(QString::fromUtf8(fileName.data, fileName.len))));
-}
-
-QFormDataPartBuilder* QFormDataPartBuilder_SetBodyDevice3(QFormDataPartBuilder* self, QIODevice* body, libqt_string fileName, libqt_string mimeType) {
-	return new QFormDataPartBuilder(self->setBodyDevice(body, QAnyStringView(QString::fromUtf8(fileName.data, fileName.len)), QAnyStringView(QString::fromUtf8(mimeType.data, mimeType.len))));
-}
-
 void QFormDataPartBuilder_Delete(QFormDataPartBuilder* self) {
     delete self;
 }
@@ -59,18 +42,6 @@ QFormDataBuilder* QFormDataBuilder_new() {
 
 void QFormDataBuilder_Swap(QFormDataBuilder* self, QFormDataBuilder* other) {
 	self->swap(*other);
-}
-
-QFormDataPartBuilder* QFormDataBuilder_Part(QFormDataBuilder* self, libqt_string name) {
-	return new QFormDataPartBuilder(self->part(QAnyStringView(QString::fromUtf8(name.data, name.len))));
-}
-
-std::unique_ptr<QHttpMultiPart> QFormDataBuilder_BuildMultiPart(QFormDataBuilder* self) {
-	return self->buildMultiPart();
-}
-
-std::unique_ptr<QHttpMultiPart> QFormDataBuilder_BuildMultiPart1(QFormDataBuilder* self, int options) {
-	return self->buildMultiPart(static_cast<QFlags<QFormDataBuilder::Option>>(options));
 }
 
 void QFormDataBuilder_Delete(QFormDataBuilder* self) {

@@ -15,6 +15,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransform>
 #include <QVariant>
 #include <qimage.h>
@@ -118,7 +119,7 @@ QImage* QImage_ConvertToFormat(const QImage* self, int f) {
 }
 
 QImage* QImage_ConvertToFormat2(const QImage* self, int f, const libqt_list colorTable) {
-	return new QImage(self->convertToFormat(static_cast<QImage::Format>(f), *colorTable));
+	return new QImage(self->convertToFormat(static_cast<QImage::Format>(f), QList<unsigned int>()));
 }
 
 bool QImage_ReinterpretAsFormat(QImage* self, int f) {
@@ -262,11 +263,20 @@ void QImage_SetPixelColor2(QImage* self, const QPoint* pt, const QColor* c) {
 }
 
 libqt_list QImage_ColorTable(const QImage* self) {
-	return self->colorTable();
+	auto _ret = self->colorTable();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QImage_SetColorTable(QImage* self, const libqt_list colors) {
-	self->setColorTable(*colors);
+	self->setColorTable(QList<unsigned int>());
 }
 
 double QImage_DevicePixelRatio(const QImage* self) {
@@ -470,7 +480,21 @@ void QImage_SetOffset(QImage* self, const QPoint* offset) {
 }
 
 libqt_list QImage_TextKeys(const QImage* self) {
-	return self->textKeys();
+	auto _ret = self->textKeys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QImage_Text(const QImage* self) {
@@ -529,7 +553,7 @@ QImage* QImage_ConvertToFormat22(const QImage* self, int f, int flags) {
 }
 
 QImage* QImage_ConvertToFormat3(const QImage* self, int f, const libqt_list colorTable, int flags) {
-	return new QImage(self->convertToFormat(static_cast<QImage::Format>(f), *colorTable, static_cast<QFlags<Qt::ImageConversionFlag>>(flags)));
+	return new QImage(self->convertToFormat(static_cast<QImage::Format>(f), QList<unsigned int>(), static_cast<QFlags<Qt::ImageConversionFlag>>(flags)));
 }
 
 QImage* QImage_ConvertedTo2(const QImage* self, int f, int flags) {

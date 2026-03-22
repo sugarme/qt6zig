@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qscreencapture.h>
 #include "libqscreencapture.h"
 #include "libqscreencapture.hxx"

@@ -1,4 +1,3 @@
-#include <QAnyStringView>
 #include <QByteArray>
 #include <QDomAttr>
 #include <QDomCDATASection>
@@ -22,6 +21,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <qdom.h>
@@ -663,10 +663,6 @@ bool QDomDocument_SetContent7(QDomDocument* self, QXmlStreamReader* reader, bool
 	return self->setContent(reader, namespaceProcessing);
 }
 
-QDomDocument__ParseResult* QDomDocument_SetContent8(QDomDocument* self, libqt_string data) {
-	return new QDomDocument::ParseResult(self->setContent(QAnyStringView(QString::fromUtf8(data.data, data.len))));
-}
-
 QDomDocument__ParseResult* QDomDocument_SetContent9(QDomDocument* self, QIODevice* device) {
 	return new QDomDocument::ParseResult(self->setContent(device));
 }
@@ -766,10 +762,6 @@ bool QDomDocument_SetContent48(QDomDocument* self, QXmlStreamReader* reader, boo
 
 bool QDomDocument_SetContent55(QDomDocument* self, QXmlStreamReader* reader, bool namespaceProcessing, libqt_string errorMsg, int* errorLine, int* errorColumn) {
 	return self->setContent(reader, namespaceProcessing, QString::fromUtf8(errorMsg.data, errorMsg.len), errorLine, errorColumn);
-}
-
-QDomDocument__ParseResult* QDomDocument_SetContent22(QDomDocument* self, libqt_string data, int options) {
-	return new QDomDocument::ParseResult(self->setContent(QAnyStringView(QString::fromUtf8(data.data, data.len)), static_cast<QFlags<QDomDocument::ParseOption>>(options)));
 }
 
 QDomDocument__ParseResult* QDomDocument_SetContent23(QDomDocument* self, QIODevice* device, int options) {

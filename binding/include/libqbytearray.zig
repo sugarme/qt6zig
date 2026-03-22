@@ -46,14 +46,8 @@ return qtc.QByteArray_new6(param1_str);
 
 
     /// New7 constructs a new QByteArray object.
-    pub fn New7(dd: *const QArrayDataPointer<char>) QtC.QByteArray {
-        return qtc.QByteArray_new7(@ptrCast(dd));
-    }
-
-
-    /// New8 constructs a new QByteArray object.
-    pub fn New8(param1: []const u8, size: i64) QtC.QByteArray {
-        return qtc.QByteArray_new8(@ptrCast(param1), size);
+    pub fn New7(param1: []const u8, size: i64) QtC.QByteArray {
+        return qtc.QByteArray_new7(@ptrCast(param1), size);
     }
 
 
@@ -997,30 +991,6 @@ return  std.mem.span(_ret);
 return  std.mem.span(_ret);
     }
 
-    pub fn Rbegin(self: ?*anyopaque, ) std::reverse_iterator<char *> {
-        return qtc.QByteArray_Rbegin(@ptrCast(self));
-    }
-
-    pub fn Rend(self: ?*anyopaque, ) std::reverse_iterator<char *> {
-        return qtc.QByteArray_Rend(@ptrCast(self));
-    }
-
-    pub fn Rbegin2(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArray_Rbegin2(@ptrCast(self));
-    }
-
-    pub fn Rend2(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArray_Rend2(@ptrCast(self));
-    }
-
-    pub fn Crbegin(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArray_Crbegin(@ptrCast(self));
-    }
-
-    pub fn Crend(self: ?*anyopaque, ) std::reverse_iterator<const char *> {
-        return qtc.QByteArray_Crend(@ptrCast(self));
-    }
-
     pub fn PushBack(self: ?*anyopaque, c: i8) void {
         qtc.QByteArray_PushBack(@ptrCast(self), c);
     }
@@ -1097,14 +1067,6 @@ return  std.mem.span(_ret);
 
     pub fn IsNull(self: ?*anyopaque, ) bool {
         return qtc.QByteArray_IsNull(@ptrCast(self));
-    }
-
-    pub fn DataPtr(self: ?*anyopaque, ) QArrayDataPointer<char> {
-        return @ptrCast(qtc.QByteArray_DataPtr(@ptrCast(self)));
-    }
-
-    pub fn DataPtr2(self: ?*anyopaque, ) QArrayDataPointer<char> {
-        return @ptrCast(qtc.QByteArray_DataPtr2(@ptrCast(self)));
     }
 
     pub fn Fill2(self: ?*anyopaque, c: i8, size: i64, allocator: std.mem.Allocator) []u8 {

@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <qmediarecorder.h>
 #include "libqmediarecorder.h"
@@ -177,10 +178,6 @@ void QMediaRecorder_SetAutoStop(QMediaRecorder* self, bool autoStop) {
 
 QMediaCaptureSession* QMediaRecorder_CaptureSession(const QMediaRecorder* self) {
 	return self->captureSession();
-}
-
-QPlatformMediaRecorder* QMediaRecorder_PlatformRecoder(const QMediaRecorder* self) {
-	return self->platformRecoder();
 }
 
 void QMediaRecorder_Record(QMediaRecorder* self) {

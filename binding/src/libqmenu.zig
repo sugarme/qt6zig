@@ -247,14 +247,6 @@ qtc.QMenu_SetTitle(@ptrCast(self), title_str);
         qtc.QMenu_SetNoReplayFor(@ptrCast(self), @ptrCast(widget));
     }
 
-    pub fn PlatformMenu(self: ?*anyopaque, ) QPlatformMenu {
-        return @ptrCast(qtc.QMenu_PlatformMenu(@ptrCast(self)));
-    }
-
-    pub fn SetPlatformMenu(self: ?*anyopaque, platformMenu: *QPlatformMenu) void {
-        qtc.QMenu_SetPlatformMenu(@ptrCast(self), @ptrCast(platformMenu));
-    }
-
     pub fn SeparatorsCollapsible(self: ?*anyopaque, ) bool {
         return qtc.QMenu_SeparatorsCollapsible(@ptrCast(self));
     }

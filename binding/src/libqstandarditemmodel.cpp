@@ -13,6 +13,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qstandarditemmodel.h>
 #include "libqstandarditemmodel.h"
@@ -325,15 +326,15 @@ void QStandardItem_SetChild2(QStandardItem* self, int row, QStandardItem* item) 
 }
 
 void QStandardItem_InsertRow(QStandardItem* self, int row, const libqt_list items) {
-	self->insertRow(row, *items);
+	self->insertRow(row, QList<QStandardItem *>());
 }
 
 void QStandardItem_InsertColumn(QStandardItem* self, int column, const libqt_list items) {
-	self->insertColumn(column, *items);
+	self->insertColumn(column, QList<QStandardItem *>());
 }
 
 void QStandardItem_InsertRows(QStandardItem* self, int row, const libqt_list items) {
-	self->insertRows(row, *items);
+	self->insertRows(row, QList<QStandardItem *>());
 }
 
 void QStandardItem_InsertRows2(QStandardItem* self, int row, int count) {
@@ -361,15 +362,15 @@ void QStandardItem_RemoveColumns(QStandardItem* self, int column, int count) {
 }
 
 void QStandardItem_AppendRow(QStandardItem* self, const libqt_list items) {
-	self->appendRow(*items);
+	self->appendRow(QList<QStandardItem *>());
 }
 
 void QStandardItem_AppendRows(QStandardItem* self, const libqt_list items) {
-	self->appendRows(*items);
+	self->appendRows(QList<QStandardItem *>());
 }
 
 void QStandardItem_AppendColumn(QStandardItem* self, const libqt_list items) {
-	self->appendColumn(*items);
+	self->appendColumn(QList<QStandardItem *>());
 }
 
 void QStandardItem_InsertRow2(QStandardItem* self, int row, QStandardItem* item) {
@@ -385,11 +386,27 @@ QStandardItem* QStandardItem_TakeChild(QStandardItem* self, int row) {
 }
 
 libqt_list QStandardItem_TakeRow(QStandardItem* self, int row) {
-	return self->takeRow(row);
+	auto _ret = self->takeRow(row);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QStandardItem_TakeColumn(QStandardItem* self, int column) {
-	return self->takeColumn(column);
+	auto _ret = self->takeColumn(column);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QStandardItem_SortChildren(QStandardItem* self, int column) {
@@ -629,11 +646,16 @@ libqt_string QStandardItemModel_Tr(const char* s) {
 }
 
 void QStandardItemModel_SetItemRoleNames(QStandardItemModel* self, const libqt_map roleNames) {
-	self->setItemRoleNames(*roleNames);
+	self->setItemRoleNames(QHash<int, QByteArray>());
 }
 
 libqt_map QStandardItemModel_RoleNames(const QStandardItemModel* self) {
-	return self->roleNames();
+	auto _ret = self->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QModelIndex* QStandardItemModel_Index(const QStandardItemModel* self, int row, int column, const QModelIndex* parent) {
@@ -705,11 +727,16 @@ int QStandardItemModel_SupportedDropActions(const QStandardItemModel* self) {
 }
 
 libqt_map QStandardItemModel_ItemData(const QStandardItemModel* self, const QModelIndex* index) {
-	return self->itemData(*index);
+	auto _ret = self->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 bool QStandardItemModel_SetItemData(QStandardItemModel* self, const QModelIndex* index, const libqt_map roles) {
-	return self->setItemData(*index, *roles);
+	return self->setItemData(*index, QMap<int, QVariant>());
 }
 
 void QStandardItemModel_Clear(QStandardItemModel* self) {
@@ -761,11 +788,11 @@ void QStandardItemModel_SetVerticalHeaderItem(QStandardItemModel* self, int row,
 }
 
 void QStandardItemModel_SetHorizontalHeaderLabels(QStandardItemModel* self, const libqt_list labels) {
-	self->setHorizontalHeaderLabels(*labels);
+	self->setHorizontalHeaderLabels(QList<QString>());
 }
 
 void QStandardItemModel_SetVerticalHeaderLabels(QStandardItemModel* self, const libqt_list labels) {
-	self->setVerticalHeaderLabels(*labels);
+	self->setVerticalHeaderLabels(QList<QString>());
 }
 
 void QStandardItemModel_SetRowCount(QStandardItemModel* self, int rows) {
@@ -777,11 +804,11 @@ void QStandardItemModel_SetColumnCount(QStandardItemModel* self, int columns) {
 }
 
 void QStandardItemModel_AppendRow(QStandardItemModel* self, const libqt_list items) {
-	self->appendRow(*items);
+	self->appendRow(QList<QStandardItem *>());
 }
 
 void QStandardItemModel_AppendColumn(QStandardItemModel* self, const libqt_list items) {
-	self->appendColumn(*items);
+	self->appendColumn(QList<QStandardItem *>());
 }
 
 void QStandardItemModel_AppendRow2(QStandardItemModel* self, QStandardItem* item) {
@@ -789,11 +816,11 @@ void QStandardItemModel_AppendRow2(QStandardItemModel* self, QStandardItem* item
 }
 
 void QStandardItemModel_InsertRow(QStandardItemModel* self, int row, const libqt_list items) {
-	self->insertRow(row, *items);
+	self->insertRow(row, QList<QStandardItem *>());
 }
 
 void QStandardItemModel_InsertColumn(QStandardItemModel* self, int column, const libqt_list items) {
-	self->insertColumn(column, *items);
+	self->insertColumn(column, QList<QStandardItem *>());
 }
 
 void QStandardItemModel_InsertRow2(QStandardItemModel* self, int row, QStandardItem* item) {
@@ -813,11 +840,27 @@ QStandardItem* QStandardItemModel_TakeItem(QStandardItemModel* self, int row) {
 }
 
 libqt_list QStandardItemModel_TakeRow(QStandardItemModel* self, int row) {
-	return self->takeRow(row);
+	auto _ret = self->takeRow(row);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QStandardItemModel_TakeColumn(QStandardItemModel* self, int column) {
-	return self->takeColumn(column);
+	auto _ret = self->takeColumn(column);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QStandardItem* QStandardItemModel_TakeHorizontalHeaderItem(QStandardItemModel* self, int column) {
@@ -837,7 +880,15 @@ void QStandardItemModel_SetItemPrototype(QStandardItemModel* self, const QStanda
 }
 
 libqt_list QStandardItemModel_FindItems(const QStandardItemModel* self, const libqt_string text) {
-	return self->findItems(QString::fromUtf8(text.data, text.len));
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QStandardItemModel_SortRole(const QStandardItemModel* self) {
@@ -848,16 +899,26 @@ void QStandardItemModel_SetSortRole(QStandardItemModel* self, int role) {
 	self->setSortRole(role);
 }
 
-QBindable<int> QStandardItemModel_BindableSortRole(QStandardItemModel* self) {
-	return self->bindableSortRole();
-}
-
 libqt_list QStandardItemModel_MimeTypes(const QStandardItemModel* self) {
-	return self->mimeTypes();
+	auto _ret = self->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QMimeData* QStandardItemModel_MimeData(const QStandardItemModel* self, const libqt_list indexes) {
-	return self->mimeData(*indexes);
+	return self->mimeData(QList<QModelIndex>());
 }
 
 bool QStandardItemModel_DropMimeData(QStandardItemModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent) {
@@ -914,11 +975,27 @@ QStandardItem* QStandardItemModel_TakeItem2(QStandardItemModel* self, int row, i
 }
 
 libqt_list QStandardItemModel_FindItems2(const QStandardItemModel* self, const libqt_string text, int flags) {
-	return self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QStandardItemModel_FindItems3(const QStandardItemModel* self, const libqt_string text, int flags, int column) {
-	return self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags), column);
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags), column);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 // Base class handler implementation
@@ -926,7 +1003,12 @@ libqt_map QStandardItemModel_QBaseRoleNames(const QStandardItemModel* self) {
 	auto* vqstandarditemmodel = dynamic_cast<const VirtualQStandardItemModel*>(self);
 	if (vqstandarditemmodel && vqstandarditemmodel->isVirtualQStandardItemModel) {
 vqstandarditemmodel->setQStandardItemModel_RoleNames_IsBase(true);
-	return vqstandarditemmodel->roleNames();
+	auto _ret = vqstandarditemmodel->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -1232,7 +1314,12 @@ libqt_map QStandardItemModel_QBaseItemData(const QStandardItemModel* self, const
 	auto* vqstandarditemmodel = dynamic_cast<const VirtualQStandardItemModel*>(self);
 	if (vqstandarditemmodel && vqstandarditemmodel->isVirtualQStandardItemModel) {
 vqstandarditemmodel->setQStandardItemModel_ItemData_IsBase(true);
-	return vqstandarditemmodel->itemData(*index);
+	auto _ret = vqstandarditemmodel->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -1249,7 +1336,7 @@ bool QStandardItemModel_QBaseSetItemData(QStandardItemModel* self, const QModelI
 	auto* vqstandarditemmodel = dynamic_cast<VirtualQStandardItemModel*>(self);
 	if (vqstandarditemmodel && vqstandarditemmodel->isVirtualQStandardItemModel) {
 vqstandarditemmodel->setQStandardItemModel_SetItemData_IsBase(true);
-	return vqstandarditemmodel->setItemData(*index, *roles);
+	return vqstandarditemmodel->setItemData(*index, QMap<int, QVariant>());
 }
 }
 
@@ -1283,7 +1370,21 @@ libqt_list QStandardItemModel_QBaseMimeTypes(const QStandardItemModel* self) {
 	auto* vqstandarditemmodel = dynamic_cast<const VirtualQStandardItemModel*>(self);
 	if (vqstandarditemmodel && vqstandarditemmodel->isVirtualQStandardItemModel) {
 vqstandarditemmodel->setQStandardItemModel_MimeTypes_IsBase(true);
-	return vqstandarditemmodel->mimeTypes();
+	auto _ret = vqstandarditemmodel->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -1300,7 +1401,7 @@ QMimeData* QStandardItemModel_QBaseMimeData(const QStandardItemModel* self, cons
 	auto* vqstandarditemmodel = dynamic_cast<const VirtualQStandardItemModel*>(self);
 	if (vqstandarditemmodel && vqstandarditemmodel->isVirtualQStandardItemModel) {
 vqstandarditemmodel->setQStandardItemModel_MimeData_IsBase(true);
-	return vqstandarditemmodel->mimeData(*indexes);
+	return vqstandarditemmodel->mimeData(QList<QModelIndex>());
 }
 }
 

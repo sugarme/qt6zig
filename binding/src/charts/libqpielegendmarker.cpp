@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpielegendmarker.h>
 #include "libqpielegendmarker.h"
 #include "libqpielegendmarker.hxx"

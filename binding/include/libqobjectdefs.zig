@@ -88,14 +88,6 @@ pub const qgenericreturnargument = struct {
 /// https://doc.qt.io/qt-6/qmetamethodargument.html
 pub const qmetamethodargument = struct {
 
-    pub fn MetaType(self: ?*anyopaque, ) QtC.QtPrivate__QMetaTypeInterface {
-        return qtc.QMetaMethodArgument_MetaType(@ptrCast(self));
-    }
-
-    pub fn SetMetaType(self: ?*anyopaque, metaType: ?*anyopaque) void {
-        qtc.QMetaMethodArgument_SetMetaType(@ptrCast(self), @ptrCast(metaType));
-    }
-
     pub fn Name(self: ?*anyopaque, ) []const u8 {
         const name_ret = qtc.QMetaMethodArgument_Name(@ptrCast(self));
 return  std.mem.span(name_ret);
@@ -113,14 +105,6 @@ return  std.mem.span(name_ret);
 
 /// https://doc.qt.io/qt-6/qmetamethodreturnargument.html
 pub const qmetamethodreturnargument = struct {
-
-    pub fn MetaType(self: ?*anyopaque, ) QtC.QtPrivate__QMetaTypeInterface {
-        return qtc.QMetaMethodReturnArgument_MetaType(@ptrCast(self));
-    }
-
-    pub fn SetMetaType(self: ?*anyopaque, metaType: ?*anyopaque) void {
-        qtc.QMetaMethodReturnArgument_SetMetaType(@ptrCast(self), @ptrCast(metaType));
-    }
 
     pub fn Name(self: ?*anyopaque, ) []const u8 {
         const name_ret = qtc.QMetaMethodReturnArgument_Name(@ptrCast(self));
@@ -462,14 +446,6 @@ pub const qmetaobject__data = struct {
 
     pub fn SetRelatedMetaObjects(self: ?*anyopaque, relatedMetaObjects: ?*anyopaque) void {
         qtc.QMetaObject__Data_SetRelatedMetaObjects(@ptrCast(self), @ptrCast(relatedMetaObjects));
-    }
-
-    pub fn MetaTypes(self: ?*anyopaque, ) QtC.QtPrivate__QMetaTypeInterface {
-        return qtc.QMetaObject__Data_MetaTypes(@ptrCast(self));
-    }
-
-    pub fn SetMetaTypes(self: ?*anyopaque, metaTypes: ?*anyopaque) void {
-        qtc.QMetaObject__Data_SetMetaTypes(@ptrCast(self), @ptrCast(metaTypes));
     }
 
     pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {

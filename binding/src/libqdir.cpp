@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #define WORKAROUND_INNER_CLASS_DEFINITION_Disambiguated_t
 #include <qdir.h>
 #include "libqdir.h"
@@ -78,20 +79,8 @@ libqt_string QDir_CanonicalPath(const QDir* self) {
 	return _str;
 }
 
-std::filesystem::path QDir_FilesystemPath(const QDir* self) {
-	return self->filesystemPath();
-}
-
-std::filesystem::path QDir_FilesystemAbsolutePath(const QDir* self) {
-	return self->filesystemAbsolutePath();
-}
-
-std::filesystem::path QDir_FilesystemCanonicalPath(const QDir* self) {
-	return self->filesystemCanonicalPath();
-}
-
 void QDir_SetSearchPaths(const libqt_string prefix, const libqt_list searchPaths) {
-	QDir::setSearchPaths(QString::fromUtf8(prefix.data, prefix.len), *searchPaths);
+	QDir::setSearchPaths(QString::fromUtf8(prefix.data, prefix.len), QList<QString>());
 }
 
 void QDir_AddSearchPath(const libqt_string prefix, const libqt_string path) {
@@ -99,7 +88,21 @@ void QDir_AddSearchPath(const libqt_string prefix, const libqt_string path) {
 }
 
 libqt_list QDir_SearchPaths(const libqt_string prefix) {
-	return QDir::searchPaths(QString::fromUtf8(prefix.data, prefix.len));
+	auto _ret = QDir::searchPaths(QString::fromUtf8(prefix.data, prefix.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QDir_DirName(const QDir* self) {
@@ -177,11 +180,25 @@ bool QDir_CdUp(QDir* self) {
 }
 
 libqt_list QDir_NameFilters(const QDir* self) {
-	return self->nameFilters();
+	auto _ret = self->nameFilters();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QDir_SetNameFilters(QDir* self, const libqt_list nameFilters) {
-	self->setNameFilters(*nameFilters);
+	self->setNameFilters(QList<QString>());
 }
 
 int QDir_Filter(const QDir* self) {
@@ -220,23 +237,83 @@ libqt_string QDir_OperatorSubscript(const QDir* self, long long param1) {
 }
 
 libqt_list QDir_NameFiltersFromString(const libqt_string nameFilter) {
-	return QDir::nameFiltersFromString(QString::fromUtf8(nameFilter.data, nameFilter.len));
+	auto _ret = QDir::nameFiltersFromString(QString::fromUtf8(nameFilter.data, nameFilter.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryList(const QDir* self) {
-	return self->entryList();
+	auto _ret = self->entryList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryList2(const QDir* self, const libqt_list nameFilters) {
-	return self->entryList(*nameFilters);
+	auto _ret = self->entryList(QList<QString>());
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryInfoList(const QDir* self) {
-	return self->entryInfoList();
+	auto _ret = self->entryInfoList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryInfoList2(const QDir* self, const libqt_list nameFilters) {
-	return self->entryInfoList(*nameFilters);
+	auto _ret = self->entryInfoList(QList<QString>());
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QDir_Mkdir(const QDir* self, const libqt_string dirName) {
@@ -308,7 +385,16 @@ bool QDir_Exists2(const QDir* self, const libqt_string name) {
 }
 
 libqt_list QDir_Drives() {
-	return QDir::drives();
+	auto _ret = QDir::drives();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QChar* QDir_ListSeparator() {
@@ -384,7 +470,7 @@ libqt_string QDir_TempPath() {
 }
 
 bool QDir_Match(const libqt_list filters, const libqt_string fileName) {
-	return QDir::match(*filters, QString::fromUtf8(fileName.data, fileName.len));
+	return QDir::match(QList<QString>(), QString::fromUtf8(fileName.data, fileName.len));
 }
 
 bool QDir_Match2(const libqt_string filter, const libqt_string fileName) {
@@ -415,35 +501,127 @@ bool QDir_IsEmpty1(const QDir* self, int filters) {
 }
 
 libqt_list QDir_EntryList1(const QDir* self, int filters) {
-	return self->entryList(static_cast<QFlags<QDir::Filter>>(filters));
+	auto _ret = self->entryList(static_cast<QFlags<QDir::Filter>>(filters));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryList22(const QDir* self, int filters, int sort) {
-	return self->entryList(static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	auto _ret = self->entryList(static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryList23(const QDir* self, const libqt_list nameFilters, int filters) {
-	return self->entryList(*nameFilters, static_cast<QFlags<QDir::Filter>>(filters));
+	auto _ret = self->entryList(QList<QString>(), static_cast<QFlags<QDir::Filter>>(filters));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryList3(const QDir* self, const libqt_list nameFilters, int filters, int sort) {
-	return self->entryList(*nameFilters, static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	auto _ret = self->entryList(QList<QString>(), static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryInfoList1(const QDir* self, int filters) {
-	return self->entryInfoList(static_cast<QFlags<QDir::Filter>>(filters));
+	auto _ret = self->entryInfoList(static_cast<QFlags<QDir::Filter>>(filters));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryInfoList22(const QDir* self, int filters, int sort) {
-	return self->entryInfoList(static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	auto _ret = self->entryInfoList(static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryInfoList23(const QDir* self, const libqt_list nameFilters, int filters) {
-	return self->entryInfoList(*nameFilters, static_cast<QFlags<QDir::Filter>>(filters));
+	auto _ret = self->entryInfoList(QList<QString>(), static_cast<QFlags<QDir::Filter>>(filters));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QDir_EntryInfoList3(const QDir* self, const libqt_list nameFilters, int filters, int sort) {
-	return self->entryInfoList(*nameFilters, static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	auto _ret = self->entryInfoList(QList<QString>(), static_cast<QFlags<QDir::Filter>>(filters), static_cast<QFlags<QDir::SortFlag>>(sort));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QDir_Delete(QDir* self) {

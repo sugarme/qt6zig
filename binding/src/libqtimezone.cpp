@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimeZone>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QTimeZone__OffsetData
 #include <qtimezone.h>
@@ -182,7 +183,16 @@ QTimeZone__OffsetData* QTimeZone_PreviousTransition(const QTimeZone* self, const
 }
 
 libqt_list QTimeZone_Transitions(const QTimeZone* self, const QDateTime* fromDateTime, const QDateTime* toDateTime) {
-	return self->transitions(*fromDateTime, *toDateTime);
+	auto _ret = self->transitions(*fromDateTime, *toDateTime);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QTimeZone_SystemTimeZoneId() {
@@ -208,15 +218,42 @@ bool QTimeZone_IsTimeZoneIdAvailable(const libqt_string ianaId) {
 }
 
 libqt_list QTimeZone_AvailableTimeZoneIds() {
-	return QTimeZone::availableTimeZoneIds();
+	auto _ret = QTimeZone::availableTimeZoneIds();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTimeZone_AvailableTimeZoneIds2(ushort territory) {
-	return QTimeZone::availableTimeZoneIds(static_cast<QLocale::Country>(territory));
+	auto _ret = QTimeZone::availableTimeZoneIds(static_cast<QLocale::Country>(territory));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTimeZone_AvailableTimeZoneIds3(int offsetSeconds) {
-	return QTimeZone::availableTimeZoneIds(offsetSeconds);
+	auto _ret = QTimeZone::availableTimeZoneIds(offsetSeconds);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QTimeZone_IanaIdToWindowsId(const libqt_string ianaId) {
@@ -250,11 +287,29 @@ libqt_string QTimeZone_WindowsIdToDefaultIanaId2(const libqt_string windowsId, u
 }
 
 libqt_list QTimeZone_WindowsIdToIanaIds(const libqt_string windowsId) {
-	return QTimeZone::windowsIdToIanaIds(QByteArray(windowsId.data, windowsId.len));
+	auto _ret = QTimeZone::windowsIdToIanaIds(QByteArray(windowsId.data, windowsId.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTimeZone_WindowsIdToIanaIds2(const libqt_string windowsId, ushort territory) {
-	return QTimeZone::windowsIdToIanaIds(QByteArray(windowsId.data, windowsId.len), static_cast<QLocale::Country>(territory));
+	auto _ret = QTimeZone::windowsIdToIanaIds(QByteArray(windowsId.data, windowsId.len), static_cast<QLocale::Country>(territory));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QTimeZone_DisplayName22(const QTimeZone* self, const QDateTime* atDateTime, int nameType) {

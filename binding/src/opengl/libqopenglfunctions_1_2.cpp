@@ -55,10 +55,6 @@ void QOpenGLFunctions_1_2_GlGetFloatv(QOpenGLFunctions_1_2* self, uint32_t pname
 	self->glGetFloatv(pname, params);
 }
 
-GL QOpenGLFunctions_1_2_GlGetError(QOpenGLFunctions_1_2* self) {
-	return self->glGetError();
-}
-
 void QOpenGLFunctions_1_2_GlGetDoublev(QOpenGLFunctions_1_2* self, uint32_t pname, double* params) {
 	self->glGetDoublev(pname, params);
 }

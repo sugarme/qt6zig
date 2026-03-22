@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qinputdialog.h>
 #include "libqinputdialog.h"
@@ -104,11 +105,25 @@ bool QInputDialog_IsComboBoxEditable(const QInputDialog* self) {
 }
 
 void QInputDialog_SetComboBoxItems(QInputDialog* self, const libqt_list items) {
-	self->setComboBoxItems(*items);
+	self->setComboBoxItems(QList<QString>());
 }
 
 libqt_list QInputDialog_ComboBoxItems(const QInputDialog* self) {
-	return self->comboBoxItems();
+	auto _ret = self->comboBoxItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QInputDialog_SetIntValue(QInputDialog* self, int value) {
@@ -252,7 +267,7 @@ libqt_string QInputDialog_GetMultiLineText(QWidget* parent, const libqt_string t
 }
 
 libqt_string QInputDialog_GetItem(QWidget* parent, const libqt_string title, const libqt_string label, const libqt_list items) {
-	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), *items);
+	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), QList<QString>());
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -474,7 +489,7 @@ libqt_string QInputDialog_GetMultiLineText7(QWidget* parent, const libqt_string 
 }
 
 libqt_string QInputDialog_GetItem5(QWidget* parent, const libqt_string title, const libqt_string label, const libqt_list items, int current) {
-	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), *items, current);
+	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), QList<QString>(), current);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -485,7 +500,7 @@ libqt_string QInputDialog_GetItem5(QWidget* parent, const libqt_string title, co
 }
 
 libqt_string QInputDialog_GetItem6(QWidget* parent, const libqt_string title, const libqt_string label, const libqt_list items, int current, bool editable) {
-	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), *items, current, editable);
+	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), QList<QString>(), current, editable);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -496,7 +511,7 @@ libqt_string QInputDialog_GetItem6(QWidget* parent, const libqt_string title, co
 }
 
 libqt_string QInputDialog_GetItem7(QWidget* parent, const libqt_string title, const libqt_string label, const libqt_list items, int current, bool editable, bool* ok) {
-	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), *items, current, editable, ok);
+	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), QList<QString>(), current, editable, ok);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -507,7 +522,7 @@ libqt_string QInputDialog_GetItem7(QWidget* parent, const libqt_string title, co
 }
 
 libqt_string QInputDialog_GetItem8(QWidget* parent, const libqt_string title, const libqt_string label, const libqt_list items, int current, bool editable, bool* ok, int flags) {
-	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), *items, current, editable, ok, static_cast<QFlags<Qt::WindowType>>(flags));
+	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), QList<QString>(), current, editable, ok, static_cast<QFlags<Qt::WindowType>>(flags));
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -518,7 +533,7 @@ libqt_string QInputDialog_GetItem8(QWidget* parent, const libqt_string title, co
 }
 
 libqt_string QInputDialog_GetItem9(QWidget* parent, const libqt_string title, const libqt_string label, const libqt_list items, int current, bool editable, bool* ok, int flags, int inputMethodHints) {
-	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), *items, current, editable, ok, static_cast<QFlags<Qt::WindowType>>(flags), static_cast<QFlags<Qt::InputMethodHint>>(inputMethodHints));
+	QString _ret = QInputDialog::getItem(parent, QString::fromUtf8(title.data, title.len), QString::fromUtf8(label.data, label.len), QList<QString>(), current, editable, ok, static_cast<QFlags<Qt::WindowType>>(flags), static_cast<QFlags<Qt::InputMethodHint>>(inputMethodHints));
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();

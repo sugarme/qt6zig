@@ -53,10 +53,6 @@ return  _ret;
         qtc.QPropertyAnimation_SetTargetObject(@ptrCast(self), @ptrCast(target));
     }
 
-    pub fn BindableTargetObject(self: ?*anyopaque, ) QBindable<QObject *> {
-        return qtc.QPropertyAnimation_BindableTargetObject(@ptrCast(self));
-    }
-
     pub fn PropertyName(self: ?*anyopaque, , allocator: std.mem.Allocator) []u8 {
         const _bytearray: qtc.libqt_string = qtc.QPropertyAnimation_PropertyName(@ptrCast(self));
 defer qtc.libqt_string_free(&_bytearray);
@@ -71,10 +67,6 @@ return  _ret;
     .data = propertyName.ptr,
 };
 qtc.QPropertyAnimation_SetPropertyName(@ptrCast(self), propertyName_str);
-    }
-
-    pub fn BindablePropertyName(self: ?*anyopaque, ) QBindable<QByteArray> {
-        return qtc.QPropertyAnimation_BindablePropertyName(@ptrCast(self));
     }
 
     pub fn Event(self: ?*anyopaque, event: ?*anyopaque) bool {

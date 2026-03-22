@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUntypedBindable>
 #include <QUntypedPropertyBinding>
 #include <QUntypedPropertyData>
@@ -134,16 +135,8 @@ QUntypedPropertyBinding* QUntypedPropertyBinding_new() {
 	 return new QUntypedPropertyBinding();
 }
 
-QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QMetaType* metaType, const QtPrivate__BindingFunctionVTable* vtable, void* function, const QPropertyBindingSourceLocation* location) {
-	 return new QUntypedPropertyBinding(*metaType, vtable, function, *location);
-}
-
-QUntypedPropertyBinding* QUntypedPropertyBinding_new3(const QUntypedPropertyBinding* other) {
+QUntypedPropertyBinding* QUntypedPropertyBinding_new2(const QUntypedPropertyBinding* other) {
 	 return new QUntypedPropertyBinding(*other);
-}
-
-QUntypedPropertyBinding* QUntypedPropertyBinding_new4(QPropertyBindingPrivate* priv) {
-	 return new QUntypedPropertyBinding(priv);
 }
 
 void QUntypedPropertyBinding_OperatorAssign(QUntypedPropertyBinding* self, const QUntypedPropertyBinding* other) {
@@ -196,10 +189,6 @@ void QPropertyObserverBase_Delete(QPropertyObserverBase* self) {
 
 QPropertyObserver* QPropertyObserver_new() {
 	 return new QPropertyObserver();
-}
-
-void QPropertyObserver_SetSource(QPropertyObserver* self, const QtPrivate__QPropertyBindingData* property) {
-	self->setSource(*property);
 }
 
 void QPropertyObserver_Delete(QPropertyObserver* self) {

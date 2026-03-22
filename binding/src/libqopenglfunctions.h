@@ -54,7 +54,6 @@ void QOpenGLFunctions_GlFlush(QOpenGLFunctions* self);
 void QOpenGLFunctions_GlFrontFace(QOpenGLFunctions* self, uint32_t mode);
 void QOpenGLFunctions_GlGenTextures(QOpenGLFunctions* self, int32_t n, uint32_t* textures);
 void QOpenGLFunctions_GlGetBooleanv(QOpenGLFunctions* self, uint32_t pname, unsigned char* params);
-GL QOpenGLFunctions_GlGetError(QOpenGLFunctions* self);
 void QOpenGLFunctions_GlGetFloatv(QOpenGLFunctions* self, uint32_t pname, float* params);
 void QOpenGLFunctions_GlGetIntegerv(QOpenGLFunctions* self, uint32_t pname, int32_t* params);
 const uint8_t* QOpenGLFunctions_GlGetString(QOpenGLFunctions* self, uint32_t name);
@@ -90,7 +89,6 @@ void QOpenGLFunctions_GlBlendEquationSeparate(QOpenGLFunctions* self, uint32_t m
 void QOpenGLFunctions_GlBlendFuncSeparate(QOpenGLFunctions* self, uint32_t srcRGB, uint32_t dstRGB, uint32_t srcAlpha, uint32_t dstAlpha);
 void QOpenGLFunctions_GlBufferData(QOpenGLFunctions* self, uint32_t target, ptrdiff_t size, const void* data, uint32_t usage);
 void QOpenGLFunctions_GlBufferSubData(QOpenGLFunctions* self, uint32_t target, ptrdiff_t offset, ptrdiff_t size, const void* data);
-GL QOpenGLFunctions_GlCheckFramebufferStatus(QOpenGLFunctions* self, uint32_t target);
 void QOpenGLFunctions_GlClearDepthf(QOpenGLFunctions* self, GLclampf depth);
 void QOpenGLFunctions_GlCompileShader(QOpenGLFunctions* self, uint32_t shader);
 void QOpenGLFunctions_GlCompressedTexImage2D(QOpenGLFunctions* self, uint32_t target, int32_t level, uint32_t internalformat, int32_t width, int32_t height, int32_t border, int32_t imageSize, const void* data);
@@ -112,8 +110,6 @@ void QOpenGLFunctions_GlGenBuffers(QOpenGLFunctions* self, int32_t n, uint32_t* 
 void QOpenGLFunctions_GlGenerateMipmap(QOpenGLFunctions* self, uint32_t target);
 void QOpenGLFunctions_GlGenFramebuffers(QOpenGLFunctions* self, int32_t n, uint32_t* framebuffers);
 void QOpenGLFunctions_GlGenRenderbuffers(QOpenGLFunctions* self, int32_t n, uint32_t* renderbuffers);
-void QOpenGLFunctions_GlGetActiveAttrib(QOpenGLFunctions* self, uint32_t program, uint32_t index, int32_t bufsize, int32_t* length, int32_t* size, GL* typeVal, char* name);
-void QOpenGLFunctions_GlGetActiveUniform(QOpenGLFunctions* self, uint32_t program, uint32_t index, int32_t bufsize, int32_t* length, int32_t* size, GL* typeVal, char* name);
 void QOpenGLFunctions_GlGetAttachedShaders(QOpenGLFunctions* self, uint32_t program, int32_t maxcount, int32_t* count, uint32_t* shaders);
 int32_t QOpenGLFunctions_GlGetAttribLocation(QOpenGLFunctions* self, uint32_t program, const char* name);
 void QOpenGLFunctions_GlGetBufferParameteriv(QOpenGLFunctions* self, uint32_t target, uint32_t pname, int32_t* params);

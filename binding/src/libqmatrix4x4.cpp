@@ -108,10 +108,6 @@ QMatrix4x4* QMatrix4x4_Transposed(const QMatrix4x4* self) {
 	return new QMatrix4x4(self->transposed());
 }
 
-QGenericMatrix<3, 3, float> QMatrix4x4_NormalMatrix(const QMatrix4x4* self) {
-	return self->normalMatrix();
-}
-
 QMatrix4x4* QMatrix4x4_OperatorPlusAssign(QMatrix4x4* self, const QMatrix4x4* other) {
 	return new QMatrix4x4(self->operator+=(*other));
 }

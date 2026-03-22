@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextBlock>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QTextBlock__iterator
 #include <QTextBlockFormat>
@@ -190,9 +191,27 @@ vqtextblockgroup->setQTextBlockGroup_BlockFormatChanged_Callback(reinterpret_cas
 libqt_list QTextBlockGroup_BlockList(const QTextBlockGroup* self) {
 	auto* vqtextblockgroup = dynamic_cast<const VirtualQTextBlockGroup*>(self);
 	if (vqtextblockgroup && vqtextblockgroup->isVirtualQTextBlockGroup) {
-	return vqtextblockgroup->blockList();
+	auto _ret = vqtextblockgroup->blockList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QTextBlockGroup::blockList();
+	auto _ret = self->QTextBlockGroup::blockList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -201,7 +220,16 @@ libqt_list QTextBlockGroup_QBaseBlockList(const QTextBlockGroup* self) {
 	auto* vqtextblockgroup = dynamic_cast<const VirtualQTextBlockGroup*>(self);
 	if (vqtextblockgroup && vqtextblockgroup->isVirtualQTextBlockGroup) {
 vqtextblockgroup->setQTextBlockGroup_BlockList_IsBase(true);
-	return vqtextblockgroup->blockList();
+	auto _ret = vqtextblockgroup->blockList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -277,7 +305,15 @@ void QTextFrame_SetLayoutData(QTextFrame* self, QTextFrameLayoutData* data) {
 }
 
 libqt_list QTextFrame_ChildFrames(const QTextFrame* self) {
-	return self->childFrames();
+	auto _ret = self->childFrames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QTextFrame* QTextFrame_ParentFrame(const QTextFrame* self) {
@@ -334,15 +370,11 @@ void QTextBlockUserData_Delete(QTextBlockUserData* self) {
     delete self;
 }
 
-QTextBlock* QTextBlock_new(QTextDocumentPrivate* priv, int b) {
-	 return new QTextBlock(priv, b);
-}
-
-QTextBlock* QTextBlock_new2() {
+QTextBlock* QTextBlock_new() {
 	 return new QTextBlock();
 }
 
-QTextBlock* QTextBlock_new3(const QTextBlock* o) {
+QTextBlock* QTextBlock_new2(const QTextBlock* o) {
 	 return new QTextBlock(*o);
 }
 
@@ -418,7 +450,16 @@ libqt_string QTextBlock_Text(const QTextBlock* self) {
 }
 
 libqt_list QTextBlock_TextFormats(const QTextBlock* self) {
-	return self->textFormats();
+	auto _ret = self->textFormats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 const QTextDocument* QTextBlock_Document(const QTextBlock* self) {
@@ -501,15 +542,11 @@ void QTextBlock_Delete(QTextBlock* self) {
     delete self;
 }
 
-QTextFragment* QTextFragment_new(const QTextDocumentPrivate* priv, int f, int fe) {
-	 return new QTextFragment(priv, f, fe);
-}
-
-QTextFragment* QTextFragment_new2() {
+QTextFragment* QTextFragment_new() {
 	 return new QTextFragment();
 }
 
-QTextFragment* QTextFragment_new3(const QTextFragment* o) {
+QTextFragment* QTextFragment_new2(const QTextFragment* o) {
 	 return new QTextFragment(*o);
 }
 
@@ -565,35 +602,50 @@ libqt_string QTextFragment_Text(const QTextFragment* self) {
 }
 
 libqt_list QTextFragment_GlyphRuns(const QTextFragment* self) {
-	return self->glyphRuns();
+	auto _ret = self->glyphRuns();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTextFragment_GlyphRuns1(const QTextFragment* self, int from) {
-	return self->glyphRuns(from);
+	auto _ret = self->glyphRuns(from);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTextFragment_GlyphRuns2(const QTextFragment* self, int from, int length) {
-	return self->glyphRuns(from, length);
+	auto _ret = self->glyphRuns(from, length);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextFragment_Delete(QTextFragment* self) {
     delete self;
 }
 
-QTextFrame__iterator* QTextFrame__iterator_new(const QTextFrame__iterator* other) {
-	 return new QTextFrame::iterator(*other);
-}
-
-QTextFrame__iterator* QTextFrame__iterator_new2(QTextFrame__iterator* other) {
-	 return new QTextFrame::iterator(*other);
-}
-
-QTextFrame__iterator* QTextFrame__iterator_new3() {
+QTextFrame__iterator* QTextFrame__iterator_new() {
 	 return new QTextFrame::iterator();
-}
-
-QTextFrame__iterator* QTextFrame__iterator_new4(const QTextFrame__iterator* param1) {
-	 return new QTextFrame::iterator(*param1);
 }
 
 void QTextFrame__iterator_CopyAssign(QTextFrame__iterator* self, QTextFrame__iterator* other) {
@@ -620,14 +672,6 @@ bool QTextFrame__iterator_AtEnd(const QTextFrame__iterator* self) {
 	return self->atEnd();
 }
 
-bool QTextFrame__iterator_OperatorEqual(const QTextFrame__iterator* self, const QTextFrame__iterator* o) {
-	return self->operator==(*o);
-}
-
-bool QTextFrame__iterator_OperatorNotEqual(const QTextFrame__iterator* self, const QTextFrame__iterator* o) {
-	return self->operator!=(*o);
-}
-
 It::value_type* QTextFrame__iterator_OperatorPlusPlus(QTextFrame__iterator* self) {
 	return self->operator++();
 }
@@ -648,20 +692,8 @@ void QTextFrame__iterator_Delete(QTextFrame__iterator* self) {
     delete self;
 }
 
-QTextBlock__iterator* QTextBlock__iterator_new(const QTextBlock__iterator* other) {
-	 return new QTextBlock::iterator(*other);
-}
-
-QTextBlock__iterator* QTextBlock__iterator_new2(QTextBlock__iterator* other) {
-	 return new QTextBlock::iterator(*other);
-}
-
-QTextBlock__iterator* QTextBlock__iterator_new3() {
+QTextBlock__iterator* QTextBlock__iterator_new() {
 	 return new QTextBlock::iterator();
-}
-
-QTextBlock__iterator* QTextBlock__iterator_new4(const QTextBlock__iterator* param1) {
-	 return new QTextBlock::iterator(*param1);
 }
 
 void QTextBlock__iterator_CopyAssign(QTextBlock__iterator* self, QTextBlock__iterator* other) {
@@ -678,14 +710,6 @@ QTextFragment* QTextBlock__iterator_Fragment(const QTextBlock__iterator* self) {
 
 bool QTextBlock__iterator_AtEnd(const QTextBlock__iterator* self) {
 	return self->atEnd();
-}
-
-bool QTextBlock__iterator_OperatorEqual(const QTextBlock__iterator* self, const QTextBlock__iterator* o) {
-	return self->operator==(*o);
-}
-
-bool QTextBlock__iterator_OperatorNotEqual(const QTextBlock__iterator* self, const QTextBlock__iterator* o) {
-	return self->operator!=(*o);
 }
 
 It::value_type* QTextBlock__iterator_OperatorPlusPlus(QTextBlock__iterator* self) {

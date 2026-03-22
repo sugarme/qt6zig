@@ -59,27 +59,27 @@ libqt_string QCryptographicHash_Hash(QByteArrayView* data, int method) {
 }
 
 QByteArrayView* QCryptographicHash_HashInto(libqt_list buffer, QByteArrayView* data, int method) {
-	return new QByteArrayView(QCryptographicHash::hashInto(buffer, *data, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QCryptographicHash::hashInto(QSpan<char>(), *data, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QCryptographicHash_HashInto2(libqt_list buffer, QByteArrayView* data, int method) {
-	return new QByteArrayView(QCryptographicHash::hashInto(buffer, *data, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QCryptographicHash::hashInto(QSpan<uchar>(), *data, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QCryptographicHash_HashInto3(libqt_list buffer, QByteArrayView* data, int method) {
-	return new QByteArrayView(QCryptographicHash::hashInto(buffer, *data, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QCryptographicHash::hashInto(QSpan<std::byte>(), *data, static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QCryptographicHash_HashInto4(libqt_list buffer, libqt_list data, int method) {
-	return new QByteArrayView(QCryptographicHash::hashInto(buffer, data, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QCryptographicHash::hashInto(QSpan<char>(), QSpan<const QByteArrayView>(), static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QCryptographicHash_HashInto5(libqt_list buffer, libqt_list data, int method) {
-	return new QByteArrayView(QCryptographicHash::hashInto(buffer, data, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QCryptographicHash::hashInto(QSpan<uchar>(), QSpan<const QByteArrayView>(), static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 QByteArrayView* QCryptographicHash_HashInto6(libqt_list buffer, libqt_list data, int method) {
-	return new QByteArrayView(QCryptographicHash::hashInto(buffer, data, static_cast<QCryptographicHash::Algorithm>(method)));
+	return new QByteArrayView(QCryptographicHash::hashInto(QSpan<std::byte>(), QSpan<const QByteArrayView>(), static_cast<QCryptographicHash::Algorithm>(method)));
 }
 
 int QCryptographicHash_HashLength(int method) {

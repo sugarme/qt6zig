@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSwipeGesture>
 #include <QTapAndHoldGesture>
 #include <QTapGesture>
@@ -475,7 +476,7 @@ void QTapAndHoldGesture_Delete(QTapAndHoldGesture* self) {
 }
 
 QGestureEvent* QGestureEvent_new(const libqt_list gestures) {
-	 return new QGestureEvent(*gestures);
+	 return new QGestureEvent(QList<QGesture *>());
 }
 
 QGestureEvent* QGestureEvent_new2(const QGestureEvent* param1) {
@@ -483,7 +484,15 @@ QGestureEvent* QGestureEvent_new2(const QGestureEvent* param1) {
 }
 
 libqt_list QGestureEvent_Gestures(const QGestureEvent* self) {
-	return self->gestures();
+	auto _ret = self->gestures();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QGesture* QGestureEvent_Gesture(const QGestureEvent* self, int typeVal) {
@@ -491,11 +500,27 @@ QGesture* QGestureEvent_Gesture(const QGestureEvent* self, int typeVal) {
 }
 
 libqt_list QGestureEvent_ActiveGestures(const QGestureEvent* self) {
-	return self->activeGestures();
+	auto _ret = self->activeGestures();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGestureEvent_CanceledGestures(const QGestureEvent* self) {
-	return self->canceledGestures();
+	auto _ret = self->canceledGestures();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QGestureEvent_SetAccepted(QGestureEvent* self, QGesture* param1, bool param2) {

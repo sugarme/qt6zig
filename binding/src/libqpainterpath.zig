@@ -119,10 +119,6 @@ pub const qpainterpath = struct {
         qtc.QPainterPath_AddEllipse3(@ptrCast(self), @ptrCast(center), rx, ry);
     }
 
-    pub fn AddPolygon(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QPainterPath_AddPolygon(@ptrCast(self), @ptrCast(polygon));
-    }
-
     pub fn AddText(self: ?*anyopaque, point: ?*anyopaque, f: ?*anyopaque, text: []const u8) void {
         const text_str = qtc.libqt_string{
     .len = text.len,
@@ -217,10 +213,6 @@ qtc.QPainterPath_AddText2(@ptrCast(self), x, y, @ptrCast(f), text_str);
 
     pub fn ToFillPolygons(self: ?*anyopaque, ) []const u8 {
         return qtc.QPainterPath_ToFillPolygons(@ptrCast(self));
-    }
-
-    pub fn ToFillPolygon(self: ?*anyopaque, ) QtC.QPolygonF {
-        return qtc.QPainterPath_ToFillPolygon(@ptrCast(self));
     }
 
     pub fn ElementCount(self: ?*anyopaque, ) i32 {
@@ -333,10 +325,6 @@ qtc.QPainterPath_AddText2(@ptrCast(self), x, y, @ptrCast(f), text_str);
 
     pub fn ToFillPolygons1(self: ?*anyopaque, matrix: ?*anyopaque) []const u8 {
         return qtc.QPainterPath_ToFillPolygons1(@ptrCast(self), @ptrCast(matrix));
-    }
-
-    pub fn ToFillPolygon1(self: ?*anyopaque, matrix: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPainterPath_ToFillPolygon1(@ptrCast(self), @ptrCast(matrix));
     }
 
     /// Delete this object from C++ memory.

@@ -20,10 +20,6 @@ int QBasicTimer_TimerId(const QBasicTimer* self) {
 	return self->timerId();
 }
 
-int QBasicTimer_Id(const QBasicTimer* self) {
-	return self->id();
-}
-
 void QBasicTimer_Start(QBasicTimer* self, int msec, QObject* obj) {
 	self->start(msec, obj);
 }

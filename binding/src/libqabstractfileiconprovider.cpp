@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qabstractfileiconprovider.h>
 #include "libqabstractfileiconprovider.h"
 #include "libqabstractfileiconprovider.hxx"

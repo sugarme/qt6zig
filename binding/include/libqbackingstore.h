@@ -44,7 +44,6 @@ void QBackingStore_EndPaint(QBackingStore* self);
 void QBackingStore_SetStaticContents(QBackingStore* self, const QRegion* region);
 QRegion* QBackingStore_StaticContents(const QBackingStore* self);
 bool QBackingStore_HasStaticContents(const QBackingStore* self);
-QPlatformBackingStore* QBackingStore_Handle(const QBackingStore* self);
 void QBackingStore_Flush2(QBackingStore* self, const QRegion* region, QWindow* window);
 void QBackingStore_Flush3(QBackingStore* self, const QRegion* region, QWindow* window, const QPoint* offset);
 void QBackingStore_Delete(QBackingStore* self);

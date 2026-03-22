@@ -18,26 +18,20 @@ pub const qrandomgenerator = struct {
 
 
     /// New3 constructs a new QRandomGenerator object.
-    pub fn New3(sseq: *std::seed_seq) QtC.QRandomGenerator {
-        return qtc.QRandomGenerator_new3(@ptrCast(sseq));
+    pub fn New3(begin: *const u32, end: *const u32) QtC.QRandomGenerator {
+        return qtc.QRandomGenerator_new3(@ptrCast(begin), @ptrCast(end));
     }
 
 
     /// New4 constructs a new QRandomGenerator object.
-    pub fn New4(begin: *const u32, end: *const u32) QtC.QRandomGenerator {
-        return qtc.QRandomGenerator_new4(@ptrCast(begin), @ptrCast(end));
+    pub fn New4(other: ?*anyopaque) QtC.QRandomGenerator {
+        return qtc.QRandomGenerator_new4(@ptrCast(other));
     }
 
 
     /// New5 constructs a new QRandomGenerator object.
-    pub fn New5(other: ?*anyopaque) QtC.QRandomGenerator {
-        return qtc.QRandomGenerator_new5(@ptrCast(other));
-    }
-
-
-    /// New6 constructs a new QRandomGenerator object.
-    pub fn New6(seedValue: u32) QtC.QRandomGenerator {
-        return qtc.QRandomGenerator_new6(seedValue);
+    pub fn New5(seedValue: u32) QtC.QRandomGenerator {
+        return qtc.QRandomGenerator_new5(seedValue);
     }
 
 
@@ -121,10 +115,6 @@ pub const qrandomgenerator = struct {
         qtc.QRandomGenerator_Seed(@ptrCast(self));
     }
 
-    pub fn Seed2(self: ?*anyopaque, sseq: *std::seed_seq) void {
-        qtc.QRandomGenerator_Seed2(@ptrCast(self), @ptrCast(sseq));
-    }
-
     pub fn Discard(self: ?*anyopaque, z: u64) void {
         qtc.QRandomGenerator_Discard(@ptrCast(self), z);
     }
@@ -175,32 +165,26 @@ pub const qrandomgenerator64 = struct {
 
 
     /// New3 constructs a new QRandomGenerator64 object.
-    pub fn New3(sseq: *std::seed_seq) QtC.QRandomGenerator64 {
-        return qtc.QRandomGenerator64_new3(@ptrCast(sseq));
+    pub fn New3(begin: *const u32, end: *const u32) QtC.QRandomGenerator64 {
+        return qtc.QRandomGenerator64_new3(@ptrCast(begin), @ptrCast(end));
     }
 
 
     /// New4 constructs a new QRandomGenerator64 object.
-    pub fn New4(begin: *const u32, end: *const u32) QtC.QRandomGenerator64 {
-        return qtc.QRandomGenerator64_new4(@ptrCast(begin), @ptrCast(end));
+    pub fn New4(other: ?*anyopaque) QtC.QRandomGenerator64 {
+        return qtc.QRandomGenerator64_new4(@ptrCast(other));
     }
 
 
     /// New5 constructs a new QRandomGenerator64 object.
-    pub fn New5(other: ?*anyopaque) QtC.QRandomGenerator64 {
-        return qtc.QRandomGenerator64_new5(@ptrCast(other));
+    pub fn New5(param1: ?*anyopaque) QtC.QRandomGenerator64 {
+        return qtc.QRandomGenerator64_new5(@ptrCast(param1));
     }
 
 
     /// New6 constructs a new QRandomGenerator64 object.
-    pub fn New6(param1: ?*anyopaque) QtC.QRandomGenerator64 {
-        return qtc.QRandomGenerator64_new6(@ptrCast(param1));
-    }
-
-
-    /// New7 constructs a new QRandomGenerator64 object.
-    pub fn New7(seedValue: u32) QtC.QRandomGenerator64 {
-        return qtc.QRandomGenerator64_new7(seedValue);
+    pub fn New6(seedValue: u32) QtC.QRandomGenerator64 {
+        return qtc.QRandomGenerator64_new6(seedValue);
     }
 
 

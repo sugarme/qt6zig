@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qbuttongroup.h>
 #include "libqbuttongroup.h"
 #include "libqbuttongroup.hxx"
@@ -44,7 +45,15 @@ void QButtonGroup_RemoveButton(QButtonGroup* self, QAbstractButton* param1) {
 }
 
 libqt_list QButtonGroup_Buttons(const QButtonGroup* self) {
-	return self->buttons();
+	auto _ret = self->buttons();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QAbstractButton* QButtonGroup_CheckedButton(const QButtonGroup* self) {

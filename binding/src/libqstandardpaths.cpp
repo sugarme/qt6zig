@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qstandardpaths.h>
 #include "libqstandardpaths.h"
 #include "libqstandardpaths.hxx"
@@ -30,7 +31,21 @@ libqt_string QStandardPaths_WritableLocation(int typeVal) {
 }
 
 libqt_list QStandardPaths_StandardLocations(int typeVal) {
-	return QStandardPaths::standardLocations(static_cast<QStandardPaths::StandardLocation>(typeVal));
+	auto _ret = QStandardPaths::standardLocations(static_cast<QStandardPaths::StandardLocation>(typeVal));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QStandardPaths_Locate(int typeVal, const libqt_string fileName) {
@@ -45,7 +60,21 @@ libqt_string QStandardPaths_Locate(int typeVal, const libqt_string fileName) {
 }
 
 libqt_list QStandardPaths_LocateAll(int typeVal, const libqt_string fileName) {
-	return QStandardPaths::locateAll(static_cast<QStandardPaths::StandardLocation>(typeVal), QString::fromUtf8(fileName.data, fileName.len));
+	auto _ret = QStandardPaths::locateAll(static_cast<QStandardPaths::StandardLocation>(typeVal), QString::fromUtf8(fileName.data, fileName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QStandardPaths_DisplayName(int typeVal) {
@@ -90,11 +119,25 @@ libqt_string QStandardPaths_Locate3(int typeVal, const libqt_string fileName, in
 }
 
 libqt_list QStandardPaths_LocateAll3(int typeVal, const libqt_string fileName, int options) {
-	return QStandardPaths::locateAll(static_cast<QStandardPaths::StandardLocation>(typeVal), QString::fromUtf8(fileName.data, fileName.len), static_cast<QFlags<QStandardPaths::LocateOption>>(options));
+	auto _ret = QStandardPaths::locateAll(static_cast<QStandardPaths::StandardLocation>(typeVal), QString::fromUtf8(fileName.data, fileName.len), static_cast<QFlags<QStandardPaths::LocateOption>>(options));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QStandardPaths_FindExecutable2(const libqt_string executableName, const libqt_list paths) {
-	QString _ret = QStandardPaths::findExecutable(QString::fromUtf8(executableName.data, executableName.len), *paths);
+	QString _ret = QStandardPaths::findExecutable(QString::fromUtf8(executableName.data, executableName.len), QList<QString>());
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();

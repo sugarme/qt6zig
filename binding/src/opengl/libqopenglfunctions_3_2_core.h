@@ -38,7 +38,6 @@ void QOpenGLFunctions_3_2_Core_GlGetTexImage(QOpenGLFunctions_3_2_Core* self, ui
 const uint8_t* QOpenGLFunctions_3_2_Core_GlGetString(QOpenGLFunctions_3_2_Core* self, uint32_t name);
 void QOpenGLFunctions_3_2_Core_GlGetIntegerv(QOpenGLFunctions_3_2_Core* self, uint32_t pname, int32_t* params);
 void QOpenGLFunctions_3_2_Core_GlGetFloatv(QOpenGLFunctions_3_2_Core* self, uint32_t pname, float* params);
-GL QOpenGLFunctions_3_2_Core_GlGetError(QOpenGLFunctions_3_2_Core* self);
 void QOpenGLFunctions_3_2_Core_GlGetDoublev(QOpenGLFunctions_3_2_Core* self, uint32_t pname, double* params);
 void QOpenGLFunctions_3_2_Core_GlGetBooleanv(QOpenGLFunctions_3_2_Core* self, uint32_t pname, unsigned char* params);
 void QOpenGLFunctions_3_2_Core_GlReadPixels(QOpenGLFunctions_3_2_Core* self, int32_t x, int32_t y, int32_t width, int32_t height, uint32_t format, uint32_t typeVal, void* pixels);
@@ -169,8 +168,6 @@ void QOpenGLFunctions_3_2_Core_GlGetProgramInfoLog(QOpenGLFunctions_3_2_Core* se
 void QOpenGLFunctions_3_2_Core_GlGetProgramiv(QOpenGLFunctions_3_2_Core* self, uint32_t program, uint32_t pname, int32_t* params);
 int32_t QOpenGLFunctions_3_2_Core_GlGetAttribLocation(QOpenGLFunctions_3_2_Core* self, uint32_t program, const GLchar* name);
 void QOpenGLFunctions_3_2_Core_GlGetAttachedShaders(QOpenGLFunctions_3_2_Core* self, uint32_t program, int32_t maxCount, int32_t* count, uint32_t* obj);
-void QOpenGLFunctions_3_2_Core_GlGetActiveUniform(QOpenGLFunctions_3_2_Core* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name);
-void QOpenGLFunctions_3_2_Core_GlGetActiveAttrib(QOpenGLFunctions_3_2_Core* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name);
 void QOpenGLFunctions_3_2_Core_GlEnableVertexAttribArray(QOpenGLFunctions_3_2_Core* self, uint32_t index);
 void QOpenGLFunctions_3_2_Core_GlDisableVertexAttribArray(QOpenGLFunctions_3_2_Core* self, uint32_t index);
 void QOpenGLFunctions_3_2_Core_GlDetachShader(QOpenGLFunctions_3_2_Core* self, uint32_t program, uint32_t shader);
@@ -184,7 +181,6 @@ void QOpenGLFunctions_3_2_Core_GlAttachShader(QOpenGLFunctions_3_2_Core* self, u
 void QOpenGLFunctions_3_2_Core_GlStencilMaskSeparate(QOpenGLFunctions_3_2_Core* self, uint32_t face, uint32_t mask);
 void QOpenGLFunctions_3_2_Core_GlStencilFuncSeparate(QOpenGLFunctions_3_2_Core* self, uint32_t face, uint32_t func, int32_t ref, uint32_t mask);
 void QOpenGLFunctions_3_2_Core_GlStencilOpSeparate(QOpenGLFunctions_3_2_Core* self, uint32_t face, uint32_t sfail, uint32_t dpfail, uint32_t dppass);
-void QOpenGLFunctions_3_2_Core_GlDrawBuffers(QOpenGLFunctions_3_2_Core* self, int32_t n, const GL* bufs);
 void QOpenGLFunctions_3_2_Core_GlBlendEquationSeparate(QOpenGLFunctions_3_2_Core* self, uint32_t modeRGB, uint32_t modeAlpha);
 void QOpenGLFunctions_3_2_Core_GlUniformMatrix4x3fv(QOpenGLFunctions_3_2_Core* self, int32_t location, int32_t count, unsigned char transpose, const float* value);
 void QOpenGLFunctions_3_2_Core_GlUniformMatrix3x4fv(QOpenGLFunctions_3_2_Core* self, int32_t location, int32_t count, unsigned char transpose, const float* value);
@@ -207,7 +203,6 @@ void QOpenGLFunctions_3_2_Core_GlFramebufferRenderbuffer(QOpenGLFunctions_3_2_Co
 void QOpenGLFunctions_3_2_Core_GlFramebufferTexture3D(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t attachment, uint32_t textarget, uint32_t texture, int32_t level, int32_t zoffset);
 void QOpenGLFunctions_3_2_Core_GlFramebufferTexture2D(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t attachment, uint32_t textarget, uint32_t texture, int32_t level);
 void QOpenGLFunctions_3_2_Core_GlFramebufferTexture1D(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t attachment, uint32_t textarget, uint32_t texture, int32_t level);
-GL QOpenGLFunctions_3_2_Core_GlCheckFramebufferStatus(QOpenGLFunctions_3_2_Core* self, uint32_t target);
 void QOpenGLFunctions_3_2_Core_GlGenFramebuffers(QOpenGLFunctions_3_2_Core* self, int32_t n, uint32_t* framebuffers);
 void QOpenGLFunctions_3_2_Core_GlDeleteFramebuffers(QOpenGLFunctions_3_2_Core* self, int32_t n, const uint32_t* framebuffers);
 void QOpenGLFunctions_3_2_Core_GlBindFramebuffer(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t framebuffer);
@@ -244,7 +239,6 @@ void QOpenGLFunctions_3_2_Core_GlVertexAttribIPointer(QOpenGLFunctions_3_2_Core*
 void QOpenGLFunctions_3_2_Core_GlEndConditionalRender(QOpenGLFunctions_3_2_Core* self);
 void QOpenGLFunctions_3_2_Core_GlBeginConditionalRender(QOpenGLFunctions_3_2_Core* self, uint32_t id, uint32_t mode);
 void QOpenGLFunctions_3_2_Core_GlClampColor(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t clamp);
-void QOpenGLFunctions_3_2_Core_GlGetTransformFeedbackVarying(QOpenGLFunctions_3_2_Core* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name);
 void QOpenGLFunctions_3_2_Core_GlTransformFeedbackVaryings(QOpenGLFunctions_3_2_Core* self, uint32_t program, int32_t count, const GLchar** varyings, uint32_t bufferMode);
 void QOpenGLFunctions_3_2_Core_GlBindBufferBase(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t index, uint32_t buffer);
 void QOpenGLFunctions_3_2_Core_GlBindBufferRange(QOpenGLFunctions_3_2_Core* self, uint32_t target, uint32_t index, uint32_t buffer, int64_t offset, int64_t size);
@@ -272,13 +266,7 @@ void QOpenGLFunctions_3_2_Core_GlSampleMaski(QOpenGLFunctions_3_2_Core* self, ui
 void QOpenGLFunctions_3_2_Core_GlGetMultisamplefv(QOpenGLFunctions_3_2_Core* self, uint32_t pname, uint32_t index, float* val);
 void QOpenGLFunctions_3_2_Core_GlTexImage3DMultisample(QOpenGLFunctions_3_2_Core* self, uint32_t target, int32_t samples, int32_t internalformat, int32_t width, int32_t height, int32_t depth, unsigned char fixedsamplelocations);
 void QOpenGLFunctions_3_2_Core_GlTexImage2DMultisample(QOpenGLFunctions_3_2_Core* self, uint32_t target, int32_t samples, int32_t internalformat, int32_t width, int32_t height, unsigned char fixedsamplelocations);
-void QOpenGLFunctions_3_2_Core_GlGetSynciv(QOpenGLFunctions_3_2_Core* self, GLsync sync, uint32_t pname, int32_t bufSize, int32_t* length, int32_t* values);
 void QOpenGLFunctions_3_2_Core_GlGetInteger64v(QOpenGLFunctions_3_2_Core* self, uint32_t pname, int64_t* params);
-void QOpenGLFunctions_3_2_Core_GlWaitSync(QOpenGLFunctions_3_2_Core* self, GLsync sync, uint32_t flags, uint64_t timeout);
-GL QOpenGLFunctions_3_2_Core_GlClientWaitSync(QOpenGLFunctions_3_2_Core* self, GLsync sync, uint32_t flags, uint64_t timeout);
-void QOpenGLFunctions_3_2_Core_GlDeleteSync(QOpenGLFunctions_3_2_Core* self, GLsync sync);
-unsigned char QOpenGLFunctions_3_2_Core_GlIsSync(QOpenGLFunctions_3_2_Core* self, GLsync sync);
-GLsync QOpenGLFunctions_3_2_Core_GlFenceSync(QOpenGLFunctions_3_2_Core* self, uint32_t condition, uint32_t flags);
 void QOpenGLFunctions_3_2_Core_GlProvokingVertex(QOpenGLFunctions_3_2_Core* self, uint32_t mode);
 void QOpenGLFunctions_3_2_Core_GlMultiDrawElementsBaseVertex(QOpenGLFunctions_3_2_Core* self, uint32_t mode, const int32_t* count, uint32_t typeVal, const void** indices, int32_t drawcount, const int32_t* basevertex);
 void QOpenGLFunctions_3_2_Core_GlDrawElementsInstancedBaseVertex(QOpenGLFunctions_3_2_Core* self, uint32_t mode, int32_t count, uint32_t typeVal, const void* indices, int32_t instancecount, int32_t basevertex);

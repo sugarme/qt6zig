@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsslcipher.h>
 #include "libqsslcipher.h"
 #include "libqsslcipher.hxx"

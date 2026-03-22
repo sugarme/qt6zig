@@ -267,34 +267,6 @@ return  _ret;
         return qtc.QCandlestickModelMapper_QBaseLastSetSection(@ptrCast(self));
     }
 
-    pub fn DFunc(self: ?*anyopaque, ) QCandlestickModelMapperPrivate {
-        return @ptrCast(qtc.QCandlestickModelMapper_DFunc(@ptrCast(self)));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnDFunc(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) QCandlestickModelMapperPrivate) void {
-        qtc.QCandlestickModelMapper_OnDFunc(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseDFunc(self: ?*anyopaque, ) QCandlestickModelMapperPrivate {
-        return @ptrCast(qtc.QCandlestickModelMapper_QBaseDFunc(@ptrCast(self)));
-    }
-
-    pub fn DFunc2(self: ?*anyopaque, ) QCandlestickModelMapperPrivate {
-        return @ptrCast(qtc.QCandlestickModelMapper_DFunc2(@ptrCast(self)));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnDFunc2(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) QCandlestickModelMapperPrivate) void {
-        qtc.QCandlestickModelMapper_OnDFunc2(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseDFunc2(self: ?*anyopaque, ) QCandlestickModelMapperPrivate {
-        return @ptrCast(qtc.QCandlestickModelMapper_QBaseDFunc2(@ptrCast(self)));
-    }
-
     pub fn Tr2(s: []const u8, c: []const u8, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QCandlestickModelMapper_Tr2(@ptrCast(s), @ptrCast(c));
 defer qtc.libqt_string_free(&_str);

@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qhstspolicy.h>
 #include "libqhstspolicy.h"
 #include "libqhstspolicy.hxx"

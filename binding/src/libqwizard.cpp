@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QWidget>
 #include <QWizard>
@@ -61,11 +62,29 @@ bool QWizard_HasVisitedPage(const QWizard* self, int id) {
 }
 
 libqt_list QWizard_VisitedIds(const QWizard* self) {
-	return self->visitedIds();
+	auto _ret = self->visitedIds();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QWizard_PageIds(const QWizard* self) {
-	return self->pageIds();
+	auto _ret = self->pageIds();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QWizard_SetStartId(QWizard* self, int id) {
@@ -140,7 +159,7 @@ libqt_string QWizard_ButtonText(const QWizard* self, int which) {
 }
 
 void QWizard_SetButtonLayout(QWizard* self, const libqt_list layout) {
-	self->setButtonLayout(*layout);
+	self->setButtonLayout(QList<WizardButton>());
 }
 
 void QWizard_SetButton(QWizard* self, int which, QAbstractButton* button) {

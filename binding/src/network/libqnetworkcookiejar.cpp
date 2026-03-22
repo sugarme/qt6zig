@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <qnetworkcookiejar.h>
 #include "libqnetworkcookiejar.h"
@@ -29,11 +30,20 @@ libqt_string QNetworkCookieJar_Tr(const char* s) {
 }
 
 libqt_list QNetworkCookieJar_CookiesForUrl(const QNetworkCookieJar* self, const QUrl* url) {
-	return self->cookiesForUrl(*url);
+	auto _ret = self->cookiesForUrl(*url);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QNetworkCookieJar_SetCookiesFromUrl(QNetworkCookieJar* self, const libqt_list cookieList, const QUrl* url) {
-	return self->setCookiesFromUrl(*cookieList, *url);
+	return self->setCookiesFromUrl(QList<QNetworkCookie>(), *url);
 }
 
 bool QNetworkCookieJar_InsertCookie(QNetworkCookieJar* self, const QNetworkCookie* cookie) {
@@ -75,7 +85,16 @@ libqt_list QNetworkCookieJar_QBaseCookiesForUrl(const QNetworkCookieJar* self, c
 	auto* vqnetworkcookiejar = dynamic_cast<const VirtualQNetworkCookieJar*>(self);
 	if (vqnetworkcookiejar && vqnetworkcookiejar->isVirtualQNetworkCookieJar) {
 vqnetworkcookiejar->setQNetworkCookieJar_CookiesForUrl_IsBase(true);
-	return vqnetworkcookiejar->cookiesForUrl(*url);
+	auto _ret = vqnetworkcookiejar->cookiesForUrl(*url);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -92,7 +111,7 @@ bool QNetworkCookieJar_QBaseSetCookiesFromUrl(QNetworkCookieJar* self, const lib
 	auto* vqnetworkcookiejar = dynamic_cast<VirtualQNetworkCookieJar*>(self);
 	if (vqnetworkcookiejar && vqnetworkcookiejar->isVirtualQNetworkCookieJar) {
 vqnetworkcookiejar->setQNetworkCookieJar_SetCookiesFromUrl_IsBase(true);
-	return vqnetworkcookiejar->setCookiesFromUrl(*cookieList, *url);
+	return vqnetworkcookiejar->setCookiesFromUrl(QList<QNetworkCookie>(), *url);
 }
 }
 
@@ -186,9 +205,27 @@ vqnetworkcookiejar->setQNetworkCookieJar_ValidateCookie_Callback(reinterpret_cas
 libqt_list QNetworkCookieJar_AllCookies(const QNetworkCookieJar* self) {
 	auto* vqnetworkcookiejar = dynamic_cast<const VirtualQNetworkCookieJar*>(self);
 	if (vqnetworkcookiejar && vqnetworkcookiejar->isVirtualQNetworkCookieJar) {
-	return vqnetworkcookiejar->allCookies();
+	auto _ret = vqnetworkcookiejar->allCookies();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QNetworkCookieJar::allCookies();
+	auto _ret = self->QNetworkCookieJar::allCookies();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -197,7 +234,16 @@ libqt_list QNetworkCookieJar_QBaseAllCookies(const QNetworkCookieJar* self) {
 	auto* vqnetworkcookiejar = dynamic_cast<const VirtualQNetworkCookieJar*>(self);
 	if (vqnetworkcookiejar && vqnetworkcookiejar->isVirtualQNetworkCookieJar) {
 vqnetworkcookiejar->setQNetworkCookieJar_AllCookies_IsBase(true);
-	return vqnetworkcookiejar->allCookies();
+	auto _ret = vqnetworkcookiejar->allCookies();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -213,9 +259,9 @@ vqnetworkcookiejar->setQNetworkCookieJar_AllCookies_Callback(reinterpret_cast<Vi
 void QNetworkCookieJar_SetAllCookies(QNetworkCookieJar* self, const libqt_list cookieList) {
 	auto* vqnetworkcookiejar = dynamic_cast<VirtualQNetworkCookieJar*>(self);
 	if (vqnetworkcookiejar && vqnetworkcookiejar->isVirtualQNetworkCookieJar) {
-	vqnetworkcookiejar->setAllCookies(*cookieList);
+	vqnetworkcookiejar->setAllCookies(QList<QNetworkCookie>());
 	} else {
-	self->QNetworkCookieJar::setAllCookies(*cookieList);
+	self->QNetworkCookieJar::setAllCookies(QList<QNetworkCookie>());
 }
 }
 
@@ -224,7 +270,7 @@ void QNetworkCookieJar_QBaseSetAllCookies(QNetworkCookieJar* self, const libqt_l
 	auto* vqnetworkcookiejar = dynamic_cast<VirtualQNetworkCookieJar*>(self);
 	if (vqnetworkcookiejar && vqnetworkcookiejar->isVirtualQNetworkCookieJar) {
 vqnetworkcookiejar->setQNetworkCookieJar_SetAllCookies_IsBase(true);
-	vqnetworkcookiejar->setAllCookies(*cookieList);
+	vqnetworkcookiejar->setAllCookies(QList<QNetworkCookie>());
 }
 }
 

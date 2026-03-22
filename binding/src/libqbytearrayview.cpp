@@ -226,22 +226,6 @@ It::value_type** QByteArrayView_Cend(const QByteArrayView* self) {
 	return self->cend();
 }
 
-std::reverse_iterator<const char *> QByteArrayView_Rbegin(const QByteArrayView* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<const char *> QByteArrayView_Rend(const QByteArrayView* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const char *> QByteArrayView_Crbegin(const QByteArrayView* self) {
-	return self->crbegin();
-}
-
-std::reverse_iterator<const char *> QByteArrayView_Crend(const QByteArrayView* self) {
-	return self->crend();
-}
-
 bool QByteArrayView_Empty(const QByteArrayView* self) {
 	return self->empty();
 }

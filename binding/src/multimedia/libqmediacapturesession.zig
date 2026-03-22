@@ -113,10 +113,6 @@ return  _ret;
         return qtc.QMediaCaptureSession_AudioOutput(@ptrCast(self));
     }
 
-    pub fn PlatformSession(self: ?*anyopaque, ) QPlatformMediaCaptureSession {
-        return @ptrCast(qtc.QMediaCaptureSession_PlatformSession(@ptrCast(self)));
-    }
-
     pub fn AudioInputChanged(self: ?*anyopaque, ) void {
         qtc.QMediaCaptureSession_AudioInputChanged(@ptrCast(self));
     }

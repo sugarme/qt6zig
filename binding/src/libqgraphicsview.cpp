@@ -26,6 +26,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionGraphicsItem>
 #include <QTransform>
 #include <QVariant>
@@ -259,31 +260,75 @@ void QGraphicsView_Render(QGraphicsView* self, QPainter* painter) {
 }
 
 libqt_list QGraphicsView_Items(const QGraphicsView* self) {
-	return self->items();
+	auto _ret = self->items();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items2(const QGraphicsView* self, const QPoint* pos) {
-	return self->items(*pos);
+	auto _ret = self->items(*pos);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items3(const QGraphicsView* self, int x, int y) {
-	return self->items(x, y);
+	auto _ret = self->items(x, y);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items4(const QGraphicsView* self, const QRect* rect) {
-	return self->items(*rect);
+	auto _ret = self->items(*rect);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items5(const QGraphicsView* self, int x, int y, int w, int h) {
-	return self->items(x, y, w, h);
-}
-
-libqt_list QGraphicsView_Items6(const QGraphicsView* self, const QPolygon* polygon) {
-	return self->items(*polygon);
+	auto _ret = self->items(x, y, w, h);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items7(const QGraphicsView* self, const QPainterPath* path) {
-	return self->items(*path);
+	auto _ret = self->items(*path);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QGraphicsItem* QGraphicsView_ItemAt(const QGraphicsView* self, const QPoint* pos) {
@@ -298,28 +343,12 @@ QPointF* QGraphicsView_MapToScene(const QGraphicsView* self, const QPoint* point
 	return new QPointF(self->mapToScene(*point));
 }
 
-QPolygonF* QGraphicsView_MapToScene2(const QGraphicsView* self, const QRect* rect) {
-	return new QPolygonF(self->mapToScene(*rect));
-}
-
-QPolygonF* QGraphicsView_MapToScene3(const QGraphicsView* self, const QPolygon* polygon) {
-	return new QPolygonF(self->mapToScene(*polygon));
-}
-
 QPainterPath* QGraphicsView_MapToScene4(const QGraphicsView* self, const QPainterPath* path) {
 	return new QPainterPath(self->mapToScene(*path));
 }
 
 QPoint* QGraphicsView_MapFromScene(const QGraphicsView* self, const QPointF* point) {
 	return new QPoint(self->mapFromScene(*point));
-}
-
-QPolygon* QGraphicsView_MapFromScene2(const QGraphicsView* self, const QRectF* rect) {
-	return new QPolygon(self->mapFromScene(*rect));
-}
-
-QPolygon* QGraphicsView_MapFromScene3(const QGraphicsView* self, const QPolygonF* polygon) {
-	return new QPolygon(self->mapFromScene(*polygon));
 }
 
 QPainterPath* QGraphicsView_MapFromScene4(const QGraphicsView* self, const QPainterPath* path) {
@@ -330,16 +359,8 @@ QPointF* QGraphicsView_MapToScene5(const QGraphicsView* self, int x, int y) {
 	return new QPointF(self->mapToScene(x, y));
 }
 
-QPolygonF* QGraphicsView_MapToScene6(const QGraphicsView* self, int x, int y, int w, int h) {
-	return new QPolygonF(self->mapToScene(x, y, w, h));
-}
-
 QPoint* QGraphicsView_MapFromScene5(const QGraphicsView* self, double x, double y) {
 	return new QPoint(self->mapFromScene(x, y));
-}
-
-QPolygon* QGraphicsView_MapFromScene6(const QGraphicsView* self, double x, double y, double w, double h) {
-	return new QPolygon(self->mapFromScene(x, y, w, h));
 }
 
 QVariant* QGraphicsView_InputMethodQuery(const QGraphicsView* self, int query) {
@@ -363,7 +384,7 @@ void QGraphicsView_SetForegroundBrush(QGraphicsView* self, const QBrush* brush) 
 }
 
 void QGraphicsView_UpdateScene(QGraphicsView* self, const libqt_list rects) {
-	self->updateScene(*rects);
+	self->updateScene(QList<QRectF>());
 }
 
 void QGraphicsView_InvalidateScene(QGraphicsView* self) {
@@ -468,19 +489,39 @@ void QGraphicsView_Render4(QGraphicsView* self, QPainter* painter, const QRectF*
 }
 
 libqt_list QGraphicsView_Items22(const QGraphicsView* self, const QRect* rect, int mode) {
-	return self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items52(const QGraphicsView* self, int x, int y, int w, int h, int mode) {
-	return self->items(x, y, w, h, static_cast<Qt::ItemSelectionMode>(mode));
-}
-
-libqt_list QGraphicsView_Items23(const QGraphicsView* self, const QPolygon* polygon, int mode) {
-	return self->items(*polygon, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->items(x, y, w, h, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsView_Items24(const QGraphicsView* self, const QPainterPath* path, int mode) {
-	return self->items(*path, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QGraphicsView_InvalidateScene1(QGraphicsView* self, const QRectF* rect) {

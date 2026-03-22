@@ -69,10 +69,6 @@ pub const qopenglfunctions_3_0 = struct {
         qtc.QOpenGLFunctions_3_0_GlGetFloatv(@ptrCast(self), pname, @ptrCast(params));
     }
 
-    pub fn GlGetError(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFunctions_3_0_GlGetError(@ptrCast(self));
-    }
-
     pub fn GlGetDoublev(self: ?*anyopaque, pname: u32, params: *f64) void {
         qtc.QOpenGLFunctions_3_0_GlGetDoublev(@ptrCast(self), pname, @ptrCast(params));
     }
@@ -605,14 +601,6 @@ pub const qopenglfunctions_3_0 = struct {
         qtc.QOpenGLFunctions_3_0_GlGetAttachedShaders(@ptrCast(self), program, maxCount, @ptrCast(count), @ptrCast(obj));
     }
 
-    pub fn GlGetActiveUniform(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_3_0_GlGetActiveUniform(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
-    pub fn GlGetActiveAttrib(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_3_0_GlGetActiveAttrib(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
     pub fn GlEnableVertexAttribArray(self: ?*anyopaque, index: u32) void {
         qtc.QOpenGLFunctions_3_0_GlEnableVertexAttribArray(@ptrCast(self), index);
     }
@@ -663,10 +651,6 @@ pub const qopenglfunctions_3_0 = struct {
 
     pub fn GlStencilOpSeparate(self: ?*anyopaque, face: u32, sfail: u32, dpfail: u32, dppass: u32) void {
         qtc.QOpenGLFunctions_3_0_GlStencilOpSeparate(@ptrCast(self), face, sfail, dpfail, dppass);
-    }
-
-    pub fn GlDrawBuffers(self: ?*anyopaque, n: i32, bufs: *const GL) void {
-        qtc.QOpenGLFunctions_3_0_GlDrawBuffers(@ptrCast(self), n, @ptrCast(bufs));
     }
 
     pub fn GlBlendEquationSeparate(self: ?*anyopaque, modeRGB: u32, modeAlpha: u32) void {
@@ -755,10 +739,6 @@ pub const qopenglfunctions_3_0 = struct {
 
     pub fn GlFramebufferTexture1D(self: ?*anyopaque, target: u32, attachment: u32, textarget: u32, texture: u32, level: i32) void {
         qtc.QOpenGLFunctions_3_0_GlFramebufferTexture1D(@ptrCast(self), target, attachment, textarget, texture, level);
-    }
-
-    pub fn GlCheckFramebufferStatus(self: ?*anyopaque, target: u32) GL {
-        return qtc.QOpenGLFunctions_3_0_GlCheckFramebufferStatus(@ptrCast(self), target);
     }
 
     pub fn GlGenFramebuffers(self: ?*anyopaque, n: i32, framebuffers: *u32) void {
@@ -903,10 +883,6 @@ pub const qopenglfunctions_3_0 = struct {
 
     pub fn GlClampColor(self: ?*anyopaque, target: u32, clamp: u32) void {
         qtc.QOpenGLFunctions_3_0_GlClampColor(@ptrCast(self), target, clamp);
-    }
-
-    pub fn GlGetTransformFeedbackVarying(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_3_0_GlGetTransformFeedbackVarying(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
     }
 
     pub fn GlTransformFeedbackVaryings(self: ?*anyopaque, program: u32, count: i32, varyings: **const i8, bufferMode: u32) void {

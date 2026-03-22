@@ -62,19 +62,37 @@ double QTextOption_TabStopDistance(const QTextOption* self) {
 }
 
 void QTextOption_SetTabArray(QTextOption* self, const libqt_list tabStops) {
-	self->setTabArray(*tabStops);
+	self->setTabArray(QList<double>());
 }
 
 libqt_list QTextOption_TabArray(const QTextOption* self) {
-	return self->tabArray();
+	auto _ret = self->tabArray();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextOption_SetTabs(QTextOption* self, const libqt_list tabStops) {
-	self->setTabs(*tabStops);
+	self->setTabs(QList<QTextOption::Tab>());
 }
 
 libqt_list QTextOption_Tabs(const QTextOption* self) {
-	return self->tabs();
+	auto _ret = self->tabs();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextOption_SetUseDesignMetrics(QTextOption* self, bool b) {

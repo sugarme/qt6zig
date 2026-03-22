@@ -108,16 +108,8 @@ QTimerEvent* QTimerEvent_new(int timerId) {
 	 return new QTimerEvent(timerId);
 }
 
-QTimerEvent* QTimerEvent_new2(int timerId) {
-	 return new QTimerEvent(static_cast<Qt::TimerId>(timerId));
-}
-
 int QTimerEvent_TimerId(const QTimerEvent* self) {
 	return self->timerId();
-}
-
-int QTimerEvent_Id(const QTimerEvent* self) {
-	return self->id();
 }
 
 void QTimerEvent_Delete(QTimerEvent* self) {

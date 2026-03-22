@@ -2,7 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <QTextBoundaryFinder>
 #include <qtextboundaryfinder.h>
 #include "libqtextboundaryfinder.h"
@@ -24,24 +24,12 @@ QTextBoundaryFinder* QTextBoundaryFinder_new4(int typeVal, const QChar* chars, p
 	 return new QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(typeVal), chars, length);
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new5(int typeVal, QStringView* str) {
-	 return new QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(typeVal), *str);
-}
-
-QTextBoundaryFinder* QTextBoundaryFinder_new6(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer) {
+QTextBoundaryFinder* QTextBoundaryFinder_new5(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer) {
 	 return new QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(typeVal), chars, length, buffer);
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new7(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize) {
+QTextBoundaryFinder* QTextBoundaryFinder_new6(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize) {
 	 return new QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(typeVal), chars, length, buffer, bufferSize);
-}
-
-QTextBoundaryFinder* QTextBoundaryFinder_new8(int typeVal, QStringView* str, unsigned char* buffer) {
-	 return new QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(typeVal), *str, buffer);
-}
-
-QTextBoundaryFinder* QTextBoundaryFinder_new9(int typeVal, QStringView* str, unsigned char* buffer, ptrdiff_t bufferSize) {
-	 return new QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(typeVal), *str, buffer, bufferSize);
 }
 
 void QTextBoundaryFinder_OperatorAssign(QTextBoundaryFinder* self, const QTextBoundaryFinder* other) {

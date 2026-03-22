@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcandlestickset.h>
 #include "libqcandlestickset.h"
 #include "libqcandlestickset.hxx"

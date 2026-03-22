@@ -39,14 +39,6 @@ pub const qfutureinterfacebase = struct {
         qtc.QFutureInterfaceBase_ReportCanceled(@ptrCast(self));
     }
 
-    pub fn ReportException(self: ?*anyopaque, e: ?*anyopaque) void {
-        qtc.QFutureInterfaceBase_ReportException(@ptrCast(self), @ptrCast(e));
-    }
-
-    pub fn ReportException2(self: ?*anyopaque, e: std::exception_ptr) void {
-        qtc.QFutureInterfaceBase_ReportException2(@ptrCast(self), e);
-    }
-
     pub fn ReportResultsReady(self: ?*anyopaque, beginIndex: i32, endIndex: i32) void {
         qtc.QFutureInterfaceBase_ReportResultsReady(@ptrCast(self), beginIndex, endIndex);
     }
@@ -225,18 +217,6 @@ return  _ret;
 
     pub fn HasException(self: ?*anyopaque, ) bool {
         return qtc.QFutureInterfaceBase_HasException(@ptrCast(self));
-    }
-
-    pub fn ExceptionStore(self: ?*anyopaque, ) QtC.QtPrivate__ExceptionStore {
-        return qtc.QFutureInterfaceBase_ExceptionStore(@ptrCast(self));
-    }
-
-    pub fn ResultStoreBase(self: ?*anyopaque, ) QtC.QtPrivate__ResultStoreBase {
-        return qtc.QFutureInterfaceBase_ResultStoreBase(@ptrCast(self));
-    }
-
-    pub fn ResultStoreBase2(self: ?*anyopaque, ) QtC.QtPrivate__ResultStoreBase {
-        return qtc.QFutureInterfaceBase_ResultStoreBase2(@ptrCast(self));
     }
 
     pub fn OperatorEqual(self: ?*anyopaque, other: ?*anyopaque) bool {

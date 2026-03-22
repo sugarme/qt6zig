@@ -6,7 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <QTextStream>
 #include <qtextstream.h>
 #include "libqtextstream.h"
@@ -20,35 +20,27 @@ QTextStream* QTextStream_new2(QIODevice* device) {
 	 return new QTextStream(device);
 }
 
-QTextStream* QTextStream_new3(FILE* fileHandle) {
-	 return new QTextStream(fileHandle);
-}
-
-QTextStream* QTextStream_new4(libqt_string stringVal) {
+QTextStream* QTextStream_new3(libqt_string stringVal) {
 	 return new QTextStream(QString::fromUtf8(stringVal.data, stringVal.len));
 }
 
-QTextStream* QTextStream_new5(libqt_string array) {
+QTextStream* QTextStream_new4(libqt_string array) {
 	 return new QTextStream(QByteArray(array.data, array.len));
 }
 
-QTextStream* QTextStream_new6(const libqt_string array) {
+QTextStream* QTextStream_new5(const libqt_string array) {
 	 return new QTextStream(QByteArray(array.data, array.len));
 }
 
-QTextStream* QTextStream_new7(FILE* fileHandle, int openMode) {
-	 return new QTextStream(fileHandle, static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(openMode));
-}
-
-QTextStream* QTextStream_new8(libqt_string stringVal, int openMode) {
+QTextStream* QTextStream_new6(libqt_string stringVal, int openMode) {
 	 return new QTextStream(QString::fromUtf8(stringVal.data, stringVal.len), static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(openMode));
 }
 
-QTextStream* QTextStream_new9(libqt_string array, int openMode) {
+QTextStream* QTextStream_new7(libqt_string array, int openMode) {
 	 return new QTextStream(QByteArray(array.data, array.len), static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(openMode));
 }
 
-QTextStream* QTextStream_new10(const libqt_string array, int openMode) {
+QTextStream* QTextStream_new8(const libqt_string array, int openMode) {
 	 return new QTextStream(QByteArray(array.data, array.len), static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(openMode));
 }
 
@@ -348,14 +340,6 @@ QTextStream* QTextStream_OperatorShiftLeft14(QTextStream* self, const libqt_stri
 	return new QTextStream(self->operator<<(QString::fromUtf8(s.data, s.len)));
 }
 
-QTextStream* QTextStream_OperatorShiftLeft15(QTextStream* self, QStringView* s) {
-	return new QTextStream(self->operator<<(*s));
-}
-
-QTextStream* QTextStream_OperatorShiftLeft16(QTextStream* self, QLatin1StringView s) {
-	return new QTextStream(self->operator<<(s));
-}
-
 QTextStream* QTextStream_OperatorShiftLeft17(QTextStream* self, const libqt_string array) {
 	return new QTextStream(self->operator<<(QByteArray(array.data, array.len)));
 }
@@ -389,26 +373,6 @@ bool QTextStream_ReadLineInto2(QTextStream* self, libqt_string line, long long m
 
 void QTextStream_Delete(QTextStream* self) {
     delete self;
-}
-
-QTextStreamManipulator* QTextStreamManipulator_new(const QTextStreamManipulator* other) {
-	 return new QTextStreamManipulator(*other);
-}
-
-QTextStreamManipulator* QTextStreamManipulator_new2(QTextStreamManipulator* other) {
-	 return new QTextStreamManipulator(*other);
-}
-
-QTextStreamManipulator* QTextStreamManipulator_new3(void (QTextStream::*)(int) m, int a) {
-	 return new QTextStreamManipulator(m, a);
-}
-
-QTextStreamManipulator* QTextStreamManipulator_new4(void (QTextStream::*)(QChar) m, QChar* c) {
-	 return new QTextStreamManipulator(m, *c);
-}
-
-QTextStreamManipulator* QTextStreamManipulator_new5(const QTextStreamManipulator* param1) {
-	 return new QTextStreamManipulator(*param1);
 }
 
 void QTextStreamManipulator_CopyAssign(QTextStreamManipulator* self, QTextStreamManipulator* other) {

@@ -47,7 +47,7 @@ public:
 		if (qnetworkproxyfactory_queryproxy_callback != nullptr) {
 			const QNetworkProxyQuery* cbval1 = (const QNetworkProxyQuery*)&query;
 			libqt_list callback_ret = qnetworkproxyfactory_queryproxy_callback(this, cbval1);
-			return callback_ret;
+			return QList<QNetworkProxy>();
 		} else {
 			return {};
 		}

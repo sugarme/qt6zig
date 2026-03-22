@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qhcandlestickmodelmapper.h>
 #include "libqhcandlestickmodelmapper.h"
 #include "libqhcandlestickmodelmapper.hxx"

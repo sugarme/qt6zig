@@ -96,7 +96,16 @@ uint32_t QOpenGLFramebufferObject_Texture(const QOpenGLFramebufferObject* self) 
 }
 
 libqt_list QOpenGLFramebufferObject_Textures(const QOpenGLFramebufferObject* self) {
-	return self->textures();
+	auto _ret = self->textures();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 uint32_t QOpenGLFramebufferObject_TakeTexture(QOpenGLFramebufferObject* self) {
@@ -112,7 +121,16 @@ QSize* QOpenGLFramebufferObject_Size(const QOpenGLFramebufferObject* self) {
 }
 
 libqt_list QOpenGLFramebufferObject_Sizes(const QOpenGLFramebufferObject* self) {
-	return self->sizes();
+	auto _ret = self->sizes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QImage* QOpenGLFramebufferObject_ToImage(const QOpenGLFramebufferObject* self) {
@@ -235,16 +253,8 @@ void QOpenGLFramebufferObjectFormat_SetTextureTarget(QOpenGLFramebufferObjectFor
 	self->setTextureTarget(target);
 }
 
-GL QOpenGLFramebufferObjectFormat_TextureTarget(const QOpenGLFramebufferObjectFormat* self) {
-	return self->textureTarget();
-}
-
 void QOpenGLFramebufferObjectFormat_SetInternalTextureFormat(QOpenGLFramebufferObjectFormat* self, uint32_t internalTextureFormat) {
 	self->setInternalTextureFormat(internalTextureFormat);
-}
-
-GL QOpenGLFramebufferObjectFormat_InternalTextureFormat(const QOpenGLFramebufferObjectFormat* self) {
-	return self->internalTextureFormat();
 }
 
 bool QOpenGLFramebufferObjectFormat_OperatorEqual(const QOpenGLFramebufferObjectFormat* self, const QOpenGLFramebufferObjectFormat* other) {

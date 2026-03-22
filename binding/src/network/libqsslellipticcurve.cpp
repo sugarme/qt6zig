@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsslellipticcurve.h>
 #include "libqsslellipticcurve.h"
 #include "libqsslellipticcurve.hxx"

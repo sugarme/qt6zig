@@ -19,28 +19,20 @@ QRegion* QRegion_new3(const QRect* r) {
 	 return new QRegion(*r);
 }
 
-QRegion* QRegion_new4(const QPolygon* pa) {
-	 return new QRegion(*pa);
-}
-
-QRegion* QRegion_new5(const QRegion* region) {
+QRegion* QRegion_new4(const QRegion* region) {
 	 return new QRegion(*region);
 }
 
-QRegion* QRegion_new6(const QBitmap* bitmap) {
+QRegion* QRegion_new5(const QBitmap* bitmap) {
 	 return new QRegion(*bitmap);
 }
 
-QRegion* QRegion_new7(int x, int y, int w, int h, int t) {
+QRegion* QRegion_new6(int x, int y, int w, int h, int t) {
 	 return new QRegion(x, y, w, h, static_cast<QRegion::RegionType>(t));
 }
 
-QRegion* QRegion_new8(const QRect* r, int t) {
+QRegion* QRegion_new7(const QRect* r, int t) {
 	 return new QRegion(*r, static_cast<QRegion::RegionType>(t));
-}
-
-QRegion* QRegion_new9(const QPolygon* pa, int fillRule) {
-	 return new QRegion(*pa, static_cast<Qt::FillRule>(fillRule));
 }
 
 void QRegion_OperatorAssign(QRegion* self, const QRegion* param1) {
@@ -73,22 +65,6 @@ const QRect** QRegion_End(const QRegion* self) {
 
 const QRect** QRegion_Cend(const QRegion* self) {
 	return self->cend();
-}
-
-std::reverse_iterator<const QRect *> QRegion_Rbegin(const QRegion* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<const QRect *> QRegion_Crbegin(const QRegion* self) {
-	return self->crbegin();
-}
-
-std::reverse_iterator<const QRect *> QRegion_Rend(const QRegion* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const QRect *> QRegion_Crend(const QRegion* self) {
-	return self->crend();
 }
 
 bool QRegion_Contains(const QRegion* self, const QPoint* p) {
@@ -156,11 +132,20 @@ void QRegion_SetRects(QRegion* self, const QRect* rect, int num) {
 }
 
 void QRegion_SetRects2(QRegion* self, libqt_list r) {
-	self->setRects(r);
+	self->setRects(QSpan<const QRect>());
 }
 
 libqt_list QRegion_Rects(const QRegion* self) {
-	return self->rects();
+	auto _ret = self->rects();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QRegion_RectCount(const QRegion* self) {

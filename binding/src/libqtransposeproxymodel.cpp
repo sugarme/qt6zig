@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransposeProxyModel>
 #include <QVariant>
 #include <qtransposeproxymodel.h>
@@ -52,7 +53,7 @@ bool QTransposeProxyModel_SetHeaderData(QTransposeProxyModel* self, int section,
 }
 
 bool QTransposeProxyModel_SetItemData(QTransposeProxyModel* self, const QModelIndex* index, const libqt_map roles) {
-	return self->setItemData(*index, *roles);
+	return self->setItemData(*index, QMap<int, QVariant>());
 }
 
 QSize* QTransposeProxyModel_Span(const QTransposeProxyModel* self, const QModelIndex* index) {
@@ -60,7 +61,12 @@ QSize* QTransposeProxyModel_Span(const QTransposeProxyModel* self, const QModelI
 }
 
 libqt_map QTransposeProxyModel_ItemData(const QTransposeProxyModel* self, const QModelIndex* index) {
-	return self->itemData(*index);
+	auto _ret = self->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QModelIndex* QTransposeProxyModel_MapFromSource(const QTransposeProxyModel* self, const QModelIndex* sourceIndex) {
@@ -219,7 +225,7 @@ bool QTransposeProxyModel_QBaseSetItemData(QTransposeProxyModel* self, const QMo
 	auto* vqtransposeproxymodel = dynamic_cast<VirtualQTransposeProxyModel*>(self);
 	if (vqtransposeproxymodel && vqtransposeproxymodel->isVirtualQTransposeProxyModel) {
 vqtransposeproxymodel->setQTransposeProxyModel_SetItemData_IsBase(true);
-	return vqtransposeproxymodel->setItemData(*index, *roles);
+	return vqtransposeproxymodel->setItemData(*index, QMap<int, QVariant>());
 }
 }
 
@@ -253,7 +259,12 @@ libqt_map QTransposeProxyModel_QBaseItemData(const QTransposeProxyModel* self, c
 	auto* vqtransposeproxymodel = dynamic_cast<const VirtualQTransposeProxyModel*>(self);
 	if (vqtransposeproxymodel && vqtransposeproxymodel->isVirtualQTransposeProxyModel) {
 vqtransposeproxymodel->setQTransposeProxyModel_ItemData_IsBase(true);
-	return vqtransposeproxymodel->itemData(*index);
+	auto _ret = vqtransposeproxymodel->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 

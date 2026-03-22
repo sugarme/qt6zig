@@ -16,6 +16,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionMenuItem>
 #include <QTimerEvent>
 #include <QWidget>
@@ -120,10 +121,6 @@ bool QMenuBar_IsNativeMenuBar(const QMenuBar* self) {
 
 void QMenuBar_SetNativeMenuBar(QMenuBar* self, bool nativeMenuBar) {
 	self->setNativeMenuBar(nativeMenuBar);
-}
-
-QPlatformMenuBar* QMenuBar_PlatformMenuBar(QMenuBar* self) {
-	return self->platformMenuBar();
 }
 
 void QMenuBar_SetVisible(QMenuBar* self, bool visible) {

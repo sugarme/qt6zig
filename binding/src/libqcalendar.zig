@@ -30,24 +30,14 @@ pub const qcalendar = struct {
 
 
     /// New5 constructs a new QCalendar object.
-    pub fn New5(name: []const u8) QtC.QCalendar {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QCalendar_new5(name_str);
+    pub fn New5(id: QtC.QCalendar__SystemId) QtC.QCalendar {
+        return qtc.QCalendar_new5(@ptrCast(id));
     }
 
 
     /// New6 constructs a new QCalendar object.
-    pub fn New6(id: QtC.QCalendar__SystemId) QtC.QCalendar {
-        return qtc.QCalendar_new6(@ptrCast(id));
-    }
-
-
-    /// New7 constructs a new QCalendar object.
-    pub fn New7(param1: ?*anyopaque) QtC.QCalendar {
-        return qtc.QCalendar_new7(@ptrCast(param1));
+    pub fn New6(param1: ?*anyopaque) QtC.QCalendar {
+        return qtc.QCalendar_new6(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -177,14 +167,6 @@ return  _ret;
         const _str = qtc.QCalendar_StandaloneWeekDayName(@ptrCast(self), @ptrCast(locale), day);
 defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qcalendar.StandaloneWeekDayName: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn DateTimeToString(self: ?*anyopaque, format: []const u8, datetime: ?*anyopaque, dateOnly: QtC.QDate, timeOnly: QtC.QTime, locale: ?*anyopaque, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QCalendar_DateTimeToString(@ptrCast(self), @ptrCast(format), @ptrCast(datetime), @ptrCast(dateOnly), @ptrCast(timeOnly), @ptrCast(locale));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qcalendar.DateTimeToString: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
     }

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qparallelanimationgroup.h>
 #include "libqparallelanimationgroup.h"
 #include "libqparallelanimationgroup.hxx"

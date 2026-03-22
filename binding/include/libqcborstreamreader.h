@@ -19,7 +19,6 @@ typedef struct QCborError QCborError;
 typedef struct QCborStreamReader QCborStreamReader;
 typedef struct QIODevice QIODevice;
 typedef struct _GUID _GUID;
-typedef struct qfloat16 qfloat16;
 typedef struct type_info type_info;
 #endif
 
@@ -73,17 +72,12 @@ bool QCborStreamReader_LeaveContainer(QCborStreamReader* self);
 bool QCborStreamReader_ReadAndAppendToString(QCborStreamReader* self, libqt_string dst);
 bool QCborStreamReader_ReadAndAppendToUtf8String(QCborStreamReader* self, libqt_string dst);
 bool QCborStreamReader_ReadAndAppendToByteArray(QCborStreamReader* self, libqt_string dst);
-StringResult<QString> QCborStreamReader_ReadString(QCborStreamReader* self);
-StringResult<QByteArray> QCborStreamReader_ReadUtf8String(QCborStreamReader* self);
-StringResult<QByteArray> QCborStreamReader_ReadByteArray(QCborStreamReader* self);
 ptrdiff_t QCborStreamReader_CurrentStringChunkSize(const QCborStreamReader* self);
-StringResult<qsizetype> QCborStreamReader_ReadStringChunk(QCborStreamReader* self, char* ptr, ptrdiff_t maxlen);
 bool QCborStreamReader_ToBool(const QCborStreamReader* self);
 quint64 QCborStreamReader_ToTag(const QCborStreamReader* self);
 unsigned long long QCborStreamReader_ToUnsignedInteger(const QCborStreamReader* self);
 quint64 QCborStreamReader_ToNegativeInteger(const QCborStreamReader* self);
 quint8 QCborStreamReader_ToSimpleType(const QCborStreamReader* self);
-qfloat16* QCborStreamReader_ToFloat16(const QCborStreamReader* self);
 float QCborStreamReader_ToFloat(const QCborStreamReader* self);
 double QCborStreamReader_ToDouble(const QCborStreamReader* self);
 long long QCborStreamReader_ToInteger(const QCborStreamReader* self);

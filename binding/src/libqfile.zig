@@ -82,10 +82,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qfile.FileName: Memory 
 return  _ret;
     }
 
-    pub fn FilesystemFileName(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFile_FilesystemFileName(@ptrCast(self));
-    }
-
     pub fn SetFileName(self: ?*anyopaque, name: []const u8) void {
         const name_str = qtc.libqt_string{
     .len = name.len,
@@ -156,10 +152,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qfile.SymLinkTarget2: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn FilesystemSymLinkTarget(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFile_FilesystemSymLinkTarget(@ptrCast(self));
     }
 
     pub fn Remove(self: ?*anyopaque, ) bool {
@@ -262,10 +254,6 @@ return qtc.QFile_Copy2(fileName_str, newName_str);
 
     pub fn Open2(self: ?*anyopaque, flags: i32, permissions: i32) bool {
         return qtc.QFile_Open2(@ptrCast(self), @intCast(flags), @intCast(permissions));
-    }
-
-    pub fn Open3(self: ?*anyopaque, f: *FILE, ioFlags: i32) bool {
-        return qtc.QFile_Open3(@ptrCast(self), @ptrCast(f), @intCast(ioFlags));
     }
 
     pub fn Open4(self: ?*anyopaque, fd: i32, ioFlags: i32) bool {
@@ -378,10 +366,6 @@ const pathInTrash_str = qtc.libqt_string{
     .data = pathInTrash.ptr,
 };
 return qtc.QFile_MoveToTrash22(fileName_str, pathInTrash_str);
-    }
-
-    pub fn Open32(self: ?*anyopaque, f: *FILE, ioFlags: i32, handleFlags: i32) bool {
-        return qtc.QFile_Open32(@ptrCast(self), @ptrCast(f), @intCast(ioFlags), @intCast(handleFlags));
     }
 
     pub fn Open33(self: ?*anyopaque, fd: i32, ioFlags: i32, handleFlags: i32) bool {

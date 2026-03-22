@@ -48,7 +48,6 @@ void QPicture_Detach(QPicture* self);
 bool QPicture_IsDetached(const QPicture* self);
 QPaintEngine* QPicture_PaintEngine(const QPicture* self);
 int QPicture_Metric(const QPicture* self, int m);
-QExplicitlySharedDataPointer<QPicturePrivate>* QPicture_DataPtr(QPicture* self);
 void QPicture_OnDevType(const QPicture* self, intptr_t slot);
 int QPicture_QBaseDevType(const QPicture* self);
 void QPicture_OnSetData(QPicture* self, intptr_t slot);

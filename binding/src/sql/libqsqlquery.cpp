@@ -1,4 +1,3 @@
-#include <QAnyStringView>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>
@@ -8,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qsqlquery.h>
 #include "libqsqlquery.h"
@@ -55,10 +55,6 @@ bool QSqlQuery_IsActive(const QSqlQuery* self) {
 
 bool QSqlQuery_IsNull(const QSqlQuery* self, int field) {
 	return self->isNull(field);
-}
-
-bool QSqlQuery_IsNull2(const QSqlQuery* self, libqt_string name) {
-	return self->isNull(QAnyStringView(QString::fromUtf8(name.data, name.len)));
 }
 
 int QSqlQuery_At(const QSqlQuery* self) {
@@ -118,10 +114,6 @@ bool QSqlQuery_Exec(QSqlQuery* self, const libqt_string query) {
 
 QVariant* QSqlQuery_Value(const QSqlQuery* self, int i) {
 	return new QVariant(self->value(i));
-}
-
-QVariant* QSqlQuery_Value2(const QSqlQuery* self, libqt_string name) {
-	return new QVariant(self->value(QAnyStringView(QString::fromUtf8(name.data, name.len))));
 }
 
 void QSqlQuery_SetNumericalPrecisionPolicy(QSqlQuery* self, int precisionPolicy) {
@@ -197,11 +189,34 @@ QVariant* QSqlQuery_BoundValue2(const QSqlQuery* self, int pos) {
 }
 
 libqt_list QSqlQuery_BoundValues(const QSqlQuery* self) {
-	return self->boundValues();
+	auto _ret = self->boundValues();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSqlQuery_BoundValueNames(const QSqlQuery* self) {
-	return self->boundValueNames();
+	auto _ret = self->boundValueNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QSqlQuery_BoundValueName(const QSqlQuery* self, int pos) {

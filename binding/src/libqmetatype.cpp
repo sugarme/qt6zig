@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qmetatype.h>
 #include "libqmetatype.h"
 #include "libqmetatype.hxx"
@@ -25,15 +26,11 @@ QMetaType* QMetaType_new3(int typeVal) {
 	 return new QMetaType(typeVal);
 }
 
-QMetaType* QMetaType_new4(const QtPrivate__QMetaTypeInterface* d) {
-	 return new QMetaType(d);
-}
-
-QMetaType* QMetaType_new5() {
+QMetaType* QMetaType_new4() {
 	 return new QMetaType();
 }
 
-QMetaType* QMetaType_new6(const QMetaType* param1) {
+QMetaType* QMetaType_new5(const QMetaType* param1) {
 	 return new QMetaType(*param1);
 }
 
@@ -263,14 +260,6 @@ void QMetaType_UnregisterMutableViewFunction(QMetaType* from, QMetaType* to) {
 
 void QMetaType_UnregisterMetaType(QMetaType* typeVal) {
 	QMetaType::unregisterMetaType(*typeVal);
-}
-
-const QtPrivate__QMetaTypeInterface* QMetaType_Iface(QMetaType* self) {
-	return self->iface();
-}
-
-const QtPrivate__QMetaTypeInterface* QMetaType_Iface2(const QMetaType* self) {
-	return self->iface();
 }
 
 void* QMetaType_Create22(int typeVal, const void* copyVal) {

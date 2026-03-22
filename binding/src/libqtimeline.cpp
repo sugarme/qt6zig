@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimeLine>
 #include <QTimerEvent>
 #include <qtimeline.h>
@@ -44,10 +45,6 @@ void QTimeLine_SetLoopCount(QTimeLine* self, int count) {
 	self->setLoopCount(count);
 }
 
-QBindable<int> QTimeLine_BindableLoopCount(QTimeLine* self) {
-	return self->bindableLoopCount();
-}
-
 int QTimeLine_Direction(const QTimeLine* self) {
 	return self->direction();
 }
@@ -56,20 +53,12 @@ void QTimeLine_SetDirection(QTimeLine* self, int direction) {
 	self->setDirection(static_cast<QProgressBar::Direction>(direction));
 }
 
-QBindable<Direction> QTimeLine_BindableDirection(QTimeLine* self) {
-	return self->bindableDirection();
-}
-
 int QTimeLine_Duration(const QTimeLine* self) {
 	return self->duration();
 }
 
 void QTimeLine_SetDuration(QTimeLine* self, int duration) {
 	self->setDuration(duration);
-}
-
-QBindable<int> QTimeLine_BindableDuration(QTimeLine* self) {
-	return self->bindableDuration();
 }
 
 int QTimeLine_StartFrame(const QTimeLine* self) {
@@ -100,10 +89,6 @@ void QTimeLine_SetUpdateInterval(QTimeLine* self, int interval) {
 	self->setUpdateInterval(interval);
 }
 
-QBindable<int> QTimeLine_BindableUpdateInterval(QTimeLine* self) {
-	return self->bindableUpdateInterval();
-}
-
 QEasingCurve* QTimeLine_EasingCurve(const QTimeLine* self) {
 	return new QEasingCurve(self->easingCurve());
 }
@@ -112,16 +97,8 @@ void QTimeLine_SetEasingCurve(QTimeLine* self, const QEasingCurve* curve) {
 	self->setEasingCurve(*curve);
 }
 
-QBindable<QEasingCurve> QTimeLine_BindableEasingCurve(QTimeLine* self) {
-	return self->bindableEasingCurve();
-}
-
 int QTimeLine_CurrentTime(const QTimeLine* self) {
 	return self->currentTime();
-}
-
-QBindable<int> QTimeLine_BindableCurrentTime(QTimeLine* self) {
-	return self->bindableCurrentTime();
 }
 
 int QTimeLine_CurrentFrame(const QTimeLine* self) {

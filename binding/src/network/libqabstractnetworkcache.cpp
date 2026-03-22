@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <qabstractnetworkcache.h>
 #include "libqabstractnetworkcache.h"
@@ -49,11 +50,20 @@ void QNetworkCacheMetaData_SetUrl(QNetworkCacheMetaData* self, const QUrl* url) 
 }
 
 libqt_list QNetworkCacheMetaData_RawHeaders(const QNetworkCacheMetaData* self) {
-	return self->rawHeaders();
+	auto _ret = self->rawHeaders();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QNetworkCacheMetaData_SetRawHeaders(QNetworkCacheMetaData* self, const libqt_list headers) {
-	self->setRawHeaders(*headers);
+	self->setRawHeaders(QList<QPair<QByteArray, QByteArray>>());
 }
 
 QHttpHeaders* QNetworkCacheMetaData_Headers(const QNetworkCacheMetaData* self) {
@@ -89,11 +99,16 @@ void QNetworkCacheMetaData_SetSaveToDisk(QNetworkCacheMetaData* self, bool allow
 }
 
 libqt_map QNetworkCacheMetaData_Attributes(const QNetworkCacheMetaData* self) {
-	return self->attributes();
+	auto _ret = self->attributes();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 void QNetworkCacheMetaData_SetAttributes(QNetworkCacheMetaData* self, const libqt_map attributes) {
-	self->setAttributes(*attributes);
+	self->setAttributes(QHash<QNetworkRequest::Attribute, QVariant>());
 }
 
 void QNetworkCacheMetaData_Delete(QNetworkCacheMetaData* self) {

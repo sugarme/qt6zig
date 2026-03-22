@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qscroller.h>
 #include "libqscroller.h"
 #include "libqscroller.hxx"
@@ -46,7 +47,15 @@ void QScroller_UngrabGesture(QObject* target) {
 }
 
 libqt_list QScroller_ActiveScrollers() {
-	return QScroller::activeScrollers();
+	auto _ret = QScroller::activeScrollers();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QObject* QScroller_Target(const QScroller* self) {
@@ -82,7 +91,7 @@ QScrollerProperties* QScroller_ScrollerProperties(const QScroller* self) {
 }
 
 void QScroller_SetSnapPositionsX(QScroller* self, const libqt_list positions) {
-	self->setSnapPositionsX(*positions);
+	self->setSnapPositionsX(QList<double>());
 }
 
 void QScroller_SetSnapPositionsX2(QScroller* self, double first, double interval) {
@@ -90,7 +99,7 @@ void QScroller_SetSnapPositionsX2(QScroller* self, double first, double interval
 }
 
 void QScroller_SetSnapPositionsY(QScroller* self, const libqt_list positions) {
-	self->setSnapPositionsY(*positions);
+	self->setSnapPositionsY(QList<double>());
 }
 
 void QScroller_SetSnapPositionsY2(QScroller* self, double first, double interval) {

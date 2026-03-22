@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcbormap.h>
 #include "libqcbormap.h"
 #include "libqcbormap.hxx"
@@ -47,14 +48,19 @@ void QCborMap_Clear(QCborMap* self) {
 }
 
 libqt_list QCborMap_Keys(const QCborMap* self) {
-	return self->keys();
+	auto _ret = self->keys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QCborValue* QCborMap_Value(const QCborMap* self, long long key) {
-	return new QCborValue(self->value(key));
-}
-
-QCborValue* QCborMap_Value2(const QCborMap* self, QLatin1StringView key) {
 	return new QCborValue(self->value(key));
 }
 
@@ -70,10 +76,6 @@ QCborValue* QCborMap_OperatorSubscript(const QCborMap* self, long long key) {
 	return new QCborValue(self->operator[](key));
 }
 
-QCborValue* QCborMap_OperatorSubscript2(const QCborMap* self, QLatin1StringView key) {
-	return new QCborValue(self->operator[](key));
-}
-
 QCborValue* QCborMap_OperatorSubscript3(const QCborMap* self, const libqt_string key) {
 	return new QCborValue(self->operator[](QString::fromUtf8(key.data, key.len)));
 }
@@ -83,10 +85,6 @@ QCborValue* QCborMap_OperatorSubscript4(const QCborMap* self, const QCborValue* 
 }
 
 QCborValueRef* QCborMap_OperatorSubscript5(QCborMap* self, long long key) {
-	return new QCborValueRef(self->operator[](key));
-}
-
-QCborValueRef* QCborMap_OperatorSubscript6(QCborMap* self, QLatin1StringView key) {
 	return new QCborValueRef(self->operator[](key));
 }
 
@@ -102,10 +100,6 @@ QCborValue* QCborMap_Take(QCborMap* self, long long key) {
 	return new QCborValue(self->take(key));
 }
 
-QCborValue* QCborMap_Take2(QCborMap* self, QLatin1StringView key) {
-	return new QCborValue(self->take(key));
-}
-
 QCborValue* QCborMap_Take3(QCborMap* self, const libqt_string key) {
 	return new QCborValue(self->take(QString::fromUtf8(key.data, key.len)));
 }
@@ -118,10 +112,6 @@ void QCborMap_Remove(QCborMap* self, long long key) {
 	self->remove(key);
 }
 
-void QCborMap_Remove2(QCborMap* self, QLatin1StringView key) {
-	self->remove(key);
-}
-
 void QCborMap_Remove3(QCborMap* self, const libqt_string key) {
 	self->remove(QString::fromUtf8(key.data, key.len));
 }
@@ -131,10 +121,6 @@ void QCborMap_Remove4(QCborMap* self, const QCborValue* key) {
 }
 
 bool QCborMap_Contains(const QCborMap* self, long long key) {
-	return self->contains(key);
-}
-
-bool QCborMap_Contains2(const QCborMap* self, QLatin1StringView key) {
 	return self->contains(key);
 }
 
@@ -206,10 +192,6 @@ QCborMap__Iterator* QCborMap_Find(QCborMap* self, long long key) {
 	return new QCborMap::Iterator(self->find(key));
 }
 
-QCborMap__Iterator* QCborMap_Find2(QCborMap* self, QLatin1StringView key) {
-	return new QCborMap::Iterator(self->find(key));
-}
-
 QCborMap__Iterator* QCborMap_Find3(QCborMap* self, const libqt_string key) {
 	return new QCborMap::Iterator(self->find(QString::fromUtf8(key.data, key.len)));
 }
@@ -219,10 +201,6 @@ QCborMap__Iterator* QCborMap_Find4(QCborMap* self, const QCborValue* key) {
 }
 
 QCborMap__ConstIterator* QCborMap_ConstFind(const QCborMap* self, long long key) {
-	return new QCborMap::ConstIterator(self->constFind(key));
-}
-
-QCborMap__ConstIterator* QCborMap_ConstFind2(const QCborMap* self, QLatin1StringView key) {
 	return new QCborMap::ConstIterator(self->constFind(key));
 }
 
@@ -238,10 +216,6 @@ QCborMap__ConstIterator* QCborMap_Find5(const QCborMap* self, long long key) {
 	return new QCborMap::ConstIterator(self->find(key));
 }
 
-QCborMap__ConstIterator* QCborMap_Find6(const QCborMap* self, QLatin1StringView key) {
-	return new QCborMap::ConstIterator(self->find(key));
-}
-
 QCborMap__ConstIterator* QCborMap_Find7(const QCborMap* self, const libqt_string key) {
 	return new QCborMap::ConstIterator(self->find(QString::fromUtf8(key.data, key.len)));
 }
@@ -251,10 +225,6 @@ QCborMap__ConstIterator* QCborMap_Find8(const QCborMap* self, const QCborValue* 
 }
 
 QCborMap__Iterator* QCborMap_Insert(QCborMap* self, long long key, const QCborValue* value_) {
-	return new QCborMap::Iterator(self->insert(key, *value_));
-}
-
-QCborMap__Iterator* QCborMap_Insert2(QCborMap* self, QLatin1StringView key, const QCborValue* value_) {
 	return new QCborMap::Iterator(self->insert(key, *value_));
 }
 
@@ -271,11 +241,11 @@ QCborMap__Iterator* QCborMap_Insert5(QCborMap* self, libqt_pair v) {
 }
 
 QCborMap* QCborMap_FromVariantMap(const libqt_map mapVal) {
-	return new QCborMap(QCborMap::fromVariantMap(*mapVal));
+	return new QCborMap(QCborMap::fromVariantMap(QMap<QString, QVariant>()));
 }
 
 QCborMap* QCborMap_FromVariantHash(const libqt_map hash) {
-	return new QCborMap(QCborMap::fromVariantHash(*hash));
+	return new QCborMap(QCborMap::fromVariantHash(QHash<QString, QVariant>()));
 }
 
 QCborMap* QCborMap_FromJsonObject(const QJsonObject* o) {
@@ -283,11 +253,21 @@ QCborMap* QCborMap_FromJsonObject(const QJsonObject* o) {
 }
 
 libqt_map QCborMap_ToVariantMap(const QCborMap* self) {
-	return self->toVariantMap();
+	auto _ret = self->toVariantMap();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 libqt_map QCborMap_ToVariantHash(const QCborMap* self) {
-	return self->toVariantHash();
+	auto _ret = self->toVariantHash();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QJsonObject* QCborMap_ToJsonObject(const QCborMap* self) {

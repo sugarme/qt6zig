@@ -23,6 +23,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionViewItem>
 #include <QTimerEvent>
 #include <QVariant>
@@ -675,9 +676,9 @@ vqabstractitemview->setQAbstractItemView_SelectAll_Callback(reinterpret_cast<Vir
 void QAbstractItemView_DataChanged(QAbstractItemView* self, const QModelIndex* topLeft, const QModelIndex* bottomRight, const libqt_list roles) {
 	auto* vqabstractitemview = dynamic_cast<VirtualQAbstractItemView*>(self);
 	if (vqabstractitemview && vqabstractitemview->isVirtualQAbstractItemView) {
-	vqabstractitemview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqabstractitemview->dataChanged(*topLeft, *bottomRight, QList<int>());
 	} else {
-	self->QAbstractItemView::dataChanged(*topLeft, *bottomRight, *roles);
+	self->QAbstractItemView::dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 
@@ -686,7 +687,7 @@ void QAbstractItemView_QBaseDataChanged(QAbstractItemView* self, const QModelInd
 	auto* vqabstractitemview = dynamic_cast<VirtualQAbstractItemView*>(self);
 	if (vqabstractitemview && vqabstractitemview->isVirtualQAbstractItemView) {
 vqabstractitemview->setQAbstractItemView_DataChanged_IsBase(true);
-	vqabstractitemview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqabstractitemview->dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 
@@ -1242,9 +1243,27 @@ vqabstractitemview->setQAbstractItemView_VisualRegionForSelection_Callback(reint
 libqt_list QAbstractItemView_SelectedIndexes(const QAbstractItemView* self) {
 	auto* vqabstractitemview = dynamic_cast<const VirtualQAbstractItemView*>(self);
 	if (vqabstractitemview && vqabstractitemview->isVirtualQAbstractItemView) {
-	return vqabstractitemview->selectedIndexes();
+	auto _ret = vqabstractitemview->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QAbstractItemView::selectedIndexes();
+	auto _ret = self->QAbstractItemView::selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1253,7 +1272,16 @@ libqt_list QAbstractItemView_QBaseSelectedIndexes(const QAbstractItemView* self)
 	auto* vqabstractitemview = dynamic_cast<const VirtualQAbstractItemView*>(self);
 	if (vqabstractitemview && vqabstractitemview->isVirtualQAbstractItemView) {
 vqabstractitemview->setQAbstractItemView_SelectedIndexes_IsBase(true);
-	return vqabstractitemview->selectedIndexes();
+	auto _ret = vqabstractitemview->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

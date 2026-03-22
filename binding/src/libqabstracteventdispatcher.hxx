@@ -173,7 +173,7 @@ public:
 		if (qabstracteventdispatcher_registeredtimers_callback != nullptr) {
 			QObject* cbval1 = object;
 			libqt_list callback_ret = qabstracteventdispatcher_registeredtimers_callback(this, cbval1);
-			return callback_ret;
+			return QList<QAbstractEventDispatcher::TimerInfo>();
 		} else {
 			return {};
 		}
@@ -237,18 +237,15 @@ public:
 	bool isVirtualQAbstractEventDispatcherV2= true;
 
 	// Virtual class public types (including callbacks)
-	using QAbstractEventDispatcherV2_UnregisterTimer_Callback = bool (*)(QAbstractEventDispatcherV2*, int);
 	using QAbstractEventDispatcherV2_TimersForObject_Callback = libqt_list (*)(const QAbstractEventDispatcherV2*, QObject*);
 	using QAbstractEventDispatcherV2_ProcessEventsWithDeadline_Callback = bool (*)(QAbstractEventDispatcherV2*, int, QDeadlineTimer*);
 
 protected:
 	// Instance callback storage
-	mutable QAbstractEventDispatcherV2_UnregisterTimer_Callback qabstracteventdispatcherv2_unregistertimer_callback = nullptr;
 	mutable QAbstractEventDispatcherV2_TimersForObject_Callback qabstracteventdispatcherv2_timersforobject_callback = nullptr;
 	mutable QAbstractEventDispatcherV2_ProcessEventsWithDeadline_Callback qabstracteventdispatcherv2_processeventswithdeadline_callback = nullptr;
 
 	// Instance base flags
-    mutable bool qabstracteventdispatcherv2_unregistertimer_isbase = false;
     mutable bool qabstracteventdispatcherv2_timersforobject_isbase = false;
     mutable bool qabstracteventdispatcherv2_processeventswithdeadline_isbase = false;
 
@@ -257,39 +254,25 @@ public:
 	VirtualQAbstractEventDispatcherV2(QObject* parent): QAbstractEventDispatcherV2(parent) {};
 
 	~VirtualQAbstractEventDispatcherV2() {
-		qabstracteventdispatcherv2_unregistertimer_callback = nullptr;
 		qabstracteventdispatcherv2_timersforobject_callback = nullptr;
 		qabstracteventdispatcherv2_processeventswithdeadline_callback = nullptr;
 	}
 
 // Callback setters
-	inline void setQAbstractEventDispatcherV2_UnregisterTimer_Callback(QAbstractEventDispatcherV2_UnregisterTimer_Callback cb) const { qabstracteventdispatcherv2_unregistertimer_callback = cb; }
 	inline void setQAbstractEventDispatcherV2_TimersForObject_Callback(QAbstractEventDispatcherV2_TimersForObject_Callback cb) const { qabstracteventdispatcherv2_timersforobject_callback = cb; }
 	inline void setQAbstractEventDispatcherV2_ProcessEventsWithDeadline_Callback(QAbstractEventDispatcherV2_ProcessEventsWithDeadline_Callback cb) const { qabstracteventdispatcherv2_processeventswithdeadline_callback = cb; }
 
 // Base flag setters
-	inline void setQAbstractEventDispatcherV2_UnregisterTimer_IsBase(bool value) const { qabstracteventdispatcherv2_unregistertimer_isbase = value; }
 	inline void setQAbstractEventDispatcherV2_TimersForObject_IsBase(bool value) const { qabstracteventdispatcherv2_timersforobject_isbase = value; }
 	inline void setQAbstractEventDispatcherV2_ProcessEventsWithDeadline_IsBase(bool value) const { qabstracteventdispatcherv2_processeventswithdeadline_isbase = value; }
 
-
-	// Virtual method for C ABI access and custom callback
-	virtual bool unregisterTimer(Qt::TimerId timerId) override {
-		if (qabstracteventdispatcherv2_unregistertimer_callback != nullptr) {
-			int cbval1 = static_cast<int>(timerId);
-			bool callback_ret = qabstracteventdispatcherv2_unregistertimer_callback(this, cbval1);
-			return callback_ret;
-		} else {
-			return {};
-		}
-	}
 
 	// Virtual method for C ABI access and custom callback
 	virtual QList<QAbstractEventDispatcher::TimerInfoV2> timersForObject(QObject* object) const override {
 		if (qabstracteventdispatcherv2_timersforobject_callback != nullptr) {
 			QObject* cbval1 = object;
 			libqt_list callback_ret = qabstracteventdispatcherv2_timersforobject_callback(this, cbval1);
-			return callback_ret;
+			return QList<QAbstractEventDispatcher::TimerInfoV2>();
 		} else {
 			return {};
 		}

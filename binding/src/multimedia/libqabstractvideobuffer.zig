@@ -11,12 +11,6 @@ pub const qabstractvideobuffer = struct {
     }
 
 
-    /// New2 constructs a new QAbstractVideoBuffer object.
-    pub fn New2(param1: ?*anyopaque) QtC.QAbstractVideoBuffer {
-        return qtc.QAbstractVideoBuffer_new2(@ptrCast(param1));
-    }
-
-
     pub fn Map(self: ?*anyopaque, mode: i32) QtC.QAbstractVideoBuffer__MapData {
         return qtc.QAbstractVideoBuffer_Map(@ptrCast(self), @intCast(mode));
     }
@@ -57,10 +51,6 @@ pub const qabstractvideobuffer = struct {
     /// Base class method implementation
     pub fn QBaseFormat(self: ?*anyopaque, ) QtC.QVideoFrameFormat {
         return qtc.QAbstractVideoBuffer_QBaseFormat(@ptrCast(self));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QAbstractVideoBuffer_OperatorAssign(@ptrCast(self), @ptrCast(param1));
     }
 
     /// Delete this object from C++ memory.

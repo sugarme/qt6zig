@@ -190,14 +190,6 @@ QQuaternion* QQuaternion_FromEulerAngles2(float pitch, float yaw, float roll) {
 	return new QQuaternion(QQuaternion::fromEulerAngles(pitch, yaw, roll));
 }
 
-QGenericMatrix<3, 3, float> QQuaternion_ToRotationMatrix(const QQuaternion* self) {
-	return self->toRotationMatrix();
-}
-
-QQuaternion* QQuaternion_FromRotationMatrix(const QGenericMatrix<3, 3, float>* rot3x3) {
-	return new QQuaternion(QQuaternion::fromRotationMatrix(*rot3x3));
-}
-
 void QQuaternion_GetAxes(const QQuaternion* self, QVector3D* xAxis, QVector3D* yAxis, QVector3D* zAxis) {
 	self->getAxes(xAxis, yAxis, zAxis);
 }

@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStringListModel>
 #include <QVariant>
 #include <qstringlistmodel.h>
@@ -15,7 +16,7 @@ QStringListModel* QStringListModel_new() {
 }
 
 QStringListModel* QStringListModel_new2(const libqt_list strings) {
-	 return new VirtualQStringListModel(*strings);
+	 return new VirtualQStringListModel(QList<QString>());
 }
 
 QStringListModel* QStringListModel_new3(QObject* parent) {
@@ -23,7 +24,7 @@ QStringListModel* QStringListModel_new3(QObject* parent) {
 }
 
 QStringListModel* QStringListModel_new4(const libqt_list strings, QObject* parent) {
-	 return new VirtualQStringListModel(*strings, parent);
+	 return new VirtualQStringListModel(QList<QString>(), parent);
 }
 
 libqt_string QStringListModel_Tr(const char* s) {
@@ -74,11 +75,16 @@ bool QStringListModel_MoveRows(QStringListModel* self, const QModelIndex* source
 }
 
 libqt_map QStringListModel_ItemData(const QStringListModel* self, const QModelIndex* index) {
-	return self->itemData(*index);
+	auto _ret = self->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 bool QStringListModel_SetItemData(QStringListModel* self, const QModelIndex* index, const libqt_map roles) {
-	return self->setItemData(*index, *roles);
+	return self->setItemData(*index, QMap<int, QVariant>());
 }
 
 void QStringListModel_Sort(QStringListModel* self, int column, int order) {
@@ -86,11 +92,25 @@ void QStringListModel_Sort(QStringListModel* self, int column, int order) {
 }
 
 libqt_list QStringListModel_StringList(const QStringListModel* self) {
-	return self->stringList();
+	auto _ret = self->stringList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QStringListModel_SetStringList(QStringListModel* self, const libqt_list strings) {
-	self->setStringList(*strings);
+	self->setStringList(QList<QString>());
 }
 
 int QStringListModel_SupportedDropActions(const QStringListModel* self) {
@@ -277,7 +297,12 @@ libqt_map QStringListModel_QBaseItemData(const QStringListModel* self, const QMo
 	auto* vqstringlistmodel = dynamic_cast<const VirtualQStringListModel*>(self);
 	if (vqstringlistmodel && vqstringlistmodel->isVirtualQStringListModel) {
 vqstringlistmodel->setQStringListModel_ItemData_IsBase(true);
-	return vqstringlistmodel->itemData(*index);
+	auto _ret = vqstringlistmodel->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -294,7 +319,7 @@ bool QStringListModel_QBaseSetItemData(QStringListModel* self, const QModelIndex
 	auto* vqstringlistmodel = dynamic_cast<VirtualQStringListModel*>(self);
 	if (vqstringlistmodel && vqstringlistmodel->isVirtualQStringListModel) {
 vqstringlistmodel->setQStringListModel_SetItemData_IsBase(true);
-	return vqstringlistmodel->setItemData(*index, *roles);
+	return vqstringlistmodel->setItemData(*index, QMap<int, QVariant>());
 }
 }
 

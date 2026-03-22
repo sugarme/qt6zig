@@ -1,11 +1,9 @@
-#include <QAnyStringView>
 #include <QColor>
-#include <QLatin1String>
 #include <QRgba64>
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <QVariant>
 #include <qcolor.h>
 #include "libqcolor.h"
@@ -43,35 +41,27 @@ QColor* QColor_new8(const libqt_string name) {
 	 return new QColor(QString::fromUtf8(name.data, name.len));
 }
 
-QColor* QColor_new9(QStringView* name) {
-	 return new QColor(*name);
-}
-
-QColor* QColor_new10(const char* aname) {
+QColor* QColor_new9(const char* aname) {
 	 return new QColor(aname);
 }
 
-QColor* QColor_new11(QLatin1StringView name) {
-	 return new QColor(name);
-}
-
-QColor* QColor_new12(int spec) {
+QColor* QColor_new10(int spec) {
 	 return new QColor(static_cast<QColor::Spec>(spec));
 }
 
-QColor* QColor_new13(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4) {
+QColor* QColor_new11(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4) {
 	 return new QColor(static_cast<QColor::Spec>(spec), a1, a2, a3, a4);
 }
 
-QColor* QColor_new14(const QColor* param1) {
+QColor* QColor_new12(const QColor* param1) {
 	 return new QColor(*param1);
 }
 
-QColor* QColor_new15(int r, int g, int b, int a) {
+QColor* QColor_new13(int r, int g, int b, int a) {
 	 return new QColor(r, g, b, a);
 }
 
-QColor* QColor_new16(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4, uint16_t a5) {
+QColor* QColor_new14(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4, uint16_t a5) {
 	 return new QColor(static_cast<QColor::Spec>(spec), a1, a2, a3, a4, a5);
 }
 
@@ -81,10 +71,6 @@ void QColor_CopyAssign(QColor* self, QColor* other) {
 
 void QColor_MoveAssign(QColor* self, QColor* other) {
     *self = std::move(*other);
-}
-
-QColor* QColor_FromString(libqt_string name) {
-	return new QColor(QColor::fromString(QAnyStringView(QString::fromUtf8(name.data, name.len))));
 }
 
 void QColor_OperatorAssign(QColor* self, int color) {
@@ -110,16 +96,22 @@ void QColor_SetNamedColor(QColor* self, const libqt_string name) {
 	self->setNamedColor(QString::fromUtf8(name.data, name.len));
 }
 
-void QColor_SetNamedColor2(QColor* self, QStringView* name) {
-	self->setNamedColor(*name);
-}
-
-void QColor_SetNamedColor3(QColor* self, QLatin1StringView name) {
-	self->setNamedColor(name);
-}
-
 libqt_list QColor_ColorNames() {
-	return QColor::colorNames();
+	auto _ret = QColor::colorNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 int QColor_Spec(const QColor* self) {
@@ -468,18 +460,6 @@ QVariant* QColor_OperatorQVariant(const QColor* self) {
 
 bool QColor_IsValidColor(const libqt_string name) {
 	return QColor::isValidColor(QString::fromUtf8(name.data, name.len));
-}
-
-bool QColor_IsValidColor2(QStringView* param1) {
-	return QColor::isValidColor(*param1);
-}
-
-bool QColor_IsValidColor3(QLatin1String* param1) {
-	return QColor::isValidColor(*param1);
-}
-
-bool QColor_IsValidColorName(libqt_string param1) {
-	return QColor::isValidColorName(QAnyStringView(QString::fromUtf8(param1.data, param1.len)));
 }
 
 void QColor_OperatorAssign2(QColor* self, const QColor* param1) {

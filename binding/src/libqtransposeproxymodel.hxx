@@ -231,7 +231,10 @@ public:
 			return QTransposeProxyModel::setItemData(index, roles);
 		} else if (qtransposeproxymodel_setitemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
-			libqt_map cbval2 = roles;
+			libqt_map cbval2;
+			cbval2.len = roles.size();
+			cbval2.keys = nullptr;
+			cbval2.values = nullptr;
 			bool callback_ret = qtransposeproxymodel_setitemdata_callback(this, cbval1, cbval2);
 			return callback_ret;
 		} else {
@@ -261,7 +264,7 @@ public:
 		} else if (qtransposeproxymodel_itemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
 			libqt_map callback_ret = qtransposeproxymodel_itemdata_callback(this, cbval1);
-			return callback_ret;
+			return QMap<int, QVariant>();
 		} else {
 			return QTransposeProxyModel::itemData(index);
 		}

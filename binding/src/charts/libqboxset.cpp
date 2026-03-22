@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qboxset.h>
 #include "libqboxset.h"
 #include "libqboxset.hxx"
@@ -49,7 +50,7 @@ void QBoxSet_Append(QBoxSet* self, const double value) {
 }
 
 void QBoxSet_Append2(QBoxSet* self, const libqt_list values) {
-	self->append(*values);
+	self->append(QList<double>());
 }
 
 void QBoxSet_Clear(QBoxSet* self) {

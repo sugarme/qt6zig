@@ -181,18 +181,6 @@ pub const qtransform = struct {
         return qtc.QTransform_RotateRadians2(@ptrCast(self), a);
     }
 
-    pub fn SquareToQuad(square: ?*anyopaque, result: ?*anyopaque) bool {
-        return qtc.QTransform_SquareToQuad(@ptrCast(square), @ptrCast(result));
-    }
-
-    pub fn QuadToSquare(quad: ?*anyopaque, result: ?*anyopaque) bool {
-        return qtc.QTransform_QuadToSquare(@ptrCast(quad), @ptrCast(result));
-    }
-
-    pub fn QuadToQuad(one: ?*anyopaque, two: ?*anyopaque, result: ?*anyopaque) bool {
-        return qtc.QTransform_QuadToQuad(@ptrCast(one), @ptrCast(two), @ptrCast(result));
-    }
-
     pub fn OperatorEqual(self: ?*anyopaque, param1: ?*anyopaque) bool {
         return qtc.QTransform_OperatorEqual(@ptrCast(self), @ptrCast(param1));
     }
@@ -233,24 +221,12 @@ pub const qtransform = struct {
         return qtc.QTransform_Map4(@ptrCast(self), @ptrCast(l));
     }
 
-    pub fn Map5(self: ?*anyopaque, a: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QTransform_Map5(@ptrCast(self), @ptrCast(a));
-    }
-
-    pub fn Map6(self: ?*anyopaque, a: ?*anyopaque) QtC.QPolygon {
-        return qtc.QTransform_Map6(@ptrCast(self), @ptrCast(a));
-    }
-
     pub fn Map7(self: ?*anyopaque, r: ?*anyopaque) QtC.QRegion {
         return qtc.QTransform_Map7(@ptrCast(self), @ptrCast(r));
     }
 
     pub fn Map8(self: ?*anyopaque, p: ?*anyopaque) QtC.QPainterPath {
         return qtc.QTransform_Map8(@ptrCast(self), @ptrCast(p));
-    }
-
-    pub fn MapToPolygon(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygon {
-        return qtc.QTransform_MapToPolygon(@ptrCast(self), @ptrCast(r));
     }
 
     pub fn MapRect(self: ?*anyopaque, param1: ?*anyopaque) QtC.QRect {

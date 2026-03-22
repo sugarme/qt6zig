@@ -15,7 +15,6 @@ extern "C" {
 
 #ifdef __cplusplus
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QByteArrayView QByteArrayView;
 typedef struct QDebug QDebug;
 typedef struct QFormDataBuilder QFormDataBuilder;
@@ -37,17 +36,10 @@ void QFormDataPartBuilder_Swap(QFormDataPartBuilder* self, QFormDataPartBuilder*
 QFormDataPartBuilder* QFormDataPartBuilder_SetBody(QFormDataPartBuilder* self, QByteArrayView* data);
 QFormDataPartBuilder* QFormDataPartBuilder_SetBodyDevice(QFormDataPartBuilder* self, QIODevice* body);
 QFormDataPartBuilder* QFormDataPartBuilder_SetHeaders(QFormDataPartBuilder* self, const QHttpHeaders* headers);
-QFormDataPartBuilder* QFormDataPartBuilder_SetBody2(QFormDataPartBuilder* self, QByteArrayView* data, libqt_string fileName);
-QFormDataPartBuilder* QFormDataPartBuilder_SetBody3(QFormDataPartBuilder* self, QByteArrayView* data, libqt_string fileName, libqt_string mimeType);
-QFormDataPartBuilder* QFormDataPartBuilder_SetBodyDevice2(QFormDataPartBuilder* self, QIODevice* body, libqt_string fileName);
-QFormDataPartBuilder* QFormDataPartBuilder_SetBodyDevice3(QFormDataPartBuilder* self, QIODevice* body, libqt_string fileName, libqt_string mimeType);
 void QFormDataPartBuilder_Delete(QFormDataPartBuilder* self);
 
 QFormDataBuilder* QFormDataBuilder_new();
 void QFormDataBuilder_Swap(QFormDataBuilder* self, QFormDataBuilder* other);
-QFormDataPartBuilder* QFormDataBuilder_Part(QFormDataBuilder* self, libqt_string name);
-std::unique_ptr<QHttpMultiPart> QFormDataBuilder_BuildMultiPart(QFormDataBuilder* self);
-std::unique_ptr<QHttpMultiPart> QFormDataBuilder_BuildMultiPart1(QFormDataBuilder* self, int options);
 void QFormDataBuilder_Delete(QFormDataBuilder* self);
 
 #ifdef __cplusplus

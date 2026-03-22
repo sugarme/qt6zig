@@ -18,11 +18,7 @@ QMetaContainer* QMetaContainer_new3() {
 	 return new QMetaContainer();
 }
 
-QMetaContainer* QMetaContainer_new4(const QtMetaContainerPrivate__QMetaContainerInterface* d) {
-	 return new QMetaContainer(d);
-}
-
-QMetaContainer* QMetaContainer_new5(const QMetaContainer* param1) {
+QMetaContainer* QMetaContainer_new4(const QMetaContainer* param1) {
 	 return new QMetaContainer(*param1);
 }
 
@@ -146,11 +142,7 @@ QMetaSequence* QMetaSequence_new3() {
 	 return new QMetaSequence();
 }
 
-QMetaSequence* QMetaSequence_new4(const QtMetaContainerPrivate__QMetaSequenceInterface* d) {
-	 return new QMetaSequence(d);
-}
-
-QMetaSequence* QMetaSequence_new5(const QMetaSequence* param1) {
+QMetaSequence* QMetaSequence_new4(const QMetaSequence* param1) {
 	 return new QMetaSequence(*param1);
 }
 
@@ -282,10 +274,6 @@ void QMetaSequence_ValueAtConstIterator(const QMetaSequence* self, const void* i
 	self->valueAtConstIterator(iterator, result);
 }
 
-const QtMetaContainerPrivate__QMetaSequenceInterface* QMetaSequence_Iface(const QMetaSequence* self) {
-	return self->iface();
-}
-
 void QMetaSequence_Delete(QMetaSequence* self) {
     delete self;
 }
@@ -302,11 +290,7 @@ QMetaAssociation* QMetaAssociation_new3() {
 	 return new QMetaAssociation();
 }
 
-QMetaAssociation* QMetaAssociation_new4(const QtMetaContainerPrivate__QMetaAssociationInterface* d) {
-	 return new QMetaAssociation(d);
-}
-
-QMetaAssociation* QMetaAssociation_new5(const QMetaAssociation* param1) {
+QMetaAssociation* QMetaAssociation_new4(const QMetaAssociation* param1) {
 	 return new QMetaAssociation(*param1);
 }
 
@@ -420,10 +404,6 @@ bool QMetaAssociation_CanCreateConstIteratorAtKey(const QMetaAssociation* self) 
 
 void* QMetaAssociation_CreateConstIteratorAtKey(const QMetaAssociation* self, const void* container, const void* key) {
 	return self->createConstIteratorAtKey(container, key);
-}
-
-const QtMetaContainerPrivate__QMetaAssociationInterface* QMetaAssociation_Iface(const QMetaAssociation* self) {
-	return self->iface();
 }
 
 void QMetaAssociation_Delete(QMetaAssociation* self) {

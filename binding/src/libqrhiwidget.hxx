@@ -26,7 +26,6 @@ public:
 	using QRhiWidget_Event_Callback = bool (*)(QRhiWidget*, QEvent*);
 	using QRhiWidget_IsAutoRenderTargetEnabled_Callback = bool (*)();
 	using QRhiWidget_SetAutoRenderTarget_Callback = void (*)(QRhiWidget*, bool);
-	using QRhiWidget_Rhi_Callback = QRhi* (*)();
 	using QRhiWidget_ColorTexture_Callback = QRhiTexture* (*)();
 	using QRhiWidget_MsaaColorBuffer_Callback = QRhiRenderBuffer* (*)();
 	using QRhiWidget_ResolveTexture_Callback = QRhiTexture* (*)();
@@ -43,7 +42,6 @@ protected:
 	mutable QRhiWidget_Event_Callback qrhiwidget_event_callback = nullptr;
 	mutable QRhiWidget_IsAutoRenderTargetEnabled_Callback qrhiwidget_isautorendertargetenabled_callback = nullptr;
 	mutable QRhiWidget_SetAutoRenderTarget_Callback qrhiwidget_setautorendertarget_callback = nullptr;
-	mutable QRhiWidget_Rhi_Callback qrhiwidget_rhi_callback = nullptr;
 	mutable QRhiWidget_ColorTexture_Callback qrhiwidget_colortexture_callback = nullptr;
 	mutable QRhiWidget_MsaaColorBuffer_Callback qrhiwidget_msaacolorbuffer_callback = nullptr;
 	mutable QRhiWidget_ResolveTexture_Callback qrhiwidget_resolvetexture_callback = nullptr;
@@ -59,7 +57,6 @@ protected:
     mutable bool qrhiwidget_event_isbase = false;
     mutable bool qrhiwidget_isautorendertargetenabled_isbase = false;
     mutable bool qrhiwidget_setautorendertarget_isbase = false;
-    mutable bool qrhiwidget_rhi_isbase = false;
     mutable bool qrhiwidget_colortexture_isbase = false;
     mutable bool qrhiwidget_msaacolorbuffer_isbase = false;
     mutable bool qrhiwidget_resolvetexture_isbase = false;
@@ -80,7 +77,6 @@ public:
 		qrhiwidget_event_callback = nullptr;
 		qrhiwidget_isautorendertargetenabled_callback = nullptr;
 		qrhiwidget_setautorendertarget_callback = nullptr;
-		qrhiwidget_rhi_callback = nullptr;
 		qrhiwidget_colortexture_callback = nullptr;
 		qrhiwidget_msaacolorbuffer_callback = nullptr;
 		qrhiwidget_resolvetexture_callback = nullptr;
@@ -97,7 +93,6 @@ public:
 	inline void setQRhiWidget_Event_Callback(QRhiWidget_Event_Callback cb) const { qrhiwidget_event_callback = cb; }
 	inline void setQRhiWidget_IsAutoRenderTargetEnabled_Callback(QRhiWidget_IsAutoRenderTargetEnabled_Callback cb) const { qrhiwidget_isautorendertargetenabled_callback = cb; }
 	inline void setQRhiWidget_SetAutoRenderTarget_Callback(QRhiWidget_SetAutoRenderTarget_Callback cb) const { qrhiwidget_setautorendertarget_callback = cb; }
-	inline void setQRhiWidget_Rhi_Callback(QRhiWidget_Rhi_Callback cb) const { qrhiwidget_rhi_callback = cb; }
 	inline void setQRhiWidget_ColorTexture_Callback(QRhiWidget_ColorTexture_Callback cb) const { qrhiwidget_colortexture_callback = cb; }
 	inline void setQRhiWidget_MsaaColorBuffer_Callback(QRhiWidget_MsaaColorBuffer_Callback cb) const { qrhiwidget_msaacolorbuffer_callback = cb; }
 	inline void setQRhiWidget_ResolveTexture_Callback(QRhiWidget_ResolveTexture_Callback cb) const { qrhiwidget_resolvetexture_callback = cb; }
@@ -113,7 +108,6 @@ public:
 	inline void setQRhiWidget_Event_IsBase(bool value) const { qrhiwidget_event_isbase = value; }
 	inline void setQRhiWidget_IsAutoRenderTargetEnabled_IsBase(bool value) const { qrhiwidget_isautorendertargetenabled_isbase = value; }
 	inline void setQRhiWidget_SetAutoRenderTarget_IsBase(bool value) const { qrhiwidget_setautorendertarget_isbase = value; }
-	inline void setQRhiWidget_Rhi_IsBase(bool value) const { qrhiwidget_rhi_isbase = value; }
 	inline void setQRhiWidget_ColorTexture_IsBase(bool value) const { qrhiwidget_colortexture_isbase = value; }
 	inline void setQRhiWidget_MsaaColorBuffer_IsBase(bool value) const { qrhiwidget_msaacolorbuffer_isbase = value; }
 	inline void setQRhiWidget_ResolveTexture_IsBase(bool value) const { qrhiwidget_resolvetexture_isbase = value; }
@@ -226,19 +220,6 @@ public:
 	}
 
 	// Virtual method for C ABI access and custom callback
-	QRhi* rhi() const {
-		if (qrhiwidget_rhi_isbase) {
-			qrhiwidget_rhi_isbase = false;
-			return QRhiWidget::rhi();
-		} else if (qrhiwidget_rhi_callback != nullptr) {
-			QRhi* callback_ret = qrhiwidget_rhi_callback();
-			return callback_ret;
-		} else {
-			return QRhiWidget::rhi();
-		}
-	}
-
-	// Virtual method for C ABI access and custom callback
 	QRhiTexture* colorTexture() const {
 		if (qrhiwidget_colortexture_isbase) {
 			qrhiwidget_colortexture_isbase = false;
@@ -320,8 +301,6 @@ public:
 	friend bool QRhiWidget_QBaseIsAutoRenderTargetEnabled(const QRhiWidget* self);
 	friend void QRhiWidget_SetAutoRenderTarget(QRhiWidget* self, bool enabled);
 	friend void QRhiWidget_QBaseSetAutoRenderTarget(QRhiWidget* self, bool enabled);
-	friend QRhi* QRhiWidget_Rhi(const QRhiWidget* self);
-	friend QRhi* QRhiWidget_QBaseRhi(const QRhiWidget* self);
 	friend QRhiTexture* QRhiWidget_ColorTexture(const QRhiWidget* self);
 	friend QRhiTexture* QRhiWidget_QBaseColorTexture(const QRhiWidget* self);
 	friend QRhiRenderBuffer* QRhiWidget_MsaaColorBuffer(const QRhiWidget* self);

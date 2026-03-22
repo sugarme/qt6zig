@@ -11,20 +11,6 @@ pub const qloggingcategory = struct {
     }
 
 
-    /// New2 constructs a new QLoggingCategory object.
-    pub fn New2(category: []const u8, severityLevel: i32) QtC.QLoggingCategory {
-        return qtc.QLoggingCategory_new2(@ptrCast(category), @intCast(severityLevel));
-    }
-
-
-    pub fn IsEnabled(self: ?*anyopaque, typeVal: i32) bool {
-        return qtc.QLoggingCategory_IsEnabled(@ptrCast(self), @intCast(typeVal));
-    }
-
-    pub fn SetEnabled(self: ?*anyopaque, typeVal: i32, enable: bool) void {
-        qtc.QLoggingCategory_SetEnabled(@ptrCast(self), @intCast(typeVal), enable);
-    }
-
     pub fn IsDebugEnabled(self: ?*anyopaque, ) bool {
         return qtc.QLoggingCategory_IsDebugEnabled(@ptrCast(self));
     }

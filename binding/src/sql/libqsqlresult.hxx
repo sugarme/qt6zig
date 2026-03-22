@@ -956,7 +956,7 @@ public:
 			return QSqlResult::boundValues();
 		} else if (qsqlresult_boundvalues_callback != nullptr) {
 			libqt_list callback_ret = qsqlresult_boundvalues_callback();
-			return callback_ret;
+			return QList<QVariant>();
 		} else {
 			return QSqlResult::boundValues();
 		}
@@ -969,7 +969,7 @@ public:
 			return QSqlResult::boundValues();
 		} else if (qsqlresult_boundvalues2_callback != nullptr) {
 			libqt_list callback_ret = qsqlresult_boundvalues2_callback();
-			return callback_ret;
+			return QList<QVariant>();
 		} else {
 			return QSqlResult::boundValues();
 		}
@@ -995,7 +995,7 @@ public:
 			return QSqlResult::boundValueNames();
 		} else if (qsqlresult_boundvaluenames_callback != nullptr) {
 			libqt_list callback_ret = qsqlresult_boundvaluenames_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QSqlResult::boundValueNames();
 		}
@@ -1112,7 +1112,7 @@ public:
 		} else if (qsqlresult_boundvalues1_callback != nullptr) {
 			Disambiguated_t* cbval1 = &param1;
 			libqt_list callback_ret = qsqlresult_boundvalues1_callback(this, cbval1);
-			return callback_ret;
+			return QList<QVariant>();
 		} else {
 			return QSqlResult::boundValues(param1);
 		}
@@ -1126,7 +1126,7 @@ public:
 		} else if (qsqlresult_boundvalues12_callback != nullptr) {
 			Disambiguated_t* cbval1 = &param1;
 			libqt_list callback_ret = qsqlresult_boundvalues12_callback(this, cbval1);
-			return callback_ret;
+			return QList<QVariant>();
 		} else {
 			return QSqlResult::boundValues(param1);
 		}

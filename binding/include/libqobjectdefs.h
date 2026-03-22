@@ -62,14 +62,10 @@ void QGenericReturnArgument_CopyAssign(QGenericReturnArgument* self, QGenericRet
 void QGenericReturnArgument_MoveAssign(QGenericReturnArgument* self, QGenericReturnArgument* other);
 void QGenericReturnArgument_Delete(QGenericReturnArgument* self);
 
-const QtPrivate__QMetaTypeInterface* QMetaMethodArgument_MetaType(const QMetaMethodArgument* self);
-void QMetaMethodArgument_SetMetaType(QMetaMethodArgument* self, const QtPrivate__QMetaTypeInterface* metaType);
 const char* QMetaMethodArgument_Name(const QMetaMethodArgument* self);
 void QMetaMethodArgument_SetName(QMetaMethodArgument* self, const char* name);
 void QMetaMethodArgument_Delete(QMetaMethodArgument* self);
 
-const QtPrivate__QMetaTypeInterface* QMetaMethodReturnArgument_MetaType(const QMetaMethodReturnArgument* self);
-void QMetaMethodReturnArgument_SetMetaType(QMetaMethodReturnArgument* self, const QtPrivate__QMetaTypeInterface* metaType);
 const char* QMetaMethodReturnArgument_Name(const QMetaMethodReturnArgument* self);
 void QMetaMethodReturnArgument_SetName(QMetaMethodReturnArgument* self, const char* name);
 void QMetaMethodReturnArgument_Delete(QMetaMethodReturnArgument* self);
@@ -146,8 +142,6 @@ const unsigned int* QMetaObject__Data_Data(const QMetaObject__Data* self);
 void QMetaObject__Data_SetData(QMetaObject__Data* self, const unsigned int* data);
 const QMetaObject__SuperData* QMetaObject__Data_RelatedMetaObjects(const QMetaObject__Data* self);
 void QMetaObject__Data_SetRelatedMetaObjects(QMetaObject__Data* self, const QMetaObject__SuperData* relatedMetaObjects);
-const QtPrivate__QMetaTypeInterface** QMetaObject__Data_MetaTypes(const QMetaObject__Data* self);
-void QMetaObject__Data_SetMetaTypes(QMetaObject__Data* self, const QtPrivate__QMetaTypeInterface** metaTypes);
 void QMetaObject__Data_OperatorAssign(QMetaObject__Data* self, const QMetaObject__Data* param1);
 void QMetaObject__Data_Delete(QMetaObject__Data* self);
 

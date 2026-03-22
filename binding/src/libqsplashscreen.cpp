@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qsplashscreen.h>
 #include "libqsplashscreen.h"

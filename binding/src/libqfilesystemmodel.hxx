@@ -353,7 +353,7 @@ public:
 			return QFileSystemModel::mimeTypes();
 		} else if (qfilesystemmodel_mimetypes_callback != nullptr) {
 			libqt_list callback_ret = qfilesystemmodel_mimetypes_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QFileSystemModel::mimeTypes();
 		}
@@ -365,7 +365,9 @@ public:
 			qfilesystemmodel_mimedata_isbase = false;
 			return QFileSystemModel::mimeData(indexes);
 		} else if (qfilesystemmodel_mimedata_callback != nullptr) {
-			libqt_list cbval1 = indexes;
+			libqt_list cbval1;
+			cbval1.len = indexes.size();
+			cbval1.data = nullptr;
 			QMimeData* callback_ret = qfilesystemmodel_mimedata_callback(this, cbval1);
 			return callback_ret;
 		} else {
@@ -411,7 +413,7 @@ public:
 			return QFileSystemModel::roleNames();
 		} else if (qfilesystemmodel_rolenames_callback != nullptr) {
 			libqt_map callback_ret = qfilesystemmodel_rolenames_callback();
-			return callback_ret;
+			return QHash<int, QByteArray>();
 		} else {
 			return QFileSystemModel::roleNames();
 		}

@@ -139,18 +139,6 @@ pub const qobjectdata = struct {
         qtc.QObjectData_SetUnused(@ptrCast(self), unused);
     }
 
-    pub fn PostedEvents(self: ?*anyopaque, ) QtC.QAtomicInt {
-        return qtc.QObjectData_PostedEvents(@ptrCast(self));
-    }
-
-    pub fn SetPostedEvents(self: ?*anyopaque, postedEvents: QtC.QAtomicInt) void {
-        qtc.QObjectData_SetPostedEvents(@ptrCast(self), @ptrCast(postedEvents));
-    }
-
-    pub fn SetMetaObject(self: ?*anyopaque, metaObject: *QDynamicMetaObjectData) void {
-        qtc.QObjectData_SetMetaObject(@ptrCast(self), @ptrCast(metaObject));
-    }
-
     pub fn BindingStorage(self: ?*anyopaque, ) QtC.QBindingStorage {
         return qtc.QObjectData_BindingStorage(@ptrCast(self));
     }
@@ -228,18 +216,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qobject.ObjectName: Mem
 return  _ret;
     }
 
-    pub fn SetObjectName(self: ?*anyopaque, name: []const u8) void {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-qtc.QObject_SetObjectName(@ptrCast(self), name_str);
-    }
-
-    pub fn BindableObjectName(self: ?*anyopaque, ) QBindable<QString> {
-        return qtc.QObject_BindableObjectName(@ptrCast(self));
-    }
-
     pub fn IsWidgetType(self: ?*anyopaque, ) bool {
         return qtc.QObject_IsWidgetType(@ptrCast(self));
     }
@@ -274,10 +250,6 @@ qtc.QObject_SetObjectName(@ptrCast(self), name_str);
 
     pub fn KillTimer(self: ?*anyopaque, id: i32) void {
         qtc.QObject_KillTimer(@ptrCast(self), id);
-    }
-
-    pub fn KillTimer2(self: ?*anyopaque, id: i32) void {
-        qtc.QObject_KillTimer2(@ptrCast(self), @intCast(id));
     }
 
     pub fn Children(self: ?*anyopaque, ) []const u8 {

@@ -11,6 +11,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyle>
 #include <QWidget>
 #include <qapplication.h>
@@ -81,11 +82,27 @@ QFontMetrics* QApplication_FontMetrics() {
 }
 
 libqt_list QApplication_AllWidgets() {
-	return QApplication::allWidgets();
+	auto _ret = QApplication::allWidgets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QApplication_TopLevelWidgets() {
-	return QApplication::topLevelWidgets();
+	auto _ret = QApplication::topLevelWidgets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QWidget* QApplication_ActivePopupWidget() {
@@ -317,33 +334,6 @@ void QApplication_OnEvent(QApplication* self, intptr_t slot) {
 	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
 	if (vqapplication && vqapplication->isVirtualQApplication) {
 vqapplication->setQApplication_Event_Callback(reinterpret_cast<VirtualQApplication::QApplication_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QApplication_CompressEvent(QApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3) {
-	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-	return vqapplication->compressEvent(param1, receiver, param3);
-	} else {
-	return self->QApplication::compressEvent(param1, receiver, param3);
-}
-}
-
-// Base class handler implementation
-bool QApplication_QBaseCompressEvent(QApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3) {
-	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-vqapplication->setQApplication_CompressEvent_IsBase(true);
-	return vqapplication->compressEvent(param1, receiver, param3);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QApplication_OnCompressEvent(QApplication* self, intptr_t slot) {
-	auto* vqapplication = dynamic_cast<VirtualQApplication*>(self);
-	if (vqapplication && vqapplication->isVirtualQApplication) {
-vqapplication->setQApplication_CompressEvent_Callback(reinterpret_cast<VirtualQApplication::QApplication_CompressEvent_Callback>(slot));
 }
 }
 

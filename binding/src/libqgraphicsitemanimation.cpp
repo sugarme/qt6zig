@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimeLine>
 #include <QTransform>
 #include <qgraphicsitemanimation.h>
@@ -51,7 +52,16 @@ QPointF* QGraphicsItemAnimation_PosAt(const QGraphicsItemAnimation* self, double
 }
 
 libqt_list QGraphicsItemAnimation_PosList(const QGraphicsItemAnimation* self) {
-	return self->posList();
+	auto _ret = self->posList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGraphicsItemAnimation_SetPosAt(QGraphicsItemAnimation* self, double step, const QPointF* pos) {
@@ -67,7 +77,16 @@ double QGraphicsItemAnimation_RotationAt(const QGraphicsItemAnimation* self, dou
 }
 
 libqt_list QGraphicsItemAnimation_RotationList(const QGraphicsItemAnimation* self) {
-	return self->rotationList();
+	auto _ret = self->rotationList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGraphicsItemAnimation_SetRotationAt(QGraphicsItemAnimation* self, double step, double angle) {
@@ -83,7 +102,16 @@ double QGraphicsItemAnimation_YTranslationAt(const QGraphicsItemAnimation* self,
 }
 
 libqt_list QGraphicsItemAnimation_TranslationList(const QGraphicsItemAnimation* self) {
-	return self->translationList();
+	auto _ret = self->translationList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGraphicsItemAnimation_SetTranslationAt(QGraphicsItemAnimation* self, double step, double dx, double dy) {
@@ -99,7 +127,16 @@ double QGraphicsItemAnimation_HorizontalScaleAt(const QGraphicsItemAnimation* se
 }
 
 libqt_list QGraphicsItemAnimation_ScaleList(const QGraphicsItemAnimation* self) {
-	return self->scaleList();
+	auto _ret = self->scaleList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGraphicsItemAnimation_SetScaleAt(QGraphicsItemAnimation* self, double step, double sx, double sy) {
@@ -115,7 +152,16 @@ double QGraphicsItemAnimation_HorizontalShearAt(const QGraphicsItemAnimation* se
 }
 
 libqt_list QGraphicsItemAnimation_ShearList(const QGraphicsItemAnimation* self) {
-	return self->shearList();
+	auto _ret = self->shearList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGraphicsItemAnimation_SetShearAt(QGraphicsItemAnimation* self, double step, double sh, double sv) {

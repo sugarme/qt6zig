@@ -20,6 +20,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionComboBox>
 #include <QValidator>
 #include <QVariant>
@@ -250,7 +251,7 @@ void QComboBox_AddItem2(QComboBox* self, const QIcon* icon, const libqt_string t
 }
 
 void QComboBox_AddItems(QComboBox* self, const libqt_list texts) {
-	self->addItems(*texts);
+	self->addItems(QList<QString>());
 }
 
 void QComboBox_InsertItem(QComboBox* self, int index, const libqt_string text) {
@@ -262,7 +263,7 @@ void QComboBox_InsertItem2(QComboBox* self, int index, const QIcon* icon, const 
 }
 
 void QComboBox_InsertItems(QComboBox* self, int index, const libqt_list texts) {
-	self->insertItems(index, *texts);
+	self->insertItems(index, QList<QString>());
 }
 
 void QComboBox_InsertSeparator(QComboBox* self, int index) {

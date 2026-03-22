@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qabstractanimation.h>
 #include "libqabstractanimation.h"
 #include "libqabstractanimation.hxx"
@@ -33,10 +34,6 @@ int QAbstractAnimation_State(const QAbstractAnimation* self) {
 	return self->state();
 }
 
-QBindable<QAbstractAnimation::State> QAbstractAnimation_BindableState(const QAbstractAnimation* self) {
-	return self->bindableState();
-}
-
 QAnimationGroup* QAbstractAnimation_Group(const QAbstractAnimation* self) {
 	return self->group();
 }
@@ -49,16 +46,8 @@ void QAbstractAnimation_SetDirection(QAbstractAnimation* self, int direction) {
 	self->setDirection(static_cast<QProgressBar::Direction>(direction));
 }
 
-QBindable<Direction> QAbstractAnimation_BindableDirection(QAbstractAnimation* self) {
-	return self->bindableDirection();
-}
-
 int QAbstractAnimation_CurrentTime(const QAbstractAnimation* self) {
 	return self->currentTime();
-}
-
-QBindable<int> QAbstractAnimation_BindableCurrentTime(QAbstractAnimation* self) {
-	return self->bindableCurrentTime();
 }
 
 int QAbstractAnimation_CurrentLoopTime(const QAbstractAnimation* self) {
@@ -73,16 +62,8 @@ void QAbstractAnimation_SetLoopCount(QAbstractAnimation* self, int loopCount) {
 	self->setLoopCount(loopCount);
 }
 
-QBindable<int> QAbstractAnimation_BindableLoopCount(QAbstractAnimation* self) {
-	return self->bindableLoopCount();
-}
-
 int QAbstractAnimation_CurrentLoop(const QAbstractAnimation* self) {
 	return self->currentLoop();
-}
-
-QBindable<int> QAbstractAnimation_BindableCurrentLoop(const QAbstractAnimation* self) {
-	return self->bindableCurrentLoop();
 }
 
 int QAbstractAnimation_Duration(const QAbstractAnimation* self) {

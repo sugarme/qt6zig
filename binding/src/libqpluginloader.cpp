@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpluginloader.h>
 #include "libqpluginloader.h"
 #include "libqpluginloader.hxx"
@@ -44,11 +45,28 @@ QJsonObject* QPluginLoader_MetaData(const QPluginLoader* self) {
 }
 
 libqt_list QPluginLoader_StaticInstances() {
-	return QPluginLoader::staticInstances();
+	auto _ret = QPluginLoader::staticInstances();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QPluginLoader_StaticPlugins() {
-	return QPluginLoader::staticPlugins();
+	auto _ret = QPluginLoader::staticPlugins();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QPluginLoader_Load(QPluginLoader* self) {

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qmimedata.h>
 #include "libqmimedata.h"
@@ -26,11 +27,20 @@ libqt_string QMimeData_Tr(const char* s) {
 }
 
 libqt_list QMimeData_Urls(const QMimeData* self) {
-	return self->urls();
+	auto _ret = self->urls();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QMimeData_SetUrls(QMimeData* self, const libqt_list urls) {
-	self->setUrls(*urls);
+	self->setUrls(QList<QUrl>());
 }
 
 bool QMimeData_HasUrls(const QMimeData* self) {
@@ -122,7 +132,21 @@ bool QMimeData_HasFormat(const QMimeData* self, const libqt_string mimetype) {
 }
 
 libqt_list QMimeData_Formats(const QMimeData* self) {
-	return self->formats();
+	auto _ret = self->formats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QMimeData_Clear(QMimeData* self) {
@@ -173,7 +197,21 @@ libqt_list QMimeData_QBaseFormats(const QMimeData* self) {
 	auto* vqmimedata = dynamic_cast<const VirtualQMimeData*>(self);
 	if (vqmimedata && vqmimedata->isVirtualQMimeData) {
 vqmimedata->setQMimeData_Formats_IsBase(true);
-	return vqmimedata->formats();
+	auto _ret = vqmimedata->formats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 

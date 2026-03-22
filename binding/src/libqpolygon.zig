@@ -30,20 +30,10 @@ pub const qpolygon = struct {
 
 
     /// New5 constructs a new QPolygon object.
-    pub fn New5(param1: ?*anyopaque) QtC.QPolygon {
-        return qtc.QPolygon_new5(@ptrCast(param1));
+    pub fn New5(r: ?*anyopaque, closed: bool) QtC.QPolygon {
+        return qtc.QPolygon_new5(@ptrCast(r), closed);
     }
 
-
-    /// New6 constructs a new QPolygon object.
-    pub fn New6(r: ?*anyopaque, closed: bool) QtC.QPolygon {
-        return qtc.QPolygon_new6(@ptrCast(r), closed);
-    }
-
-
-    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QPolygon_Swap(@ptrCast(self), @ptrCast(other));
-    }
 
     pub fn OperatorQVariant(self: ?*anyopaque, ) QtC.QVariant {
         return qtc.QPolygon_OperatorQVariant(@ptrCast(self));
@@ -55,14 +45,6 @@ pub const qpolygon = struct {
 
     pub fn Translate2(self: ?*anyopaque, offset: ?*anyopaque) void {
         qtc.QPolygon_Translate2(@ptrCast(self), @ptrCast(offset));
-    }
-
-    pub fn Translated(self: ?*anyopaque, dx: i32, dy: i32) QtC.QPolygon {
-        return qtc.QPolygon_Translated(@ptrCast(self), dx, dy);
-    }
-
-    pub fn Translated2(self: ?*anyopaque, offset: ?*anyopaque) QtC.QPolygon {
-        return qtc.QPolygon_Translated2(@ptrCast(self), @ptrCast(offset));
     }
 
     pub fn BoundingRect(self: ?*anyopaque, ) QtC.QRect {
@@ -101,36 +83,8 @@ pub const qpolygon = struct {
         qtc.QPolygon_PutPoints2(@ptrCast(self), index, nPoints, firstx, firsty, );
     }
 
-    pub fn PutPoints3(self: ?*anyopaque, index: i32, nPoints: i32, from: ?*anyopaque) void {
-        qtc.QPolygon_PutPoints3(@ptrCast(self), index, nPoints, @ptrCast(from));
-    }
-
     pub fn ContainsPoint(self: ?*anyopaque, pt: ?*anyopaque, fillRule: i32) bool {
         return qtc.QPolygon_ContainsPoint(@ptrCast(self), @ptrCast(pt), @intCast(fillRule));
-    }
-
-    pub fn United(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygon {
-        return qtc.QPolygon_United(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn Intersected(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygon {
-        return qtc.QPolygon_Intersected(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn Subtracted(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygon {
-        return qtc.QPolygon_Subtracted(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn Intersects(self: ?*anyopaque, r: ?*anyopaque) bool {
-        return qtc.QPolygon_Intersects(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn ToPolygonF(self: ?*anyopaque, ) QtC.QPolygonF {
-        return qtc.QPolygon_ToPolygonF(@ptrCast(self));
-    }
-
-    pub fn PutPoints4(self: ?*anyopaque, index: i32, nPoints: i32, from: ?*anyopaque, fromIndex: i32) void {
-        qtc.QPolygon_PutPoints4(@ptrCast(self), index, nPoints, @ptrCast(from), fromIndex);
     }
 
     /// Delete this object from C++ memory.
@@ -160,22 +114,6 @@ pub const qpolygonf = struct {
     }
 
 
-    /// New4 constructs a new QPolygonF object.
-    pub fn New4(a: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPolygonF_new4(@ptrCast(a));
-    }
-
-
-    /// New5 constructs a new QPolygonF object.
-    pub fn New5(param1: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPolygonF_new5(@ptrCast(param1));
-    }
-
-
-    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QPolygonF_Swap(@ptrCast(self), @ptrCast(other));
-    }
-
     pub fn OperatorQVariant(self: ?*anyopaque, ) QtC.QVariant {
         return qtc.QPolygonF_OperatorQVariant(@ptrCast(self));
     }
@@ -188,18 +126,6 @@ pub const qpolygonf = struct {
         qtc.QPolygonF_Translate2(@ptrCast(self), @ptrCast(offset));
     }
 
-    pub fn Translated(self: ?*anyopaque, dx: f64, dy: f64) QtC.QPolygonF {
-        return qtc.QPolygonF_Translated(@ptrCast(self), dx, dy);
-    }
-
-    pub fn Translated2(self: ?*anyopaque, offset: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPolygonF_Translated2(@ptrCast(self), @ptrCast(offset));
-    }
-
-    pub fn ToPolygon(self: ?*anyopaque, ) QtC.QPolygon {
-        return qtc.QPolygonF_ToPolygon(@ptrCast(self));
-    }
-
     pub fn IsClosed(self: ?*anyopaque, ) bool {
         return qtc.QPolygonF_IsClosed(@ptrCast(self));
     }
@@ -210,22 +136,6 @@ pub const qpolygonf = struct {
 
     pub fn ContainsPoint(self: ?*anyopaque, pt: ?*anyopaque, fillRule: i32) bool {
         return qtc.QPolygonF_ContainsPoint(@ptrCast(self), @ptrCast(pt), @intCast(fillRule));
-    }
-
-    pub fn United(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPolygonF_United(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn Intersected(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPolygonF_Intersected(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn Subtracted(self: ?*anyopaque, r: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QPolygonF_Subtracted(@ptrCast(self), @ptrCast(r));
-    }
-
-    pub fn Intersects(self: ?*anyopaque, r: ?*anyopaque) bool {
-        return qtc.QPolygonF_Intersects(@ptrCast(self), @ptrCast(r));
     }
 
     /// Delete this object from C++ memory.

@@ -81,30 +81,20 @@ pub const quuid = struct {
 
 
     /// New6 constructs a new QUuid object.
-    pub fn New6(stringVal: []const u8) QtC.QUuid {
-        const stringVal_str = qtc.libqt_string{
-    .len = stringVal.len,
-    .data = stringVal.ptr,
-};
-return qtc.QUuid_new6(stringVal_str);
+    pub fn New6(guid: ?*anyopaque) QtC.QUuid {
+        return qtc.QUuid_new6(@ptrCast(guid));
     }
 
 
     /// New7 constructs a new QUuid object.
-    pub fn New7(guid: ?*anyopaque) QtC.QUuid {
-        return qtc.QUuid_new7(@ptrCast(guid));
+    pub fn New7(param1: ?*anyopaque) QtC.QUuid {
+        return qtc.QUuid_new7(@ptrCast(param1));
     }
 
 
     /// New8 constructs a new QUuid object.
-    pub fn New8(param1: ?*anyopaque) QtC.QUuid {
-        return qtc.QUuid_new8(@ptrCast(param1));
-    }
-
-
-    /// New9 constructs a new QUuid object.
-    pub fn New9(id128: QtC.QUuid__Id128Bytes, order: i32) QtC.QUuid {
-        return qtc.QUuid_new9(@ptrCast(id128), @intCast(order));
+    pub fn New8(id128: QtC.QUuid__Id128Bytes, order: i32) QtC.QUuid {
+        return qtc.QUuid_new8(@ptrCast(id128), @intCast(order));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -117,14 +107,6 @@ return qtc.QUuid_new6(stringVal_str);
         qtc.QUuid_MoveAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
-    pub fn FromString(stringVal: []const u8) QtC.QUuid {
-        const stringVal_str = qtc.libqt_string{
-    .len = stringVal.len,
-    .data = stringVal.ptr,
-};
-return qtc.QUuid_FromString(stringVal_str);
-    }
 
     pub fn ToString(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QUuid_ToString(@ptrCast(self));

@@ -55,7 +55,6 @@ void QMatrix4x4_Fill(QMatrix4x4* self, float value);
 double QMatrix4x4_Determinant(const QMatrix4x4* self);
 QMatrix4x4* QMatrix4x4_Inverted(const QMatrix4x4* self);
 QMatrix4x4* QMatrix4x4_Transposed(const QMatrix4x4* self);
-QGenericMatrix<3, 3, float> QMatrix4x4_NormalMatrix(const QMatrix4x4* self);
 QMatrix4x4* QMatrix4x4_OperatorPlusAssign(QMatrix4x4* self, const QMatrix4x4* other);
 QMatrix4x4* QMatrix4x4_OperatorMinusAssign(QMatrix4x4* self, const QMatrix4x4* other);
 QMatrix4x4* QMatrix4x4_OperatorMultiplyAssign(QMatrix4x4* self, const QMatrix4x4* other);

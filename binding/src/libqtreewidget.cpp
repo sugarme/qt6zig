@@ -13,6 +13,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTreeView>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -27,7 +28,7 @@ QTreeWidgetItem* QTreeWidgetItem_new() {
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new2(const libqt_list strings) {
-	 return new VirtualQTreeWidgetItem(*strings);
+	 return new VirtualQTreeWidgetItem(QList<QString>());
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new3(QTreeWidget* treeview) {
@@ -35,7 +36,7 @@ QTreeWidgetItem* QTreeWidgetItem_new3(QTreeWidget* treeview) {
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new4(QTreeWidget* treeview, const libqt_list strings) {
-	 return new VirtualQTreeWidgetItem(treeview, *strings);
+	 return new VirtualQTreeWidgetItem(treeview, QList<QString>());
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new5(QTreeWidget* treeview, QTreeWidgetItem* after) {
@@ -47,7 +48,7 @@ QTreeWidgetItem* QTreeWidgetItem_new6(QTreeWidgetItem* parent) {
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new7(QTreeWidgetItem* parent, const libqt_list strings) {
-	 return new VirtualQTreeWidgetItem(parent, *strings);
+	 return new VirtualQTreeWidgetItem(parent, QList<QString>());
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new8(QTreeWidgetItem* parent, QTreeWidgetItem* after) {
@@ -63,7 +64,7 @@ QTreeWidgetItem* QTreeWidgetItem_new10(int typeVal) {
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new11(const libqt_list strings, int typeVal) {
-	 return new VirtualQTreeWidgetItem(*strings, typeVal);
+	 return new VirtualQTreeWidgetItem(QList<QString>(), typeVal);
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new12(QTreeWidget* treeview, int typeVal) {
@@ -71,7 +72,7 @@ QTreeWidgetItem* QTreeWidgetItem_new12(QTreeWidget* treeview, int typeVal) {
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new13(QTreeWidget* treeview, const libqt_list strings, int typeVal) {
-	 return new VirtualQTreeWidgetItem(treeview, *strings, typeVal);
+	 return new VirtualQTreeWidgetItem(treeview, QList<QString>(), typeVal);
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new14(QTreeWidget* treeview, QTreeWidgetItem* after, int typeVal) {
@@ -83,7 +84,7 @@ QTreeWidgetItem* QTreeWidgetItem_new15(QTreeWidgetItem* parent, int typeVal) {
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new16(QTreeWidgetItem* parent, const libqt_list strings, int typeVal) {
-	 return new VirtualQTreeWidgetItem(parent, *strings, typeVal);
+	 return new VirtualQTreeWidgetItem(parent, QList<QString>(), typeVal);
 }
 
 QTreeWidgetItem* QTreeWidgetItem_new17(QTreeWidgetItem* parent, QTreeWidgetItem* after, int typeVal) {
@@ -335,15 +336,23 @@ QTreeWidgetItem* QTreeWidgetItem_TakeChild(QTreeWidgetItem* self, int index) {
 }
 
 void QTreeWidgetItem_AddChildren(QTreeWidgetItem* self, const libqt_list children) {
-	self->addChildren(*children);
+	self->addChildren(QList<QTreeWidgetItem *>());
 }
 
 void QTreeWidgetItem_InsertChildren(QTreeWidgetItem* self, int index, const libqt_list children) {
-	self->insertChildren(index, *children);
+	self->insertChildren(index, QList<QTreeWidgetItem *>());
 }
 
 libqt_list QTreeWidgetItem_TakeChildren(QTreeWidgetItem* self) {
-	return self->takeChildren();
+	auto _ret = self->takeChildren();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QTreeWidgetItem_Type(const QTreeWidgetItem* self) {
@@ -526,11 +535,11 @@ int QTreeWidget_IndexOfTopLevelItem(const QTreeWidget* self, QTreeWidgetItem* it
 }
 
 void QTreeWidget_InsertTopLevelItems(QTreeWidget* self, int index, const libqt_list items) {
-	self->insertTopLevelItems(index, *items);
+	self->insertTopLevelItems(index, QList<QTreeWidgetItem *>());
 }
 
 void QTreeWidget_AddTopLevelItems(QTreeWidget* self, const libqt_list items) {
-	self->addTopLevelItems(*items);
+	self->addTopLevelItems(QList<QTreeWidgetItem *>());
 }
 
 QTreeWidgetItem* QTreeWidget_HeaderItem(const QTreeWidget* self) {
@@ -542,7 +551,7 @@ void QTreeWidget_SetHeaderItem(QTreeWidget* self, QTreeWidgetItem* item) {
 }
 
 void QTreeWidget_SetHeaderLabels(QTreeWidget* self, const libqt_list labels) {
-	self->setHeaderLabels(*labels);
+	self->setHeaderLabels(QList<QString>());
 }
 
 void QTreeWidget_SetHeaderLabel(QTreeWidget* self, const libqt_string label) {
@@ -618,11 +627,27 @@ void QTreeWidget_RemoveItemWidget(QTreeWidget* self, QTreeWidgetItem* item, int 
 }
 
 libqt_list QTreeWidget_SelectedItems(const QTreeWidget* self) {
-	return self->selectedItems();
+	auto _ret = self->selectedItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QTreeWidget_FindItems(const QTreeWidget* self, const libqt_string text, int flags) {
-	return self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QTreeWidgetItem* QTreeWidget_ItemAbove(const QTreeWidget* self, const QTreeWidgetItem* item) {
@@ -810,7 +835,15 @@ bool QTreeWidget_IsPersistentEditorOpen2(const QTreeWidget* self, QTreeWidgetIte
 }
 
 libqt_list QTreeWidget_FindItems3(const QTreeWidget* self, const libqt_string text, int flags, int column) {
-	return self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags), column);
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags), column);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QModelIndex* QTreeWidget_IndexFromItem2(const QTreeWidget* self, const QTreeWidgetItem* item, int column) {
@@ -869,9 +902,37 @@ vqtreewidget->setQTreeWidget_Event_Callback(reinterpret_cast<VirtualQTreeWidget:
 libqt_list QTreeWidget_MimeTypes(const QTreeWidget* self) {
 	auto* vqtreewidget = dynamic_cast<const VirtualQTreeWidget*>(self);
 	if (vqtreewidget && vqtreewidget->isVirtualQTreeWidget) {
-	return vqtreewidget->mimeTypes();
+	auto _ret = vqtreewidget->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 	} else {
-	return self->QTreeWidget::mimeTypes();
+	auto _ret = self->QTreeWidget::mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -880,7 +941,21 @@ libqt_list QTreeWidget_QBaseMimeTypes(const QTreeWidget* self) {
 	auto* vqtreewidget = dynamic_cast<const VirtualQTreeWidget*>(self);
 	if (vqtreewidget && vqtreewidget->isVirtualQTreeWidget) {
 vqtreewidget->setQTreeWidget_MimeTypes_IsBase(true);
-	return vqtreewidget->mimeTypes();
+	auto _ret = vqtreewidget->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -896,9 +971,9 @@ vqtreewidget->setQTreeWidget_MimeTypes_Callback(reinterpret_cast<VirtualQTreeWid
 QMimeData* QTreeWidget_MimeData(const QTreeWidget* self, const libqt_list items) {
 	auto* vqtreewidget = dynamic_cast<const VirtualQTreeWidget*>(self);
 	if (vqtreewidget && vqtreewidget->isVirtualQTreeWidget) {
-	return vqtreewidget->mimeData(*items);
+	return vqtreewidget->mimeData(QList<QTreeWidgetItem *>());
 	} else {
-	return self->QTreeWidget::mimeData(*items);
+	return self->QTreeWidget::mimeData(QList<QTreeWidgetItem *>());
 }
 }
 
@@ -907,7 +982,7 @@ QMimeData* QTreeWidget_QBaseMimeData(const QTreeWidget* self, const libqt_list i
 	auto* vqtreewidget = dynamic_cast<const VirtualQTreeWidget*>(self);
 	if (vqtreewidget && vqtreewidget->isVirtualQTreeWidget) {
 vqtreewidget->setQTreeWidget_MimeData_IsBase(true);
-	return vqtreewidget->mimeData(*items);
+	return vqtreewidget->mimeData(QList<QTreeWidgetItem *>());
 }
 }
 

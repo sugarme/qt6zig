@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QThreadPool>
 #include <qfutureinterface.h>
 #include "libqfutureinterface.h"
@@ -35,14 +36,6 @@ void QFutureInterfaceBase_ReportFinished(QFutureInterfaceBase* self) {
 
 void QFutureInterfaceBase_ReportCanceled(QFutureInterfaceBase* self) {
 	self->reportCanceled();
-}
-
-void QFutureInterfaceBase_ReportException(QFutureInterfaceBase* self, const QException* e) {
-	self->reportException(*e);
-}
-
-void QFutureInterfaceBase_ReportException2(QFutureInterfaceBase* self, std::exception_ptr e) {
-	self->reportException(e);
 }
 
 void QFutureInterfaceBase_ReportResultsReady(QFutureInterfaceBase* self, int beginIndex, int endIndex) {
@@ -222,20 +215,6 @@ QMutex* QFutureInterfaceBase_Mutex(const QFutureInterfaceBase* self) {
 
 bool QFutureInterfaceBase_HasException(const QFutureInterfaceBase* self) {
 	return self->hasException();
-}
-
-QtPrivate__ExceptionStore* QFutureInterfaceBase_ExceptionStore(QFutureInterfaceBase* self) {
-	return new QtPrivate::ExceptionStore(self->exceptionStore());
-}
-
-QtPrivate__ResultStoreBase* QFutureInterfaceBase_ResultStoreBase(QFutureInterfaceBase* self) {
-	return new QtPrivate::ResultStoreBase(self->resultStoreBase());
-}
-
-const QtPrivate__ResultStoreBase* QFutureInterfaceBase_ResultStoreBase2(const QFutureInterfaceBase* self) {
-	const QtPrivate::ResultStoreBase& _ret = self->resultStoreBase();
-	// Cast returned reference into pointer
-	return const_cast<QtPrivate::ResultStoreBase*>(&_ret);
 }
 
 bool QFutureInterfaceBase_OperatorEqual(const QFutureInterfaceBase* self, const QFutureInterfaceBase* other) {

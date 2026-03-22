@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <qmimedatabase.h>
 #include "libqmimedatabase.h"
@@ -28,7 +29,16 @@ QMimeType* QMimeDatabase_MimeTypeForFile2(const QMimeDatabase* self, const QFile
 }
 
 libqt_list QMimeDatabase_MimeTypesForFileName(const QMimeDatabase* self, const libqt_string fileName) {
-	return self->mimeTypesForFileName(QString::fromUtf8(fileName.data, fileName.len));
+	auto _ret = self->mimeTypesForFileName(QString::fromUtf8(fileName.data, fileName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QMimeType* QMimeDatabase_MimeTypeForData(const QMimeDatabase* self, const libqt_string data) {
@@ -63,7 +73,16 @@ libqt_string QMimeDatabase_SuffixForFileName(const QMimeDatabase* self, const li
 }
 
 libqt_list QMimeDatabase_AllMimeTypes(const QMimeDatabase* self) {
-	return self->allMimeTypes();
+	auto _ret = self->allMimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QMimeType* QMimeDatabase_MimeTypeForFile22(const QMimeDatabase* self, const libqt_string fileName, int mode) {

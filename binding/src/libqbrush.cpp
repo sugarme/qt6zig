@@ -1,4 +1,3 @@
-#include <QAtomicInt>
 #include <QBrush>
 #include <QBrushData>
 #include <QColor>
@@ -16,19 +15,7 @@
 #include "libqbrush.h"
 #include "libqbrush.hxx"
 
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new(const QBrushDataPointerDeleter* other) {
-	 return new QBrushDataPointerDeleter(*other);
-}
-
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new2(QBrushDataPointerDeleter* other) {
-	 return new QBrushDataPointerDeleter(*other);
-}
-
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new3(const QBrushDataPointerDeleter* param1) {
-	 return new QBrushDataPointerDeleter(*param1);
-}
-
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new4() {
+QBrushDataPointerDeleter* QBrushDataPointerDeleter_new() {
 	 return new QBrushDataPointerDeleter();
 }
 
@@ -42,10 +29,6 @@ void QBrushDataPointerDeleter_MoveAssign(QBrushDataPointerDeleter* self, QBrushD
 
 void QBrushDataPointerDeleter_OperatorCall(const QBrushDataPointerDeleter* self, QBrushData* d) {
 	self->operator()(d);
-}
-
-void QBrushDataPointerDeleter_OperatorAssign(QBrushDataPointerDeleter* self, const QBrushDataPointerDeleter* param1) {
-	self->operator=(*param1);
 }
 
 void QBrushDataPointerDeleter_Delete(QBrushDataPointerDeleter* self) {
@@ -178,24 +161,12 @@ bool QBrush_IsDetached(const QBrush* self) {
 	return self->isDetached();
 }
 
-std::unique_ptr<QBrushData, QBrushDataPointerDeleter>* QBrush_DataPtr(QBrush* self) {
-	return self->data_ptr();
-}
-
 void QBrush_Delete(QBrush* self) {
     delete self;
 }
 
 QBrushData* QBrushData_new(const QBrushData* param1) {
 	 return new QBrushData(*param1);
-}
-
-QAtomicInt* QBrushData_Ref(const QBrushData* self) {
-	return new QAtomicInt(self->ref);
-}
-
-void QBrushData_SetRef(QBrushData* self, QAtomicInt* ref) {
-	self->ref;
 }
 
 int QBrushData_Style(const QBrushData* self) {
@@ -251,11 +222,20 @@ void QGradient_SetColorAt(QGradient* self, double pos, const QColor* color) {
 }
 
 void QGradient_SetStops(QGradient* self, const libqt_list stops) {
-	self->setStops(*stops);
+	self->setStops(QList<QPair<double, QColor>>());
 }
 
 libqt_list QGradient_Stops(const QGradient* self) {
-	return self->stops();
+	auto _ret = self->stops();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QGradient_CoordinateMode(const QGradient* self) {

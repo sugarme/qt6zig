@@ -29,14 +29,6 @@ return  _ret;
         return qtc.QChronoTimer_IsActive(@ptrCast(self));
     }
 
-    pub fn BindableActive(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QChronoTimer_BindableActive(@ptrCast(self));
-    }
-
-    pub fn Id(self: ?*anyopaque, ) i32 {
-        return qtc.QChronoTimer_Id(@ptrCast(self));
-    }
-
     pub fn SetTimerType(self: ?*anyopaque, atype: i32) void {
         qtc.QChronoTimer_SetTimerType(@ptrCast(self), @intCast(atype));
     }
@@ -45,20 +37,12 @@ return  _ret;
         return qtc.QChronoTimer_TimerType(@ptrCast(self));
     }
 
-    pub fn BindableTimerType(self: ?*anyopaque, ) QBindable<Qt::TimerType> {
-        return qtc.QChronoTimer_BindableTimerType(@ptrCast(self));
-    }
-
     pub fn SetSingleShot(self: ?*anyopaque, singleShot: bool) void {
         qtc.QChronoTimer_SetSingleShot(@ptrCast(self), singleShot);
     }
 
     pub fn IsSingleShot(self: ?*anyopaque, ) bool {
         return qtc.QChronoTimer_IsSingleShot(@ptrCast(self));
-    }
-
-    pub fn BindableSingleShot(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QChronoTimer_BindableSingleShot(@ptrCast(self));
     }
 
     pub fn Start(self: ?*anyopaque, ) void {

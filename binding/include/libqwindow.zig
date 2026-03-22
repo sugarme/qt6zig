@@ -349,10 +349,6 @@ return  _ret;
         qtc.QWindow_Destroy(@ptrCast(self));
     }
 
-    pub fn Handle(self: ?*anyopaque, ) QPlatformWindow {
-        return @ptrCast(qtc.QWindow_Handle(@ptrCast(self)));
-    }
-
     pub fn SetKeyboardGrabEnabled(self: ?*anyopaque, grab: bool) bool {
         return qtc.QWindow_SetKeyboardGrabEnabled(@ptrCast(self), grab);
     }
@@ -427,14 +423,6 @@ return  _ret;
 
     pub fn FromWinId(id: usize) QtC.QWindow {
         return qtc.QWindow_FromWinId(id);
-    }
-
-    pub fn SetVulkanInstance(self: ?*anyopaque, instance: *QVulkanInstance) void {
-        qtc.QWindow_SetVulkanInstance(@ptrCast(self), @ptrCast(instance));
-    }
-
-    pub fn VulkanInstance(self: ?*anyopaque, ) QVulkanInstance {
-        return @ptrCast(qtc.QWindow_VulkanInstance(@ptrCast(self)));
     }
 
     pub fn ResolveInterface(self: ?*anyopaque, name: []const u8, revision: i32) ?*anyopaque {

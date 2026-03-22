@@ -34,32 +34,14 @@ return qtc.QTextBoundaryFinder_new3(@intCast(typeVal), stringVal_str);
 
 
     /// New5 constructs a new QTextBoundaryFinder object.
-    pub fn New5(typeVal: i32, str: []const u8) QtC.QTextBoundaryFinder {
-        return qtc.QTextBoundaryFinder_new5(@intCast(typeVal), @ptrCast(str));
+    pub fn New5(typeVal: i32, chars: ?*anyopaque, length: i64, buffer: *u8) QtC.QTextBoundaryFinder {
+        return qtc.QTextBoundaryFinder_new5(@intCast(typeVal), @ptrCast(chars), length, @ptrCast(buffer));
     }
 
 
     /// New6 constructs a new QTextBoundaryFinder object.
-    pub fn New6(typeVal: i32, chars: ?*anyopaque, length: i64, buffer: *u8) QtC.QTextBoundaryFinder {
-        return qtc.QTextBoundaryFinder_new6(@intCast(typeVal), @ptrCast(chars), length, @ptrCast(buffer));
-    }
-
-
-    /// New7 constructs a new QTextBoundaryFinder object.
-    pub fn New7(typeVal: i32, chars: ?*anyopaque, length: i64, buffer: *u8, bufferSize: i64) QtC.QTextBoundaryFinder {
-        return qtc.QTextBoundaryFinder_new7(@intCast(typeVal), @ptrCast(chars), length, @ptrCast(buffer), bufferSize);
-    }
-
-
-    /// New8 constructs a new QTextBoundaryFinder object.
-    pub fn New8(typeVal: i32, str: []const u8, buffer: *u8) QtC.QTextBoundaryFinder {
-        return qtc.QTextBoundaryFinder_new8(@intCast(typeVal), @ptrCast(str), @ptrCast(buffer));
-    }
-
-
-    /// New9 constructs a new QTextBoundaryFinder object.
-    pub fn New9(typeVal: i32, str: []const u8, buffer: *u8, bufferSize: i64) QtC.QTextBoundaryFinder {
-        return qtc.QTextBoundaryFinder_new9(@intCast(typeVal), @ptrCast(str), @ptrCast(buffer), bufferSize);
+    pub fn New6(typeVal: i32, chars: ?*anyopaque, length: i64, buffer: *u8, bufferSize: i64) QtC.QTextBoundaryFinder {
+        return qtc.QTextBoundaryFinder_new6(@intCast(typeVal), @ptrCast(chars), length, @ptrCast(buffer), bufferSize);
     }
 
 

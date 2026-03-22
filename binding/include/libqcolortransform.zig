@@ -37,14 +37,6 @@ pub const qcolortransform = struct {
         return qtc.QColorTransform_Map2(@ptrCast(self), @ptrCast(rgba64));
     }
 
-    pub fn Map3(self: ?*anyopaque, rgbafp16: QRgbaFloat<qfloat16>) QRgbaFloat<qfloat16> {
-        return qtc.QColorTransform_Map3(@ptrCast(self), rgbafp16);
-    }
-
-    pub fn Map4(self: ?*anyopaque, rgbafp32: QRgbaFloat<float>) QRgbaFloat<float> {
-        return qtc.QColorTransform_Map4(@ptrCast(self), rgbafp32);
-    }
-
     pub fn Map5(self: ?*anyopaque, color: ?*anyopaque) QtC.QColor {
         return qtc.QColorTransform_Map5(@ptrCast(self), @ptrCast(color));
     }

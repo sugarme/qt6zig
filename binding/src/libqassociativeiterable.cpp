@@ -21,10 +21,6 @@ QVariantPointer<QAssociativeIterator> QAssociativeIterator_OperatorMinusGreater(
 	return self->operator->();
 }
 
-void QAssociativeIterator_OperatorAssign(QAssociativeIterator* self, const QAssociativeIterator* param1) {
-	self->operator=(*param1);
-}
-
 void QAssociativeIterator_Delete(QAssociativeIterator* self) {
     delete self;
 }
@@ -41,40 +37,20 @@ QVariant* QAssociativeConstIterator_OperatorMultiply(const QAssociativeConstIter
 	return new QVariant(self->operator*());
 }
 
-QVariantConstPointer* QAssociativeConstIterator_OperatorMinusGreater(const QAssociativeConstIterator* self) {
-	return new QVariantConstPointer(self->operator->());
-}
-
-void QAssociativeConstIterator_OperatorAssign(QAssociativeConstIterator* self, const QAssociativeConstIterator* param1) {
-	self->operator=(*param1);
-}
-
 void QAssociativeConstIterator_Delete(QAssociativeConstIterator* self) {
     delete self;
 }
 
-QAssociativeIterable* QAssociativeIterable_new(const QAssociativeIterable* other) {
-	 return new QAssociativeIterable(*other);
-}
-
-QAssociativeIterable* QAssociativeIterable_new2(QAssociativeIterable* other) {
-	 return new QAssociativeIterable(*other);
-}
-
-QAssociativeIterable* QAssociativeIterable_new3() {
+QAssociativeIterable* QAssociativeIterable_new() {
 	 return new QAssociativeIterable();
 }
 
-QAssociativeIterable* QAssociativeIterable_new4(const QMetaAssociation* metaAssociation, const QMetaType* metaType, void* iterable) {
+QAssociativeIterable* QAssociativeIterable_new2(const QMetaAssociation* metaAssociation, const QMetaType* metaType, void* iterable) {
 	 return new QAssociativeIterable(*metaAssociation, *metaType, iterable);
 }
 
-QAssociativeIterable* QAssociativeIterable_new5(const QMetaAssociation* metaAssociation, const QMetaType* metaType, const void* iterable) {
+QAssociativeIterable* QAssociativeIterable_new3(const QMetaAssociation* metaAssociation, const QMetaType* metaType, const void* iterable) {
 	 return new QAssociativeIterable(*metaAssociation, *metaType, iterable);
-}
-
-QAssociativeIterable* QAssociativeIterable_new6(const QAssociativeIterable* param1) {
-	 return new QAssociativeIterable(*param1);
 }
 
 void QAssociativeIterable_CopyAssign(QAssociativeIterable* self, QAssociativeIterable* other) {
@@ -139,10 +115,6 @@ QVariant* QAssociativeIterable_Value(const QAssociativeIterable* self, const QVa
 
 void QAssociativeIterable_SetValue(QAssociativeIterable* self, const QVariant* key, const QVariant* mapped) {
 	self->setValue(*key, *mapped);
-}
-
-void QAssociativeIterable_OperatorAssign(QAssociativeIterable* self, const QAssociativeIterable* param1) {
-	self->operator=(*param1);
 }
 
 void QAssociativeIterable_Delete(QAssociativeIterable* self) {

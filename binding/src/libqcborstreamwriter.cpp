@@ -1,7 +1,6 @@
 #include <QByteArray>
 #include <QCborStreamWriter>
 #include <QIODevice>
-#include <QStringView>
 #include <qcborstreamwriter.h>
 #include "libqcborstreamwriter.h"
 #include "libqcborstreamwriter.hxx"
@@ -38,14 +37,6 @@ void QCborStreamWriter_Append4(QCborStreamWriter* self, const libqt_string ba) {
 	self->append(QByteArray(ba.data, ba.len));
 }
 
-void QCborStreamWriter_Append5(QCborStreamWriter* self, QLatin1StringView str) {
-	self->append(str);
-}
-
-void QCborStreamWriter_Append6(QCborStreamWriter* self, QStringView* str) {
-	self->append(*str);
-}
-
 void QCborStreamWriter_Append7(QCborStreamWriter* self, quint64 tag) {
 	self->append(static_cast<QCborTag>(tag));
 }
@@ -56,10 +47,6 @@ void QCborStreamWriter_Append8(QCborStreamWriter* self, int tag) {
 
 void QCborStreamWriter_Append9(QCborStreamWriter* self, quint8 st) {
 	self->append(static_cast<QCborSimpleType>(st));
-}
-
-void QCborStreamWriter_Append11(QCborStreamWriter* self, qfloat16* f) {
-	self->append(*f);
 }
 
 void QCborStreamWriter_Append12(QCborStreamWriter* self, float f) {

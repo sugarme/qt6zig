@@ -32,7 +32,6 @@ QPauseAnimation* QPauseAnimation_new4(int msecs, QObject* parent);
 libqt_string QPauseAnimation_Tr(const char* s);
 int QPauseAnimation_Duration(const QPauseAnimation* self);
 void QPauseAnimation_SetDuration(QPauseAnimation* self, int msecs);
-QBindable<int> QPauseAnimation_BindableDuration(QPauseAnimation* self);
 bool QPauseAnimation_Event(QPauseAnimation* self, QEvent* e);
 void QPauseAnimation_UpdateCurrentTime(QPauseAnimation* self, int param1);
 libqt_string QPauseAnimation_Tr2(const char* s, const char* c);

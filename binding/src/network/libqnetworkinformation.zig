@@ -49,16 +49,8 @@ return  _ret;
         return qtc.QNetworkInformation_LoadDefaultBackend();
     }
 
-    pub fn LoadBackendByName(backend: []const u8) bool {
-        return qtc.QNetworkInformation_LoadBackendByName(@ptrCast(backend));
-    }
-
     pub fn LoadBackendByFeatures(features: i32) bool {
         return qtc.QNetworkInformation_LoadBackendByFeatures(@intCast(features));
-    }
-
-    pub fn Load(backend: []const u8) bool {
-        return qtc.QNetworkInformation_Load(@ptrCast(backend));
     }
 
     pub fn Load2(features: i32) bool {

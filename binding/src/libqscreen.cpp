@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransform>
 #include <qscreen.h>
 #include "libqscreen.h"
@@ -22,10 +23,6 @@ libqt_string QScreen_Tr(const char* s) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-QPlatformScreen* QScreen_Handle(const QScreen* self) {
-	return self->handle();
 }
 
 libqt_string QScreen_Name(const QScreen* self) {
@@ -125,7 +122,15 @@ QRect* QScreen_AvailableGeometry(const QScreen* self) {
 }
 
 libqt_list QScreen_VirtualSiblings(const QScreen* self) {
-	return self->virtualSiblings();
+	auto _ret = self->virtualSiblings();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QScreen* QScreen_VirtualSiblingAt(QScreen* self, QPoint* point) {

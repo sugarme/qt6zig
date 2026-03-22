@@ -84,9 +84,7 @@ bool QOpenGLFramebufferObjectFormat_Mipmap(const QOpenGLFramebufferObjectFormat*
 void QOpenGLFramebufferObjectFormat_SetAttachment(QOpenGLFramebufferObjectFormat* self, int attachment);
 int QOpenGLFramebufferObjectFormat_Attachment(const QOpenGLFramebufferObjectFormat* self);
 void QOpenGLFramebufferObjectFormat_SetTextureTarget(QOpenGLFramebufferObjectFormat* self, uint32_t target);
-GL QOpenGLFramebufferObjectFormat_TextureTarget(const QOpenGLFramebufferObjectFormat* self);
 void QOpenGLFramebufferObjectFormat_SetInternalTextureFormat(QOpenGLFramebufferObjectFormat* self, uint32_t internalTextureFormat);
-GL QOpenGLFramebufferObjectFormat_InternalTextureFormat(const QOpenGLFramebufferObjectFormat* self);
 bool QOpenGLFramebufferObjectFormat_OperatorEqual(const QOpenGLFramebufferObjectFormat* self, const QOpenGLFramebufferObjectFormat* other);
 bool QOpenGLFramebufferObjectFormat_OperatorNotEqual(const QOpenGLFramebufferObjectFormat* self, const QOpenGLFramebufferObjectFormat* other);
 void QOpenGLFramebufferObjectFormat_Delete(QOpenGLFramebufferObjectFormat* self);

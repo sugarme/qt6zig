@@ -6,7 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <QTextStream>
 #include <QTime>
 #include <QVariant>
@@ -22,27 +22,23 @@ QLocale* QLocale_new2(const libqt_string name) {
 	 return new QLocale(QString::fromUtf8(name.data, name.len));
 }
 
-QLocale* QLocale_new3(QStringView* name) {
-	 return new QLocale(*name);
-}
-
-QLocale* QLocale_new4(ushort language, ushort territory) {
+QLocale* QLocale_new3(ushort language, ushort territory) {
 	 return new QLocale(static_cast<QLocale::Language>(language), static_cast<QLocale::Country>(territory));
 }
 
-QLocale* QLocale_new5(ushort language) {
+QLocale* QLocale_new4(ushort language) {
 	 return new QLocale(static_cast<QLocale::Language>(language));
 }
 
-QLocale* QLocale_new6(const QLocale* other) {
+QLocale* QLocale_new5(const QLocale* other) {
 	 return new QLocale(*other);
 }
 
-QLocale* QLocale_new7(ushort language, ushort script) {
+QLocale* QLocale_new6(ushort language, ushort script) {
 	 return new QLocale(static_cast<QLocale::Language>(language), static_cast<QLocale::Script>(script));
 }
 
-QLocale* QLocale_new8(ushort language, ushort script, ushort territory) {
+QLocale* QLocale_new7(ushort language, ushort script, ushort territory) {
 	 return new QLocale(static_cast<QLocale::Language>(language), static_cast<QLocale::Script>(script), static_cast<QLocale::Country>(territory));
 }
 
@@ -163,46 +159,6 @@ float QLocale_ToFloat(const QLocale* self, const libqt_string s) {
 
 double QLocale_ToDouble(const QLocale* self, const libqt_string s) {
 	return self->toDouble(QString::fromUtf8(s.data, s.len));
-}
-
-int16_t QLocale_ToShort2(const QLocale* self, QStringView* s) {
-	return self->toShort(*s);
-}
-
-uint16_t QLocale_ToUShort2(const QLocale* self, QStringView* s) {
-	return self->toUShort(*s);
-}
-
-int QLocale_ToInt2(const QLocale* self, QStringView* s) {
-	return self->toInt(*s);
-}
-
-unsigned int QLocale_ToUInt2(const QLocale* self, QStringView* s) {
-	return self->toUInt(*s);
-}
-
-long QLocale_ToLong2(const QLocale* self, QStringView* s) {
-	return self->toLong(*s);
-}
-
-unsigned long QLocale_ToULong2(const QLocale* self, QStringView* s) {
-	return self->toULong(*s);
-}
-
-long long QLocale_ToLongLong2(const QLocale* self, QStringView* s) {
-	return self->toLongLong(*s);
-}
-
-unsigned long long QLocale_ToULongLong2(const QLocale* self, QStringView* s) {
-	return self->toULongLong(*s);
-}
-
-float QLocale_ToFloat2(const QLocale* self, QStringView* s) {
-	return self->toFloat(*s);
-}
-
-double QLocale_ToDouble2(const QLocale* self, QStringView* s) {
-	return self->toDouble(*s);
 }
 
 libqt_string QLocale_ToString(const QLocale* self, long long i) {
@@ -348,39 +304,6 @@ libqt_string QLocale_ToString13(const QLocale* self, const QDateTime* dateTime, 
 	return _str;
 }
 
-libqt_string QLocale_ToString14(const QLocale* self, QDate* date, QStringView* format) {
-	QString _ret = self->toString(*date, *format);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QLocale_ToString15(const QLocale* self, QTime* time, QStringView* format) {
-	QString _ret = self->toString(*time, *format);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QLocale_ToString16(const QLocale* self, const QDateTime* dateTime, QStringView* format) {
-	QString _ret = self->toString(*dateTime, *format);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QLocale_ToString17(const QLocale* self, QDate* date) {
 	QString _ret = self->toString(*date);
 	QByteArray _b = _ret.toUtf8();
@@ -414,17 +337,6 @@ libqt_string QLocale_ToString19(const QLocale* self, const QDateTime* dateTime) 
 	return _str;
 }
 
-libqt_string QLocale_ToString20(const QLocale* self, QDate* date, QStringView* format, QCalendar* cal) {
-	QString _ret = self->toString(*date, *format, *cal);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QLocale_ToString21(const QLocale* self, QDate* date, int format, QCalendar* cal) {
 	QString _ret = self->toString(*date, static_cast<QTextFormat::FormatType>(format), *cal);
 	QByteArray _b = _ret.toUtf8();
@@ -438,17 +350,6 @@ libqt_string QLocale_ToString21(const QLocale* self, QDate* date, int format, QC
 
 libqt_string QLocale_ToString22(const QLocale* self, const QDateTime* dateTime, int format, QCalendar* cal) {
 	QString _ret = self->toString(*dateTime, static_cast<QTextFormat::FormatType>(format), *cal);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QLocale_ToString23(const QLocale* self, const QDateTime* dateTime, QStringView* format, QCalendar* cal) {
-	QString _ret = self->toString(*dateTime, *format, *cal);
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -657,7 +558,16 @@ int QLocale_FirstDayOfWeek(const QLocale* self) {
 }
 
 libqt_list QLocale_Weekdays(const QLocale* self) {
-	return self->weekdays();
+	auto _ret = self->weekdays();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QLocale_AmText(const QLocale* self) {
@@ -827,7 +737,21 @@ libqt_string QLocale_FormattedDataSize(const QLocale* self, long long bytes) {
 }
 
 libqt_list QLocale_UiLanguages(const QLocale* self) {
-	return self->uiLanguages();
+	auto _ret = self->uiLanguages();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QLocale_LanguageToCode(ushort language) {
@@ -841,10 +765,6 @@ libqt_string QLocale_LanguageToCode(ushort language) {
 	return _str;
 }
 
-ushort QLocale_CodeToLanguage(QStringView* languageCode) {
-	return QLocale::codeToLanguage(*languageCode);
-}
-
 libqt_string QLocale_TerritoryToCode(ushort territory) {
 	QString _ret = QLocale::territoryToCode(static_cast<QLocale::Country>(territory));
 	QByteArray _b = _ret.toUtf8();
@@ -854,10 +774,6 @@ libqt_string QLocale_TerritoryToCode(ushort territory) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-ushort QLocale_CodeToTerritory(QStringView* territoryCode) {
-	return QLocale::codeToTerritory(*territoryCode);
 }
 
 libqt_string QLocale_CountryToCode(ushort country) {
@@ -871,10 +787,6 @@ libqt_string QLocale_CountryToCode(ushort country) {
 	return _str;
 }
 
-ushort QLocale_CodeToCountry(QStringView* countryCode) {
-	return QLocale::codeToCountry(*countryCode);
-}
-
 libqt_string QLocale_ScriptToCode(ushort script) {
 	QString _ret = QLocale::scriptToCode(static_cast<QLocale::Script>(script));
 	QByteArray _b = _ret.toUtf8();
@@ -884,10 +796,6 @@ libqt_string QLocale_ScriptToCode(ushort script) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-ushort QLocale_CodeToScript(QStringView* scriptCode) {
-	return QLocale::codeToScript(*scriptCode);
 }
 
 libqt_string QLocale_LanguageToString(ushort language) {
@@ -947,11 +855,29 @@ QLocale* QLocale_System() {
 }
 
 libqt_list QLocale_MatchingLocales(ushort language, ushort script, ushort territory) {
-	return QLocale::matchingLocales(static_cast<QLocale::Language>(language), static_cast<QLocale::Script>(script), static_cast<QLocale::Country>(territory));
+	auto _ret = QLocale::matchingLocales(static_cast<QLocale::Language>(language), static_cast<QLocale::Script>(script), static_cast<QLocale::Country>(territory));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QLocale_CountriesForLanguage(ushort lang) {
-	return QLocale::countriesForLanguage(static_cast<QLocale::Language>(lang));
+	auto _ret = QLocale::countriesForLanguage(static_cast<QLocale::Language>(lang));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QLocale_SetNumberOptions(QLocale* self, int options) {
@@ -973,19 +899,8 @@ libqt_string QLocale_QuoteString(const QLocale* self, const libqt_string str) {
 	return _str;
 }
 
-libqt_string QLocale_QuoteString2(const QLocale* self, QStringView* str) {
-	QString _ret = self->quoteString(*str);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
 libqt_string QLocale_CreateSeparatedList(const QLocale* self, const libqt_list strl) {
-	QString _ret = self->createSeparatedList(*strl);
+	QString _ret = self->createSeparatedList(QList<QString>());
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();
@@ -1055,46 +970,6 @@ float QLocale_ToFloat22(const QLocale* self, const libqt_string s, bool* ok) {
 
 double QLocale_ToDouble22(const QLocale* self, const libqt_string s, bool* ok) {
 	return self->toDouble(QString::fromUtf8(s.data, s.len), ok);
-}
-
-int16_t QLocale_ToShort23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toShort(*s, ok);
-}
-
-uint16_t QLocale_ToUShort23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toUShort(*s, ok);
-}
-
-int QLocale_ToInt23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toInt(*s, ok);
-}
-
-unsigned int QLocale_ToUInt23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toUInt(*s, ok);
-}
-
-long QLocale_ToLong23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toLong(*s, ok);
-}
-
-unsigned long QLocale_ToULong23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toULong(*s, ok);
-}
-
-long long QLocale_ToLongLong23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toLongLong(*s, ok);
-}
-
-unsigned long long QLocale_ToULongLong23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toULongLong(*s, ok);
-}
-
-float QLocale_ToFloat23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toFloat(*s, ok);
-}
-
-double QLocale_ToDouble23(const QLocale* self, QStringView* s, bool* ok) {
-	return self->toDouble(*s, ok);
 }
 
 libqt_string QLocale_ToString24(const QLocale* self, double f, char format) {
@@ -1439,7 +1314,21 @@ libqt_string QLocale_FormattedDataSize3(const QLocale* self, long long bytes, in
 }
 
 libqt_list QLocale_UiLanguages1(const QLocale* self, char separator) {
-	return self->uiLanguages(static_cast<QLocale::TagSeparator>(separator));
+	auto _ret = self->uiLanguages(static_cast<QLocale::TagSeparator>(separator));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QLocale_LanguageToCode2(ushort language, int codeTypes) {
@@ -1453,23 +1342,8 @@ libqt_string QLocale_LanguageToCode2(ushort language, int codeTypes) {
 	return _str;
 }
 
-ushort QLocale_CodeToLanguage2(QStringView* languageCode, int codeTypes) {
-	return QLocale::codeToLanguage(*languageCode, static_cast<QFlags<QLocale::LanguageCodeType>>(codeTypes));
-}
-
 libqt_string QLocale_QuoteString22(const QLocale* self, const libqt_string str, int style) {
 	QString _ret = self->quoteString(QString::fromUtf8(str.data, str.len), static_cast<QLocale::QuotationStyle>(style));
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QLocale_QuoteString23(const QLocale* self, QStringView* str, int style) {
-	QString _ret = self->quoteString(*str, static_cast<QLocale::QuotationStyle>(style));
 	QByteArray _b = _ret.toUtf8();
 	libqt_string _str;
 	_str.len = _b.length();

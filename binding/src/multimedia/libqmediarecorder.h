@@ -67,7 +67,6 @@ void QMediaRecorder_AddMetaData(QMediaRecorder* self, const QMediaMetaData* meta
 bool QMediaRecorder_AutoStop(const QMediaRecorder* self);
 void QMediaRecorder_SetAutoStop(QMediaRecorder* self, bool autoStop);
 QMediaCaptureSession* QMediaRecorder_CaptureSession(const QMediaRecorder* self);
-QPlatformMediaRecorder* QMediaRecorder_PlatformRecoder(const QMediaRecorder* self);
 void QMediaRecorder_Record(QMediaRecorder* self);
 void QMediaRecorder_Pause(QMediaRecorder* self);
 void QMediaRecorder_Stop(QMediaRecorder* self);

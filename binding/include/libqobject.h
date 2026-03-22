@@ -25,8 +25,6 @@ extern "C" {
 typedef Qt::Disambiguated_t Disambiguated_t;
 #endif
 #else
-typedef struct QAnyStringView QAnyStringView;
-typedef struct QAtomicInt QAtomicInt;
 typedef struct QBindingStorage QBindingStorage;
 typedef struct QChildEvent QChildEvent;
 typedef struct QEvent QEvent;
@@ -79,9 +77,6 @@ unsigned int QObjectData_ReceiveParentEvents(const QObjectData* self);
 void QObjectData_SetReceiveParentEvents(QObjectData* self, unsigned int receiveParentEvents);
 unsigned int QObjectData_Unused(const QObjectData* self);
 void QObjectData_SetUnused(QObjectData* self, unsigned int unused);
-QAtomicInt* QObjectData_PostedEvents(const QObjectData* self);
-void QObjectData_SetPostedEvents(QObjectData* self, QAtomicInt* postedEvents);
-void QObjectData_SetMetaObject(QObjectData* self, QDynamicMetaObjectData* metaObject);
 QBindingStorage* QObjectData_BindingStorage(const QObjectData* self);
 void QObjectData_SetBindingStorage(QObjectData* self, QBindingStorage* bindingStorage);
 QMetaObject* QObjectData_DynamicMetaObject(const QObjectData* self);
@@ -93,8 +88,6 @@ libqt_string QObject_Tr(const char* s);
 bool QObject_Event(QObject* self, QEvent* event);
 bool QObject_EventFilter(QObject* self, QObject* watched, QEvent* event);
 libqt_string QObject_ObjectName(const QObject* self);
-void QObject_SetObjectName(QObject* self, libqt_string name);
-QBindable<QString> QObject_BindableObjectName(QObject* self);
 bool QObject_IsWidgetType(const QObject* self);
 bool QObject_IsWindowType(const QObject* self);
 bool QObject_IsQuickItemType(const QObject* self);
@@ -104,7 +97,6 @@ QThread* QObject_Thread(const QObject* self);
 bool QObject_MoveToThread(QObject* self, QThread* thread);
 int QObject_StartTimer(QObject* self, int interval);
 void QObject_KillTimer(QObject* self, int id);
-void QObject_KillTimer2(QObject* self, int id);
 libqt_list QObject_Children(const QObject* self);
 void QObject_SetParent(QObject* self, QObject* parent);
 void QObject_InstallEventFilter(QObject* self, QObject* filterObj);

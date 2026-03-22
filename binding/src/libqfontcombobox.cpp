@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qfontcombobox.h>
 #include "libqfontcombobox.h"

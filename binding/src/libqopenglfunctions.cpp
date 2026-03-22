@@ -120,10 +120,6 @@ void QOpenGLFunctions_GlGetBooleanv(QOpenGLFunctions* self, uint32_t pname, unsi
 	self->glGetBooleanv(pname, params);
 }
 
-GL QOpenGLFunctions_GlGetError(QOpenGLFunctions* self) {
-	return self->glGetError();
-}
-
 void QOpenGLFunctions_GlGetFloatv(QOpenGLFunctions* self, uint32_t pname, float* params) {
 	self->glGetFloatv(pname, params);
 }
@@ -264,10 +260,6 @@ void QOpenGLFunctions_GlBufferSubData(QOpenGLFunctions* self, uint32_t target, p
 	self->glBufferSubData(target, offset, size, data);
 }
 
-GL QOpenGLFunctions_GlCheckFramebufferStatus(QOpenGLFunctions* self, uint32_t target) {
-	return self->glCheckFramebufferStatus(target);
-}
-
 void QOpenGLFunctions_GlClearDepthf(QOpenGLFunctions* self, GLclampf depth) {
 	self->glClearDepthf(depth);
 }
@@ -350,14 +342,6 @@ void QOpenGLFunctions_GlGenFramebuffers(QOpenGLFunctions* self, int32_t n, uint3
 
 void QOpenGLFunctions_GlGenRenderbuffers(QOpenGLFunctions* self, int32_t n, uint32_t* renderbuffers) {
 	self->glGenRenderbuffers(n, renderbuffers);
-}
-
-void QOpenGLFunctions_GlGetActiveAttrib(QOpenGLFunctions* self, uint32_t program, uint32_t index, int32_t bufsize, int32_t* length, int32_t* size, GL* typeVal, char* name) {
-	self->glGetActiveAttrib(program, index, bufsize, length, size, typeVal, name);
-}
-
-void QOpenGLFunctions_GlGetActiveUniform(QOpenGLFunctions* self, uint32_t program, uint32_t index, int32_t bufsize, int32_t* length, int32_t* size, GL* typeVal, char* name) {
-	self->glGetActiveUniform(program, index, bufsize, length, size, typeVal, name);
 }
 
 void QOpenGLFunctions_GlGetAttachedShaders(QOpenGLFunctions* self, uint32_t program, int32_t maxcount, int32_t* count, uint32_t* shaders) {

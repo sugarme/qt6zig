@@ -1,11 +1,10 @@
-#include <QAnyStringView>
 #include <QEvent>
 #include <QObject>
 #include <QSettings>
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QVariant>
+#include <type_traits>
 #include <qsettings.h>
 #include "libqsettings.h"
 #include "libqsettings.hxx"
@@ -101,10 +100,6 @@ void QSettings_SetAtomicSyncRequired(QSettings* self, bool enable) {
 	self->setAtomicSyncRequired(enable);
 }
 
-void QSettings_BeginGroup(QSettings* self, libqt_string prefix) {
-	self->beginGroup(QAnyStringView(QString::fromUtf8(prefix.data, prefix.len)));
-}
-
 void QSettings_EndGroup(QSettings* self) {
 	self->endGroup();
 }
@@ -120,14 +115,6 @@ libqt_string QSettings_Group(const QSettings* self) {
 	return _str;
 }
 
-int QSettings_BeginReadArray(QSettings* self, libqt_string prefix) {
-	return self->beginReadArray(QAnyStringView(QString::fromUtf8(prefix.data, prefix.len)));
-}
-
-void QSettings_BeginWriteArray(QSettings* self, libqt_string prefix) {
-	self->beginWriteArray(QAnyStringView(QString::fromUtf8(prefix.data, prefix.len)));
-}
-
 void QSettings_EndArray(QSettings* self) {
 	self->endArray();
 }
@@ -137,39 +124,61 @@ void QSettings_SetArrayIndex(QSettings* self, int i) {
 }
 
 libqt_list QSettings_AllKeys(const QSettings* self) {
-	return self->allKeys();
+	auto _ret = self->allKeys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QSettings_ChildKeys(const QSettings* self) {
-	return self->childKeys();
+	auto _ret = self->childKeys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QSettings_ChildGroups(const QSettings* self) {
-	return self->childGroups();
+	auto _ret = self->childGroups();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 bool QSettings_IsWritable(const QSettings* self) {
 	return self->isWritable();
-}
-
-void QSettings_SetValue(QSettings* self, libqt_string key, const QVariant* value) {
-	self->setValue(QAnyStringView(QString::fromUtf8(key.data, key.len)), *value);
-}
-
-QVariant* QSettings_Value(const QSettings* self, libqt_string key, const QVariant* defaultValue) {
-	return new QVariant(self->value(QAnyStringView(QString::fromUtf8(key.data, key.len)), *defaultValue));
-}
-
-QVariant* QSettings_Value2(const QSettings* self, libqt_string key) {
-	return new QVariant(self->value(QAnyStringView(QString::fromUtf8(key.data, key.len))));
-}
-
-void QSettings_Remove(QSettings* self, libqt_string key) {
-	self->remove(QAnyStringView(QString::fromUtf8(key.data, key.len)));
-}
-
-bool QSettings_Contains(const QSettings* self, libqt_string key) {
-	return self->contains(QAnyStringView(QString::fromUtf8(key.data, key.len)));
 }
 
 void QSettings_SetFallbacksEnabled(QSettings* self, bool b) {
@@ -253,10 +262,6 @@ libqt_string QSettings_Tr3(const char* s, const char* c, int n) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-void QSettings_BeginWriteArray2(QSettings* self, libqt_string prefix, int size) {
-	self->beginWriteArray(QAnyStringView(QString::fromUtf8(prefix.data, prefix.len)), size);
 }
 
 // Derived class handler implementation

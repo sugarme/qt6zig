@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qmovie.h>
 #include "libqmovie.h"
 #include "libqmovie.hxx"
@@ -58,7 +59,16 @@ libqt_string QMovie_Tr(const char* s) {
 }
 
 libqt_list QMovie_SupportedFormats() {
-	return QMovie::supportedFormats();
+	auto _ret = QMovie::supportedFormats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QMovie_SetDevice(QMovie* self, QIODevice* device) {
@@ -165,10 +175,6 @@ int QMovie_Speed(const QMovie* self) {
 	return self->speed();
 }
 
-QBindable<int> QMovie_BindableSpeed(QMovie* self) {
-	return self->bindableSpeed();
-}
-
 QSize* QMovie_ScaledSize(QMovie* self) {
 	return new QSize(self->scaledSize());
 }
@@ -183,10 +189,6 @@ int QMovie_CacheMode(const QMovie* self) {
 
 void QMovie_SetCacheMode(QMovie* self, int mode) {
 	self->setCacheMode(static_cast<QFlags<QGraphicsView::CacheModeFlag>>(mode));
-}
-
-QBindable<CacheMode> QMovie_BindableCacheMode(QMovie* self) {
-	return self->bindableCacheMode();
 }
 
 void QMovie_Started(QMovie* self) {

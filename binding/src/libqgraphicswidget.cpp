@@ -24,6 +24,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyle>
 #include <QStyleOption>
 #include <QStyleOptionGraphicsItem>
@@ -240,11 +241,11 @@ void QGraphicsWidget_AddAction(QGraphicsWidget* self, QAction* action) {
 }
 
 void QGraphicsWidget_AddActions(QGraphicsWidget* self, const libqt_list actions) {
-	self->addActions(*actions);
+	self->addActions(QList<QAction *>());
 }
 
 void QGraphicsWidget_InsertActions(QGraphicsWidget* self, QAction* before, const libqt_list actions) {
-	self->insertActions(before, *actions);
+	self->insertActions(before, QList<QAction *>());
 }
 
 void QGraphicsWidget_InsertAction(QGraphicsWidget* self, QAction* before, QAction* action) {
@@ -256,7 +257,15 @@ void QGraphicsWidget_RemoveAction(QGraphicsWidget* self, QAction* action) {
 }
 
 libqt_list QGraphicsWidget_Actions(const QGraphicsWidget* self) {
-	return self->actions();
+	auto _ret = self->actions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QGraphicsWidget_SetAttribute(QGraphicsWidget* self, int attribute) {

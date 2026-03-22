@@ -13,10 +13,6 @@ QVariantPointer<QSequentialIterator> QSequentialIterator_OperatorMinusGreater(co
 	return self->operator->();
 }
 
-void QSequentialIterator_OperatorAssign(QSequentialIterator* self, const QSequentialIterator* param1) {
-	self->operator=(*param1);
-}
-
 void QSequentialIterator_Delete(QSequentialIterator* self) {
     delete self;
 }
@@ -25,40 +21,20 @@ QVariant* QSequentialConstIterator_OperatorMultiply(const QSequentialConstIterat
 	return new QVariant(self->operator*());
 }
 
-QVariantConstPointer* QSequentialConstIterator_OperatorMinusGreater(const QSequentialConstIterator* self) {
-	return new QVariantConstPointer(self->operator->());
-}
-
-void QSequentialConstIterator_OperatorAssign(QSequentialConstIterator* self, const QSequentialConstIterator* param1) {
-	self->operator=(*param1);
-}
-
 void QSequentialConstIterator_Delete(QSequentialConstIterator* self) {
     delete self;
 }
 
-QSequentialIterable* QSequentialIterable_new(const QSequentialIterable* other) {
-	 return new QSequentialIterable(*other);
-}
-
-QSequentialIterable* QSequentialIterable_new2(QSequentialIterable* other) {
-	 return new QSequentialIterable(*other);
-}
-
-QSequentialIterable* QSequentialIterable_new3() {
+QSequentialIterable* QSequentialIterable_new() {
 	 return new QSequentialIterable();
 }
 
-QSequentialIterable* QSequentialIterable_new4(const QMetaSequence* metaSequence, const QMetaType* metaType, void* iterable) {
+QSequentialIterable* QSequentialIterable_new2(const QMetaSequence* metaSequence, const QMetaType* metaType, void* iterable) {
 	 return new QSequentialIterable(*metaSequence, *metaType, iterable);
 }
 
-QSequentialIterable* QSequentialIterable_new5(const QMetaSequence* metaSequence, const QMetaType* metaType, const void* iterable) {
+QSequentialIterable* QSequentialIterable_new3(const QMetaSequence* metaSequence, const QMetaType* metaType, const void* iterable) {
 	 return new QSequentialIterable(*metaSequence, *metaType, iterable);
-}
-
-QSequentialIterable* QSequentialIterable_new6(const QSequentialIterable* param1) {
-	 return new QSequentialIterable(*param1);
 }
 
 void QSequentialIterable_CopyAssign(QSequentialIterable* self, QSequentialIterable* other) {
@@ -111,10 +87,6 @@ void QSequentialIterable_RemoveValue(QSequentialIterable* self) {
 
 QMetaType* QSequentialIterable_ValueMetaType(const QSequentialIterable* self) {
 	return new QMetaType(self->valueMetaType());
-}
-
-void QSequentialIterable_OperatorAssign(QSequentialIterable* self, const QSequentialIterable* param1) {
-	self->operator=(*param1);
 }
 
 void QSequentialIterable_AddValue2(QSequentialIterable* self, const QVariant* value, int position) {

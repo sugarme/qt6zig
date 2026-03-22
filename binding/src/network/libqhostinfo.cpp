@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qhostinfo.h>
 #include "libqhostinfo.h"
 #include "libqhostinfo.hxx"
@@ -43,11 +44,20 @@ void QHostInfo_SetHostName(QHostInfo* self, const libqt_string name) {
 }
 
 libqt_list QHostInfo_Addresses(const QHostInfo* self) {
-	return self->addresses();
+	auto _ret = self->addresses();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QHostInfo_SetAddresses(QHostInfo* self, const libqt_list addresses) {
-	self->setAddresses(*addresses);
+	self->setAddresses(QList<QHostAddress>());
 }
 
 int QHostInfo_Error(const QHostInfo* self) {

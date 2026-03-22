@@ -15,7 +15,6 @@ extern "C" {
 
 #ifdef __cplusplus
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QByteArrayView QByteArrayView;
 typedef struct QHttpHeaders QHttpHeaders;
 typedef struct QIODevice QIODevice;
@@ -50,9 +49,7 @@ bool QNetworkReply_IsFinished(const QNetworkReply* self);
 bool QNetworkReply_IsRunning(const QNetworkReply* self);
 QUrl* QNetworkReply_Url(const QNetworkReply* self);
 QVariant* QNetworkReply_Header(const QNetworkReply* self, int header);
-bool QNetworkReply_HasRawHeader(const QNetworkReply* self, libqt_string headerName);
 libqt_list QNetworkReply_RawHeaderList(const QNetworkReply* self);
-libqt_string QNetworkReply_RawHeader(const QNetworkReply* self, libqt_string headerName);
 libqt_list QNetworkReply_RawHeaderPairs(const QNetworkReply* self);
 QHttpHeaders* QNetworkReply_Headers(const QNetworkReply* self);
 QVariant* QNetworkReply_Attribute(const QNetworkReply* self, int code);

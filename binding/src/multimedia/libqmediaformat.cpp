@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qmediaformat.h>
 #include "libqmediaformat.h"
 #include "libqmediaformat.hxx"
@@ -60,15 +61,42 @@ QMimeType* QMediaFormat_MimeType(const QMediaFormat* self) {
 }
 
 libqt_list QMediaFormat_SupportedFileFormats(QMediaFormat* self, int m) {
-	return self->supportedFileFormats(static_cast<QFlags<QHostAddress::ConversionModeFlag>>(m));
+	auto _ret = self->supportedFileFormats(static_cast<QFlags<QHostAddress::ConversionModeFlag>>(m));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QMediaFormat_SupportedVideoCodecs(QMediaFormat* self, int m) {
-	return self->supportedVideoCodecs(static_cast<QFlags<QHostAddress::ConversionModeFlag>>(m));
+	auto _ret = self->supportedVideoCodecs(static_cast<QFlags<QHostAddress::ConversionModeFlag>>(m));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QMediaFormat_SupportedAudioCodecs(QMediaFormat* self, int m) {
-	return self->supportedAudioCodecs(static_cast<QFlags<QHostAddress::ConversionModeFlag>>(m));
+	auto _ret = self->supportedAudioCodecs(static_cast<QFlags<QHostAddress::ConversionModeFlag>>(m));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QMediaFormat_FileFormatName(int fileFormat) {

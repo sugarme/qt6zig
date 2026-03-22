@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTableView>
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -435,7 +436,15 @@ QTableWidgetItem* QTableWidget_TakeItem(QTableWidget* self, int row, int column)
 }
 
 libqt_list QTableWidget_Items(const QTableWidget* self, const QMimeData* data) {
-	return self->items(data);
+	auto _ret = self->items(data);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QModelIndex* QTableWidget_IndexFromItem(const QTableWidget* self, const QTableWidgetItem* item) {
@@ -471,11 +480,11 @@ QTableWidgetItem* QTableWidget_TakeHorizontalHeaderItem(QTableWidget* self, int 
 }
 
 void QTableWidget_SetVerticalHeaderLabels(QTableWidget* self, const libqt_list labels) {
-	self->setVerticalHeaderLabels(*labels);
+	self->setVerticalHeaderLabels(QList<QString>());
 }
 
 void QTableWidget_SetHorizontalHeaderLabels(QTableWidget* self, const libqt_list labels) {
-	self->setHorizontalHeaderLabels(*labels);
+	self->setHorizontalHeaderLabels(QList<QString>());
 }
 
 int QTableWidget_CurrentRow(const QTableWidget* self) {
@@ -551,15 +560,40 @@ void QTableWidget_SetRangeSelected(QTableWidget* self, const QTableWidgetSelecti
 }
 
 libqt_list QTableWidget_SelectedRanges(const QTableWidget* self) {
-	return self->selectedRanges();
+	auto _ret = self->selectedRanges();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTableWidget_SelectedItems(const QTableWidget* self) {
-	return self->selectedItems();
+	auto _ret = self->selectedItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QTableWidget_FindItems(const QTableWidget* self, const libqt_string text, int flags) {
-	return self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QTableWidget_VisualRow(const QTableWidget* self, int logicalRow) {
@@ -844,9 +878,37 @@ vqtablewidget->setQTableWidget_Event_Callback(reinterpret_cast<VirtualQTableWidg
 libqt_list QTableWidget_MimeTypes(const QTableWidget* self) {
 	auto* vqtablewidget = dynamic_cast<const VirtualQTableWidget*>(self);
 	if (vqtablewidget && vqtablewidget->isVirtualQTableWidget) {
-	return vqtablewidget->mimeTypes();
+	auto _ret = vqtablewidget->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 	} else {
-	return self->QTableWidget::mimeTypes();
+	auto _ret = self->QTableWidget::mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -855,7 +917,21 @@ libqt_list QTableWidget_QBaseMimeTypes(const QTableWidget* self) {
 	auto* vqtablewidget = dynamic_cast<const VirtualQTableWidget*>(self);
 	if (vqtablewidget && vqtablewidget->isVirtualQTableWidget) {
 vqtablewidget->setQTableWidget_MimeTypes_IsBase(true);
-	return vqtablewidget->mimeTypes();
+	auto _ret = vqtablewidget->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -871,9 +947,9 @@ vqtablewidget->setQTableWidget_MimeTypes_Callback(reinterpret_cast<VirtualQTable
 QMimeData* QTableWidget_MimeData(const QTableWidget* self, const libqt_list items) {
 	auto* vqtablewidget = dynamic_cast<const VirtualQTableWidget*>(self);
 	if (vqtablewidget && vqtablewidget->isVirtualQTableWidget) {
-	return vqtablewidget->mimeData(*items);
+	return vqtablewidget->mimeData(QList<QTableWidgetItem *>());
 	} else {
-	return self->QTableWidget::mimeData(*items);
+	return self->QTableWidget::mimeData(QList<QTableWidgetItem *>());
 }
 }
 
@@ -882,7 +958,7 @@ QMimeData* QTableWidget_QBaseMimeData(const QTableWidget* self, const libqt_list
 	auto* vqtablewidget = dynamic_cast<const VirtualQTableWidget*>(self);
 	if (vqtablewidget && vqtablewidget->isVirtualQTableWidget) {
 vqtablewidget->setQTableWidget_MimeData_IsBase(true);
-	return vqtablewidget->mimeData(*items);
+	return vqtablewidget->mimeData(QList<QTableWidgetItem *>());
 }
 }
 

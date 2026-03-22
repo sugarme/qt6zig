@@ -65,10 +65,6 @@ return  _ret;
         return qtc.QAbstractEventDispatcher_RemainingTime(@ptrCast(self), timerId);
     }
 
-    pub fn UnregisterTimer2(self: ?*anyopaque, timerId: i32) bool {
-        return qtc.QAbstractEventDispatcher_UnregisterTimer2(@ptrCast(self), @intCast(timerId));
-    }
-
     pub fn TimersForObject(self: ?*anyopaque, object: ?*anyopaque) []const u8 {
         return qtc.QAbstractEventDispatcher_TimersForObject(@ptrCast(self), @ptrCast(object));
     }
@@ -168,10 +164,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qabstracteventdispatcherv2.Tr: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn UnregisterTimer(self: ?*anyopaque, timerId: i32) bool {
-        return qtc.QAbstractEventDispatcherV2_UnregisterTimer(@ptrCast(self), @intCast(timerId));
     }
 
     pub fn TimersForObject(self: ?*anyopaque, object: ?*anyopaque) []const u8 {
@@ -285,14 +277,6 @@ pub const qabstracteventdispatcher__timerinfov2 = struct {
         return qtc.QAbstractEventDispatcher__TimerInfoV2_new2(@ptrCast(param1));
     }
 
-
-    pub fn TimerId(self: ?*anyopaque, ) i32 {
-        return qtc.QAbstractEventDispatcher__TimerInfoV2_TimerId(@ptrCast(self));
-    }
-
-    pub fn SetTimerId(self: ?*anyopaque, timerId: i32) void {
-        qtc.QAbstractEventDispatcher__TimerInfoV2_SetTimerId(@ptrCast(self), @intCast(timerId));
-    }
 
     pub fn TimerType(self: ?*anyopaque, ) i32 {
         return qtc.QAbstractEventDispatcher__TimerInfoV2_TimerType(@ptrCast(self));

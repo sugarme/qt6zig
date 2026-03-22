@@ -15,6 +15,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionHeader>
 #include <QWidget>
 #include <qheaderview.h>
@@ -936,9 +937,9 @@ vqheaderview->setQHeaderView_ScrollContentsBy_Callback(reinterpret_cast<VirtualQ
 void QHeaderView_DataChanged(QHeaderView* self, const QModelIndex* topLeft, const QModelIndex* bottomRight, const libqt_list roles) {
 	auto* vqheaderview = dynamic_cast<VirtualQHeaderView*>(self);
 	if (vqheaderview && vqheaderview->isVirtualQHeaderView) {
-	vqheaderview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqheaderview->dataChanged(*topLeft, *bottomRight, QList<int>());
 	} else {
-	self->QHeaderView::dataChanged(*topLeft, *bottomRight, *roles);
+	self->QHeaderView::dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 
@@ -947,7 +948,7 @@ void QHeaderView_QBaseDataChanged(QHeaderView* self, const QModelIndex* topLeft,
 	auto* vqheaderview = dynamic_cast<VirtualQHeaderView*>(self);
 	if (vqheaderview && vqheaderview->isVirtualQHeaderView) {
 vqheaderview->setQHeaderView_DataChanged_IsBase(true);
-	vqheaderview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqheaderview->dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 

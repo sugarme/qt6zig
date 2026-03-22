@@ -145,10 +145,6 @@ return qtc.QLocalServer_RemoveServer(name_str);
         return qtc.QLocalServer_SocketOptions(@ptrCast(self));
     }
 
-    pub fn BindableSocketOptions(self: ?*anyopaque, ) QBindable<SocketOptions> {
-        return qtc.QLocalServer_BindableSocketOptions(@ptrCast(self));
-    }
-
     pub fn SocketDescriptor(self: ?*anyopaque, ) isize {
         return qtc.QLocalServer_SocketDescriptor(@ptrCast(self));
     }

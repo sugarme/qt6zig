@@ -1,9 +1,9 @@
-#include <QAnyStringView>
 #include <QByteArray>
 #include <QByteArrayView>
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUuid>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QUuid__Id128Bytes
 #include <quuid.h>
@@ -66,19 +66,15 @@ QUuid* QUuid_new5(QUuid__Id128Bytes* id128) {
 	 return new QUuid(*id128);
 }
 
-QUuid* QUuid_new6(libqt_string stringVal) {
-	 return new QUuid(QAnyStringView(QString::fromUtf8(stringVal.data, stringVal.len)));
-}
-
-QUuid* QUuid_new7(const _GUID* guid) {
+QUuid* QUuid_new6(const _GUID* guid) {
 	 return new QUuid(*guid);
 }
 
-QUuid* QUuid_new8(const QUuid* param1) {
+QUuid* QUuid_new7(const QUuid* param1) {
 	 return new QUuid(*param1);
 }
 
-QUuid* QUuid_new9(QUuid__Id128Bytes* id128, int order) {
+QUuid* QUuid_new8(QUuid__Id128Bytes* id128, int order) {
 	 return new QUuid(*id128, static_cast<QSysInfo::Endian>(order));
 }
 
@@ -88,10 +84,6 @@ void QUuid_CopyAssign(QUuid* self, QUuid* other) {
 
 void QUuid_MoveAssign(QUuid* self, QUuid* other) {
     *self = std::move(*other);
-}
-
-QUuid* QUuid_FromString(libqt_string stringVal) {
-	return new QUuid(QUuid::fromString(QAnyStringView(QString::fromUtf8(stringVal.data, stringVal.len))));
 }
 
 libqt_string QUuid_ToString(const QUuid* self) {

@@ -88,10 +88,6 @@ void QOpenGLExtraFunctions_GlGetBufferPointerv(QOpenGLExtraFunctions* self, uint
 	self->glGetBufferPointerv(target, pname, params);
 }
 
-void QOpenGLExtraFunctions_GlDrawBuffers(QOpenGLExtraFunctions* self, int32_t n, const GL* bufs) {
-	self->glDrawBuffers(n, bufs);
-}
-
 void QOpenGLExtraFunctions_GlUniformMatrix2x3fv(QOpenGLExtraFunctions* self, int32_t location, int32_t count, unsigned char transpose, const float* value) {
 	self->glUniformMatrix2x3fv(location, count, transpose, value);
 }
@@ -174,10 +170,6 @@ void QOpenGLExtraFunctions_GlBindBufferBase(QOpenGLExtraFunctions* self, uint32_
 
 void QOpenGLExtraFunctions_GlTransformFeedbackVaryings(QOpenGLExtraFunctions* self, uint32_t program, int32_t count, const GLchar** varyings, uint32_t bufferMode) {
 	self->glTransformFeedbackVaryings(program, count, varyings, bufferMode);
-}
-
-void QOpenGLExtraFunctions_GlGetTransformFeedbackVarying(QOpenGLExtraFunctions* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name) {
-	self->glGetTransformFeedbackVarying(program, index, bufSize, length, size, typeVal, name);
 }
 
 void QOpenGLExtraFunctions_GlVertexAttribIPointer(QOpenGLExtraFunctions* self, uint32_t index, int32_t size, uint32_t typeVal, int32_t stride, const void* pointer) {
@@ -304,32 +296,8 @@ void QOpenGLExtraFunctions_GlDrawElementsInstanced(QOpenGLExtraFunctions* self, 
 	self->glDrawElementsInstanced(mode, count, typeVal, indices, instancecount);
 }
 
-GLsync QOpenGLExtraFunctions_GlFenceSync(QOpenGLExtraFunctions* self, uint32_t condition, uint32_t flags) {
-	return self->glFenceSync(condition, flags);
-}
-
-unsigned char QOpenGLExtraFunctions_GlIsSync(QOpenGLExtraFunctions* self, GLsync sync) {
-	return self->glIsSync(sync);
-}
-
-void QOpenGLExtraFunctions_GlDeleteSync(QOpenGLExtraFunctions* self, GLsync sync) {
-	self->glDeleteSync(sync);
-}
-
-GL QOpenGLExtraFunctions_GlClientWaitSync(QOpenGLExtraFunctions* self, GLsync sync, uint32_t flags, uint64_t timeout) {
-	return self->glClientWaitSync(sync, flags, timeout);
-}
-
-void QOpenGLExtraFunctions_GlWaitSync(QOpenGLExtraFunctions* self, GLsync sync, uint32_t flags, uint64_t timeout) {
-	self->glWaitSync(sync, flags, timeout);
-}
-
 void QOpenGLExtraFunctions_GlGetInteger64v(QOpenGLExtraFunctions* self, uint32_t pname, int64_t* data) {
 	self->glGetInteger64v(pname, data);
-}
-
-void QOpenGLExtraFunctions_GlGetSynciv(QOpenGLExtraFunctions* self, GLsync sync, uint32_t pname, int32_t bufSize, int32_t* length, int32_t* values) {
-	self->glGetSynciv(sync, pname, bufSize, length, values);
 }
 
 void QOpenGLExtraFunctions_GlGetInteger64iV(QOpenGLExtraFunctions* self, uint32_t target, uint32_t index, int64_t* data) {
@@ -408,24 +376,12 @@ void QOpenGLExtraFunctions_GlResumeTransformFeedback(QOpenGLExtraFunctions* self
 	self->glResumeTransformFeedback();
 }
 
-void QOpenGLExtraFunctions_GlGetProgramBinary(QOpenGLExtraFunctions* self, uint32_t program, int32_t bufSize, int32_t* length, GL* binaryFormat, void* binary) {
-	self->glGetProgramBinary(program, bufSize, length, binaryFormat, binary);
-}
-
 void QOpenGLExtraFunctions_GlProgramBinary(QOpenGLExtraFunctions* self, uint32_t program, uint32_t binaryFormat, const void* binary, int32_t length) {
 	self->glProgramBinary(program, binaryFormat, binary, length);
 }
 
 void QOpenGLExtraFunctions_GlProgramParameteri(QOpenGLExtraFunctions* self, uint32_t program, uint32_t pname, int32_t value) {
 	self->glProgramParameteri(program, pname, value);
-}
-
-void QOpenGLExtraFunctions_GlInvalidateFramebuffer(QOpenGLExtraFunctions* self, uint32_t target, int32_t numAttachments, const GL* attachments) {
-	self->glInvalidateFramebuffer(target, numAttachments, attachments);
-}
-
-void QOpenGLExtraFunctions_GlInvalidateSubFramebuffer(QOpenGLExtraFunctions* self, uint32_t target, int32_t numAttachments, const GL* attachments, int32_t x, int32_t y, int32_t width, int32_t height) {
-	self->glInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height);
 }
 
 void QOpenGLExtraFunctions_GlTexStorage2D(QOpenGLExtraFunctions* self, uint32_t target, int32_t levels, uint32_t internalformat, int32_t width, int32_t height) {
@@ -474,10 +430,6 @@ uint32_t QOpenGLExtraFunctions_GlGetProgramResourceIndex(QOpenGLExtraFunctions* 
 
 void QOpenGLExtraFunctions_GlGetProgramResourceName(QOpenGLExtraFunctions* self, uint32_t program, uint32_t programInterface, uint32_t index, int32_t bufSize, int32_t* length, GLchar* name) {
 	self->glGetProgramResourceName(program, programInterface, index, bufSize, length, name);
-}
-
-void QOpenGLExtraFunctions_GlGetProgramResourceiv(QOpenGLExtraFunctions* self, uint32_t program, uint32_t programInterface, uint32_t index, int32_t propCount, const GL* props, int32_t bufSize, int32_t* length, int32_t* params) {
-	self->glGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params);
 }
 
 int32_t QOpenGLExtraFunctions_GlGetProgramResourceLocation(QOpenGLExtraFunctions* self, uint32_t program, uint32_t programInterface, const GLchar* name) {
@@ -728,14 +680,6 @@ void QOpenGLExtraFunctions_GlDebugMessageInsert(QOpenGLExtraFunctions* self, uin
 	self->glDebugMessageInsert(source, typeVal, id, severity, length, buf);
 }
 
-void QOpenGLExtraFunctions_GlDebugMessageCallback(QOpenGLExtraFunctions* self, GLDEBUGPROC callback, const void* userParam) {
-	self->glDebugMessageCallback(callback, userParam);
-}
-
-uint32_t QOpenGLExtraFunctions_GlGetDebugMessageLog(QOpenGLExtraFunctions* self, uint32_t count, int32_t bufSize, GL* sources, GL* types, uint32_t* ids, GL* severities, int32_t* lengths, GLchar* messageLog) {
-	return self->glGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog);
-}
-
 void QOpenGLExtraFunctions_GlPushDebugGroup(QOpenGLExtraFunctions* self, uint32_t source, uint32_t id, int32_t length, const GLchar* message) {
 	self->glPushDebugGroup(source, id, length, message);
 }
@@ -814,10 +758,6 @@ void QOpenGLExtraFunctions_GlFramebufferTexture(QOpenGLExtraFunctions* self, uin
 
 void QOpenGLExtraFunctions_GlPrimitiveBoundingBox(QOpenGLExtraFunctions* self, float minX, float minY, float minZ, float minW, float maxX, float maxY, float maxZ, float maxW) {
 	self->glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
-}
-
-GL QOpenGLExtraFunctions_GlGetGraphicsResetStatus(QOpenGLExtraFunctions* self) {
-	return self->glGetGraphicsResetStatus();
 }
 
 void QOpenGLExtraFunctions_GlReadnPixels(QOpenGLExtraFunctions* self, int32_t x, int32_t y, int32_t width, int32_t height, uint32_t format, uint32_t typeVal, int32_t bufSize, void* data) {

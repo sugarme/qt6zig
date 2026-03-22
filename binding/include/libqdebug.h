@@ -22,9 +22,7 @@ typedef struct QDebugStateSaver QDebugStateSaver;
 typedef struct QIODevice QIODevice;
 typedef struct QIODeviceBase QIODeviceBase;
 typedef struct QNoDebug QNoDebug;
-typedef struct QStringView QStringView;
 typedef struct _GUID _GUID;
-typedef struct qfloat16 qfloat16;
 typedef struct type_info type_info;
 #endif
 
@@ -32,8 +30,7 @@ typedef struct type_info type_info;
 
 QDebug* QDebug_new(QIODevice* device);
 QDebug* QDebug_new2(libqt_string stringVal);
-QDebug* QDebug_new3(int t);
-QDebug* QDebug_new4(const QDebug* o);
+QDebug* QDebug_new3(const QDebug* o);
 void QDebug_OperatorAssign(QDebug* self, const QDebug* other);
 void QDebug_Swap(QDebug* self, QDebug* other);
 QDebug* QDebug_ResetFormat(QDebug* self);
@@ -61,19 +58,13 @@ QDebug* QDebug_OperatorShiftLeft10(QDebug* self, long t);
 QDebug* QDebug_OperatorShiftLeft11(QDebug* self, unsigned long t);
 QDebug* QDebug_OperatorShiftLeft12(QDebug* self, long long t);
 QDebug* QDebug_OperatorShiftLeft13(QDebug* self, unsigned long long t);
-QDebug* QDebug_OperatorShiftLeft14(QDebug* self, qfloat16* t);
 QDebug* QDebug_OperatorShiftLeft15(QDebug* self, float t);
 QDebug* QDebug_OperatorShiftLeft16(QDebug* self, double t);
 QDebug* QDebug_OperatorShiftLeft17(QDebug* self, const char* t);
 QDebug* QDebug_OperatorShiftLeft19(QDebug* self, const libqt_string t);
-QDebug* QDebug_OperatorShiftLeft20(QDebug* self, QStringView* s);
-QDebug* QDebug_OperatorShiftLeft21(QDebug* self, QUtf8StringView s);
-QDebug* QDebug_OperatorShiftLeft22(QDebug* self, QLatin1StringView t);
 QDebug* QDebug_OperatorShiftLeft23(QDebug* self, const libqt_string t);
 QDebug* QDebug_OperatorShiftLeft24(QDebug* self, QByteArrayView* t);
 QDebug* QDebug_OperatorShiftLeft25(QDebug* self, const void* t);
-QDebug* QDebug_OperatorShiftLeft27(QDebug* self, std::nullopt_t param1);
-QDebug* QDebug_OperatorShiftLeft29(QDebug* self, QTextStreamManipulator* m);
 QDebug* QDebug_MaybeQuote1(QDebug* self, char c);
 void QDebug_Delete(QDebug* self);
 
@@ -84,7 +75,6 @@ QNoDebug* QNoDebug_new(const QNoDebug* other);
 QNoDebug* QNoDebug_new2(QNoDebug* other);
 void QNoDebug_CopyAssign(QNoDebug* self, QNoDebug* other);
 void QNoDebug_MoveAssign(QNoDebug* self, QNoDebug* other);
-QNoDebug* QNoDebug_OperatorShiftLeft2(QNoDebug* self, QTextStreamManipulator* param1);
 QNoDebug* QNoDebug_Space(QNoDebug* self);
 QNoDebug* QNoDebug_Nospace(QNoDebug* self);
 QNoDebug* QNoDebug_MaybeSpace(QNoDebug* self);

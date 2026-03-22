@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qaccessiblebridge.h>
 #include "libqaccessiblebridge.h"
 #include "libqaccessiblebridge.hxx"

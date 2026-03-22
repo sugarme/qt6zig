@@ -23,7 +23,6 @@ typedef struct QObject QObject;
 typedef struct QProcess QProcess;
 typedef struct QProcess__CreateProcessArguments QProcess__CreateProcessArguments;
 typedef struct QProcessEnvironment QProcessEnvironment;
-typedef struct QStringView QStringView;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
 #endif
@@ -99,7 +98,6 @@ int QProcess_Execute(const libqt_string program);
 bool QProcess_StartDetached2(const libqt_string program);
 libqt_list QProcess_SystemEnvironment();
 libqt_string QProcess_NullDevice();
-libqt_list QProcess_SplitCommand(QStringView* command);
 void QProcess_Terminate(QProcess* self);
 void QProcess_Kill(QProcess* self);
 void QProcess_Finished(QProcess* self, int exitCode);

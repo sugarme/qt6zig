@@ -53,20 +53,12 @@ qtc.QWebChannel_RegisterObject(@ptrCast(self), id_str, @ptrCast(object));
         qtc.QWebChannel_SetBlockUpdates(@ptrCast(self), block);
     }
 
-    pub fn BindableBlockUpdates(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QWebChannel_BindableBlockUpdates(@ptrCast(self));
-    }
-
     pub fn PropertyUpdateInterval(self: ?*anyopaque, ) i32 {
         return qtc.QWebChannel_PropertyUpdateInterval(@ptrCast(self));
     }
 
     pub fn SetPropertyUpdateInterval(self: ?*anyopaque, ms: i32) void {
         qtc.QWebChannel_SetPropertyUpdateInterval(@ptrCast(self), ms);
-    }
-
-    pub fn BindablePropertyUpdateInterval(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QWebChannel_BindablePropertyUpdateInterval(@ptrCast(self));
     }
 
     pub fn BlockUpdatesChanged(self: ?*anyopaque, block: bool) void {

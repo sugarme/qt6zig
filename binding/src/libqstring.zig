@@ -30,52 +30,40 @@ pub const qstring = struct {
 
 
     /// New5 constructs a new QString object.
-    pub fn New5(latin1: QLatin1StringView) QtC.QString {
-        return qtc.QString_new5(latin1);
-    }
-
-
-    /// New6 constructs a new QString object.
-    pub fn New6(sv: []const u8) QtC.QString {
-        return qtc.QString_new6(@ptrCast(sv));
-    }
-
-
-    /// New7 constructs a new QString object.
-    pub fn New7(param1: []const u8) QtC.QString {
+    pub fn New5(param1: []const u8) QtC.QString {
         const param1_str = qtc.libqt_string{
     .len = param1.len,
     .data = param1.ptr,
 };
-return qtc.QString_new7(param1_str);
+return qtc.QString_new5(param1_str);
     }
 
 
-    /// New8 constructs a new QString object.
-    pub fn New8(ch: []const u8) QtC.QString {
-        return qtc.QString_new8(@ptrCast(ch));
+    /// New6 constructs a new QString object.
+    pub fn New6(ch: []const u8) QtC.QString {
+        return qtc.QString_new6(@ptrCast(ch));
     }
 
 
-    /// New9 constructs a new QString object.
-    pub fn New9(a: []u8) QtC.QString {
+    /// New7 constructs a new QString object.
+    pub fn New7(a: []u8) QtC.QString {
         const a_str = qtc.libqt_string{
     .len = a.len,
     .data = a.ptr,
 };
-return qtc.QString_new9(a_str);
+return qtc.QString_new7(a_str);
     }
 
 
-    /// New10 constructs a new QString object.
-    pub fn New10(size: i64, param2: i32) QtC.QString {
-        return qtc.QString_new10(size, @intCast(param2));
+    /// New8 constructs a new QString object.
+    pub fn New8(size: i64, param2: i32) QtC.QString {
+        return qtc.QString_new8(size, @intCast(param2));
     }
 
 
-    /// New11 constructs a new QString object.
-    pub fn New11(unicode: ?*anyopaque, size: i64) QtC.QString {
-        return qtc.QString_new11(@ptrCast(unicode), size);
+    /// New9 constructs a new QString object.
+    pub fn New9(unicode: ?*anyopaque, size: i64) QtC.QString {
+        return qtc.QString_new9(@ptrCast(unicode), size);
     }
 
 
@@ -89,10 +77,6 @@ return qtc.QString_new9(a_str);
     .data = param1.ptr,
 };
 qtc.QString_OperatorAssign2(@ptrCast(self), param1_str);
-    }
-
-    pub fn OperatorAssign3(self: ?*anyopaque, latin1: QLatin1StringView) void {
-        qtc.QString_OperatorAssign3(@ptrCast(self), latin1);
     }
 
     pub fn Swap(self: ?*anyopaque, other: []const u8) void {
@@ -343,22 +327,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg12: Memory a
 return  _ret;
     }
 
-    pub fn Arg13(self: ?*anyopaque, a: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Arg13(@ptrCast(self), @ptrCast(a));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg13: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Arg14(self: ?*anyopaque, a: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Arg14(@ptrCast(self), a);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg14: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Asprintf(format: []const u8, : ..., allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QString_Asprintf(@ptrCast(format), );
 defer qtc.libqt_string_free(&_str);
@@ -371,10 +339,6 @@ return  _ret;
         return qtc.QString_IndexOf(@ptrCast(self), @ptrCast(c));
     }
 
-    pub fn IndexOf2(self: ?*anyopaque, s: QLatin1StringView) i64 {
-        return qtc.QString_IndexOf2(@ptrCast(self), s);
-    }
-
     pub fn IndexOf3(self: ?*anyopaque, s: []const u8) i64 {
         const s_str = qtc.libqt_string{
     .len = s.len,
@@ -383,24 +347,12 @@ return  _ret;
 return qtc.QString_IndexOf3(@ptrCast(self), s_str);
     }
 
-    pub fn IndexOf4(self: ?*anyopaque, s: []const u8) i64 {
-        return qtc.QString_IndexOf4(@ptrCast(self), @ptrCast(s));
-    }
-
     pub fn LastIndexOf(self: ?*anyopaque, c: QtC.QChar) i64 {
         return qtc.QString_LastIndexOf(@ptrCast(self), @ptrCast(c));
     }
 
     pub fn LastIndexOf2(self: ?*anyopaque, c: QtC.QChar, from: i64) i64 {
         return qtc.QString_LastIndexOf2(@ptrCast(self), @ptrCast(c), from);
-    }
-
-    pub fn LastIndexOf3(self: ?*anyopaque, s: QLatin1StringView) i64 {
-        return qtc.QString_LastIndexOf3(@ptrCast(self), s);
-    }
-
-    pub fn LastIndexOf4(self: ?*anyopaque, s: QLatin1StringView, from: i64) i64 {
-        return qtc.QString_LastIndexOf4(@ptrCast(self), s, from);
     }
 
     pub fn LastIndexOf5(self: ?*anyopaque, s: []const u8) i64 {
@@ -419,14 +371,6 @@ return qtc.QString_LastIndexOf5(@ptrCast(self), s_str);
 return qtc.QString_LastIndexOf6(@ptrCast(self), s_str, from);
     }
 
-    pub fn LastIndexOf7(self: ?*anyopaque, s: []const u8) i64 {
-        return qtc.QString_LastIndexOf7(@ptrCast(self), @ptrCast(s));
-    }
-
-    pub fn LastIndexOf8(self: ?*anyopaque, s: []const u8, from: i64) i64 {
-        return qtc.QString_LastIndexOf8(@ptrCast(self), @ptrCast(s), from);
-    }
-
     pub fn Contains(self: ?*anyopaque, c: QtC.QChar) bool {
         return qtc.QString_Contains(@ptrCast(self), @ptrCast(c));
     }
@@ -439,14 +383,6 @@ return qtc.QString_LastIndexOf6(@ptrCast(self), s_str, from);
 return qtc.QString_Contains2(@ptrCast(self), s_str);
     }
 
-    pub fn Contains3(self: ?*anyopaque, s: QLatin1StringView) bool {
-        return qtc.QString_Contains3(@ptrCast(self), s);
-    }
-
-    pub fn Contains4(self: ?*anyopaque, s: []const u8) bool {
-        return qtc.QString_Contains4(@ptrCast(self), @ptrCast(s));
-    }
-
     pub fn Count2(self: ?*anyopaque, c: QtC.QChar) i64 {
         return qtc.QString_Count2(@ptrCast(self), @ptrCast(c));
     }
@@ -457,10 +393,6 @@ return qtc.QString_Contains2(@ptrCast(self), s_str);
     .data = s.ptr,
 };
 return qtc.QString_Count3(@ptrCast(self), s_str);
-    }
-
-    pub fn Count4(self: ?*anyopaque, s: []const u8) i64 {
-        return qtc.QString_Count4(@ptrCast(self), @ptrCast(s));
     }
 
     pub fn IndexOf5(self: ?*anyopaque, re: ?*anyopaque) i64 {
@@ -579,14 +511,6 @@ return  _ret;
 return qtc.QString_StartsWith(@ptrCast(self), s_str);
     }
 
-    pub fn StartsWith2(self: ?*anyopaque, s: []const u8) bool {
-        return qtc.QString_StartsWith2(@ptrCast(self), @ptrCast(s));
-    }
-
-    pub fn StartsWith3(self: ?*anyopaque, s: QLatin1StringView) bool {
-        return qtc.QString_StartsWith3(@ptrCast(self), s);
-    }
-
     pub fn StartsWith4(self: ?*anyopaque, c: QtC.QChar) bool {
         return qtc.QString_StartsWith4(@ptrCast(self), @ptrCast(c));
     }
@@ -597,14 +521,6 @@ return qtc.QString_StartsWith(@ptrCast(self), s_str);
     .data = s.ptr,
 };
 return qtc.QString_EndsWith(@ptrCast(self), s_str);
-    }
-
-    pub fn EndsWith2(self: ?*anyopaque, s: []const u8) bool {
-        return qtc.QString_EndsWith2(@ptrCast(self), @ptrCast(s));
-    }
-
-    pub fn EndsWith3(self: ?*anyopaque, s: QLatin1StringView) bool {
-        return qtc.QString_EndsWith3(@ptrCast(self), s);
     }
 
     pub fn EndsWith4(self: ?*anyopaque, c: QtC.QChar) bool {
@@ -711,30 +627,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Insert3: Memory
 return  _ret;
     }
 
-    pub fn Insert4(self: ?*anyopaque, i: i64, v: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Insert4(@ptrCast(self), i, @ptrCast(v));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Insert4: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Insert5(self: ?*anyopaque, i: i64, s: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Insert5(@ptrCast(self), i, s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Insert5: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Insert6(self: ?*anyopaque, i: i64, s: QUtf8StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Insert6(@ptrCast(self), i, s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Insert6: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Append(self: ?*anyopaque, c: QtC.QChar, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QString_Append(@ptrCast(self), @ptrCast(c));
 defer qtc.libqt_string_free(&_str);
@@ -759,30 +651,6 @@ return  _ret;
 const _str = qtc.QString_Append3(@ptrCast(self), s_str);
 defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Append3: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Append4(self: ?*anyopaque, v: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Append4(@ptrCast(self), @ptrCast(v));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Append4: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Append5(self: ?*anyopaque, s: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Append5(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Append5: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Append6(self: ?*anyopaque, s: QUtf8StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Append6(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Append6: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
     }
@@ -815,42 +683,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Prepend3: Memor
 return  _ret;
     }
 
-    pub fn Prepend4(self: ?*anyopaque, v: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Prepend4(@ptrCast(self), @ptrCast(v));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Prepend4: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Prepend5(self: ?*anyopaque, s: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Prepend5(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Prepend5: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Prepend6(self: ?*anyopaque, s: QUtf8StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Prepend6(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Prepend6: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Assign(self: ?*anyopaque, s: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const s_str = qtc.libqt_string{
-    .len = s.len,
-    .data = s.ptr,
-};
-const _str = qtc.QString_Assign(@ptrCast(self), s_str);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Assign: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Assign2(self: ?*anyopaque, n: i64, c: QtC.QChar, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QString_Assign2(@ptrCast(self), n, @ptrCast(c));
 defer qtc.libqt_string_free(&_str);
@@ -879,30 +711,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.OperatorPlusAss
 return  _ret;
     }
 
-    pub fn OperatorPlusAssign3(self: ?*anyopaque, v: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_OperatorPlusAssign3(@ptrCast(self), @ptrCast(v));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.OperatorPlusAssign3: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn OperatorPlusAssign4(self: ?*anyopaque, s: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_OperatorPlusAssign4(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.OperatorPlusAssign4: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn OperatorPlusAssign5(self: ?*anyopaque, s: QUtf8StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_OperatorPlusAssign5(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.OperatorPlusAssign5: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Remove(self: ?*anyopaque, i: i64, lenVal: i64, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QString_Remove(@ptrCast(self), i, lenVal);
 defer qtc.libqt_string_free(&_str);
@@ -915,14 +723,6 @@ return  _ret;
         const _str = qtc.QString_Remove2(@ptrCast(self), @ptrCast(c));
 defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Remove2: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Remove3(self: ?*anyopaque, s: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Remove3(@ptrCast(self), s);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Remove3: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
     }
@@ -1007,38 +807,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace5: Memor
 return  _ret;
     }
 
-    pub fn Replace6(self: ?*anyopaque, before: QLatin1StringView, after: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Replace6(@ptrCast(self), before, after);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace6: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Replace7(self: ?*anyopaque, before: QLatin1StringView, after: []const u8, allocator: std.mem.Allocator) []const u8 {
-        const after_str = qtc.libqt_string{
-    .len = after.len,
-    .data = after.ptr,
-};
-const _str = qtc.QString_Replace7(@ptrCast(self), before, after_str);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace7: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Replace8(self: ?*anyopaque, before: []const u8, after: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const before_str = qtc.libqt_string{
-    .len = before.len,
-    .data = before.ptr,
-};
-const _str = qtc.QString_Replace8(@ptrCast(self), before_str, after);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace8: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Replace9(self: ?*anyopaque, before: []const u8, after: []const u8, allocator: std.mem.Allocator) []const u8 {
         const before_str = qtc.libqt_string{
     .len = before.len,
@@ -1063,14 +831,6 @@ return  _ret;
 const _str = qtc.QString_Replace10(@ptrCast(self), @ptrCast(c), after_str);
 defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace10: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Replace11(self: ?*anyopaque, c: QtC.QChar, after: QLatin1StringView, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Replace11(@ptrCast(self), @ptrCast(c), after);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace11: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
     }
@@ -1263,14 +1023,6 @@ return  _ret;
 return qtc.QString_Compare(@ptrCast(self), s_str);
     }
 
-    pub fn Compare2(self: ?*anyopaque, other: QLatin1StringView) i32 {
-        return qtc.QString_Compare2(@ptrCast(self), other);
-    }
-
-    pub fn Compare3(self: ?*anyopaque, s: []const u8) i32 {
-        return qtc.QString_Compare3(@ptrCast(self), @ptrCast(s));
-    }
-
     pub fn Compare4(self: ?*anyopaque, ch: QtC.QChar) i32 {
         return qtc.QString_Compare4(@ptrCast(self), @ptrCast(ch));
     }
@@ -1287,48 +1039,12 @@ const s2_str = qtc.libqt_string{
 return qtc.QString_Compare5(s1_str, s2_str);
     }
 
-    pub fn Compare6(s1: []const u8, s2: QLatin1StringView) i32 {
-        const s1_str = qtc.libqt_string{
-    .len = s1.len,
-    .data = s1.ptr,
-};
-return qtc.QString_Compare6(s1_str, s2);
-    }
-
-    pub fn Compare7(s1: QLatin1StringView, s2: []const u8) i32 {
-        const s2_str = qtc.libqt_string{
-    .len = s2.len,
-    .data = s2.ptr,
-};
-return qtc.QString_Compare7(s1, s2_str);
-    }
-
-    pub fn Compare8(s1: []const u8, s2: []const u8) i32 {
-        const s1_str = qtc.libqt_string{
-    .len = s1.len,
-    .data = s1.ptr,
-};
-return qtc.QString_Compare8(s1_str, @ptrCast(s2));
-    }
-
-    pub fn Compare9(s1: []const u8, s2: []const u8) i32 {
-        const s2_str = qtc.libqt_string{
-    .len = s2.len,
-    .data = s2.ptr,
-};
-return qtc.QString_Compare9(@ptrCast(s1), s2_str);
-    }
-
     pub fn LocaleAwareCompare(self: ?*anyopaque, s: []const u8) i32 {
         const s_str = qtc.libqt_string{
     .len = s.len,
     .data = s.ptr,
 };
 return qtc.QString_LocaleAwareCompare(@ptrCast(self), s_str);
-    }
-
-    pub fn LocaleAwareCompare2(self: ?*anyopaque, s: []const u8) i32 {
-        return qtc.QString_LocaleAwareCompare2(@ptrCast(self), @ptrCast(s));
     }
 
     pub fn LocaleAwareCompare3(s1: []const u8, s2: []const u8) i32 {
@@ -1341,10 +1057,6 @@ const s2_str = qtc.libqt_string{
     .data = s2.ptr,
 };
 return qtc.QString_LocaleAwareCompare3(s1_str, s2_str);
-    }
-
-    pub fn LocaleAwareCompare4(s1: []const u8, s2: []const u8) i32 {
-        return qtc.QString_LocaleAwareCompare4(@ptrCast(s1), @ptrCast(s2));
     }
 
     pub fn ToShort(self: ?*anyopaque, ) i16 {
@@ -1647,30 +1359,6 @@ return  _ret;
         return qtc.QString_ConstEnd(@ptrCast(self));
     }
 
-    pub fn Rbegin(self: ?*anyopaque, ) std::reverse_iterator<QChar *> {
-        return qtc.QString_Rbegin(@ptrCast(self));
-    }
-
-    pub fn Rend(self: ?*anyopaque, ) std::reverse_iterator<QChar *> {
-        return qtc.QString_Rend(@ptrCast(self));
-    }
-
-    pub fn Rbegin2(self: ?*anyopaque, ) std::reverse_iterator<const QChar *> {
-        return qtc.QString_Rbegin2(@ptrCast(self));
-    }
-
-    pub fn Rend2(self: ?*anyopaque, ) std::reverse_iterator<const QChar *> {
-        return qtc.QString_Rend2(@ptrCast(self));
-    }
-
-    pub fn Crbegin(self: ?*anyopaque, ) std::reverse_iterator<const QChar *> {
-        return qtc.QString_Crbegin(@ptrCast(self));
-    }
-
-    pub fn Crend(self: ?*anyopaque, ) std::reverse_iterator<const QChar *> {
-        return qtc.QString_Crend(@ptrCast(self));
-    }
-
     pub fn PushBack(self: ?*anyopaque, c: QtC.QChar) void {
         qtc.QString_PushBack(@ptrCast(self), @ptrCast(c));
     }
@@ -1709,46 +1397,6 @@ qtc.QString_PushFront2(@ptrCast(self), s_str);
 
     pub fn MaxSize2(self: ?*anyopaque, ) i64 {
         return qtc.QString_MaxSize2(@ptrCast(self));
-    }
-
-    pub fn FromStdWString(s: *const std::wstring, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_FromStdWString(@ptrCast(s));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.FromStdWString: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn ToStdWString(self: ?*anyopaque, ) std::wstring {
-        return qtc.QString_ToStdWString(@ptrCast(self));
-    }
-
-    pub fn FromStdU16String(s: *const std::u16string, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_FromStdU16String(@ptrCast(s));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.FromStdU16String: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn ToStdU16String(self: ?*anyopaque, ) std::u16string {
-        return qtc.QString_ToStdU16String(@ptrCast(self));
-    }
-
-    pub fn FromStdU32String(s: *const std::u32string, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_FromStdU32String(@ptrCast(s));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.FromStdU32String: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn ToStdU32String(self: ?*anyopaque, ) std::u32string {
-        return qtc.QString_ToStdU32String(@ptrCast(self));
-    }
-
-    pub fn OperatorbasicStringView(self: ?*anyopaque, ) std::u16string_view {
-        return qtc.QString_OperatorbasicStringView(@ptrCast(self));
     }
 
     pub fn IsNull(self: ?*anyopaque, ) bool {
@@ -2051,52 +1699,12 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg313: Memory 
 return  _ret;
     }
 
-    pub fn Arg214(self: ?*anyopaque, a: []const u8, fieldWidth: i32, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Arg214(@ptrCast(self), @ptrCast(a), fieldWidth);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg214: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Arg314(self: ?*anyopaque, a: []const u8, fieldWidth: i32, fillChar: QtC.QChar, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Arg314(@ptrCast(self), @ptrCast(a), fieldWidth, @ptrCast(fillChar));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg314: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Arg215(self: ?*anyopaque, a: QLatin1StringView, fieldWidth: i32, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Arg215(@ptrCast(self), a, fieldWidth);
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg215: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Arg315(self: ?*anyopaque, a: QLatin1StringView, fieldWidth: i32, fillChar: QtC.QChar, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Arg315(@ptrCast(self), a, fieldWidth, @ptrCast(fillChar));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Arg315: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn IndexOf22(self: ?*anyopaque, c: QtC.QChar, from: i64) i64 {
         return qtc.QString_IndexOf22(@ptrCast(self), @ptrCast(c), from);
     }
 
     pub fn IndexOf32(self: ?*anyopaque, c: QtC.QChar, from: i64, cs: i32) i64 {
         return qtc.QString_IndexOf32(@ptrCast(self), @ptrCast(c), from, @intCast(cs));
-    }
-
-    pub fn IndexOf23(self: ?*anyopaque, s: QLatin1StringView, from: i64) i64 {
-        return qtc.QString_IndexOf23(@ptrCast(self), s, from);
-    }
-
-    pub fn IndexOf33(self: ?*anyopaque, s: QLatin1StringView, from: i64, cs: i32) i64 {
-        return qtc.QString_IndexOf33(@ptrCast(self), s, from, @intCast(cs));
     }
 
     pub fn IndexOf24(self: ?*anyopaque, s: []const u8, from: i64) i64 {
@@ -2115,28 +1723,12 @@ return qtc.QString_IndexOf24(@ptrCast(self), s_str, from);
 return qtc.QString_IndexOf34(@ptrCast(self), s_str, from, @intCast(cs));
     }
 
-    pub fn IndexOf25(self: ?*anyopaque, s: []const u8, from: i64) i64 {
-        return qtc.QString_IndexOf25(@ptrCast(self), @ptrCast(s), from);
-    }
-
-    pub fn IndexOf35(self: ?*anyopaque, s: []const u8, from: i64, cs: i32) i64 {
-        return qtc.QString_IndexOf35(@ptrCast(self), @ptrCast(s), from, @intCast(cs));
-    }
-
     pub fn LastIndexOf22(self: ?*anyopaque, c: QtC.QChar, cs: i32) i64 {
         return qtc.QString_LastIndexOf22(@ptrCast(self), @ptrCast(c), @intCast(cs));
     }
 
     pub fn LastIndexOf32(self: ?*anyopaque, c: QtC.QChar, from: i64, cs: i32) i64 {
         return qtc.QString_LastIndexOf32(@ptrCast(self), @ptrCast(c), from, @intCast(cs));
-    }
-
-    pub fn LastIndexOf23(self: ?*anyopaque, s: QLatin1StringView, cs: i32) i64 {
-        return qtc.QString_LastIndexOf23(@ptrCast(self), s, @intCast(cs));
-    }
-
-    pub fn LastIndexOf33(self: ?*anyopaque, s: QLatin1StringView, from: i64, cs: i32) i64 {
-        return qtc.QString_LastIndexOf33(@ptrCast(self), s, from, @intCast(cs));
     }
 
     pub fn LastIndexOf24(self: ?*anyopaque, s: []const u8, cs: i32) i64 {
@@ -2155,14 +1747,6 @@ return qtc.QString_LastIndexOf24(@ptrCast(self), s_str, @intCast(cs));
 return qtc.QString_LastIndexOf34(@ptrCast(self), s_str, from, @intCast(cs));
     }
 
-    pub fn LastIndexOf25(self: ?*anyopaque, s: []const u8, cs: i32) i64 {
-        return qtc.QString_LastIndexOf25(@ptrCast(self), @ptrCast(s), @intCast(cs));
-    }
-
-    pub fn LastIndexOf35(self: ?*anyopaque, s: []const u8, from: i64, cs: i32) i64 {
-        return qtc.QString_LastIndexOf35(@ptrCast(self), @ptrCast(s), from, @intCast(cs));
-    }
-
     pub fn Contains22(self: ?*anyopaque, c: QtC.QChar, cs: i32) bool {
         return qtc.QString_Contains22(@ptrCast(self), @ptrCast(c), @intCast(cs));
     }
@@ -2175,14 +1759,6 @@ return qtc.QString_LastIndexOf34(@ptrCast(self), s_str, from, @intCast(cs));
 return qtc.QString_Contains23(@ptrCast(self), s_str, @intCast(cs));
     }
 
-    pub fn Contains24(self: ?*anyopaque, s: QLatin1StringView, cs: i32) bool {
-        return qtc.QString_Contains24(@ptrCast(self), s, @intCast(cs));
-    }
-
-    pub fn Contains25(self: ?*anyopaque, s: []const u8, cs: i32) bool {
-        return qtc.QString_Contains25(@ptrCast(self), @ptrCast(s), @intCast(cs));
-    }
-
     pub fn Count22(self: ?*anyopaque, c: QtC.QChar, cs: i32) i64 {
         return qtc.QString_Count22(@ptrCast(self), @ptrCast(c), @intCast(cs));
     }
@@ -2193,10 +1769,6 @@ return qtc.QString_Contains23(@ptrCast(self), s_str, @intCast(cs));
     .data = s.ptr,
 };
 return qtc.QString_Count23(@ptrCast(self), s_str, @intCast(cs));
-    }
-
-    pub fn Count24(self: ?*anyopaque, s: []const u8, cs: i32) i64 {
-        return qtc.QString_Count24(@ptrCast(self), @ptrCast(s), @intCast(cs));
     }
 
     pub fn IndexOf26(self: ?*anyopaque, re: ?*anyopaque, from: i64) i64 {
@@ -2287,14 +1859,6 @@ return  _ret;
 return qtc.QString_StartsWith22(@ptrCast(self), s_str, @intCast(cs));
     }
 
-    pub fn StartsWith23(self: ?*anyopaque, s: []const u8, cs: i32) bool {
-        return qtc.QString_StartsWith23(@ptrCast(self), @ptrCast(s), @intCast(cs));
-    }
-
-    pub fn StartsWith24(self: ?*anyopaque, s: QLatin1StringView, cs: i32) bool {
-        return qtc.QString_StartsWith24(@ptrCast(self), s, @intCast(cs));
-    }
-
     pub fn StartsWith25(self: ?*anyopaque, c: QtC.QChar, cs: i32) bool {
         return qtc.QString_StartsWith25(@ptrCast(self), @ptrCast(c), @intCast(cs));
     }
@@ -2305,14 +1869,6 @@ return qtc.QString_StartsWith22(@ptrCast(self), s_str, @intCast(cs));
     .data = s.ptr,
 };
 return qtc.QString_EndsWith22(@ptrCast(self), s_str, @intCast(cs));
-    }
-
-    pub fn EndsWith23(self: ?*anyopaque, s: []const u8, cs: i32) bool {
-        return qtc.QString_EndsWith23(@ptrCast(self), @ptrCast(s), @intCast(cs));
-    }
-
-    pub fn EndsWith24(self: ?*anyopaque, s: QLatin1StringView, cs: i32) bool {
-        return qtc.QString_EndsWith24(@ptrCast(self), s, @intCast(cs));
     }
 
     pub fn EndsWith25(self: ?*anyopaque, c: QtC.QChar, cs: i32) bool {
@@ -2359,14 +1915,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Remove22: Memor
 return  _ret;
     }
 
-    pub fn Remove23(self: ?*anyopaque, s: QLatin1StringView, cs: i32, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Remove23(@ptrCast(self), s, @intCast(cs));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Remove23: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Remove24(self: ?*anyopaque, s: []const u8, cs: i32, allocator: std.mem.Allocator) []const u8 {
         const s_str = qtc.libqt_string{
     .len = s.len,
@@ -2395,38 +1943,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace52: Memo
 return  _ret;
     }
 
-    pub fn Replace33(self: ?*anyopaque, before: QLatin1StringView, after: QLatin1StringView, cs: i32, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Replace33(@ptrCast(self), before, after, @intCast(cs));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace33: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Replace34(self: ?*anyopaque, before: QLatin1StringView, after: []const u8, cs: i32, allocator: std.mem.Allocator) []const u8 {
-        const after_str = qtc.libqt_string{
-    .len = after.len,
-    .data = after.ptr,
-};
-const _str = qtc.QString_Replace34(@ptrCast(self), before, after_str, @intCast(cs));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace34: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Replace35(self: ?*anyopaque, before: []const u8, after: QLatin1StringView, cs: i32, allocator: std.mem.Allocator) []const u8 {
-        const before_str = qtc.libqt_string{
-    .len = before.len,
-    .data = before.ptr,
-};
-const _str = qtc.QString_Replace35(@ptrCast(self), before_str, after, @intCast(cs));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace35: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
     pub fn Replace36(self: ?*anyopaque, before: []const u8, after: []const u8, cs: i32, allocator: std.mem.Allocator) []const u8 {
         const before_str = qtc.libqt_string{
     .len = before.len,
@@ -2451,14 +1967,6 @@ return  _ret;
 const _str = qtc.QString_Replace37(@ptrCast(self), @ptrCast(c), after_str, @intCast(cs));
 defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace37: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn Replace38(self: ?*anyopaque, c: QtC.QChar, after: QLatin1StringView, cs: i32, allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QString_Replace38(@ptrCast(self), @ptrCast(c), after, @intCast(cs));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstring.Replace38: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
     }
@@ -2523,14 +2031,6 @@ return  _ret;
 return qtc.QString_Compare22(@ptrCast(self), s_str, @intCast(cs));
     }
 
-    pub fn Compare23(self: ?*anyopaque, other: QLatin1StringView, cs: i32) i32 {
-        return qtc.QString_Compare23(@ptrCast(self), other, @intCast(cs));
-    }
-
-    pub fn Compare24(self: ?*anyopaque, s: []const u8, cs: i32) i32 {
-        return qtc.QString_Compare24(@ptrCast(self), @ptrCast(s), @intCast(cs));
-    }
-
     pub fn Compare25(self: ?*anyopaque, ch: QtC.QChar, cs: i32) i32 {
         return qtc.QString_Compare25(@ptrCast(self), @ptrCast(ch), @intCast(cs));
     }
@@ -2545,38 +2045,6 @@ const s2_str = qtc.libqt_string{
     .data = s2.ptr,
 };
 return qtc.QString_Compare32(s1_str, s2_str, @intCast(cs));
-    }
-
-    pub fn Compare33(s1: []const u8, s2: QLatin1StringView, cs: i32) i32 {
-        const s1_str = qtc.libqt_string{
-    .len = s1.len,
-    .data = s1.ptr,
-};
-return qtc.QString_Compare33(s1_str, s2, @intCast(cs));
-    }
-
-    pub fn Compare34(s1: QLatin1StringView, s2: []const u8, cs: i32) i32 {
-        const s2_str = qtc.libqt_string{
-    .len = s2.len,
-    .data = s2.ptr,
-};
-return qtc.QString_Compare34(s1, s2_str, @intCast(cs));
-    }
-
-    pub fn Compare35(s1: []const u8, s2: []const u8, cs: i32) i32 {
-        const s1_str = qtc.libqt_string{
-    .len = s1.len,
-    .data = s1.ptr,
-};
-return qtc.QString_Compare35(s1_str, @ptrCast(s2), @intCast(cs));
-    }
-
-    pub fn Compare36(s1: []const u8, s2: []const u8, cs: i32) i32 {
-        const s2_str = qtc.libqt_string{
-    .len = s2.len,
-    .data = s2.ptr,
-};
-return qtc.QString_Compare36(@ptrCast(s1), s2_str, @intCast(cs));
     }
 
     pub fn ToShort1(self: ?*anyopaque, ok: *bool) i16 {

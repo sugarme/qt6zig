@@ -47,7 +47,6 @@ void QLocalServer_SetListenBacklogSize(QLocalServer* self, int size);
 int QLocalServer_ListenBacklogSize(const QLocalServer* self);
 void QLocalServer_SetSocketOptions(QLocalServer* self, int options);
 int QLocalServer_SocketOptions(const QLocalServer* self);
-QBindable<SocketOptions> QLocalServer_BindableSocketOptions(QLocalServer* self);
 intptr_t QLocalServer_SocketDescriptor(const QLocalServer* self);
 void QLocalServer_IncomingConnection(QLocalServer* self, uintptr_t socketDescriptor);
 libqt_string QLocalServer_Tr2(const char* s, const char* c);

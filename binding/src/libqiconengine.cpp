@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qiconengine.h>
 #include "libqiconengine.h"
 #include "libqiconengine.hxx"
@@ -56,7 +57,16 @@ bool QIconEngine_Write(const QIconEngine* self, QDataStream* out) {
 }
 
 libqt_list QIconEngine_AvailableSizes(QIconEngine* self, int mode, int state) {
-	return self->availableSizes(static_cast<QIcon::Mode>(mode), static_cast<QIcon::State>(state));
+	auto _ret = self->availableSizes(static_cast<QIcon::Mode>(mode), static_cast<QIcon::State>(state));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QIconEngine_IconName(QIconEngine* self) {
@@ -230,7 +240,16 @@ libqt_list QIconEngine_QBaseAvailableSizes(QIconEngine* self, int mode, int stat
 	auto* vqiconengine = dynamic_cast<VirtualQIconEngine*>(self);
 	if (vqiconengine && vqiconengine->isVirtualQIconEngine) {
 vqiconengine->setQIconEngine_AvailableSizes_IsBase(true);
-	return vqiconengine->availableSizes(static_cast<QIcon::Mode>(mode), static_cast<QIcon::State>(state));
+	auto _ret = vqiconengine->availableSizes(static_cast<QIcon::Mode>(mode), static_cast<QIcon::State>(state));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

@@ -398,7 +398,7 @@ public:
 			return QStandardItemModel::roleNames();
 		} else if (qstandarditemmodel_rolenames_callback != nullptr) {
 			libqt_map callback_ret = qstandarditemmodel_rolenames_callback();
-			return callback_ret;
+			return QHash<int, QByteArray>();
 		} else {
 			return QStandardItemModel::roleNames();
 		}
@@ -667,7 +667,7 @@ public:
 		} else if (qstandarditemmodel_itemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
 			libqt_map callback_ret = qstandarditemmodel_itemdata_callback(this, cbval1);
-			return callback_ret;
+			return QMap<int, QVariant>();
 		} else {
 			return QStandardItemModel::itemData(index);
 		}
@@ -680,7 +680,10 @@ public:
 			return QStandardItemModel::setItemData(index, roles);
 		} else if (qstandarditemmodel_setitemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
-			libqt_map cbval2 = roles;
+			libqt_map cbval2;
+			cbval2.len = roles.size();
+			cbval2.keys = nullptr;
+			cbval2.values = nullptr;
 			bool callback_ret = qstandarditemmodel_setitemdata_callback(this, cbval1, cbval2);
 			return callback_ret;
 		} else {
@@ -709,7 +712,7 @@ public:
 			return QStandardItemModel::mimeTypes();
 		} else if (qstandarditemmodel_mimetypes_callback != nullptr) {
 			libqt_list callback_ret = qstandarditemmodel_mimetypes_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QStandardItemModel::mimeTypes();
 		}
@@ -721,7 +724,9 @@ public:
 			qstandarditemmodel_mimedata_isbase = false;
 			return QStandardItemModel::mimeData(indexes);
 		} else if (qstandarditemmodel_mimedata_callback != nullptr) {
-			libqt_list cbval1 = indexes;
+			libqt_list cbval1;
+			cbval1.len = indexes.size();
+			cbval1.data = nullptr;
 			QMimeData* callback_ret = qstandarditemmodel_mimedata_callback(this, cbval1);
 			return callback_ret;
 		} else {

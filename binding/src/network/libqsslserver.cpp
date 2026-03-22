@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTcpServer>
 #include <qsslserver.h>
 #include "libqsslserver.h"
@@ -48,7 +49,7 @@ int QSslServer_HandshakeTimeout(const QSslServer* self) {
 }
 
 void QSslServer_SslErrors(QSslServer* self, QSslSocket* socket, const libqt_list errors) {
-	self->sslErrors(socket, *errors);
+	self->sslErrors(socket, QList<QSslError>());
 }
 
 void QSslServer_Connect_SslErrors(QSslServer* self, intptr_t slot) {

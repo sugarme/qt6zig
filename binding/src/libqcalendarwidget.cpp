@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextCharFormat>
 #include <QWidget>
 #include <qcalendarwidget.h>
@@ -146,7 +147,12 @@ void QCalendarWidget_SetWeekdayTextFormat(QCalendarWidget* self, int dayOfWeek, 
 }
 
 libqt_map QCalendarWidget_DateTextFormat(const QCalendarWidget* self) {
-	return self->dateTextFormat();
+	auto _ret = self->dateTextFormat();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QTextCharFormat* QCalendarWidget_DateTextFormat2(const QCalendarWidget* self, QDate* date) {

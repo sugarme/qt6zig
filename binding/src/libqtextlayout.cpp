@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextBlock>
 #include <QTextCharFormat>
 #include <QTextFormat>
@@ -29,15 +30,11 @@ QTextInlineObject* QTextInlineObject_new2(QTextInlineObject* other) {
 	 return new QTextInlineObject(*other);
 }
 
-QTextInlineObject* QTextInlineObject_new3(int i, QTextEngine* e) {
-	 return new QTextInlineObject(i, e);
-}
-
-QTextInlineObject* QTextInlineObject_new4() {
+QTextInlineObject* QTextInlineObject_new3() {
 	 return new QTextInlineObject();
 }
 
-QTextInlineObject* QTextInlineObject_new5(const QTextInlineObject* param1) {
+QTextInlineObject* QTextInlineObject_new4(const QTextInlineObject* param1) {
 	 return new QTextInlineObject(*param1);
 }
 
@@ -182,11 +179,20 @@ libqt_string QTextLayout_PreeditAreaText(const QTextLayout* self) {
 }
 
 void QTextLayout_SetFormats(QTextLayout* self, const libqt_list overrides) {
-	self->setFormats(*overrides);
+	self->setFormats(QList<QTextLayout::FormatRange>());
 }
 
 libqt_list QTextLayout_Formats(const QTextLayout* self) {
-	return self->formats();
+	auto _ret = self->formats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextLayout_ClearFormats(QTextLayout* self) {
@@ -290,15 +296,29 @@ double QTextLayout_MaximumWidth(const QTextLayout* self) {
 }
 
 libqt_list QTextLayout_GlyphRuns(const QTextLayout* self, int from, int length, quint16 flags) {
-	return self->glyphRuns(from, length, static_cast<QFlags<QTextLayout::GlyphRunRetrievalFlag>>(flags));
+	auto _ret = self->glyphRuns(from, length, static_cast<QFlags<QTextLayout::GlyphRunRetrievalFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTextLayout_GlyphRuns2(const QTextLayout* self) {
-	return self->glyphRuns();
-}
-
-QTextEngine* QTextLayout_Engine(const QTextLayout* self) {
-	return self->engine();
+	auto _ret = self->glyphRuns();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextLayout_SetFlags(QTextLayout* self, int flags) {
@@ -314,19 +334,37 @@ int QTextLayout_PreviousCursorPosition2(const QTextLayout* self, int oldPos, int
 }
 
 void QTextLayout_Draw3(const QTextLayout* self, QPainter* p, const QPointF* pos, const libqt_list selections) {
-	self->draw(p, *pos, *selections);
+	self->draw(p, *pos, QList<QTextLayout::FormatRange>());
 }
 
 void QTextLayout_Draw4(const QTextLayout* self, QPainter* p, const QPointF* pos, const libqt_list selections, const QRectF* clip) {
-	self->draw(p, *pos, *selections, *clip);
+	self->draw(p, *pos, QList<QTextLayout::FormatRange>(), *clip);
 }
 
 libqt_list QTextLayout_GlyphRuns1(const QTextLayout* self, int from) {
-	return self->glyphRuns(from);
+	auto _ret = self->glyphRuns(from);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTextLayout_GlyphRuns22(const QTextLayout* self, int from, int length) {
-	return self->glyphRuns(from, length);
+	auto _ret = self->glyphRuns(from, length);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextLayout_Delete(QTextLayout* self) {
@@ -462,11 +500,29 @@ void QTextLine_Draw(const QTextLine* self, QPainter* painter, const QPointF* pos
 }
 
 libqt_list QTextLine_GlyphRuns(const QTextLine* self, int from, int length, quint16 flags) {
-	return self->glyphRuns(from, length, static_cast<QFlags<QTextLayout::GlyphRunRetrievalFlag>>(flags));
+	auto _ret = self->glyphRuns(from, length, static_cast<QFlags<QTextLayout::GlyphRunRetrievalFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTextLine_GlyphRuns2(const QTextLine* self) {
-	return self->glyphRuns();
+	auto _ret = self->glyphRuns();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 double QTextLine_CursorToX22(const QTextLine* self, int* cursorPos, int edge) {
@@ -482,11 +538,29 @@ int QTextLine_XToCursor2(const QTextLine* self, double x, int param2) {
 }
 
 libqt_list QTextLine_GlyphRuns1(const QTextLine* self, int from) {
-	return self->glyphRuns(from);
+	auto _ret = self->glyphRuns(from);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QTextLine_GlyphRuns22(const QTextLine* self, int from, int length) {
-	return self->glyphRuns(from, length);
+	auto _ret = self->glyphRuns(from, length);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextLine_Delete(QTextLine* self) {

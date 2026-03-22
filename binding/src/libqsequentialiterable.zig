@@ -13,10 +13,6 @@ pub const qsequentialiterator = struct {
         return qtc.QSequentialIterator_OperatorMinusGreater(@ptrCast(self));
     }
 
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QSequentialIterator_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QSequentialIterator_Delete(@ptrCast(self));
@@ -30,14 +26,6 @@ pub const qsequentialconstiterator = struct {
         return qtc.QSequentialConstIterator_OperatorMultiply(@ptrCast(self));
     }
 
-    pub fn OperatorMinusGreater(self: ?*anyopaque, ) QtC.QVariantConstPointer {
-        return qtc.QSequentialConstIterator_OperatorMinusGreater(@ptrCast(self));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QSequentialConstIterator_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QSequentialConstIterator_Delete(@ptrCast(self));
@@ -48,38 +36,20 @@ pub const qsequentialconstiterator = struct {
 pub const qsequentialiterable = struct {
 
     /// New constructs a new QSequentialIterable object.
-    pub fn New(other: ?*anyopaque) QtC.QSequentialIterable {
-        return qtc.QSequentialIterable_new(@ptrCast(other));
+    pub fn New() QtC.QSequentialIterable {
+        return qtc.QSequentialIterable_new();
     }
 
 
     /// New2 constructs a new QSequentialIterable object.
-    pub fn New2(other: ?*anyopaque) QtC.QSequentialIterable {
-        return qtc.QSequentialIterable_new2(@ptrCast(other));
+    pub fn New2(metaSequence: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QSequentialIterable {
+        return qtc.QSequentialIterable_new2(@ptrCast(metaSequence), @ptrCast(metaType), @ptrCast(iterable));
     }
 
 
     /// New3 constructs a new QSequentialIterable object.
-    pub fn New3() QtC.QSequentialIterable {
-        return qtc.QSequentialIterable_new3();
-    }
-
-
-    /// New4 constructs a new QSequentialIterable object.
-    pub fn New4(metaSequence: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QSequentialIterable {
-        return qtc.QSequentialIterable_new4(@ptrCast(metaSequence), @ptrCast(metaType), @ptrCast(iterable));
-    }
-
-
-    /// New5 constructs a new QSequentialIterable object.
-    pub fn New5(metaSequence: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QSequentialIterable {
-        return qtc.QSequentialIterable_new5(@ptrCast(metaSequence), @ptrCast(metaType), @ptrCast(iterable));
-    }
-
-
-    /// New6 constructs a new QSequentialIterable object.
-    pub fn New6(param1: ?*anyopaque) QtC.QSequentialIterable {
-        return qtc.QSequentialIterable_new6(@ptrCast(param1));
+    pub fn New3(metaSequence: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QSequentialIterable {
+        return qtc.QSequentialIterable_new3(@ptrCast(metaSequence), @ptrCast(metaType), @ptrCast(iterable));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -135,10 +105,6 @@ pub const qsequentialiterable = struct {
 
     pub fn ValueMetaType(self: ?*anyopaque, ) QtC.QMetaType {
         return qtc.QSequentialIterable_ValueMetaType(@ptrCast(self));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QSequentialIterable_OperatorAssign(@ptrCast(self), @ptrCast(param1));
     }
 
     pub fn AddValue2(self: ?*anyopaque, value: ?*anyopaque, position: i32) void {

@@ -172,18 +172,6 @@ QTransform* QTransform_RotateRadians2(QTransform* self, double a) {
 	return new QTransform(self->rotateRadians(a));
 }
 
-bool QTransform_SquareToQuad(const QPolygonF* square, QTransform* result) {
-	return QTransform::squareToQuad(*square, *result);
-}
-
-bool QTransform_QuadToSquare(const QPolygonF* quad, QTransform* result) {
-	return QTransform::quadToSquare(*quad, *result);
-}
-
-bool QTransform_QuadToQuad(const QPolygonF* one, const QPolygonF* two, QTransform* result) {
-	return QTransform::quadToQuad(*one, *two, *result);
-}
-
 bool QTransform_OperatorEqual(const QTransform* self, const QTransform* param1) {
 	return self->operator==(*param1);
 }
@@ -224,24 +212,12 @@ QLineF* QTransform_Map4(const QTransform* self, const QLineF* l) {
 	return new QLineF(self->map(*l));
 }
 
-QPolygonF* QTransform_Map5(const QTransform* self, const QPolygonF* a) {
-	return new QPolygonF(self->map(*a));
-}
-
-QPolygon* QTransform_Map6(const QTransform* self, const QPolygon* a) {
-	return new QPolygon(self->map(*a));
-}
-
 QRegion* QTransform_Map7(const QTransform* self, const QRegion* r) {
 	return new QRegion(self->map(*r));
 }
 
 QPainterPath* QTransform_Map8(const QTransform* self, const QPainterPath* p) {
 	return new QPainterPath(self->map(*p));
-}
-
-QPolygon* QTransform_MapToPolygon(const QTransform* self, const QRect* r) {
-	return new QPolygon(self->mapToPolygon(*r));
 }
 
 QRect* QTransform_MapRect(const QTransform* self, const QRect* param1) {

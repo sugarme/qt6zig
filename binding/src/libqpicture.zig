@@ -144,10 +144,6 @@ return qtc.QPicture_Save2(@ptrCast(self), fileName_str);
         return qtc.QPicture_QBaseMetric(@ptrCast(self), @intCast(m));
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QExplicitlySharedDataPointer<QPicturePrivate> {
-        return @ptrCast(qtc.QPicture_DataPtr(@ptrCast(self)));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QPicture_Delete(@ptrCast(self));

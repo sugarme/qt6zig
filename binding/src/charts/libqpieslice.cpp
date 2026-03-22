@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpieslice.h>
 #include "libqpieslice.h"
 #include "libqpieslice.hxx"

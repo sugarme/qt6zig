@@ -145,8 +145,6 @@ const void* QVariant_Data2(const QVariant* self);
 void QVariant_SetValue(QVariant* self, const QVariant* avalue);
 QVariant* QVariant_FromMetaType(QMetaType* typeVal);
 QPartialOrdering* QVariant_Compare(const QVariant* lhs, const QVariant* rhs);
-QVariant__Private* QVariant_DataPtr(QVariant* self);
-const QVariant__Private* QVariant_DataPtr2(const QVariant* self);
 int QVariant_ToInt1(const QVariant* self, bool* ok);
 unsigned int QVariant_ToUInt1(const QVariant* self, bool* ok);
 long long QVariant_ToLongLong1(const QVariant* self, bool* ok);
@@ -158,10 +156,8 @@ QVariant* QVariant_FromMetaType2(QMetaType* typeVal, const void* copyVal);
 void QVariant_Delete(QVariant* self);
 
 QVariantConstPointer* QVariantConstPointer_new(QVariant* variant);
-QVariantConstPointer* QVariantConstPointer_new2(const QVariantConstPointer* param1);
 QVariant* QVariantConstPointer_OperatorMultiply(const QVariantConstPointer* self);
 const QVariant* QVariantConstPointer_OperatorMinusGreater(const QVariantConstPointer* self);
-void QVariantConstPointer_OperatorAssign(QVariantConstPointer* self, const QVariantConstPointer* param1);
 void QVariantConstPointer_Delete(QVariantConstPointer* self);
 
 #ifdef __cplusplus

@@ -45,7 +45,16 @@ long long QMediaTimeRange_LatestTime(const QMediaTimeRange* self) {
 }
 
 libqt_list QMediaTimeRange_Intervals(const QMediaTimeRange* self) {
-	return self->intervals();
+	auto _ret = self->intervals();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QMediaTimeRange_IsEmpty(const QMediaTimeRange* self) {

@@ -37,10 +37,6 @@ return  _ret;
         return qtc.QSequentialAnimationGroup_CurrentAnimation(@ptrCast(self));
     }
 
-    pub fn BindableCurrentAnimation(self: ?*anyopaque, ) QBindable<QAbstractAnimation *> {
-        return qtc.QSequentialAnimationGroup_BindableCurrentAnimation(@ptrCast(self));
-    }
-
     pub fn Duration(self: ?*anyopaque, ) i32 {
         return qtc.QSequentialAnimationGroup_Duration(@ptrCast(self));
     }

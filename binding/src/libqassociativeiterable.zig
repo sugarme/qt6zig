@@ -21,10 +21,6 @@ pub const qassociativeiterator = struct {
         return qtc.QAssociativeIterator_OperatorMinusGreater(@ptrCast(self));
     }
 
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QAssociativeIterator_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QAssociativeIterator_Delete(@ptrCast(self));
@@ -46,14 +42,6 @@ pub const qassociativeconstiterator = struct {
         return qtc.QAssociativeConstIterator_OperatorMultiply(@ptrCast(self));
     }
 
-    pub fn OperatorMinusGreater(self: ?*anyopaque, ) QtC.QVariantConstPointer {
-        return qtc.QAssociativeConstIterator_OperatorMinusGreater(@ptrCast(self));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QAssociativeConstIterator_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QAssociativeConstIterator_Delete(@ptrCast(self));
@@ -64,38 +52,20 @@ pub const qassociativeconstiterator = struct {
 pub const qassociativeiterable = struct {
 
     /// New constructs a new QAssociativeIterable object.
-    pub fn New(other: ?*anyopaque) QtC.QAssociativeIterable {
-        return qtc.QAssociativeIterable_new(@ptrCast(other));
+    pub fn New() QtC.QAssociativeIterable {
+        return qtc.QAssociativeIterable_new();
     }
 
 
     /// New2 constructs a new QAssociativeIterable object.
-    pub fn New2(other: ?*anyopaque) QtC.QAssociativeIterable {
-        return qtc.QAssociativeIterable_new2(@ptrCast(other));
+    pub fn New2(metaAssociation: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QAssociativeIterable {
+        return qtc.QAssociativeIterable_new2(@ptrCast(metaAssociation), @ptrCast(metaType), @ptrCast(iterable));
     }
 
 
     /// New3 constructs a new QAssociativeIterable object.
-    pub fn New3() QtC.QAssociativeIterable {
-        return qtc.QAssociativeIterable_new3();
-    }
-
-
-    /// New4 constructs a new QAssociativeIterable object.
-    pub fn New4(metaAssociation: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QAssociativeIterable {
-        return qtc.QAssociativeIterable_new4(@ptrCast(metaAssociation), @ptrCast(metaType), @ptrCast(iterable));
-    }
-
-
-    /// New5 constructs a new QAssociativeIterable object.
-    pub fn New5(metaAssociation: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QAssociativeIterable {
-        return qtc.QAssociativeIterable_new5(@ptrCast(metaAssociation), @ptrCast(metaType), @ptrCast(iterable));
-    }
-
-
-    /// New6 constructs a new QAssociativeIterable object.
-    pub fn New6(param1: ?*anyopaque) QtC.QAssociativeIterable {
-        return qtc.QAssociativeIterable_new6(@ptrCast(param1));
+    pub fn New3(metaAssociation: ?*anyopaque, metaType: ?*anyopaque, iterable: ?*anyopaque) QtC.QAssociativeIterable {
+        return qtc.QAssociativeIterable_new3(@ptrCast(metaAssociation), @ptrCast(metaType), @ptrCast(iterable));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -163,10 +133,6 @@ pub const qassociativeiterable = struct {
 
     pub fn SetValue(self: ?*anyopaque, key: ?*anyopaque, mapped: ?*anyopaque) void {
         qtc.QAssociativeIterable_SetValue(@ptrCast(self), @ptrCast(key), @ptrCast(mapped));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QAssociativeIterable_OperatorAssign(@ptrCast(self), @ptrCast(param1));
     }
 
     /// Delete this object from C++ memory.

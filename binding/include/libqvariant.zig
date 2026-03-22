@@ -463,14 +463,6 @@ return  std.mem.span(_ret);
         return qtc.QVariant_Compare(@ptrCast(lhs), @ptrCast(rhs));
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QtC.QVariant__Private {
-        return qtc.QVariant_DataPtr(@ptrCast(self));
-    }
-
-    pub fn DataPtr2(self: ?*anyopaque, ) QtC.QVariant__Private {
-        return qtc.QVariant_DataPtr2(@ptrCast(self));
-    }
-
     pub fn ToInt1(self: ?*anyopaque, ok: *bool) i32 {
         return qtc.QVariant_ToInt1(@ptrCast(self), @ptrCast(ok));
     }
@@ -518,22 +510,12 @@ pub const qvariantconstpointer = struct {
     }
 
 
-    /// New2 constructs a new QVariantConstPointer object.
-    pub fn New2(param1: ?*anyopaque) QtC.QVariantConstPointer {
-        return qtc.QVariantConstPointer_new2(@ptrCast(param1));
-    }
-
-
     pub fn OperatorMultiply(self: ?*anyopaque, ) QtC.QVariant {
         return qtc.QVariantConstPointer_OperatorMultiply(@ptrCast(self));
     }
 
     pub fn OperatorMinusGreater(self: ?*anyopaque, ) QtC.QVariant {
         return qtc.QVariantConstPointer_OperatorMinusGreater(@ptrCast(self));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QVariantConstPointer_OperatorAssign(@ptrCast(self), @ptrCast(param1));
     }
 
     /// Delete this object from C++ memory.

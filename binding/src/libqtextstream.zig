@@ -18,18 +18,22 @@ pub const qtextstream = struct {
 
 
     /// New3 constructs a new QTextStream object.
-    pub fn New3(fileHandle: *FILE) QtC.QTextStream {
-        return qtc.QTextStream_new3(@ptrCast(fileHandle));
-    }
-
-
-    /// New4 constructs a new QTextStream object.
-    pub fn New4(stringVal: []const u8) QtC.QTextStream {
+    pub fn New3(stringVal: []const u8) QtC.QTextStream {
         const stringVal_str = qtc.libqt_string{
     .len = stringVal.len,
     .data = stringVal.ptr,
 };
-return qtc.QTextStream_new4(stringVal_str);
+return qtc.QTextStream_new3(stringVal_str);
+    }
+
+
+    /// New4 constructs a new QTextStream object.
+    pub fn New4(array: []u8) QtC.QTextStream {
+        const array_str = qtc.libqt_string{
+    .len = array.len,
+    .data = array.ptr,
+};
+return qtc.QTextStream_new4(array_str);
     }
 
 
@@ -44,48 +48,32 @@ return qtc.QTextStream_new5(array_str);
 
 
     /// New6 constructs a new QTextStream object.
-    pub fn New6(array: []u8) QtC.QTextStream {
-        const array_str = qtc.libqt_string{
-    .len = array.len,
-    .data = array.ptr,
-};
-return qtc.QTextStream_new6(array_str);
-    }
-
-
-    /// New7 constructs a new QTextStream object.
-    pub fn New7(fileHandle: *FILE, openMode: i32) QtC.QTextStream {
-        return qtc.QTextStream_new7(@ptrCast(fileHandle), @intCast(openMode));
-    }
-
-
-    /// New8 constructs a new QTextStream object.
-    pub fn New8(stringVal: []const u8, openMode: i32) QtC.QTextStream {
+    pub fn New6(stringVal: []const u8, openMode: i32) QtC.QTextStream {
         const stringVal_str = qtc.libqt_string{
     .len = stringVal.len,
     .data = stringVal.ptr,
 };
-return qtc.QTextStream_new8(stringVal_str, @intCast(openMode));
+return qtc.QTextStream_new6(stringVal_str, @intCast(openMode));
     }
 
 
-    /// New9 constructs a new QTextStream object.
-    pub fn New9(array: []u8, openMode: i32) QtC.QTextStream {
+    /// New7 constructs a new QTextStream object.
+    pub fn New7(array: []u8, openMode: i32) QtC.QTextStream {
         const array_str = qtc.libqt_string{
     .len = array.len,
     .data = array.ptr,
 };
-return qtc.QTextStream_new9(array_str, @intCast(openMode));
+return qtc.QTextStream_new7(array_str, @intCast(openMode));
     }
 
 
-    /// New10 constructs a new QTextStream object.
-    pub fn New10(array: []u8, openMode: i32) QtC.QTextStream {
+    /// New8 constructs a new QTextStream object.
+    pub fn New8(array: []u8, openMode: i32) QtC.QTextStream {
         const array_str = qtc.libqt_string{
     .len = array.len,
     .data = array.ptr,
 };
-return qtc.QTextStream_new10(array_str, @intCast(openMode));
+return qtc.QTextStream_new8(array_str, @intCast(openMode));
     }
 
 
@@ -393,14 +381,6 @@ return qtc.QTextStream_OperatorShiftRight15(@ptrCast(self), array_str);
 return qtc.QTextStream_OperatorShiftLeft14(@ptrCast(self), s_str);
     }
 
-    pub fn OperatorShiftLeft15(self: ?*anyopaque, s: []const u8) QtC.QTextStream {
-        return qtc.QTextStream_OperatorShiftLeft15(@ptrCast(self), @ptrCast(s));
-    }
-
-    pub fn OperatorShiftLeft16(self: ?*anyopaque, s: QLatin1StringView) QtC.QTextStream {
-        return qtc.QTextStream_OperatorShiftLeft16(@ptrCast(self), s);
-    }
-
     pub fn OperatorShiftLeft17(self: ?*anyopaque, array: []u8) QtC.QTextStream {
         const array_str = qtc.libqt_string{
     .len = array.len,
@@ -449,36 +429,6 @@ return qtc.QTextStream_ReadLineInto2(@ptrCast(self), line_str, maxlen);
 
 /// https://doc.qt.io/qt-6/qtextstreammanipulator.html
 pub const qtextstreammanipulator = struct {
-
-    /// New constructs a new QTextStreamManipulator object.
-    pub fn New(other: ?*anyopaque) QtC.QTextStreamManipulator {
-        return qtc.QTextStreamManipulator_new(@ptrCast(other));
-    }
-
-
-    /// New2 constructs a new QTextStreamManipulator object.
-    pub fn New2(other: ?*anyopaque) QtC.QTextStreamManipulator {
-        return qtc.QTextStreamManipulator_new2(@ptrCast(other));
-    }
-
-
-    /// New3 constructs a new QTextStreamManipulator object.
-    pub fn New3(m: void (QTextStream::*)(int), a: i32) QtC.QTextStreamManipulator {
-        return qtc.QTextStreamManipulator_new3(m, a);
-    }
-
-
-    /// New4 constructs a new QTextStreamManipulator object.
-    pub fn New4(m: void (QTextStream::*)(QChar), c: QtC.QChar) QtC.QTextStreamManipulator {
-        return qtc.QTextStreamManipulator_new4(m, @ptrCast(c));
-    }
-
-
-    /// New5 constructs a new QTextStreamManipulator object.
-    pub fn New5(param1: ?*anyopaque) QtC.QTextStreamManipulator {
-        return qtc.QTextStreamManipulator_new5(@ptrCast(param1));
-    }
-
     /// CopyAssign shallow copies `other` into `self`.
     pub fn CopyAssign(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QTextStreamManipulator_CopyAssign(@ptrCast(self), @ptrCast(other));

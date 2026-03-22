@@ -7,7 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <qjsonobject.h>
 #include "libqjsonobject.h"
 #include "libqjsonobject.hxx"
@@ -29,23 +29,47 @@ void QJsonObject_Swap(QJsonObject* self, QJsonObject* other) {
 }
 
 QJsonObject* QJsonObject_FromVariantMap(const libqt_map mapVal) {
-	return new QJsonObject(QJsonObject::fromVariantMap(*mapVal));
+	return new QJsonObject(QJsonObject::fromVariantMap(QMap<QString, QVariant>()));
 }
 
 libqt_map QJsonObject_ToVariantMap(const QJsonObject* self) {
-	return self->toVariantMap();
+	auto _ret = self->toVariantMap();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QJsonObject* QJsonObject_FromVariantHash(const libqt_map mapVal) {
-	return new QJsonObject(QJsonObject::fromVariantHash(*mapVal));
+	return new QJsonObject(QJsonObject::fromVariantHash(QHash<QString, QVariant>()));
 }
 
 libqt_map QJsonObject_ToVariantHash(const QJsonObject* self) {
-	return self->toVariantHash();
+	auto _ret = self->toVariantHash();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 libqt_list QJsonObject_Keys(const QJsonObject* self) {
-	return self->keys();
+	auto _ret = self->keys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 ptrdiff_t QJsonObject_Size(const QJsonObject* self) {
@@ -72,22 +96,6 @@ QJsonValue* QJsonObject_OperatorSubscript(const QJsonObject* self, const libqt_s
 	return new QJsonValue(self->operator[](QString::fromUtf8(key.data, key.len)));
 }
 
-QJsonValue* QJsonObject_Value2(const QJsonObject* self, QStringView* key) {
-	return new QJsonValue(self->value(*key));
-}
-
-QJsonValue* QJsonObject_Value3(const QJsonObject* self, QLatin1StringView key) {
-	return new QJsonValue(self->value(key));
-}
-
-QJsonValue* QJsonObject_OperatorSubscript3(const QJsonObject* self, QStringView* key) {
-	return new QJsonValue(self->operator[](*key));
-}
-
-QJsonValue* QJsonObject_OperatorSubscript4(const QJsonObject* self, QLatin1StringView key) {
-	return new QJsonValue(self->operator[](key));
-}
-
 void QJsonObject_Remove(QJsonObject* self, const libqt_string key) {
 	self->remove(QString::fromUtf8(key.data, key.len));
 }
@@ -98,30 +106,6 @@ QJsonValue* QJsonObject_Take(QJsonObject* self, const libqt_string key) {
 
 bool QJsonObject_Contains(const QJsonObject* self, const libqt_string key) {
 	return self->contains(QString::fromUtf8(key.data, key.len));
-}
-
-void QJsonObject_Remove2(QJsonObject* self, QStringView* key) {
-	self->remove(*key);
-}
-
-void QJsonObject_Remove3(QJsonObject* self, QLatin1StringView key) {
-	self->remove(key);
-}
-
-QJsonValue* QJsonObject_Take2(QJsonObject* self, QStringView* key) {
-	return new QJsonValue(self->take(*key));
-}
-
-QJsonValue* QJsonObject_Take3(QJsonObject* self, QLatin1StringView key) {
-	return new QJsonValue(self->take(key));
-}
-
-bool QJsonObject_Contains2(const QJsonObject* self, QStringView* key) {
-	return self->contains(*key);
-}
-
-bool QJsonObject_Contains3(const QJsonObject* self, QLatin1StringView key) {
-	return self->contains(key);
 }
 
 It::value_type* QJsonObject_Begin(QJsonObject* self) {
@@ -168,38 +152,6 @@ It::value_type* QJsonObject_Insert(QJsonObject* self, const libqt_string key, co
 	return self->insert(QString::fromUtf8(key.data, key.len), *value);
 }
 
-It::value_type* QJsonObject_Find3(QJsonObject* self, QStringView* key) {
-	return self->find(*key);
-}
-
-It::value_type* QJsonObject_Find4(QJsonObject* self, QLatin1StringView key) {
-	return self->find(key);
-}
-
-const QRect* QJsonObject_Find5(const QJsonObject* self, QStringView* key) {
-	return self->find(*key);
-}
-
-const QRect* QJsonObject_Find6(const QJsonObject* self, QLatin1StringView key) {
-	return self->find(key);
-}
-
-const QRect* QJsonObject_ConstFind2(const QJsonObject* self, QStringView* key) {
-	return self->constFind(*key);
-}
-
-const QRect* QJsonObject_ConstFind3(const QJsonObject* self, QLatin1StringView key) {
-	return self->constFind(key);
-}
-
-It::value_type* QJsonObject_Insert2(QJsonObject* self, QStringView* key, const QJsonValue* value) {
-	return self->insert(*key, *value);
-}
-
-It::value_type* QJsonObject_Insert3(QJsonObject* self, QLatin1StringView key, const QJsonValue* value) {
-	return self->insert(key, *value);
-}
-
 bool QJsonObject_Empty(const QJsonObject* self) {
 	return self->empty();
 }
@@ -208,24 +160,12 @@ void QJsonObject_Delete(QJsonObject* self) {
     delete self;
 }
 
-QJsonObject__iterator* QJsonObject__iterator_new(const QJsonObject__iterator* other) {
-	 return new QJsonObject::iterator(*other);
-}
-
-QJsonObject__iterator* QJsonObject__iterator_new2() {
+QJsonObject__iterator* QJsonObject__iterator_new() {
 	 return new QJsonObject::iterator();
 }
 
-QJsonObject__iterator* QJsonObject__iterator_new3(QJsonObject* obj, ptrdiff_t index) {
+QJsonObject__iterator* QJsonObject__iterator_new2(QJsonObject* obj, ptrdiff_t index) {
 	 return new QJsonObject::iterator(obj, index);
-}
-
-QJsonObject__iterator* QJsonObject__iterator_new4(const QJsonObject__iterator* other) {
-	 return new QJsonObject::iterator(*other);
-}
-
-void QJsonObject__iterator_OperatorAssign(QJsonObject__iterator* self, const QJsonObject__iterator* other) {
-	self->operator=(*other);
 }
 
 libqt_string QJsonObject__iterator_Key(const QJsonObject__iterator* self) {
@@ -271,36 +211,20 @@ It::value_type* QJsonObject__iterator_OperatorMinusAssign(QJsonObject__iterator*
 	return self->operator-=(j);
 }
 
-ptrdiff_t QJsonObject__iterator_OperatorMinus2(const QJsonObject__iterator* self, QJsonObject__iterator* j) {
-	return self->operator-(*j);
-}
-
 void QJsonObject__iterator_Delete(QJsonObject__iterator* self) {
     delete self;
 }
 
-QJsonObject__const_iterator* QJsonObject__const_iterator_new(const QJsonObject__const_iterator* other) {
-	 return new QJsonObject::const_iterator(*other);
-}
-
-QJsonObject__const_iterator* QJsonObject__const_iterator_new2() {
+QJsonObject__const_iterator* QJsonObject__const_iterator_new() {
 	 return new QJsonObject::const_iterator();
 }
 
-QJsonObject__const_iterator* QJsonObject__const_iterator_new3(const QJsonObject* obj, ptrdiff_t index) {
+QJsonObject__const_iterator* QJsonObject__const_iterator_new2(const QJsonObject* obj, ptrdiff_t index) {
 	 return new QJsonObject::const_iterator(obj, index);
 }
 
-QJsonObject__const_iterator* QJsonObject__const_iterator_new4(const It::value_type* other) {
+QJsonObject__const_iterator* QJsonObject__const_iterator_new3(const It::value_type* other) {
 	 return new QJsonObject::const_iterator(other);
-}
-
-QJsonObject__const_iterator* QJsonObject__const_iterator_new5(const QJsonObject__const_iterator* other) {
-	 return new QJsonObject::const_iterator(*other);
-}
-
-void QJsonObject__const_iterator_OperatorAssign(QJsonObject__const_iterator* self, const QJsonObject__const_iterator* other) {
-	self->operator=(*other);
 }
 
 libqt_string QJsonObject__const_iterator_Key(const QJsonObject__const_iterator* self) {
@@ -352,10 +276,6 @@ const QRect* QJsonObject__const_iterator_OperatorMinusAssign(QJsonObject__const_
 	const_iterator& _ret = self->operator-=(j);
 	// Cast returned reference into pointer
 	return const_cast<QRect*>(&_ret);
-}
-
-ptrdiff_t QJsonObject__const_iterator_OperatorMinus2(const QJsonObject__const_iterator* self, QJsonObject__const_iterator* j) {
-	return self->operator-(*j);
 }
 
 void QJsonObject__const_iterator_Delete(QJsonObject__const_iterator* self) {

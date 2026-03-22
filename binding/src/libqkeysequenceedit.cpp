@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimerEvent>
 #include <QWidget>
 #include <qkeysequenceedit.h>
@@ -56,11 +57,20 @@ bool QKeySequenceEdit_IsClearButtonEnabled(const QKeySequenceEdit* self) {
 }
 
 void QKeySequenceEdit_SetFinishingKeyCombinations(QKeySequenceEdit* self, const libqt_list finishingKeyCombinations) {
-	self->setFinishingKeyCombinations(*finishingKeyCombinations);
+	self->setFinishingKeyCombinations(QList<QKeyCombination>());
 }
 
 libqt_list QKeySequenceEdit_FinishingKeyCombinations(const QKeySequenceEdit* self) {
-	return self->finishingKeyCombinations();
+	auto _ret = self->finishingKeyCombinations();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QKeySequenceEdit_SetKeySequence(QKeySequenceEdit* self, const QKeySequence* keySequence) {

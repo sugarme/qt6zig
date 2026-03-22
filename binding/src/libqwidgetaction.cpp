@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <QWidgetAction>
 #include <qwidgetaction.h>
@@ -175,9 +176,25 @@ vqwidgetaction->setQWidgetAction_DeleteWidget_Callback(reinterpret_cast<VirtualQ
 libqt_list QWidgetAction_CreatedWidgets(const QWidgetAction* self) {
 	auto* vqwidgetaction = dynamic_cast<const VirtualQWidgetAction*>(self);
 	if (vqwidgetaction && vqwidgetaction->isVirtualQWidgetAction) {
-	return vqwidgetaction->createdWidgets();
+	auto _ret = vqwidgetaction->createdWidgets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 	} else {
-	return self->QWidgetAction::createdWidgets();
+	auto _ret = self->QWidgetAction::createdWidgets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -186,7 +203,15 @@ libqt_list QWidgetAction_QBaseCreatedWidgets(const QWidgetAction* self) {
 	auto* vqwidgetaction = dynamic_cast<const VirtualQWidgetAction*>(self);
 	if (vqwidgetaction && vqwidgetaction->isVirtualQWidgetAction) {
 vqwidgetaction->setQWidgetAction_CreatedWidgets_IsBase(true);
-	return vqwidgetaction->createdWidgets();
+	auto _ret = vqwidgetaction->createdWidgets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 

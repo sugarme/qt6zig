@@ -16,6 +16,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QWidget>
 #include <qlistwidget.h>
@@ -371,7 +372,7 @@ void QListWidget_InsertItem2(QListWidget* self, int row, const libqt_string labe
 }
 
 void QListWidget_InsertItems(QListWidget* self, int row, const libqt_list labels) {
-	self->insertItems(row, *labels);
+	self->insertItems(row, QList<QString>());
 }
 
 void QListWidget_AddItem(QListWidget* self, const libqt_string label) {
@@ -383,7 +384,7 @@ void QListWidget_AddItem2(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_AddItems(QListWidget* self, const libqt_list labels) {
-	self->addItems(*labels);
+	self->addItems(QList<QString>());
 }
 
 QListWidgetItem* QListWidget_TakeItem(QListWidget* self, int row) {
@@ -471,15 +472,39 @@ void QListWidget_RemoveItemWidget(QListWidget* self, QListWidgetItem* item) {
 }
 
 libqt_list QListWidget_SelectedItems(const QListWidget* self) {
-	return self->selectedItems();
+	auto _ret = self->selectedItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QListWidget_FindItems(const QListWidget* self, const libqt_string text, int flags) {
-	return self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->findItems(QString::fromUtf8(text.data, text.len), static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QListWidget_Items(const QListWidget* self, const QMimeData* data) {
-	return self->items(data);
+	auto _ret = self->items(data);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QModelIndex* QListWidget_IndexFromItem(const QListWidget* self, const QListWidgetItem* item) {
@@ -713,9 +738,37 @@ vqlistwidget->setQListWidget_Event_Callback(reinterpret_cast<VirtualQListWidget:
 libqt_list QListWidget_MimeTypes(const QListWidget* self) {
 	auto* vqlistwidget = dynamic_cast<const VirtualQListWidget*>(self);
 	if (vqlistwidget && vqlistwidget->isVirtualQListWidget) {
-	return vqlistwidget->mimeTypes();
+	auto _ret = vqlistwidget->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 	} else {
-	return self->QListWidget::mimeTypes();
+	auto _ret = self->QListWidget::mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -724,7 +777,21 @@ libqt_list QListWidget_QBaseMimeTypes(const QListWidget* self) {
 	auto* vqlistwidget = dynamic_cast<const VirtualQListWidget*>(self);
 	if (vqlistwidget && vqlistwidget->isVirtualQListWidget) {
 vqlistwidget->setQListWidget_MimeTypes_IsBase(true);
-	return vqlistwidget->mimeTypes();
+	auto _ret = vqlistwidget->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -740,9 +807,9 @@ vqlistwidget->setQListWidget_MimeTypes_Callback(reinterpret_cast<VirtualQListWid
 QMimeData* QListWidget_MimeData(const QListWidget* self, const libqt_list items) {
 	auto* vqlistwidget = dynamic_cast<const VirtualQListWidget*>(self);
 	if (vqlistwidget && vqlistwidget->isVirtualQListWidget) {
-	return vqlistwidget->mimeData(*items);
+	return vqlistwidget->mimeData(QList<QListWidgetItem *>());
 	} else {
-	return self->QListWidget::mimeData(*items);
+	return self->QListWidget::mimeData(QList<QListWidgetItem *>());
 }
 }
 
@@ -751,7 +818,7 @@ QMimeData* QListWidget_QBaseMimeData(const QListWidget* self, const libqt_list i
 	auto* vqlistwidget = dynamic_cast<const VirtualQListWidget*>(self);
 	if (vqlistwidget && vqlistwidget->isVirtualQListWidget) {
 vqlistwidget->setQListWidget_MimeData_IsBase(true);
-	return vqlistwidget->mimeData(*items);
+	return vqlistwidget->mimeData(QList<QListWidgetItem *>());
 }
 }
 

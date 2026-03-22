@@ -29,11 +29,7 @@ QByteArray* QByteArray_new6(const libqt_string param1) {
 	 return new QByteArray(QByteArray(param1.data, param1.len));
 }
 
-QByteArray* QByteArray_new7(const QArrayDataPointer<char>* dd) {
-	 return new QByteArray(*dd);
-}
-
-QByteArray* QByteArray_new8(const char* param1, ptrdiff_t size) {
+QByteArray* QByteArray_new7(const char* param1, ptrdiff_t size) {
 	 return new QByteArray(param1, size);
 }
 
@@ -728,7 +724,16 @@ libqt_string QByteArray_OperatorPlusAssign4(QByteArray* self, QByteArrayView* a)
 }
 
 libqt_list QByteArray_Split(const QByteArray* self, char sep) {
-	return self->split(sep);
+	auto _ret = self->split(sep);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QByteArray_Repeated(const QByteArray* self, ptrdiff_t times) {
@@ -1077,30 +1082,6 @@ const char** QByteArray_ConstEnd(const QByteArray* self) {
 	return self->constEnd();
 }
 
-std::reverse_iterator<char *> QByteArray_Rbegin(QByteArray* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<char *> QByteArray_Rend(QByteArray* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const char *> QByteArray_Rbegin2(const QByteArray* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<const char *> QByteArray_Rend2(const QByteArray* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const char *> QByteArray_Crbegin(const QByteArray* self) {
-	return self->crbegin();
-}
-
-std::reverse_iterator<const char *> QByteArray_Crend(const QByteArray* self) {
-	return self->crend();
-}
-
 void QByteArray_PushBack(QByteArray* self, char c) {
 	self->push_back(c);
 }
@@ -1167,14 +1148,6 @@ ptrdiff_t QByteArray_Length(const QByteArray* self) {
 
 bool QByteArray_IsNull(const QByteArray* self) {
 	return self->isNull();
-}
-
-const QArrayDataPointer<char>* QByteArray_DataPtr(const QByteArray* self) {
-	return self->data_ptr();
-}
-
-QArrayDataPointer<char>* QByteArray_DataPtr2(QByteArray* self) {
-	return self->data_ptr();
 }
 
 libqt_string QByteArray_Fill2(QByteArray* self, char c, ptrdiff_t size) {

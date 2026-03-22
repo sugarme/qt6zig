@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcapturablewindow.h>
 #include "libqcapturablewindow.h"
 #include "libqcapturablewindow.hxx"

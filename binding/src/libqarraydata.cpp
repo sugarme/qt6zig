@@ -3,14 +3,6 @@
 #include "libqarraydata.h"
 #include "libqarraydata.hxx"
 
-QBasicAtomicInteger<int> QArrayData_Ref_(const QArrayData* self) {
-	return self->ref_;
-}
-
-void QArrayData_SetRef_(QArrayData* self, QBasicAtomicInteger<int> ref_) {
-	self->ref_;
-}
-
 int QArrayData_Flags(const QArrayData* self) {
 	return self->flags;
 }

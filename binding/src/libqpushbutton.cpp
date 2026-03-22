@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionButton>
 #include <QWidget>
 #include <qpushbutton.h>

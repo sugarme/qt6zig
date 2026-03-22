@@ -69,14 +69,6 @@ return qtc.QSqlQuery_new6(query_str, @ptrCast(db));
         return qtc.QSqlQuery_IsNull(@ptrCast(self), field);
     }
 
-    pub fn IsNull2(self: ?*anyopaque, name: []const u8) bool {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlQuery_IsNull2(@ptrCast(self), name_str);
-    }
-
     pub fn At(self: ?*anyopaque, ) i32 {
         return qtc.QSqlQuery_At(@ptrCast(self));
     }
@@ -135,14 +127,6 @@ return qtc.QSqlQuery_Exec(@ptrCast(self), query_str);
 
     pub fn Value(self: ?*anyopaque, i: i32) QtC.QVariant {
         return qtc.QSqlQuery_Value(@ptrCast(self), i);
-    }
-
-    pub fn Value2(self: ?*anyopaque, name: []const u8) QtC.QVariant {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlQuery_Value2(@ptrCast(self), name_str);
     }
 
     pub fn SetNumericalPrecisionPolicy(self: ?*anyopaque, precisionPolicy: i32) void {

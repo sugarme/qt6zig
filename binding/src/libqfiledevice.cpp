@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qfiledevice.h>
 #include "libqfiledevice.h"
 #include "libqfiledevice.hxx"

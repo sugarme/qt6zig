@@ -24,7 +24,6 @@ public:
 	using QPagedPaintDevice_SetPageOrientation_Callback = bool (*)(QPagedPaintDevice*, int);
 	using QPagedPaintDevice_SetPageMargins_Callback = bool (*)(QPagedPaintDevice*, const QMarginsF*, int);
 	using QPagedPaintDevice_SetPageRanges_Callback = void (*)(QPagedPaintDevice*, const QPageRanges*);
-	using QPagedPaintDevice_Dd_Callback = QPagedPaintDevicePrivate* (*)();
 
 protected:
 	// Instance callback storage
@@ -34,7 +33,6 @@ protected:
 	mutable QPagedPaintDevice_SetPageOrientation_Callback qpagedpaintdevice_setpageorientation_callback = nullptr;
 	mutable QPagedPaintDevice_SetPageMargins_Callback qpagedpaintdevice_setpagemargins_callback = nullptr;
 	mutable QPagedPaintDevice_SetPageRanges_Callback qpagedpaintdevice_setpageranges_callback = nullptr;
-	mutable QPagedPaintDevice_Dd_Callback qpagedpaintdevice_dd_callback = nullptr;
 
 	// Instance base flags
     mutable bool qpagedpaintdevice_newpage_isbase = false;
@@ -43,7 +41,6 @@ protected:
     mutable bool qpagedpaintdevice_setpageorientation_isbase = false;
     mutable bool qpagedpaintdevice_setpagemargins_isbase = false;
     mutable bool qpagedpaintdevice_setpageranges_isbase = false;
-    mutable bool qpagedpaintdevice_dd_isbase = false;
 
 public:
 
@@ -54,7 +51,6 @@ public:
 		qpagedpaintdevice_setpageorientation_callback = nullptr;
 		qpagedpaintdevice_setpagemargins_callback = nullptr;
 		qpagedpaintdevice_setpageranges_callback = nullptr;
-		qpagedpaintdevice_dd_callback = nullptr;
 	}
 
 // Callback setters
@@ -64,7 +60,6 @@ public:
 	inline void setQPagedPaintDevice_SetPageOrientation_Callback(QPagedPaintDevice_SetPageOrientation_Callback cb) const { qpagedpaintdevice_setpageorientation_callback = cb; }
 	inline void setQPagedPaintDevice_SetPageMargins_Callback(QPagedPaintDevice_SetPageMargins_Callback cb) const { qpagedpaintdevice_setpagemargins_callback = cb; }
 	inline void setQPagedPaintDevice_SetPageRanges_Callback(QPagedPaintDevice_SetPageRanges_Callback cb) const { qpagedpaintdevice_setpageranges_callback = cb; }
-	inline void setQPagedPaintDevice_Dd_Callback(QPagedPaintDevice_Dd_Callback cb) const { qpagedpaintdevice_dd_callback = cb; }
 
 // Base flag setters
 	inline void setQPagedPaintDevice_NewPage_IsBase(bool value) const { qpagedpaintdevice_newpage_isbase = value; }
@@ -73,7 +68,6 @@ public:
 	inline void setQPagedPaintDevice_SetPageOrientation_IsBase(bool value) const { qpagedpaintdevice_setpageorientation_isbase = value; }
 	inline void setQPagedPaintDevice_SetPageMargins_IsBase(bool value) const { qpagedpaintdevice_setpagemargins_isbase = value; }
 	inline void setQPagedPaintDevice_SetPageRanges_IsBase(bool value) const { qpagedpaintdevice_setpageranges_isbase = value; }
-	inline void setQPagedPaintDevice_Dd_IsBase(bool value) const { qpagedpaintdevice_dd_isbase = value; }
 
 
 	// Virtual method for C ABI access and custom callback
@@ -155,23 +149,6 @@ public:
 			QPagedPaintDevice::setPageRanges(ranges);
 		}
 	}
-
-	// Virtual method for C ABI access and custom callback
-	QPagedPaintDevicePrivate* dd() {
-		if (qpagedpaintdevice_dd_isbase) {
-			qpagedpaintdevice_dd_isbase = false;
-			return QPagedPaintDevice::dd();
-		} else if (qpagedpaintdevice_dd_callback != nullptr) {
-			QPagedPaintDevicePrivate* callback_ret = qpagedpaintdevice_dd_callback();
-			return callback_ret;
-		} else {
-			return QPagedPaintDevice::dd();
-		}
-	}
-
-	// Friend functions
-	friend QPagedPaintDevicePrivate* QPagedPaintDevice_Dd(QPagedPaintDevice* self);
-	friend QPagedPaintDevicePrivate* QPagedPaintDevice_QBaseDd(QPagedPaintDevice* self);
 };
 
 #endif

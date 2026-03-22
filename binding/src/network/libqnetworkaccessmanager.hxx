@@ -61,7 +61,7 @@ public:
 			return QNetworkAccessManager::supportedSchemes();
 		} else if (qnetworkaccessmanager_supportedschemes_callback != nullptr) {
 			libqt_list callback_ret = qnetworkaccessmanager_supportedschemes_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QNetworkAccessManager::supportedSchemes();
 		}
@@ -90,7 +90,7 @@ public:
 			return QNetworkAccessManager::supportedSchemesImplementation();
 		} else if (qnetworkaccessmanager_supportedschemesimplementation_callback != nullptr) {
 			libqt_list callback_ret = qnetworkaccessmanager_supportedschemesimplementation_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QNetworkAccessManager::supportedSchemesImplementation();
 		}

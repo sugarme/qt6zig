@@ -69,10 +69,6 @@ pub const qopenglfunctions_1_0 = struct {
         qtc.QOpenGLFunctions_1_0_GlGetFloatv(@ptrCast(self), pname, @ptrCast(params));
     }
 
-    pub fn GlGetError(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFunctions_1_0_GlGetError(@ptrCast(self));
-    }
-
     pub fn GlGetDoublev(self: ?*anyopaque, pname: u32, params: *f64) void {
         qtc.QOpenGLFunctions_1_0_GlGetDoublev(@ptrCast(self), pname, @ptrCast(params));
     }

@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qhboxplotmodelmapper.h>
 #include "libqhboxplotmodelmapper.h"
 #include "libqhboxplotmodelmapper.hxx"

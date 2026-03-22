@@ -233,7 +233,7 @@ public:
 			return QAbstractItemDelegate::paintingRoles();
 		} else if (qabstractitemdelegate_paintingroles_callback != nullptr) {
 			libqt_list callback_ret = qabstractitemdelegate_paintingroles_callback();
-			return callback_ret;
+			return QList<int>();
 		} else {
 			return QAbstractItemDelegate::paintingRoles();
 		}

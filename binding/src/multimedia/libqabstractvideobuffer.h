@@ -28,11 +28,9 @@ typedef struct type_info type_info;
 
 
 QAbstractVideoBuffer* QAbstractVideoBuffer_new();
-QAbstractVideoBuffer* QAbstractVideoBuffer_new2(const QAbstractVideoBuffer* param1);
 QAbstractVideoBuffer__MapData* QAbstractVideoBuffer_Map(QAbstractVideoBuffer* self, int mode);
 void QAbstractVideoBuffer_Unmap(QAbstractVideoBuffer* self);
 QVideoFrameFormat* QAbstractVideoBuffer_Format(const QAbstractVideoBuffer* self);
-void QAbstractVideoBuffer_OperatorAssign(QAbstractVideoBuffer* self, const QAbstractVideoBuffer* param1);
 void QAbstractVideoBuffer_OnMap(QAbstractVideoBuffer* self, intptr_t slot);
 QAbstractVideoBuffer__MapData* QAbstractVideoBuffer_QBaseMap(QAbstractVideoBuffer* self, int mode);
 void QAbstractVideoBuffer_OnUnmap(QAbstractVideoBuffer* self, intptr_t slot);

@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionGroupBox>
 #include <QWidget>
 #include <qgroupbox.h>

@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <qnetworkdiskcache.h>
 #include "libqnetworkdiskcache.h"

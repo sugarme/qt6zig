@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qfile.h>
 #include "libqfile.h"
 #include "libqfile.hxx"
@@ -54,10 +55,6 @@ libqt_string QFile_FileName(const QFile* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-std::filesystem::path QFile_FilesystemFileName(const QFile* self) {
-	return self->filesystemFileName();
 }
 
 void QFile_SetFileName(QFile* self, const libqt_string name) {
@@ -126,10 +123,6 @@ libqt_string QFile_SymLinkTarget2(const libqt_string fileName) {
 	return _str;
 }
 
-std::filesystem::path QFile_FilesystemSymLinkTarget(const QFile* self) {
-	return self->filesystemSymLinkTarget();
-}
-
 bool QFile_Remove(QFile* self) {
 	return self->remove();
 }
@@ -176,10 +169,6 @@ bool QFile_Open(QFile* self, int flags) {
 
 bool QFile_Open2(QFile* self, int flags, int permissions) {
 	return self->open(static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(flags), static_cast<QFlags<QFileDevice::Permission>>(permissions));
-}
-
-bool QFile_Open3(QFile* self, FILE* f, int ioFlags) {
-	return self->open(f, static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(ioFlags));
 }
 
 bool QFile_Open4(QFile* self, int fd, int ioFlags) {
@@ -238,10 +227,6 @@ libqt_string QFile_Tr3(const char* s, const char* c, int n) {
 
 bool QFile_MoveToTrash22(const libqt_string fileName, libqt_string pathInTrash) {
 	return QFile::moveToTrash(QString::fromUtf8(fileName.data, fileName.len), QString::fromUtf8(pathInTrash.data, pathInTrash.len));
-}
-
-bool QFile_Open32(QFile* self, FILE* f, int ioFlags, int handleFlags) {
-	return self->open(f, static_cast<QFlags<QIODeviceBase::OpenModeFlag>>(ioFlags), static_cast<QFlags<QFileDevice::FileHandleFlag>>(handleFlags));
 }
 
 bool QFile_Open33(QFile* self, int fd, int ioFlags, int handleFlags) {

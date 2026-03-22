@@ -5,14 +5,6 @@ const qtc = @import("qt6c");%%_IMPORTLIBS_%%
 /// https://doc.qt.io/qt-6/qarraydata.html
 pub const qarraydata = struct {
 
-    pub fn Ref_(self: ?*anyopaque, ) QBasicAtomicInteger<int> {
-        return qtc.QArrayData_Ref_(@ptrCast(self));
-    }
-
-    pub fn SetRef_(self: ?*anyopaque, ref_: QBasicAtomicInteger<int>) void {
-        qtc.QArrayData_SetRef_(@ptrCast(self), ref_);
-    }
-
     pub fn Flags(self: ?*anyopaque, ) i32 {
         return qtc.QArrayData_Flags(@ptrCast(self));
     }

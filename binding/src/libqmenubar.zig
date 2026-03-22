@@ -143,10 +143,6 @@ return qtc.QMenuBar_AddMenu3(@ptrCast(self), @ptrCast(icon), title_str);
         qtc.QMenuBar_SetNativeMenuBar(@ptrCast(self), nativeMenuBar);
     }
 
-    pub fn PlatformMenuBar(self: ?*anyopaque, ) QPlatformMenuBar {
-        return @ptrCast(qtc.QMenuBar_PlatformMenuBar(@ptrCast(self)));
-    }
-
     pub fn SetVisible(self: ?*anyopaque, visible: bool) void {
         qtc.QMenuBar_SetVisible(@ptrCast(self), visible);
     }

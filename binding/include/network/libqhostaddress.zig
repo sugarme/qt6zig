@@ -63,30 +63,24 @@ pub const qhostaddress = struct {
 
 
     /// New5 constructs a new QHostAddress object.
-    pub fn New5(address: *const sockaddr) QtC.QHostAddress {
-        return qtc.QHostAddress_new5(@ptrCast(address));
-    }
-
-
-    /// New6 constructs a new QHostAddress object.
-    pub fn New6(address: []const u8) QtC.QHostAddress {
+    pub fn New5(address: []const u8) QtC.QHostAddress {
         const address_str = qtc.libqt_string{
     .len = address.len,
     .data = address.ptr,
 };
-return qtc.QHostAddress_new6(address_str);
+return qtc.QHostAddress_new5(address_str);
+    }
+
+
+    /// New6 constructs a new QHostAddress object.
+    pub fn New6(copyVal: ?*anyopaque) QtC.QHostAddress {
+        return qtc.QHostAddress_new6(@ptrCast(copyVal));
     }
 
 
     /// New7 constructs a new QHostAddress object.
-    pub fn New7(copyVal: ?*anyopaque) QtC.QHostAddress {
-        return qtc.QHostAddress_new7(@ptrCast(copyVal));
-    }
-
-
-    /// New8 constructs a new QHostAddress object.
-    pub fn New8(address: i32) QtC.QHostAddress {
-        return qtc.QHostAddress_new8(@intCast(address));
+    pub fn New7(address: i32) QtC.QHostAddress {
+        return qtc.QHostAddress_new7(@intCast(address));
     }
 
 
@@ -112,10 +106,6 @@ return qtc.QHostAddress_new6(address_str);
 
     pub fn SetAddress3(self: ?*anyopaque, ip6Addr: ?*anyopaque) void {
         qtc.QHostAddress_SetAddress3(@ptrCast(self), @ptrCast(ip6Addr));
-    }
-
-    pub fn SetAddress4(self: ?*anyopaque, address: *const sockaddr) void {
-        qtc.QHostAddress_SetAddress4(@ptrCast(self), @ptrCast(address));
     }
 
     pub fn SetAddress5(self: ?*anyopaque, address: []const u8) bool {

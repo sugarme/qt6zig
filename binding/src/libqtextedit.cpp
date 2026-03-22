@@ -23,6 +23,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextCharFormat>
 #include <QTextCursor>
 #include <QTextDocument>
@@ -342,11 +343,20 @@ void QTextEdit_SetAcceptRichText(QTextEdit* self, bool accept) {
 }
 
 void QTextEdit_SetExtraSelections(QTextEdit* self, const libqt_list selections) {
-	self->setExtraSelections(*selections);
+	self->setExtraSelections(QList<QTextEdit::ExtraSelection>());
 }
 
 libqt_list QTextEdit_ExtraSelections(const QTextEdit* self) {
-	return self->extraSelections();
+	auto _ret = self->extraSelections();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextEdit_MoveCursor(QTextEdit* self, int operation) {

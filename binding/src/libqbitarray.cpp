@@ -132,14 +132,6 @@ unsigned int QBitArray_ToUInt32(const QBitArray* self, int endianness) {
 	return self->toUInt32(static_cast<QSysInfo::Endian>(endianness));
 }
 
-QArrayDataPointer<char>* QBitArray_DataPtr(QBitArray* self) {
-	return self->data_ptr();
-}
-
-const QArrayDataPointer<char>* QBitArray_DataPtr2(const QBitArray* self) {
-	return self->data_ptr();
-}
-
 bool QBitArray_Fill22(QBitArray* self, bool aval, ptrdiff_t asize) {
 	return self->fill(aval, asize);
 }

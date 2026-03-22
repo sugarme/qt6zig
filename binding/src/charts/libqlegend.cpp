@@ -11,6 +11,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionGraphicsItem>
 #include <QWidget>
 #include <qlegend.h>
@@ -117,7 +118,15 @@ bool QLegend_IsBackgroundVisible(const QLegend* self) {
 }
 
 libqt_list QLegend_Markers(const QLegend* self) {
-	return self->markers();
+	auto _ret = self->markers();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 bool QLegend_ReverseMarkers(QLegend* self) {
@@ -289,7 +298,15 @@ void QLegend_SetBackgroundVisible1(QLegend* self, bool visible) {
 }
 
 libqt_list QLegend_Markers1(const QLegend* self, QAbstractSeries* series) {
-	return self->markers(series);
+	auto _ret = self->markers(series);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QLegend_SetReverseMarkers1(QLegend* self, bool reverseMarkers) {

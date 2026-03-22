@@ -71,8 +71,6 @@ QVector3D* QQuaternion_ToEulerAngles(const QQuaternion* self);
 QQuaternion* QQuaternion_FromEulerAngles(const QVector3D* eulerAngles);
 void QQuaternion_GetEulerAngles(const QQuaternion* self, float* pitch, float* yaw, float* roll);
 QQuaternion* QQuaternion_FromEulerAngles2(float pitch, float yaw, float roll);
-QGenericMatrix<3, 3, float> QQuaternion_ToRotationMatrix(const QQuaternion* self);
-QQuaternion* QQuaternion_FromRotationMatrix(const QGenericMatrix<3, 3, float>* rot3x3);
 void QQuaternion_GetAxes(const QQuaternion* self, QVector3D* xAxis, QVector3D* yAxis, QVector3D* zAxis);
 QQuaternion* QQuaternion_FromAxes(const QVector3D* xAxis, const QVector3D* yAxis, const QVector3D* zAxis);
 QQuaternion* QQuaternion_FromDirection(const QVector3D* direction, const QVector3D* up);

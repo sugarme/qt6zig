@@ -611,18 +611,6 @@ qtc.QGraphicsItem_SetToolTip(@ptrCast(self), toolTip_str);
         return qtc.QGraphicsItem_MapToScene(@ptrCast(self), @ptrCast(point));
     }
 
-    pub fn MapToItem2(self: ?*anyopaque, item: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToItem2(@ptrCast(self), @ptrCast(item), @ptrCast(rect));
-    }
-
-    pub fn MapToParent2(self: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToParent2(@ptrCast(self), @ptrCast(rect));
-    }
-
-    pub fn MapToScene2(self: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToScene2(@ptrCast(self), @ptrCast(rect));
-    }
-
     pub fn MapRectToItem(self: ?*anyopaque, item: ?*anyopaque, rect: ?*anyopaque) QtC.QRectF {
         return qtc.QGraphicsItem_MapRectToItem(@ptrCast(self), @ptrCast(item), @ptrCast(rect));
     }
@@ -633,18 +621,6 @@ qtc.QGraphicsItem_SetToolTip(@ptrCast(self), toolTip_str);
 
     pub fn MapRectToScene(self: ?*anyopaque, rect: ?*anyopaque) QtC.QRectF {
         return qtc.QGraphicsItem_MapRectToScene(@ptrCast(self), @ptrCast(rect));
-    }
-
-    pub fn MapToItem3(self: ?*anyopaque, item: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToItem3(@ptrCast(self), @ptrCast(item), @ptrCast(polygon));
-    }
-
-    pub fn MapToParent3(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToParent3(@ptrCast(self), @ptrCast(polygon));
-    }
-
-    pub fn MapToScene3(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToScene3(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn MapToItem4(self: ?*anyopaque, item: ?*anyopaque, path: ?*anyopaque) QtC.QPainterPath {
@@ -671,18 +647,6 @@ qtc.QGraphicsItem_SetToolTip(@ptrCast(self), toolTip_str);
         return qtc.QGraphicsItem_MapFromScene(@ptrCast(self), @ptrCast(point));
     }
 
-    pub fn MapFromItem2(self: ?*anyopaque, item: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromItem2(@ptrCast(self), @ptrCast(item), @ptrCast(rect));
-    }
-
-    pub fn MapFromParent2(self: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromParent2(@ptrCast(self), @ptrCast(rect));
-    }
-
-    pub fn MapFromScene2(self: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromScene2(@ptrCast(self), @ptrCast(rect));
-    }
-
     pub fn MapRectFromItem(self: ?*anyopaque, item: ?*anyopaque, rect: ?*anyopaque) QtC.QRectF {
         return qtc.QGraphicsItem_MapRectFromItem(@ptrCast(self), @ptrCast(item), @ptrCast(rect));
     }
@@ -693,18 +657,6 @@ qtc.QGraphicsItem_SetToolTip(@ptrCast(self), toolTip_str);
 
     pub fn MapRectFromScene(self: ?*anyopaque, rect: ?*anyopaque) QtC.QRectF {
         return qtc.QGraphicsItem_MapRectFromScene(@ptrCast(self), @ptrCast(rect));
-    }
-
-    pub fn MapFromItem3(self: ?*anyopaque, item: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromItem3(@ptrCast(self), @ptrCast(item), @ptrCast(polygon));
-    }
-
-    pub fn MapFromParent3(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromParent3(@ptrCast(self), @ptrCast(polygon));
-    }
-
-    pub fn MapFromScene3(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromScene3(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn MapFromItem4(self: ?*anyopaque, item: ?*anyopaque, path: ?*anyopaque) QtC.QPainterPath {
@@ -731,18 +683,6 @@ qtc.QGraphicsItem_SetToolTip(@ptrCast(self), toolTip_str);
         return qtc.QGraphicsItem_MapToScene5(@ptrCast(self), x, y);
     }
 
-    pub fn MapToItem6(self: ?*anyopaque, item: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToItem6(@ptrCast(self), @ptrCast(item), x, y, w, h);
-    }
-
-    pub fn MapToParent6(self: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToParent6(@ptrCast(self), x, y, w, h);
-    }
-
-    pub fn MapToScene6(self: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapToScene6(@ptrCast(self), x, y, w, h);
-    }
-
     pub fn MapRectToItem2(self: ?*anyopaque, item: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QRectF {
         return qtc.QGraphicsItem_MapRectToItem2(@ptrCast(self), @ptrCast(item), x, y, w, h);
     }
@@ -765,18 +705,6 @@ qtc.QGraphicsItem_SetToolTip(@ptrCast(self), toolTip_str);
 
     pub fn MapFromScene5(self: ?*anyopaque, x: f64, y: f64) QtC.QPointF {
         return qtc.QGraphicsItem_MapFromScene5(@ptrCast(self), x, y);
-    }
-
-    pub fn MapFromItem6(self: ?*anyopaque, item: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromItem6(@ptrCast(self), @ptrCast(item), x, y, w, h);
-    }
-
-    pub fn MapFromParent6(self: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromParent6(@ptrCast(self), x, y, w, h);
-    }
-
-    pub fn MapFromScene6(self: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygonF {
-        return qtc.QGraphicsItem_MapFromScene6(@ptrCast(self), x, y, w, h);
     }
 
     pub fn MapRectFromItem2(self: ?*anyopaque, item: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QRectF {
@@ -2160,30 +2088,10 @@ pub const qgraphicspolygonitem = struct {
 
 
     /// New2 constructs a new QGraphicsPolygonItem object.
-    pub fn New2(polygon: ?*anyopaque) QtC.QGraphicsPolygonItem {
-        return qtc.QGraphicsPolygonItem_new2(@ptrCast(polygon));
+    pub fn New2(parent: ?*anyopaque) QtC.QGraphicsPolygonItem {
+        return qtc.QGraphicsPolygonItem_new2(@ptrCast(parent));
     }
 
-
-    /// New3 constructs a new QGraphicsPolygonItem object.
-    pub fn New3(parent: ?*anyopaque) QtC.QGraphicsPolygonItem {
-        return qtc.QGraphicsPolygonItem_new3(@ptrCast(parent));
-    }
-
-
-    /// New4 constructs a new QGraphicsPolygonItem object.
-    pub fn New4(polygon: ?*anyopaque, parent: ?*anyopaque) QtC.QGraphicsPolygonItem {
-        return qtc.QGraphicsPolygonItem_new4(@ptrCast(polygon), @ptrCast(parent));
-    }
-
-
-    pub fn Polygon(self: ?*anyopaque, ) QtC.QPolygonF {
-        return qtc.QGraphicsPolygonItem_Polygon(@ptrCast(self));
-    }
-
-    pub fn SetPolygon(self: ?*anyopaque, polygon: ?*anyopaque) void {
-        qtc.QGraphicsPolygonItem_SetPolygon(@ptrCast(self), @ptrCast(polygon));
-    }
 
     pub fn FillRule(self: ?*anyopaque, ) i32 {
         return qtc.QGraphicsPolygonItem_FillRule(@ptrCast(self));

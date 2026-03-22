@@ -130,10 +130,6 @@ pub const qopenglfunctions = struct {
         qtc.QOpenGLFunctions_GlGetBooleanv(@ptrCast(self), pname, @ptrCast(params));
     }
 
-    pub fn GlGetError(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFunctions_GlGetError(@ptrCast(self));
-    }
-
     pub fn GlGetFloatv(self: ?*anyopaque, pname: u32, params: *f32) void {
         qtc.QOpenGLFunctions_GlGetFloatv(@ptrCast(self), pname, @ptrCast(params));
     }
@@ -274,10 +270,6 @@ pub const qopenglfunctions = struct {
         qtc.QOpenGLFunctions_GlBufferSubData(@ptrCast(self), target, offset, size, @ptrCast(data));
     }
 
-    pub fn GlCheckFramebufferStatus(self: ?*anyopaque, target: u32) GL {
-        return qtc.QOpenGLFunctions_GlCheckFramebufferStatus(@ptrCast(self), target);
-    }
-
     pub fn GlClearDepthf(self: ?*anyopaque, depth: f32) void {
         qtc.QOpenGLFunctions_GlClearDepthf(@ptrCast(self), depth);
     }
@@ -360,14 +352,6 @@ pub const qopenglfunctions = struct {
 
     pub fn GlGenRenderbuffers(self: ?*anyopaque, n: i32, renderbuffers: *u32) void {
         qtc.QOpenGLFunctions_GlGenRenderbuffers(@ptrCast(self), n, @ptrCast(renderbuffers));
-    }
-
-    pub fn GlGetActiveAttrib(self: ?*anyopaque, program: u32, index: u32, bufsize: i32, length: *i32, size: *i32, typeVal: *GL, name: []const u8) void {
-        qtc.QOpenGLFunctions_GlGetActiveAttrib(@ptrCast(self), program, index, bufsize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
-    pub fn GlGetActiveUniform(self: ?*anyopaque, program: u32, index: u32, bufsize: i32, length: *i32, size: *i32, typeVal: *GL, name: []const u8) void {
-        qtc.QOpenGLFunctions_GlGetActiveUniform(@ptrCast(self), program, index, bufsize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
     }
 
     pub fn GlGetAttachedShaders(self: ?*anyopaque, program: u32, maxcount: i32, count: *i32, shaders: *u32) void {

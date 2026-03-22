@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qabstractbarseries.h>
 #include "libqabstractbarseries.h"
 #include "libqabstractbarseries.hxx"
@@ -40,7 +41,7 @@ bool QAbstractBarSeries_Take(QAbstractBarSeries* self, QBarSet* set) {
 }
 
 bool QAbstractBarSeries_Append2(QAbstractBarSeries* self, const libqt_list sets) {
-	return self->append(*sets);
+	return self->append(QList<QBarSet *>());
 }
 
 bool QAbstractBarSeries_Insert(QAbstractBarSeries* self, int index, QBarSet* set) {
@@ -52,7 +53,15 @@ int QAbstractBarSeries_Count(const QAbstractBarSeries* self) {
 }
 
 libqt_list QAbstractBarSeries_BarSets(const QAbstractBarSeries* self) {
-	return self->barSets();
+	auto _ret = self->barSets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QAbstractBarSeries_Clear(QAbstractBarSeries* self) {
@@ -228,7 +237,7 @@ void QAbstractBarSeries_Connect_LabelsPrecisionChanged(QAbstractBarSeries* self,
 }
 
 void QAbstractBarSeries_BarsetsAdded(QAbstractBarSeries* self, const libqt_list sets) {
-	self->barsetsAdded(*sets);
+	self->barsetsAdded(QList<QBarSet *>());
 }
 
 void QAbstractBarSeries_Connect_BarsetsAdded(QAbstractBarSeries* self, intptr_t slot) {
@@ -239,7 +248,7 @@ void QAbstractBarSeries_Connect_BarsetsAdded(QAbstractBarSeries* self, intptr_t 
 }
 
 void QAbstractBarSeries_BarsetsRemoved(QAbstractBarSeries* self, const libqt_list sets) {
-	self->barsetsRemoved(*sets);
+	self->barsetsRemoved(QList<QBarSet *>());
 }
 
 void QAbstractBarSeries_Connect_BarsetsRemoved(QAbstractBarSeries* self, intptr_t slot) {

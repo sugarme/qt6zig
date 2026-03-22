@@ -33,10 +33,8 @@ QPropertyAnimation* QPropertyAnimation_new4(QObject* target, const libqt_string 
 libqt_string QPropertyAnimation_Tr(const char* s);
 QObject* QPropertyAnimation_TargetObject(const QPropertyAnimation* self);
 void QPropertyAnimation_SetTargetObject(QPropertyAnimation* self, QObject* target);
-QBindable<QObject *> QPropertyAnimation_BindableTargetObject(QPropertyAnimation* self);
 libqt_string QPropertyAnimation_PropertyName(const QPropertyAnimation* self);
 void QPropertyAnimation_SetPropertyName(QPropertyAnimation* self, const libqt_string propertyName);
-QBindable<QByteArray> QPropertyAnimation_BindablePropertyName(QPropertyAnimation* self);
 bool QPropertyAnimation_Event(QPropertyAnimation* self, QEvent* event);
 void QPropertyAnimation_UpdateCurrentValue(QPropertyAnimation* self, const QVariant* value);
 void QPropertyAnimation_UpdateState(QPropertyAnimation* self, int newState, int oldState);

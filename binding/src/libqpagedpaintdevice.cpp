@@ -142,33 +142,6 @@ vqpagedpaintdevice->setQPagedPaintDevice_SetPageRanges_Callback(reinterpret_cast
 }
 }
 
-// Derived class handler implementation
-QPagedPaintDevicePrivate* QPagedPaintDevice_Dd(QPagedPaintDevice* self) {
-	auto* vqpagedpaintdevice = dynamic_cast<VirtualQPagedPaintDevice*>(self);
-	if (vqpagedpaintdevice && vqpagedpaintdevice->isVirtualQPagedPaintDevice) {
-	return vqpagedpaintdevice->dd();
-	} else {
-	return self->QPagedPaintDevice::dd();
-}
-}
-
-// Base class handler implementation
-QPagedPaintDevicePrivate* QPagedPaintDevice_QBaseDd(QPagedPaintDevice* self) {
-	auto* vqpagedpaintdevice = dynamic_cast<VirtualQPagedPaintDevice*>(self);
-	if (vqpagedpaintdevice && vqpagedpaintdevice->isVirtualQPagedPaintDevice) {
-vqpagedpaintdevice->setQPagedPaintDevice_Dd_IsBase(true);
-	return vqpagedpaintdevice->dd();
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QPagedPaintDevice_OnDd(QPagedPaintDevice* self, intptr_t slot) {
-	auto* vqpagedpaintdevice = dynamic_cast<VirtualQPagedPaintDevice*>(self);
-	if (vqpagedpaintdevice && vqpagedpaintdevice->isVirtualQPagedPaintDevice) {
-vqpagedpaintdevice->setQPagedPaintDevice_Dd_Callback(reinterpret_cast<VirtualQPagedPaintDevice::QPagedPaintDevice_Dd_Callback>(slot));
-}
-}
-
 void QPagedPaintDevice_Delete(QPagedPaintDevice* self) {
     delete self;
 }

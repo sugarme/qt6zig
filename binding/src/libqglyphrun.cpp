@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qglyphrun.h>
 #include "libqglyphrun.h"
 #include "libqglyphrun.hxx"
@@ -38,19 +39,37 @@ void QGlyphRun_SetRawData(QGlyphRun* self, const unsigned int* glyphIndexArray, 
 }
 
 libqt_list QGlyphRun_GlyphIndexes(const QGlyphRun* self) {
-	return self->glyphIndexes();
+	auto _ret = self->glyphIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGlyphRun_SetGlyphIndexes(QGlyphRun* self, const libqt_list glyphIndexes) {
-	self->setGlyphIndexes(*glyphIndexes);
+	self->setGlyphIndexes(QList<unsigned int>());
 }
 
 libqt_list QGlyphRun_Positions(const QGlyphRun* self) {
-	return self->positions();
+	auto _ret = self->positions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGlyphRun_SetPositions(QGlyphRun* self, const libqt_list positions) {
-	self->setPositions(*positions);
+	self->setPositions(QList<QPointF>());
 }
 
 void QGlyphRun_Clear(QGlyphRun* self) {
@@ -118,11 +137,20 @@ QRectF* QGlyphRun_BoundingRect(const QGlyphRun* self) {
 }
 
 libqt_list QGlyphRun_StringIndexes(const QGlyphRun* self) {
-	return self->stringIndexes();
+	auto _ret = self->stringIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QGlyphRun_SetStringIndexes(QGlyphRun* self, const libqt_list stringIndexes) {
-	self->setStringIndexes(*stringIndexes);
+	self->setStringIndexes(QList<QIntegerForSizeof<std::size_t>::Signed>());
 }
 
 void QGlyphRun_SetSourceString(QGlyphRun* self, const libqt_string sourceString) {

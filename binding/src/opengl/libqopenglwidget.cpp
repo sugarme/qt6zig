@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSurfaceFormat>
 #include <QWidget>
 #include <qopenglwidget.h>
@@ -53,10 +54,6 @@ void QOpenGLWidget_SetFormat(QOpenGLWidget* self, const QSurfaceFormat* format) 
 
 QSurfaceFormat* QOpenGLWidget_Format(const QOpenGLWidget* self) {
 	return new QSurfaceFormat(self->format());
-}
-
-GL QOpenGLWidget_TextureFormat(const QOpenGLWidget* self) {
-	return self->textureFormat();
 }
 
 void QOpenGLWidget_SetTextureFormat(QOpenGLWidget* self, uint32_t texFormat) {

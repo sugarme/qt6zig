@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qimagewriter.h>
 #include "libqimagewriter.h"
 #include "libqimagewriter.hxx"
@@ -104,7 +105,16 @@ libqt_string QImageWriter_SubType(const QImageWriter* self) {
 }
 
 libqt_list QImageWriter_SupportedSubTypes(const QImageWriter* self) {
-	return self->supportedSubTypes();
+	auto _ret = self->supportedSubTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QImageWriter_SetOptimizedWrite(QImageWriter* self, bool optimize) {
@@ -163,15 +173,42 @@ bool QImageWriter_SupportsOption(const QImageWriter* self, int option) {
 }
 
 libqt_list QImageWriter_SupportedImageFormats() {
-	return QImageWriter::supportedImageFormats();
+	auto _ret = QImageWriter::supportedImageFormats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QImageWriter_SupportedMimeTypes() {
-	return QImageWriter::supportedMimeTypes();
+	auto _ret = QImageWriter::supportedMimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QImageWriter_ImageFormatsForMimeType(const libqt_string mimeType) {
-	return QImageWriter::imageFormatsForMimeType(QByteArray(mimeType.data, mimeType.len));
+	auto _ret = QImageWriter::imageFormatsForMimeType(QByteArray(mimeType.data, mimeType.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QImageWriter_Tr2(const char* sourceText, const char* disambiguation) {

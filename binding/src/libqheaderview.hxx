@@ -517,7 +517,9 @@ public:
 		} else if (qheaderview_datachanged_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&topLeft;
 			const QModelIndex* cbval2 = (const QModelIndex*)&bottomRight;
-			libqt_list cbval3 = roles;
+			libqt_list cbval3;
+			cbval3.len = roles.size();
+			cbval3.data = nullptr;
 			qheaderview_datachanged_callback(this, cbval1, cbval2, cbval3);
 		} else {
 			QHeaderView::dataChanged(topLeft, bottomRight, roles);

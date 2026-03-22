@@ -5,25 +5,14 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStringView>
 #include <qstringview.h>
 #include "libqstringview.h"
 #include "libqstringview.hxx"
 
-QStringView* QStringView_new(const QStringView* other) {
-	 return new QStringView(*other);
-}
-
-QStringView* QStringView_new2(QStringView* other) {
-	 return new QStringView(*other);
-}
-
-QStringView* QStringView_new3() {
+QStringView* QStringView_new() {
 	 return new QStringView();
-}
-
-QStringView* QStringView_new4(const QStringView* param1) {
-	 return new QStringView(*param1);
 }
 
 void QStringView_CopyAssign(QStringView* self, QStringView* other) {
@@ -92,43 +81,20 @@ libqt_string QStringView_ToLocal8Bit(const QStringView* self) {
 }
 
 libqt_list QStringView_ToUcs4(const QStringView* self) {
-	return self->toUcs4();
+	auto _ret = self->toUcs4();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QChar* QStringView_At(const QStringView* self, ptrdiff_t n) {
 	return new QChar(self->at(n));
-}
-
-QStringView* QStringView_Mid(const QStringView* self, ptrdiff_t pos) {
-	return new QStringView(self->mid(pos));
-}
-
-QStringView* QStringView_Left(const QStringView* self, ptrdiff_t n) {
-	return new QStringView(self->left(n));
-}
-
-QStringView* QStringView_Right(const QStringView* self, ptrdiff_t n) {
-	return new QStringView(self->right(n));
-}
-
-QStringView* QStringView_First(const QStringView* self, ptrdiff_t n) {
-	return new QStringView(self->first(n));
-}
-
-QStringView* QStringView_Last(const QStringView* self, ptrdiff_t n) {
-	return new QStringView(self->last(n));
-}
-
-QStringView* QStringView_Sliced(const QStringView* self, ptrdiff_t pos) {
-	return new QStringView(self->sliced(pos));
-}
-
-QStringView* QStringView_Sliced2(const QStringView* self, ptrdiff_t pos, ptrdiff_t n) {
-	return new QStringView(self->sliced(pos, n));
-}
-
-QStringView* QStringView_Chopped(const QStringView* self, ptrdiff_t n) {
-	return new QStringView(self->chopped(n));
 }
 
 void QStringView_Truncate(QStringView* self, ptrdiff_t n) {
@@ -139,30 +105,6 @@ void QStringView_Chop(QStringView* self, ptrdiff_t n) {
 	self->chop(n);
 }
 
-QStringView* QStringView_Trimmed(const QStringView* self) {
-	return new QStringView(self->trimmed());
-}
-
-QStringView* QStringView_Slice(QStringView* self, ptrdiff_t pos) {
-	return new QStringView(self->slice(pos));
-}
-
-QStringView* QStringView_Slice2(QStringView* self, ptrdiff_t pos, ptrdiff_t n) {
-	return new QStringView(self->slice(pos, n));
-}
-
-int QStringView_Compare(const QStringView* self, QStringView* other) {
-	return self->compare(*other);
-}
-
-int QStringView_Compare2(const QStringView* self, QLatin1StringView other) {
-	return self->compare(other);
-}
-
-int QStringView_Compare3(const QStringView* self, QUtf8StringView other) {
-	return self->compare(other);
-}
-
 int QStringView_Compare4(const QStringView* self, QChar* c) {
 	return self->compare(*c);
 }
@@ -171,32 +113,12 @@ int QStringView_Compare5(const QStringView* self, QChar* c, int cs) {
 	return self->compare(*c, static_cast<Qt::CaseSensitivity>(cs));
 }
 
-int QStringView_LocaleAwareCompare(const QStringView* self, QStringView* other) {
-	return self->localeAwareCompare(*other);
-}
-
-bool QStringView_StartsWith(const QStringView* self, QStringView* s) {
-	return self->startsWith(*s);
-}
-
-bool QStringView_StartsWith2(const QStringView* self, QLatin1StringView s) {
-	return self->startsWith(s);
-}
-
 bool QStringView_StartsWith3(const QStringView* self, QChar* c) {
 	return self->startsWith(*c);
 }
 
 bool QStringView_StartsWith4(const QStringView* self, QChar* c, int cs) {
 	return self->startsWith(*c, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QStringView_EndsWith(const QStringView* self, QStringView* s) {
-	return self->endsWith(*s);
-}
-
-bool QStringView_EndsWith2(const QStringView* self, QLatin1StringView s) {
-	return self->endsWith(s);
 }
 
 bool QStringView_EndsWith3(const QStringView* self, QChar* c) {
@@ -211,36 +133,12 @@ ptrdiff_t QStringView_IndexOf(const QStringView* self, QChar* c) {
 	return self->indexOf(*c);
 }
 
-ptrdiff_t QStringView_IndexOf2(const QStringView* self, QStringView* s) {
-	return self->indexOf(*s);
-}
-
-ptrdiff_t QStringView_IndexOf3(const QStringView* self, QLatin1StringView s) {
-	return self->indexOf(s);
-}
-
 bool QStringView_Contains(const QStringView* self, QChar* c) {
 	return self->contains(*c);
 }
 
-bool QStringView_Contains2(const QStringView* self, QStringView* s) {
-	return self->contains(*s);
-}
-
-bool QStringView_Contains3(const QStringView* self, QLatin1StringView s) {
-	return self->contains(s);
-}
-
 ptrdiff_t QStringView_Count(const QStringView* self, QChar* c) {
 	return self->count(*c);
-}
-
-ptrdiff_t QStringView_Count2(const QStringView* self, QStringView* s) {
-	return self->count(*s);
-}
-
-ptrdiff_t QStringView_Count3(const QStringView* self, QLatin1StringView s) {
-	return self->count(s);
 }
 
 ptrdiff_t QStringView_LastIndexOf(const QStringView* self, QChar* c) {
@@ -249,22 +147,6 @@ ptrdiff_t QStringView_LastIndexOf(const QStringView* self, QChar* c) {
 
 ptrdiff_t QStringView_LastIndexOf2(const QStringView* self, QChar* c, ptrdiff_t from) {
 	return self->lastIndexOf(*c, from);
-}
-
-ptrdiff_t QStringView_LastIndexOf3(const QStringView* self, QStringView* s) {
-	return self->lastIndexOf(*s);
-}
-
-ptrdiff_t QStringView_LastIndexOf4(const QStringView* self, QStringView* s, ptrdiff_t from) {
-	return self->lastIndexOf(*s, from);
-}
-
-ptrdiff_t QStringView_LastIndexOf5(const QStringView* self, QLatin1StringView s) {
-	return self->lastIndexOf(s);
-}
-
-ptrdiff_t QStringView_LastIndexOf6(const QStringView* self, QLatin1StringView s, ptrdiff_t from) {
-	return self->lastIndexOf(s, from);
 }
 
 ptrdiff_t QStringView_IndexOf4(const QStringView* self, const QRegularExpression* re) {
@@ -339,16 +221,40 @@ double QStringView_ToDouble(const QStringView* self) {
 	return self->toDouble();
 }
 
-libqt_list QStringView_Split(const QStringView* self, QStringView* sep) {
-	return self->split(*sep);
-}
-
 libqt_list QStringView_Split2(const QStringView* self, QChar* sep) {
-	return self->split(*sep);
+	auto _ret = self->split(*sep);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QStringView_Split3(const QStringView* self, const QRegularExpression* sep) {
-	return self->split(*sep);
+	auto _ret = self->split(*sep);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 It::value_type** QStringView_Begin(const QStringView* self) {
@@ -367,22 +273,6 @@ It::value_type** QStringView_Cend(const QStringView* self) {
 	return self->cend();
 }
 
-std::reverse_iterator<const QChar *> QStringView_Rbegin(const QStringView* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<const QChar *> QStringView_Rend(const QStringView* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<const QChar *> QStringView_Crbegin(const QStringView* self) {
-	return self->crbegin();
-}
-
-std::reverse_iterator<const QChar *> QStringView_Crend(const QStringView* self) {
-	return self->crend();
-}
-
 bool QStringView_Empty(const QStringView* self) {
 	return self->empty();
 }
@@ -393,10 +283,6 @@ QChar* QStringView_Front(const QStringView* self) {
 
 QChar* QStringView_Back(const QStringView* self) {
 	return new QChar(self->back());
-}
-
-std::u16string_view QStringView_OperatorbasicStringView(const QStringView* self) {
-	return self->operator basic_string_view();
 }
 
 ptrdiff_t QStringView_MaxSize(const QStringView* self) {
@@ -435,38 +321,6 @@ ptrdiff_t QStringView_MaxSize2() {
 	return QStringView::maxSize();
 }
 
-QStringView* QStringView_Mid2(const QStringView* self, ptrdiff_t pos, ptrdiff_t n) {
-	return new QStringView(self->mid(pos, n));
-}
-
-int QStringView_Compare22(const QStringView* self, QStringView* other, int cs) {
-	return self->compare(*other, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QStringView_Compare23(const QStringView* self, QLatin1StringView other, int cs) {
-	return self->compare(other, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-int QStringView_Compare24(const QStringView* self, QUtf8StringView other, int cs) {
-	return self->compare(other, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QStringView_StartsWith22(const QStringView* self, QStringView* s, int cs) {
-	return self->startsWith(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QStringView_StartsWith23(const QStringView* self, QLatin1StringView s, int cs) {
-	return self->startsWith(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QStringView_EndsWith22(const QStringView* self, QStringView* s, int cs) {
-	return self->endsWith(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QStringView_EndsWith23(const QStringView* self, QLatin1StringView s, int cs) {
-	return self->endsWith(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 ptrdiff_t QStringView_IndexOf22(const QStringView* self, QChar* c, ptrdiff_t from) {
 	return self->indexOf(*c, from);
 }
@@ -475,44 +329,12 @@ ptrdiff_t QStringView_IndexOf32(const QStringView* self, QChar* c, ptrdiff_t fro
 	return self->indexOf(*c, from, static_cast<Qt::CaseSensitivity>(cs));
 }
 
-ptrdiff_t QStringView_IndexOf23(const QStringView* self, QStringView* s, ptrdiff_t from) {
-	return self->indexOf(*s, from);
-}
-
-ptrdiff_t QStringView_IndexOf33(const QStringView* self, QStringView* s, ptrdiff_t from, int cs) {
-	return self->indexOf(*s, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_IndexOf24(const QStringView* self, QLatin1StringView s, ptrdiff_t from) {
-	return self->indexOf(s, from);
-}
-
-ptrdiff_t QStringView_IndexOf34(const QStringView* self, QLatin1StringView s, ptrdiff_t from, int cs) {
-	return self->indexOf(s, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 bool QStringView_Contains22(const QStringView* self, QChar* c, int cs) {
 	return self->contains(*c, static_cast<Qt::CaseSensitivity>(cs));
 }
 
-bool QStringView_Contains23(const QStringView* self, QStringView* s, int cs) {
-	return self->contains(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-bool QStringView_Contains24(const QStringView* self, QLatin1StringView s, int cs) {
-	return self->contains(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
 ptrdiff_t QStringView_Count22(const QStringView* self, QChar* c, int cs) {
 	return self->count(*c, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_Count23(const QStringView* self, QStringView* s, int cs) {
-	return self->count(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_Count24(const QStringView* self, QLatin1StringView s, int cs) {
-	return self->count(s, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QStringView_LastIndexOf22(const QStringView* self, QChar* c, int cs) {
@@ -521,22 +343,6 @@ ptrdiff_t QStringView_LastIndexOf22(const QStringView* self, QChar* c, int cs) {
 
 ptrdiff_t QStringView_LastIndexOf32(const QStringView* self, QChar* c, ptrdiff_t from, int cs) {
 	return self->lastIndexOf(*c, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_LastIndexOf23(const QStringView* self, QStringView* s, int cs) {
-	return self->lastIndexOf(*s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_LastIndexOf33(const QStringView* self, QStringView* s, ptrdiff_t from, int cs) {
-	return self->lastIndexOf(*s, from, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_LastIndexOf24(const QStringView* self, QLatin1StringView s, int cs) {
-	return self->lastIndexOf(s, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-ptrdiff_t QStringView_LastIndexOf34(const QStringView* self, QLatin1StringView s, ptrdiff_t from, int cs) {
-	return self->lastIndexOf(s, from, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 ptrdiff_t QStringView_IndexOf25(const QStringView* self, const QRegularExpression* re, ptrdiff_t from) {
@@ -627,24 +433,58 @@ double QStringView_ToDouble1(const QStringView* self, bool* ok) {
 	return self->toDouble(ok);
 }
 
-libqt_list QStringView_Split22(const QStringView* self, QStringView* sep, int behavior) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
-}
-
-libqt_list QStringView_Split32(const QStringView* self, QStringView* sep, int behavior, int cs) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
-}
-
 libqt_list QStringView_Split23(const QStringView* self, QChar* sep, int behavior) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	auto _ret = self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QStringView_Split33(const QStringView* self, QChar* sep, int behavior, int cs) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
+	auto _ret = self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior), static_cast<Qt::CaseSensitivity>(cs));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QStringView_Split24(const QStringView* self, const QRegularExpression* sep, int behavior) {
-	return self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	auto _ret = self->split(*sep, static_cast<QFlags<Qt::SplitBehaviorFlags>>(behavior));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QStringView_Delete(QStringView* self) {

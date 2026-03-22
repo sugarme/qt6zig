@@ -109,18 +109,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qdir.CanonicalPath: Mem
 return  _ret;
     }
 
-    pub fn FilesystemPath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QDir_FilesystemPath(@ptrCast(self));
-    }
-
-    pub fn FilesystemAbsolutePath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QDir_FilesystemAbsolutePath(@ptrCast(self));
-    }
-
-    pub fn FilesystemCanonicalPath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QDir_FilesystemCanonicalPath(@ptrCast(self));
-    }
-
     pub fn SetSearchPaths(prefix: []const u8, searchPaths: []const u8) void {
         const prefix_str = qtc.libqt_string{
     .len = prefix.len,

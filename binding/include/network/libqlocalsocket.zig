@@ -189,10 +189,6 @@ return  _ret;
         return qtc.QLocalSocket_SocketOptions(@ptrCast(self));
     }
 
-    pub fn BindableSocketOptions(self: ?*anyopaque, ) QBindable<SocketOptions> {
-        return qtc.QLocalSocket_BindableSocketOptions(@ptrCast(self));
-    }
-
     pub fn State(self: ?*anyopaque, ) i32 {
         return qtc.QLocalSocket_State(@ptrCast(self));
     }

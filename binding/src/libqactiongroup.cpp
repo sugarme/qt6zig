@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qactiongroup.h>
 #include "libqactiongroup.h"
 #include "libqactiongroup.hxx"
@@ -41,7 +42,15 @@ void QActionGroup_RemoveAction(QActionGroup* self, QAction* a) {
 }
 
 libqt_list QActionGroup_Actions(const QActionGroup* self) {
-	return self->actions();
+	auto _ret = self->actions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QAction* QActionGroup_CheckedAction(const QActionGroup* self) {

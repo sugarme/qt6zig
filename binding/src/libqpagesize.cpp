@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpagesize.h>
 #include "libqpagesize.h"
 #include "libqpagesize.hxx"

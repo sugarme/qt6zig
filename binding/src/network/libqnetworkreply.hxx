@@ -252,7 +252,9 @@ public:
 			qnetworkreply_ignoresslerrorsimplementation_isbase = false;
 			QNetworkReply::ignoreSslErrorsImplementation(param1);
 		} else if (qnetworkreply_ignoresslerrorsimplementation_callback != nullptr) {
-			libqt_list cbval1 = param1;
+			libqt_list cbval1;
+			cbval1.len = param1.size();
+			cbval1.data = nullptr;
 			qnetworkreply_ignoresslerrorsimplementation_callback(this, cbval1);
 		} else {
 			QNetworkReply::ignoreSslErrorsImplementation(param1);

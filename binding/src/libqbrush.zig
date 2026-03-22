@@ -6,26 +6,8 @@ const qtc = @import("qt6c");%%_IMPORTLIBS_%%
 pub const qbrushdatapointerdeleter = struct {
 
     /// New constructs a new QBrushDataPointerDeleter object.
-    pub fn New(other: ?*anyopaque) QtC.QBrushDataPointerDeleter {
-        return qtc.QBrushDataPointerDeleter_new(@ptrCast(other));
-    }
-
-
-    /// New2 constructs a new QBrushDataPointerDeleter object.
-    pub fn New2(other: ?*anyopaque) QtC.QBrushDataPointerDeleter {
-        return qtc.QBrushDataPointerDeleter_new2(@ptrCast(other));
-    }
-
-
-    /// New3 constructs a new QBrushDataPointerDeleter object.
-    pub fn New3(param1: ?*anyopaque) QtC.QBrushDataPointerDeleter {
-        return qtc.QBrushDataPointerDeleter_new3(@ptrCast(param1));
-    }
-
-
-    /// New4 constructs a new QBrushDataPointerDeleter object.
-    pub fn New4() QtC.QBrushDataPointerDeleter {
-        return qtc.QBrushDataPointerDeleter_new4();
+    pub fn New() QtC.QBrushDataPointerDeleter {
+        return qtc.QBrushDataPointerDeleter_new();
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -41,10 +23,6 @@ pub const qbrushdatapointerdeleter = struct {
 
     pub fn OperatorCall(self: ?*anyopaque, d: ?*anyopaque) void {
         qtc.QBrushDataPointerDeleter_OperatorCall(@ptrCast(self), @ptrCast(d));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QBrushDataPointerDeleter_OperatorAssign(@ptrCast(self), @ptrCast(param1));
     }
 
     /// Delete this object from C++ memory.
@@ -204,10 +182,6 @@ pub const qbrush = struct {
         return qtc.QBrush_IsDetached(@ptrCast(self));
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) std::unique_ptr<QBrushData, QBrushDataPointerDeleter> {
-        return @ptrCast(qtc.QBrush_DataPtr(@ptrCast(self)));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QBrush_Delete(@ptrCast(self));
@@ -222,14 +196,6 @@ pub const qbrushdata = struct {
         return qtc.QBrushData_new(@ptrCast(param1));
     }
 
-
-    pub fn Ref(self: ?*anyopaque, ) QtC.QAtomicInt {
-        return qtc.QBrushData_Ref(@ptrCast(self));
-    }
-
-    pub fn SetRef(self: ?*anyopaque, ref: QtC.QAtomicInt) void {
-        qtc.QBrushData_SetRef(@ptrCast(self), @ptrCast(ref));
-    }
 
     pub fn Style(self: ?*anyopaque, ) i32 {
         return qtc.QBrushData_Style(@ptrCast(self));

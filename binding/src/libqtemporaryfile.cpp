@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTemporaryFile>
 #include <qtemporaryfile.h>
 #include "libqtemporaryfile.h"

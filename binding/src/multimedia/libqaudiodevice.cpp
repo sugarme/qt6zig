@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qaudiodevice.h>
 #include "libqaudiodevice.h"
 #include "libqaudiodevice.hxx"
@@ -90,15 +91,20 @@ int QAudioDevice_MaximumChannelCount(const QAudioDevice* self) {
 }
 
 libqt_list QAudioDevice_SupportedSampleFormats(const QAudioDevice* self) {
-	return self->supportedSampleFormats();
+	auto _ret = self->supportedSampleFormats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 quint32 QAudioDevice_ChannelConfiguration(const QAudioDevice* self) {
 	return self->channelConfiguration();
-}
-
-const QAudioDevicePrivate* QAudioDevice_Handle(const QAudioDevice* self) {
-	return self->handle();
 }
 
 void QAudioDevice_Delete(QAudioDevice* self) {

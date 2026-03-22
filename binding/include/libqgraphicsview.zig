@@ -263,10 +263,6 @@ return  _ret;
         return qtc.QGraphicsView_Items5(@ptrCast(self), x, y, w, h);
     }
 
-    pub fn Items6(self: ?*anyopaque, polygon: ?*anyopaque) []const u8 {
-        return qtc.QGraphicsView_Items6(@ptrCast(self), @ptrCast(polygon));
-    }
-
     pub fn Items7(self: ?*anyopaque, path: ?*anyopaque) []const u8 {
         return qtc.QGraphicsView_Items7(@ptrCast(self), @ptrCast(path));
     }
@@ -283,28 +279,12 @@ return  _ret;
         return qtc.QGraphicsView_MapToScene(@ptrCast(self), @ptrCast(point));
     }
 
-    pub fn MapToScene2(self: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsView_MapToScene2(@ptrCast(self), @ptrCast(rect));
-    }
-
-    pub fn MapToScene3(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygonF {
-        return qtc.QGraphicsView_MapToScene3(@ptrCast(self), @ptrCast(polygon));
-    }
-
     pub fn MapToScene4(self: ?*anyopaque, path: ?*anyopaque) QtC.QPainterPath {
         return qtc.QGraphicsView_MapToScene4(@ptrCast(self), @ptrCast(path));
     }
 
     pub fn MapFromScene(self: ?*anyopaque, point: ?*anyopaque) QtC.QPoint {
         return qtc.QGraphicsView_MapFromScene(@ptrCast(self), @ptrCast(point));
-    }
-
-    pub fn MapFromScene2(self: ?*anyopaque, rect: ?*anyopaque) QtC.QPolygon {
-        return qtc.QGraphicsView_MapFromScene2(@ptrCast(self), @ptrCast(rect));
-    }
-
-    pub fn MapFromScene3(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QPolygon {
-        return qtc.QGraphicsView_MapFromScene3(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn MapFromScene4(self: ?*anyopaque, path: ?*anyopaque) QtC.QPainterPath {
@@ -315,16 +295,8 @@ return  _ret;
         return qtc.QGraphicsView_MapToScene5(@ptrCast(self), x, y);
     }
 
-    pub fn MapToScene6(self: ?*anyopaque, x: i32, y: i32, w: i32, h: i32) QtC.QPolygonF {
-        return qtc.QGraphicsView_MapToScene6(@ptrCast(self), x, y, w, h);
-    }
-
     pub fn MapFromScene5(self: ?*anyopaque, x: f64, y: f64) QtC.QPoint {
         return qtc.QGraphicsView_MapFromScene5(@ptrCast(self), x, y);
-    }
-
-    pub fn MapFromScene6(self: ?*anyopaque, x: f64, y: f64, w: f64, h: f64) QtC.QPolygon {
-        return qtc.QGraphicsView_MapFromScene6(@ptrCast(self), x, y, w, h);
     }
 
     pub fn InputMethodQuery(self: ?*anyopaque, query: i64) QtC.QVariant {
@@ -823,10 +795,6 @@ return  _ret;
 
     pub fn Items52(self: ?*anyopaque, x: i32, y: i32, w: i32, h: i32, mode: i32) []const u8 {
         return qtc.QGraphicsView_Items52(@ptrCast(self), x, y, w, h, @intCast(mode));
-    }
-
-    pub fn Items23(self: ?*anyopaque, polygon: ?*anyopaque, mode: i32) []const u8 {
-        return qtc.QGraphicsView_Items23(@ptrCast(self), @ptrCast(polygon), @intCast(mode));
     }
 
     pub fn Items24(self: ?*anyopaque, path: ?*anyopaque, mode: i32) []const u8 {

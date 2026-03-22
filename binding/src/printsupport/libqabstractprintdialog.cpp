@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qabstractprintdialog.h>
 #include "libqabstractprintdialog.h"
@@ -29,7 +30,7 @@ libqt_string QAbstractPrintDialog_Tr(const char* s) {
 }
 
 void QAbstractPrintDialog_SetOptionTabs(QAbstractPrintDialog* self, const libqt_list tabs) {
-	self->setOptionTabs(*tabs);
+	self->setOptionTabs(QList<QWidget *>());
 }
 
 void QAbstractPrintDialog_SetPrintRange(QAbstractPrintDialog* self, int range) {

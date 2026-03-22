@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qsortfilterproxymodel.h>
 #include "libqsortfilterproxymodel.h"
@@ -58,20 +59,12 @@ QRegularExpression* QSortFilterProxyModel_FilterRegularExpression(const QSortFil
 	return new QRegularExpression(self->filterRegularExpression());
 }
 
-QBindable<QRegularExpression> QSortFilterProxyModel_BindableFilterRegularExpression(QSortFilterProxyModel* self) {
-	return self->bindableFilterRegularExpression();
-}
-
 int QSortFilterProxyModel_FilterKeyColumn(const QSortFilterProxyModel* self) {
 	return self->filterKeyColumn();
 }
 
 void QSortFilterProxyModel_SetFilterKeyColumn(QSortFilterProxyModel* self, int column) {
 	self->setFilterKeyColumn(column);
-}
-
-QBindable<int> QSortFilterProxyModel_BindableFilterKeyColumn(QSortFilterProxyModel* self) {
-	return self->bindableFilterKeyColumn();
 }
 
 int QSortFilterProxyModel_FilterCaseSensitivity(const QSortFilterProxyModel* self) {
@@ -82,10 +75,6 @@ void QSortFilterProxyModel_SetFilterCaseSensitivity(QSortFilterProxyModel* self,
 	self->setFilterCaseSensitivity(static_cast<Qt::CaseSensitivity>(cs));
 }
 
-QBindable<Qt::CaseSensitivity> QSortFilterProxyModel_BindableFilterCaseSensitivity(QSortFilterProxyModel* self) {
-	return self->bindableFilterCaseSensitivity();
-}
-
 int QSortFilterProxyModel_SortCaseSensitivity(const QSortFilterProxyModel* self) {
 	return self->sortCaseSensitivity();
 }
@@ -94,20 +83,12 @@ void QSortFilterProxyModel_SetSortCaseSensitivity(QSortFilterProxyModel* self, i
 	self->setSortCaseSensitivity(static_cast<Qt::CaseSensitivity>(cs));
 }
 
-QBindable<Qt::CaseSensitivity> QSortFilterProxyModel_BindableSortCaseSensitivity(QSortFilterProxyModel* self) {
-	return self->bindableSortCaseSensitivity();
-}
-
 bool QSortFilterProxyModel_IsSortLocaleAware(const QSortFilterProxyModel* self) {
 	return self->isSortLocaleAware();
 }
 
 void QSortFilterProxyModel_SetSortLocaleAware(QSortFilterProxyModel* self, bool on) {
 	self->setSortLocaleAware(on);
-}
-
-QBindable<bool> QSortFilterProxyModel_BindableIsSortLocaleAware(QSortFilterProxyModel* self) {
-	return self->bindableIsSortLocaleAware();
 }
 
 int QSortFilterProxyModel_SortColumn(const QSortFilterProxyModel* self) {
@@ -126,20 +107,12 @@ void QSortFilterProxyModel_SetDynamicSortFilter(QSortFilterProxyModel* self, boo
 	self->setDynamicSortFilter(enable);
 }
 
-QBindable<bool> QSortFilterProxyModel_BindableDynamicSortFilter(QSortFilterProxyModel* self) {
-	return self->bindableDynamicSortFilter();
-}
-
 int QSortFilterProxyModel_SortRole(const QSortFilterProxyModel* self) {
 	return self->sortRole();
 }
 
 void QSortFilterProxyModel_SetSortRole(QSortFilterProxyModel* self, int role) {
 	self->setSortRole(role);
-}
-
-QBindable<int> QSortFilterProxyModel_BindableSortRole(QSortFilterProxyModel* self) {
-	return self->bindableSortRole();
 }
 
 int QSortFilterProxyModel_FilterRole(const QSortFilterProxyModel* self) {
@@ -150,10 +123,6 @@ void QSortFilterProxyModel_SetFilterRole(QSortFilterProxyModel* self, int role) 
 	self->setFilterRole(role);
 }
 
-QBindable<int> QSortFilterProxyModel_BindableFilterRole(QSortFilterProxyModel* self) {
-	return self->bindableFilterRole();
-}
-
 bool QSortFilterProxyModel_IsRecursiveFilteringEnabled(const QSortFilterProxyModel* self) {
 	return self->isRecursiveFilteringEnabled();
 }
@@ -162,20 +131,12 @@ void QSortFilterProxyModel_SetRecursiveFilteringEnabled(QSortFilterProxyModel* s
 	self->setRecursiveFilteringEnabled(recursive);
 }
 
-QBindable<bool> QSortFilterProxyModel_BindableRecursiveFilteringEnabled(QSortFilterProxyModel* self) {
-	return self->bindableRecursiveFilteringEnabled();
-}
-
 bool QSortFilterProxyModel_AutoAcceptChildRows(const QSortFilterProxyModel* self) {
 	return self->autoAcceptChildRows();
 }
 
 void QSortFilterProxyModel_SetAutoAcceptChildRows(QSortFilterProxyModel* self, bool accept) {
 	self->setAutoAcceptChildRows(accept);
-}
-
-QBindable<bool> QSortFilterProxyModel_BindableAutoAcceptChildRows(QSortFilterProxyModel* self) {
-	return self->bindableAutoAcceptChildRows();
 }
 
 void QSortFilterProxyModel_SetFilterRegularExpression(QSortFilterProxyModel* self, const libqt_string pattern) {
@@ -239,7 +200,7 @@ bool QSortFilterProxyModel_SetHeaderData(QSortFilterProxyModel* self, int sectio
 }
 
 QMimeData* QSortFilterProxyModel_MimeData(const QSortFilterProxyModel* self, const libqt_list indexes) {
-	return self->mimeData(*indexes);
+	return self->mimeData(QList<QModelIndex>());
 }
 
 bool QSortFilterProxyModel_DropMimeData(QSortFilterProxyModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent) {
@@ -279,7 +240,16 @@ QModelIndex* QSortFilterProxyModel_Buddy(const QSortFilterProxyModel* self, cons
 }
 
 libqt_list QSortFilterProxyModel_Match(const QSortFilterProxyModel* self, const QModelIndex* start, int role, const QVariant* value, int hits, int flags) {
-	return self->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QSize* QSortFilterProxyModel_Span(const QSortFilterProxyModel* self, const QModelIndex* index) {
@@ -291,7 +261,21 @@ void QSortFilterProxyModel_Sort(QSortFilterProxyModel* self, int column, int ord
 }
 
 libqt_list QSortFilterProxyModel_MimeTypes(const QSortFilterProxyModel* self) {
-	return self->mimeTypes();
+	auto _ret = self->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 int QSortFilterProxyModel_SupportedDropActions(const QSortFilterProxyModel* self) {
@@ -749,7 +733,7 @@ QMimeData* QSortFilterProxyModel_QBaseMimeData(const QSortFilterProxyModel* self
 	auto* vqsortfilterproxymodel = dynamic_cast<const VirtualQSortFilterProxyModel*>(self);
 	if (vqsortfilterproxymodel && vqsortfilterproxymodel->isVirtualQSortFilterProxyModel) {
 vqsortfilterproxymodel->setQSortFilterProxyModel_MimeData_IsBase(true);
-	return vqsortfilterproxymodel->mimeData(*indexes);
+	return vqsortfilterproxymodel->mimeData(QList<QModelIndex>());
 }
 }
 
@@ -919,7 +903,16 @@ libqt_list QSortFilterProxyModel_QBaseMatch(const QSortFilterProxyModel* self, c
 	auto* vqsortfilterproxymodel = dynamic_cast<const VirtualQSortFilterProxyModel*>(self);
 	if (vqsortfilterproxymodel && vqsortfilterproxymodel->isVirtualQSortFilterProxyModel) {
 vqsortfilterproxymodel->setQSortFilterProxyModel_Match_IsBase(true);
-	return vqsortfilterproxymodel->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = vqsortfilterproxymodel->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -970,7 +963,21 @@ libqt_list QSortFilterProxyModel_QBaseMimeTypes(const QSortFilterProxyModel* sel
 	auto* vqsortfilterproxymodel = dynamic_cast<const VirtualQSortFilterProxyModel*>(self);
 	if (vqsortfilterproxymodel && vqsortfilterproxymodel->isVirtualQSortFilterProxyModel) {
 vqsortfilterproxymodel->setQSortFilterProxyModel_MimeTypes_IsBase(true);
-	return vqsortfilterproxymodel->mimeTypes();
+	auto _ret = vqsortfilterproxymodel->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 

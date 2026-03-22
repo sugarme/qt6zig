@@ -15,11 +15,9 @@ extern "C" {
 
 #ifdef __cplusplus
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QEvent QEvent;
 typedef struct QObject QObject;
 typedef struct QSettings QSettings;
-typedef struct QVariant QVariant;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
 #endif
@@ -47,22 +45,14 @@ void QSettings_Sync(QSettings* self);
 int QSettings_Status(const QSettings* self);
 bool QSettings_IsAtomicSyncRequired(const QSettings* self);
 void QSettings_SetAtomicSyncRequired(QSettings* self, bool enable);
-void QSettings_BeginGroup(QSettings* self, libqt_string prefix);
 void QSettings_EndGroup(QSettings* self);
 libqt_string QSettings_Group(const QSettings* self);
-int QSettings_BeginReadArray(QSettings* self, libqt_string prefix);
-void QSettings_BeginWriteArray(QSettings* self, libqt_string prefix);
 void QSettings_EndArray(QSettings* self);
 void QSettings_SetArrayIndex(QSettings* self, int i);
 libqt_list QSettings_AllKeys(const QSettings* self);
 libqt_list QSettings_ChildKeys(const QSettings* self);
 libqt_list QSettings_ChildGroups(const QSettings* self);
 bool QSettings_IsWritable(const QSettings* self);
-void QSettings_SetValue(QSettings* self, libqt_string key, const QVariant* value);
-QVariant* QSettings_Value(const QSettings* self, libqt_string key, const QVariant* defaultValue);
-QVariant* QSettings_Value2(const QSettings* self, libqt_string key);
-void QSettings_Remove(QSettings* self, libqt_string key);
-bool QSettings_Contains(const QSettings* self, libqt_string key);
 void QSettings_SetFallbacksEnabled(QSettings* self, bool b);
 bool QSettings_FallbacksEnabled(const QSettings* self);
 libqt_string QSettings_FileName(const QSettings* self);
@@ -76,7 +66,6 @@ void QSettings_SetPath(int format, int scope, const libqt_string path);
 bool QSettings_Event(QSettings* self, QEvent* event);
 libqt_string QSettings_Tr2(const char* s, const char* c);
 libqt_string QSettings_Tr3(const char* s, const char* c, int n);
-void QSettings_BeginWriteArray2(QSettings* self, libqt_string prefix, int size);
 void QSettings_OnEvent(QSettings* self, intptr_t slot);
 bool QSettings_QBaseEvent(QSettings* self, QEvent* event);
 void QSettings_Delete(QSettings* self);

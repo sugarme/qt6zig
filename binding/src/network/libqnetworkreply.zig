@@ -91,28 +91,8 @@ return  _ret;
         return qtc.QNetworkReply_Header(@ptrCast(self), @intCast(header));
     }
 
-    pub fn HasRawHeader(self: ?*anyopaque, headerName: []const u8) bool {
-        const headerName_str = qtc.libqt_string{
-    .len = headerName.len,
-    .data = headerName.ptr,
-};
-return qtc.QNetworkReply_HasRawHeader(@ptrCast(self), headerName_str);
-    }
-
     pub fn RawHeaderList(self: ?*anyopaque, ) []const u8 {
         return qtc.QNetworkReply_RawHeaderList(@ptrCast(self));
-    }
-
-    pub fn RawHeader(self: ?*anyopaque, headerName: []const u8, allocator: std.mem.Allocator) []u8 {
-        const headerName_str = qtc.libqt_string{
-    .len = headerName.len,
-    .data = headerName.ptr,
-};
-const _bytearray: qtc.libqt_string = qtc.QNetworkReply_RawHeader(@ptrCast(self), headerName_str);
-defer qtc.libqt_string_free(&_bytearray);
-const _ret = allocator.alloc(u8, _bytearray.len) catch @panic("qnetworkreply.RawHeader: Memory allocation failed");
-@memcpy(_ret, _bytearray.data[0.._bytearray.len]);
-return  _ret;
     }
 
     pub fn RawHeaderPairs(self: ?*anyopaque, ) []const u8 {

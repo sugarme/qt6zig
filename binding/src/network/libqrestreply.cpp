@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qrestreply.h>
 #include "libqrestreply.h"
 #include "libqrestreply.hxx"

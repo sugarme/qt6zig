@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsqlerror.h>
 #include "libqsqlerror.h"
 #include "libqsqlerror.hxx"

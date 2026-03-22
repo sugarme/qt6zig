@@ -38,7 +38,6 @@ void QOpenGLFunctions_1_5_GlGetTexImage(QOpenGLFunctions_1_5* self, uint32_t tar
 const uint8_t* QOpenGLFunctions_1_5_GlGetString(QOpenGLFunctions_1_5* self, uint32_t name);
 void QOpenGLFunctions_1_5_GlGetIntegerv(QOpenGLFunctions_1_5* self, uint32_t pname, int32_t* params);
 void QOpenGLFunctions_1_5_GlGetFloatv(QOpenGLFunctions_1_5* self, uint32_t pname, float* params);
-GL QOpenGLFunctions_1_5_GlGetError(QOpenGLFunctions_1_5* self);
 void QOpenGLFunctions_1_5_GlGetDoublev(QOpenGLFunctions_1_5* self, uint32_t pname, double* params);
 void QOpenGLFunctions_1_5_GlGetBooleanv(QOpenGLFunctions_1_5* self, uint32_t pname, unsigned char* params);
 void QOpenGLFunctions_1_5_GlReadPixels(QOpenGLFunctions_1_5* self, int32_t x, int32_t y, int32_t width, int32_t height, uint32_t format, uint32_t typeVal, void* pixels);

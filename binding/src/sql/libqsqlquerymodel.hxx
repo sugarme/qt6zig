@@ -334,7 +334,7 @@ public:
 			return QSqlQueryModel::roleNames();
 		} else if (qsqlquerymodel_rolenames_callback != nullptr) {
 			libqt_map callback_ret = qsqlquerymodel_rolenames_callback();
-			return callback_ret;
+			return QHash<int, QByteArray>();
 		} else {
 			return QSqlQueryModel::roleNames();
 		}

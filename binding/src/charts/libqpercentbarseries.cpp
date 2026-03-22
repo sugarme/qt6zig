@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpercentbarseries.h>
 #include "libqpercentbarseries.h"
 #include "libqpercentbarseries.hxx"

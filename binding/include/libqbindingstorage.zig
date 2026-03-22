@@ -27,30 +27,6 @@ pub const qbindingstatus = struct {
     }
 
 
-    pub fn CurrentlyEvaluatingBinding(self: ?*anyopaque, ) QtPrivate::BindingEvaluationState {
-        return @ptrCast(qtc.QBindingStatus_CurrentlyEvaluatingBinding(@ptrCast(self)));
-    }
-
-    pub fn SetCurrentlyEvaluatingBinding(self: ?*anyopaque, currentlyEvaluatingBinding: *QtPrivate::BindingEvaluationState) void {
-        qtc.QBindingStatus_SetCurrentlyEvaluatingBinding(@ptrCast(self), @ptrCast(currentlyEvaluatingBinding));
-    }
-
-    pub fn CurrentCompatProperty(self: ?*anyopaque, ) QtPrivate::CompatPropertySafePoint {
-        return @ptrCast(qtc.QBindingStatus_CurrentCompatProperty(@ptrCast(self)));
-    }
-
-    pub fn SetCurrentCompatProperty(self: ?*anyopaque, currentCompatProperty: *QtPrivate::CompatPropertySafePoint) void {
-        qtc.QBindingStatus_SetCurrentCompatProperty(@ptrCast(self), @ptrCast(currentCompatProperty));
-    }
-
-    pub fn GroupUpdateData(self: ?*anyopaque, ) QPropertyDelayedNotifications {
-        return @ptrCast(qtc.QBindingStatus_GroupUpdateData(@ptrCast(self)));
-    }
-
-    pub fn SetGroupUpdateData(self: ?*anyopaque, groupUpdateData: *QPropertyDelayedNotifications) void {
-        qtc.QBindingStatus_SetGroupUpdateData(@ptrCast(self), @ptrCast(groupUpdateData));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QBindingStatus_Delete(@ptrCast(self));
@@ -80,20 +56,8 @@ pub const qbindingstorage = struct {
         return qtc.QBindingStorage_IsValid(@ptrCast(self));
     }
 
-    pub fn Status(self: ?*anyopaque, param1: QtPrivate::QBindingStatusAccessToken) QtC.QBindingStatus {
-        return qtc.QBindingStorage_Status(@ptrCast(self), param1);
-    }
-
     pub fn RegisterDependency(self: ?*anyopaque, data: ?*anyopaque) void {
         qtc.QBindingStorage_RegisterDependency(@ptrCast(self), @ptrCast(data));
-    }
-
-    pub fn BindingData(self: ?*anyopaque, data: ?*anyopaque) QtC.QtPrivate__QPropertyBindingData {
-        return qtc.QBindingStorage_BindingData(@ptrCast(self), @ptrCast(data));
-    }
-
-    pub fn BindingData2(self: ?*anyopaque, data: ?*anyopaque, create: bool) QtC.QtPrivate__QPropertyBindingData {
-        return qtc.QBindingStorage_BindingData2(@ptrCast(self), @ptrCast(data), create);
     }
 
     /// Delete this object from C++ memory.

@@ -58,10 +58,6 @@ bool QBackingStore_HasStaticContents(const QBackingStore* self) {
 	return self->hasStaticContents();
 }
 
-QPlatformBackingStore* QBackingStore_Handle(const QBackingStore* self) {
-	return self->handle();
-}
-
 void QBackingStore_Flush2(QBackingStore* self, const QRegion* region, QWindow* window) {
 	self->flush(*region, window);
 }

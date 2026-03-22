@@ -37,56 +37,16 @@ pub const qsqlrecord = struct {
         return qtc.QSqlRecord_Value(@ptrCast(self), i);
     }
 
-    pub fn Value2(self: ?*anyopaque, name: []const u8) QtC.QVariant {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlRecord_Value2(@ptrCast(self), name_str);
-    }
-
     pub fn SetValue(self: ?*anyopaque, i: i32, val: ?*anyopaque) void {
         qtc.QSqlRecord_SetValue(@ptrCast(self), i, @ptrCast(val));
-    }
-
-    pub fn SetValue2(self: ?*anyopaque, name: []const u8, val: ?*anyopaque) void {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-qtc.QSqlRecord_SetValue2(@ptrCast(self), name_str, @ptrCast(val));
     }
 
     pub fn SetNull(self: ?*anyopaque, i: i32) void {
         qtc.QSqlRecord_SetNull(@ptrCast(self), i);
     }
 
-    pub fn SetNull2(self: ?*anyopaque, name: []const u8) void {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-qtc.QSqlRecord_SetNull2(@ptrCast(self), name_str);
-    }
-
     pub fn IsNull(self: ?*anyopaque, i: i32) bool {
         return qtc.QSqlRecord_IsNull(@ptrCast(self), i);
-    }
-
-    pub fn IsNull2(self: ?*anyopaque, name: []const u8) bool {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlRecord_IsNull2(@ptrCast(self), name_str);
-    }
-
-    pub fn IndexOf(self: ?*anyopaque, name: []const u8) i32 {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlRecord_IndexOf(@ptrCast(self), name_str);
     }
 
     pub fn FieldName(self: ?*anyopaque, i: i32, allocator: std.mem.Allocator) []const u8 {
@@ -101,32 +61,8 @@ return  _ret;
         return qtc.QSqlRecord_Field(@ptrCast(self), i);
     }
 
-    pub fn Field2(self: ?*anyopaque, name: []const u8) QtC.QSqlField {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlRecord_Field2(@ptrCast(self), name_str);
-    }
-
     pub fn IsGenerated(self: ?*anyopaque, i: i32) bool {
         return qtc.QSqlRecord_IsGenerated(@ptrCast(self), i);
-    }
-
-    pub fn IsGenerated2(self: ?*anyopaque, name: []const u8) bool {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlRecord_IsGenerated2(@ptrCast(self), name_str);
-    }
-
-    pub fn SetGenerated(self: ?*anyopaque, name: []const u8, generated: bool) void {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-qtc.QSqlRecord_SetGenerated(@ptrCast(self), name_str, generated);
     }
 
     pub fn SetGenerated2(self: ?*anyopaque, i: i32, generated: bool) void {
@@ -151,14 +87,6 @@ qtc.QSqlRecord_SetGenerated(@ptrCast(self), name_str, generated);
 
     pub fn IsEmpty(self: ?*anyopaque, ) bool {
         return qtc.QSqlRecord_IsEmpty(@ptrCast(self));
-    }
-
-    pub fn Contains(self: ?*anyopaque, name: []const u8) bool {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QSqlRecord_Contains(@ptrCast(self), name_str);
     }
 
     pub fn Clear(self: ?*anyopaque, ) void {

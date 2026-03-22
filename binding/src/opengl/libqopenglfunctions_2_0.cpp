@@ -55,10 +55,6 @@ void QOpenGLFunctions_2_0_GlGetFloatv(QOpenGLFunctions_2_0* self, uint32_t pname
 	self->glGetFloatv(pname, params);
 }
 
-GL QOpenGLFunctions_2_0_GlGetError(QOpenGLFunctions_2_0* self) {
-	return self->glGetError();
-}
-
 void QOpenGLFunctions_2_0_GlGetDoublev(QOpenGLFunctions_2_0* self, uint32_t pname, double* params) {
 	self->glGetDoublev(pname, params);
 }
@@ -591,14 +587,6 @@ void QOpenGLFunctions_2_0_GlGetAttachedShaders(QOpenGLFunctions_2_0* self, uint3
 	self->glGetAttachedShaders(program, maxCount, count, obj);
 }
 
-void QOpenGLFunctions_2_0_GlGetActiveUniform(QOpenGLFunctions_2_0* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name) {
-	self->glGetActiveUniform(program, index, bufSize, length, size, typeVal, name);
-}
-
-void QOpenGLFunctions_2_0_GlGetActiveAttrib(QOpenGLFunctions_2_0* self, uint32_t program, uint32_t index, int32_t bufSize, int32_t* length, int32_t* size, GL* typeVal, GLchar* name) {
-	self->glGetActiveAttrib(program, index, bufSize, length, size, typeVal, name);
-}
-
 void QOpenGLFunctions_2_0_GlEnableVertexAttribArray(QOpenGLFunctions_2_0* self, uint32_t index) {
 	self->glEnableVertexAttribArray(index);
 }
@@ -649,10 +637,6 @@ void QOpenGLFunctions_2_0_GlStencilFuncSeparate(QOpenGLFunctions_2_0* self, uint
 
 void QOpenGLFunctions_2_0_GlStencilOpSeparate(QOpenGLFunctions_2_0* self, uint32_t face, uint32_t sfail, uint32_t dpfail, uint32_t dppass) {
 	self->glStencilOpSeparate(face, sfail, dpfail, dppass);
-}
-
-void QOpenGLFunctions_2_0_GlDrawBuffers(QOpenGLFunctions_2_0* self, int32_t n, const GL* bufs) {
-	self->glDrawBuffers(n, bufs);
 }
 
 void QOpenGLFunctions_2_0_GlBlendEquationSeparate(QOpenGLFunctions_2_0* self, uint32_t modeRGB, uint32_t modeAlpha) {

@@ -8,7 +8,6 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsPathItem>
 #include <QGraphicsPixmapItem>
-#include <QGraphicsPolygonItem>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
@@ -35,6 +34,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
 #include <QTransform>
@@ -124,31 +124,75 @@ QRectF* QGraphicsScene_ItemsBoundingRect(const QGraphicsScene* self) {
 }
 
 libqt_list QGraphicsScene_Items(const QGraphicsScene* self) {
-	return self->items();
+	auto _ret = self->items();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items2(const QGraphicsScene* self, const QPointF* pos) {
-	return self->items(*pos);
+	auto _ret = self->items(*pos);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items3(const QGraphicsScene* self, const QRectF* rect) {
-	return self->items(*rect);
-}
-
-libqt_list QGraphicsScene_Items4(const QGraphicsScene* self, const QPolygonF* polygon) {
-	return self->items(*polygon);
+	auto _ret = self->items(*rect);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items5(const QGraphicsScene* self, const QPainterPath* path) {
-	return self->items(*path);
+	auto _ret = self->items(*path);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items6(const QGraphicsScene* self, double x, double y, double w, double h, int mode, int order) {
-	return self->items(x, y, w, h, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	auto _ret = self->items(x, y, w, h, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_CollidingItems(const QGraphicsScene* self, const QGraphicsItem* item) {
-	return self->collidingItems(item);
+	auto _ret = self->collidingItems(item);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QGraphicsItem* QGraphicsScene_ItemAt(const QGraphicsScene* self, const QPointF* pos, const QTransform* deviceTransform) {
@@ -160,7 +204,15 @@ QGraphicsItem* QGraphicsScene_ItemAt2(const QGraphicsScene* self, double x, doub
 }
 
 libqt_list QGraphicsScene_SelectedItems(const QGraphicsScene* self) {
-	return self->selectedItems();
+	auto _ret = self->selectedItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QPainterPath* QGraphicsScene_SelectionArea(const QGraphicsScene* self) {
@@ -176,7 +228,7 @@ void QGraphicsScene_SetSelectionArea2(QGraphicsScene* self, const QPainterPath* 
 }
 
 QGraphicsItemGroup* QGraphicsScene_CreateItemGroup(QGraphicsScene* self, const libqt_list items) {
-	return self->createItemGroup(*items);
+	return self->createItemGroup(QList<QGraphicsItem *>());
 }
 
 void QGraphicsScene_DestroyItemGroup(QGraphicsScene* self, QGraphicsItemGroup* group) {
@@ -201,10 +253,6 @@ QGraphicsPathItem* QGraphicsScene_AddPath(QGraphicsScene* self, const QPainterPa
 
 QGraphicsPixmapItem* QGraphicsScene_AddPixmap(QGraphicsScene* self, const QPixmap* pixmap) {
 	return self->addPixmap(*pixmap);
-}
-
-QGraphicsPolygonItem* QGraphicsScene_AddPolygon(QGraphicsScene* self, const QPolygonF* polygon) {
-	return self->addPolygon(*polygon);
 }
 
 QGraphicsRectItem* QGraphicsScene_AddRect(QGraphicsScene* self, const QRectF* rect) {
@@ -292,7 +340,15 @@ QVariant* QGraphicsScene_InputMethodQuery(const QGraphicsScene* self, int query)
 }
 
 libqt_list QGraphicsScene_Views(const QGraphicsScene* self) {
-	return self->views();
+	auto _ret = self->views();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QGraphicsScene_Update(QGraphicsScene* self, double x, double y, double w, double h) {
@@ -388,7 +444,7 @@ void QGraphicsScene_Clear(QGraphicsScene* self) {
 }
 
 void QGraphicsScene_Changed(QGraphicsScene* self, const libqt_list region) {
-	self->changed(*region);
+	self->changed(QList<QRectF>());
 }
 
 void QGraphicsScene_Connect_Changed(QGraphicsScene* self, intptr_t slot) {
@@ -466,63 +522,147 @@ void QGraphicsScene_Render4(QGraphicsScene* self, QPainter* painter, const QRect
 }
 
 libqt_list QGraphicsScene_Items1(const QGraphicsScene* self, int order) {
-	return self->items(static_cast<Qt::SortOrder>(order));
+	auto _ret = self->items(static_cast<Qt::SortOrder>(order));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items22(const QGraphicsScene* self, const QPointF* pos, int mode) {
-	return self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items32(const QGraphicsScene* self, const QPointF* pos, int mode, int order) {
-	return self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	auto _ret = self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items42(const QGraphicsScene* self, const QPointF* pos, int mode, int order, const QTransform* deviceTransform) {
-	return self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	auto _ret = self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items23(const QGraphicsScene* self, const QRectF* rect, int mode) {
-	return self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items33(const QGraphicsScene* self, const QRectF* rect, int mode, int order) {
-	return self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	auto _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items43(const QGraphicsScene* self, const QRectF* rect, int mode, int order, const QTransform* deviceTransform) {
-	return self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
-}
-
-libqt_list QGraphicsScene_Items24(const QGraphicsScene* self, const QPolygonF* polygon, int mode) {
-	return self->items(*polygon, static_cast<Qt::ItemSelectionMode>(mode));
-}
-
-libqt_list QGraphicsScene_Items34(const QGraphicsScene* self, const QPolygonF* polygon, int mode, int order) {
-	return self->items(*polygon, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
-}
-
-libqt_list QGraphicsScene_Items44(const QGraphicsScene* self, const QPolygonF* polygon, int mode, int order, const QTransform* deviceTransform) {
-	return self->items(*polygon, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	auto _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items25(const QGraphicsScene* self, const QPainterPath* path, int mode) {
-	return self->items(*path, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items35(const QGraphicsScene* self, const QPainterPath* path, int mode, int order) {
-	return self->items(*path, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	auto _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items45(const QGraphicsScene* self, const QPainterPath* path, int mode, int order, const QTransform* deviceTransform) {
-	return self->items(*path, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	auto _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_Items7(const QGraphicsScene* self, double x, double y, double w, double h, int mode, int order, const QTransform* deviceTransform) {
-	return self->items(x, y, w, h, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	auto _ret = self->items(x, y, w, h, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGraphicsScene_CollidingItems2(const QGraphicsScene* self, const QGraphicsItem* item, int mode) {
-	return self->collidingItems(item, static_cast<Qt::ItemSelectionMode>(mode));
+	auto _ret = self->collidingItems(item, static_cast<Qt::ItemSelectionMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QGraphicsScene_SetSelectionArea22(QGraphicsScene* self, const QPainterPath* path, int selectionOperation) {
@@ -555,14 +695,6 @@ QGraphicsPathItem* QGraphicsScene_AddPath2(QGraphicsScene* self, const QPainterP
 
 QGraphicsPathItem* QGraphicsScene_AddPath3(QGraphicsScene* self, const QPainterPath* path, const QPen* pen, const QBrush* brush) {
 	return self->addPath(*path, *pen, *brush);
-}
-
-QGraphicsPolygonItem* QGraphicsScene_AddPolygon2(QGraphicsScene* self, const QPolygonF* polygon, const QPen* pen) {
-	return self->addPolygon(*polygon, *pen);
-}
-
-QGraphicsPolygonItem* QGraphicsScene_AddPolygon3(QGraphicsScene* self, const QPolygonF* polygon, const QPen* pen, const QBrush* brush) {
-	return self->addPolygon(*polygon, *pen, *brush);
 }
 
 QGraphicsRectItem* QGraphicsScene_AddRect22(QGraphicsScene* self, const QRectF* rect, const QPen* pen) {

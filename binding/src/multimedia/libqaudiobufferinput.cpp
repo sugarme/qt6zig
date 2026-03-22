@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qaudiobufferinput.h>
 #include "libqaudiobufferinput.h"
 #include "libqaudiobufferinput.hxx"

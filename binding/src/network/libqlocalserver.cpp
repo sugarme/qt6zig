@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qlocalserver.h>
 #include "libqlocalserver.h"
 #include "libqlocalserver.hxx"
@@ -129,10 +130,6 @@ void QLocalServer_SetSocketOptions(QLocalServer* self, int options) {
 
 int QLocalServer_SocketOptions(const QLocalServer* self) {
 	return self->socketOptions();
-}
-
-QBindable<SocketOptions> QLocalServer_BindableSocketOptions(QLocalServer* self) {
-	return self->bindableSocketOptions();
 }
 
 intptr_t QLocalServer_SocketDescriptor(const QLocalServer* self) {

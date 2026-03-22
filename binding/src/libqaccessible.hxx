@@ -197,7 +197,7 @@ public:
 		} else if (qaccessibleinterface_relations_callback != nullptr) {
 			int cbval1 = static_cast<int>(match);
 			libqt_list callback_ret = qaccessibleinterface_relations_callback(this, cbval1);
-			return callback_ret;
+			return QList<QPair<QAccessibleInterface *, QFlags<QAccessible::RelationFlag>>>();
 		} else {
 			return QAccessibleInterface::relations(match);
 		}
@@ -972,7 +972,7 @@ public:
 	virtual QList<QAccessibleInterface *> columnHeaderCells() const override {
 		if (qaccessibletablecellinterface_columnheadercells_callback != nullptr) {
 			libqt_list callback_ret = qaccessibletablecellinterface_columnheadercells_callback();
-			return callback_ret;
+			return QList<QAccessibleInterface *>();
 		} else {
 			return {};
 		}
@@ -982,7 +982,7 @@ public:
 	virtual QList<QAccessibleInterface *> rowHeaderCells() const override {
 		if (qaccessibletablecellinterface_rowheadercells_callback != nullptr) {
 			libqt_list callback_ret = qaccessibletablecellinterface_rowheadercells_callback();
-			return callback_ret;
+			return QList<QAccessibleInterface *>();
 		} else {
 			return {};
 		}
@@ -1237,7 +1237,7 @@ public:
 	virtual QList<QAccessibleInterface *> selectedCells() const override {
 		if (qaccessibletableinterface_selectedcells_callback != nullptr) {
 			libqt_list callback_ret = qaccessibletableinterface_selectedcells_callback();
-			return callback_ret;
+			return QList<QAccessibleInterface *>();
 		} else {
 			return {};
 		}
@@ -1309,7 +1309,7 @@ public:
 	virtual QList<int> selectedColumns() const override {
 		if (qaccessibletableinterface_selectedcolumns_callback != nullptr) {
 			libqt_list callback_ret = qaccessibletableinterface_selectedcolumns_callback();
-			return callback_ret;
+			return QList<int>();
 		} else {
 			return {};
 		}
@@ -1319,7 +1319,7 @@ public:
 	virtual QList<int> selectedRows() const override {
 		if (qaccessibletableinterface_selectedrows_callback != nullptr) {
 			libqt_list callback_ret = qaccessibletableinterface_selectedrows_callback();
-			return callback_ret;
+			return QList<int>();
 		} else {
 			return {};
 		}
@@ -1477,7 +1477,7 @@ public:
 	virtual QList<QString> actionNames() const override {
 		if (qaccessibleactioninterface_actionnames_callback != nullptr) {
 			libqt_list callback_ret = qaccessibleactioninterface_actionnames_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return {};
 		}
@@ -1536,7 +1536,7 @@ public:
 			cbval1.len = actionName_qb.length();
 			cbval1.data = static_cast<const char*>(actionName_qb.constData());
 			libqt_list callback_ret = qaccessibleactioninterface_keybindingsforaction_callback(this, cbval1);
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return {};
 		}
@@ -1813,7 +1813,7 @@ public:
 	virtual QList<QAccessibleInterface *> selectedItems() const override {
 		if (qaccessibleselectioninterface_selecteditems_callback != nullptr) {
 			libqt_list callback_ret = qaccessibleselectioninterface_selecteditems_callback();
-			return callback_ret;
+			return QList<QAccessibleInterface *>();
 		} else {
 			return {};
 		}
@@ -1932,7 +1932,7 @@ public:
 	virtual QList<QAccessible::Attribute> attributeKeys() const override {
 		if (qaccessibleattributesinterface_attributekeys_callback != nullptr) {
 			libqt_list callback_ret = qaccessibleattributesinterface_attributekeys_callback();
-			return callback_ret;
+			return QList<QAccessible::Attribute>();
 		} else {
 			return {};
 		}

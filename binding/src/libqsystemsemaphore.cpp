@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSystemSemaphore>
 #include <qsystemsemaphore.h>
 #include "libqsystemsemaphore.h"

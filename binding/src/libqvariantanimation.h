@@ -41,10 +41,8 @@ void QVariantAnimation_SetKeyValues(QVariantAnimation* self, const libqt_list va
 QVariant* QVariantAnimation_CurrentValue(const QVariantAnimation* self);
 int QVariantAnimation_Duration(const QVariantAnimation* self);
 void QVariantAnimation_SetDuration(QVariantAnimation* self, int msecs);
-QBindable<int> QVariantAnimation_BindableDuration(QVariantAnimation* self);
 QEasingCurve* QVariantAnimation_EasingCurve(const QVariantAnimation* self);
 void QVariantAnimation_SetEasingCurve(QVariantAnimation* self, const QEasingCurve* easing);
-QBindable<QEasingCurve> QVariantAnimation_BindableEasingCurve(QVariantAnimation* self);
 void QVariantAnimation_ValueChanged(QVariantAnimation* self, const QVariant* value);
 void QVariantAnimation_Connect_ValueChanged(QVariantAnimation* self, intptr_t slot);
 bool QVariantAnimation_Event(QVariantAnimation* self, QEvent* event);

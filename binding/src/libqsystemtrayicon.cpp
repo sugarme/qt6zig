@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSystemTrayIcon>
 #include <qsystemtrayicon.h>
 #include "libqsystemtrayicon.h"

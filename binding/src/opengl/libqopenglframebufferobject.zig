@@ -266,16 +266,8 @@ pub const qopenglframebufferobjectformat = struct {
         qtc.QOpenGLFramebufferObjectFormat_SetTextureTarget(@ptrCast(self), target);
     }
 
-    pub fn TextureTarget(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFramebufferObjectFormat_TextureTarget(@ptrCast(self));
-    }
-
     pub fn SetInternalTextureFormat(self: ?*anyopaque, internalTextureFormat: u32) void {
         qtc.QOpenGLFramebufferObjectFormat_SetInternalTextureFormat(@ptrCast(self), internalTextureFormat);
-    }
-
-    pub fn InternalTextureFormat(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFramebufferObjectFormat_InternalTextureFormat(@ptrCast(self));
     }
 
     pub fn OperatorEqual(self: ?*anyopaque, other: ?*anyopaque) bool {

@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpicture.h>
 #include "libqpicture.h"
 #include "libqpicture.hxx"
@@ -89,10 +90,6 @@ bool QPicture_IsDetached(const QPicture* self) {
 
 QPaintEngine* QPicture_PaintEngine(const QPicture* self) {
 	return self->paintEngine();
-}
-
-QExplicitlySharedDataPointer<QPicturePrivate>* QPicture_DataPtr(QPicture* self) {
-	return self->data_ptr();
 }
 
 // Base class handler implementation

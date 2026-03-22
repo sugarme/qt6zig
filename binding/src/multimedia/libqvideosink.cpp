@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVideoFrame>
 #include <QVideoSink>
 #include <qvideosink.h>
@@ -26,14 +27,6 @@ libqt_string QVideoSink_Tr(const char* s) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-QRhi* QVideoSink_Rhi(const QVideoSink* self) {
-	return self->rhi();
-}
-
-void QVideoSink_SetRhi(QVideoSink* self, QRhi* rhi) {
-	self->setRhi(rhi);
 }
 
 QSize* QVideoSink_VideoSize(const QVideoSink* self) {
@@ -61,10 +54,6 @@ void QVideoSink_SetVideoFrame(QVideoSink* self, const QVideoFrame* frame) {
 
 QVideoFrame* QVideoSink_VideoFrame(const QVideoSink* self) {
 	return new QVideoFrame(self->videoFrame());
-}
-
-QPlatformVideoSink* QVideoSink_PlatformVideoSink(const QVideoSink* self) {
-	return self->platformVideoSink();
 }
 
 void QVideoSink_VideoFrameChanged(const QVideoSink* self, const QVideoFrame* frame) {

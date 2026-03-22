@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransform>
 #include <qpainterpath.h>
 #include "libqpainterpath.h"
@@ -122,10 +123,6 @@ void QPainterPath_AddEllipse3(QPainterPath* self, const QPointF* center, double 
 	self->addEllipse(*center, rx, ry);
 }
 
-void QPainterPath_AddPolygon(QPainterPath* self, const QPolygonF* polygon) {
-	self->addPolygon(*polygon);
-}
-
 void QPainterPath_AddText(QPainterPath* self, const QPointF* point, const QFont* f, const libqt_string text) {
 	self->addText(*point, *f, QString::fromUtf8(text.data, text.len));
 }
@@ -207,15 +204,29 @@ QPainterPath* QPainterPath_ToReversed(const QPainterPath* self) {
 }
 
 libqt_list QPainterPath_ToSubpathPolygons(const QPainterPath* self) {
-	return self->toSubpathPolygons();
+	auto _ret = self->toSubpathPolygons();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QPainterPath_ToFillPolygons(const QPainterPath* self) {
-	return self->toFillPolygons();
-}
-
-QPolygonF* QPainterPath_ToFillPolygon(const QPainterPath* self) {
-	return new QPolygonF(self->toFillPolygon());
+	auto _ret = self->toFillPolygons();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QPainterPath_ElementCount(const QPainterPath* self) {
@@ -323,15 +334,29 @@ void QPainterPath_AddRoundedRect7(QPainterPath* self, double x, double y, double
 }
 
 libqt_list QPainterPath_ToSubpathPolygons1(const QPainterPath* self, const QTransform* matrix) {
-	return self->toSubpathPolygons(*matrix);
+	auto _ret = self->toSubpathPolygons(*matrix);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QPainterPath_ToFillPolygons1(const QPainterPath* self, const QTransform* matrix) {
-	return self->toFillPolygons(*matrix);
-}
-
-QPolygonF* QPainterPath_ToFillPolygon1(const QPainterPath* self, const QTransform* matrix) {
-	return new QPolygonF(self->toFillPolygon(*matrix));
+	auto _ret = self->toFillPolygons(*matrix);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QPainterPath_Delete(QPainterPath* self) {
@@ -391,11 +416,20 @@ void QPainterPathStroker_SetDashPattern(QPainterPathStroker* self, int dashPatte
 }
 
 void QPainterPathStroker_SetDashPattern2(QPainterPathStroker* self, const libqt_list dashPattern) {
-	self->setDashPattern(*dashPattern);
+	self->setDashPattern(QList<double>());
 }
 
 libqt_list QPainterPathStroker_DashPattern(const QPainterPathStroker* self) {
-	return self->dashPattern();
+	auto _ret = self->dashPattern();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QPainterPathStroker_SetDashOffset(QPainterPathStroker* self, double offset) {

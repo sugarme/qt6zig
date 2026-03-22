@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSurface>
 #include <QSurfaceFormat>
 #include <qopenglcontext.h>
@@ -26,7 +27,15 @@ libqt_string QOpenGLContextGroup_Tr(const char* s) {
 }
 
 libqt_list QOpenGLContextGroup_Shares(const QOpenGLContextGroup* self) {
-	return self->shares();
+	auto _ret = self->shares();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QOpenGLContextGroup* QOpenGLContextGroup_CurrentContextGroup() {
@@ -140,14 +149,6 @@ QOpenGLContext* QOpenGLContext_CurrentContext() {
 
 bool QOpenGLContext_AreSharing(QOpenGLContext* first, QOpenGLContext* second) {
 	return QOpenGLContext::areSharing(first, second);
-}
-
-QPlatformOpenGLContext* QOpenGLContext_Handle(const QOpenGLContext* self) {
-	return self->handle();
-}
-
-QPlatformOpenGLContext* QOpenGLContext_ShareHandle(const QOpenGLContext* self) {
-	return self->shareHandle();
 }
 
 QOpenGLFunctions* QOpenGLContext_Functions(const QOpenGLContext* self) {

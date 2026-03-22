@@ -2,8 +2,8 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStringMatcher>
-#include <QStringView>
 #include <qstringmatcher.h>
 #include "libqstringmatcher.h"
 #include "libqstringmatcher.hxx"
@@ -20,24 +20,16 @@ QStringMatcher* QStringMatcher_new3(const QChar* uc, ptrdiff_t lenVal) {
 	 return new QStringMatcher(uc, lenVal);
 }
 
-QStringMatcher* QStringMatcher_new4(QStringView* pattern) {
-	 return new QStringMatcher(*pattern);
-}
-
-QStringMatcher* QStringMatcher_new5(const QStringMatcher* other) {
+QStringMatcher* QStringMatcher_new4(const QStringMatcher* other) {
 	 return new QStringMatcher(*other);
 }
 
-QStringMatcher* QStringMatcher_new6(const libqt_string pattern, int cs) {
+QStringMatcher* QStringMatcher_new5(const libqt_string pattern, int cs) {
 	 return new QStringMatcher(QString::fromUtf8(pattern.data, pattern.len), static_cast<Qt::CaseSensitivity>(cs));
 }
 
-QStringMatcher* QStringMatcher_new7(const QChar* uc, ptrdiff_t lenVal, int cs) {
+QStringMatcher* QStringMatcher_new6(const QChar* uc, ptrdiff_t lenVal, int cs) {
 	 return new QStringMatcher(uc, lenVal, static_cast<Qt::CaseSensitivity>(cs));
-}
-
-QStringMatcher* QStringMatcher_new8(QStringView* pattern, int cs) {
-	 return new QStringMatcher(*pattern, static_cast<Qt::CaseSensitivity>(cs));
 }
 
 void QStringMatcher_OperatorAssign(QStringMatcher* self, const QStringMatcher* other) {
@@ -60,10 +52,6 @@ ptrdiff_t QStringMatcher_IndexIn2(const QStringMatcher* self, const QChar* str, 
 	return self->indexIn(str, length);
 }
 
-ptrdiff_t QStringMatcher_IndexIn3(const QStringMatcher* self, QStringView* str) {
-	return self->indexIn(*str);
-}
-
 libqt_string QStringMatcher_Pattern(const QStringMatcher* self) {
 	QString _ret = self->pattern();
 	QByteArray _b = _ret.toUtf8();
@@ -73,10 +61,6 @@ libqt_string QStringMatcher_Pattern(const QStringMatcher* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-QStringView* QStringMatcher_PatternView(const QStringMatcher* self) {
-	return new QStringView(self->patternView());
 }
 
 int QStringMatcher_CaseSensitivity(const QStringMatcher* self) {
@@ -89,10 +73,6 @@ ptrdiff_t QStringMatcher_IndexIn22(const QStringMatcher* self, const libqt_strin
 
 ptrdiff_t QStringMatcher_IndexIn32(const QStringMatcher* self, const QChar* str, ptrdiff_t length, ptrdiff_t from) {
 	return self->indexIn(str, length, from);
-}
-
-ptrdiff_t QStringMatcher_IndexIn23(const QStringMatcher* self, QStringView* str, ptrdiff_t from) {
-	return self->indexIn(*str, from);
 }
 
 void QStringMatcher_Delete(QStringMatcher* self) {

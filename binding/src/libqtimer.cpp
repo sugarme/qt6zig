@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimer>
 #include <QTimerEvent>
 #include <qtimer.h>
@@ -31,16 +32,8 @@ bool QTimer_IsActive(const QTimer* self) {
 	return self->isActive();
 }
 
-QBindable<bool> QTimer_BindableActive(QTimer* self) {
-	return self->bindableActive();
-}
-
 int QTimer_TimerId(const QTimer* self) {
 	return self->timerId();
-}
-
-int QTimer_Id(const QTimer* self) {
-	return self->id();
 }
 
 void QTimer_SetInterval(QTimer* self, int msec) {
@@ -49,10 +42,6 @@ void QTimer_SetInterval(QTimer* self, int msec) {
 
 int QTimer_Interval(const QTimer* self) {
 	return self->interval();
-}
-
-QBindable<int> QTimer_BindableInterval(QTimer* self) {
-	return self->bindableInterval();
 }
 
 int QTimer_RemainingTime(const QTimer* self) {
@@ -67,20 +56,12 @@ int QTimer_TimerType(const QTimer* self) {
 	return self->timerType();
 }
 
-QBindable<Qt::TimerType> QTimer_BindableTimerType(QTimer* self) {
-	return self->bindableTimerType();
-}
-
 void QTimer_SetSingleShot(QTimer* self, bool singleShot) {
 	self->setSingleShot(singleShot);
 }
 
 bool QTimer_IsSingleShot(const QTimer* self) {
 	return self->isSingleShot();
-}
-
-QBindable<bool> QTimer_BindableSingleShot(QTimer* self) {
-	return self->bindableSingleShot();
 }
 
 void QTimer_SingleShot(int msec, const QObject* receiver, const char* member) {

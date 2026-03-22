@@ -128,7 +128,7 @@ public:
 			return QWidgetAction::createdWidgets();
 		} else if (qwidgetaction_createdwidgets_callback != nullptr) {
 			libqt_list callback_ret = qwidgetaction_createdwidgets_callback();
-			return callback_ret;
+			return QList<QWidget *>();
 		} else {
 			return QWidgetAction::createdWidgets();
 		}

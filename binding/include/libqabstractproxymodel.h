@@ -34,7 +34,6 @@ QAbstractProxyModel* QAbstractProxyModel_new2(QObject* parent);
 libqt_string QAbstractProxyModel_Tr(const char* s);
 void QAbstractProxyModel_SetSourceModel(QAbstractProxyModel* self, QAbstractItemModel* sourceModel);
 QAbstractItemModel* QAbstractProxyModel_SourceModel(const QAbstractProxyModel* self);
-QBindable<QAbstractItemModel *> QAbstractProxyModel_BindableSourceModel(QAbstractProxyModel* self);
 QModelIndex* QAbstractProxyModel_MapToSource(const QAbstractProxyModel* self, const QModelIndex* proxyIndex);
 QModelIndex* QAbstractProxyModel_MapFromSource(const QAbstractProxyModel* self, const QModelIndex* sourceIndex);
 QItemSelection* QAbstractProxyModel_MapSelectionToSource(const QAbstractProxyModel* self, const QItemSelection* selection);

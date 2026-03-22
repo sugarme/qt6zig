@@ -22,14 +22,8 @@ return qtc.QDebug_new2(stringVal_str);
 
 
     /// New3 constructs a new QDebug object.
-    pub fn New3(t: i32) QtC.QDebug {
-        return qtc.QDebug_new3(@intCast(t));
-    }
-
-
-    /// New4 constructs a new QDebug object.
-    pub fn New4(o: ?*anyopaque) QtC.QDebug {
-        return qtc.QDebug_new4(@ptrCast(o));
+    pub fn New3(o: ?*anyopaque) QtC.QDebug {
+        return qtc.QDebug_new3(@ptrCast(o));
     }
 
 
@@ -141,10 +135,6 @@ return qtc.QDebug_new2(stringVal_str);
         return qtc.QDebug_OperatorShiftLeft13(@ptrCast(self), t);
     }
 
-    pub fn OperatorShiftLeft14(self: ?*anyopaque, t: QtC.qfloat16) QtC.QDebug {
-        return qtc.QDebug_OperatorShiftLeft14(@ptrCast(self), @ptrCast(t));
-    }
-
     pub fn OperatorShiftLeft15(self: ?*anyopaque, t: f32) QtC.QDebug {
         return qtc.QDebug_OperatorShiftLeft15(@ptrCast(self), t);
     }
@@ -165,18 +155,6 @@ return qtc.QDebug_new2(stringVal_str);
 return qtc.QDebug_OperatorShiftLeft19(@ptrCast(self), t_str);
     }
 
-    pub fn OperatorShiftLeft20(self: ?*anyopaque, s: []const u8) QtC.QDebug {
-        return qtc.QDebug_OperatorShiftLeft20(@ptrCast(self), @ptrCast(s));
-    }
-
-    pub fn OperatorShiftLeft21(self: ?*anyopaque, s: QUtf8StringView) QtC.QDebug {
-        return qtc.QDebug_OperatorShiftLeft21(@ptrCast(self), s);
-    }
-
-    pub fn OperatorShiftLeft22(self: ?*anyopaque, t: QLatin1StringView) QtC.QDebug {
-        return qtc.QDebug_OperatorShiftLeft22(@ptrCast(self), t);
-    }
-
     pub fn OperatorShiftLeft23(self: ?*anyopaque, t: []u8) QtC.QDebug {
         const t_str = qtc.libqt_string{
     .len = t.len,
@@ -191,14 +169,6 @@ return qtc.QDebug_OperatorShiftLeft23(@ptrCast(self), t_str);
 
     pub fn OperatorShiftLeft25(self: ?*anyopaque, t: ?*anyopaque) QtC.QDebug {
         return qtc.QDebug_OperatorShiftLeft25(@ptrCast(self), @ptrCast(t));
-    }
-
-    pub fn OperatorShiftLeft27(self: ?*anyopaque, param1: std::nullopt_t) QtC.QDebug {
-        return qtc.QDebug_OperatorShiftLeft27(@ptrCast(self), param1);
-    }
-
-    pub fn OperatorShiftLeft29(self: ?*anyopaque, m: QtC.QTextStreamManipulator) QtC.QDebug {
-        return qtc.QDebug_OperatorShiftLeft29(@ptrCast(self), @ptrCast(m));
     }
 
     pub fn MaybeQuote1(self: ?*anyopaque, c: i8) QtC.QDebug {
@@ -250,10 +220,6 @@ pub const qnodebug = struct {
         qtc.QNoDebug_MoveAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
-    pub fn OperatorShiftLeft2(self: ?*anyopaque, param1: QtC.QTextStreamManipulator) QtC.QNoDebug {
-        return qtc.QNoDebug_OperatorShiftLeft2(@ptrCast(self), @ptrCast(param1));
-    }
 
     pub fn Space(self: ?*anyopaque, ) QtC.QNoDebug {
         return qtc.QNoDebug_Space(@ptrCast(self));

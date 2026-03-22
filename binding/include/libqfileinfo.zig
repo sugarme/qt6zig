@@ -6,46 +6,40 @@ const qtc = @import("qt6c");%%_IMPORTLIBS_%%
 pub const qfileinfo = struct {
 
     /// New constructs a new QFileInfo object.
-    pub fn New(d: *QFileInfoPrivate) QtC.QFileInfo {
-        return qtc.QFileInfo_new(@ptrCast(d));
+    pub fn New() QtC.QFileInfo {
+        return qtc.QFileInfo_new();
     }
 
 
     /// New2 constructs a new QFileInfo object.
-    pub fn New2() QtC.QFileInfo {
-        return qtc.QFileInfo_new2();
+    pub fn New2(file: []const u8) QtC.QFileInfo {
+        const file_str = qtc.libqt_string{
+    .len = file.len,
+    .data = file.ptr,
+};
+return qtc.QFileInfo_new2(file_str);
     }
 
 
     /// New3 constructs a new QFileInfo object.
-    pub fn New3(file: []const u8) QtC.QFileInfo {
-        const file_str = qtc.libqt_string{
-    .len = file.len,
-    .data = file.ptr,
-};
-return qtc.QFileInfo_new3(file_str);
+    pub fn New3(file: ?*anyopaque) QtC.QFileInfo {
+        return qtc.QFileInfo_new3(@ptrCast(file));
     }
 
 
     /// New4 constructs a new QFileInfo object.
-    pub fn New4(file: ?*anyopaque) QtC.QFileInfo {
-        return qtc.QFileInfo_new4(@ptrCast(file));
-    }
-
-
-    /// New5 constructs a new QFileInfo object.
-    pub fn New5(dir: ?*anyopaque, file: []const u8) QtC.QFileInfo {
+    pub fn New4(dir: ?*anyopaque, file: []const u8) QtC.QFileInfo {
         const file_str = qtc.libqt_string{
     .len = file.len,
     .data = file.ptr,
 };
-return qtc.QFileInfo_new5(@ptrCast(dir), file_str);
+return qtc.QFileInfo_new4(@ptrCast(dir), file_str);
     }
 
 
-    /// New6 constructs a new QFileInfo object.
-    pub fn New6(fileinfo: ?*anyopaque) QtC.QFileInfo {
-        return qtc.QFileInfo_new6(@ptrCast(fileinfo));
+    /// New5 constructs a new QFileInfo object.
+    pub fn New5(fileinfo: ?*anyopaque) QtC.QFileInfo {
+        return qtc.QFileInfo_new5(@ptrCast(fileinfo));
     }
 
 
@@ -115,18 +109,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qfileinfo.CanonicalFilePath: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn FilesystemFilePath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemFilePath(@ptrCast(self));
-    }
-
-    pub fn FilesystemAbsoluteFilePath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemAbsoluteFilePath(@ptrCast(self));
-    }
-
-    pub fn FilesystemCanonicalFilePath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemCanonicalFilePath(@ptrCast(self));
     }
 
     pub fn FileName(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
@@ -199,18 +181,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qfileinfo.CanonicalPath: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn FilesystemPath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemPath(@ptrCast(self));
-    }
-
-    pub fn FilesystemAbsolutePath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemAbsolutePath(@ptrCast(self));
-    }
-
-    pub fn FilesystemCanonicalPath(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemCanonicalPath(@ptrCast(self));
     }
 
     pub fn Dir(self: ?*anyopaque, ) QtC.QDir {
@@ -311,18 +281,6 @@ defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qfileinfo.JunctionTarget: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
-    }
-
-    pub fn FilesystemSymLinkTarget(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemSymLinkTarget(@ptrCast(self));
-    }
-
-    pub fn FilesystemReadSymLink(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemReadSymLink(@ptrCast(self));
-    }
-
-    pub fn FilesystemJunctionTarget(self: ?*anyopaque, ) std::filesystem::path {
-        return qtc.QFileInfo_FilesystemJunctionTarget(@ptrCast(self));
     }
 
     pub fn Owner(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {

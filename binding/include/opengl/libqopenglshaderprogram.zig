@@ -528,38 +528,6 @@ return qtc.QOpenGLShaderProgram_UniformLocation3(@ptrCast(self), name_str);
         qtc.QOpenGLShaderProgram_SetUniformValue14(@ptrCast(self), location, @ptrCast(size));
     }
 
-    pub fn SetUniformValue15(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<2, 2, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue15(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue16(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<2, 3, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue16(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue17(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<2, 4, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue17(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue18(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<3, 2, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue18(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue19(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<3, 3, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue19(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue20(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<3, 4, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue20(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue21(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<4, 2, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue21(@ptrCast(self), location, @ptrCast(value));
-    }
-
-    pub fn SetUniformValue22(self: ?*anyopaque, location: i32, value: *const QGenericMatrix<4, 3, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue22(@ptrCast(self), location, @ptrCast(value));
-    }
-
     pub fn SetUniformValue23(self: ?*anyopaque, location: i32, value: ?*anyopaque) void {
         qtc.QOpenGLShaderProgram_SetUniformValue23(@ptrCast(self), location, @ptrCast(value));
     }
@@ -624,38 +592,6 @@ return qtc.QOpenGLShaderProgram_UniformLocation3(@ptrCast(self), name_str);
         qtc.QOpenGLShaderProgram_SetUniformValue38(@ptrCast(self), @ptrCast(name), @ptrCast(size));
     }
 
-    pub fn SetUniformValue39(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<2, 2, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue39(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue40(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<2, 3, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue40(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue41(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<2, 4, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue41(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue42(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<3, 2, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue42(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue43(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<3, 3, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue43(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue44(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<3, 4, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue44(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue45(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<4, 2, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue45(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
-    pub fn SetUniformValue46(self: ?*anyopaque, name: []const u8, value: *const QGenericMatrix<4, 3, float>) void {
-        qtc.QOpenGLShaderProgram_SetUniformValue46(@ptrCast(self), @ptrCast(name), @ptrCast(value));
-    }
-
     pub fn SetUniformValue47(self: ?*anyopaque, name: []const u8, value: ?*anyopaque) void {
         qtc.QOpenGLShaderProgram_SetUniformValue47(@ptrCast(self), @ptrCast(name), @ptrCast(value));
     }
@@ -688,38 +624,6 @@ return qtc.QOpenGLShaderProgram_UniformLocation3(@ptrCast(self), name_str);
         qtc.QOpenGLShaderProgram_SetUniformValueArray6(@ptrCast(self), location, @ptrCast(values), count);
     }
 
-    pub fn SetUniformValueArray7(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<2, 2, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray7(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray8(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<2, 3, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray8(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray9(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<2, 4, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray9(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray10(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<3, 2, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray10(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray11(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<3, 3, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray11(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray12(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<3, 4, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray12(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray13(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<4, 2, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray13(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray14(self: ?*anyopaque, location: i32, values: *const QGenericMatrix<4, 3, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray14(@ptrCast(self), location, @ptrCast(values), count);
-    }
-
     pub fn SetUniformValueArray15(self: ?*anyopaque, location: i32, values: ?*anyopaque, count: i32) void {
         qtc.QOpenGLShaderProgram_SetUniformValueArray15(@ptrCast(self), location, @ptrCast(values), count);
     }
@@ -746,38 +650,6 @@ return qtc.QOpenGLShaderProgram_UniformLocation3(@ptrCast(self), name_str);
 
     pub fn SetUniformValueArray21(self: ?*anyopaque, name: []const u8, values: ?*anyopaque, count: i32) void {
         qtc.QOpenGLShaderProgram_SetUniformValueArray21(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray22(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<2, 2, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray22(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray23(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<2, 3, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray23(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray24(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<2, 4, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray24(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray25(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<3, 2, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray25(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray26(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<3, 3, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray26(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray27(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<3, 4, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray27(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray28(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<4, 2, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray28(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
-    }
-
-    pub fn SetUniformValueArray29(self: ?*anyopaque, name: []const u8, values: *const QGenericMatrix<4, 3, float>, count: i32) void {
-        qtc.QOpenGLShaderProgram_SetUniformValueArray29(@ptrCast(self), @ptrCast(name), @ptrCast(values), count);
     }
 
     pub fn SetUniformValueArray30(self: ?*anyopaque, name: []const u8, values: ?*anyopaque, count: i32) void {

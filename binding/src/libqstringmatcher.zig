@@ -28,36 +28,24 @@ return qtc.QStringMatcher_new2(pattern_str);
 
 
     /// New4 constructs a new QStringMatcher object.
-    pub fn New4(pattern: []const u8) QtC.QStringMatcher {
-        return qtc.QStringMatcher_new4(@ptrCast(pattern));
+    pub fn New4(other: ?*anyopaque) QtC.QStringMatcher {
+        return qtc.QStringMatcher_new4(@ptrCast(other));
     }
 
 
     /// New5 constructs a new QStringMatcher object.
-    pub fn New5(other: ?*anyopaque) QtC.QStringMatcher {
-        return qtc.QStringMatcher_new5(@ptrCast(other));
-    }
-
-
-    /// New6 constructs a new QStringMatcher object.
-    pub fn New6(pattern: []const u8, cs: i32) QtC.QStringMatcher {
+    pub fn New5(pattern: []const u8, cs: i32) QtC.QStringMatcher {
         const pattern_str = qtc.libqt_string{
     .len = pattern.len,
     .data = pattern.ptr,
 };
-return qtc.QStringMatcher_new6(pattern_str, @intCast(cs));
+return qtc.QStringMatcher_new5(pattern_str, @intCast(cs));
     }
 
 
-    /// New7 constructs a new QStringMatcher object.
-    pub fn New7(uc: ?*anyopaque, lenVal: i64, cs: i32) QtC.QStringMatcher {
-        return qtc.QStringMatcher_new7(@ptrCast(uc), lenVal, @intCast(cs));
-    }
-
-
-    /// New8 constructs a new QStringMatcher object.
-    pub fn New8(pattern: []const u8, cs: i32) QtC.QStringMatcher {
-        return qtc.QStringMatcher_new8(@ptrCast(pattern), @intCast(cs));
+    /// New6 constructs a new QStringMatcher object.
+    pub fn New6(uc: ?*anyopaque, lenVal: i64, cs: i32) QtC.QStringMatcher {
+        return qtc.QStringMatcher_new6(@ptrCast(uc), lenVal, @intCast(cs));
     }
 
 
@@ -89,22 +77,10 @@ return qtc.QStringMatcher_IndexIn(@ptrCast(self), str_str);
         return qtc.QStringMatcher_IndexIn2(@ptrCast(self), @ptrCast(str), length);
     }
 
-    pub fn IndexIn3(self: ?*anyopaque, str: []const u8) i64 {
-        return qtc.QStringMatcher_IndexIn3(@ptrCast(self), @ptrCast(str));
-    }
-
     pub fn Pattern(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QStringMatcher_Pattern(@ptrCast(self));
 defer qtc.libqt_string_free(&_str);
 const _ret = allocator.alloc(u8, _str.len) catch @panic("qstringmatcher.Pattern: Memory allocation failed");
-@memcpy(_ret, _str.data[0.._str.len]);
-return  _ret;
-    }
-
-    pub fn PatternView(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
-        const _str = qtc.QStringMatcher_PatternView(@ptrCast(self));
-defer qtc.libqt_string_free(&_str);
-const _ret = allocator.alloc(u8, _str.len) catch @panic("qstringmatcher.PatternView: Memory allocation failed");
 @memcpy(_ret, _str.data[0.._str.len]);
 return  _ret;
     }
@@ -123,10 +99,6 @@ return qtc.QStringMatcher_IndexIn22(@ptrCast(self), str_str, from);
 
     pub fn IndexIn32(self: ?*anyopaque, str: ?*anyopaque, length: i64, from: i64) i64 {
         return qtc.QStringMatcher_IndexIn32(@ptrCast(self), @ptrCast(str), length, from);
-    }
-
-    pub fn IndexIn23(self: ?*anyopaque, str: []const u8, from: i64) i64 {
-        return qtc.QStringMatcher_IndexIn23(@ptrCast(self), @ptrCast(str), from);
     }
 
     /// Delete this object from C++ memory.

@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #define WORKAROUND_INNER_CLASS_DEFINITION_Disambiguated_t
 #include <qsqlquerymodel.h>
@@ -101,7 +102,12 @@ bool QSqlQueryModel_CanFetchMore(const QSqlQueryModel* self, const QModelIndex* 
 }
 
 libqt_map QSqlQueryModel_RoleNames(const QSqlQueryModel* self) {
-	return self->roleNames();
+	auto _ret = self->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 libqt_string QSqlQueryModel_Tr2(const char* s, const char* c) {
@@ -311,7 +317,12 @@ libqt_map QSqlQueryModel_QBaseRoleNames(const QSqlQueryModel* self) {
 	auto* vqsqlquerymodel = dynamic_cast<const VirtualQSqlQueryModel*>(self);
 	if (vqsqlquerymodel && vqsqlquerymodel->isVirtualQSqlQueryModel) {
 vqsqlquerymodel->setQSqlQueryModel_RoleNames_IsBase(true);
-	return vqsqlquerymodel->roleNames();
+	auto _ret = vqsqlquerymodel->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 

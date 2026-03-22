@@ -225,7 +225,7 @@ public:
 			return QTableWidget::mimeTypes();
 		} else if (qtablewidget_mimetypes_callback != nullptr) {
 			libqt_list callback_ret = qtablewidget_mimetypes_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QTableWidget::mimeTypes();
 		}
@@ -237,7 +237,9 @@ public:
 			qtablewidget_mimedata_isbase = false;
 			return QTableWidget::mimeData(items);
 		} else if (qtablewidget_mimedata_callback != nullptr) {
-			libqt_list cbval1 = items;
+			libqt_list cbval1;
+			cbval1.len = items.size();
+			cbval1.data = nullptr;
 			QMimeData* callback_ret = qtablewidget_mimedata_callback(this, cbval1);
 			return callback_ret;
 		} else {

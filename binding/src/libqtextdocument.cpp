@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextBlock>
 #include <QTextCursor>
 #include <QTextDocument>
@@ -350,7 +351,16 @@ void QTextDocument_AddResource(QTextDocument* self, int typeVal, const QUrl* nam
 }
 
 libqt_list QTextDocument_AllFormats(const QTextDocument* self) {
-	return self->allFormats();
+	auto _ret = self->allFormats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextDocument_MarkContentsDirty(QTextDocument* self, int from, int length) {

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qpieseries.h>
 #include "libqpieseries.h"
 #include "libqpieseries.hxx"
@@ -37,7 +38,7 @@ bool QPieSeries_Append(QPieSeries* self, QPieSlice* slice) {
 }
 
 bool QPieSeries_Append2(QPieSeries* self, const libqt_list slices) {
-	return self->append(*slices);
+	return self->append(QList<QPieSlice *>());
 }
 
 QPieSeries* QPieSeries_OperatorShiftLeft(QPieSeries* self, QPieSlice* slice) {
@@ -65,7 +66,15 @@ void QPieSeries_Clear(QPieSeries* self) {
 }
 
 libqt_list QPieSeries_Slices(const QPieSeries* self) {
-	return self->slices();
+	auto _ret = self->slices();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QPieSeries_Count(const QPieSeries* self) {
@@ -137,7 +146,7 @@ void QPieSeries_SetLabelsPosition(QPieSeries* self, int position) {
 }
 
 void QPieSeries_Added(QPieSeries* self, const libqt_list slices) {
-	self->added(*slices);
+	self->added(QList<QPieSlice *>());
 }
 
 void QPieSeries_Connect_Added(QPieSeries* self, intptr_t slot) {
@@ -148,7 +157,7 @@ void QPieSeries_Connect_Added(QPieSeries* self, intptr_t slot) {
 }
 
 void QPieSeries_Removed(QPieSeries* self, const libqt_list slices) {
-	self->removed(*slices);
+	self->removed(QList<QPieSlice *>());
 }
 
 void QPieSeries_Connect_Removed(QPieSeries* self, intptr_t slot) {

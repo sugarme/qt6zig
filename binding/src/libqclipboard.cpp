@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qclipboard.h>
 #include "libqclipboard.h"
 #include "libqclipboard.hxx"

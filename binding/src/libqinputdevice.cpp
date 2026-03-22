@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qinputdevice.h>
 #include "libqinputdevice.h"
 #include "libqinputdevice.hxx"
@@ -83,11 +84,33 @@ QRect* QInputDevice_AvailableVirtualGeometry(const QInputDevice* self) {
 }
 
 libqt_list QInputDevice_SeatNames() {
-	return QInputDevice::seatNames();
+	auto _ret = QInputDevice::seatNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QInputDevice_Devices() {
-	return QInputDevice::devices();
+	auto _ret = QInputDevice::devices();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 const QInputDevice* QInputDevice_PrimaryKeyboard() {

@@ -227,24 +227,8 @@ return qtc.QCborStreamReader_ReadAndAppendToUtf8String(@ptrCast(self), dst_str);
 return qtc.QCborStreamReader_ReadAndAppendToByteArray(@ptrCast(self), dst_str);
     }
 
-    pub fn ReadString(self: ?*anyopaque, ) StringResult<QString> {
-        return qtc.QCborStreamReader_ReadString(@ptrCast(self));
-    }
-
-    pub fn ReadUtf8String(self: ?*anyopaque, ) StringResult<QByteArray> {
-        return qtc.QCborStreamReader_ReadUtf8String(@ptrCast(self));
-    }
-
-    pub fn ReadByteArray(self: ?*anyopaque, ) StringResult<QByteArray> {
-        return qtc.QCborStreamReader_ReadByteArray(@ptrCast(self));
-    }
-
     pub fn CurrentStringChunkSize(self: ?*anyopaque, ) i64 {
         return qtc.QCborStreamReader_CurrentStringChunkSize(@ptrCast(self));
-    }
-
-    pub fn ReadStringChunk(self: ?*anyopaque, ptr: []const u8, maxlen: i64) StringResult<qsizetype> {
-        return qtc.QCborStreamReader_ReadStringChunk(@ptrCast(self), @ptrCast(ptr), maxlen);
     }
 
     pub fn ToBool(self: ?*anyopaque, ) bool {
@@ -265,10 +249,6 @@ return qtc.QCborStreamReader_ReadAndAppendToByteArray(@ptrCast(self), dst_str);
 
     pub fn ToSimpleType(self: ?*anyopaque, ) u8 {
         return qtc.QCborStreamReader_ToSimpleType(@ptrCast(self));
-    }
-
-    pub fn ToFloat16(self: ?*anyopaque, ) QtC.qfloat16 {
-        return qtc.QCborStreamReader_ToFloat16(@ptrCast(self));
     }
 
     pub fn ToFloat(self: ?*anyopaque, ) f32 {

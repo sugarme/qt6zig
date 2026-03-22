@@ -29,7 +29,6 @@ protected:
 
 public:
 	VirtualQException(): QException() {};
-	VirtualQException(const QException& param1): QException(param1) {};
 
 	~VirtualQException() {
 		qexception_raise_callback = nullptr;
@@ -74,8 +73,6 @@ protected:
 
 public:
 	VirtualQUnhandledException(): QUnhandledException() {};
-	VirtualQUnhandledException(const QUnhandledException& other): QUnhandledException(other) {};
-	VirtualQUnhandledException(std::exception_ptr exception): QUnhandledException(exception) {};
 
 	~VirtualQUnhandledException() {
 		qunhandledexception_raise_callback = nullptr;

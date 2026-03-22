@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qmediametadata.h>
 #include "libqmediametadata.h"
@@ -30,7 +31,16 @@ void QMediaMetaData_Remove(QMediaMetaData* self, QPixmapCache__Key* k) {
 }
 
 libqt_list QMediaMetaData_Keys(const QMediaMetaData* self) {
-	return self->keys();
+	auto _ret = self->keys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QVariant* QMediaMetaData_OperatorSubscript(QMediaMetaData* self, QPixmapCache__Key* k) {

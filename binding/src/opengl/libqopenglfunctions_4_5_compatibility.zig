@@ -69,10 +69,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetFloatv(@ptrCast(self), pname, @ptrCast(data));
     }
 
-    pub fn GlGetError(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlGetError(@ptrCast(self));
-    }
-
     pub fn GlGetDoublev(self: ?*anyopaque, pname: u32, data: *f64) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetDoublev(@ptrCast(self), pname, @ptrCast(data));
     }
@@ -737,14 +733,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetAttachedShaders(@ptrCast(self), program, maxCount, @ptrCast(count), @ptrCast(shaders));
     }
 
-    pub fn GlGetActiveUniform(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlGetActiveUniform(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
-    pub fn GlGetActiveAttrib(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlGetActiveAttrib(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
     pub fn GlEnableVertexAttribArray(self: ?*anyopaque, index: u32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlEnableVertexAttribArray(@ptrCast(self), index);
     }
@@ -795,10 +783,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
 
     pub fn GlStencilOpSeparate(self: ?*anyopaque, face: u32, sfail: u32, dpfail: u32, dppass: u32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlStencilOpSeparate(@ptrCast(self), face, sfail, dpfail, dppass);
-    }
-
-    pub fn GlDrawBuffers(self: ?*anyopaque, n: i32, bufs: *const GL) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlDrawBuffers(@ptrCast(self), n, @ptrCast(bufs));
     }
 
     pub fn GlBlendEquationSeparate(self: ?*anyopaque, modeRGB: u32, modeAlpha: u32) void {
@@ -887,10 +871,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
 
     pub fn GlFramebufferTexture1D(self: ?*anyopaque, target: u32, attachment: u32, textarget: u32, texture: u32, level: i32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlFramebufferTexture1D(@ptrCast(self), target, attachment, textarget, texture, level);
-    }
-
-    pub fn GlCheckFramebufferStatus(self: ?*anyopaque, target: u32) GL {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlCheckFramebufferStatus(@ptrCast(self), target);
     }
 
     pub fn GlGenFramebuffers(self: ?*anyopaque, n: i32, framebuffers: *u32) void {
@@ -1117,10 +1097,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlClampColor(@ptrCast(self), target, clamp);
     }
 
-    pub fn GlGetTransformFeedbackVarying(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlGetTransformFeedbackVarying(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
     pub fn GlTransformFeedbackVaryings(self: ?*anyopaque, program: u32, count: i32, varyings: **const i8, bufferMode: u32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlTransformFeedbackVaryings(@ptrCast(self), program, count, @ptrCast(varyings), bufferMode);
     }
@@ -1241,32 +1217,8 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetInteger64iV(@ptrCast(self), target, index, @ptrCast(data));
     }
 
-    pub fn GlGetSynciv(self: ?*anyopaque, sync: GLsync, pname: u32, bufSize: i32, length: *i32, values: *i32) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlGetSynciv(@ptrCast(self), sync, pname, bufSize, @ptrCast(length), @ptrCast(values));
-    }
-
     pub fn GlGetInteger64v(self: ?*anyopaque, pname: u32, data: *i64) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetInteger64v(@ptrCast(self), pname, @ptrCast(data));
-    }
-
-    pub fn GlWaitSync(self: ?*anyopaque, sync: GLsync, flags: u32, timeout: u64) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlWaitSync(@ptrCast(self), sync, flags, timeout);
-    }
-
-    pub fn GlClientWaitSync(self: ?*anyopaque, sync: GLsync, flags: u32, timeout: u64) GL {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlClientWaitSync(@ptrCast(self), sync, flags, timeout);
-    }
-
-    pub fn GlDeleteSync(self: ?*anyopaque, sync: GLsync) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlDeleteSync(@ptrCast(self), sync);
-    }
-
-    pub fn GlIsSync(self: ?*anyopaque, sync: GLsync) u8 {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlIsSync(@ptrCast(self), sync);
-    }
-
-    pub fn GlFenceSync(self: ?*anyopaque, condition: u32, flags: u32) GLsync {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlFenceSync(@ptrCast(self), condition, flags);
     }
 
     pub fn GlProvokingVertex(self: ?*anyopaque, mode: u32) void {
@@ -1913,10 +1865,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlProgramBinary(@ptrCast(self), program, binaryFormat, @ptrCast(binary), length);
     }
 
-    pub fn GlGetProgramBinary(self: ?*anyopaque, program: u32, bufSize: i32, length: *i32, binaryFormat: *GL, binary: ?*anyopaque) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlGetProgramBinary(@ptrCast(self), program, bufSize, @ptrCast(length), @ptrCast(binaryFormat), @ptrCast(binary));
-    }
-
     pub fn GlClearDepthf(self: ?*anyopaque, dd: f32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlClearDepthf(@ptrCast(self), dd);
     }
@@ -2009,14 +1957,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlPushDebugGroup(@ptrCast(self), source, id, length, @ptrCast(message));
     }
 
-    pub fn GlGetDebugMessageLog(self: ?*anyopaque, count: u32, bufSize: i32, sources: *GL, types: *GL, ids: *u32, severities: *GL, lengths: *i32, messageLog: *i8) u32 {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlGetDebugMessageLog(@ptrCast(self), count, bufSize, @ptrCast(sources), @ptrCast(types), @ptrCast(ids), @ptrCast(severities), @ptrCast(lengths), @ptrCast(messageLog));
-    }
-
-    pub fn GlDebugMessageCallback(self: ?*anyopaque, callback: GLDEBUGPROC, userParam: ?*anyopaque) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlDebugMessageCallback(@ptrCast(self), callback, @ptrCast(userParam));
-    }
-
     pub fn GlDebugMessageInsert(self: ?*anyopaque, source: u32, typeVal: u32, id: u32, severity: u32, length: i32, buf: *const i8) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlDebugMessageInsert(@ptrCast(self), source, typeVal, id, severity, length, @ptrCast(buf));
     }
@@ -2077,10 +2017,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         return qtc.QOpenGLFunctions_4_5_Compatibility_GlGetProgramResourceLocation(@ptrCast(self), program, programInterface, @ptrCast(name));
     }
 
-    pub fn GlGetProgramResourceiv(self: ?*anyopaque, program: u32, programInterface: u32, index: u32, propCount: i32, props: *const GL, bufSize: i32, length: *i32, params: *i32) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlGetProgramResourceiv(@ptrCast(self), program, programInterface, index, propCount, @ptrCast(props), bufSize, @ptrCast(length), @ptrCast(params));
-    }
-
     pub fn GlGetProgramResourceName(self: ?*anyopaque, program: u32, programInterface: u32, index: u32, bufSize: i32, length: *i32, name: *i8) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetProgramResourceName(@ptrCast(self), program, programInterface, index, bufSize, @ptrCast(length), @ptrCast(name));
     }
@@ -2099,14 +2035,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
 
     pub fn GlMultiDrawArraysIndirect(self: ?*anyopaque, mode: u32, indirect: ?*anyopaque, drawcount: i32, stride: i32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlMultiDrawArraysIndirect(@ptrCast(self), mode, @ptrCast(indirect), drawcount, stride);
-    }
-
-    pub fn GlInvalidateSubFramebuffer(self: ?*anyopaque, target: u32, numAttachments: i32, attachments: *const GL, x: i32, y: i32, width: i32, height: i32) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlInvalidateSubFramebuffer(@ptrCast(self), target, numAttachments, @ptrCast(attachments), x, y, width, height);
-    }
-
-    pub fn GlInvalidateFramebuffer(self: ?*anyopaque, target: u32, numAttachments: i32, attachments: *const GL) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlInvalidateFramebuffer(@ptrCast(self), target, numAttachments, @ptrCast(attachments));
     }
 
     pub fn GlInvalidateBufferData(self: ?*anyopaque, buffer: u32) void {
@@ -2223,10 +2151,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
 
     pub fn GlGetnCompressedTexImage(self: ?*anyopaque, target: u32, lod: i32, bufSize: i32, pixels: ?*anyopaque) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetnCompressedTexImage(@ptrCast(self), target, lod, bufSize, @ptrCast(pixels));
-    }
-
-    pub fn GlGetGraphicsResetStatus(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlGetGraphicsResetStatus(@ptrCast(self));
     }
 
     pub fn GlGetCompressedTextureSubImage(self: ?*anyopaque, texture: u32, level: i32, xoffset: i32, yoffset: i32, zoffset: i32, width: i32, height: i32, depth: i32, bufSize: i32, pixels: ?*anyopaque) void {
@@ -2465,10 +2389,6 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlGetNamedFramebufferParameteriv(@ptrCast(self), framebuffer, pname, @ptrCast(param));
     }
 
-    pub fn GlCheckNamedFramebufferStatus(self: ?*anyopaque, framebuffer: u32, target: u32) GL {
-        return qtc.QOpenGLFunctions_4_5_Compatibility_GlCheckNamedFramebufferStatus(@ptrCast(self), framebuffer, target);
-    }
-
     pub fn GlBlitNamedFramebuffer(self: ?*anyopaque, readFramebuffer: u32, drawFramebuffer: u32, srcX0: i32, srcY0: i32, srcX1: i32, srcY1: i32, dstX0: i32, dstY0: i32, dstX1: i32, dstY1: i32, mask: u32, filter: u32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlBlitNamedFramebuffer(@ptrCast(self), readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
     }
@@ -2489,20 +2409,8 @@ pub const qopenglfunctions_4_5_compatibility = struct {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlClearNamedFramebufferiv(@ptrCast(self), framebuffer, buffer, drawbuffer, @ptrCast(value));
     }
 
-    pub fn GlInvalidateNamedFramebufferSubData(self: ?*anyopaque, framebuffer: u32, numAttachments: i32, attachments: *const GL, x: i32, y: i32, width: i32, height: i32) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlInvalidateNamedFramebufferSubData(@ptrCast(self), framebuffer, numAttachments, @ptrCast(attachments), x, y, width, height);
-    }
-
-    pub fn GlInvalidateNamedFramebufferData(self: ?*anyopaque, framebuffer: u32, numAttachments: i32, attachments: *const GL) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlInvalidateNamedFramebufferData(@ptrCast(self), framebuffer, numAttachments, @ptrCast(attachments));
-    }
-
     pub fn GlNamedFramebufferReadBuffer(self: ?*anyopaque, framebuffer: u32, src: u32) void {
         qtc.QOpenGLFunctions_4_5_Compatibility_GlNamedFramebufferReadBuffer(@ptrCast(self), framebuffer, src);
-    }
-
-    pub fn GlNamedFramebufferDrawBuffers(self: ?*anyopaque, framebuffer: u32, n: i32, bufs: *const GL) void {
-        qtc.QOpenGLFunctions_4_5_Compatibility_GlNamedFramebufferDrawBuffers(@ptrCast(self), framebuffer, n, @ptrCast(bufs));
     }
 
     pub fn GlNamedFramebufferDrawBuffer(self: ?*anyopaque, framebuffer: u32, buf: u32) void {

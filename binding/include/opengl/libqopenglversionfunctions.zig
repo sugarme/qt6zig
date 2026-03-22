@@ -84,14 +84,6 @@ pub const qopenglversionfunctionsbackend = struct {
         qtc.QOpenGLVersionFunctionsBackend_SetContext(@ptrCast(self), @ptrCast(context));
     }
 
-    pub fn Refs(self: ?*anyopaque, ) QtC.QAtomicInt {
-        return qtc.QOpenGLVersionFunctionsBackend_Refs(@ptrCast(self));
-    }
-
-    pub fn SetRefs(self: ?*anyopaque, refs: QtC.QAtomicInt) void {
-        qtc.QOpenGLVersionFunctionsBackend_SetRefs(@ptrCast(self), @ptrCast(refs));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QOpenGLVersionFunctionsBackend_Delete(@ptrCast(self));
@@ -117,10 +109,6 @@ pub const qopenglversionfunctionsstorage = struct {
         qtc.QOpenGLVersionFunctionsStorage_CopyAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
-    pub fn Backend(self: ?*anyopaque, context: ?*anyopaque, v: i32) QtC.QOpenGLVersionFunctionsBackend {
-        return qtc.QOpenGLVersionFunctionsStorage_Backend(@ptrCast(self), @ptrCast(context), @intCast(v));
-    }
 
     pub fn Backends(self: ?*anyopaque, ) QtC.QOpenGLVersionFunctionsBackend {
         return qtc.QOpenGLVersionFunctionsStorage_Backends(@ptrCast(self));
@@ -151,14 +139,6 @@ pub const qabstractopenglfunctions = struct {
     /// Base class method implementation
     pub fn QBaseInitializeOpenGLFunctions(self: ?*anyopaque, ) bool {
         return qtc.QAbstractOpenGLFunctions_QBaseInitializeOpenGLFunctions(@ptrCast(self));
-    }
-
-    pub fn DFunc(self: ?*anyopaque, ) QtC.QAbstractOpenGLFunctionsPrivate {
-        return qtc.QAbstractOpenGLFunctions_DFunc(@ptrCast(self));
-    }
-
-    pub fn DFunc2(self: ?*anyopaque, ) QtC.QAbstractOpenGLFunctionsPrivate {
-        return qtc.QAbstractOpenGLFunctions_DFunc2(@ptrCast(self));
     }
 
     pub fn IsInitialized(self: ?*anyopaque, ) bool {

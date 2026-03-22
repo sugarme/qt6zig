@@ -18,32 +18,20 @@ pub const qtextcursor = struct {
 
 
     /// New3 constructs a new QTextCursor object.
-    pub fn New3(p: *QTextDocumentPrivate, pos: i32) QtC.QTextCursor {
-        return qtc.QTextCursor_new3(@ptrCast(p), pos);
+    pub fn New3(frame: ?*anyopaque) QtC.QTextCursor {
+        return qtc.QTextCursor_new3(@ptrCast(frame));
     }
 
 
     /// New4 constructs a new QTextCursor object.
-    pub fn New4(d: *QTextCursorPrivate) QtC.QTextCursor {
-        return qtc.QTextCursor_new4(@ptrCast(d));
+    pub fn New4(block: ?*anyopaque) QtC.QTextCursor {
+        return qtc.QTextCursor_new4(@ptrCast(block));
     }
 
 
     /// New5 constructs a new QTextCursor object.
-    pub fn New5(frame: ?*anyopaque) QtC.QTextCursor {
-        return qtc.QTextCursor_new5(@ptrCast(frame));
-    }
-
-
-    /// New6 constructs a new QTextCursor object.
-    pub fn New6(block: ?*anyopaque) QtC.QTextCursor {
-        return qtc.QTextCursor_new6(@ptrCast(block));
-    }
-
-
-    /// New7 constructs a new QTextCursor object.
-    pub fn New7(cursor: ?*anyopaque) QtC.QTextCursor {
-        return qtc.QTextCursor_new7(@ptrCast(cursor));
+    pub fn New5(cursor: ?*anyopaque) QtC.QTextCursor {
+        return qtc.QTextCursor_new5(@ptrCast(cursor));
     }
 
 

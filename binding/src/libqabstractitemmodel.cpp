@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qabstractitemmodel.h>
 #include "libqabstractitemmodel.h"
@@ -347,11 +348,16 @@ bool QAbstractItemModel_SetHeaderData(QAbstractItemModel* self, int section, int
 }
 
 libqt_map QAbstractItemModel_ItemData(const QAbstractItemModel* self, const QModelIndex* index) {
-	return self->itemData(*index);
+	auto _ret = self->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 bool QAbstractItemModel_SetItemData(QAbstractItemModel* self, const QModelIndex* index, const libqt_map roles) {
-	return self->setItemData(*index, *roles);
+	return self->setItemData(*index, QMap<int, QVariant>());
 }
 
 bool QAbstractItemModel_ClearItemData(QAbstractItemModel* self, const QModelIndex* index) {
@@ -359,11 +365,25 @@ bool QAbstractItemModel_ClearItemData(QAbstractItemModel* self, const QModelInde
 }
 
 libqt_list QAbstractItemModel_MimeTypes(const QAbstractItemModel* self) {
-	return self->mimeTypes();
+	auto _ret = self->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QMimeData* QAbstractItemModel_MimeData(const QAbstractItemModel* self, const libqt_list indexes) {
-	return self->mimeData(*indexes);
+	return self->mimeData(QList<QModelIndex>());
 }
 
 bool QAbstractItemModel_CanDropMimeData(const QAbstractItemModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent) {
@@ -451,7 +471,16 @@ QModelIndex* QAbstractItemModel_Buddy(const QAbstractItemModel* self, const QMod
 }
 
 libqt_list QAbstractItemModel_Match(const QAbstractItemModel* self, const QModelIndex* start, int role, const QVariant* value, int hits, int flags) {
-	return self->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QSize* QAbstractItemModel_Span(const QAbstractItemModel* self, const QModelIndex* index) {
@@ -459,7 +488,12 @@ QSize* QAbstractItemModel_Span(const QAbstractItemModel* self, const QModelIndex
 }
 
 libqt_map QAbstractItemModel_RoleNames(const QAbstractItemModel* self) {
-	return self->roleNames();
+	auto _ret = self->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 bool QAbstractItemModel_CheckIndex(const QAbstractItemModel* self, const QModelIndex* index) {
@@ -569,7 +603,7 @@ bool QAbstractItemModel_CheckIndex2(const QAbstractItemModel* self, const QModel
 }
 
 void QAbstractItemModel_DataChanged3(QAbstractItemModel* self, const QModelIndex* topLeft, const QModelIndex* bottomRight, const libqt_list roles) {
-	self->dataChanged(*topLeft, *bottomRight, *roles);
+	self->dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 
 void QAbstractItemModel_Connect_DataChanged3(QAbstractItemModel* self, intptr_t slot) {
@@ -580,7 +614,7 @@ void QAbstractItemModel_Connect_DataChanged3(QAbstractItemModel* self, intptr_t 
 }
 
 void QAbstractItemModel_LayoutChanged1(QAbstractItemModel* self, const libqt_list parents) {
-	self->layoutChanged(*parents);
+	self->layoutChanged(QList<QPersistentModelIndex>());
 }
 
 void QAbstractItemModel_Connect_LayoutChanged1(QAbstractItemModel* self, intptr_t slot) {
@@ -591,7 +625,7 @@ void QAbstractItemModel_Connect_LayoutChanged1(QAbstractItemModel* self, intptr_
 }
 
 void QAbstractItemModel_LayoutChanged2(QAbstractItemModel* self, const libqt_list parents, int hint) {
-	self->layoutChanged(*parents, static_cast<QAbstractItemModel::LayoutChangeHint>(hint));
+	self->layoutChanged(QList<QPersistentModelIndex>(), static_cast<QAbstractItemModel::LayoutChangeHint>(hint));
 }
 
 void QAbstractItemModel_Connect_LayoutChanged2(QAbstractItemModel* self, intptr_t slot) {
@@ -602,7 +636,7 @@ void QAbstractItemModel_Connect_LayoutChanged2(QAbstractItemModel* self, intptr_
 }
 
 void QAbstractItemModel_LayoutAboutToBeChanged1(QAbstractItemModel* self, const libqt_list parents) {
-	self->layoutAboutToBeChanged(*parents);
+	self->layoutAboutToBeChanged(QList<QPersistentModelIndex>());
 }
 
 void QAbstractItemModel_Connect_LayoutAboutToBeChanged1(QAbstractItemModel* self, intptr_t slot) {
@@ -613,7 +647,7 @@ void QAbstractItemModel_Connect_LayoutAboutToBeChanged1(QAbstractItemModel* self
 }
 
 void QAbstractItemModel_LayoutAboutToBeChanged2(QAbstractItemModel* self, const libqt_list parents, int hint) {
-	self->layoutAboutToBeChanged(*parents, static_cast<QAbstractItemModel::LayoutChangeHint>(hint));
+	self->layoutAboutToBeChanged(QList<QPersistentModelIndex>(), static_cast<QAbstractItemModel::LayoutChangeHint>(hint));
 }
 
 void QAbstractItemModel_Connect_LayoutAboutToBeChanged2(QAbstractItemModel* self, intptr_t slot) {
@@ -798,7 +832,12 @@ libqt_map QAbstractItemModel_QBaseItemData(const QAbstractItemModel* self, const
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_ItemData_IsBase(true);
-	return vqabstractitemmodel->itemData(*index);
+	auto _ret = vqabstractitemmodel->itemData(*index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -815,7 +854,7 @@ bool QAbstractItemModel_QBaseSetItemData(QAbstractItemModel* self, const QModelI
 	auto* vqabstractitemmodel = dynamic_cast<VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_SetItemData_IsBase(true);
-	return vqabstractitemmodel->setItemData(*index, *roles);
+	return vqabstractitemmodel->setItemData(*index, QMap<int, QVariant>());
 }
 }
 
@@ -849,7 +888,21 @@ libqt_list QAbstractItemModel_QBaseMimeTypes(const QAbstractItemModel* self) {
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_MimeTypes_IsBase(true);
-	return vqabstractitemmodel->mimeTypes();
+	auto _ret = vqabstractitemmodel->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -866,7 +919,7 @@ QMimeData* QAbstractItemModel_QBaseMimeData(const QAbstractItemModel* self, cons
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_MimeData_IsBase(true);
-	return vqabstractitemmodel->mimeData(*indexes);
+	return vqabstractitemmodel->mimeData(QList<QModelIndex>());
 }
 }
 
@@ -1138,7 +1191,16 @@ libqt_list QAbstractItemModel_QBaseMatch(const QAbstractItemModel* self, const Q
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_Match_IsBase(true);
-	return vqabstractitemmodel->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = vqabstractitemmodel->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1172,7 +1234,12 @@ libqt_map QAbstractItemModel_QBaseRoleNames(const QAbstractItemModel* self) {
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_RoleNames_IsBase(true);
-	return vqabstractitemmodel->roleNames();
+	auto _ret = vqabstractitemmodel->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 
@@ -1320,9 +1387,9 @@ vqabstractitemmodel->setQAbstractItemModel_CreateIndex2_Callback(reinterpret_cas
 void QAbstractItemModel_EncodeData(const QAbstractItemModel* self, const libqt_list indexes, QDataStream* stream) {
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
-	vqabstractitemmodel->encodeData(*indexes, *stream);
+	vqabstractitemmodel->encodeData(QList<QModelIndex>(), *stream);
 	} else {
-	self->QAbstractItemModel::encodeData(*indexes, *stream);
+	self->QAbstractItemModel::encodeData(QList<QModelIndex>(), *stream);
 }
 }
 
@@ -1331,7 +1398,7 @@ void QAbstractItemModel_QBaseEncodeData(const QAbstractItemModel* self, const li
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_EncodeData_IsBase(true);
-	vqabstractitemmodel->encodeData(*indexes, *stream);
+	vqabstractitemmodel->encodeData(QList<QModelIndex>(), *stream);
 }
 }
 
@@ -1779,9 +1846,9 @@ vqabstractitemmodel->setQAbstractItemModel_ChangePersistentIndex_Callback(reinte
 void QAbstractItemModel_ChangePersistentIndexList(QAbstractItemModel* self, const libqt_list from, const libqt_list to) {
 	auto* vqabstractitemmodel = dynamic_cast<VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
-	vqabstractitemmodel->changePersistentIndexList(*from, *to);
+	vqabstractitemmodel->changePersistentIndexList(QList<QModelIndex>(), QList<QModelIndex>());
 	} else {
-	self->QAbstractItemModel::changePersistentIndexList(*from, *to);
+	self->QAbstractItemModel::changePersistentIndexList(QList<QModelIndex>(), QList<QModelIndex>());
 }
 }
 
@@ -1790,7 +1857,7 @@ void QAbstractItemModel_QBaseChangePersistentIndexList(QAbstractItemModel* self,
 	auto* vqabstractitemmodel = dynamic_cast<VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_ChangePersistentIndexList_IsBase(true);
-	vqabstractitemmodel->changePersistentIndexList(*from, *to);
+	vqabstractitemmodel->changePersistentIndexList(QList<QModelIndex>(), QList<QModelIndex>());
 }
 }
 
@@ -1806,9 +1873,27 @@ vqabstractitemmodel->setQAbstractItemModel_ChangePersistentIndexList_Callback(re
 libqt_list QAbstractItemModel_PersistentIndexList(const QAbstractItemModel* self) {
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
-	return vqabstractitemmodel->persistentIndexList();
+	auto _ret = vqabstractitemmodel->persistentIndexList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QAbstractItemModel::persistentIndexList();
+	auto _ret = self->QAbstractItemModel::persistentIndexList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1817,7 +1902,16 @@ libqt_list QAbstractItemModel_QBasePersistentIndexList(const QAbstractItemModel*
 	auto* vqabstractitemmodel = dynamic_cast<const VirtualQAbstractItemModel*>(self);
 	if (vqabstractitemmodel && vqabstractitemmodel->isVirtualQAbstractItemModel) {
 vqabstractitemmodel->setQAbstractItemModel_PersistentIndexList_IsBase(true);
-	return vqabstractitemmodel->persistentIndexList();
+	auto _ret = vqabstractitemmodel->persistentIndexList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

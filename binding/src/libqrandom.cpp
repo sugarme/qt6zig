@@ -12,19 +12,15 @@ QRandomGenerator* QRandomGenerator_new2(const unsigned int* seedBuffer, ptrdiff_
 	 return new QRandomGenerator(seedBuffer, lenVal);
 }
 
-QRandomGenerator* QRandomGenerator_new3(std::seed_seq* sseq) {
-	 return new QRandomGenerator(*sseq);
-}
-
-QRandomGenerator* QRandomGenerator_new4(const unsigned int* begin, const unsigned int* end) {
+QRandomGenerator* QRandomGenerator_new3(const unsigned int* begin, const unsigned int* end) {
 	 return new QRandomGenerator(begin, end);
 }
 
-QRandomGenerator* QRandomGenerator_new5(const QRandomGenerator* other) {
+QRandomGenerator* QRandomGenerator_new4(const QRandomGenerator* other) {
 	 return new QRandomGenerator(*other);
 }
 
-QRandomGenerator* QRandomGenerator_new6(unsigned int seedValue) {
+QRandomGenerator* QRandomGenerator_new5(unsigned int seedValue) {
 	 return new QRandomGenerator(seedValue);
 }
 
@@ -108,10 +104,6 @@ void QRandomGenerator_Seed(QRandomGenerator* self) {
 	self->seed();
 }
 
-void QRandomGenerator_Seed2(QRandomGenerator* self, std::seed_seq* sseq) {
-	self->seed(*sseq);
-}
-
 void QRandomGenerator_Discard(QRandomGenerator* self, unsigned long long z) {
 	self->discard(z);
 }
@@ -152,23 +144,19 @@ QRandomGenerator64* QRandomGenerator64_new2(const unsigned int* seedBuffer, ptrd
 	 return new QRandomGenerator64(seedBuffer, lenVal);
 }
 
-QRandomGenerator64* QRandomGenerator64_new3(std::seed_seq* sseq) {
-	 return new QRandomGenerator64(*sseq);
-}
-
-QRandomGenerator64* QRandomGenerator64_new4(const unsigned int* begin, const unsigned int* end) {
+QRandomGenerator64* QRandomGenerator64_new3(const unsigned int* begin, const unsigned int* end) {
 	 return new QRandomGenerator64(begin, end);
 }
 
-QRandomGenerator64* QRandomGenerator64_new5(const QRandomGenerator* other) {
+QRandomGenerator64* QRandomGenerator64_new4(const QRandomGenerator* other) {
 	 return new QRandomGenerator64(*other);
 }
 
-QRandomGenerator64* QRandomGenerator64_new6(const QRandomGenerator64* param1) {
+QRandomGenerator64* QRandomGenerator64_new5(const QRandomGenerator64* param1) {
 	 return new QRandomGenerator64(*param1);
 }
 
-QRandomGenerator64* QRandomGenerator64_new7(unsigned int seedValue) {
+QRandomGenerator64* QRandomGenerator64_new6(unsigned int seedValue) {
 	 return new QRandomGenerator64(seedValue);
 }
 

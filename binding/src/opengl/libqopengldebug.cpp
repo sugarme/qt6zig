@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qopengldebug.h>
 #include "libqopengldebug.h"
 #include "libqopengldebug.hxx"
@@ -143,7 +144,7 @@ void QOpenGLDebugLogger_EnableMessages(QOpenGLDebugLogger* self) {
 }
 
 void QOpenGLDebugLogger_EnableMessages2(QOpenGLDebugLogger* self, const libqt_list ids) {
-	self->enableMessages(*ids);
+	self->enableMessages(QList<GLuint>());
 }
 
 void QOpenGLDebugLogger_DisableMessages(QOpenGLDebugLogger* self) {
@@ -151,11 +152,20 @@ void QOpenGLDebugLogger_DisableMessages(QOpenGLDebugLogger* self) {
 }
 
 void QOpenGLDebugLogger_DisableMessages2(QOpenGLDebugLogger* self, const libqt_list ids) {
-	self->disableMessages(*ids);
+	self->disableMessages(QList<GLuint>());
 }
 
 libqt_list QOpenGLDebugLogger_LoggedMessages(const QOpenGLDebugLogger* self) {
-	return self->loggedMessages();
+	auto _ret = self->loggedMessages();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QOpenGLDebugLogger_LogMessage(QOpenGLDebugLogger* self, const QOpenGLDebugMessage* debugMessage) {
@@ -224,11 +234,11 @@ void QOpenGLDebugLogger_EnableMessages3(QOpenGLDebugLogger* self, int sources, i
 }
 
 void QOpenGLDebugLogger_EnableMessages23(QOpenGLDebugLogger* self, const libqt_list ids, int sources) {
-	self->enableMessages(*ids, static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources));
+	self->enableMessages(QList<GLuint>(), static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources));
 }
 
 void QOpenGLDebugLogger_EnableMessages32(QOpenGLDebugLogger* self, const libqt_list ids, int sources, int types) {
-	self->enableMessages(*ids, static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources), static_cast<QFlags<QOpenGLDebugMessage::Type>>(types));
+	self->enableMessages(QList<GLuint>(), static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources), static_cast<QFlags<QOpenGLDebugMessage::Type>>(types));
 }
 
 void QOpenGLDebugLogger_DisableMessages1(QOpenGLDebugLogger* self, int sources) {
@@ -244,11 +254,11 @@ void QOpenGLDebugLogger_DisableMessages3(QOpenGLDebugLogger* self, int sources, 
 }
 
 void QOpenGLDebugLogger_DisableMessages23(QOpenGLDebugLogger* self, const libqt_list ids, int sources) {
-	self->disableMessages(*ids, static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources));
+	self->disableMessages(QList<GLuint>(), static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources));
 }
 
 void QOpenGLDebugLogger_DisableMessages32(QOpenGLDebugLogger* self, const libqt_list ids, int sources, int types) {
-	self->disableMessages(*ids, static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources), static_cast<QFlags<QOpenGLDebugMessage::Type>>(types));
+	self->disableMessages(QList<GLuint>(), static_cast<QFlags<QOpenGLDebugMessage::Source>>(sources), static_cast<QFlags<QOpenGLDebugMessage::Type>>(types));
 }
 
 void QOpenGLDebugLogger_StartLogging1(QOpenGLDebugLogger* self, int loggingMode) {

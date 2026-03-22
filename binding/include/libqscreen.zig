@@ -13,10 +13,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qscreen.Tr: Memory allo
 return  _ret;
     }
 
-    pub fn Handle(self: ?*anyopaque, ) QPlatformScreen {
-        return @ptrCast(qtc.QScreen_Handle(@ptrCast(self)));
-    }
-
     pub fn Name(self: ?*anyopaque, , allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QScreen_Name(@ptrCast(self));
 defer qtc.libqt_string_free(&_str);

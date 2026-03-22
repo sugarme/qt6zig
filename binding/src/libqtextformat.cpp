@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextBlockFormat>
 #include <QTextCharFormat>
 #include <QTextFormat>
@@ -175,15 +176,29 @@ QTextLength* QTextFormat_LengthProperty(const QTextFormat* self, int propertyId)
 }
 
 libqt_list QTextFormat_LengthVectorProperty(const QTextFormat* self, int propertyId) {
-	return self->lengthVectorProperty(propertyId);
+	auto _ret = self->lengthVectorProperty(propertyId);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextFormat_SetProperty2(QTextFormat* self, int propertyId, const libqt_list lengths) {
-	self->setProperty(propertyId, *lengths);
+	self->setProperty(propertyId, QList<QTextLength>());
 }
 
 libqt_map QTextFormat_Properties(const QTextFormat* self) {
-	return self->properties();
+	auto _ret = self->properties();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 int QTextFormat_PropertyCount(const QTextFormat* self) {
@@ -334,7 +349,7 @@ libqt_string QTextCharFormat_FontFamily(const QTextCharFormat* self) {
 }
 
 void QTextCharFormat_SetFontFamilies(QTextCharFormat* self, const libqt_list families) {
-	self->setFontFamilies(*families);
+	self->setFontFamilies(QList<QString>());
 }
 
 QVariant* QTextCharFormat_FontFamilies(const QTextCharFormat* self) {
@@ -572,11 +587,25 @@ libqt_string QTextCharFormat_AnchorHref(const QTextCharFormat* self) {
 }
 
 void QTextCharFormat_SetAnchorNames(QTextCharFormat* self, const libqt_list names) {
-	self->setAnchorNames(*names);
+	self->setAnchorNames(QList<QString>());
 }
 
 libqt_list QTextCharFormat_AnchorNames(const QTextCharFormat* self) {
-	return self->anchorNames();
+	auto _ret = self->anchorNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QTextCharFormat_SetTableCellRowSpan(QTextCharFormat* self, int tableCellRowSpan) {
@@ -712,11 +741,20 @@ int QTextBlockFormat_PageBreakPolicy(const QTextBlockFormat* self) {
 }
 
 void QTextBlockFormat_SetTabPositions(QTextBlockFormat* self, const libqt_list tabs) {
-	self->setTabPositions(*tabs);
+	self->setTabPositions(QList<QTextOption::Tab>());
 }
 
 libqt_list QTextBlockFormat_TabPositions(const QTextBlockFormat* self) {
-	return self->tabPositions();
+	auto _ret = self->tabPositions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextBlockFormat_SetMarker(QTextBlockFormat* self, int marker) {
@@ -1001,11 +1039,20 @@ void QTextTableFormat_SetColumns(QTextTableFormat* self, int columns) {
 }
 
 void QTextTableFormat_SetColumnWidthConstraints(QTextTableFormat* self, const libqt_list constraints) {
-	self->setColumnWidthConstraints(*constraints);
+	self->setColumnWidthConstraints(QList<QTextLength>());
 }
 
 libqt_list QTextTableFormat_ColumnWidthConstraints(const QTextTableFormat* self) {
-	return self->columnWidthConstraints();
+	auto _ret = self->columnWidthConstraints();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QTextTableFormat_ClearColumnWidthConstraints(QTextTableFormat* self) {

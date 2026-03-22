@@ -169,10 +169,6 @@ pub const qpen = struct {
         return qtc.QPen_IsDetached(@ptrCast(self));
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QExplicitlySharedDataPointer<QPenPrivate> {
-        return @ptrCast(qtc.QPen_DataPtr(@ptrCast(self)));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QPen_Delete(@ptrCast(self));

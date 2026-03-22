@@ -338,7 +338,7 @@ public:
 			int cbval4 = hits;
 			int cbval5 = static_cast<int>(flags);
 			libqt_list callback_ret = qidentityproxymodel_match_callback(this, cbval1, cbval2, cbval3, cbval4, cbval5);
-			return callback_ret;
+			return QList<QModelIndex>();
 		} else {
 			return QIdentityProxyModel::match(start, role, value, hits, flags);
 		}

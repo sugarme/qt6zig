@@ -43,10 +43,6 @@ return  _ret;
         return qtc.QAbstractProxyModel_SourceModel(@ptrCast(self));
     }
 
-    pub fn BindableSourceModel(self: ?*anyopaque, ) QBindable<QAbstractItemModel *> {
-        return qtc.QAbstractProxyModel_BindableSourceModel(@ptrCast(self));
-    }
-
     pub fn MapToSource(self: ?*anyopaque, proxyIndex: ?*anyopaque) QtC.QModelIndex {
         return qtc.QAbstractProxyModel_MapToSource(@ptrCast(self), @ptrCast(proxyIndex));
     }

@@ -153,10 +153,6 @@ return qtc.QUrlQuery_AllQueryItemValues(@ptrCast(self), key_str);
 qtc.QUrlQuery_RemoveAllQueryItems(@ptrCast(self), key_str);
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QSharedDataPointer<QUrlQueryPrivate> {
-        return @ptrCast(qtc.QUrlQuery_DataPtr(@ptrCast(self)));
-    }
-
     pub fn Query1(self: ?*anyopaque, encoding: u32, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QUrlQuery_Query1(@ptrCast(self), @intCast(encoding));
 defer qtc.libqt_string_free(&_str);

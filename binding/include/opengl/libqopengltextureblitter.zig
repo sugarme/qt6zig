@@ -51,16 +51,8 @@ pub const qopengltextureblitter = struct {
         qtc.QOpenGLTextureBlitter_Blit(@ptrCast(self), texture, @ptrCast(targetTransform), @intCast(sourceOrigin));
     }
 
-    pub fn Blit2(self: ?*anyopaque, texture: u32, targetTransform: ?*anyopaque, sourceTransform: *const QGenericMatrix<3, 3, float>) void {
-        qtc.QOpenGLTextureBlitter_Blit2(@ptrCast(self), texture, @ptrCast(targetTransform), @ptrCast(sourceTransform));
-    }
-
     pub fn TargetTransform(target: ?*anyopaque, viewport: ?*anyopaque) QtC.QMatrix4x4 {
         return qtc.QOpenGLTextureBlitter_TargetTransform(@ptrCast(target), @ptrCast(viewport));
-    }
-
-    pub fn SourceTransform(subTexture: ?*anyopaque, textureSize: ?*anyopaque, origin: i32) QGenericMatrix<3, 3, float> {
-        return qtc.QOpenGLTextureBlitter_SourceTransform(@ptrCast(subTexture), @ptrCast(textureSize), @intCast(origin));
     }
 
     pub fn Bind1(self: ?*anyopaque, target: u32) void {

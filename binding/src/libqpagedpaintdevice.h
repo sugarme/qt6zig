@@ -47,9 +47,6 @@ void QPagedPaintDevice_OnSetPageMargins(QPagedPaintDevice* self, intptr_t slot);
 bool QPagedPaintDevice_QBaseSetPageMargins(QPagedPaintDevice* self, const QMarginsF* margins, int units);
 void QPagedPaintDevice_OnSetPageRanges(QPagedPaintDevice* self, intptr_t slot);
 void QPagedPaintDevice_QBaseSetPageRanges(QPagedPaintDevice* self, const QPageRanges* ranges);
-QPagedPaintDevicePrivate* QPagedPaintDevice_Dd(QPagedPaintDevice* self);
-void QPagedPaintDevice_OnDd(QPagedPaintDevice* self, intptr_t slot);
-QPagedPaintDevicePrivate* QPagedPaintDevice_QBaseDd(QPagedPaintDevice* self);
 void QPagedPaintDevice_Delete(QPagedPaintDevice* self);
 
 #ifdef __cplusplus

@@ -11,6 +11,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qrestaccessmanager.h>
 #include "libqrestaccessmanager.h"
 #include "libqrestaccessmanager.hxx"
@@ -116,7 +117,7 @@ void QRestAccessManager_Connect_Post(QRestAccessManager* self, intptr_t slot) {
 }
 
 QNetworkReply* QRestAccessManager_Post2(QRestAccessManager* self, const QNetworkRequest* request, const libqt_map data) {
-	return self->post(*request, *data);
+	return self->post(*request, QMap<QString, QVariant>());
 }
 
 void QRestAccessManager_Connect_Post2(QRestAccessManager* self, intptr_t slot) {
@@ -171,7 +172,7 @@ void QRestAccessManager_Connect_Put(QRestAccessManager* self, intptr_t slot) {
 }
 
 QNetworkReply* QRestAccessManager_Put2(QRestAccessManager* self, const QNetworkRequest* request, const libqt_map data) {
-	return self->put(*request, *data);
+	return self->put(*request, QMap<QString, QVariant>());
 }
 
 void QRestAccessManager_Connect_Put2(QRestAccessManager* self, intptr_t slot) {
@@ -226,7 +227,7 @@ void QRestAccessManager_Connect_Patch(QRestAccessManager* self, intptr_t slot) {
 }
 
 QNetworkReply* QRestAccessManager_Patch2(QRestAccessManager* self, const QNetworkRequest* request, const libqt_map data) {
-	return self->patch(*request, *data);
+	return self->patch(*request, QMap<QString, QVariant>());
 }
 
 void QRestAccessManager_Connect_Patch2(QRestAccessManager* self, intptr_t slot) {

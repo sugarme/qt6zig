@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyle>
 #include <QStylePlugin>
 #include <qstyleplugin.h>

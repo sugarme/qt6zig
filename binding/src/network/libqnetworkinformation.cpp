@@ -3,7 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <qnetworkinformation.h>
 #include "libqnetworkinformation.h"
 #include "libqnetworkinformation.hxx"
@@ -58,16 +58,8 @@ bool QNetworkInformation_LoadDefaultBackend() {
 	return QNetworkInformation::loadDefaultBackend();
 }
 
-bool QNetworkInformation_LoadBackendByName(QStringView* backend) {
-	return QNetworkInformation::loadBackendByName(*backend);
-}
-
 bool QNetworkInformation_LoadBackendByFeatures(int features) {
 	return QNetworkInformation::loadBackendByFeatures(static_cast<QFlags<QNetworkInformation::Feature>>(features));
-}
-
-bool QNetworkInformation_Load(QStringView* backend) {
-	return QNetworkInformation::load(*backend);
 }
 
 bool QNetworkInformation_Load2(int features) {
@@ -75,7 +67,21 @@ bool QNetworkInformation_Load2(int features) {
 }
 
 libqt_list QNetworkInformation_AvailableBackends() {
-	return QNetworkInformation::availableBackends();
+	auto _ret = QNetworkInformation::availableBackends();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QNetworkInformation* QNetworkInformation_Instance() {

@@ -29,16 +29,8 @@ return  _ret;
         return qtc.QTimer_IsActive(@ptrCast(self));
     }
 
-    pub fn BindableActive(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QTimer_BindableActive(@ptrCast(self));
-    }
-
     pub fn TimerId(self: ?*anyopaque, ) i32 {
         return qtc.QTimer_TimerId(@ptrCast(self));
-    }
-
-    pub fn Id(self: ?*anyopaque, ) i32 {
-        return qtc.QTimer_Id(@ptrCast(self));
     }
 
     pub fn SetInterval(self: ?*anyopaque, msec: i32) void {
@@ -47,10 +39,6 @@ return  _ret;
 
     pub fn Interval(self: ?*anyopaque, ) i32 {
         return qtc.QTimer_Interval(@ptrCast(self));
-    }
-
-    pub fn BindableInterval(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QTimer_BindableInterval(@ptrCast(self));
     }
 
     pub fn RemainingTime(self: ?*anyopaque, ) i32 {
@@ -65,20 +53,12 @@ return  _ret;
         return qtc.QTimer_TimerType(@ptrCast(self));
     }
 
-    pub fn BindableTimerType(self: ?*anyopaque, ) QBindable<Qt::TimerType> {
-        return qtc.QTimer_BindableTimerType(@ptrCast(self));
-    }
-
     pub fn SetSingleShot(self: ?*anyopaque, singleShot: bool) void {
         qtc.QTimer_SetSingleShot(@ptrCast(self), singleShot);
     }
 
     pub fn IsSingleShot(self: ?*anyopaque, ) bool {
         return qtc.QTimer_IsSingleShot(@ptrCast(self));
-    }
-
-    pub fn BindableSingleShot(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QTimer_BindableSingleShot(@ptrCast(self));
     }
 
     pub fn SingleShot(msec: i32, receiver: ?*anyopaque, member: []const u8) void {

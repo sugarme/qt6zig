@@ -17,9 +17,7 @@ extern "C" {
 #else
 typedef struct QCborStreamWriter QCborStreamWriter;
 typedef struct QIODevice QIODevice;
-typedef struct QStringView QStringView;
 typedef struct _GUID _GUID;
-typedef struct qfloat16 qfloat16;
 typedef struct type_info type_info;
 #endif
 
@@ -33,12 +31,9 @@ void QCborStreamWriter_Append(QCborStreamWriter* self, unsigned long long u);
 void QCborStreamWriter_Append2(QCborStreamWriter* self, long long i);
 void QCborStreamWriter_Append3(QCborStreamWriter* self, quint64 n);
 void QCborStreamWriter_Append4(QCborStreamWriter* self, const libqt_string ba);
-void QCborStreamWriter_Append5(QCborStreamWriter* self, QLatin1StringView str);
-void QCborStreamWriter_Append6(QCborStreamWriter* self, QStringView* str);
 void QCborStreamWriter_Append7(QCborStreamWriter* self, quint64 tag);
 void QCborStreamWriter_Append8(QCborStreamWriter* self, int tag);
 void QCborStreamWriter_Append9(QCborStreamWriter* self, quint8 st);
-void QCborStreamWriter_Append11(QCborStreamWriter* self, qfloat16* f);
 void QCborStreamWriter_Append12(QCborStreamWriter* self, float f);
 void QCborStreamWriter_Append13(QCborStreamWriter* self, double d);
 void QCborStreamWriter_AppendByteString(QCborStreamWriter* self, const char* data, ptrdiff_t lenVal);

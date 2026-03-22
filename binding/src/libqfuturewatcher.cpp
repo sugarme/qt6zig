@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qfuturewatcher.h>
 #include "libqfuturewatcher.h"
 #include "libqfuturewatcher.hxx"

@@ -62,7 +62,6 @@ void QPainterPath_AddRect2(QPainterPath* self, double x, double y, double w, dou
 void QPainterPath_AddEllipse(QPainterPath* self, const QRectF* rect);
 void QPainterPath_AddEllipse2(QPainterPath* self, double x, double y, double w, double h);
 void QPainterPath_AddEllipse3(QPainterPath* self, const QPointF* center, double rx, double ry);
-void QPainterPath_AddPolygon(QPainterPath* self, const QPolygonF* polygon);
 void QPainterPath_AddText(QPainterPath* self, const QPointF* point, const QFont* f, const libqt_string text);
 void QPainterPath_AddText2(QPainterPath* self, double x, double y, const QFont* f, const libqt_string text);
 void QPainterPath_AddPath(QPainterPath* self, const QPainterPath* path);
@@ -85,7 +84,6 @@ bool QPainterPath_IsEmpty(const QPainterPath* self);
 QPainterPath* QPainterPath_ToReversed(const QPainterPath* self);
 libqt_list QPainterPath_ToSubpathPolygons(const QPainterPath* self);
 libqt_list QPainterPath_ToFillPolygons(const QPainterPath* self);
-QPolygonF* QPainterPath_ToFillPolygon(const QPainterPath* self);
 int QPainterPath_ElementCount(const QPainterPath* self);
 QPainterPath__Element* QPainterPath_ElementAt(const QPainterPath* self, int i);
 void QPainterPath_SetElementPositionAt(QPainterPath* self, int i, double x, double y);
@@ -114,7 +112,6 @@ void QPainterPath_AddRoundedRect4(QPainterPath* self, const QRectF* rect, double
 void QPainterPath_AddRoundedRect7(QPainterPath* self, double x, double y, double w, double h, double xRadius, double yRadius, int mode);
 libqt_list QPainterPath_ToSubpathPolygons1(const QPainterPath* self, const QTransform* matrix);
 libqt_list QPainterPath_ToFillPolygons1(const QPainterPath* self, const QTransform* matrix);
-QPolygonF* QPainterPath_ToFillPolygon1(const QPainterPath* self, const QTransform* matrix);
 void QPainterPath_Delete(QPainterPath* self);
 
 QPainterPathStroker* QPainterPathStroker_new();

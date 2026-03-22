@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qareaseries.h>
 #include "libqareaseries.h"
 #include "libqareaseries.hxx"

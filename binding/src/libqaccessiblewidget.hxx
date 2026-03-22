@@ -224,7 +224,7 @@ public:
 		} else if (qaccessiblewidget_relations_callback != nullptr) {
 			int cbval1 = static_cast<int>(match);
 			libqt_list callback_ret = qaccessiblewidget_relations_callback(this, cbval1);
-			return callback_ret;
+			return QList<QPair<QAccessibleInterface *, QFlags<QAccessible::RelationFlag>>>();
 		} else {
 			return QAccessibleWidget::relations(match);
 		}
@@ -370,7 +370,7 @@ public:
 			return QAccessibleWidget::actionNames();
 		} else if (qaccessiblewidget_actionnames_callback != nullptr) {
 			libqt_list callback_ret = qaccessiblewidget_actionnames_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QAccessibleWidget::actionNames();
 		}
@@ -403,7 +403,7 @@ public:
 			cbval1.len = actionName_qb.length();
 			cbval1.data = static_cast<const char*>(actionName_qb.constData());
 			libqt_list callback_ret = qaccessiblewidget_keybindingsforaction_callback(this, cbval1);
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QAccessibleWidget::keyBindingsForAction(actionName);
 		}

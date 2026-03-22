@@ -46,9 +46,7 @@ void QEvent_QBaseOperatorAssign(QEvent* self, const QEvent* other);
 void QEvent_Delete(QEvent* self);
 
 QTimerEvent* QTimerEvent_new(int timerId);
-QTimerEvent* QTimerEvent_new2(int timerId);
 int QTimerEvent_TimerId(const QTimerEvent* self);
-int QTimerEvent_Id(const QTimerEvent* self);
 void QTimerEvent_Delete(QTimerEvent* self);
 
 QChildEvent* QChildEvent_new(int typeVal, QObject* child);

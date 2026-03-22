@@ -240,7 +240,7 @@ public:
 			int cbval1 = static_cast<int>(mode);
 			int cbval2 = static_cast<int>(state);
 			libqt_list callback_ret = qiconengine_availablesizes_callback(this, cbval1, cbval2);
-			return callback_ret;
+			return QList<QSize>();
 		} else {
 			return QIconEngine::availableSizes(mode, state);
 		}

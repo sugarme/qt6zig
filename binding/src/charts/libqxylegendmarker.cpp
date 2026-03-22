@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QXYLegendMarker>
 #include <QXYSeries>
 #include <qxylegendmarker.h>

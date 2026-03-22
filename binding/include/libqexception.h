@@ -22,20 +22,13 @@ typedef struct type_info type_info;
 
 
 QException* QException_new();
-QException* QException_new2(const QException* param1);
-void QException_OperatorAssign(QException* self, const QException* param1);
 void QException_Raise(const QException* self);
 void QException_OnRaise(const QException* self, intptr_t slot);
 void QException_QBaseRaise(const QException* self);
 void QException_Delete(QException* self);
 
 QUnhandledException* QUnhandledException_new();
-QUnhandledException* QUnhandledException_new2(const QUnhandledException* other);
-QUnhandledException* QUnhandledException_new3(std::exception_ptr exception);
-void QUnhandledException_Swap(QUnhandledException* self, QUnhandledException* other);
-void QUnhandledException_OperatorAssign(QUnhandledException* self, const QUnhandledException* other);
 void QUnhandledException_Raise(const QUnhandledException* self);
-std::exception_ptr QUnhandledException_Exception(const QUnhandledException* self);
 void QUnhandledException_OnRaise(const QUnhandledException* self, intptr_t slot);
 void QUnhandledException_QBaseRaise(const QUnhandledException* self);
 void QUnhandledException_Delete(QUnhandledException* self);

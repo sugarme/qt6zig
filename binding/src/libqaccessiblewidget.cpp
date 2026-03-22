@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <QWindow>
 #include <qaccessiblewidget.h>
@@ -44,7 +45,15 @@ int QAccessibleWidget_IndexOfChild(const QAccessibleWidget* self, const QAccessi
 }
 
 libqt_list QAccessibleWidget_Relations(const QAccessibleWidget* self, int match) {
-	return self->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	auto _ret = self->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QAccessibleInterface* QAccessibleWidget_FocusChild(const QAccessibleWidget* self) {
@@ -95,7 +104,21 @@ void* QAccessibleWidget_InterfaceCast(QAccessibleWidget* self, int t) {
 }
 
 libqt_list QAccessibleWidget_ActionNames(const QAccessibleWidget* self) {
-	return self->actionNames();
+	auto _ret = self->actionNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QAccessibleWidget_DoAction(QAccessibleWidget* self, const libqt_string actionName) {
@@ -103,7 +126,21 @@ void QAccessibleWidget_DoAction(QAccessibleWidget* self, const libqt_string acti
 }
 
 libqt_list QAccessibleWidget_KeyBindingsForAction(const QAccessibleWidget* self, const libqt_string actionName) {
-	return self->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	auto _ret = self->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 // Base class handler implementation
@@ -179,7 +216,15 @@ libqt_list QAccessibleWidget_QBaseRelations(const QAccessibleWidget* self, int m
 	auto* vqaccessiblewidget = dynamic_cast<const VirtualQAccessibleWidget*>(self);
 	if (vqaccessiblewidget && vqaccessiblewidget->isVirtualQAccessibleWidget) {
 vqaccessiblewidget->setQAccessibleWidget_Relations_IsBase(true);
-	return vqaccessiblewidget->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	auto _ret = vqaccessiblewidget->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -373,7 +418,21 @@ libqt_list QAccessibleWidget_QBaseActionNames(const QAccessibleWidget* self) {
 	auto* vqaccessiblewidget = dynamic_cast<const VirtualQAccessibleWidget*>(self);
 	if (vqaccessiblewidget && vqaccessiblewidget->isVirtualQAccessibleWidget) {
 vqaccessiblewidget->setQAccessibleWidget_ActionNames_IsBase(true);
-	return vqaccessiblewidget->actionNames();
+	auto _ret = vqaccessiblewidget->actionNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -407,7 +466,21 @@ libqt_list QAccessibleWidget_QBaseKeyBindingsForAction(const QAccessibleWidget* 
 	auto* vqaccessiblewidget = dynamic_cast<const VirtualQAccessibleWidget*>(self);
 	if (vqaccessiblewidget && vqaccessiblewidget->isVirtualQAccessibleWidget) {
 vqaccessiblewidget->setQAccessibleWidget_KeyBindingsForAction_IsBase(true);
-	return vqaccessiblewidget->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	auto _ret = vqaccessiblewidget->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 

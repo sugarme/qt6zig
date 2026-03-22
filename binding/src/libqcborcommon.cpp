@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcborcommon.h>
 #include "libqcborcommon.h"
 #include "libqcborcommon.hxx"

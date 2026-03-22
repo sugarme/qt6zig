@@ -89,7 +89,7 @@ public:
 			cbval1.len = path_qb.length();
 			cbval1.data = static_cast<const char*>(path_qb.constData());
 			libqt_list callback_ret = qcompleter_splitpath_callback(this, cbval1);
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QCompleter::splitPath(path);
 		}

@@ -24,7 +24,6 @@ typedef struct type_info type_info;
 
 QMimeType* QMimeType_new();
 QMimeType* QMimeType_new2(const QMimeType* other);
-QMimeType* QMimeType_new3(const QMimeTypePrivate* dd);
 void QMimeType_OperatorAssign(QMimeType* self, const QMimeType* other);
 void QMimeType_Swap(QMimeType* self, QMimeType* other);
 bool QMimeType_IsValid(const QMimeType* self);

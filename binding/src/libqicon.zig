@@ -219,10 +219,6 @@ return  _ret;
 qtc.QIcon_SetFallbackThemeName(name_str);
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QIconPrivate {
-        return @ptrCast(qtc.QIcon_DataPtr(@ptrCast(self)));
-    }
-
     pub fn Pixmap22(self: ?*anyopaque, size: ?*anyopaque, mode: i32) QtC.QPixmap {
         return qtc.QIcon_Pixmap22(@ptrCast(self), @ptrCast(size), @intCast(mode));
     }

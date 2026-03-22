@@ -5,7 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <qcollator.h>
 #include "libqcollator.h"
 #include "libqcollator.hxx"
@@ -94,24 +94,8 @@ bool QCollator_OperatorCall(const QCollator* self, const libqt_string s1, const 
 	return self->operator()(QString::fromUtf8(s1.data, s1.len), QString::fromUtf8(s2.data, s2.len));
 }
 
-int QCollator_Compare3(const QCollator* self, QStringView* s1, QStringView* s2) {
-	return self->compare(*s1, *s2);
-}
-
-bool QCollator_OperatorCall2(const QCollator* self, QStringView* s1, QStringView* s2) {
-	return self->operator()(*s1, *s2);
-}
-
 QCollatorSortKey* QCollator_SortKey(const QCollator* self, const libqt_string stringVal) {
 	return new QCollatorSortKey(self->sortKey(QString::fromUtf8(stringVal.data, stringVal.len)));
-}
-
-int QCollator_DefaultCompare(QStringView* s1, QStringView* s2) {
-	return QCollator::defaultCompare(*s1, *s2);
-}
-
-QCollatorSortKey* QCollator_DefaultSortKey(QStringView* key) {
-	return new QCollatorSortKey(QCollator::defaultSortKey(*key));
 }
 
 void QCollator_Delete(QCollator* self) {

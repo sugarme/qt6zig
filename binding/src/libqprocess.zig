@@ -456,10 +456,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qprocess.NullDevice: Me
 return  _ret;
     }
 
-    pub fn SplitCommand(command: []const u8) []const u8 {
-        return qtc.QProcess_SplitCommand(@ptrCast(command));
-    }
-
     pub fn Terminate(self: ?*anyopaque, ) void {
         qtc.QProcess_Terminate(@ptrCast(self));
     }

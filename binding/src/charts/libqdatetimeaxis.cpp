@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qdatetimeaxis.h>
 #include "libqdatetimeaxis.h"
 #include "libqdatetimeaxis.hxx"

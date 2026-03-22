@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsplineseries.h>
 #include "libqsplineseries.h"
 #include "libqsplineseries.hxx"

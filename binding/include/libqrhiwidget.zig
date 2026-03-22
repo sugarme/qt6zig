@@ -157,20 +157,6 @@ return  _ret;
         qtc.QRhiWidget_QBaseReleaseResources(@ptrCast(self));
     }
 
-    pub fn Rhi(self: ?*anyopaque, ) QRhi {
-        return @ptrCast(qtc.QRhiWidget_Rhi(@ptrCast(self)));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnRhi(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) QRhi) void {
-        qtc.QRhiWidget_OnRhi(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseRhi(self: ?*anyopaque, ) QRhi {
-        return @ptrCast(qtc.QRhiWidget_QBaseRhi(@ptrCast(self)));
-    }
-
     pub fn ColorTexture(self: ?*anyopaque, ) QRhiTexture {
         return @ptrCast(qtc.QRhiWidget_ColorTexture(@ptrCast(self)));
     }

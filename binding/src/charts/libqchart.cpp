@@ -15,6 +15,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qchart.h>
 #include "libqchart.h"
 #include "libqchart.hxx"
@@ -55,7 +56,15 @@ void QChart_RemoveAllSeries(QChart* self) {
 }
 
 libqt_list QChart_Series(const QChart* self) {
-	return self->series();
+	auto _ret = self->series();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QChart_SetAxisX(QChart* self, QAbstractAxis* axis) {
@@ -83,7 +92,15 @@ void QChart_RemoveAxis(QChart* self, QAbstractAxis* axis) {
 }
 
 libqt_list QChart_Axes(const QChart* self) {
-	return self->axes();
+	auto _ret = self->axes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QChart_CreateDefaultAxes(QChart* self) {
@@ -343,11 +360,27 @@ QAbstractAxis* QChart_AxisY1(const QChart* self, QAbstractSeries* series) {
 }
 
 libqt_list QChart_Axes1(const QChart* self, int orientation) {
-	return self->axes(static_cast<QFlags<Qt::Orientation>>(orientation));
+	auto _ret = self->axes(static_cast<QFlags<Qt::Orientation>>(orientation));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QChart_Axes2(const QChart* self, int orientation, QAbstractSeries* series) {
-	return self->axes(static_cast<QFlags<Qt::Orientation>>(orientation), series);
+	auto _ret = self->axes(static_cast<QFlags<Qt::Orientation>>(orientation), series);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QChart_SetBackgroundVisible1(QChart* self, bool visible) {

@@ -207,14 +207,6 @@ pub const qquaternion = struct {
         return qtc.QQuaternion_FromEulerAngles2(pitch, yaw, roll);
     }
 
-    pub fn ToRotationMatrix(self: ?*anyopaque, ) QGenericMatrix<3, 3, float> {
-        return qtc.QQuaternion_ToRotationMatrix(@ptrCast(self));
-    }
-
-    pub fn FromRotationMatrix(rot3x3: *const QGenericMatrix<3, 3, float>) QtC.QQuaternion {
-        return qtc.QQuaternion_FromRotationMatrix(@ptrCast(rot3x3));
-    }
-
     pub fn GetAxes(self: ?*anyopaque, xAxis: ?*anyopaque, yAxis: ?*anyopaque, zAxis: ?*anyopaque) void {
         qtc.QQuaternion_GetAxes(@ptrCast(self), @ptrCast(xAxis), @ptrCast(yAxis), @ptrCast(zAxis));
     }

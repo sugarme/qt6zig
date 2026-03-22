@@ -49,7 +49,6 @@ bool QAbstractEventDispatcher_UnregisterTimer(QAbstractEventDispatcher* self, in
 bool QAbstractEventDispatcher_UnregisterTimers(QAbstractEventDispatcher* self, QObject* object);
 libqt_list QAbstractEventDispatcher_RegisteredTimers(const QAbstractEventDispatcher* self, QObject* object);
 int QAbstractEventDispatcher_RemainingTime(QAbstractEventDispatcher* self, int timerId);
-bool QAbstractEventDispatcher_UnregisterTimer2(QAbstractEventDispatcher* self, int timerId);
 libqt_list QAbstractEventDispatcher_TimersForObject(const QAbstractEventDispatcher* self, QObject* object);
 void QAbstractEventDispatcher_WakeUp(QAbstractEventDispatcher* self);
 void QAbstractEventDispatcher_Interrupt(QAbstractEventDispatcher* self);
@@ -70,7 +69,6 @@ void QAbstractEventDispatcher_Delete(QAbstractEventDispatcher* self);
 QAbstractEventDispatcherV2* QAbstractEventDispatcherV2_new();
 QAbstractEventDispatcherV2* QAbstractEventDispatcherV2_new2(QObject* parent);
 libqt_string QAbstractEventDispatcherV2_Tr(const char* s);
-bool QAbstractEventDispatcherV2_UnregisterTimer(QAbstractEventDispatcherV2* self, int timerId);
 libqt_list QAbstractEventDispatcherV2_TimersForObject(const QAbstractEventDispatcherV2* self, QObject* object);
 bool QAbstractEventDispatcherV2_ProcessEventsWithDeadline(QAbstractEventDispatcherV2* self, int flags, QDeadlineTimer* deadline);
 libqt_string QAbstractEventDispatcherV2_Tr2(const char* s, const char* c);
@@ -93,8 +91,6 @@ void QAbstractEventDispatcher__TimerInfo_Delete(QAbstractEventDispatcher__TimerI
 
 QAbstractEventDispatcher__TimerInfoV2* QAbstractEventDispatcher__TimerInfoV2_new();
 QAbstractEventDispatcher__TimerInfoV2* QAbstractEventDispatcher__TimerInfoV2_new2(const QAbstractEventDispatcher__TimerInfoV2* param1);
-int QAbstractEventDispatcher__TimerInfoV2_TimerId(const QAbstractEventDispatcher__TimerInfoV2* self);
-void QAbstractEventDispatcher__TimerInfoV2_SetTimerId(QAbstractEventDispatcher__TimerInfoV2* self, int timerId);
 int QAbstractEventDispatcher__TimerInfoV2_TimerType(const QAbstractEventDispatcher__TimerInfoV2* self);
 void QAbstractEventDispatcher__TimerInfoV2_SetTimerType(QAbstractEventDispatcher__TimerInfoV2* self, int timerType);
 void QAbstractEventDispatcher__TimerInfoV2_Delete(QAbstractEventDispatcher__TimerInfoV2* self);

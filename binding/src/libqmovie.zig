@@ -197,10 +197,6 @@ return  _ret;
         return qtc.QMovie_Speed(@ptrCast(self));
     }
 
-    pub fn BindableSpeed(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QMovie_BindableSpeed(@ptrCast(self));
-    }
-
     pub fn ScaledSize(self: ?*anyopaque, ) QtC.QSize {
         return qtc.QMovie_ScaledSize(@ptrCast(self));
     }
@@ -215,10 +211,6 @@ return  _ret;
 
     pub fn SetCacheMode(self: ?*anyopaque, mode: i32) void {
         qtc.QMovie_SetCacheMode(@ptrCast(self), @intCast(mode));
-    }
-
-    pub fn BindableCacheMode(self: ?*anyopaque, ) QBindable<CacheMode> {
-        return qtc.QMovie_BindableCacheMode(@ptrCast(self));
     }
 
     pub fn Started(self: ?*anyopaque, ) void {

@@ -246,7 +246,7 @@ public:
 		} else if (qsqldriver_tables_callback != nullptr) {
 			int cbval1 = static_cast<int>(tableType);
 			libqt_list callback_ret = qsqldriver_tables_callback(this, cbval1);
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QSqlDriver::tables(tableType);
 		}
@@ -452,7 +452,7 @@ public:
 			return QSqlDriver::subscribedToNotifications();
 		} else if (qsqldriver_subscribedtonotifications_callback != nullptr) {
 			libqt_list callback_ret = qsqldriver_subscribedtonotifications_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QSqlDriver::subscribedToNotifications();
 		}

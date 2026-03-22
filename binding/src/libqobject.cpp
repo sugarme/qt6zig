@@ -1,5 +1,3 @@
-#include <QAnyStringView>
-#include <QAtomicInt>
 #include <QBindingStorage>
 #include <QChildEvent>
 #include <QEvent>
@@ -11,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QThread>
 #include <QTimerEvent>
 #include <QVariant>
@@ -40,7 +39,15 @@ void QObjectData_SetParent(QObjectData* self, QObject* parent) {
 }
 
 libqt_list QObjectData_Children(const QObjectData* self) {
-	return self->children;
+	auto _ret = self->children;
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QObjectData_SetChildren(QObjectData* self, libqt_list children) {
@@ -151,18 +158,6 @@ void QObjectData_SetUnused(QObjectData* self, unsigned int unused) {
 	self->unused;
 }
 
-QAtomicInt* QObjectData_PostedEvents(const QObjectData* self) {
-	return new QAtomicInt(self->postedEvents);
-}
-
-void QObjectData_SetPostedEvents(QObjectData* self, QAtomicInt* postedEvents) {
-	self->postedEvents;
-}
-
-void QObjectData_SetMetaObject(QObjectData* self, QDynamicMetaObjectData* metaObject) {
-	self->metaObject;
-}
-
 QBindingStorage* QObjectData_BindingStorage(const QObjectData* self) {
 	return new QBindingStorage(self->bindingStorage);
 }
@@ -217,14 +212,6 @@ libqt_string QObject_ObjectName(const QObject* self) {
 	return _str;
 }
 
-void QObject_SetObjectName(QObject* self, libqt_string name) {
-	self->setObjectName(QAnyStringView(QString::fromUtf8(name.data, name.len)));
-}
-
-QBindable<QString> QObject_BindableObjectName(QObject* self) {
-	return self->bindableObjectName();
-}
-
 bool QObject_IsWidgetType(const QObject* self) {
 	return self->isWidgetType();
 }
@@ -261,12 +248,16 @@ void QObject_KillTimer(QObject* self, int id) {
 	self->killTimer(id);
 }
 
-void QObject_KillTimer2(QObject* self, int id) {
-	self->killTimer(static_cast<Qt::TimerId>(id));
-}
-
 libqt_list QObject_Children(const QObject* self) {
-	return self->children();
+	auto _ret = self->children();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QObject_SetParent(QObject* self, QObject* parent) {
@@ -314,7 +305,16 @@ QVariant* QObject_Property(const QObject* self, const char* name) {
 }
 
 libqt_list QObject_DynamicPropertyNames(const QObject* self) {
-	return self->dynamicPropertyNames();
+	auto _ret = self->dynamicPropertyNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QBindingStorage* QObject_BindingStorage(QObject* self) {

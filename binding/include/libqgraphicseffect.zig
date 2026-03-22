@@ -161,10 +161,6 @@ return  _ret;
         return qtc.QGraphicsEffect_QBaseSourcePixmap(@ptrCast(self));
     }
 
-    pub fn Source(self: ?*anyopaque, ) QGraphicsEffectSource {
-        return @ptrCast(qtc.QGraphicsEffect_Source(@ptrCast(self)));
-    }
-
     pub fn Tr2(s: []const u8, c: []const u8, allocator: std.mem.Allocator) []const u8 {
         const _str = qtc.QGraphicsEffect_Tr2(@ptrCast(s), @ptrCast(c));
 defer qtc.libqt_string_free(&_str);

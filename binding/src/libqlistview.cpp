@@ -16,6 +16,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionViewItem>
 #include <QTimerEvent>
 #include <QWheelEvent>
@@ -192,7 +193,7 @@ void QListView_SetRootIndex(QListView* self, const QModelIndex* index) {
 }
 
 void QListView_IndexesMoved(QListView* self, const libqt_list indexes) {
-	self->indexesMoved(*indexes);
+	self->indexesMoved(QList<QModelIndex>());
 }
 
 void QListView_Connect_IndexesMoved(QListView* self, intptr_t slot) {
@@ -384,9 +385,9 @@ vqlistview->setQListView_ScrollContentsBy_Callback(reinterpret_cast<VirtualQList
 void QListView_DataChanged(QListView* self, const QModelIndex* topLeft, const QModelIndex* bottomRight, const libqt_list roles) {
 	auto* vqlistview = dynamic_cast<VirtualQListView*>(self);
 	if (vqlistview && vqlistview->isVirtualQListView) {
-	vqlistview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqlistview->dataChanged(*topLeft, *bottomRight, QList<int>());
 	} else {
-	self->QListView::dataChanged(*topLeft, *bottomRight, *roles);
+	self->QListView::dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 
@@ -395,7 +396,7 @@ void QListView_QBaseDataChanged(QListView* self, const QModelIndex* topLeft, con
 	auto* vqlistview = dynamic_cast<VirtualQListView*>(self);
 	if (vqlistview && vqlistview->isVirtualQListView) {
 vqlistview->setQListView_DataChanged_IsBase(true);
-	vqlistview->dataChanged(*topLeft, *bottomRight, *roles);
+	vqlistview->dataChanged(*topLeft, *bottomRight, QList<int>());
 }
 }
 
@@ -897,9 +898,27 @@ vqlistview->setQListView_VisualRegionForSelection_Callback(reinterpret_cast<Virt
 libqt_list QListView_SelectedIndexes(const QListView* self) {
 	auto* vqlistview = dynamic_cast<const VirtualQListView*>(self);
 	if (vqlistview && vqlistview->isVirtualQListView) {
-	return vqlistview->selectedIndexes();
+	auto _ret = vqlistview->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 	} else {
-	return self->QListView::selectedIndexes();
+	auto _ret = self->QListView::selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -908,7 +927,16 @@ libqt_list QListView_QBaseSelectedIndexes(const QListView* self) {
 	auto* vqlistview = dynamic_cast<const VirtualQListView*>(self);
 	if (vqlistview && vqlistview->isVirtualQListView) {
 vqlistview->setQListView_SelectedIndexes_IsBase(true);
-	return vqlistview->selectedIndexes();
+	auto _ret = vqlistview->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

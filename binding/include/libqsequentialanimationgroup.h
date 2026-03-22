@@ -33,7 +33,6 @@ libqt_string QSequentialAnimationGroup_Tr(const char* s);
 QPauseAnimation* QSequentialAnimationGroup_AddPause(QSequentialAnimationGroup* self, int msecs);
 QPauseAnimation* QSequentialAnimationGroup_InsertPause(QSequentialAnimationGroup* self, int index, int msecs);
 QAbstractAnimation* QSequentialAnimationGroup_CurrentAnimation(const QSequentialAnimationGroup* self);
-QBindable<QAbstractAnimation *> QSequentialAnimationGroup_BindableCurrentAnimation(const QSequentialAnimationGroup* self);
 int QSequentialAnimationGroup_Duration(const QSequentialAnimationGroup* self);
 void QSequentialAnimationGroup_CurrentAnimationChanged(QSequentialAnimationGroup* self, QAbstractAnimation* current);
 void QSequentialAnimationGroup_Connect_CurrentAnimationChanged(QSequentialAnimationGroup* self, intptr_t slot);

@@ -135,80 +135,68 @@ return qtc.QCborValue_new10(s_str);
 
 
     /// New12 constructs a new QCborValue object.
-    pub fn New12(s: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborValue_new12(s);
+    pub fn New12(a: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new12(@ptrCast(a));
     }
 
 
     /// New13 constructs a new QCborValue object.
-    pub fn New13(s: []const u8) QtC.QCborValue {
-        return qtc.QCborValue_new13(@ptrCast(s));
+    pub fn New13(m: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new13(@ptrCast(m));
     }
 
 
     /// New14 constructs a new QCborValue object.
-    pub fn New14(a: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new14(@ptrCast(a));
+    pub fn New14(tag: u64) QtC.QCborValue {
+        return qtc.QCborValue_new14(@intCast(tag));
     }
 
 
     /// New15 constructs a new QCborValue object.
-    pub fn New15(m: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new15(@ptrCast(m));
+    pub fn New15(t_: i32) QtC.QCborValue {
+        return qtc.QCborValue_new15(@intCast(t_));
     }
 
 
     /// New16 constructs a new QCborValue object.
-    pub fn New16(tag: u64) QtC.QCborValue {
-        return qtc.QCborValue_new16(@intCast(tag));
+    pub fn New16(dt: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new16(@ptrCast(dt));
     }
 
 
     /// New17 constructs a new QCborValue object.
-    pub fn New17(t_: i32) QtC.QCborValue {
-        return qtc.QCborValue_new17(@intCast(t_));
+    pub fn New17(url: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new17(@ptrCast(url));
     }
 
 
     /// New18 constructs a new QCborValue object.
-    pub fn New18(dt: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new18(@ptrCast(dt));
+    pub fn New18(rx: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new18(@ptrCast(rx));
     }
 
 
     /// New19 constructs a new QCborValue object.
-    pub fn New19(url: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new19(@ptrCast(url));
+    pub fn New19(uuid: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new19(@ptrCast(uuid));
     }
 
 
     /// New20 constructs a new QCborValue object.
-    pub fn New20(rx: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new20(@ptrCast(rx));
+    pub fn New20(other: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new20(@ptrCast(other));
     }
 
 
     /// New21 constructs a new QCborValue object.
-    pub fn New21(uuid: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new21(@ptrCast(uuid));
+    pub fn New21(tag: u64, taggedValue: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new21(@intCast(tag), @ptrCast(taggedValue));
     }
 
 
     /// New22 constructs a new QCborValue object.
-    pub fn New22(other: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new22(@ptrCast(other));
-    }
-
-
-    /// New23 constructs a new QCborValue object.
-    pub fn New23(tag: u64, taggedValue: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new23(@intCast(tag), @ptrCast(taggedValue));
-    }
-
-
-    /// New24 constructs a new QCborValue object.
-    pub fn New24(t_: i32, tv: ?*anyopaque) QtC.QCborValue {
-        return qtc.QCborValue_new24(@intCast(t_), @ptrCast(tv));
+    pub fn New22(t_: i32, tv: ?*anyopaque) QtC.QCborValue {
+        return qtc.QCborValue_new22(@intCast(t_), @ptrCast(tv));
     }
 
 
@@ -384,20 +372,12 @@ return  _ret;
 return qtc.QCborValue_OperatorSubscript(@ptrCast(self), key_str);
     }
 
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborValue_OperatorSubscript2(@ptrCast(self), key);
-    }
-
     pub fn OperatorSubscript3(self: ?*anyopaque, key: i64) QtC.QCborValue {
         return qtc.QCborValue_OperatorSubscript3(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript4(self: ?*anyopaque, key: i64) QtC.QCborValueRef {
         return qtc.QCborValue_OperatorSubscript4(@ptrCast(self), key);
-    }
-
-    pub fn OperatorSubscript5(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValueRef {
-        return qtc.QCborValue_OperatorSubscript5(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript6(self: ?*anyopaque, key: []const u8) QtC.QCborValueRef {
@@ -757,10 +737,6 @@ return  _ret;
 return qtc.QCborValueConstRef_OperatorSubscript(@ptrCast(self), key_str);
     }
 
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborValueConstRef_OperatorSubscript2(@ptrCast(self), key);
-    }
-
     pub fn OperatorSubscript3(self: ?*anyopaque, key: i64) QtC.QCborValue {
         return qtc.QCborValueConstRef_OperatorSubscript3(@ptrCast(self), key);
     }
@@ -918,10 +894,6 @@ pub const qcborvalueref = struct {
 
     pub fn OperatorSubscript(self: ?*anyopaque, key: i64) QtC.QCborValueRef {
         return qtc.QCborValueRef_OperatorSubscript(@ptrCast(self), key);
-    }
-
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValueRef {
-        return qtc.QCborValueRef_OperatorSubscript2(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript3(self: ?*anyopaque, key: []const u8) QtC.QCborValueRef {
@@ -1098,10 +1070,6 @@ return  _ret;
     .data = key.ptr,
 };
 return qtc.QCborValueRef_OperatorSubscript4(@ptrCast(self), key_str);
-    }
-
-    pub fn OperatorSubscript5(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborValueRef_OperatorSubscript5(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript6(self: ?*anyopaque, key: i64) QtC.QCborValue {

@@ -26,20 +26,14 @@ typedef struct type_info type_info;
 
 QVariantRef<QSequentialIterator> QSequentialIterator_OperatorMultiply(const QSequentialIterator* self);
 QVariantPointer<QSequentialIterator> QSequentialIterator_OperatorMinusGreater(const QSequentialIterator* self);
-void QSequentialIterator_OperatorAssign(QSequentialIterator* self, const QSequentialIterator* param1);
 void QSequentialIterator_Delete(QSequentialIterator* self);
 
 QVariant* QSequentialConstIterator_OperatorMultiply(const QSequentialConstIterator* self);
-QVariantConstPointer* QSequentialConstIterator_OperatorMinusGreater(const QSequentialConstIterator* self);
-void QSequentialConstIterator_OperatorAssign(QSequentialConstIterator* self, const QSequentialConstIterator* param1);
 void QSequentialConstIterator_Delete(QSequentialConstIterator* self);
 
-QSequentialIterable* QSequentialIterable_new(const QSequentialIterable* other);
-QSequentialIterable* QSequentialIterable_new2(QSequentialIterable* other);
-QSequentialIterable* QSequentialIterable_new3();
-QSequentialIterable* QSequentialIterable_new4(const QMetaSequence* metaSequence, const QMetaType* metaType, void* iterable);
-QSequentialIterable* QSequentialIterable_new5(const QMetaSequence* metaSequence, const QMetaType* metaType, const void* iterable);
-QSequentialIterable* QSequentialIterable_new6(const QSequentialIterable* param1);
+QSequentialIterable* QSequentialIterable_new();
+QSequentialIterable* QSequentialIterable_new2(const QMetaSequence* metaSequence, const QMetaType* metaType, void* iterable);
+QSequentialIterable* QSequentialIterable_new3(const QMetaSequence* metaSequence, const QMetaType* metaType, const void* iterable);
 void QSequentialIterable_CopyAssign(QSequentialIterable* self, QSequentialIterable* other);
 void QSequentialIterable_MoveAssign(QSequentialIterable* self, QSequentialIterable* other);
 QTaggedIterator<QSequentialConstIterator, void> QSequentialIterable_Begin(const QSequentialIterable* self);
@@ -53,7 +47,6 @@ void QSequentialIterable_Set(QSequentialIterable* self, ptrdiff_t idx, const QVa
 void QSequentialIterable_AddValue(QSequentialIterable* self, const QVariant* value);
 void QSequentialIterable_RemoveValue(QSequentialIterable* self);
 QMetaType* QSequentialIterable_ValueMetaType(const QSequentialIterable* self);
-void QSequentialIterable_OperatorAssign(QSequentialIterable* self, const QSequentialIterable* param1);
 void QSequentialIterable_AddValue2(QSequentialIterable* self, const QVariant* value, int position);
 void QSequentialIterable_RemoveValue1(QSequentialIterable* self, int position);
 void QSequentialIterable_Delete(QSequentialIterable* self);

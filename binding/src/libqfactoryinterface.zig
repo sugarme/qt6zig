@@ -11,12 +11,6 @@ pub const qfactoryinterface = struct {
     }
 
 
-    /// New2 constructs a new QFactoryInterface object.
-    pub fn New2(param1: ?*anyopaque) QtC.QFactoryInterface {
-        return qtc.QFactoryInterface_new2(@ptrCast(param1));
-    }
-
-
     pub fn Keys(self: ?*anyopaque, ) []const u8 {
         return qtc.QFactoryInterface_Keys(@ptrCast(self));
     }
@@ -29,10 +23,6 @@ pub const qfactoryinterface = struct {
     /// Base class method implementation
     pub fn QBaseKeys(self: ?*anyopaque, ) []const u8 {
         return qtc.QFactoryInterface_QBaseKeys(@ptrCast(self));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QFactoryInterface_OperatorAssign(@ptrCast(self), @ptrCast(param1));
     }
 
     /// Delete this object from C++ memory.

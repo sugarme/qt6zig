@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcameradevice.h>
 #include "libqcameradevice.h"
 #include "libqcameradevice.hxx"
@@ -107,11 +108,29 @@ int QCameraDevice_Position(const QCameraDevice* self) {
 }
 
 libqt_list QCameraDevice_PhotoResolutions(const QCameraDevice* self) {
-	return self->photoResolutions();
+	auto _ret = self->photoResolutions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QCameraDevice_VideoFormats(const QCameraDevice* self) {
-	return self->videoFormats();
+	auto _ret = self->videoFormats();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QCameraDevice_CorrectionAngle(const QCameraDevice* self) {

@@ -33,46 +33,6 @@ pub const qformdatapartbuilder = struct {
         return qtc.QFormDataPartBuilder_SetHeaders(@ptrCast(self), @ptrCast(headers));
     }
 
-    pub fn SetBody2(self: ?*anyopaque, data: []const u8, fileName: []const u8) QtC.QFormDataPartBuilder {
-        const fileName_str = qtc.libqt_string{
-    .len = fileName.len,
-    .data = fileName.ptr,
-};
-return qtc.QFormDataPartBuilder_SetBody2(@ptrCast(self), @ptrCast(data), fileName_str);
-    }
-
-    pub fn SetBody3(self: ?*anyopaque, data: []const u8, fileName: []const u8, mimeType: []const u8) QtC.QFormDataPartBuilder {
-        const fileName_str = qtc.libqt_string{
-    .len = fileName.len,
-    .data = fileName.ptr,
-};
-const mimeType_str = qtc.libqt_string{
-    .len = mimeType.len,
-    .data = mimeType.ptr,
-};
-return qtc.QFormDataPartBuilder_SetBody3(@ptrCast(self), @ptrCast(data), fileName_str, mimeType_str);
-    }
-
-    pub fn SetBodyDevice2(self: ?*anyopaque, body: ?*anyopaque, fileName: []const u8) QtC.QFormDataPartBuilder {
-        const fileName_str = qtc.libqt_string{
-    .len = fileName.len,
-    .data = fileName.ptr,
-};
-return qtc.QFormDataPartBuilder_SetBodyDevice2(@ptrCast(self), @ptrCast(body), fileName_str);
-    }
-
-    pub fn SetBodyDevice3(self: ?*anyopaque, body: ?*anyopaque, fileName: []const u8, mimeType: []const u8) QtC.QFormDataPartBuilder {
-        const fileName_str = qtc.libqt_string{
-    .len = fileName.len,
-    .data = fileName.ptr,
-};
-const mimeType_str = qtc.libqt_string{
-    .len = mimeType.len,
-    .data = mimeType.ptr,
-};
-return qtc.QFormDataPartBuilder_SetBodyDevice3(@ptrCast(self), @ptrCast(body), fileName_str, mimeType_str);
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QFormDataPartBuilder_Delete(@ptrCast(self));
@@ -90,22 +50,6 @@ pub const qformdatabuilder = struct {
 
     pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
         qtc.QFormDataBuilder_Swap(@ptrCast(self), @ptrCast(other));
-    }
-
-    pub fn Part(self: ?*anyopaque, name: []const u8) QtC.QFormDataPartBuilder {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QFormDataBuilder_Part(@ptrCast(self), name_str);
-    }
-
-    pub fn BuildMultiPart(self: ?*anyopaque, ) std::unique_ptr<QHttpMultiPart> {
-        return qtc.QFormDataBuilder_BuildMultiPart(@ptrCast(self));
-    }
-
-    pub fn BuildMultiPart1(self: ?*anyopaque, options: i32) std::unique_ptr<QHttpMultiPart> {
-        return qtc.QFormDataBuilder_BuildMultiPart1(@ptrCast(self), @intCast(options));
     }
 
     /// Delete this object from C++ memory.

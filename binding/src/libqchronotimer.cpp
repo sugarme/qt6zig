@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimerEvent>
 #include <qchronotimer.h>
 #include "libqchronotimer.h"
@@ -31,14 +32,6 @@ bool QChronoTimer_IsActive(const QChronoTimer* self) {
 	return self->isActive();
 }
 
-QBindable<bool> QChronoTimer_BindableActive(QChronoTimer* self) {
-	return self->bindableActive();
-}
-
-int QChronoTimer_Id(const QChronoTimer* self) {
-	return self->id();
-}
-
 void QChronoTimer_SetTimerType(QChronoTimer* self, int atype) {
 	self->setTimerType(static_cast<Qt::TimerType>(atype));
 }
@@ -47,20 +40,12 @@ int QChronoTimer_TimerType(const QChronoTimer* self) {
 	return self->timerType();
 }
 
-QBindable<Qt::TimerType> QChronoTimer_BindableTimerType(QChronoTimer* self) {
-	return self->bindableTimerType();
-}
-
 void QChronoTimer_SetSingleShot(QChronoTimer* self, bool singleShot) {
 	self->setSingleShot(singleShot);
 }
 
 bool QChronoTimer_IsSingleShot(const QChronoTimer* self) {
 	return self->isSingleShot();
-}
-
-QBindable<bool> QChronoTimer_BindableSingleShot(QChronoTimer* self) {
-	return self->bindableSingleShot();
 }
 
 void QChronoTimer_Start(QChronoTimer* self) {

@@ -73,14 +73,6 @@ pub const qtexttablecell = struct {
         return qtc.QTextTableCell_OperatorNotEqual(@ptrCast(self), @ptrCast(other));
     }
 
-    pub fn Begin(self: ?*anyopaque, ) QtC.QTextFrame__iterator {
-        return qtc.QTextTableCell_Begin(@ptrCast(self));
-    }
-
-    pub fn End(self: ?*anyopaque, ) QtC.QTextFrame__iterator {
-        return qtc.QTextTableCell_End(@ptrCast(self));
-    }
-
     pub fn TableCellFormatIndex(self: ?*anyopaque, ) i32 {
         return qtc.QTextTableCell_TableCellFormatIndex(@ptrCast(self));
     }

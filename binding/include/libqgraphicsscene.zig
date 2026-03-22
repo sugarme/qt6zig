@@ -105,10 +105,6 @@ return  _ret;
         return qtc.QGraphicsScene_Items3(@ptrCast(self), @ptrCast(rect));
     }
 
-    pub fn Items4(self: ?*anyopaque, polygon: ?*anyopaque) []const u8 {
-        return qtc.QGraphicsScene_Items4(@ptrCast(self), @ptrCast(polygon));
-    }
-
     pub fn Items5(self: ?*anyopaque, path: ?*anyopaque) []const u8 {
         return qtc.QGraphicsScene_Items5(@ptrCast(self), @ptrCast(path));
     }
@@ -171,10 +167,6 @@ return  _ret;
 
     pub fn AddPixmap(self: ?*anyopaque, pixmap: ?*anyopaque) QtC.QGraphicsPixmapItem {
         return qtc.QGraphicsScene_AddPixmap(@ptrCast(self), @ptrCast(pixmap));
-    }
-
-    pub fn AddPolygon(self: ?*anyopaque, polygon: ?*anyopaque) QtC.QGraphicsPolygonItem {
-        return qtc.QGraphicsScene_AddPolygon(@ptrCast(self), @ptrCast(polygon));
     }
 
     pub fn AddRect(self: ?*anyopaque, rect: ?*anyopaque) QtC.QGraphicsRectItem {
@@ -771,18 +763,6 @@ return  _ret;
         return qtc.QGraphicsScene_Items43(@ptrCast(self), @ptrCast(rect), @intCast(mode), @intCast(order), @ptrCast(deviceTransform));
     }
 
-    pub fn Items24(self: ?*anyopaque, polygon: ?*anyopaque, mode: i32) []const u8 {
-        return qtc.QGraphicsScene_Items24(@ptrCast(self), @ptrCast(polygon), @intCast(mode));
-    }
-
-    pub fn Items34(self: ?*anyopaque, polygon: ?*anyopaque, mode: i32, order: i32) []const u8 {
-        return qtc.QGraphicsScene_Items34(@ptrCast(self), @ptrCast(polygon), @intCast(mode), @intCast(order));
-    }
-
-    pub fn Items44(self: ?*anyopaque, polygon: ?*anyopaque, mode: i32, order: i32, deviceTransform: ?*anyopaque) []const u8 {
-        return qtc.QGraphicsScene_Items44(@ptrCast(self), @ptrCast(polygon), @intCast(mode), @intCast(order), @ptrCast(deviceTransform));
-    }
-
     pub fn Items25(self: ?*anyopaque, path: ?*anyopaque, mode: i32) []const u8 {
         return qtc.QGraphicsScene_Items25(@ptrCast(self), @ptrCast(path), @intCast(mode));
     }
@@ -833,14 +813,6 @@ return  _ret;
 
     pub fn AddPath3(self: ?*anyopaque, path: ?*anyopaque, pen: ?*anyopaque, brush: ?*anyopaque) QtC.QGraphicsPathItem {
         return qtc.QGraphicsScene_AddPath3(@ptrCast(self), @ptrCast(path), @ptrCast(pen), @ptrCast(brush));
-    }
-
-    pub fn AddPolygon2(self: ?*anyopaque, polygon: ?*anyopaque, pen: ?*anyopaque) QtC.QGraphicsPolygonItem {
-        return qtc.QGraphicsScene_AddPolygon2(@ptrCast(self), @ptrCast(polygon), @ptrCast(pen));
-    }
-
-    pub fn AddPolygon3(self: ?*anyopaque, polygon: ?*anyopaque, pen: ?*anyopaque, brush: ?*anyopaque) QtC.QGraphicsPolygonItem {
-        return qtc.QGraphicsScene_AddPolygon3(@ptrCast(self), @ptrCast(polygon), @ptrCast(pen), @ptrCast(brush));
     }
 
     pub fn AddRect22(self: ?*anyopaque, rect: ?*anyopaque, pen: ?*anyopaque) QtC.QGraphicsRectItem {

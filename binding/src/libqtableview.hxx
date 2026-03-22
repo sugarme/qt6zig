@@ -469,7 +469,7 @@ public:
 			return QTableView::selectedIndexes();
 		} else if (qtableview_selectedindexes_callback != nullptr) {
 			libqt_list callback_ret = qtableview_selectedindexes_callback();
-			return callback_ret;
+			return QList<QModelIndex>();
 		} else {
 			return QTableView::selectedIndexes();
 		}

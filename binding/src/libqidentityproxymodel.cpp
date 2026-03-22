@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qidentityproxymodel.h>
 #include "libqidentityproxymodel.h"
@@ -77,7 +78,16 @@ QItemSelection* QIdentityProxyModel_MapSelectionToSource(const QIdentityProxyMod
 }
 
 libqt_list QIdentityProxyModel_Match(const QIdentityProxyModel* self, const QModelIndex* start, int role, const QVariant* value, int hits, int flags) {
-	return self->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = self->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QIdentityProxyModel_SetSourceModel(QIdentityProxyModel* self, QAbstractItemModel* sourceModel) {
@@ -330,7 +340,16 @@ libqt_list QIdentityProxyModel_QBaseMatch(const QIdentityProxyModel* self, const
 	auto* vqidentityproxymodel = dynamic_cast<const VirtualQIdentityProxyModel*>(self);
 	if (vqidentityproxymodel && vqidentityproxymodel->isVirtualQIdentityProxyModel) {
 vqidentityproxymodel->setQIdentityProxyModel_Match_IsBase(true);
-	return vqidentityproxymodel->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	auto _ret = vqidentityproxymodel->match(*start, role, *value, hits, static_cast<QFlags<Qt::MatchFlag>>(flags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

@@ -14,6 +14,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleHints>
 #include <QWindow>
 #include <qguiapplication.h>
@@ -74,11 +75,27 @@ libqt_string QGuiApplication_DesktopFileName() {
 }
 
 libqt_list QGuiApplication_AllWindows() {
-	return QGuiApplication::allWindows();
+	auto _ret = QGuiApplication::allWindows();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QGuiApplication_TopLevelWindows() {
-	return QGuiApplication::topLevelWindows();
+	auto _ret = QGuiApplication::topLevelWindows();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QWindow* QGuiApplication_TopLevelAt(const QPoint* pos) {
@@ -121,7 +138,15 @@ QScreen* QGuiApplication_PrimaryScreen() {
 }
 
 libqt_list QGuiApplication_Screens() {
-	return QGuiApplication::screens();
+	auto _ret = QGuiApplication::screens();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QScreen* QGuiApplication_ScreenAt(const QPoint* point) {
@@ -210,10 +235,6 @@ bool QGuiApplication_DesktopSettingsAware() {
 
 QInputMethod* QGuiApplication_InputMethod() {
 	return QGuiApplication::inputMethod();
-}
-
-QPlatformNativeInterface* QGuiApplication_PlatformNativeInterface() {
-	return QGuiApplication::platformNativeInterface();
 }
 
 void QGuiApplication_SetQuitOnLastWindowClosed(bool quit) {
@@ -495,33 +516,6 @@ void QGuiApplication_OnEvent(QGuiApplication* self, intptr_t slot) {
 	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
 	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
 vqguiapplication->setQGuiApplication_Event_Callback(reinterpret_cast<VirtualQGuiApplication::QGuiApplication_Event_Callback>(slot));
-}
-}
-
-// Derived class handler implementation
-bool QGuiApplication_CompressEvent(QGuiApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3) {
-	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-	return vqguiapplication->compressEvent(param1, receiver, param3);
-	} else {
-	return self->QGuiApplication::compressEvent(param1, receiver, param3);
-}
-}
-
-// Base class handler implementation
-bool QGuiApplication_QBaseCompressEvent(QGuiApplication* self, QEvent* param1, QObject* receiver, QPostEventList* param3) {
-	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-vqguiapplication->setQGuiApplication_CompressEvent_IsBase(true);
-	return vqguiapplication->compressEvent(param1, receiver, param3);
-}
-}
-
-// Auxiliary method to allow providing re-implementation
-void QGuiApplication_OnCompressEvent(QGuiApplication* self, intptr_t slot) {
-	auto* vqguiapplication = dynamic_cast<VirtualQGuiApplication*>(self);
-	if (vqguiapplication && vqguiapplication->isVirtualQGuiApplication) {
-vqguiapplication->setQGuiApplication_CompressEvent_Callback(reinterpret_cast<VirtualQGuiApplication::QGuiApplication_CompressEvent_Callback>(slot));
 }
 }
 

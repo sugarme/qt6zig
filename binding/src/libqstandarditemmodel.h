@@ -207,7 +207,6 @@ void QStandardItemModel_SetItemPrototype(QStandardItemModel* self, const QStanda
 libqt_list QStandardItemModel_FindItems(const QStandardItemModel* self, const libqt_string text);
 int QStandardItemModel_SortRole(const QStandardItemModel* self);
 void QStandardItemModel_SetSortRole(QStandardItemModel* self, int role);
-QBindable<int> QStandardItemModel_BindableSortRole(QStandardItemModel* self);
 libqt_list QStandardItemModel_MimeTypes(const QStandardItemModel* self);
 QMimeData* QStandardItemModel_MimeData(const QStandardItemModel* self, const libqt_list indexes);
 bool QStandardItemModel_DropMimeData(QStandardItemModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent);

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qaudiobufferoutput.h>
 #include "libqaudiobufferoutput.h"
 #include "libqaudiobufferoutput.hxx"

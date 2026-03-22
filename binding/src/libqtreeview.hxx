@@ -453,7 +453,9 @@ public:
 		} else if (qtreeview_datachanged_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&topLeft;
 			const QModelIndex* cbval2 = (const QModelIndex*)&bottomRight;
-			libqt_list cbval3 = roles;
+			libqt_list cbval3;
+			cbval3.len = roles.size();
+			cbval3.data = nullptr;
 			qtreeview_datachanged_callback(this, cbval1, cbval2, cbval3);
 		} else {
 			QTreeView::dataChanged(topLeft, bottomRight, roles);
@@ -605,7 +607,7 @@ public:
 			return QTreeView::selectedIndexes();
 		} else if (qtreeview_selectedindexes_callback != nullptr) {
 			libqt_list callback_ret = qtreeview_selectedindexes_callback();
-			return callback_ret;
+			return QList<QModelIndex>();
 		} else {
 			return QTreeView::selectedIndexes();
 		}

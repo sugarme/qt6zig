@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qlockfile.h>
 #include "libqlockfile.h"
 #include "libqlockfile.hxx"

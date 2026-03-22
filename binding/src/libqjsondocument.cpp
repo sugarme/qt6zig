@@ -9,7 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <QVariant>
 #include <qjsondocument.h>
 #include "libqjsondocument.h"
@@ -150,14 +150,6 @@ void QJsonDocument_SetArray(QJsonDocument* self, const QJsonArray* array) {
 
 QJsonValue* QJsonDocument_OperatorSubscript(const QJsonDocument* self, const libqt_string key) {
 	return new QJsonValue(self->operator[](QString::fromUtf8(key.data, key.len)));
-}
-
-QJsonValue* QJsonDocument_OperatorSubscript2(const QJsonDocument* self, QStringView* key) {
-	return new QJsonValue(self->operator[](*key));
-}
-
-QJsonValue* QJsonDocument_OperatorSubscript3(const QJsonDocument* self, QLatin1StringView key) {
-	return new QJsonValue(self->operator[](key));
 }
 
 QJsonValue* QJsonDocument_OperatorSubscript4(const QJsonDocument* self, ptrdiff_t i) {

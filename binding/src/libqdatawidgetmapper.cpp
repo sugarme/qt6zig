@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qdatawidgetmapper.h>
 #include "libqdatawidgetmapper.h"

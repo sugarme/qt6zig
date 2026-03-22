@@ -79,20 +79,12 @@ return  _ret;
         qtc.QVariantAnimation_SetDuration(@ptrCast(self), msecs);
     }
 
-    pub fn BindableDuration(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QVariantAnimation_BindableDuration(@ptrCast(self));
-    }
-
     pub fn EasingCurve(self: ?*anyopaque, ) QtC.QEasingCurve {
         return qtc.QVariantAnimation_EasingCurve(@ptrCast(self));
     }
 
     pub fn SetEasingCurve(self: ?*anyopaque, easing: ?*anyopaque) void {
         qtc.QVariantAnimation_SetEasingCurve(@ptrCast(self), @ptrCast(easing));
-    }
-
-    pub fn BindableEasingCurve(self: ?*anyopaque, ) QBindable<QEasingCurve> {
-        return qtc.QVariantAnimation_BindableEasingCurve(@ptrCast(self));
     }
 
     pub fn ValueChanged(self: ?*anyopaque, value: ?*anyopaque) void {

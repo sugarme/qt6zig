@@ -197,10 +197,6 @@ return  _ret;
         return qtc.QGuiApplication_InputMethod();
     }
 
-    pub fn PlatformNativeInterface() QPlatformNativeInterface {
-        return @ptrCast(qtc.QGuiApplication_PlatformNativeInterface());
-    }
-
     pub fn SetQuitOnLastWindowClosed(quit: bool) void {
         qtc.QGuiApplication_SetQuitOnLastWindowClosed(quit);
     }
@@ -409,20 +405,6 @@ return  _ret;
     /// Base class method implementation
     pub fn QBaseEvent(self: ?*anyopaque, param1: ?*anyopaque) bool {
         return qtc.QGuiApplication_QBaseEvent(@ptrCast(self), @ptrCast(param1));
-    }
-
-    pub fn CompressEvent(self: ?*anyopaque, param1: ?*anyopaque, receiver: ?*anyopaque, param3: *QPostEventList) bool {
-        return qtc.QGuiApplication_CompressEvent(@ptrCast(self), @ptrCast(param1), @ptrCast(receiver), @ptrCast(param3));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnCompressEvent(self: ?*anyopaque, callback: *const fn (?*anyopaque, ?*anyopaque, ?*anyopaque, *QPostEventList) callconv(.c) bool) void {
-        qtc.QGuiApplication_OnCompressEvent(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseCompressEvent(self: ?*anyopaque, param1: ?*anyopaque, receiver: ?*anyopaque, param3: *QPostEventList) bool {
-        return qtc.QGuiApplication_QBaseCompressEvent(@ptrCast(self), @ptrCast(param1), @ptrCast(receiver), @ptrCast(param3));
     }
 
     pub fn Tr2(s: []const u8, c: []const u8, allocator: std.mem.Allocator) []const u8 {

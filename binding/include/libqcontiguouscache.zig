@@ -11,14 +11,6 @@ pub const qcontiguouscachedata = struct {
     }
 
 
-    pub fn Ref(self: ?*anyopaque, ) QBasicAtomicInteger<int> {
-        return qtc.QContiguousCacheData_Ref(@ptrCast(self));
-    }
-
-    pub fn SetRef(self: ?*anyopaque, ref: QBasicAtomicInteger<int>) void {
-        qtc.QContiguousCacheData_SetRef(@ptrCast(self), ref);
-    }
-
     pub fn Alloc(self: ?*anyopaque, ) i64 {
         return qtc.QContiguousCacheData_Alloc(@ptrCast(self));
     }

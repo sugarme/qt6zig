@@ -83,12 +83,6 @@ void QCandlestickModelMapper_QBaseSetLastSetSection(QCandlestickModelMapper* sel
 int QCandlestickModelMapper_LastSetSection(const QCandlestickModelMapper* self);
 void QCandlestickModelMapper_OnLastSetSection(const QCandlestickModelMapper* self, intptr_t slot);
 int QCandlestickModelMapper_QBaseLastSetSection(const QCandlestickModelMapper* self);
-QCandlestickModelMapperPrivate* QCandlestickModelMapper_DFunc(QCandlestickModelMapper* self);
-void QCandlestickModelMapper_OnDFunc(QCandlestickModelMapper* self, intptr_t slot);
-QCandlestickModelMapperPrivate* QCandlestickModelMapper_QBaseDFunc(QCandlestickModelMapper* self);
-const QCandlestickModelMapperPrivate* QCandlestickModelMapper_DFunc2(const QCandlestickModelMapper* self);
-void QCandlestickModelMapper_OnDFunc2(const QCandlestickModelMapper* self, intptr_t slot);
-const QCandlestickModelMapperPrivate* QCandlestickModelMapper_QBaseDFunc2(const QCandlestickModelMapper* self);
 void QCandlestickModelMapper_Delete(QCandlestickModelMapper* self);
 
 #ifdef __cplusplus

@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qmediadevices.h>
 #include "libqmediadevices.h"
 #include "libqmediadevices.hxx"
@@ -30,15 +31,42 @@ libqt_string QMediaDevices_Tr(const char* s) {
 }
 
 libqt_list QMediaDevices_AudioInputs() {
-	return QMediaDevices::audioInputs();
+	auto _ret = QMediaDevices::audioInputs();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QMediaDevices_AudioOutputs() {
-	return QMediaDevices::audioOutputs();
+	auto _ret = QMediaDevices::audioOutputs();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QMediaDevices_VideoInputs() {
-	return QMediaDevices::videoInputs();
+	auto _ret = QMediaDevices::videoInputs();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QAudioDevice* QMediaDevices_DefaultAudioInput() {

@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qbarseries.h>
 #include "libqbarseries.h"
 #include "libqbarseries.hxx"

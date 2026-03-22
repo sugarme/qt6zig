@@ -69,10 +69,6 @@ pub const qopenglfunctions_3_2_core = struct {
         qtc.QOpenGLFunctions_3_2_Core_GlGetFloatv(@ptrCast(self), pname, @ptrCast(params));
     }
 
-    pub fn GlGetError(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLFunctions_3_2_Core_GlGetError(@ptrCast(self));
-    }
-
     pub fn GlGetDoublev(self: ?*anyopaque, pname: u32, params: *f64) void {
         qtc.QOpenGLFunctions_3_2_Core_GlGetDoublev(@ptrCast(self), pname, @ptrCast(params));
     }
@@ -593,14 +589,6 @@ pub const qopenglfunctions_3_2_core = struct {
         qtc.QOpenGLFunctions_3_2_Core_GlGetAttachedShaders(@ptrCast(self), program, maxCount, @ptrCast(count), @ptrCast(obj));
     }
 
-    pub fn GlGetActiveUniform(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlGetActiveUniform(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
-    pub fn GlGetActiveAttrib(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlGetActiveAttrib(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
     pub fn GlEnableVertexAttribArray(self: ?*anyopaque, index: u32) void {
         qtc.QOpenGLFunctions_3_2_Core_GlEnableVertexAttribArray(@ptrCast(self), index);
     }
@@ -651,10 +639,6 @@ pub const qopenglfunctions_3_2_core = struct {
 
     pub fn GlStencilOpSeparate(self: ?*anyopaque, face: u32, sfail: u32, dpfail: u32, dppass: u32) void {
         qtc.QOpenGLFunctions_3_2_Core_GlStencilOpSeparate(@ptrCast(self), face, sfail, dpfail, dppass);
-    }
-
-    pub fn GlDrawBuffers(self: ?*anyopaque, n: i32, bufs: *const GL) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlDrawBuffers(@ptrCast(self), n, @ptrCast(bufs));
     }
 
     pub fn GlBlendEquationSeparate(self: ?*anyopaque, modeRGB: u32, modeAlpha: u32) void {
@@ -743,10 +727,6 @@ pub const qopenglfunctions_3_2_core = struct {
 
     pub fn GlFramebufferTexture1D(self: ?*anyopaque, target: u32, attachment: u32, textarget: u32, texture: u32, level: i32) void {
         qtc.QOpenGLFunctions_3_2_Core_GlFramebufferTexture1D(@ptrCast(self), target, attachment, textarget, texture, level);
-    }
-
-    pub fn GlCheckFramebufferStatus(self: ?*anyopaque, target: u32) GL {
-        return qtc.QOpenGLFunctions_3_2_Core_GlCheckFramebufferStatus(@ptrCast(self), target);
     }
 
     pub fn GlGenFramebuffers(self: ?*anyopaque, n: i32, framebuffers: *u32) void {
@@ -893,10 +873,6 @@ pub const qopenglfunctions_3_2_core = struct {
         qtc.QOpenGLFunctions_3_2_Core_GlClampColor(@ptrCast(self), target, clamp);
     }
 
-    pub fn GlGetTransformFeedbackVarying(self: ?*anyopaque, program: u32, index: u32, bufSize: i32, length: *i32, size: *i32, typeVal: *GL, name: *i8) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlGetTransformFeedbackVarying(@ptrCast(self), program, index, bufSize, @ptrCast(length), @ptrCast(size), @ptrCast(typeVal), @ptrCast(name));
-    }
-
     pub fn GlTransformFeedbackVaryings(self: ?*anyopaque, program: u32, count: i32, varyings: **const i8, bufferMode: u32) void {
         qtc.QOpenGLFunctions_3_2_Core_GlTransformFeedbackVaryings(@ptrCast(self), program, count, @ptrCast(varyings), bufferMode);
     }
@@ -1005,32 +981,8 @@ pub const qopenglfunctions_3_2_core = struct {
         qtc.QOpenGLFunctions_3_2_Core_GlTexImage2DMultisample(@ptrCast(self), target, samples, internalformat, width, height, fixedsamplelocations);
     }
 
-    pub fn GlGetSynciv(self: ?*anyopaque, sync: GLsync, pname: u32, bufSize: i32, length: *i32, values: *i32) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlGetSynciv(@ptrCast(self), sync, pname, bufSize, @ptrCast(length), @ptrCast(values));
-    }
-
     pub fn GlGetInteger64v(self: ?*anyopaque, pname: u32, params: *i64) void {
         qtc.QOpenGLFunctions_3_2_Core_GlGetInteger64v(@ptrCast(self), pname, @ptrCast(params));
-    }
-
-    pub fn GlWaitSync(self: ?*anyopaque, sync: GLsync, flags: u32, timeout: u64) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlWaitSync(@ptrCast(self), sync, flags, timeout);
-    }
-
-    pub fn GlClientWaitSync(self: ?*anyopaque, sync: GLsync, flags: u32, timeout: u64) GL {
-        return qtc.QOpenGLFunctions_3_2_Core_GlClientWaitSync(@ptrCast(self), sync, flags, timeout);
-    }
-
-    pub fn GlDeleteSync(self: ?*anyopaque, sync: GLsync) void {
-        qtc.QOpenGLFunctions_3_2_Core_GlDeleteSync(@ptrCast(self), sync);
-    }
-
-    pub fn GlIsSync(self: ?*anyopaque, sync: GLsync) u8 {
-        return qtc.QOpenGLFunctions_3_2_Core_GlIsSync(@ptrCast(self), sync);
-    }
-
-    pub fn GlFenceSync(self: ?*anyopaque, condition: u32, flags: u32) GLsync {
-        return qtc.QOpenGLFunctions_3_2_Core_GlFenceSync(@ptrCast(self), condition, flags);
     }
 
     pub fn GlProvokingVertex(self: ?*anyopaque, mode: u32) void {

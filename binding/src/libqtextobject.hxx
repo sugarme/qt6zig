@@ -104,7 +104,7 @@ public:
 			return QTextBlockGroup::blockList();
 		} else if (qtextblockgroup_blocklist_callback != nullptr) {
 			libqt_list callback_ret = qtextblockgroup_blocklist_callback();
-			return callback_ret;
+			return QList<QTextBlock>();
 		} else {
 			return QTextBlockGroup::blockList();
 		}

@@ -11,6 +11,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QToolBar>
 #include <QWidget>
 #include <qmainwindow.h>
@@ -205,7 +206,15 @@ void QMainWindow_TabifyDockWidget(QMainWindow* self, QDockWidget* first, QDockWi
 }
 
 libqt_list QMainWindow_TabifiedDockWidgets(const QMainWindow* self, QDockWidget* dockwidget) {
-	return self->tabifiedDockWidgets(dockwidget);
+	auto _ret = self->tabifiedDockWidgets(dockwidget);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QMainWindow_RemoveDockWidget(QMainWindow* self, QDockWidget* dockwidget) {
@@ -221,7 +230,7 @@ int QMainWindow_DockWidgetArea(const QMainWindow* self, QDockWidget* dockwidget)
 }
 
 void QMainWindow_ResizeDocks(QMainWindow* self, const libqt_list docks, const libqt_list sizes, int orientation) {
-	self->resizeDocks(*docks, *sizes, static_cast<Qt::Orientation>(orientation));
+	self->resizeDocks(QList<QDockWidget *>(), QList<int>(), static_cast<Qt::Orientation>(orientation));
 }
 
 libqt_string QMainWindow_SaveState(const QMainWindow* self) {

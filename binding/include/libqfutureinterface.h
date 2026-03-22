@@ -32,8 +32,6 @@ void QFutureInterfaceBase_OperatorAssign(QFutureInterfaceBase* self, const QFutu
 void QFutureInterfaceBase_ReportStarted(QFutureInterfaceBase* self);
 void QFutureInterfaceBase_ReportFinished(QFutureInterfaceBase* self);
 void QFutureInterfaceBase_ReportCanceled(QFutureInterfaceBase* self);
-void QFutureInterfaceBase_ReportException(QFutureInterfaceBase* self, const QException* e);
-void QFutureInterfaceBase_ReportException2(QFutureInterfaceBase* self, std::exception_ptr e);
 void QFutureInterfaceBase_ReportResultsReady(QFutureInterfaceBase* self, int beginIndex, int endIndex);
 void QFutureInterfaceBase_SetRunnable(QFutureInterfaceBase* self, QRunnable* runnable);
 void QFutureInterfaceBase_SetThreadPool(QFutureInterfaceBase* self, QThreadPool* pool);
@@ -77,9 +75,6 @@ void QFutureInterfaceBase_WaitForResume(QFutureInterfaceBase* self);
 void QFutureInterfaceBase_SuspendIfRequested(QFutureInterfaceBase* self);
 QMutex* QFutureInterfaceBase_Mutex(const QFutureInterfaceBase* self);
 bool QFutureInterfaceBase_HasException(const QFutureInterfaceBase* self);
-QtPrivate__ExceptionStore* QFutureInterfaceBase_ExceptionStore(QFutureInterfaceBase* self);
-QtPrivate__ResultStoreBase* QFutureInterfaceBase_ResultStoreBase(QFutureInterfaceBase* self);
-const QtPrivate__ResultStoreBase* QFutureInterfaceBase_ResultStoreBase2(const QFutureInterfaceBase* self);
 bool QFutureInterfaceBase_OperatorEqual(const QFutureInterfaceBase* self, const QFutureInterfaceBase* other);
 bool QFutureInterfaceBase_OperatorNotEqual(const QFutureInterfaceBase* self, const QFutureInterfaceBase* other);
 void QFutureInterfaceBase_Swap(QFutureInterfaceBase* self, QFutureInterfaceBase* other);

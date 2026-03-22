@@ -1008,10 +1008,6 @@ return qtc.QStandardItemModel_FindItems(@ptrCast(self), text_str);
         qtc.QStandardItemModel_SetSortRole(@ptrCast(self), role);
     }
 
-    pub fn BindableSortRole(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QStandardItemModel_BindableSortRole(@ptrCast(self));
-    }
-
     pub fn MimeTypes(self: ?*anyopaque, ) []const u8 {
         return qtc.QStandardItemModel_MimeTypes(@ptrCast(self));
     }

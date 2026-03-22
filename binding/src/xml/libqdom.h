@@ -18,7 +18,6 @@ extern "C" {
 typedef QDomDocument::ParseResult QDomDocument__ParseResult;
 #endif
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QDomAttr QDomAttr;
 typedef struct QDomCDATASection QDomCDATASection;
 typedef struct QDomCharacterData QDomCharacterData;
@@ -193,7 +192,6 @@ bool QDomDocument_SetContent4(QDomDocument* self, const libqt_string text, libqt
 bool QDomDocument_SetContent5(QDomDocument* self, const libqt_string text, libqt_string errorMsg);
 bool QDomDocument_SetContent6(QDomDocument* self, QIODevice* dev, libqt_string errorMsg);
 bool QDomDocument_SetContent7(QDomDocument* self, QXmlStreamReader* reader, bool namespaceProcessing);
-QDomDocument__ParseResult* QDomDocument_SetContent8(QDomDocument* self, libqt_string data);
 QDomDocument__ParseResult* QDomDocument_SetContent9(QDomDocument* self, QIODevice* device);
 QDomDocument__ParseResult* QDomDocument_SetContent10(QDomDocument* self, QXmlStreamReader* reader);
 libqt_string QDomDocument_ToString(const QDomDocument* self);
@@ -216,7 +214,6 @@ bool QDomDocument_SetContent47(QDomDocument* self, QIODevice* dev, libqt_string 
 bool QDomDocument_SetContent38(QDomDocument* self, QXmlStreamReader* reader, bool namespaceProcessing, libqt_string errorMsg);
 bool QDomDocument_SetContent48(QDomDocument* self, QXmlStreamReader* reader, bool namespaceProcessing, libqt_string errorMsg, int* errorLine);
 bool QDomDocument_SetContent55(QDomDocument* self, QXmlStreamReader* reader, bool namespaceProcessing, libqt_string errorMsg, int* errorLine, int* errorColumn);
-QDomDocument__ParseResult* QDomDocument_SetContent22(QDomDocument* self, libqt_string data, int options);
 QDomDocument__ParseResult* QDomDocument_SetContent23(QDomDocument* self, QIODevice* device, int options);
 QDomDocument__ParseResult* QDomDocument_SetContent24(QDomDocument* self, QXmlStreamReader* reader, int options);
 libqt_string QDomDocument_ToString1(const QDomDocument* self, int indent);

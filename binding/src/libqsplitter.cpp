@@ -11,6 +11,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextStream>
 #include <QWidget>
 #include <qsplitter.h>
@@ -101,11 +102,20 @@ QSize* QSplitter_MinimumSizeHint(const QSplitter* self) {
 }
 
 libqt_list QSplitter_Sizes(const QSplitter* self) {
-	return self->sizes();
+	auto _ret = self->sizes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QSplitter_SetSizes(QSplitter* self, const libqt_list list) {
-	self->setSizes(*list);
+	self->setSizes(QList<int>());
 }
 
 libqt_string QSplitter_SaveState(const QSplitter* self) {

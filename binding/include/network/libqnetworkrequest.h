@@ -18,7 +18,6 @@ extern "C" {
 typedef QInputMethodEvent::Attribute QInputMethodEvent__Attribute;
 #endif
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QHttp1Configuration QHttp1Configuration;
 typedef struct QHttp2Configuration QHttp2Configuration;
 typedef struct QHttpHeaders QHttpHeaders;
@@ -47,9 +46,7 @@ QHttpHeaders* QNetworkRequest_Headers(const QNetworkRequest* self);
 void QNetworkRequest_SetHeaders(QNetworkRequest* self, const QHttpHeaders* newHeaders);
 QVariant* QNetworkRequest_Header(const QNetworkRequest* self, int header);
 void QNetworkRequest_SetHeader(QNetworkRequest* self, int header, const QVariant* value);
-bool QNetworkRequest_HasRawHeader(const QNetworkRequest* self, libqt_string headerName);
 libqt_list QNetworkRequest_RawHeaderList(const QNetworkRequest* self);
-libqt_string QNetworkRequest_RawHeader(const QNetworkRequest* self, libqt_string headerName);
 void QNetworkRequest_SetRawHeader(QNetworkRequest* self, const libqt_string headerName, const libqt_string value);
 QVariant* QNetworkRequest_Attribute(const QNetworkRequest* self, QInputMethodEvent__Attribute* code);
 void QNetworkRequest_SetAttribute(QNetworkRequest* self, QInputMethodEvent__Attribute* code, const QVariant* value);

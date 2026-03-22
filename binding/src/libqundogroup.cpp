@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUndoGroup>
 #include <QUndoStack>
 #include <qundogroup.h>
@@ -37,7 +38,15 @@ void QUndoGroup_RemoveStack(QUndoGroup* self, QUndoStack* stack) {
 }
 
 libqt_list QUndoGroup_Stacks(const QUndoGroup* self) {
-	return self->stacks();
+	auto _ret = self->stacks();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QUndoStack* QUndoGroup_ActiveStack(const QUndoGroup* self) {

@@ -43,10 +43,6 @@ return  _ret;
         qtc.QTimeLine_SetLoopCount(@ptrCast(self), count);
     }
 
-    pub fn BindableLoopCount(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QTimeLine_BindableLoopCount(@ptrCast(self));
-    }
-
     pub fn Direction(self: ?*anyopaque, ) i32 {
         return qtc.QTimeLine_Direction(@ptrCast(self));
     }
@@ -55,20 +51,12 @@ return  _ret;
         qtc.QTimeLine_SetDirection(@ptrCast(self), @intCast(direction));
     }
 
-    pub fn BindableDirection(self: ?*anyopaque, ) QBindable<Direction> {
-        return qtc.QTimeLine_BindableDirection(@ptrCast(self));
-    }
-
     pub fn Duration(self: ?*anyopaque, ) i32 {
         return qtc.QTimeLine_Duration(@ptrCast(self));
     }
 
     pub fn SetDuration(self: ?*anyopaque, duration: i32) void {
         qtc.QTimeLine_SetDuration(@ptrCast(self), duration);
-    }
-
-    pub fn BindableDuration(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QTimeLine_BindableDuration(@ptrCast(self));
     }
 
     pub fn StartFrame(self: ?*anyopaque, ) i32 {
@@ -99,10 +87,6 @@ return  _ret;
         qtc.QTimeLine_SetUpdateInterval(@ptrCast(self), interval);
     }
 
-    pub fn BindableUpdateInterval(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QTimeLine_BindableUpdateInterval(@ptrCast(self));
-    }
-
     pub fn EasingCurve(self: ?*anyopaque, ) QtC.QEasingCurve {
         return qtc.QTimeLine_EasingCurve(@ptrCast(self));
     }
@@ -111,16 +95,8 @@ return  _ret;
         qtc.QTimeLine_SetEasingCurve(@ptrCast(self), @ptrCast(curve));
     }
 
-    pub fn BindableEasingCurve(self: ?*anyopaque, ) QBindable<QEasingCurve> {
-        return qtc.QTimeLine_BindableEasingCurve(@ptrCast(self));
-    }
-
     pub fn CurrentTime(self: ?*anyopaque, ) i32 {
         return qtc.QTimeLine_CurrentTime(@ptrCast(self));
-    }
-
-    pub fn BindableCurrentTime(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QTimeLine_BindableCurrentTime(@ptrCast(self));
     }
 
     pub fn CurrentFrame(self: ?*anyopaque, ) i32 {

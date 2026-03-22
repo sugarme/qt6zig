@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsignalmapper.h>
 #include "libqsignalmapper.h"
 #include "libqsignalmapper.hxx"

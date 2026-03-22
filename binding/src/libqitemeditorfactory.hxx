@@ -63,7 +63,7 @@ public:
 	virtual QByteArray valuePropertyName() const override {
 		if (qitemeditorcreatorbase_valuepropertyname_callback != nullptr) {
 			const char* callback_ret = qitemeditorcreatorbase_valuepropertyname_callback();
-			return QByteArray::fromUtf8(callback_ret.data, callback_ret.len);
+			return QByteArray(callback_ret.data, callback_ret.len);
 		} else {
 			return {};
 		}
@@ -131,7 +131,7 @@ public:
 		} else if (qitemeditorfactory_valuepropertyname_callback != nullptr) {
 			int cbval1 = userType;
 			const char* callback_ret = qitemeditorfactory_valuepropertyname_callback(this, cbval1);
-			return QByteArray::fromUtf8(callback_ret.data, callback_ret.len);
+			return QByteArray(callback_ret.data, callback_ret.len);
 		} else {
 			return QItemEditorFactory::valuePropertyName(userType);
 		}

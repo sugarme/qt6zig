@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsqlindex.h>
 #include "libqsqlindex.h"
 #include "libqsqlindex.hxx"

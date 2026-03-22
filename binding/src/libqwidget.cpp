@@ -48,6 +48,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyle>
 #include <QTabletEvent>
 #include <QVariant>
@@ -1213,11 +1214,11 @@ void QWidget_AddAction(QWidget* self, QAction* action) {
 }
 
 void QWidget_AddActions(QWidget* self, const libqt_list actions) {
-	self->addActions(*actions);
+	self->addActions(QList<QAction *>());
 }
 
 void QWidget_InsertActions(QWidget* self, QAction* before, const libqt_list actions) {
-	self->insertActions(before, *actions);
+	self->insertActions(before, QList<QAction *>());
 }
 
 void QWidget_InsertAction(QWidget* self, QAction* before, QAction* action) {
@@ -1229,7 +1230,15 @@ void QWidget_RemoveAction(QWidget* self, QAction* action) {
 }
 
 libqt_list QWidget_Actions(const QWidget* self) {
-	return self->actions();
+	auto _ret = self->actions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QAction* QWidget_AddAction2(QWidget* self, const libqt_string text) {

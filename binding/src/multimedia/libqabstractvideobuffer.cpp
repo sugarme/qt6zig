@@ -9,10 +9,6 @@ QAbstractVideoBuffer* QAbstractVideoBuffer_new() {
 	 return new VirtualQAbstractVideoBuffer();
 }
 
-QAbstractVideoBuffer* QAbstractVideoBuffer_new2(const QAbstractVideoBuffer* param1) {
-	 return new VirtualQAbstractVideoBuffer(*param1);
-}
-
 QAbstractVideoBuffer__MapData* QAbstractVideoBuffer_Map(QAbstractVideoBuffer* self, int mode) {
 	return new QAbstractVideoBuffer::MapData(self->map(static_cast<QVideoFrame::MapMode>(mode)));
 }
@@ -23,10 +19,6 @@ void QAbstractVideoBuffer_Unmap(QAbstractVideoBuffer* self) {
 
 QVideoFrameFormat* QAbstractVideoBuffer_Format(const QAbstractVideoBuffer* self) {
 	return new QVideoFrameFormat(self->format());
-}
-
-void QAbstractVideoBuffer_OperatorAssign(QAbstractVideoBuffer* self, const QAbstractVideoBuffer* param1) {
-	self->operator=(*param1);
 }
 
 // Base class handler implementation

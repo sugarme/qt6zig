@@ -20,6 +20,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionGraphicsItem>
 #include <QVariant>
 #include <QWidget>

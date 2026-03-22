@@ -77,7 +77,7 @@ public:
 			return QMimeData::formats();
 		} else if (qmimedata_formats_callback != nullptr) {
 			libqt_list callback_ret = qmimedata_formats_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QMimeData::formats();
 		}

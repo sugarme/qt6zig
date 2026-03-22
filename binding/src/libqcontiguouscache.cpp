@@ -7,14 +7,6 @@ QContiguousCacheData* QContiguousCacheData_new() {
 	 return new QContiguousCacheData();
 }
 
-QBasicAtomicInteger<int> QContiguousCacheData_Ref(const QContiguousCacheData* self) {
-	return self->ref;
-}
-
-void QContiguousCacheData_SetRef(QContiguousCacheData* self, QBasicAtomicInteger<int> ref) {
-	self->ref;
-}
-
 ptrdiff_t QContiguousCacheData_Alloc(const QContiguousCacheData* self) {
 	return self->alloc;
 }

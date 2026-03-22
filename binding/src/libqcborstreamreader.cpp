@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qcborstreamreader.h>
 #include "libqcborstreamreader.h"
 #include "libqcborstreamreader.hxx"
@@ -201,24 +202,8 @@ bool QCborStreamReader_ReadAndAppendToByteArray(QCborStreamReader* self, libqt_s
 	return self->readAndAppendToByteArray(QByteArray(dst.data, dst.len));
 }
 
-StringResult<QString> QCborStreamReader_ReadString(QCborStreamReader* self) {
-	return self->readString();
-}
-
-StringResult<QByteArray> QCborStreamReader_ReadUtf8String(QCborStreamReader* self) {
-	return self->readUtf8String();
-}
-
-StringResult<QByteArray> QCborStreamReader_ReadByteArray(QCborStreamReader* self) {
-	return self->readByteArray();
-}
-
 ptrdiff_t QCborStreamReader_CurrentStringChunkSize(const QCborStreamReader* self) {
 	return self->currentStringChunkSize();
-}
-
-StringResult<qsizetype> QCborStreamReader_ReadStringChunk(QCborStreamReader* self, char* ptr, ptrdiff_t maxlen) {
-	return self->readStringChunk(ptr, maxlen);
 }
 
 bool QCborStreamReader_ToBool(const QCborStreamReader* self) {
@@ -239,10 +224,6 @@ quint64 QCborStreamReader_ToNegativeInteger(const QCborStreamReader* self) {
 
 quint8 QCborStreamReader_ToSimpleType(const QCborStreamReader* self) {
 	return self->toSimpleType();
-}
-
-qfloat16* QCborStreamReader_ToFloat16(const QCborStreamReader* self) {
-	return new qfloat16(self->toFloat16());
 }
 
 float QCborStreamReader_ToFloat(const QCborStreamReader* self) {

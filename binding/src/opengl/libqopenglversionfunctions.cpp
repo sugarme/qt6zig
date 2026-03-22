@@ -1,4 +1,3 @@
-#include <QAtomicInt>
 #include <QOpenGLContext>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QOpenGLFunctions_1_0_CoreBackend__Functions
 #define WORKAROUND_INNER_CLASS_DEFINITION_QOpenGLFunctions_1_0_DeprecatedBackend__Functions
@@ -91,14 +90,6 @@ void QOpenGLVersionFunctionsBackend_SetContext(QOpenGLVersionFunctionsBackend* s
 	self->context;
 }
 
-QAtomicInt* QOpenGLVersionFunctionsBackend_Refs(const QOpenGLVersionFunctionsBackend* self) {
-	return new QAtomicInt(self->refs);
-}
-
-void QOpenGLVersionFunctionsBackend_SetRefs(QOpenGLVersionFunctionsBackend* self, QAtomicInt* refs) {
-	self->refs;
-}
-
 void QOpenGLVersionFunctionsBackend_Delete(QOpenGLVersionFunctionsBackend* self) {
     delete self;
 }
@@ -115,10 +106,6 @@ void QOpenGLVersionFunctionsStorage_CopyAssign(QOpenGLVersionFunctionsStorage* s
     *self = *other;
 }
 
-QOpenGLVersionFunctionsBackend* QOpenGLVersionFunctionsStorage_Backend(QOpenGLVersionFunctionsStorage* self, QOpenGLContext* context, int v) {
-	return self->backend(context, static_cast<QOpenGLVersionFunctionsBackend::Version>(v));
-}
-
 QOpenGLVersionFunctionsBackend** QOpenGLVersionFunctionsStorage_Backends(const QOpenGLVersionFunctionsStorage* self) {
 	return self->backends;
 }
@@ -133,14 +120,6 @@ void QOpenGLVersionFunctionsStorage_Delete(QOpenGLVersionFunctionsStorage* self)
 
 bool QAbstractOpenGLFunctions_InitializeOpenGLFunctions(QAbstractOpenGLFunctions* self) {
 	return self->initializeOpenGLFunctions();
-}
-
-QAbstractOpenGLFunctionsPrivate* QAbstractOpenGLFunctions_DFunc(QAbstractOpenGLFunctions* self) {
-	return self->d_func();
-}
-
-const QAbstractOpenGLFunctionsPrivate* QAbstractOpenGLFunctions_DFunc2(const QAbstractOpenGLFunctions* self) {
-	return self->d_func();
 }
 
 // Base class handler implementation

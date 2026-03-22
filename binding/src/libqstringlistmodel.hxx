@@ -263,7 +263,7 @@ public:
 		} else if (qstringlistmodel_itemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
 			libqt_map callback_ret = qstringlistmodel_itemdata_callback(this, cbval1);
-			return callback_ret;
+			return QMap<int, QVariant>();
 		} else {
 			return QStringListModel::itemData(index);
 		}
@@ -276,7 +276,10 @@ public:
 			return QStringListModel::setItemData(index, roles);
 		} else if (qstringlistmodel_setitemdata_callback != nullptr) {
 			const QModelIndex* cbval1 = (const QModelIndex*)&index;
-			libqt_map cbval2 = roles;
+			libqt_map cbval2;
+			cbval2.len = roles.size();
+			cbval2.keys = nullptr;
+			cbval2.values = nullptr;
 			bool callback_ret = qstringlistmodel_setitemdata_callback(this, cbval1, cbval2);
 			return callback_ret;
 		} else {

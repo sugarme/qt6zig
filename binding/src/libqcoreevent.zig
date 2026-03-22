@@ -98,18 +98,8 @@ pub const qtimerevent = struct {
     }
 
 
-    /// New2 constructs a new QTimerEvent object.
-    pub fn New2(timerId: i32) QtC.QTimerEvent {
-        return qtc.QTimerEvent_new2(@intCast(timerId));
-    }
-
-
     pub fn TimerId(self: ?*anyopaque, ) i32 {
         return qtc.QTimerEvent_TimerId(@ptrCast(self));
-    }
-
-    pub fn Id(self: ?*anyopaque, ) i32 {
-        return qtc.QTimerEvent_Id(@ptrCast(self));
     }
 
     /// Delete this object from C++ memory.

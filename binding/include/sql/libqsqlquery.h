@@ -15,7 +15,6 @@ extern "C" {
 
 #ifdef __cplusplus
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QSqlDatabase QSqlDatabase;
 typedef struct QSqlDriver QSqlDriver;
 typedef struct QSqlError QSqlError;
@@ -40,7 +39,6 @@ void QSqlQuery_Swap(QSqlQuery* self, QSqlQuery* other);
 bool QSqlQuery_IsValid(const QSqlQuery* self);
 bool QSqlQuery_IsActive(const QSqlQuery* self);
 bool QSqlQuery_IsNull(const QSqlQuery* self, int field);
-bool QSqlQuery_IsNull2(const QSqlQuery* self, libqt_string name);
 int QSqlQuery_At(const QSqlQuery* self);
 libqt_string QSqlQuery_LastQuery(const QSqlQuery* self);
 int QSqlQuery_NumRowsAffected(const QSqlQuery* self);
@@ -54,7 +52,6 @@ QSqlRecord* QSqlQuery_Record(const QSqlQuery* self);
 void QSqlQuery_SetForwardOnly(QSqlQuery* self, bool forward);
 bool QSqlQuery_Exec(QSqlQuery* self, const libqt_string query);
 QVariant* QSqlQuery_Value(const QSqlQuery* self, int i);
-QVariant* QSqlQuery_Value2(const QSqlQuery* self, libqt_string name);
 void QSqlQuery_SetNumericalPrecisionPolicy(QSqlQuery* self, int precisionPolicy);
 int QSqlQuery_NumericalPrecisionPolicy(const QSqlQuery* self);
 void QSqlQuery_SetPositionalBindingEnabled(QSqlQuery* self, bool enable);

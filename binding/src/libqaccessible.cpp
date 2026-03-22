@@ -28,6 +28,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QWindow>
 #include <qaccessible.h>
@@ -55,7 +56,15 @@ QWindow* QAccessibleInterface_Window(const QAccessibleInterface* self) {
 }
 
 libqt_list QAccessibleInterface_Relations(const QAccessibleInterface* self, int match) {
-	return self->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	auto _ret = self->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QAccessibleInterface* QAccessibleInterface_FocusChild(const QAccessibleInterface* self) {
@@ -221,7 +230,15 @@ libqt_list QAccessibleInterface_QBaseRelations(const QAccessibleInterface* self,
 	auto* vqaccessibleinterface = dynamic_cast<const VirtualQAccessibleInterface*>(self);
 	if (vqaccessibleinterface && vqaccessibleinterface->isVirtualQAccessibleInterface) {
 vqaccessibleinterface->setQAccessibleInterface_Relations_IsBase(true);
-	return vqaccessibleinterface->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	auto _ret = vqaccessibleinterface->relations(static_cast<QFlags<QAccessible::RelationFlag>>(match));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -1157,11 +1174,27 @@ bool QAccessibleTableCellInterface_IsSelected(const QAccessibleTableCellInterfac
 }
 
 libqt_list QAccessibleTableCellInterface_ColumnHeaderCells(const QAccessibleTableCellInterface* self) {
-	return self->columnHeaderCells();
+	auto _ret = self->columnHeaderCells();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_list QAccessibleTableCellInterface_RowHeaderCells(const QAccessibleTableCellInterface* self) {
-	return self->rowHeaderCells();
+	auto _ret = self->rowHeaderCells();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 int QAccessibleTableCellInterface_ColumnIndex(const QAccessibleTableCellInterface* self) {
@@ -1210,7 +1243,15 @@ libqt_list QAccessibleTableCellInterface_QBaseColumnHeaderCells(const QAccessibl
 	auto* vqaccessibletablecellinterface = dynamic_cast<const VirtualQAccessibleTableCellInterface*>(self);
 	if (vqaccessibletablecellinterface && vqaccessibletablecellinterface->isVirtualQAccessibleTableCellInterface) {
 vqaccessibletablecellinterface->setQAccessibleTableCellInterface_ColumnHeaderCells_IsBase(true);
-	return vqaccessibletablecellinterface->columnHeaderCells();
+	auto _ret = vqaccessibletablecellinterface->columnHeaderCells();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -1227,7 +1268,15 @@ libqt_list QAccessibleTableCellInterface_QBaseRowHeaderCells(const QAccessibleTa
 	auto* vqaccessibletablecellinterface = dynamic_cast<const VirtualQAccessibleTableCellInterface*>(self);
 	if (vqaccessibletablecellinterface && vqaccessibletablecellinterface->isVirtualQAccessibleTableCellInterface) {
 vqaccessibletablecellinterface->setQAccessibleTableCellInterface_RowHeaderCells_IsBase(true);
-	return vqaccessibletablecellinterface->rowHeaderCells();
+	auto _ret = vqaccessibletablecellinterface->rowHeaderCells();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -1353,7 +1402,15 @@ int QAccessibleTableInterface_SelectedCellCount(const QAccessibleTableInterface*
 }
 
 libqt_list QAccessibleTableInterface_SelectedCells(const QAccessibleTableInterface* self) {
-	return self->selectedCells();
+	auto _ret = self->selectedCells();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 libqt_string QAccessibleTableInterface_ColumnDescription(const QAccessibleTableInterface* self, int column) {
@@ -1395,11 +1452,29 @@ int QAccessibleTableInterface_RowCount(const QAccessibleTableInterface* self) {
 }
 
 libqt_list QAccessibleTableInterface_SelectedColumns(const QAccessibleTableInterface* self) {
-	return self->selectedColumns();
+	auto _ret = self->selectedColumns();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QAccessibleTableInterface_SelectedRows(const QAccessibleTableInterface* self) {
-	return self->selectedRows();
+	auto _ret = self->selectedRows();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QAccessibleTableInterface_IsColumnSelected(const QAccessibleTableInterface* self, int column) {
@@ -1503,7 +1578,15 @@ libqt_list QAccessibleTableInterface_QBaseSelectedCells(const QAccessibleTableIn
 	auto* vqaccessibletableinterface = dynamic_cast<const VirtualQAccessibleTableInterface*>(self);
 	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
 vqaccessibletableinterface->setQAccessibleTableInterface_SelectedCells_IsBase(true);
-	return vqaccessibletableinterface->selectedCells();
+	auto _ret = vqaccessibletableinterface->selectedCells();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -1636,7 +1719,16 @@ libqt_list QAccessibleTableInterface_QBaseSelectedColumns(const QAccessibleTable
 	auto* vqaccessibletableinterface = dynamic_cast<const VirtualQAccessibleTableInterface*>(self);
 	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
 vqaccessibletableinterface->setQAccessibleTableInterface_SelectedColumns_IsBase(true);
-	return vqaccessibletableinterface->selectedColumns();
+	auto _ret = vqaccessibletableinterface->selectedColumns();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1653,7 +1745,16 @@ libqt_list QAccessibleTableInterface_QBaseSelectedRows(const QAccessibleTableInt
 	auto* vqaccessibletableinterface = dynamic_cast<const VirtualQAccessibleTableInterface*>(self);
 	if (vqaccessibletableinterface && vqaccessibletableinterface->isVirtualQAccessibleTableInterface) {
 vqaccessibletableinterface->setQAccessibleTableInterface_SelectedRows_IsBase(true);
-	return vqaccessibletableinterface->selectedRows();
+	auto _ret = vqaccessibletableinterface->selectedRows();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 
@@ -1835,7 +1936,21 @@ libqt_string QAccessibleActionInterface_Tr(const char* sourceText) {
 }
 
 libqt_list QAccessibleActionInterface_ActionNames(const QAccessibleActionInterface* self) {
-	return self->actionNames();
+	auto _ret = self->actionNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QAccessibleActionInterface_LocalizedActionName(const QAccessibleActionInterface* self, const libqt_string name) {
@@ -1865,7 +1980,21 @@ void QAccessibleActionInterface_DoAction(QAccessibleActionInterface* self, const
 }
 
 libqt_list QAccessibleActionInterface_KeyBindingsForAction(const QAccessibleActionInterface* self, const libqt_string actionName) {
-	return self->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	auto _ret = self->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QAccessibleActionInterface_PressAction() {
@@ -2031,7 +2160,21 @@ libqt_list QAccessibleActionInterface_QBaseActionNames(const QAccessibleActionIn
 	auto* vqaccessibleactioninterface = dynamic_cast<const VirtualQAccessibleActionInterface*>(self);
 	if (vqaccessibleactioninterface && vqaccessibleactioninterface->isVirtualQAccessibleActionInterface) {
 vqaccessibleactioninterface->setQAccessibleActionInterface_ActionNames_IsBase(true);
-	return vqaccessibleactioninterface->actionNames();
+	auto _ret = vqaccessibleactioninterface->actionNames();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -2113,7 +2256,21 @@ libqt_list QAccessibleActionInterface_QBaseKeyBindingsForAction(const QAccessibl
 	auto* vqaccessibleactioninterface = dynamic_cast<const VirtualQAccessibleActionInterface*>(self);
 	if (vqaccessibleactioninterface && vqaccessibleactioninterface->isVirtualQAccessibleActionInterface) {
 vqaccessibleactioninterface->setQAccessibleActionInterface_KeyBindingsForAction_IsBase(true);
-	return vqaccessibleactioninterface->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	auto _ret = vqaccessibleactioninterface->keyBindingsForAction(QString::fromUtf8(actionName.data, actionName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -2384,7 +2541,15 @@ int QAccessibleSelectionInterface_SelectedItemCount(const QAccessibleSelectionIn
 }
 
 libqt_list QAccessibleSelectionInterface_SelectedItems(const QAccessibleSelectionInterface* self) {
-	return self->selectedItems();
+	auto _ret = self->selectedItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QAccessibleInterface* QAccessibleSelectionInterface_SelectedItem(const QAccessibleSelectionInterface* self, int selectionIndex) {
@@ -2437,7 +2602,15 @@ libqt_list QAccessibleSelectionInterface_QBaseSelectedItems(const QAccessibleSel
 	auto* vqaccessibleselectioninterface = dynamic_cast<const VirtualQAccessibleSelectionInterface*>(self);
 	if (vqaccessibleselectioninterface && vqaccessibleselectioninterface->isVirtualQAccessibleSelectionInterface) {
 vqaccessibleselectioninterface->setQAccessibleSelectionInterface_SelectedItems_IsBase(true);
-	return vqaccessibleselectioninterface->selectedItems();
+	auto _ret = vqaccessibleselectioninterface->selectedItems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 }
 
@@ -2564,7 +2737,16 @@ QAccessibleAttributesInterface* QAccessibleAttributesInterface_new2(const QAcces
 }
 
 libqt_list QAccessibleAttributesInterface_AttributeKeys(const QAccessibleAttributesInterface* self) {
-	return self->attributeKeys();
+	auto _ret = self->attributeKeys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QVariant* QAccessibleAttributesInterface_AttributeValue(const QAccessibleAttributesInterface* self, int key) {
@@ -2580,7 +2762,16 @@ libqt_list QAccessibleAttributesInterface_QBaseAttributeKeys(const QAccessibleAt
 	auto* vqaccessibleattributesinterface = dynamic_cast<const VirtualQAccessibleAttributesInterface*>(self);
 	if (vqaccessibleattributesinterface && vqaccessibleattributesinterface->isVirtualQAccessibleAttributesInterface) {
 vqaccessibleattributesinterface->setQAccessibleAttributesInterface_AttributeKeys_IsBase(true);
-	return vqaccessibleattributesinterface->attributeKeys();
+	auto _ret = vqaccessibleattributesinterface->attributeKeys();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 }
 

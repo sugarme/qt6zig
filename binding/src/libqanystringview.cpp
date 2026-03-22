@@ -4,41 +4,21 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <qanystringview.h>
 #include "libqanystringview.h"
 #include "libqanystringview.hxx"
 
-QAnyStringView* QAnyStringView_new(const libqt_string other) {
-	 return new QAnyStringView(QAnyStringView(QString::fromUtf8(other.data, other.len)));
-}
-
-QAnyStringView* QAnyStringView_new2(libqt_string other) {
-	 return new QAnyStringView(QAnyStringView(QString::fromUtf8(other.data, other.len)));
-}
-
-QAnyStringView* QAnyStringView_new3() {
+QAnyStringView* QAnyStringView_new() {
 	 return new QAnyStringView();
 }
 
-QAnyStringView* QAnyStringView_new4(const libqt_string str) {
+QAnyStringView* QAnyStringView_new2(const libqt_string str) {
 	 return new QAnyStringView(QByteArray(str.data, str.len));
 }
 
-QAnyStringView* QAnyStringView_new5(const libqt_string str) {
+QAnyStringView* QAnyStringView_new3(const libqt_string str) {
 	 return new QAnyStringView(QString::fromUtf8(str.data, str.len));
-}
-
-QAnyStringView* QAnyStringView_new6(QLatin1StringView str) {
-	 return new QAnyStringView(str);
-}
-
-QAnyStringView* QAnyStringView_new7(QStringView* v) {
-	 return new QAnyStringView(*v);
-}
-
-QAnyStringView* QAnyStringView_new8(const libqt_string param1) {
-	 return new QAnyStringView(QAnyStringView(QString::fromUtf8(param1.data, param1.len)));
 }
 
 void QAnyStringView_CopyAssign(QAnyStringView* self, QAnyStringView* other) {
@@ -47,46 +27,6 @@ void QAnyStringView_CopyAssign(QAnyStringView* self, QAnyStringView* other) {
 
 void QAnyStringView_MoveAssign(QAnyStringView* self, QAnyStringView* other) {
     *self = std::move(*other);
-}
-
-libqt_string QAnyStringView_Mid(const QAnyStringView* self, ptrdiff_t pos) {
-	return new QAnyStringView(self->mid(pos));
-}
-
-libqt_string QAnyStringView_Left(const QAnyStringView* self, ptrdiff_t n) {
-	return new QAnyStringView(self->left(n));
-}
-
-libqt_string QAnyStringView_Right(const QAnyStringView* self, ptrdiff_t n) {
-	return new QAnyStringView(self->right(n));
-}
-
-libqt_string QAnyStringView_Sliced(const QAnyStringView* self, ptrdiff_t pos) {
-	return new QAnyStringView(self->sliced(pos));
-}
-
-libqt_string QAnyStringView_Sliced2(const QAnyStringView* self, ptrdiff_t pos, ptrdiff_t n) {
-	return new QAnyStringView(self->sliced(pos, n));
-}
-
-libqt_string QAnyStringView_First(const QAnyStringView* self, ptrdiff_t n) {
-	return new QAnyStringView(self->first(n));
-}
-
-libqt_string QAnyStringView_Last(const QAnyStringView* self, ptrdiff_t n) {
-	return new QAnyStringView(self->last(n));
-}
-
-libqt_string QAnyStringView_Chopped(const QAnyStringView* self, ptrdiff_t n) {
-	return new QAnyStringView(self->chopped(n));
-}
-
-libqt_string QAnyStringView_Slice(QAnyStringView* self, ptrdiff_t pos) {
-	return new QAnyStringView(self->slice(pos));
-}
-
-libqt_string QAnyStringView_Slice2(QAnyStringView* self, ptrdiff_t pos, ptrdiff_t n) {
-	return new QAnyStringView(self->slice(pos, n));
 }
 
 void QAnyStringView_Truncate(QAnyStringView* self, ptrdiff_t n) {
@@ -114,14 +54,6 @@ ptrdiff_t QAnyStringView_Size(const QAnyStringView* self) {
 
 const void* QAnyStringView_Data(const QAnyStringView* self) {
 	return self->data();
-}
-
-int QAnyStringView_Compare(libqt_string lhs, libqt_string rhs) {
-	return QAnyStringView::compare(QAnyStringView(QString::fromUtf8(lhs.data, lhs.len)), QAnyStringView(QString::fromUtf8(rhs.data, rhs.len)));
-}
-
-bool QAnyStringView_Equal(libqt_string lhs, libqt_string rhs) {
-	return QAnyStringView::equal(QAnyStringView(QString::fromUtf8(lhs.data, lhs.len)), QAnyStringView(QString::fromUtf8(rhs.data, rhs.len)));
 }
 
 QChar* QAnyStringView_Front(const QAnyStringView* self) {
@@ -154,14 +86,6 @@ bool QAnyStringView_IsEmpty(const QAnyStringView* self) {
 
 ptrdiff_t QAnyStringView_Length(const QAnyStringView* self) {
 	return self->length();
-}
-
-libqt_string QAnyStringView_Mid2(const QAnyStringView* self, ptrdiff_t pos, ptrdiff_t n) {
-	return new QAnyStringView(self->mid(pos, n));
-}
-
-int QAnyStringView_Compare3(libqt_string lhs, libqt_string rhs, int cs) {
-	return QAnyStringView::compare(QAnyStringView(QString::fromUtf8(lhs.data, lhs.len)), QAnyStringView(QString::fromUtf8(rhs.data, rhs.len)), static_cast<Qt::CaseSensitivity>(cs));
 }
 
 void QAnyStringView_Delete(QAnyStringView* self) {

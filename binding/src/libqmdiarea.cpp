@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimerEvent>
 #include <QWidget>
 #include <qmdiarea.h>
@@ -54,7 +55,15 @@ QMdiSubWindow* QMdiArea_ActiveSubWindow(const QMdiArea* self) {
 }
 
 libqt_list QMdiArea_SubWindowList(const QMdiArea* self) {
-	return self->subWindowList();
+	auto _ret = self->subWindowList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QMdiSubWindow* QMdiArea_AddSubWindow(QMdiArea* self, QWidget* widget) {
@@ -199,7 +208,15 @@ libqt_string QMdiArea_Tr3(const char* s, const char* c, int n) {
 }
 
 libqt_list QMdiArea_SubWindowList1(const QMdiArea* self, int order) {
-	return self->subWindowList(static_cast<QMdiArea::WindowOrder>(order));
+	auto _ret = self->subWindowList(static_cast<QMdiArea::WindowOrder>(order));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QMdiSubWindow* QMdiArea_AddSubWindow2(QMdiArea* self, QWidget* widget, int flags) {

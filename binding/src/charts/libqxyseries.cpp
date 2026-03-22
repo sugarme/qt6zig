@@ -9,6 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QXYSeries>
 #include <qxyseries.h>
@@ -35,7 +36,7 @@ void QXYSeries_Append2(QXYSeries* self, const QPointF* point) {
 }
 
 void QXYSeries_Append3(QXYSeries* self, const libqt_list points) {
-	self->append(*points);
+	self->append(QList<QPointF>());
 }
 
 void QXYSeries_Replace(QXYSeries* self, double oldX, double oldY, double newX, double newY) {
@@ -83,11 +84,29 @@ int QXYSeries_Count(const QXYSeries* self) {
 }
 
 libqt_list QXYSeries_Points(const QXYSeries* self) {
-	return self->points();
+	auto _ret = self->points();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QXYSeries_PointsVector(const QXYSeries* self) {
-	return self->pointsVector();
+	auto _ret = self->pointsVector();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 const QPointF* QXYSeries_At(const QXYSeries* self, int index) {
@@ -101,7 +120,7 @@ QXYSeries* QXYSeries_OperatorShiftLeft(QXYSeries* self, const QPointF* point) {
 }
 
 QXYSeries* QXYSeries_OperatorShiftLeft2(QXYSeries* self, const libqt_list points) {
-	return new QXYSeries(self->operator<<(*points));
+	return new QXYSeries(self->operator<<(QList<QPointF>()));
 }
 
 void QXYSeries_SetPen(QXYSeries* self, const QPen* pen) {
@@ -192,7 +211,7 @@ bool QXYSeries_PointLabelsClipping(const QXYSeries* self) {
 }
 
 void QXYSeries_Replace5(QXYSeries* self, const libqt_list points) {
-	self->replace(*points);
+	self->replace(QList<QPointF>());
 }
 
 bool QXYSeries_IsPointSelected(QXYSeries* self, int index) {
@@ -220,19 +239,28 @@ void QXYSeries_DeselectAllPoints(QXYSeries* self) {
 }
 
 void QXYSeries_SelectPoints(QXYSeries* self, const libqt_list indexes) {
-	self->selectPoints(*indexes);
+	self->selectPoints(QList<int>());
 }
 
 void QXYSeries_DeselectPoints(QXYSeries* self, const libqt_list indexes) {
-	self->deselectPoints(*indexes);
+	self->deselectPoints(QList<int>());
 }
 
 void QXYSeries_ToggleSelection(QXYSeries* self, const libqt_list indexes) {
-	self->toggleSelection(*indexes);
+	self->toggleSelection(QList<int>());
 }
 
 libqt_list QXYSeries_SelectedPoints(const QXYSeries* self) {
-	return self->selectedPoints();
+	auto _ret = self->selectedPoints();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QXYSeries_SetLightMarker(QXYSeries* self, const QImage* lightMarker) {
@@ -308,7 +336,7 @@ void QXYSeries_ClearPointsConfiguration2(QXYSeries* self, const int key) {
 }
 
 void QXYSeries_SetPointConfiguration(QXYSeries* self, const int index, const libqt_map configuration) {
-	self->setPointConfiguration(index, *configuration);
+	self->setPointConfiguration(index, QHash<PointConfiguration, QVariant>());
 }
 
 void QXYSeries_SetPointConfiguration2(QXYSeries* self, const int index, const int key, const QVariant* value) {
@@ -316,23 +344,33 @@ void QXYSeries_SetPointConfiguration2(QXYSeries* self, const int index, const in
 }
 
 void QXYSeries_SetPointsConfiguration(QXYSeries* self, const libqt_map pointsConfiguration) {
-	self->setPointsConfiguration(*pointsConfiguration);
+	self->setPointsConfiguration(QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>());
 }
 
 libqt_map QXYSeries_PointConfiguration(const QXYSeries* self, const int index) {
-	return self->pointConfiguration(index);
+	auto _ret = self->pointConfiguration(index);
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 libqt_map QXYSeries_PointsConfiguration(const QXYSeries* self) {
-	return self->pointsConfiguration();
+	auto _ret = self->pointsConfiguration();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 void QXYSeries_SizeBy(QXYSeries* self, const libqt_list sourceData, const double minSize, const double maxSize) {
-	self->sizeBy(*sourceData, minSize, maxSize);
+	self->sizeBy(QList<double>(), minSize, maxSize);
 }
 
 void QXYSeries_ColorBy(QXYSeries* self, const libqt_list sourceData) {
-	self->colorBy(*sourceData);
+	self->colorBy(QList<double>());
 }
 
 void QXYSeries_Clicked(QXYSeries* self, const QPointF* point) {
@@ -600,7 +638,7 @@ void QXYSeries_Connect_BestFitLineColorChanged(QXYSeries* self, intptr_t slot) {
 }
 
 void QXYSeries_PointsConfigurationChanged(QXYSeries* self, const libqt_map configuration) {
-	self->pointsConfigurationChanged(*configuration);
+	self->pointsConfigurationChanged(QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>());
 }
 
 void QXYSeries_Connect_PointsConfigurationChanged(QXYSeries* self, intptr_t slot) {
@@ -660,7 +698,7 @@ void QXYSeries_SetBestFitLineVisible1(QXYSeries* self, bool visible) {
 }
 
 void QXYSeries_ColorBy2(QXYSeries* self, const libqt_list sourceData, const QLinearGradient* gradient) {
-	self->colorBy(*sourceData, *gradient);
+	self->colorBy(QList<double>(), *gradient);
 }
 
 // Base class handler implementation

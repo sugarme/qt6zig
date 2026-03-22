@@ -83,8 +83,6 @@ void QMenu_SetTitle(QMenu* self, const libqt_string title);
 QIcon* QMenu_Icon(const QMenu* self);
 void QMenu_SetIcon(QMenu* self, const QIcon* icon);
 void QMenu_SetNoReplayFor(QMenu* self, QWidget* widget);
-QPlatformMenu* QMenu_PlatformMenu(QMenu* self);
-void QMenu_SetPlatformMenu(QMenu* self, QPlatformMenu* platformMenu);
 bool QMenu_SeparatorsCollapsible(const QMenu* self);
 void QMenu_SetSeparatorsCollapsible(QMenu* self, bool collapse);
 bool QMenu_ToolTipsVisible(const QMenu* self);

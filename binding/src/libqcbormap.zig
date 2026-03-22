@@ -49,10 +49,6 @@ pub const qcbormap = struct {
         return qtc.QCborMap_Value(@ptrCast(self), key);
     }
 
-    pub fn Value2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborMap_Value2(@ptrCast(self), key);
-    }
-
     pub fn Value3(self: ?*anyopaque, key: []const u8) QtC.QCborValue {
         const key_str = qtc.libqt_string{
     .len = key.len,
@@ -67,10 +63,6 @@ return qtc.QCborMap_Value3(@ptrCast(self), key_str);
 
     pub fn OperatorSubscript(self: ?*anyopaque, key: i64) QtC.QCborValue {
         return qtc.QCborMap_OperatorSubscript(@ptrCast(self), key);
-    }
-
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborMap_OperatorSubscript2(@ptrCast(self), key);
     }
 
     pub fn OperatorSubscript3(self: ?*anyopaque, key: []const u8) QtC.QCborValue {
@@ -89,10 +81,6 @@ return qtc.QCborMap_OperatorSubscript3(@ptrCast(self), key_str);
         return qtc.QCborMap_OperatorSubscript5(@ptrCast(self), key);
     }
 
-    pub fn OperatorSubscript6(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValueRef {
-        return qtc.QCborMap_OperatorSubscript6(@ptrCast(self), key);
-    }
-
     pub fn OperatorSubscript7(self: ?*anyopaque, key: []const u8) QtC.QCborValueRef {
         const key_str = qtc.libqt_string{
     .len = key.len,
@@ -107,10 +95,6 @@ return qtc.QCborMap_OperatorSubscript7(@ptrCast(self), key_str);
 
     pub fn Take(self: ?*anyopaque, key: i64) QtC.QCborValue {
         return qtc.QCborMap_Take(@ptrCast(self), key);
-    }
-
-    pub fn Take2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborValue {
-        return qtc.QCborMap_Take2(@ptrCast(self), key);
     }
 
     pub fn Take3(self: ?*anyopaque, key: []const u8) QtC.QCborValue {
@@ -129,10 +113,6 @@ return qtc.QCborMap_Take3(@ptrCast(self), key_str);
         qtc.QCborMap_Remove(@ptrCast(self), key);
     }
 
-    pub fn Remove2(self: ?*anyopaque, key: QLatin1StringView) void {
-        qtc.QCborMap_Remove2(@ptrCast(self), key);
-    }
-
     pub fn Remove3(self: ?*anyopaque, key: []const u8) void {
         const key_str = qtc.libqt_string{
     .len = key.len,
@@ -147,10 +127,6 @@ qtc.QCborMap_Remove3(@ptrCast(self), key_str);
 
     pub fn Contains(self: ?*anyopaque, key: i64) bool {
         return qtc.QCborMap_Contains(@ptrCast(self), key);
-    }
-
-    pub fn Contains2(self: ?*anyopaque, key: QLatin1StringView) bool {
-        return qtc.QCborMap_Contains2(@ptrCast(self), key);
     }
 
     pub fn Contains3(self: ?*anyopaque, key: []const u8) bool {
@@ -225,10 +201,6 @@ return qtc.QCborMap_Contains3(@ptrCast(self), key_str);
         return qtc.QCborMap_Find(@ptrCast(self), key);
     }
 
-    pub fn Find2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborMap__Iterator {
-        return qtc.QCborMap_Find2(@ptrCast(self), key);
-    }
-
     pub fn Find3(self: ?*anyopaque, key: []const u8) QtC.QCborMap__Iterator {
         const key_str = qtc.libqt_string{
     .len = key.len,
@@ -243,10 +215,6 @@ return qtc.QCborMap_Find3(@ptrCast(self), key_str);
 
     pub fn ConstFind(self: ?*anyopaque, key: i64) QtC.QCborMap__ConstIterator {
         return qtc.QCborMap_ConstFind(@ptrCast(self), key);
-    }
-
-    pub fn ConstFind2(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborMap__ConstIterator {
-        return qtc.QCborMap_ConstFind2(@ptrCast(self), key);
     }
 
     pub fn ConstFind3(self: ?*anyopaque, key: []const u8) QtC.QCborMap__ConstIterator {
@@ -265,10 +233,6 @@ return qtc.QCborMap_ConstFind3(@ptrCast(self), key_str);
         return qtc.QCborMap_Find5(@ptrCast(self), key);
     }
 
-    pub fn Find6(self: ?*anyopaque, key: QLatin1StringView) QtC.QCborMap__ConstIterator {
-        return qtc.QCborMap_Find6(@ptrCast(self), key);
-    }
-
     pub fn Find7(self: ?*anyopaque, key: []const u8) QtC.QCborMap__ConstIterator {
         const key_str = qtc.libqt_string{
     .len = key.len,
@@ -283,10 +247,6 @@ return qtc.QCborMap_Find7(@ptrCast(self), key_str);
 
     pub fn Insert(self: ?*anyopaque, key: i64, value_: ?*anyopaque) QtC.QCborMap__Iterator {
         return qtc.QCborMap_Insert(@ptrCast(self), key, @ptrCast(value_));
-    }
-
-    pub fn Insert2(self: ?*anyopaque, key: QLatin1StringView, value_: ?*anyopaque) QtC.QCborMap__Iterator {
-        return qtc.QCborMap_Insert2(@ptrCast(self), key, @ptrCast(value_));
     }
 
     pub fn Insert3(self: ?*anyopaque, key: []const u8, value_: ?*anyopaque) QtC.QCborMap__Iterator {

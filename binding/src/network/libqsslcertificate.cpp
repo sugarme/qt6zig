@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qsslcertificate.h>
 #include "libqsslcertificate.h"
 #include "libqsslcertificate.hxx"
@@ -98,19 +99,75 @@ libqt_string QSslCertificate_Digest(const QSslCertificate* self) {
 }
 
 libqt_list QSslCertificate_IssuerInfo(const QSslCertificate* self, int info) {
-	return self->issuerInfo(static_cast<QSslCertificate::SubjectInfo>(info));
+	auto _ret = self->issuerInfo(static_cast<QSslCertificate::SubjectInfo>(info));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_IssuerInfo2(const QSslCertificate* self, const libqt_string attribute) {
-	return self->issuerInfo(QByteArray(attribute.data, attribute.len));
+	auto _ret = self->issuerInfo(QByteArray(attribute.data, attribute.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_SubjectInfo(const QSslCertificate* self, int info) {
-	return self->subjectInfo(static_cast<QSslCertificate::SubjectInfo>(info));
+	auto _ret = self->subjectInfo(static_cast<QSslCertificate::SubjectInfo>(info));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_SubjectInfo2(const QSslCertificate* self, const libqt_string attribute) {
-	return self->subjectInfo(QByteArray(attribute.data, attribute.len));
+	auto _ret = self->subjectInfo(QByteArray(attribute.data, attribute.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QSslCertificate_IssuerDisplayName(const QSslCertificate* self) {
@@ -136,15 +193,38 @@ libqt_string QSslCertificate_SubjectDisplayName(const QSslCertificate* self) {
 }
 
 libqt_list QSslCertificate_SubjectInfoAttributes(const QSslCertificate* self) {
-	return self->subjectInfoAttributes();
+	auto _ret = self->subjectInfoAttributes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_IssuerInfoAttributes(const QSslCertificate* self) {
-	return self->issuerInfoAttributes();
+	auto _ret = self->issuerInfoAttributes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_map QSslCertificate_SubjectAlternativeNames(const QSslCertificate* self) {
-	return self->subjectAlternativeNames();
+	auto _ret = self->subjectAlternativeNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QDateTime* QSslCertificate_EffectiveDate(const QSslCertificate* self) {
@@ -160,7 +240,16 @@ QSslKey* QSslCertificate_PublicKey(const QSslCertificate* self) {
 }
 
 libqt_list QSslCertificate_Extensions(const QSslCertificate* self) {
-	return self->extensions();
+	auto _ret = self->extensions();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QSslCertificate_ToPem(const QSslCertificate* self) {
@@ -195,19 +284,55 @@ libqt_string QSslCertificate_ToText(const QSslCertificate* self) {
 }
 
 libqt_list QSslCertificate_FromPath(const libqt_string path) {
-	return QSslCertificate::fromPath(QString::fromUtf8(path.data, path.len));
+	auto _ret = QSslCertificate::fromPath(QString::fromUtf8(path.data, path.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_FromDevice(QIODevice* device) {
-	return QSslCertificate::fromDevice(device);
+	auto _ret = QSslCertificate::fromDevice(device);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_FromData(const libqt_string data) {
-	return QSslCertificate::fromData(QByteArray(data.data, data.len));
+	auto _ret = QSslCertificate::fromData(QByteArray(data.data, data.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_Verify(const libqt_list certificateChain) {
-	return QSslCertificate::verify(*certificateChain);
+	auto _ret = QSslCertificate::verify(QList<QSslCertificate>());
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslCertificate_ImportPkcs12(QIODevice* device, QSslKey* key, QSslCertificate* cert) {
@@ -229,31 +354,76 @@ libqt_string QSslCertificate_Digest1(const QSslCertificate* self, int algorithm)
 }
 
 libqt_list QSslCertificate_FromPath2(const libqt_string path, int format) {
-	return QSslCertificate::fromPath(QString::fromUtf8(path.data, path.len), static_cast<QSsl::EncodingFormat>(format));
+	auto _ret = QSslCertificate::fromPath(QString::fromUtf8(path.data, path.len), static_cast<QSsl::EncodingFormat>(format));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_FromPath3(const libqt_string path, int format, int syntax) {
-	return QSslCertificate::fromPath(QString::fromUtf8(path.data, path.len), static_cast<QSsl::EncodingFormat>(format), static_cast<QSslCertificate::PatternSyntax>(syntax));
+	auto _ret = QSslCertificate::fromPath(QString::fromUtf8(path.data, path.len), static_cast<QSsl::EncodingFormat>(format), static_cast<QSslCertificate::PatternSyntax>(syntax));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_FromDevice2(QIODevice* device, int format) {
-	return QSslCertificate::fromDevice(device, static_cast<QSsl::EncodingFormat>(format));
+	auto _ret = QSslCertificate::fromDevice(device, static_cast<QSsl::EncodingFormat>(format));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_FromData2(const libqt_string data, int format) {
-	return QSslCertificate::fromData(QByteArray(data.data, data.len), static_cast<QSsl::EncodingFormat>(format));
+	auto _ret = QSslCertificate::fromData(QByteArray(data.data, data.len), static_cast<QSsl::EncodingFormat>(format));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QSslCertificate_Verify2(const libqt_list certificateChain, const libqt_string hostName) {
-	return QSslCertificate::verify(*certificateChain, QString::fromUtf8(hostName.data, hostName.len));
+	auto _ret = QSslCertificate::verify(QList<QSslCertificate>(), QString::fromUtf8(hostName.data, hostName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslCertificate_ImportPkcs124(QIODevice* device, QSslKey* key, QSslCertificate* cert, libqt_list caCertificates) {
-	return QSslCertificate::importPkcs12(device, key, cert, caCertificates);
+	return QSslCertificate::importPkcs12(device, key, cert, QList<QSslCertificate>());
 }
 
 bool QSslCertificate_ImportPkcs125(QIODevice* device, QSslKey* key, QSslCertificate* cert, libqt_list caCertificates, const libqt_string passPhrase) {
-	return QSslCertificate::importPkcs12(device, key, cert, caCertificates, QByteArray(passPhrase.data, passPhrase.len));
+	return QSslCertificate::importPkcs12(device, key, cert, QList<QSslCertificate>(), QByteArray(passPhrase.data, passPhrase.len));
 }
 
 void QSslCertificate_Delete(QSslCertificate* self) {

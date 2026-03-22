@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleHints>
 #include <qstylehints.h>
 #include "libqstylehints.h"

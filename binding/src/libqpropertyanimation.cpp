@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <QVariantAnimation>
 #include <qpropertyanimation.h>
@@ -46,10 +47,6 @@ void QPropertyAnimation_SetTargetObject(QPropertyAnimation* self, QObject* targe
 	self->setTargetObject(target);
 }
 
-QBindable<QObject *> QPropertyAnimation_BindableTargetObject(QPropertyAnimation* self) {
-	return self->bindableTargetObject();
-}
-
 libqt_string QPropertyAnimation_PropertyName(const QPropertyAnimation* self) {
 	QByteArray _qb = self->propertyName();
 	libqt_string _str;
@@ -62,10 +59,6 @@ libqt_string QPropertyAnimation_PropertyName(const QPropertyAnimation* self) {
 
 void QPropertyAnimation_SetPropertyName(QPropertyAnimation* self, const libqt_string propertyName) {
 	self->setPropertyName(QByteArray(propertyName.data, propertyName.len));
-}
-
-QBindable<QByteArray> QPropertyAnimation_BindablePropertyName(QPropertyAnimation* self) {
-	return self->bindablePropertyName();
 }
 
 libqt_string QPropertyAnimation_Tr2(const char* s, const char* c) {

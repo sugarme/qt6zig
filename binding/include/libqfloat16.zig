@@ -6,38 +6,20 @@ const qtc = @import("qt6c");%%_IMPORTLIBS_%%
 pub const qfloat16 = struct {
 
     /// New constructs a new qfloat16 object.
-    pub fn New(other: ?*anyopaque) QtC.qfloat16 {
-        return qtc.qfloat16_new(@ptrCast(other));
+    pub fn New() QtC.qfloat16 {
+        return qtc.qfloat16_new();
     }
 
 
     /// New2 constructs a new qfloat16 object.
-    pub fn New2(other: ?*anyopaque) QtC.qfloat16 {
-        return qtc.qfloat16_new2(@ptrCast(other));
+    pub fn New2(param1: i32) QtC.qfloat16 {
+        return qtc.qfloat16_new2(@intCast(param1));
     }
 
 
     /// New3 constructs a new qfloat16 object.
-    pub fn New3() QtC.qfloat16 {
-        return qtc.qfloat16_new3();
-    }
-
-
-    /// New4 constructs a new qfloat16 object.
-    pub fn New4(param1: i32) QtC.qfloat16 {
-        return qtc.qfloat16_new4(@intCast(param1));
-    }
-
-
-    /// New5 constructs a new qfloat16 object.
-    pub fn New5(f: f32) QtC.qfloat16 {
-        return qtc.qfloat16_new5(f);
-    }
-
-
-    /// New6 constructs a new qfloat16 object.
-    pub fn New6(param1: ?*anyopaque) QtC.qfloat16 {
-        return qtc.qfloat16_new6(@ptrCast(param1));
+    pub fn New3(f: f32) QtC.qfloat16 {
+        return qtc.qfloat16_new3(f);
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -69,42 +51,6 @@ pub const qfloat16 = struct {
 
     pub fn FpClassify(self: ?*anyopaque, ) i32 {
         return qtc.qfloat16_FpClassify(@ptrCast(self));
-    }
-
-    pub fn CopySign(self: ?*anyopaque, sign: QtC.qfloat16) QtC.qfloat16 {
-        return qtc.qfloat16_CopySign(@ptrCast(self), @ptrCast(sign));
-    }
-
-    pub fn LimitEpsilon() QtC.qfloat16 {
-        return qtc.qfloat16_LimitEpsilon();
-    }
-
-    pub fn LimitMin() QtC.qfloat16 {
-        return qtc.qfloat16_LimitMin();
-    }
-
-    pub fn LimitDenormMin() QtC.qfloat16 {
-        return qtc.qfloat16_LimitDenormMin();
-    }
-
-    pub fn LimitMax() QtC.qfloat16 {
-        return qtc.qfloat16_LimitMax();
-    }
-
-    pub fn LimitLowest() QtC.qfloat16 {
-        return qtc.qfloat16_LimitLowest();
-    }
-
-    pub fn LimitInfinity() QtC.qfloat16 {
-        return qtc.qfloat16_LimitInfinity();
-    }
-
-    pub fn LimitQuiet_NaN() QtC.qfloat16 {
-        return qtc.qfloat16_LimitQuiet_NaN();
-    }
-
-    pub fn LimitSignaling_NaN() QtC.qfloat16 {
-        return qtc.qfloat16_LimitSignaling_NaN();
     }
 
     pub fn IsNormal(self: ?*anyopaque, ) bool {

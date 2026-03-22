@@ -19,6 +19,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextItem>
 #include <QTransform>
 #include <qpaintengine.h>

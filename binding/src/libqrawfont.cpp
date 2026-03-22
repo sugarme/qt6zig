@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTransform>
 #include <qrawfont.h>
 #include "libqrawfont.h"
@@ -90,15 +91,42 @@ int QRawFont_Weight(const QRawFont* self) {
 }
 
 libqt_list QRawFont_GlyphIndexesForString(const QRawFont* self, const libqt_string text) {
-	return self->glyphIndexesForString(QString::fromUtf8(text.data, text.len));
+	auto _ret = self->glyphIndexesForString(QString::fromUtf8(text.data, text.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QRawFont_AdvancesForGlyphIndexes(const QRawFont* self, const libqt_list glyphIndexes) {
-	return self->advancesForGlyphIndexes(*glyphIndexes);
+	auto _ret = self->advancesForGlyphIndexes(QList<unsigned int>());
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QRawFont_AdvancesForGlyphIndexes2(const QRawFont* self, const libqt_list glyphIndexes, int layoutFlags) {
-	return self->advancesForGlyphIndexes(*glyphIndexes, static_cast<QFlags<QRawFont::LayoutFlag>>(layoutFlags));
+	auto _ret = self->advancesForGlyphIndexes(QList<unsigned int>(), static_cast<QFlags<QRawFont::LayoutFlag>>(layoutFlags));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QRawFont_GlyphIndexesForChars(const QRawFont* self, const QChar* chars, int numChars, unsigned int* glyphIndexes, int* numGlyphs) {
@@ -194,7 +222,16 @@ bool QRawFont_SupportsCharacter2(const QRawFont* self, QChar* character) {
 }
 
 libqt_list QRawFont_SupportedWritingSystems(const QRawFont* self) {
-	return self->supportedWritingSystems();
+	auto _ret = self->supportedWritingSystems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QRawFont_FontTable(const QRawFont* self, const char* tagName) {

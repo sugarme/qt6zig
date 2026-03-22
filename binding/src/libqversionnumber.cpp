@@ -1,7 +1,7 @@
-#include <QAnyStringView>
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVersionNumber>
 #include <qversionnumber.h>
 #include "libqversionnumber.h"
@@ -12,7 +12,7 @@ QVersionNumber* QVersionNumber_new() {
 }
 
 QVersionNumber* QVersionNumber_new2(libqt_list args) {
-	 return new QVersionNumber(args);
+	 return new QVersionNumber(QSpan<const int>());
 }
 
 QVersionNumber* QVersionNumber_new3(int maj) {
@@ -52,7 +52,16 @@ QVersionNumber* QVersionNumber_Normalized(const QVersionNumber* self) {
 }
 
 libqt_list QVersionNumber_Segments(const QVersionNumber* self) {
-	return self->segments();
+	auto _ret = self->segments();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 int QVersionNumber_SegmentAt(const QVersionNumber* self, ptrdiff_t index) {
@@ -61,46 +70,6 @@ int QVersionNumber_SegmentAt(const QVersionNumber* self, ptrdiff_t index) {
 
 ptrdiff_t QVersionNumber_SegmentCount(const QVersionNumber* self) {
 	return self->segmentCount();
-}
-
-QVersionNumber::It QVersionNumber_Begin(const QVersionNumber* self) {
-	return self->begin();
-}
-
-QVersionNumber::It QVersionNumber_End(const QVersionNumber* self) {
-	return self->end();
-}
-
-QVersionNumber::It QVersionNumber_Cbegin(const QVersionNumber* self) {
-	return self->cbegin();
-}
-
-QVersionNumber::It QVersionNumber_Cend(const QVersionNumber* self) {
-	return self->cend();
-}
-
-std::reverse_iterator<QVersionNumber::It> QVersionNumber_Rbegin(const QVersionNumber* self) {
-	return self->rbegin();
-}
-
-std::reverse_iterator<QVersionNumber::It> QVersionNumber_Rend(const QVersionNumber* self) {
-	return self->rend();
-}
-
-std::reverse_iterator<QVersionNumber::It> QVersionNumber_Crbegin(const QVersionNumber* self) {
-	return self->crbegin();
-}
-
-std::reverse_iterator<QVersionNumber::It> QVersionNumber_Crend(const QVersionNumber* self) {
-	return self->crend();
-}
-
-QVersionNumber::It QVersionNumber_ConstBegin(const QVersionNumber* self) {
-	return self->constBegin();
-}
-
-QVersionNumber::It QVersionNumber_ConstEnd(const QVersionNumber* self) {
-	return self->constEnd();
 }
 
 bool QVersionNumber_IsPrefixOf(const QVersionNumber* self, const QVersionNumber* other) {
@@ -124,14 +93,6 @@ libqt_string QVersionNumber_ToString(const QVersionNumber* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-QVersionNumber* QVersionNumber_FromString(libqt_string stringVal) {
-	return new QVersionNumber(QVersionNumber::fromString(QAnyStringView(QString::fromUtf8(stringVal.data, stringVal.len))));
-}
-
-QVersionNumber* QVersionNumber_FromString2(libqt_string stringVal, ptrdiff_t* suffixIndex) {
-	return new QVersionNumber(QVersionNumber::fromString(QAnyStringView(QString::fromUtf8(stringVal.data, stringVal.len)), suffixIndex));
 }
 
 void QVersionNumber_Delete(QVersionNumber* self) {

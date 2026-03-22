@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <QUrlQuery>
 #include <qurl.h>
@@ -72,10 +73,6 @@ libqt_string QUrl_ToDisplayString(const QUrl* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-QUrl* QUrl_Adjusted(const QUrl* self, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	return new QUrl(self->adjusted(options));
 }
 
 libqt_string QUrl_ToEncoded(const QUrl* self) {
@@ -324,10 +321,6 @@ bool QUrl_IsDetached(const QUrl* self) {
 	return self->isDetached();
 }
 
-bool QUrl_Matches(const QUrl* self, const QUrl* url, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	return self->matches(*url, options);
-}
-
 libqt_string QUrl_FromPercentEncoding(const libqt_string param1) {
 	QString _ret = QUrl::fromPercentEncoding(QByteArray(param1.data, param1.len));
 	QByteArray _b = _ret.toUtf8();
@@ -371,70 +364,60 @@ libqt_string QUrl_ToAce(const libqt_string domain) {
 }
 
 libqt_list QUrl_IdnWhitelist() {
-	return QUrl::idnWhitelist();
+	auto _ret = QUrl::idnWhitelist();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QUrl_ToStringList(const libqt_list uris) {
-	return QUrl::toStringList(*uris);
+	auto _ret = QUrl::toStringList(QList<QUrl>());
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QUrl_FromStringList(const libqt_list uris) {
-	return QUrl::fromStringList(*uris);
+	auto _ret = QUrl::fromStringList(QList<QString>());
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QUrl_SetIdnWhitelist(const libqt_list idnWhitelist) {
-	QUrl::setIdnWhitelist(*idnWhitelist);
-}
-
-QUrlPrivate** QUrl_DataPtr(QUrl* self) {
-	return self->data_ptr();
+	QUrl::setIdnWhitelist(QList<QString>());
 }
 
 void QUrl_SetUrl2(QUrl* self, const libqt_string url, int mode) {
 	self->setUrl(QString::fromUtf8(url.data, url.len), static_cast<QUrl::ParsingMode>(mode));
-}
-
-libqt_string QUrl_Url1(const QUrl* self, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	QString _ret = self->url(options);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QUrl_ToString1(const QUrl* self, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	QString _ret = self->toString(options);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QUrl_ToDisplayString1(const QUrl* self, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	QString _ret = self->toDisplayString(options);
-	QByteArray _b = _ret.toUtf8();
-	libqt_string _str;
-	_str.len = _b.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _b.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
-}
-
-libqt_string QUrl_ToEncoded1(const QUrl* self, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	QByteArray _qb = self->toEncoded(options);
-	libqt_string _str;
-	_str.len = _qb.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _qb.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
 }
 
 QUrl* QUrl_FromEncoded2(QByteArrayView* input, int mode) {
@@ -625,12 +608,17 @@ libqt_string QUrl_ToAce2(const libqt_string domain, unsigned int options) {
 	return _str;
 }
 
-libqt_list QUrl_ToStringList2(const libqt_list uris, QUrlTwoFlags<QUrl::UrlFormattingOption, QUrl::ComponentFormattingOption> options) {
-	return QUrl::toStringList(*uris, options);
-}
-
 libqt_list QUrl_FromStringList2(const libqt_list uris, int mode) {
-	return QUrl::fromStringList(*uris, static_cast<QUrl::ParsingMode>(mode));
+	auto _ret = QUrl::fromStringList(QList<QString>(), static_cast<QUrl::ParsingMode>(mode));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QUrl_Delete(QUrl* self) {

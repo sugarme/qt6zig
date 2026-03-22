@@ -93,10 +93,6 @@ return  _ret;
         return qtc.QAudioDevice_ChannelConfiguration(@ptrCast(self));
     }
 
-    pub fn Handle(self: ?*anyopaque, ) QAudioDevicePrivate {
-        return @ptrCast(qtc.QAudioDevice_Handle(@ptrCast(self)));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QAudioDevice_Delete(@ptrCast(self));

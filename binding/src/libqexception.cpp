@@ -6,14 +6,6 @@ QException* QException_new() {
 	 return new VirtualQException();
 }
 
-QException* QException_new2(const QException* param1) {
-	 return new VirtualQException(*param1);
-}
-
-void QException_OperatorAssign(QException* self, const QException* param1) {
-	self->operator=(*param1);
-}
-
 void QException_Raise(const QException* self) {
 	self->raise();
 }
@@ -43,28 +35,8 @@ QUnhandledException* QUnhandledException_new() {
 	 return new VirtualQUnhandledException();
 }
 
-QUnhandledException* QUnhandledException_new2(const QUnhandledException* other) {
-	 return new VirtualQUnhandledException(*other);
-}
-
-QUnhandledException* QUnhandledException_new3(std::exception_ptr exception) {
-	 return new VirtualQUnhandledException(exception);
-}
-
-void QUnhandledException_Swap(QUnhandledException* self, QUnhandledException* other) {
-	self->swap(*other);
-}
-
-void QUnhandledException_OperatorAssign(QUnhandledException* self, const QUnhandledException* other) {
-	self->operator=(*other);
-}
-
 void QUnhandledException_Raise(const QUnhandledException* self) {
 	self->raise();
-}
-
-std::exception_ptr QUnhandledException_Exception(const QUnhandledException* self) {
-	return self->exception();
 }
 
 // Base class handler implementation

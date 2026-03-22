@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWidget>
 #include <qpagesetupdialog.h>
 #include "libqpagesetupdialog.h"

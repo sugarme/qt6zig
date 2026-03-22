@@ -23,9 +23,7 @@ typedef struct type_info type_info;
 
 
 QAtomicInt* QAtomicInt_new();
-QAtomicInt* QAtomicInt_new2(const QAtomicInt* param1);
-QAtomicInt* QAtomicInt_new3(int value);
-void QAtomicInt_OperatorAssign(QAtomicInt* self, const QAtomicInt* param1);
+QAtomicInt* QAtomicInt_new2(int value);
 void QAtomicInt_Delete(QAtomicInt* self);
 
 #ifdef __cplusplus

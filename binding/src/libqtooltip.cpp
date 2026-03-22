@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QToolTip>
 #include <QWidget>
 #include <qtooltip.h>

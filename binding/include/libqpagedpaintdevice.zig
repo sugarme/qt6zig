@@ -97,20 +97,6 @@ pub const qpagedpaintdevice = struct {
         return qtc.QPagedPaintDevice_PageRanges(@ptrCast(self));
     }
 
-    pub fn Dd(self: ?*anyopaque, ) QPagedPaintDevicePrivate {
-        return @ptrCast(qtc.QPagedPaintDevice_Dd(@ptrCast(self)));
-    }
-
-    /// Allows for overriding the related default method
-    pub fn OnDd(self: ?*anyopaque, callback: *const fn (?*anyopaque) callconv(.c) QPagedPaintDevicePrivate) void {
-        qtc.QPagedPaintDevice_OnDd(@ptrCast(self), @intCast(@intFromPtr(callback)));
-    }
-
-    /// Base class method implementation
-    pub fn QBaseDd(self: ?*anyopaque, ) QPagedPaintDevicePrivate {
-        return @ptrCast(qtc.QPagedPaintDevice_QBaseDd(@ptrCast(self)));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QPagedPaintDevice_Delete(@ptrCast(self));

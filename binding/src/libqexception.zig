@@ -11,16 +11,6 @@ pub const qexception = struct {
     }
 
 
-    /// New2 constructs a new QException object.
-    pub fn New2(param1: ?*anyopaque) QtC.QException {
-        return qtc.QException_new2(@ptrCast(param1));
-    }
-
-
-    pub fn OperatorAssign(self: ?*anyopaque, param1: ?*anyopaque) void {
-        qtc.QException_OperatorAssign(@ptrCast(self), @ptrCast(param1));
-    }
-
     pub fn Raise(self: ?*anyopaque, ) void {
         qtc.QException_Raise(@ptrCast(self));
     }
@@ -50,26 +40,6 @@ pub const qunhandledexception = struct {
     }
 
 
-    /// New2 constructs a new QUnhandledException object.
-    pub fn New2(other: ?*anyopaque) QtC.QUnhandledException {
-        return qtc.QUnhandledException_new2(@ptrCast(other));
-    }
-
-
-    /// New3 constructs a new QUnhandledException object.
-    pub fn New3(exception: std::exception_ptr) QtC.QUnhandledException {
-        return qtc.QUnhandledException_new3(exception);
-    }
-
-
-    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QUnhandledException_Swap(@ptrCast(self), @ptrCast(other));
-    }
-
-    pub fn OperatorAssign(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QUnhandledException_OperatorAssign(@ptrCast(self), @ptrCast(other));
-    }
-
     pub fn Raise(self: ?*anyopaque, ) void {
         qtc.QUnhandledException_Raise(@ptrCast(self));
     }
@@ -82,10 +52,6 @@ pub const qunhandledexception = struct {
     /// Base class method implementation
     pub fn QBaseRaise(self: ?*anyopaque, ) void {
         qtc.QUnhandledException_QBaseRaise(@ptrCast(self));
-    }
-
-    pub fn Exception(self: ?*anyopaque, ) std::exception_ptr {
-        return qtc.QUnhandledException_Exception(@ptrCast(self));
     }
 
     /// Delete this object from C++ memory.

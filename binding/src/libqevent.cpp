@@ -55,6 +55,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTabletEvent>
 #include <QToolBarChangeEvent>
 #include <QTouchEvent>
@@ -157,7 +158,7 @@ QPointerEvent* QPointerEvent_new2(int typeVal, const QPointingDevice* dev, int m
 }
 
 QPointerEvent* QPointerEvent_new3(int typeVal, const QPointingDevice* dev, int modifiers, const libqt_list points) {
-	 return new VirtualQPointerEvent(static_cast<QMetaType::Type>(typeVal), dev, static_cast<QFlags<Qt::KeyboardModifier>>(modifiers), *points);
+	 return new VirtualQPointerEvent(static_cast<QMetaType::Type>(typeVal), dev, static_cast<QFlags<Qt::KeyboardModifier>>(modifiers), QList<QEventPoint>());
 }
 
 const QPointingDevice* QPointerEvent_PointingDevice(const QPointerEvent* self) {
@@ -181,7 +182,16 @@ QEventPoint* QPointerEvent_Point(QPointerEvent* self, ptrdiff_t i) {
 }
 
 libqt_list QPointerEvent_Points(const QPointerEvent* self) {
-	return self->points();
+	auto _ret = self->points();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QEventPoint* QPointerEvent_PointById(QPointerEvent* self, int id) {
@@ -221,7 +231,16 @@ void QPointerEvent_SetExclusiveGrabber(QPointerEvent* self, const QEventPoint* p
 }
 
 libqt_list QPointerEvent_PassiveGrabbers(const QPointerEvent* self, const QEventPoint* point) {
-	return self->passiveGrabbers(*point);
+	auto _ret = self->passiveGrabbers(*point);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QPointerEvent_ClearPassiveGrabbers(QPointerEvent* self, const QEventPoint* point) {
@@ -1242,7 +1261,7 @@ QInputMethodEvent* QInputMethodEvent_new() {
 }
 
 QInputMethodEvent* QInputMethodEvent_new2(const libqt_string preeditText, const libqt_list attributes) {
-	 return new QInputMethodEvent(QString::fromUtf8(preeditText.data, preeditText.len), *attributes);
+	 return new QInputMethodEvent(QString::fromUtf8(preeditText.data, preeditText.len), QList<QInputMethodEvent::Attribute>());
 }
 
 void QInputMethodEvent_SetCommitString(QInputMethodEvent* self, const libqt_string commitString) {
@@ -1250,7 +1269,16 @@ void QInputMethodEvent_SetCommitString(QInputMethodEvent* self, const libqt_stri
 }
 
 libqt_list QInputMethodEvent_Attributes(const QInputMethodEvent* self) {
-	return self->attributes();
+	auto _ret = self->attributes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QInputMethodEvent_PreeditString(const QInputMethodEvent* self) {
@@ -1643,11 +1671,11 @@ QTouchEvent* QTouchEvent_new4(int eventType, const QPointingDevice* device, int 
 }
 
 QTouchEvent* QTouchEvent_new5(int eventType, const QPointingDevice* device, int modifiers, const libqt_list touchPoints) {
-	 return new VirtualQTouchEvent(static_cast<QEvent::Type>(eventType), device, static_cast<QFlags<Qt::KeyboardModifier>>(modifiers), *touchPoints);
+	 return new VirtualQTouchEvent(static_cast<QEvent::Type>(eventType), device, static_cast<QFlags<Qt::KeyboardModifier>>(modifiers), QList<QEventPoint>());
 }
 
 QTouchEvent* QTouchEvent_new6(int eventType, const QPointingDevice* device, int modifiers, quint8 touchPointStates, const libqt_list touchPoints) {
-	 return new VirtualQTouchEvent(static_cast<QEvent::Type>(eventType), device, static_cast<QFlags<Qt::KeyboardModifier>>(modifiers), static_cast<QFlags<QEventPoint::State>>(touchPointStates), *touchPoints);
+	 return new VirtualQTouchEvent(static_cast<QEvent::Type>(eventType), device, static_cast<QFlags<Qt::KeyboardModifier>>(modifiers), static_cast<QFlags<QEventPoint::State>>(touchPointStates), QList<QEventPoint>());
 }
 
 QObject* QTouchEvent_Target(const QTouchEvent* self) {
@@ -1659,7 +1687,16 @@ quint8 QTouchEvent_TouchPointStates(const QTouchEvent* self) {
 }
 
 libqt_list QTouchEvent_TouchPoints(const QTouchEvent* self) {
-	return self->touchPoints();
+	auto _ret = self->touchPoints();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QTouchEvent_IsBeginEvent(const QTouchEvent* self) {

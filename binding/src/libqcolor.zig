@@ -58,50 +58,38 @@ return qtc.QColor_new8(name_str);
 
 
     /// New9 constructs a new QColor object.
-    pub fn New9(name: []const u8) QtC.QColor {
-        return qtc.QColor_new9(@ptrCast(name));
+    pub fn New9(aname: []const u8) QtC.QColor {
+        return qtc.QColor_new9(@ptrCast(aname));
     }
 
 
     /// New10 constructs a new QColor object.
-    pub fn New10(aname: []const u8) QtC.QColor {
-        return qtc.QColor_new10(@ptrCast(aname));
+    pub fn New10(spec: i32) QtC.QColor {
+        return qtc.QColor_new10(@intCast(spec));
     }
 
 
     /// New11 constructs a new QColor object.
-    pub fn New11(name: QLatin1StringView) QtC.QColor {
-        return qtc.QColor_new11(name);
+    pub fn New11(spec: i32, a1: u16, a2: u16, a3: u16, a4: u16) QtC.QColor {
+        return qtc.QColor_new11(@intCast(spec), a1, a2, a3, a4);
     }
 
 
     /// New12 constructs a new QColor object.
-    pub fn New12(spec: i32) QtC.QColor {
-        return qtc.QColor_new12(@intCast(spec));
+    pub fn New12(param1: ?*anyopaque) QtC.QColor {
+        return qtc.QColor_new12(@ptrCast(param1));
     }
 
 
     /// New13 constructs a new QColor object.
-    pub fn New13(spec: i32, a1: u16, a2: u16, a3: u16, a4: u16) QtC.QColor {
-        return qtc.QColor_new13(@intCast(spec), a1, a2, a3, a4);
+    pub fn New13(r: i32, g: i32, b: i32, a: i32) QtC.QColor {
+        return qtc.QColor_new13(r, g, b, a);
     }
 
 
     /// New14 constructs a new QColor object.
-    pub fn New14(param1: ?*anyopaque) QtC.QColor {
-        return qtc.QColor_new14(@ptrCast(param1));
-    }
-
-
-    /// New15 constructs a new QColor object.
-    pub fn New15(r: i32, g: i32, b: i32, a: i32) QtC.QColor {
-        return qtc.QColor_new15(r, g, b, a);
-    }
-
-
-    /// New16 constructs a new QColor object.
-    pub fn New16(spec: i32, a1: u16, a2: u16, a3: u16, a4: u16, a5: u16) QtC.QColor {
-        return qtc.QColor_new16(@intCast(spec), a1, a2, a3, a4, a5);
+    pub fn New14(spec: i32, a1: u16, a2: u16, a3: u16, a4: u16, a5: u16) QtC.QColor {
+        return qtc.QColor_new14(@intCast(spec), a1, a2, a3, a4, a5);
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -114,14 +102,6 @@ return qtc.QColor_new8(name_str);
         qtc.QColor_MoveAssign(@ptrCast(self), @ptrCast(other));
     }
 
-
-    pub fn FromString(name: []const u8) QtC.QColor {
-        const name_str = qtc.libqt_string{
-    .len = name.len,
-    .data = name.ptr,
-};
-return qtc.QColor_FromString(name_str);
-    }
 
     pub fn OperatorAssign(self: ?*anyopaque, color: i32) void {
         qtc.QColor_OperatorAssign(@ptrCast(self), @intCast(color));
@@ -145,14 +125,6 @@ return  _ret;
     .data = name.ptr,
 };
 qtc.QColor_SetNamedColor(@ptrCast(self), name_str);
-    }
-
-    pub fn SetNamedColor2(self: ?*anyopaque, name: []const u8) void {
-        qtc.QColor_SetNamedColor2(@ptrCast(self), @ptrCast(name));
-    }
-
-    pub fn SetNamedColor3(self: ?*anyopaque, name: QLatin1StringView) void {
-        qtc.QColor_SetNamedColor3(@ptrCast(self), name);
     }
 
     pub fn ColorNames() []const u8 {
@@ -509,22 +481,6 @@ qtc.QColor_SetNamedColor(@ptrCast(self), name_str);
     .data = name.ptr,
 };
 return qtc.QColor_IsValidColor(name_str);
-    }
-
-    pub fn IsValidColor2(param1: []const u8) bool {
-        return qtc.QColor_IsValidColor2(@ptrCast(param1));
-    }
-
-    pub fn IsValidColor3(param1: QtC.QLatin1String) bool {
-        return qtc.QColor_IsValidColor3(@ptrCast(param1));
-    }
-
-    pub fn IsValidColorName(param1: []const u8) bool {
-        const param1_str = qtc.libqt_string{
-    .len = param1.len,
-    .data = param1.ptr,
-};
-return qtc.QColor_IsValidColorName(param1_str);
     }
 
     pub fn OperatorAssign2(self: ?*anyopaque, param1: ?*anyopaque) void {

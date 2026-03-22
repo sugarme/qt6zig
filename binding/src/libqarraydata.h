@@ -22,8 +22,6 @@ typedef struct type_info type_info;
 
 
 
-QBasicAtomicInteger<int> QArrayData_Ref_(const QArrayData* self);
-void QArrayData_SetRef_(QArrayData* self, QBasicAtomicInteger<int> ref_);
 int QArrayData_Flags(const QArrayData* self);
 void QArrayData_SetFlags(QArrayData* self, int flags);
 ptrdiff_t QArrayData_Alloc(const QArrayData* self);

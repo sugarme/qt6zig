@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qboxplotseries.h>
 #include "libqboxplotseries.h"
 #include "libqboxplotseries.hxx"
@@ -43,7 +44,7 @@ bool QBoxPlotSeries_Take(QBoxPlotSeries* self, QBoxSet* box) {
 }
 
 bool QBoxPlotSeries_Append2(QBoxPlotSeries* self, const libqt_list boxes) {
-	return self->append(*boxes);
+	return self->append(QList<QBoxSet *>());
 }
 
 bool QBoxPlotSeries_Insert(QBoxPlotSeries* self, int index, QBoxSet* box) {
@@ -55,7 +56,15 @@ int QBoxPlotSeries_Count(const QBoxPlotSeries* self) {
 }
 
 libqt_list QBoxPlotSeries_BoxSets(const QBoxPlotSeries* self) {
-	return self->boxSets();
+	auto _ret = self->boxSets();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QBoxPlotSeries_Clear(QBoxPlotSeries* self) {
@@ -209,7 +218,7 @@ void QBoxPlotSeries_Connect_BoxWidthChanged(QBoxPlotSeries* self, intptr_t slot)
 }
 
 void QBoxPlotSeries_BoxsetsAdded(QBoxPlotSeries* self, const libqt_list sets) {
-	self->boxsetsAdded(*sets);
+	self->boxsetsAdded(QList<QBoxSet *>());
 }
 
 void QBoxPlotSeries_Connect_BoxsetsAdded(QBoxPlotSeries* self, intptr_t slot) {
@@ -220,7 +229,7 @@ void QBoxPlotSeries_Connect_BoxsetsAdded(QBoxPlotSeries* self, intptr_t slot) {
 }
 
 void QBoxPlotSeries_BoxsetsRemoved(QBoxPlotSeries* self, const libqt_list sets) {
-	self->boxsetsRemoved(*sets);
+	self->boxsetsRemoved(QList<QBoxSet *>());
 }
 
 void QBoxPlotSeries_Connect_BoxsetsRemoved(QBoxPlotSeries* self, intptr_t slot) {

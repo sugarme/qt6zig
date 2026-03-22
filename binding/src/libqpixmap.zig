@@ -12,62 +12,56 @@ pub const qpixmap = struct {
 
 
     /// New2 constructs a new QPixmap object.
-    pub fn New2(data: *QPlatformPixmap) QtC.QPixmap {
-        return qtc.QPixmap_new2(@ptrCast(data));
+    pub fn New2(w: i32, h: i32) QtC.QPixmap {
+        return qtc.QPixmap_new2(w, h);
     }
 
 
     /// New3 constructs a new QPixmap object.
-    pub fn New3(w: i32, h: i32) QtC.QPixmap {
-        return qtc.QPixmap_new3(w, h);
+    pub fn New3(param1: ?*anyopaque) QtC.QPixmap {
+        return qtc.QPixmap_new3(@ptrCast(param1));
     }
 
 
     /// New4 constructs a new QPixmap object.
-    pub fn New4(param1: ?*anyopaque) QtC.QPixmap {
-        return qtc.QPixmap_new4(@ptrCast(param1));
+    pub fn New4(fileName: []const u8) QtC.QPixmap {
+        const fileName_str = qtc.libqt_string{
+    .len = fileName.len,
+    .data = fileName.ptr,
+};
+return qtc.QPixmap_new4(fileName_str);
     }
 
 
     /// New5 constructs a new QPixmap object.
-    pub fn New5(fileName: []const u8) QtC.QPixmap {
-        const fileName_str = qtc.libqt_string{
-    .len = fileName.len,
-    .data = fileName.ptr,
-};
-return qtc.QPixmap_new5(fileName_str);
+    pub fn New5(xpm: []const u8) QtC.QPixmap {
+        return qtc.QPixmap_new5(@ptrCast(xpm));
     }
 
 
     /// New6 constructs a new QPixmap object.
-    pub fn New6(xpm: []const u8) QtC.QPixmap {
-        return qtc.QPixmap_new6(@ptrCast(xpm));
+    pub fn New6(param1: ?*anyopaque) QtC.QPixmap {
+        return qtc.QPixmap_new6(@ptrCast(param1));
     }
 
 
     /// New7 constructs a new QPixmap object.
-    pub fn New7(param1: ?*anyopaque) QtC.QPixmap {
-        return qtc.QPixmap_new7(@ptrCast(param1));
+    pub fn New7(fileName: []const u8, format: []const u8) QtC.QPixmap {
+        const fileName_str = qtc.libqt_string{
+    .len = fileName.len,
+    .data = fileName.ptr,
+};
+return qtc.QPixmap_new7(fileName_str, @ptrCast(format));
     }
 
 
     /// New8 constructs a new QPixmap object.
-    pub fn New8(fileName: []const u8, format: []const u8) QtC.QPixmap {
+    pub fn New8(fileName: []const u8, format: []const u8, flags: i32) QtC.QPixmap {
         const fileName_str = qtc.libqt_string{
     .len = fileName.len,
     .data = fileName.ptr,
 };
-return qtc.QPixmap_new8(fileName_str, @ptrCast(format));
-    }
-
-
-    /// New9 constructs a new QPixmap object.
-    pub fn New9(fileName: []const u8, format: []const u8, flags: i32) QtC.QPixmap {
-        const fileName_str = qtc.libqt_string{
-    .len = fileName.len,
-    .data = fileName.ptr,
-};
-return qtc.QPixmap_new9(fileName_str, @ptrCast(format), @intCast(flags));
+return qtc.QPixmap_new8(fileName_str, @ptrCast(format), @intCast(flags));
     }
 
 
@@ -313,14 +307,6 @@ return qtc.QPixmap_Save(@ptrCast(self), fileName_str);
     /// Base class method implementation
     pub fn QBaseFromImageInPlace(self: ?*anyopaque, image: ?*anyopaque) QtC.QPixmap {
         return qtc.QPixmap_QBaseFromImageInPlace(@ptrCast(self), @ptrCast(image));
-    }
-
-    pub fn Handle(self: ?*anyopaque, ) QPlatformPixmap {
-        return @ptrCast(qtc.QPixmap_Handle(@ptrCast(self)));
-    }
-
-    pub fn DataPtr(self: ?*anyopaque, ) QExplicitlySharedDataPointer<QPlatformPixmap> {
-        return @ptrCast(qtc.QPixmap_DataPtr(@ptrCast(self)));
     }
 
     pub fn Fill1(self: ?*anyopaque, fillColor: ?*anyopaque) void {

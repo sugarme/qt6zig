@@ -26,6 +26,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTime>
 #include <QUrl>
 #include <QUuid>
@@ -99,7 +100,7 @@ QVariant* QVariant_new16(const QDateTime* datetime) {
 }
 
 QVariant* QVariant_new17(const libqt_map hash) {
-	 return new QVariant(*hash);
+	 return new QVariant(QHash<QString, QVariant>());
 }
 
 QVariant* QVariant_new18(const QJsonArray* jsonArray) {
@@ -111,7 +112,7 @@ QVariant* QVariant_new19(const QJsonObject* jsonObject) {
 }
 
 QVariant* QVariant_new20(const libqt_list list) {
-	 return new QVariant(*list);
+	 return new QVariant(QList<QVariant>());
 }
 
 QVariant* QVariant_new21(const QLocale* locale) {
@@ -119,7 +120,7 @@ QVariant* QVariant_new21(const QLocale* locale) {
 }
 
 QVariant* QVariant_new22(const libqt_map mapVal) {
-	 return new QVariant(*mapVal);
+	 return new QVariant(QMap<QString, QVariant>());
 }
 
 QVariant* QVariant_new23(const QRegularExpression* re) {
@@ -131,7 +132,7 @@ QVariant* QVariant_new24(const libqt_string stringVal) {
 }
 
 QVariant* QVariant_new25(const libqt_list stringlist) {
-	 return new QVariant(*stringlist);
+	 return new QVariant(QList<QString>());
 }
 
 QVariant* QVariant_new26(const QUrl* url) {
@@ -276,7 +277,21 @@ libqt_string QVariant_ToString(const QVariant* self) {
 }
 
 libqt_list QVariant_ToStringList(const QVariant* self) {
-	return self->toStringList();
+	auto _ret = self->toStringList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QChar* QVariant_ToChar(const QVariant* self) {
@@ -296,15 +311,34 @@ QDateTime* QVariant_ToDateTime(const QVariant* self) {
 }
 
 libqt_list QVariant_ToList(const QVariant* self) {
-	return self->toList();
+	auto _ret = self->toList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_map QVariant_ToMap(const QVariant* self) {
-	return self->toMap();
+	auto _ret = self->toMap();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 libqt_map QVariant_ToHash(const QVariant* self) {
-	return self->toHash();
+	auto _ret = self->toHash();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QPoint* QVariant_ToPoint(const QVariant* self) {
@@ -427,16 +461,6 @@ QPartialOrdering* QVariant_Compare(const QVariant* lhs, const QVariant* rhs) {
 	return new QPartialOrdering(QVariant::compare(*lhs, *rhs));
 }
 
-QVariant__Private* QVariant_DataPtr(QVariant* self) {
-	return new QVariant::Private(self->data_ptr());
-}
-
-const QVariant__Private* QVariant_DataPtr2(const QVariant* self) {
-	const QVariant::Private& _ret = self->data_ptr();
-	// Cast returned reference into pointer
-	return const_cast<QVariant::Private*>(&_ret);
-}
-
 int QVariant_ToInt1(const QVariant* self, bool* ok) {
 	return self->toInt(ok);
 }
@@ -477,20 +501,12 @@ QVariantConstPointer* QVariantConstPointer_new(QVariant* variant) {
 	 return new QVariantConstPointer(*variant);
 }
 
-QVariantConstPointer* QVariantConstPointer_new2(const QVariantConstPointer* param1) {
-	 return new QVariantConstPointer(*param1);
-}
-
 QVariant* QVariantConstPointer_OperatorMultiply(const QVariantConstPointer* self) {
 	return new QVariant(self->operator*());
 }
 
 const QVariant* QVariantConstPointer_OperatorMinusGreater(const QVariantConstPointer* self) {
 	return self->operator->();
-}
-
-void QVariantConstPointer_OperatorAssign(QVariantConstPointer* self, const QVariantConstPointer* param1) {
-	self->operator=(*param1);
 }
 
 void QVariantConstPointer_Delete(QVariantConstPointer* self) {

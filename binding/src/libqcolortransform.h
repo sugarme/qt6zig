@@ -31,8 +31,6 @@ void QColorTransform_Swap(QColorTransform* self, QColorTransform* other);
 bool QColorTransform_IsIdentity(const QColorTransform* self);
 unsigned int QColorTransform_Map(const QColorTransform* self, unsigned int argb);
 QRgba64* QColorTransform_Map2(const QColorTransform* self, QRgba64* rgba64);
-QRgbaFloat<qfloat16> QColorTransform_Map3(const QColorTransform* self, QRgbaFloat<qfloat16> rgbafp16);
-QRgbaFloat<float> QColorTransform_Map4(const QColorTransform* self, QRgbaFloat<float> rgbafp32);
 QColor* QColorTransform_Map5(const QColorTransform* self, const QColor* color);
 void QColorTransform_Delete(QColorTransform* self);
 

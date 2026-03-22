@@ -19,7 +19,6 @@ typedef struct QChar QChar;
 typedef struct QCollator QCollator;
 typedef struct QCollatorSortKey QCollatorSortKey;
 typedef struct QLocale QLocale;
-typedef struct QStringView QStringView;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
 #endif
@@ -48,11 +47,7 @@ bool QCollator_IgnorePunctuation(const QCollator* self);
 int QCollator_Compare(const QCollator* self, const libqt_string s1, const libqt_string s2);
 int QCollator_Compare2(const QCollator* self, const QChar* s1, ptrdiff_t len1, const QChar* s2, ptrdiff_t len2);
 bool QCollator_OperatorCall(const QCollator* self, const libqt_string s1, const libqt_string s2);
-int QCollator_Compare3(const QCollator* self, QStringView* s1, QStringView* s2);
-bool QCollator_OperatorCall2(const QCollator* self, QStringView* s1, QStringView* s2);
 QCollatorSortKey* QCollator_SortKey(const QCollator* self, const libqt_string stringVal);
-int QCollator_DefaultCompare(QStringView* s1, QStringView* s2);
-QCollatorSortKey* QCollator_DefaultSortKey(QStringView* key);
 void QCollator_Delete(QCollator* self);
 
 #ifdef __cplusplus

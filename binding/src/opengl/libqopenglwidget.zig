@@ -47,10 +47,6 @@ return  _ret;
         return qtc.QOpenGLWidget_Format(@ptrCast(self));
     }
 
-    pub fn TextureFormat(self: ?*anyopaque, ) GL {
-        return qtc.QOpenGLWidget_TextureFormat(@ptrCast(self));
-    }
-
     pub fn SetTextureFormat(self: ?*anyopaque, texFormat: u32) void {
         qtc.QOpenGLWidget_SetTextureFormat(@ptrCast(self), texFormat);
     }

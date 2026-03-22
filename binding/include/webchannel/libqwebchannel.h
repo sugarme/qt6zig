@@ -33,10 +33,8 @@ void QWebChannel_RegisterObject(QWebChannel* self, const libqt_string id, QObjec
 void QWebChannel_DeregisterObject(QWebChannel* self, QObject* object);
 bool QWebChannel_BlockUpdates(const QWebChannel* self);
 void QWebChannel_SetBlockUpdates(QWebChannel* self, bool block);
-QBindable<bool> QWebChannel_BindableBlockUpdates(QWebChannel* self);
 int QWebChannel_PropertyUpdateInterval(const QWebChannel* self);
 void QWebChannel_SetPropertyUpdateInterval(QWebChannel* self, int ms);
-QBindable<int> QWebChannel_BindablePropertyUpdateInterval(QWebChannel* self);
 void QWebChannel_BlockUpdatesChanged(QWebChannel* self, bool block);
 void QWebChannel_Connect_BlockUpdatesChanged(QWebChannel* self, intptr_t slot);
 void QWebChannel_ConnectTo(QWebChannel* self, QWebChannelAbstractTransport* transport);

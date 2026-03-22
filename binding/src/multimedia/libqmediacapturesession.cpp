@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVideoFrameInput>
 #include <QVideoSink>
 #include <QWindowCapture>
@@ -122,10 +123,6 @@ void QMediaCaptureSession_SetAudioOutput(QMediaCaptureSession* self, QAudioOutpu
 
 QAudioOutput* QMediaCaptureSession_AudioOutput(const QMediaCaptureSession* self) {
 	return self->audioOutput();
-}
-
-QPlatformMediaCaptureSession* QMediaCaptureSession_PlatformSession(const QMediaCaptureSession* self) {
-	return self->platformSession();
 }
 
 void QMediaCaptureSession_AudioInputChanged(QMediaCaptureSession* self) {

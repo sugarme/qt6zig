@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qfontinfo.h>
 #include "libqfontinfo.h"
 #include "libqfontinfo.hxx"

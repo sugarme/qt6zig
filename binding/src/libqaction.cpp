@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVariant>
 #include <qaction.h>
 #include "libqaction.h"
@@ -49,7 +50,15 @@ libqt_string QAction_Tr(const char* s) {
 }
 
 libqt_list QAction_AssociatedObjects(const QAction* self) {
-	return self->associatedObjects();
+	auto _ret = self->associatedObjects();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 void QAction_SetActionGroup(QAction* self, QActionGroup* group) {
@@ -168,7 +177,7 @@ QKeySequence* QAction_Shortcut(const QAction* self) {
 }
 
 void QAction_SetShortcuts(QAction* self, const libqt_list shortcuts) {
-	self->setShortcuts(*shortcuts);
+	self->setShortcuts(QList<QKeySequence>());
 }
 
 void QAction_SetShortcuts2(QAction* self, int shortcuts) {
@@ -176,7 +185,16 @@ void QAction_SetShortcuts2(QAction* self, int shortcuts) {
 }
 
 libqt_list QAction_Shortcuts(const QAction* self) {
-	return self->shortcuts();
+	auto _ret = self->shortcuts();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QAction_SetShortcutContext(QAction* self, int context) {

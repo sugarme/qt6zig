@@ -25,14 +25,6 @@ const _ret = allocator.alloc(u8, _str.len) catch @panic("qvideosink.Tr: Memory a
 return  _ret;
     }
 
-    pub fn Rhi(self: ?*anyopaque, ) QRhi {
-        return @ptrCast(qtc.QVideoSink_Rhi(@ptrCast(self)));
-    }
-
-    pub fn SetRhi(self: ?*anyopaque, rhi: *QRhi) void {
-        qtc.QVideoSink_SetRhi(@ptrCast(self), @ptrCast(rhi));
-    }
-
     pub fn VideoSize(self: ?*anyopaque, ) QtC.QSize {
         return qtc.QVideoSink_VideoSize(@ptrCast(self));
     }
@@ -59,10 +51,6 @@ qtc.QVideoSink_SetSubtitleText(@ptrCast(self), subtitle_str);
 
     pub fn VideoFrame(self: ?*anyopaque, ) QtC.QVideoFrame {
         return qtc.QVideoSink_VideoFrame(@ptrCast(self));
-    }
-
-    pub fn PlatformVideoSink(self: ?*anyopaque, ) QPlatformVideoSink {
-        return @ptrCast(qtc.QVideoSink_PlatformVideoSink(@ptrCast(self)));
     }
 
     pub fn VideoFrameChanged(self: ?*anyopaque, frame: ?*anyopaque) void {

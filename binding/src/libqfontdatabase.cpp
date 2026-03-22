@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qfontdatabase.h>
 #include "libqfontdatabase.h"
 #include "libqfontdatabase.hxx"
@@ -34,31 +35,104 @@ void QFontDatabase_MoveAssign(QFontDatabase* self, QFontDatabase* other) {
 }
 
 libqt_list QFontDatabase_StandardSizes() {
-	return QFontDatabase::standardSizes();
+	auto _ret = QFontDatabase::standardSizes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_WritingSystems() {
-	return QFontDatabase::writingSystems();
+	auto _ret = QFontDatabase::writingSystems();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_WritingSystems2(const libqt_string family) {
-	return QFontDatabase::writingSystems(QString::fromUtf8(family.data, family.len));
+	auto _ret = QFontDatabase::writingSystems(QString::fromUtf8(family.data, family.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_Families() {
-	return QFontDatabase::families();
+	auto _ret = QFontDatabase::families();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_Styles(const libqt_string family) {
-	return QFontDatabase::styles(QString::fromUtf8(family.data, family.len));
+	auto _ret = QFontDatabase::styles(QString::fromUtf8(family.data, family.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_PointSizes(const libqt_string family) {
-	return QFontDatabase::pointSizes(QString::fromUtf8(family.data, family.len));
+	auto _ret = QFontDatabase::pointSizes(QString::fromUtf8(family.data, family.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_SmoothSizes(const libqt_string family, const libqt_string style) {
-	return QFontDatabase::smoothSizes(QString::fromUtf8(family.data, family.len), QString::fromUtf8(style.data, style.len));
+	auto _ret = QFontDatabase::smoothSizes(QString::fromUtf8(family.data, family.len), QString::fromUtf8(style.data, style.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_string QFontDatabase_StyleString(const QFont* font) {
@@ -154,7 +228,21 @@ int QFontDatabase_AddApplicationFontFromData(const libqt_string fontData) {
 }
 
 libqt_list QFontDatabase_ApplicationFontFamilies(int id) {
-	return QFontDatabase::applicationFontFamilies(id);
+	auto _ret = QFontDatabase::applicationFontFamilies(id);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 bool QFontDatabase_RemoveApplicationFont(int id) {
@@ -174,11 +262,25 @@ bool QFontDatabase_RemoveApplicationFallbackFontFamily(int script, const libqt_s
 }
 
 void QFontDatabase_SetApplicationFallbackFontFamilies(int param1, const libqt_list familyNames) {
-	QFontDatabase::setApplicationFallbackFontFamilies(static_cast<QChar::Script>(param1), *familyNames);
+	QFontDatabase::setApplicationFallbackFontFamilies(static_cast<QChar::Script>(param1), QList<QString>());
 }
 
 libqt_list QFontDatabase_ApplicationFallbackFontFamilies(int script) {
-	return QFontDatabase::applicationFallbackFontFamilies(static_cast<QChar::Script>(script));
+	auto _ret = QFontDatabase::applicationFallbackFontFamilies(static_cast<QChar::Script>(script));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QFont* QFontDatabase_SystemFont(int typeVal) {
@@ -190,11 +292,34 @@ void QFontDatabase_OperatorAssign(QFontDatabase* self, const QFontDatabase* para
 }
 
 libqt_list QFontDatabase_Families1(int writingSystem) {
-	return QFontDatabase::families(static_cast<QFontDatabase::WritingSystem>(writingSystem));
+	auto _ret = QFontDatabase::families(static_cast<QFontDatabase::WritingSystem>(writingSystem));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_list QFontDatabase_PointSizes2(const libqt_string family, const libqt_string style) {
-	return QFontDatabase::pointSizes(QString::fromUtf8(family.data, family.len), QString::fromUtf8(style.data, style.len));
+	auto _ret = QFontDatabase::pointSizes(QString::fromUtf8(family.data, family.len), QString::fromUtf8(style.data, style.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QFontDatabase_IsBitmapScalable2(const libqt_string family, const libqt_string style) {

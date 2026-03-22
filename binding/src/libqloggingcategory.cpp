@@ -2,24 +2,13 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qloggingcategory.h>
 #include "libqloggingcategory.h"
 #include "libqloggingcategory.hxx"
 
 QLoggingCategory* QLoggingCategory_new(const char* category) {
 	 return new QLoggingCategory(category);
-}
-
-QLoggingCategory* QLoggingCategory_new2(const char* category, int severityLevel) {
-	 return new QLoggingCategory(category, static_cast<QtMsgType>(severityLevel));
-}
-
-bool QLoggingCategory_IsEnabled(const QLoggingCategory* self, int typeVal) {
-	return self->isEnabled(static_cast<QtMsgType>(typeVal));
-}
-
-void QLoggingCategory_SetEnabled(QLoggingCategory* self, int typeVal, bool enable) {
-	self->setEnabled(static_cast<QtMsgType>(typeVal), enable);
 }
 
 bool QLoggingCategory_IsDebugEnabled(const QLoggingCategory* self) {

@@ -21,15 +21,11 @@ typedef QCalendar::SystemId QCalendar__SystemId;
 typedef QCalendar::YearMonthDay QCalendar__YearMonthDay;
 #endif
 #else
-typedef struct QAnyStringView QAnyStringView;
 typedef struct QCalendar QCalendar;
 typedef struct QCalendar__SystemId QCalendar__SystemId;
 typedef struct QCalendar__YearMonthDay QCalendar__YearMonthDay;
 typedef struct QDate QDate;
-typedef struct QDateTime QDateTime;
 typedef struct QLocale QLocale;
-typedef struct QStringView QStringView;
-typedef struct QTime QTime;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
 #endif
@@ -40,9 +36,8 @@ QCalendar* QCalendar_new(const QCalendar* other);
 QCalendar* QCalendar_new2(QCalendar* other);
 QCalendar* QCalendar_new3();
 QCalendar* QCalendar_new4(int system);
-QCalendar* QCalendar_new5(libqt_string name);
-QCalendar* QCalendar_new6(QCalendar__SystemId* id);
-QCalendar* QCalendar_new7(const QCalendar* param1);
+QCalendar* QCalendar_new5(QCalendar__SystemId* id);
+QCalendar* QCalendar_new6(const QCalendar* param1);
 void QCalendar_CopyAssign(QCalendar* self, QCalendar* other);
 void QCalendar_MoveAssign(QCalendar* self, QCalendar* other);
 bool QCalendar_IsValid(const QCalendar* self);
@@ -70,7 +65,6 @@ libqt_string QCalendar_MonthName(const QCalendar* self, const QLocale* locale, i
 libqt_string QCalendar_StandaloneMonthName(const QCalendar* self, const QLocale* locale, int month);
 libqt_string QCalendar_WeekDayName(const QCalendar* self, const QLocale* locale, int day);
 libqt_string QCalendar_StandaloneWeekDayName(const QCalendar* self, const QLocale* locale, int day);
-libqt_string QCalendar_DateTimeToString(const QCalendar* self, QStringView* format, const QDateTime* datetime, QDate* dateOnly, QTime* timeOnly, const QLocale* locale);
 libqt_list QCalendar_AvailableCalendars();
 int QCalendar_DaysInMonth2(const QCalendar* self, int month, int year);
 libqt_string QCalendar_MonthName3(const QCalendar* self, const QLocale* locale, int month, int year);

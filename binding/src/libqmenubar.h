@@ -62,7 +62,6 @@ void QMenuBar_SetCornerWidget(QMenuBar* self, QWidget* w);
 QWidget* QMenuBar_CornerWidget(const QMenuBar* self);
 bool QMenuBar_IsNativeMenuBar(const QMenuBar* self);
 void QMenuBar_SetNativeMenuBar(QMenuBar* self, bool nativeMenuBar);
-QPlatformMenuBar* QMenuBar_PlatformMenuBar(QMenuBar* self);
 void QMenuBar_SetVisible(QMenuBar* self, bool visible);
 void QMenuBar_Triggered(QMenuBar* self, QAction* action);
 void QMenuBar_Connect_Triggered(QMenuBar* self, intptr_t slot);

@@ -524,7 +524,9 @@ public:
 			qsortfilterproxymodel_mimedata_isbase = false;
 			return QSortFilterProxyModel::mimeData(indexes);
 		} else if (qsortfilterproxymodel_mimedata_callback != nullptr) {
-			libqt_list cbval1 = indexes;
+			libqt_list cbval1;
+			cbval1.len = indexes.size();
+			cbval1.data = nullptr;
 			QMimeData* callback_ret = qsortfilterproxymodel_mimedata_callback(this, cbval1);
 			return callback_ret;
 		} else {
@@ -681,7 +683,7 @@ public:
 			int cbval4 = hits;
 			int cbval5 = static_cast<int>(flags);
 			libqt_list callback_ret = qsortfilterproxymodel_match_callback(this, cbval1, cbval2, cbval3, cbval4, cbval5);
-			return callback_ret;
+			return QList<QModelIndex>();
 		} else {
 			return QSortFilterProxyModel::match(start, role, value, hits, flags);
 		}
@@ -722,7 +724,7 @@ public:
 			return QSortFilterProxyModel::mimeTypes();
 		} else if (qsortfilterproxymodel_mimetypes_callback != nullptr) {
 			libqt_list callback_ret = qsortfilterproxymodel_mimetypes_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return QSortFilterProxyModel::mimeTypes();
 		}

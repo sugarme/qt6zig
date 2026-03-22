@@ -43,11 +43,9 @@ typedef struct type_info type_info;
 
 QTextCursor* QTextCursor_new();
 QTextCursor* QTextCursor_new2(QTextDocument* document);
-QTextCursor* QTextCursor_new3(QTextDocumentPrivate* p, int pos);
-QTextCursor* QTextCursor_new4(QTextCursorPrivate* d);
-QTextCursor* QTextCursor_new5(QTextFrame* frame);
-QTextCursor* QTextCursor_new6(const QTextBlock* block);
-QTextCursor* QTextCursor_new7(const QTextCursor* cursor);
+QTextCursor* QTextCursor_new3(QTextFrame* frame);
+QTextCursor* QTextCursor_new4(const QTextBlock* block);
+QTextCursor* QTextCursor_new5(const QTextCursor* cursor);
 void QTextCursor_OperatorAssign(QTextCursor* self, const QTextCursor* other);
 void QTextCursor_Swap(QTextCursor* self, QTextCursor* other);
 bool QTextCursor_IsNull(const QTextCursor* self);

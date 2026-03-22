@@ -17,14 +17,6 @@ pub const qshareddata = struct {
     }
 
 
-    pub fn Ref(self: ?*anyopaque, ) QtC.QAtomicInt {
-        return qtc.QSharedData_Ref(@ptrCast(self));
-    }
-
-    pub fn SetRef(self: ?*anyopaque, ref: QtC.QAtomicInt) void {
-        qtc.QSharedData_SetRef(@ptrCast(self), @ptrCast(ref));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QSharedData_Delete(@ptrCast(self));

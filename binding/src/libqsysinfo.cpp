@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSysInfo>
 #include <qsysinfo.h>
 #include "libqsysinfo.h"

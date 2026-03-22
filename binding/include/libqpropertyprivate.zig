@@ -11,54 +11,6 @@ pub const qpropertybindingprivateptr = struct {
     }
 
 
-    /// New2 constructs a new QPropertyBindingPrivatePtr object.
-    pub fn New2(data: ?*anyopaque) QtC.QPropertyBindingPrivatePtr {
-        return qtc.QPropertyBindingPrivatePtr_new2(@ptrCast(data));
-    }
-
-
-    /// New3 constructs a new QPropertyBindingPrivatePtr object.
-    pub fn New3(o: ?*anyopaque) QtC.QPropertyBindingPrivatePtr {
-        return qtc.QPropertyBindingPrivatePtr_new3(@ptrCast(o));
-    }
-
-
-    pub fn OperatorMultiply(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_OperatorMultiply(@ptrCast(self));
-    }
-
-    pub fn OperatorMinusGreater(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_OperatorMinusGreater(@ptrCast(self));
-    }
-
-    pub fn OperatorMinusGreater2(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_OperatorMinusGreater2(@ptrCast(self));
-    }
-
-    pub fn OperatorQtPrivate__RefCountedMultiply(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_OperatorQtPrivate__RefCountedMultiply(@ptrCast(self));
-    }
-
-    pub fn OperatorconstQtPrivate__RefCountedMultiply(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_OperatorconstQtPrivate__RefCountedMultiply(@ptrCast(self));
-    }
-
-    pub fn Data(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_Data(@ptrCast(self));
-    }
-
-    pub fn Get(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_Get(@ptrCast(self));
-    }
-
-    pub fn ConstData(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_ConstData(@ptrCast(self));
-    }
-
-    pub fn Take(self: ?*anyopaque, ) QtC.QtPrivate__RefCounted {
-        return qtc.QPropertyBindingPrivatePtr_Take(@ptrCast(self));
-    }
-
     pub fn DestroyAndFreeMemory(self: ?*anyopaque, ) void {
         qtc.QPropertyBindingPrivatePtr_DestroyAndFreeMemory(@ptrCast(self));
     }
@@ -67,28 +19,12 @@ pub const qpropertybindingprivateptr = struct {
         qtc.QPropertyBindingPrivatePtr_Reset(@ptrCast(self));
     }
 
-    pub fn OperatorAssign(self: ?*anyopaque, o: ?*anyopaque) void {
-        qtc.QPropertyBindingPrivatePtr_OperatorAssign(@ptrCast(self), @ptrCast(o));
-    }
-
-    pub fn OperatorAssign2(self: ?*anyopaque, o: ?*anyopaque) void {
-        qtc.QPropertyBindingPrivatePtr_OperatorAssign2(@ptrCast(self), @ptrCast(o));
-    }
-
     pub fn Operatorbool(self: ?*anyopaque, ) bool {
         return qtc.QPropertyBindingPrivatePtr_Operatorbool(@ptrCast(self));
     }
 
     pub fn OperatorNot(self: ?*anyopaque, ) bool {
         return qtc.QPropertyBindingPrivatePtr_OperatorNot(@ptrCast(self));
-    }
-
-    pub fn Swap(self: ?*anyopaque, other: ?*anyopaque) void {
-        qtc.QPropertyBindingPrivatePtr_Swap(@ptrCast(self), @ptrCast(other));
-    }
-
-    pub fn Reset1(self: ?*anyopaque, ptr: ?*anyopaque) void {
-        qtc.QPropertyBindingPrivatePtr_Reset1(@ptrCast(self), @ptrCast(ptr));
     }
 
     /// Delete this object from C++ memory.
@@ -137,14 +73,6 @@ pub const qpropertyproxybindingdata = struct {
 
     pub fn SetDPtr(self: ?*anyopaque, d_ptr: usize) void {
         qtc.QPropertyProxyBindingData_SetDPtr(@ptrCast(self), d_ptr);
-    }
-
-    pub fn OriginalBindingData(self: ?*anyopaque, ) QtC.QtPrivate__QPropertyBindingData {
-        return qtc.QPropertyProxyBindingData_OriginalBindingData(@ptrCast(self));
-    }
-
-    pub fn SetOriginalBindingData(self: ?*anyopaque, originalBindingData: ?*anyopaque) void {
-        qtc.QPropertyProxyBindingData_SetOriginalBindingData(@ptrCast(self), @ptrCast(originalBindingData));
     }
 
     pub fn PropertyData(self: ?*anyopaque, ) QtC.QUntypedPropertyData {

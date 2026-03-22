@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWinEventNotifier>
 #include <qwineventnotifier.h>
 #include "libqwineventnotifier.h"

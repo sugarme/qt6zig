@@ -271,20 +271,14 @@ pub const qtextblockuserdata = struct {
 pub const qtextblock = struct {
 
     /// New constructs a new QTextBlock object.
-    pub fn New(priv: *QTextDocumentPrivate, b: i32) QtC.QTextBlock {
-        return qtc.QTextBlock_new(@ptrCast(priv), b);
+    pub fn New() QtC.QTextBlock {
+        return qtc.QTextBlock_new();
     }
 
 
     /// New2 constructs a new QTextBlock object.
-    pub fn New2() QtC.QTextBlock {
-        return qtc.QTextBlock_new2();
-    }
-
-
-    /// New3 constructs a new QTextBlock object.
-    pub fn New3(o: ?*anyopaque) QtC.QTextBlock {
-        return qtc.QTextBlock_new3(@ptrCast(o));
+    pub fn New2(o: ?*anyopaque) QtC.QTextBlock {
+        return qtc.QTextBlock_new2(@ptrCast(o));
     }
 
 
@@ -446,20 +440,14 @@ return  _ret;
 pub const qtextfragment = struct {
 
     /// New constructs a new QTextFragment object.
-    pub fn New(priv: *const QTextDocumentPrivate, f: i32, fe: i32) QtC.QTextFragment {
-        return qtc.QTextFragment_new(@ptrCast(priv), f, fe);
+    pub fn New() QtC.QTextFragment {
+        return qtc.QTextFragment_new();
     }
 
 
     /// New2 constructs a new QTextFragment object.
-    pub fn New2() QtC.QTextFragment {
-        return qtc.QTextFragment_new2();
-    }
-
-
-    /// New3 constructs a new QTextFragment object.
-    pub fn New3(o: ?*anyopaque) QtC.QTextFragment {
-        return qtc.QTextFragment_new3(@ptrCast(o));
+    pub fn New2(o: ?*anyopaque) QtC.QTextFragment {
+        return qtc.QTextFragment_new2(@ptrCast(o));
     }
 
 
@@ -533,26 +521,8 @@ return  _ret;
 pub const qtextframe__iterator = struct {
 
     /// New constructs a new QTextFrame::iterator object.
-    pub fn New(other: ?*anyopaque) QtC.QTextFrame__iterator {
-        return qtc.QTextFrame__iterator_new(@ptrCast(other));
-    }
-
-
-    /// New2 constructs a new QTextFrame::iterator object.
-    pub fn New2(other: ?*anyopaque) QtC.QTextFrame__iterator {
-        return qtc.QTextFrame__iterator_new2(@ptrCast(other));
-    }
-
-
-    /// New3 constructs a new QTextFrame::iterator object.
-    pub fn New3() QtC.QTextFrame__iterator {
-        return qtc.QTextFrame__iterator_new3();
-    }
-
-
-    /// New4 constructs a new QTextFrame::iterator object.
-    pub fn New4(param1: ?*anyopaque) QtC.QTextFrame__iterator {
-        return qtc.QTextFrame__iterator_new4(@ptrCast(param1));
+    pub fn New() QtC.QTextFrame__iterator {
+        return qtc.QTextFrame__iterator_new();
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -582,14 +552,6 @@ pub const qtextframe__iterator = struct {
         return qtc.QTextFrame__iterator_AtEnd(@ptrCast(self));
     }
 
-    pub fn OperatorEqual(self: ?*anyopaque, o: ?*anyopaque) bool {
-        return qtc.QTextFrame__iterator_OperatorEqual(@ptrCast(self), @ptrCast(o));
-    }
-
-    pub fn OperatorNotEqual(self: ?*anyopaque, o: ?*anyopaque) bool {
-        return qtc.QTextFrame__iterator_OperatorNotEqual(@ptrCast(self), @ptrCast(o));
-    }
-
     pub fn OperatorPlusPlus(self: ?*anyopaque, ) It::value_type {
         return @ptrCast(qtc.QTextFrame__iterator_OperatorPlusPlus(@ptrCast(self)));
     }
@@ -616,26 +578,8 @@ pub const qtextframe__iterator = struct {
 pub const qtextblock__iterator = struct {
 
     /// New constructs a new QTextBlock::iterator object.
-    pub fn New(other: ?*anyopaque) QtC.QTextBlock__iterator {
-        return qtc.QTextBlock__iterator_new(@ptrCast(other));
-    }
-
-
-    /// New2 constructs a new QTextBlock::iterator object.
-    pub fn New2(other: ?*anyopaque) QtC.QTextBlock__iterator {
-        return qtc.QTextBlock__iterator_new2(@ptrCast(other));
-    }
-
-
-    /// New3 constructs a new QTextBlock::iterator object.
-    pub fn New3() QtC.QTextBlock__iterator {
-        return qtc.QTextBlock__iterator_new3();
-    }
-
-
-    /// New4 constructs a new QTextBlock::iterator object.
-    pub fn New4(param1: ?*anyopaque) QtC.QTextBlock__iterator {
-        return qtc.QTextBlock__iterator_new4(@ptrCast(param1));
+    pub fn New() QtC.QTextBlock__iterator {
+        return qtc.QTextBlock__iterator_new();
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -655,14 +599,6 @@ pub const qtextblock__iterator = struct {
 
     pub fn AtEnd(self: ?*anyopaque, ) bool {
         return qtc.QTextBlock__iterator_AtEnd(@ptrCast(self));
-    }
-
-    pub fn OperatorEqual(self: ?*anyopaque, o: ?*anyopaque) bool {
-        return qtc.QTextBlock__iterator_OperatorEqual(@ptrCast(self), @ptrCast(o));
-    }
-
-    pub fn OperatorNotEqual(self: ?*anyopaque, o: ?*anyopaque) bool {
-        return qtc.QTextBlock__iterator_OperatorNotEqual(@ptrCast(self), @ptrCast(o));
     }
 
     pub fn OperatorPlusPlus(self: ?*anyopaque, ) It::value_type {

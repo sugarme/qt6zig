@@ -92,7 +92,7 @@ public:
 		} else if (qnetworkcookiejar_cookiesforurl_callback != nullptr) {
 			const QUrl* cbval1 = (const QUrl*)&url;
 			libqt_list callback_ret = qnetworkcookiejar_cookiesforurl_callback(this, cbval1);
-			return callback_ret;
+			return QList<QNetworkCookie>();
 		} else {
 			return QNetworkCookieJar::cookiesForUrl(url);
 		}
@@ -104,7 +104,9 @@ public:
 			qnetworkcookiejar_setcookiesfromurl_isbase = false;
 			return QNetworkCookieJar::setCookiesFromUrl(cookieList, url);
 		} else if (qnetworkcookiejar_setcookiesfromurl_callback != nullptr) {
-			libqt_list cbval1 = cookieList;
+			libqt_list cbval1;
+			cbval1.len = cookieList.size();
+			cbval1.data = nullptr;
 			const QUrl* cbval2 = (const QUrl*)&url;
 			bool callback_ret = qnetworkcookiejar_setcookiesfromurl_callback(this, cbval1, cbval2);
 			return callback_ret;
@@ -177,7 +179,7 @@ public:
 			return QNetworkCookieJar::allCookies();
 		} else if (qnetworkcookiejar_allcookies_callback != nullptr) {
 			libqt_list callback_ret = qnetworkcookiejar_allcookies_callback();
-			return callback_ret;
+			return QList<QNetworkCookie>();
 		} else {
 			return QNetworkCookieJar::allCookies();
 		}
@@ -189,7 +191,9 @@ public:
 			qnetworkcookiejar_setallcookies_isbase = false;
 			QNetworkCookieJar::setAllCookies(cookieList);
 		} else if (qnetworkcookiejar_setallcookies_callback != nullptr) {
-			libqt_list cbval1 = cookieList;
+			libqt_list cbval1;
+			cbval1.len = cookieList.size();
+			cbval1.data = nullptr;
 			qnetworkcookiejar_setallcookies_callback(this, cbval1);
 		} else {
 			QNetworkCookieJar::setAllCookies(cookieList);

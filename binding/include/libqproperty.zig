@@ -165,20 +165,8 @@ pub const quntypedpropertybinding = struct {
 
 
     /// New2 constructs a new QUntypedPropertyBinding object.
-    pub fn New2(metaType: QtC.QMetaType, vtable: ?*anyopaque, function: ?*anyopaque, location: ?*anyopaque) QtC.QUntypedPropertyBinding {
-        return qtc.QUntypedPropertyBinding_new2(@ptrCast(metaType), @ptrCast(vtable), @ptrCast(function), @ptrCast(location));
-    }
-
-
-    /// New3 constructs a new QUntypedPropertyBinding object.
-    pub fn New3(other: ?*anyopaque) QtC.QUntypedPropertyBinding {
-        return qtc.QUntypedPropertyBinding_new3(@ptrCast(other));
-    }
-
-
-    /// New4 constructs a new QUntypedPropertyBinding object.
-    pub fn New4(priv: *QPropertyBindingPrivate) QtC.QUntypedPropertyBinding {
-        return qtc.QUntypedPropertyBinding_new4(@ptrCast(priv));
+    pub fn New2(other: ?*anyopaque) QtC.QUntypedPropertyBinding {
+        return qtc.QUntypedPropertyBinding_new2(@ptrCast(other));
     }
 
 
@@ -255,10 +243,6 @@ pub const qpropertyobserver = struct {
         return qtc.QPropertyObserver_new();
     }
 
-
-    pub fn SetSource(self: ?*anyopaque, property: ?*anyopaque) void {
-        qtc.QPropertyObserver_SetSource(@ptrCast(self), @ptrCast(property));
-    }
 
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {

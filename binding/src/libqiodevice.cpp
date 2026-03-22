@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qiodevice.h>
 #include "libqiodevice.h"
 #include "libqiodevice.hxx"

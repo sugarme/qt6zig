@@ -16,7 +16,6 @@ extern "C" {
 #ifdef __cplusplus
 #else
 typedef struct QChar QChar;
-typedef struct QStringView QStringView;
 typedef struct QTextBoundaryFinder QTextBoundaryFinder;
 typedef struct _GUID _GUID;
 typedef struct type_info type_info;
@@ -28,11 +27,8 @@ QTextBoundaryFinder* QTextBoundaryFinder_new();
 QTextBoundaryFinder* QTextBoundaryFinder_new2(const QTextBoundaryFinder* other);
 QTextBoundaryFinder* QTextBoundaryFinder_new3(int typeVal, const libqt_string stringVal);
 QTextBoundaryFinder* QTextBoundaryFinder_new4(int typeVal, const QChar* chars, ptrdiff_t length);
-QTextBoundaryFinder* QTextBoundaryFinder_new5(int typeVal, QStringView* str);
-QTextBoundaryFinder* QTextBoundaryFinder_new6(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer);
-QTextBoundaryFinder* QTextBoundaryFinder_new7(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize);
-QTextBoundaryFinder* QTextBoundaryFinder_new8(int typeVal, QStringView* str, unsigned char* buffer);
-QTextBoundaryFinder* QTextBoundaryFinder_new9(int typeVal, QStringView* str, unsigned char* buffer, ptrdiff_t bufferSize);
+QTextBoundaryFinder* QTextBoundaryFinder_new5(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer);
+QTextBoundaryFinder* QTextBoundaryFinder_new6(int typeVal, const QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize);
 void QTextBoundaryFinder_OperatorAssign(QTextBoundaryFinder* self, const QTextBoundaryFinder* other);
 bool QTextBoundaryFinder_IsValid(const QTextBoundaryFinder* self);
 int QTextBoundaryFinder_Type(const QTextBoundaryFinder* self);

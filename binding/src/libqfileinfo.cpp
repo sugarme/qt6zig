@@ -5,32 +5,29 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimeZone>
 #include <qfileinfo.h>
 #include "libqfileinfo.h"
 #include "libqfileinfo.hxx"
 
-QFileInfo* QFileInfo_new(QFileInfoPrivate* d) {
-	 return new QFileInfo(d);
-}
-
-QFileInfo* QFileInfo_new2() {
+QFileInfo* QFileInfo_new() {
 	 return new QFileInfo();
 }
 
-QFileInfo* QFileInfo_new3(const libqt_string file) {
+QFileInfo* QFileInfo_new2(const libqt_string file) {
 	 return new QFileInfo(QString::fromUtf8(file.data, file.len));
 }
 
-QFileInfo* QFileInfo_new4(const QFileDevice* file) {
+QFileInfo* QFileInfo_new3(const QFileDevice* file) {
 	 return new QFileInfo(*file);
 }
 
-QFileInfo* QFileInfo_new5(const QDir* dir, const libqt_string file) {
+QFileInfo* QFileInfo_new4(const QDir* dir, const libqt_string file) {
 	 return new QFileInfo(*dir, QString::fromUtf8(file.data, file.len));
 }
 
-QFileInfo* QFileInfo_new6(const QFileInfo* fileinfo) {
+QFileInfo* QFileInfo_new5(const QFileInfo* fileinfo) {
 	 return new QFileInfo(*fileinfo);
 }
 
@@ -97,18 +94,6 @@ libqt_string QFileInfo_CanonicalFilePath(const QFileInfo* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-std::filesystem::path QFileInfo_FilesystemFilePath(const QFileInfo* self) {
-	return self->filesystemFilePath();
-}
-
-std::filesystem::path QFileInfo_FilesystemAbsoluteFilePath(const QFileInfo* self) {
-	return self->filesystemAbsoluteFilePath();
-}
-
-std::filesystem::path QFileInfo_FilesystemCanonicalFilePath(const QFileInfo* self) {
-	return self->filesystemCanonicalFilePath();
 }
 
 libqt_string QFileInfo_FileName(const QFileInfo* self) {
@@ -208,18 +193,6 @@ libqt_string QFileInfo_CanonicalPath(const QFileInfo* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-std::filesystem::path QFileInfo_FilesystemPath(const QFileInfo* self) {
-	return self->filesystemPath();
-}
-
-std::filesystem::path QFileInfo_FilesystemAbsolutePath(const QFileInfo* self) {
-	return self->filesystemAbsolutePath();
-}
-
-std::filesystem::path QFileInfo_FilesystemCanonicalPath(const QFileInfo* self) {
-	return self->filesystemCanonicalPath();
 }
 
 QDir* QFileInfo_Dir(const QFileInfo* self) {
@@ -329,18 +302,6 @@ libqt_string QFileInfo_JunctionTarget(const QFileInfo* self) {
 	memcpy((void*)_str.data, _b.data(), _str.len);
 	((char*)_str.data)[_str.len] = '\0';
 	return _str;
-}
-
-std::filesystem::path QFileInfo_FilesystemSymLinkTarget(const QFileInfo* self) {
-	return self->filesystemSymLinkTarget();
-}
-
-std::filesystem::path QFileInfo_FilesystemReadSymLink(const QFileInfo* self) {
-	return self->filesystemReadSymLink();
-}
-
-std::filesystem::path QFileInfo_FilesystemJunctionTarget(const QFileInfo* self) {
-	return self->filesystemJunctionTarget();
 }
 
 libqt_string QFileInfo_Owner(const QFileInfo* self) {

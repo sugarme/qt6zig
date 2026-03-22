@@ -24,20 +24,14 @@ pub const qmetatype = struct {
 
 
     /// New4 constructs a new QMetaType object.
-    pub fn New4(d: ?*anyopaque) QtC.QMetaType {
-        return qtc.QMetaType_new4(@ptrCast(d));
+    pub fn New4() QtC.QMetaType {
+        return qtc.QMetaType_new4();
     }
 
 
     /// New5 constructs a new QMetaType object.
-    pub fn New5() QtC.QMetaType {
-        return qtc.QMetaType_new5();
-    }
-
-
-    /// New6 constructs a new QMetaType object.
-    pub fn New6(param1: ?*anyopaque) QtC.QMetaType {
-        return qtc.QMetaType_new6(@ptrCast(param1));
+    pub fn New5(param1: ?*anyopaque) QtC.QMetaType {
+        return qtc.QMetaType_new5(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -279,14 +273,6 @@ return  std.mem.span(_ret);
 
     pub fn UnregisterMetaType(typeVal: QtC.QMetaType) void {
         qtc.QMetaType_UnregisterMetaType(@ptrCast(typeVal));
-    }
-
-    pub fn Iface(self: ?*anyopaque, ) QtC.QtPrivate__QMetaTypeInterface {
-        return qtc.QMetaType_Iface(@ptrCast(self));
-    }
-
-    pub fn Iface2(self: ?*anyopaque, ) QtC.QtPrivate__QMetaTypeInterface {
-        return qtc.QMetaType_Iface2(@ptrCast(self));
     }
 
     pub fn Create22(typeVal: i32, copyVal: ?*anyopaque) ?*anyopaque {

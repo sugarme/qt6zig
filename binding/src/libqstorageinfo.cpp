@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qstorageinfo.h>
 #include "libqstorageinfo.h"
 #include "libqstorageinfo.hxx"
@@ -137,7 +138,16 @@ void QStorageInfo_Refresh(QStorageInfo* self) {
 }
 
 libqt_list QStorageInfo_MountedVolumes() {
-	return QStorageInfo::mountedVolumes();
+	auto _ret = QStorageInfo::mountedVolumes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QStorageInfo* QStorageInfo_Root() {

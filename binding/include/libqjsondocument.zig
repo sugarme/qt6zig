@@ -168,14 +168,6 @@ return  _ret;
 return qtc.QJsonDocument_OperatorSubscript(@ptrCast(self), key_str);
     }
 
-    pub fn OperatorSubscript2(self: ?*anyopaque, key: []const u8) QtC.QJsonValue {
-        return qtc.QJsonDocument_OperatorSubscript2(@ptrCast(self), @ptrCast(key));
-    }
-
-    pub fn OperatorSubscript3(self: ?*anyopaque, key: QLatin1StringView) QtC.QJsonValue {
-        return qtc.QJsonDocument_OperatorSubscript3(@ptrCast(self), key);
-    }
-
     pub fn OperatorSubscript4(self: ?*anyopaque, i: i64) QtC.QJsonValue {
         return qtc.QJsonDocument_OperatorSubscript4(@ptrCast(self), i);
     }

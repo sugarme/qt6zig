@@ -42,7 +42,6 @@ int QAudioDevice_MinimumChannelCount(const QAudioDevice* self);
 int QAudioDevice_MaximumChannelCount(const QAudioDevice* self);
 libqt_list QAudioDevice_SupportedSampleFormats(const QAudioDevice* self);
 quint32 QAudioDevice_ChannelConfiguration(const QAudioDevice* self);
-const QAudioDevicePrivate* QAudioDevice_Handle(const QAudioDevice* self);
 void QAudioDevice_Delete(QAudioDevice* self);
 
 #ifdef __cplusplus

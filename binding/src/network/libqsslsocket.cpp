@@ -10,6 +10,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTcpSocket>
 #include <QVariant>
 #include <qsslsocket.h>
@@ -155,11 +156,20 @@ void QSslSocket_SetSslConfiguration(QSslSocket* self, const QSslConfiguration* c
 }
 
 void QSslSocket_SetLocalCertificateChain(QSslSocket* self, const libqt_list localChain) {
-	self->setLocalCertificateChain(*localChain);
+	self->setLocalCertificateChain(QList<QSslCertificate>());
 }
 
 libqt_list QSslSocket_LocalCertificateChain(const QSslSocket* self) {
-	return self->localCertificateChain();
+	auto _ret = self->localCertificateChain();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QSslSocket_SetLocalCertificate(QSslSocket* self, const QSslCertificate* certificate) {
@@ -179,7 +189,16 @@ QSslCertificate* QSslSocket_PeerCertificate(const QSslSocket* self) {
 }
 
 libqt_list QSslSocket_PeerCertificateChain(const QSslSocket* self) {
-	return self->peerCertificateChain();
+	auto _ret = self->peerCertificateChain();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QSslCipher* QSslSocket_SessionCipher(const QSslSocket* self) {
@@ -191,7 +210,16 @@ int QSslSocket_SessionProtocol(const QSslSocket* self) {
 }
 
 libqt_list QSslSocket_OcspResponses(const QSslSocket* self) {
-	return self->ocspResponses();
+	auto _ret = self->ocspResponses();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QSslSocket_SetPrivateKey(QSslSocket* self, const QSslKey* key) {
@@ -227,7 +255,16 @@ bool QSslSocket_WaitForDisconnected(QSslSocket* self, int msecs) {
 }
 
 libqt_list QSslSocket_SslHandshakeErrors(const QSslSocket* self) {
-	return self->sslHandshakeErrors();
+	auto _ret = self->sslHandshakeErrors();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_SupportsSsl() {
@@ -265,7 +302,21 @@ libqt_string QSslSocket_SslLibraryBuildVersionString() {
 }
 
 libqt_list QSslSocket_AvailableBackends() {
-	return QSslSocket::availableBackends();
+	auto _ret = QSslSocket::availableBackends();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QSslSocket_ActiveBackend() {
@@ -284,7 +335,16 @@ bool QSslSocket_SetActiveBackend(const libqt_string backendName) {
 }
 
 libqt_list QSslSocket_SupportedProtocols() {
-	return QSslSocket::supportedProtocols();
+	auto _ret = QSslSocket::supportedProtocols();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_IsProtocolSupported(int protocol) {
@@ -292,7 +352,16 @@ bool QSslSocket_IsProtocolSupported(int protocol) {
 }
 
 libqt_list QSslSocket_ImplementedClasses() {
-	return QSslSocket::implementedClasses();
+	auto _ret = QSslSocket::implementedClasses();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_IsClassImplemented(int cl) {
@@ -300,7 +369,16 @@ bool QSslSocket_IsClassImplemented(int cl) {
 }
 
 libqt_list QSslSocket_SupportedFeatures() {
-	return QSslSocket::supportedFeatures();
+	auto _ret = QSslSocket::supportedFeatures();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_IsFeatureSupported(int feat) {
@@ -308,7 +386,7 @@ bool QSslSocket_IsFeatureSupported(int feat) {
 }
 
 void QSslSocket_IgnoreSslErrors(QSslSocket* self, const libqt_list errors) {
-	self->ignoreSslErrors(*errors);
+	self->ignoreSslErrors(QList<QSslError>());
 }
 
 void QSslSocket_ContinueInterruptedHandshake(QSslSocket* self) {
@@ -350,7 +428,7 @@ void QSslSocket_Connect_PeerVerifyError(QSslSocket* self, intptr_t slot) {
 }
 
 void QSslSocket_SslErrors(QSslSocket* self, const libqt_list errors) {
-	self->sslErrors(*errors);
+	self->sslErrors(QList<QSslError>());
 }
 
 void QSslSocket_Connect_SslErrors(QSslSocket* self, intptr_t slot) {
@@ -496,7 +574,16 @@ bool QSslSocket_WaitForEncrypted1(QSslSocket* self, int msecs) {
 }
 
 libqt_list QSslSocket_SupportedProtocols1(const libqt_string backendName) {
-	return QSslSocket::supportedProtocols(QString::fromUtf8(backendName.data, backendName.len));
+	auto _ret = QSslSocket::supportedProtocols(QString::fromUtf8(backendName.data, backendName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_IsProtocolSupported2(int protocol, const libqt_string backendName) {
@@ -504,7 +591,16 @@ bool QSslSocket_IsProtocolSupported2(int protocol, const libqt_string backendNam
 }
 
 libqt_list QSslSocket_ImplementedClasses1(const libqt_string backendName) {
-	return QSslSocket::implementedClasses(QString::fromUtf8(backendName.data, backendName.len));
+	auto _ret = QSslSocket::implementedClasses(QString::fromUtf8(backendName.data, backendName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_IsClassImplemented2(int cl, const libqt_string backendName) {
@@ -512,7 +608,16 @@ bool QSslSocket_IsClassImplemented2(int cl, const libqt_string backendName) {
 }
 
 libqt_list QSslSocket_SupportedFeatures1(const libqt_string backendName) {
-	return QSslSocket::supportedFeatures(QString::fromUtf8(backendName.data, backendName.len));
+	auto _ret = QSslSocket::supportedFeatures(QString::fromUtf8(backendName.data, backendName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 bool QSslSocket_IsFeatureSupported2(int feat, const libqt_string backendName) {

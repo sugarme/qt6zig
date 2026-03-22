@@ -24,14 +24,8 @@ pub const qmetacontainer = struct {
 
 
     /// New4 constructs a new QMetaContainer object.
-    pub fn New4(d: ?*anyopaque) QtC.QMetaContainer {
-        return qtc.QMetaContainer_new4(@ptrCast(d));
-    }
-
-
-    /// New5 constructs a new QMetaContainer object.
-    pub fn New5(param1: ?*anyopaque) QtC.QMetaContainer {
-        return qtc.QMetaContainer_new5(@ptrCast(param1));
+    pub fn New4(param1: ?*anyopaque) QtC.QMetaContainer {
+        return qtc.QMetaContainer_new4(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -169,14 +163,8 @@ pub const qmetasequence = struct {
 
 
     /// New4 constructs a new QMetaSequence object.
-    pub fn New4(d: ?*anyopaque) QtC.QMetaSequence {
-        return qtc.QMetaSequence_new4(@ptrCast(d));
-    }
-
-
-    /// New5 constructs a new QMetaSequence object.
-    pub fn New5(param1: ?*anyopaque) QtC.QMetaSequence {
-        return qtc.QMetaSequence_new5(@ptrCast(param1));
+    pub fn New4(param1: ?*anyopaque) QtC.QMetaSequence {
+        return qtc.QMetaSequence_new4(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -310,10 +298,6 @@ pub const qmetasequence = struct {
         qtc.QMetaSequence_ValueAtConstIterator(@ptrCast(self), @ptrCast(iterator), @ptrCast(result));
     }
 
-    pub fn Iface(self: ?*anyopaque, ) QtC.QtMetaContainerPrivate__QMetaSequenceInterface {
-        return qtc.QMetaSequence_Iface(@ptrCast(self));
-    }
-
     /// Delete this object from C++ memory.
     pub fn QDelete(self: ?*anyopaque) void {
         qtc.QMetaSequence_Delete(@ptrCast(self));
@@ -342,14 +326,8 @@ pub const qmetaassociation = struct {
 
 
     /// New4 constructs a new QMetaAssociation object.
-    pub fn New4(d: ?*anyopaque) QtC.QMetaAssociation {
-        return qtc.QMetaAssociation_new4(@ptrCast(d));
-    }
-
-
-    /// New5 constructs a new QMetaAssociation object.
-    pub fn New5(param1: ?*anyopaque) QtC.QMetaAssociation {
-        return qtc.QMetaAssociation_new5(@ptrCast(param1));
+    pub fn New4(param1: ?*anyopaque) QtC.QMetaAssociation {
+        return qtc.QMetaAssociation_new4(@ptrCast(param1));
     }
 
     /// CopyAssign shallow copies `other` into `self`.
@@ -465,10 +443,6 @@ pub const qmetaassociation = struct {
 
     pub fn CreateConstIteratorAtKey(self: ?*anyopaque, container: ?*anyopaque, key: ?*anyopaque) ?*anyopaque {
         return qtc.QMetaAssociation_CreateConstIteratorAtKey(@ptrCast(self), @ptrCast(container), @ptrCast(key));
-    }
-
-    pub fn Iface(self: ?*anyopaque, ) QtC.QtMetaContainerPrivate__QMetaAssociationInterface {
-        return qtc.QMetaAssociation_Iface(@ptrCast(self));
     }
 
     /// Delete this object from C++ memory.

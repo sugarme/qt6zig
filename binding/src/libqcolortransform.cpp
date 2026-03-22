@@ -33,14 +33,6 @@ QRgba64* QColorTransform_Map2(const QColorTransform* self, QRgba64* rgba64) {
 	return new QRgba64(self->map(*rgba64));
 }
 
-QRgbaFloat<qfloat16> QColorTransform_Map3(const QColorTransform* self, QRgbaFloat<qfloat16> rgbafp16) {
-	return self->map(rgbafp16);
-}
-
-QRgbaFloat<float> QColorTransform_Map4(const QColorTransform* self, QRgbaFloat<float> rgbafp32) {
-	return self->map(rgbafp32);
-}
-
 QColor* QColorTransform_Map5(const QColorTransform* self, const QColor* color) {
 	return new QColor(self->map(*color));
 }

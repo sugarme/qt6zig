@@ -16,6 +16,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QStyleOptionMenuItem>
 #include <QTimerEvent>
 #include <QWheelEvent>
@@ -160,7 +161,7 @@ QAction* QMenu_Exec2(QMenu* self, const QPoint* pos) {
 }
 
 QAction* QMenu_Exec3(const libqt_list actions, const QPoint* pos) {
-	return QMenu::exec(*actions, *pos);
+	return QMenu::exec(QList<QAction *>(), *pos);
 }
 
 QSize* QMenu_SizeHint(const QMenu* self) {
@@ -208,14 +209,6 @@ void QMenu_SetIcon(QMenu* self, const QIcon* icon) {
 
 void QMenu_SetNoReplayFor(QMenu* self, QWidget* widget) {
 	self->setNoReplayFor(widget);
-}
-
-QPlatformMenu* QMenu_PlatformMenu(QMenu* self) {
-	return self->platformMenu();
-}
-
-void QMenu_SetPlatformMenu(QMenu* self, QPlatformMenu* platformMenu) {
-	self->setPlatformMenu(platformMenu);
 }
 
 bool QMenu_SeparatorsCollapsible(const QMenu* self) {
@@ -309,11 +302,11 @@ QAction* QMenu_Exec22(QMenu* self, const QPoint* pos, QAction* at) {
 }
 
 QAction* QMenu_Exec32(const libqt_list actions, const QPoint* pos, QAction* at) {
-	return QMenu::exec(*actions, *pos, at);
+	return QMenu::exec(QList<QAction *>(), *pos, at);
 }
 
 QAction* QMenu_Exec4(const libqt_list actions, const QPoint* pos, QAction* at, QWidget* parent) {
-	return QMenu::exec(*actions, *pos, at, parent);
+	return QMenu::exec(QList<QAction *>(), *pos, at, parent);
 }
 
 // Base class handler implementation

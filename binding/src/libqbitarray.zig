@@ -142,14 +142,6 @@ return  std.mem.span(_ret);
         return qtc.QBitArray_ToUInt32(@ptrCast(self), @intCast(endianness));
     }
 
-    pub fn DataPtr(self: ?*anyopaque, ) QArrayDataPointer<char> {
-        return @ptrCast(qtc.QBitArray_DataPtr(@ptrCast(self)));
-    }
-
-    pub fn DataPtr2(self: ?*anyopaque, ) QArrayDataPointer<char> {
-        return @ptrCast(qtc.QBitArray_DataPtr2(@ptrCast(self)));
-    }
-
     pub fn Fill22(self: ?*anyopaque, aval: bool, asize: i64) bool {
         return qtc.QBitArray_Fill22(@ptrCast(self), aval, asize);
     }

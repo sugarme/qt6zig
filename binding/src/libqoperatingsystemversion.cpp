@@ -4,6 +4,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVersionNumber>
 #include <qoperatingsystemversion.h>
 #include "libqoperatingsystemversion.h"

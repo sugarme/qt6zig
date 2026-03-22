@@ -6,6 +6,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qboxplotlegendmarker.h>
 #include "libqboxplotlegendmarker.h"
 #include "libqboxplotlegendmarker.hxx"

@@ -16,6 +16,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qnetworkaccessmanager.h>
 #include "libqnetworkaccessmanager.h"
 #include "libqnetworkaccessmanager.hxx"
@@ -40,7 +41,21 @@ libqt_string QNetworkAccessManager_Tr(const char* s) {
 }
 
 libqt_list QNetworkAccessManager_SupportedSchemes(const QNetworkAccessManager* self) {
-	return self->supportedSchemes();
+	auto _ret = self->supportedSchemes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QNetworkAccessManager_ClearAccessCache(QNetworkAccessManager* self) {
@@ -100,11 +115,20 @@ bool QNetworkAccessManager_IsStrictTransportSecurityStoreEnabled(const QNetworkA
 }
 
 void QNetworkAccessManager_AddStrictTransportSecurityHosts(QNetworkAccessManager* self, const libqt_list knownHosts) {
-	self->addStrictTransportSecurityHosts(*knownHosts);
+	self->addStrictTransportSecurityHosts(QList<QHstsPolicy>());
 }
 
 libqt_list QNetworkAccessManager_StrictTransportSecurityHosts(const QNetworkAccessManager* self) {
-	return self->strictTransportSecurityHosts();
+	auto _ret = self->strictTransportSecurityHosts();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QNetworkReply* QNetworkAccessManager_Head(QNetworkAccessManager* self, const QNetworkRequest* request) {
@@ -248,7 +272,7 @@ void QNetworkAccessManager_Connect_Encrypted(QNetworkAccessManager* self, intptr
 }
 
 void QNetworkAccessManager_SslErrors(QNetworkAccessManager* self, QNetworkReply* reply, const libqt_list errors) {
-	self->sslErrors(reply, *errors);
+	self->sslErrors(reply, QList<QSslError>());
 }
 
 void QNetworkAccessManager_Connect_SslErrors(QNetworkAccessManager* self, intptr_t slot) {
@@ -316,7 +340,21 @@ libqt_list QNetworkAccessManager_QBaseSupportedSchemes(const QNetworkAccessManag
 	auto* vqnetworkaccessmanager = dynamic_cast<const VirtualQNetworkAccessManager*>(self);
 	if (vqnetworkaccessmanager && vqnetworkaccessmanager->isVirtualQNetworkAccessManager) {
 vqnetworkaccessmanager->setQNetworkAccessManager_SupportedSchemes_IsBase(true);
-	return vqnetworkaccessmanager->supportedSchemes();
+	auto _ret = vqnetworkaccessmanager->supportedSchemes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -359,9 +397,37 @@ vqnetworkaccessmanager->setQNetworkAccessManager_CreateRequest_Callback(reinterp
 libqt_list QNetworkAccessManager_SupportedSchemesImplementation(const QNetworkAccessManager* self) {
 	auto* vqnetworkaccessmanager = dynamic_cast<const VirtualQNetworkAccessManager*>(self);
 	if (vqnetworkaccessmanager && vqnetworkaccessmanager->isVirtualQNetworkAccessManager) {
-	return vqnetworkaccessmanager->supportedSchemesImplementation();
+	auto _ret = vqnetworkaccessmanager->supportedSchemesImplementation();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 	} else {
-	return self->QNetworkAccessManager::supportedSchemesImplementation();
+	auto _ret = self->QNetworkAccessManager::supportedSchemesImplementation();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -370,7 +436,21 @@ libqt_list QNetworkAccessManager_QBaseSupportedSchemesImplementation(const QNetw
 	auto* vqnetworkaccessmanager = dynamic_cast<const VirtualQNetworkAccessManager*>(self);
 	if (vqnetworkaccessmanager && vqnetworkaccessmanager->isVirtualQNetworkAccessManager) {
 vqnetworkaccessmanager->setQNetworkAccessManager_SupportedSchemesImplementation_IsBase(true);
-	return vqnetworkaccessmanager->supportedSchemesImplementation();
+	auto _ret = vqnetworkaccessmanager->supportedSchemesImplementation();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 

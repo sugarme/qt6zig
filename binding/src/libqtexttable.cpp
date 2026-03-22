@@ -1,11 +1,11 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextCharFormat>
 #include <QTextCursor>
 #include <QTextDocument>
 #include <QTextFrame>
-#define WORKAROUND_INNER_CLASS_DEFINITION_QTextFrame__iterator
 #include <QTextTable>
 #include <QTextTableCell>
 #include <QTextTableFormat>
@@ -75,14 +75,6 @@ bool QTextTableCell_OperatorEqual(const QTextTableCell* self, const QTextTableCe
 
 bool QTextTableCell_OperatorNotEqual(const QTextTableCell* self, const QTextTableCell* other) {
 	return self->operator!=(*other);
-}
-
-QTextFrame__iterator* QTextTableCell_Begin(const QTextTableCell* self) {
-	return new QTextFrame::iterator(self->begin());
-}
-
-QTextFrame__iterator* QTextTableCell_End(const QTextTableCell* self) {
-	return new QTextFrame::iterator(self->end());
 }
 
 int QTextTableCell_TableCellFormatIndex(const QTextTableCell* self) {

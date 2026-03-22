@@ -1,4 +1,3 @@
-#include <QAnyStringView>
 #include <QByteArray>
 #include <QByteArrayView>
 #include <QHttpHeaders>
@@ -12,6 +11,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QUrl>
 #include <QVariant>
 #include <qnetworkreply.h>
@@ -77,26 +77,30 @@ QVariant* QNetworkReply_Header(const QNetworkReply* self, int header) {
 	return new QVariant(self->header(static_cast<QNetworkRequest::KnownHeaders>(header)));
 }
 
-bool QNetworkReply_HasRawHeader(const QNetworkReply* self, libqt_string headerName) {
-	return self->hasRawHeader(QAnyStringView(QString::fromUtf8(headerName.data, headerName.len)));
-}
-
 libqt_list QNetworkReply_RawHeaderList(const QNetworkReply* self) {
-	return self->rawHeaderList();
-}
-
-libqt_string QNetworkReply_RawHeader(const QNetworkReply* self, libqt_string headerName) {
-	QByteArray _qb = self->rawHeader(QAnyStringView(QString::fromUtf8(headerName.data, headerName.len)));
-	libqt_string _str;
-	_str.len = _qb.length();
-	_str.data = static_cast<const char*>(malloc(_str.len + 1));
-	memcpy((void*)_str.data, _qb.data(), _str.len);
-	((char*)_str.data)[_str.len] = '\0';
-	return _str;
+	auto _ret = self->rawHeaderList();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QNetworkReply_RawHeaderPairs(const QNetworkReply* self) {
-	return self->rawHeaderPairs();
+	auto _ret = self->rawHeaderPairs();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QHttpHeaders* QNetworkReply_Headers(const QNetworkReply* self) {
@@ -116,7 +120,7 @@ void QNetworkReply_SetSslConfiguration(QNetworkReply* self, const QSslConfigurat
 }
 
 void QNetworkReply_IgnoreSslErrors(QNetworkReply* self, const libqt_list errors) {
-	self->ignoreSslErrors(*errors);
+	self->ignoreSslErrors(QList<QSslError>());
 }
 
 void QNetworkReply_Abort(QNetworkReply* self) {
@@ -194,7 +198,7 @@ void QNetworkReply_Connect_Encrypted(QNetworkReply* self, intptr_t slot) {
 }
 
 void QNetworkReply_SslErrors(QNetworkReply* self, const libqt_list errors) {
-	self->sslErrors(*errors);
+	self->sslErrors(QList<QSslError>());
 }
 
 void QNetworkReply_Connect_SslErrors(QNetworkReply* self, intptr_t slot) {
@@ -451,9 +455,9 @@ vqnetworkreply->setQNetworkReply_SetSslConfigurationImplementation_Callback(rein
 void QNetworkReply_IgnoreSslErrorsImplementation(QNetworkReply* self, const libqt_list param1) {
 	auto* vqnetworkreply = dynamic_cast<VirtualQNetworkReply*>(self);
 	if (vqnetworkreply && vqnetworkreply->isVirtualQNetworkReply) {
-	vqnetworkreply->ignoreSslErrorsImplementation(*param1);
+	vqnetworkreply->ignoreSslErrorsImplementation(QList<QSslError>());
 	} else {
-	self->QNetworkReply::ignoreSslErrorsImplementation(*param1);
+	self->QNetworkReply::ignoreSslErrorsImplementation(QList<QSslError>());
 }
 }
 
@@ -462,7 +466,7 @@ void QNetworkReply_QBaseIgnoreSslErrorsImplementation(QNetworkReply* self, const
 	auto* vqnetworkreply = dynamic_cast<VirtualQNetworkReply*>(self);
 	if (vqnetworkreply && vqnetworkreply->isVirtualQNetworkReply) {
 vqnetworkreply->setQNetworkReply_IgnoreSslErrorsImplementation_IsBase(true);
-	vqnetworkreply->ignoreSslErrorsImplementation(*param1);
+	vqnetworkreply->ignoreSslErrorsImplementation(QList<QSslError>());
 }
 }
 

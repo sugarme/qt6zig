@@ -17,6 +17,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWheelEvent>
 #include <QWidget>
 #include <qabstractscrollarea.h>
@@ -87,7 +88,15 @@ void QAbstractScrollArea_AddScrollBarWidget(QAbstractScrollArea* self, QWidget* 
 }
 
 libqt_list QAbstractScrollArea_ScrollBarWidgets(QAbstractScrollArea* self, int alignment) {
-	return self->scrollBarWidgets(static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
+	auto _ret = self->scrollBarWidgets(static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		_data[_i] = _ret[_i];
+	}
+	return _arr;
 }
 
 QWidget* QAbstractScrollArea_Viewport(const QAbstractScrollArea* self) {

@@ -18,7 +18,6 @@ extern "C" {
 typedef QGradient::QGradientData QGradient__QGradientData;
 #endif
 #else
-typedef struct QAtomicInt QAtomicInt;
 typedef struct QBrush QBrush;
 typedef struct QBrushData QBrushData;
 typedef struct QColor QColor;
@@ -39,14 +38,10 @@ typedef struct type_info type_info;
 
 
 
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new(const QBrushDataPointerDeleter* other);
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new2(QBrushDataPointerDeleter* other);
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new3(const QBrushDataPointerDeleter* param1);
-QBrushDataPointerDeleter* QBrushDataPointerDeleter_new4();
+QBrushDataPointerDeleter* QBrushDataPointerDeleter_new();
 void QBrushDataPointerDeleter_CopyAssign(QBrushDataPointerDeleter* self, QBrushDataPointerDeleter* other);
 void QBrushDataPointerDeleter_MoveAssign(QBrushDataPointerDeleter* self, QBrushDataPointerDeleter* other);
 void QBrushDataPointerDeleter_OperatorCall(const QBrushDataPointerDeleter* self, QBrushData* d);
-void QBrushDataPointerDeleter_OperatorAssign(QBrushDataPointerDeleter* self, const QBrushDataPointerDeleter* param1);
 void QBrushDataPointerDeleter_Delete(QBrushDataPointerDeleter* self);
 
 QBrush* QBrush_new();
@@ -80,12 +75,9 @@ bool QBrush_IsOpaque(const QBrush* self);
 bool QBrush_OperatorEqual(const QBrush* self, const QBrush* b);
 bool QBrush_OperatorNotEqual(const QBrush* self, const QBrush* b);
 bool QBrush_IsDetached(const QBrush* self);
-std::unique_ptr<QBrushData, QBrushDataPointerDeleter>* QBrush_DataPtr(QBrush* self);
 void QBrush_Delete(QBrush* self);
 
 QBrushData* QBrushData_new(const QBrushData* param1);
-QAtomicInt* QBrushData_Ref(const QBrushData* self);
-void QBrushData_SetRef(QBrushData* self, QAtomicInt* ref);
 int QBrushData_Style(const QBrushData* self);
 void QBrushData_SetStyle(QBrushData* self, int style);
 QColor* QBrushData_Color(const QBrushData* self);

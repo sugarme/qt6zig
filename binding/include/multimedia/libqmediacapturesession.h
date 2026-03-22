@@ -58,7 +58,6 @@ void QMediaCaptureSession_SetVideoSink(QMediaCaptureSession* self, QVideoSink* s
 QVideoSink* QMediaCaptureSession_VideoSink(const QMediaCaptureSession* self);
 void QMediaCaptureSession_SetAudioOutput(QMediaCaptureSession* self, QAudioOutput* output);
 QAudioOutput* QMediaCaptureSession_AudioOutput(const QMediaCaptureSession* self);
-QPlatformMediaCaptureSession* QMediaCaptureSession_PlatformSession(const QMediaCaptureSession* self);
 void QMediaCaptureSession_AudioInputChanged(QMediaCaptureSession* self);
 void QMediaCaptureSession_Connect_AudioInputChanged(QMediaCaptureSession* self, intptr_t slot);
 void QMediaCaptureSession_AudioBufferInputChanged(QMediaCaptureSession* self);

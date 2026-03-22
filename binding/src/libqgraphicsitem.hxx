@@ -1733,9 +1733,7 @@ protected:
 
 public:
 	VirtualQGraphicsPolygonItem(): QGraphicsPolygonItem() {};
-	VirtualQGraphicsPolygonItem(const QPolygonF& polygon): QGraphicsPolygonItem(polygon) {};
 	VirtualQGraphicsPolygonItem(QGraphicsItem* parent): QGraphicsPolygonItem(parent) {};
-	VirtualQGraphicsPolygonItem(const QPolygonF& polygon, QGraphicsItem* parent): QGraphicsPolygonItem(polygon, parent) {};
 
 	~VirtualQGraphicsPolygonItem() {
 		qgraphicspolygonitem_boundingrect_callback = nullptr;

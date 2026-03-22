@@ -26,7 +26,21 @@ const char* QStringConverter_NameForEncoding(int e) {
 }
 
 libqt_list QStringConverter_AvailableCodecs() {
-	return QStringConverter::availableCodecs();
+	auto _ret = QStringConverter::availableCodecs();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QStringConverterBase__State* QStringConverterBase__State_new() {

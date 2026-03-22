@@ -101,10 +101,6 @@ return  _ret;
         qtc.QOffscreenSurface_SetScreen(@ptrCast(self), @ptrCast(screen));
     }
 
-    pub fn Handle(self: ?*anyopaque, ) QPlatformOffscreenSurface {
-        return @ptrCast(qtc.QOffscreenSurface_Handle(@ptrCast(self)));
-    }
-
     pub fn ResolveInterface(self: ?*anyopaque, name: []const u8, revision: i32) ?*anyopaque {
         return qtc.QOffscreenSurface_ResolveInterface(@ptrCast(self), @ptrCast(name), revision);
     }

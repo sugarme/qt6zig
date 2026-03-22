@@ -23,10 +23,6 @@ pub const qbasictimer = struct {
         return qtc.QBasicTimer_TimerId(@ptrCast(self));
     }
 
-    pub fn Id(self: ?*anyopaque, ) i32 {
-        return qtc.QBasicTimer_Id(@ptrCast(self));
-    }
-
     pub fn Start(self: ?*anyopaque, msec: i32, obj: ?*anyopaque) void {
         qtc.QBasicTimer_Start(@ptrCast(self), msec, @ptrCast(obj));
     }

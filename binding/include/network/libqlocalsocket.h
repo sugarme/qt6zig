@@ -49,7 +49,6 @@ bool QLocalSocket_SetSocketDescriptor(QLocalSocket* self, intptr_t socketDescrip
 intptr_t QLocalSocket_SocketDescriptor(const QLocalSocket* self);
 void QLocalSocket_SetSocketOptions(QLocalSocket* self, int option);
 int QLocalSocket_SocketOptions(const QLocalSocket* self);
-QBindable<SocketOptions> QLocalSocket_BindableSocketOptions(QLocalSocket* self);
 int QLocalSocket_State(const QLocalSocket* self);
 bool QLocalSocket_WaitForBytesWritten(QLocalSocket* self, int msecs);
 bool QLocalSocket_WaitForConnected(QLocalSocket* self);

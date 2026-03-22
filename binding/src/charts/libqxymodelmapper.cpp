@@ -3,6 +3,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QXYModelMapper>
 #include <QXYSeries>
 #include <qxymodelmapper.h>

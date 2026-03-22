@@ -49,14 +49,6 @@ return qtc.QCborStreamWriter_new2(data_str);
 qtc.QCborStreamWriter_Append4(@ptrCast(self), ba_str);
     }
 
-    pub fn Append5(self: ?*anyopaque, str: QLatin1StringView) void {
-        qtc.QCborStreamWriter_Append5(@ptrCast(self), str);
-    }
-
-    pub fn Append6(self: ?*anyopaque, str: []const u8) void {
-        qtc.QCborStreamWriter_Append6(@ptrCast(self), @ptrCast(str));
-    }
-
     pub fn Append7(self: ?*anyopaque, tag: u64) void {
         qtc.QCborStreamWriter_Append7(@ptrCast(self), @intCast(tag));
     }
@@ -67,10 +59,6 @@ qtc.QCborStreamWriter_Append4(@ptrCast(self), ba_str);
 
     pub fn Append9(self: ?*anyopaque, st: u8) void {
         qtc.QCborStreamWriter_Append9(@ptrCast(self), @intCast(st));
-    }
-
-    pub fn Append11(self: ?*anyopaque, f: QtC.qfloat16) void {
-        qtc.QCborStreamWriter_Append11(@ptrCast(self), @ptrCast(f));
     }
 
     pub fn Append12(self: ?*anyopaque, f: f32) void {

@@ -24,6 +24,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTextItem>
 #include <QTextOption>
 #include <QTransform>
@@ -329,16 +330,8 @@ void QPainter_DrawPoints(QPainter* self, const QPointF* points, int pointCount) 
 	self->drawPoints(points, pointCount);
 }
 
-void QPainter_DrawPoints2(QPainter* self, const QPolygonF* points) {
-	self->drawPoints(*points);
-}
-
 void QPainter_DrawPoints3(QPainter* self, const QPoint* points, int pointCount) {
 	self->drawPoints(points, pointCount);
-}
-
-void QPainter_DrawPoints4(QPainter* self, const QPolygon* points) {
-	self->drawPoints(*points);
 }
 
 void QPainter_DrawLine(QPainter* self, const QLineF* line) {
@@ -366,7 +359,7 @@ void QPainter_DrawLines(QPainter* self, const QLineF* lines, int lineCount) {
 }
 
 void QPainter_DrawLines2(QPainter* self, const libqt_list lines) {
-	self->drawLines(*lines);
+	self->drawLines(QList<QLineF>());
 }
 
 void QPainter_DrawLines3(QPainter* self, const QPointF* pointPairs, int lineCount) {
@@ -374,7 +367,7 @@ void QPainter_DrawLines3(QPainter* self, const QPointF* pointPairs, int lineCoun
 }
 
 void QPainter_DrawLines4(QPainter* self, const libqt_list pointPairs) {
-	self->drawLines(*pointPairs);
+	self->drawLines(QList<QPointF>());
 }
 
 void QPainter_DrawLines5(QPainter* self, const QLine* lines, int lineCount) {
@@ -382,7 +375,7 @@ void QPainter_DrawLines5(QPainter* self, const QLine* lines, int lineCount) {
 }
 
 void QPainter_DrawLines6(QPainter* self, const libqt_list lines) {
-	self->drawLines(*lines);
+	self->drawLines(QList<QLine>());
 }
 
 void QPainter_DrawLines7(QPainter* self, const QPoint* pointPairs, int lineCount) {
@@ -390,7 +383,7 @@ void QPainter_DrawLines7(QPainter* self, const QPoint* pointPairs, int lineCount
 }
 
 void QPainter_DrawLines8(QPainter* self, const libqt_list pointPairs) {
-	self->drawLines(*pointPairs);
+	self->drawLines(QList<QPoint>());
 }
 
 void QPainter_DrawRect(QPainter* self, const QRectF* rect) {
@@ -410,7 +403,7 @@ void QPainter_DrawRects(QPainter* self, const QRectF* rects, int rectCount) {
 }
 
 void QPainter_DrawRects2(QPainter* self, const libqt_list rectangles) {
-	self->drawRects(*rectangles);
+	self->drawRects(QList<QRectF>());
 }
 
 void QPainter_DrawRects3(QPainter* self, const QRect* rects, int rectCount) {
@@ -418,7 +411,7 @@ void QPainter_DrawRects3(QPainter* self, const QRect* rects, int rectCount) {
 }
 
 void QPainter_DrawRects4(QPainter* self, const libqt_list rectangles) {
-	self->drawRects(*rectangles);
+	self->drawRects(QList<QRect>());
 }
 
 void QPainter_DrawEllipse(QPainter* self, const QRectF* r) {
@@ -445,48 +438,24 @@ void QPainter_DrawPolyline(QPainter* self, const QPointF* points, int pointCount
 	self->drawPolyline(points, pointCount);
 }
 
-void QPainter_DrawPolyline2(QPainter* self, const QPolygonF* polyline) {
-	self->drawPolyline(*polyline);
-}
-
 void QPainter_DrawPolyline3(QPainter* self, const QPoint* points, int pointCount) {
 	self->drawPolyline(points, pointCount);
-}
-
-void QPainter_DrawPolyline4(QPainter* self, const QPolygon* polygon) {
-	self->drawPolyline(*polygon);
 }
 
 void QPainter_DrawPolygon(QPainter* self, const QPointF* points, int pointCount) {
 	self->drawPolygon(points, pointCount);
 }
 
-void QPainter_DrawPolygon2(QPainter* self, const QPolygonF* polygon) {
-	self->drawPolygon(*polygon);
-}
-
 void QPainter_DrawPolygon3(QPainter* self, const QPoint* points, int pointCount) {
 	self->drawPolygon(points, pointCount);
-}
-
-void QPainter_DrawPolygon4(QPainter* self, const QPolygon* polygon) {
-	self->drawPolygon(*polygon);
 }
 
 void QPainter_DrawConvexPolygon(QPainter* self, const QPointF* points, int pointCount) {
 	self->drawConvexPolygon(points, pointCount);
 }
 
-void QPainter_DrawConvexPolygon2(QPainter* self, const QPolygonF* polygon) {
-	self->drawConvexPolygon(*polygon);
-}
-
 void QPainter_DrawConvexPolygon3(QPainter* self, const QPoint* points, int pointCount) {
 	self->drawConvexPolygon(points, pointCount);
-}
-
-void QPainter_DrawConvexPolygon4(QPainter* self, const QPolygon* polygon) {
-	self->drawConvexPolygon(*polygon);
 }
 
 void QPainter_DrawArc(QPainter* self, const QRectF* rect, int a, int alen) {
@@ -861,16 +830,8 @@ void QPainter_DrawPolygon32(QPainter* self, const QPointF* points, int pointCoun
 	self->drawPolygon(points, pointCount, static_cast<Qt::FillRule>(fillRule));
 }
 
-void QPainter_DrawPolygon22(QPainter* self, const QPolygonF* polygon, int fillRule) {
-	self->drawPolygon(*polygon, static_cast<Qt::FillRule>(fillRule));
-}
-
 void QPainter_DrawPolygon33(QPainter* self, const QPoint* points, int pointCount, int fillRule) {
 	self->drawPolygon(points, pointCount, static_cast<Qt::FillRule>(fillRule));
-}
-
-void QPainter_DrawPolygon23(QPainter* self, const QPolygon* polygon, int fillRule) {
-	self->drawPolygon(*polygon, static_cast<Qt::FillRule>(fillRule));
 }
 
 void QPainter_DrawRoundedRect4(QPainter* self, const QRectF* rect, double xRadius, double yRadius, int mode) {

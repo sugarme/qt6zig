@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <qitemselectionmodel.h>
 #include "libqitemselectionmodel.h"
 #include "libqitemselectionmodel.hxx"
@@ -97,7 +98,16 @@ bool QItemSelectionRange_IsEmpty(const QItemSelectionRange* self) {
 }
 
 libqt_list QItemSelectionRange_Indexes(const QItemSelectionRange* self) {
-	return self->indexes();
+	auto _ret = self->indexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QItemSelectionRange_Delete(QItemSelectionRange* self) {
@@ -156,15 +166,42 @@ bool QItemSelectionModel_HasSelection(const QItemSelectionModel* self) {
 }
 
 libqt_list QItemSelectionModel_SelectedIndexes(const QItemSelectionModel* self) {
-	return self->selectedIndexes();
+	auto _ret = self->selectedIndexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QItemSelectionModel_SelectedRows(const QItemSelectionModel* self) {
-	return self->selectedRows();
+	auto _ret = self->selectedRows();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QItemSelectionModel_SelectedColumns(const QItemSelectionModel* self) {
-	return self->selectedColumns();
+	auto _ret = self->selectedColumns();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 QItemSelection* QItemSelectionModel_Selection(const QItemSelectionModel* self) {
@@ -177,10 +214,6 @@ const QAbstractItemModel* QItemSelectionModel_Model(const QItemSelectionModel* s
 
 QAbstractItemModel* QItemSelectionModel_Model2(QItemSelectionModel* self) {
 	return self->model();
-}
-
-QBindable<QAbstractItemModel *> QItemSelectionModel_BindableModel(QItemSelectionModel* self) {
-	return self->bindableModel();
 }
 
 void QItemSelectionModel_SetModel(QItemSelectionModel* self, QAbstractItemModel* model) {
@@ -309,11 +342,29 @@ bool QItemSelectionModel_ColumnIntersectsSelection2(const QItemSelectionModel* s
 }
 
 libqt_list QItemSelectionModel_SelectedRows1(const QItemSelectionModel* self, int column) {
-	return self->selectedRows(column);
+	auto _ret = self->selectedRows(column);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 libqt_list QItemSelectionModel_SelectedColumns1(const QItemSelectionModel* self, int row) {
-	return self->selectedColumns(row);
+	auto _ret = self->selectedColumns(row);
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 // Base class handler implementation
@@ -470,7 +521,16 @@ bool QItemSelection_Contains(const QItemSelection* self, const QModelIndex* inde
 }
 
 libqt_list QItemSelection_Indexes(const QItemSelection* self) {
-	return self->indexes();
+	auto _ret = self->indexes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		auto& _elem = _ret[_i];
+		_data[_i] = new std::remove_reference_t<decltype(_elem)>(_elem);
+	}
+	return _arr;
 }
 
 void QItemSelection_Merge(QItemSelection* self, const QItemSelection* other, int command) {

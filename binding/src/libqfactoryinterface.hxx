@@ -29,7 +29,6 @@ protected:
 
 public:
 	VirtualQFactoryInterface(): QFactoryInterface() {};
-	VirtualQFactoryInterface(const QFactoryInterface& param1): QFactoryInterface(param1) {};
 
 	~VirtualQFactoryInterface() {
 		qfactoryinterface_keys_callback = nullptr;
@@ -46,7 +45,7 @@ public:
 	virtual QList<QString> keys() const override {
 		if (qfactoryinterface_keys_callback != nullptr) {
 			libqt_list callback_ret = qfactoryinterface_keys_callback();
-			return callback_ret;
+			return QList<QString>();
 		} else {
 			return {};
 		}

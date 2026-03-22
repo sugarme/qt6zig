@@ -12,6 +12,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimeZone>
 #include <QTimerEvent>
 #include <QVariant>
@@ -132,11 +133,25 @@ void QFileSystemModel_Sort(QFileSystemModel* self, int column, int order) {
 }
 
 libqt_list QFileSystemModel_MimeTypes(const QFileSystemModel* self) {
-	return self->mimeTypes();
+	auto _ret = self->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 QMimeData* QFileSystemModel_MimeData(const QFileSystemModel* self, const libqt_list indexes) {
-	return self->mimeData(*indexes);
+	return self->mimeData(QList<QModelIndex>());
 }
 
 bool QFileSystemModel_DropMimeData(QFileSystemModel* self, const QMimeData* data, int action, int row, int column, const QModelIndex* parent) {
@@ -148,7 +163,12 @@ int QFileSystemModel_SupportedDropActions(const QFileSystemModel* self) {
 }
 
 libqt_map QFileSystemModel_RoleNames(const QFileSystemModel* self) {
-	return self->roleNames();
+	auto _ret = self->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 QModelIndex* QFileSystemModel_SetRootPath(QFileSystemModel* self, const libqt_string path) {
@@ -211,11 +231,25 @@ bool QFileSystemModel_NameFilterDisables(const QFileSystemModel* self) {
 }
 
 void QFileSystemModel_SetNameFilters(QFileSystemModel* self, const libqt_list filters) {
-	self->setNameFilters(*filters);
+	self->setNameFilters(QList<QString>());
 }
 
 libqt_list QFileSystemModel_NameFilters(const QFileSystemModel* self) {
-	return self->nameFilters();
+	auto _ret = self->nameFilters();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QFileSystemModel_SetOption(QFileSystemModel* self, int option) {
@@ -567,7 +601,21 @@ libqt_list QFileSystemModel_QBaseMimeTypes(const QFileSystemModel* self) {
 	auto* vqfilesystemmodel = dynamic_cast<const VirtualQFileSystemModel*>(self);
 	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
 vqfilesystemmodel->setQFileSystemModel_MimeTypes_IsBase(true);
-	return vqfilesystemmodel->mimeTypes();
+	auto _ret = vqfilesystemmodel->mimeTypes();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 }
 
@@ -584,7 +632,7 @@ QMimeData* QFileSystemModel_QBaseMimeData(const QFileSystemModel* self, const li
 	auto* vqfilesystemmodel = dynamic_cast<const VirtualQFileSystemModel*>(self);
 	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
 vqfilesystemmodel->setQFileSystemModel_MimeData_IsBase(true);
-	return vqfilesystemmodel->mimeData(*indexes);
+	return vqfilesystemmodel->mimeData(QList<QModelIndex>());
 }
 }
 
@@ -635,7 +683,12 @@ libqt_map QFileSystemModel_QBaseRoleNames(const QFileSystemModel* self) {
 	auto* vqfilesystemmodel = dynamic_cast<const VirtualQFileSystemModel*>(self);
 	if (vqfilesystemmodel && vqfilesystemmodel->isVirtualQFileSystemModel) {
 vqfilesystemmodel->setQFileSystemModel_RoleNames_IsBase(true);
-	return vqfilesystemmodel->roleNames();
+	auto _ret = vqfilesystemmodel->roleNames();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 }
 

@@ -99,20 +99,12 @@ return  _ret;
         return qtc.QSortFilterProxyModel_FilterRegularExpression(@ptrCast(self));
     }
 
-    pub fn BindableFilterRegularExpression(self: ?*anyopaque, ) QBindable<QRegularExpression> {
-        return qtc.QSortFilterProxyModel_BindableFilterRegularExpression(@ptrCast(self));
-    }
-
     pub fn FilterKeyColumn(self: ?*anyopaque, ) i32 {
         return qtc.QSortFilterProxyModel_FilterKeyColumn(@ptrCast(self));
     }
 
     pub fn SetFilterKeyColumn(self: ?*anyopaque, column: i32) void {
         qtc.QSortFilterProxyModel_SetFilterKeyColumn(@ptrCast(self), column);
-    }
-
-    pub fn BindableFilterKeyColumn(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QSortFilterProxyModel_BindableFilterKeyColumn(@ptrCast(self));
     }
 
     pub fn FilterCaseSensitivity(self: ?*anyopaque, ) i32 {
@@ -123,10 +115,6 @@ return  _ret;
         qtc.QSortFilterProxyModel_SetFilterCaseSensitivity(@ptrCast(self), @intCast(cs));
     }
 
-    pub fn BindableFilterCaseSensitivity(self: ?*anyopaque, ) QBindable<Qt::CaseSensitivity> {
-        return qtc.QSortFilterProxyModel_BindableFilterCaseSensitivity(@ptrCast(self));
-    }
-
     pub fn SortCaseSensitivity(self: ?*anyopaque, ) i32 {
         return qtc.QSortFilterProxyModel_SortCaseSensitivity(@ptrCast(self));
     }
@@ -135,20 +123,12 @@ return  _ret;
         qtc.QSortFilterProxyModel_SetSortCaseSensitivity(@ptrCast(self), @intCast(cs));
     }
 
-    pub fn BindableSortCaseSensitivity(self: ?*anyopaque, ) QBindable<Qt::CaseSensitivity> {
-        return qtc.QSortFilterProxyModel_BindableSortCaseSensitivity(@ptrCast(self));
-    }
-
     pub fn IsSortLocaleAware(self: ?*anyopaque, ) bool {
         return qtc.QSortFilterProxyModel_IsSortLocaleAware(@ptrCast(self));
     }
 
     pub fn SetSortLocaleAware(self: ?*anyopaque, on: bool) void {
         qtc.QSortFilterProxyModel_SetSortLocaleAware(@ptrCast(self), on);
-    }
-
-    pub fn BindableIsSortLocaleAware(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QSortFilterProxyModel_BindableIsSortLocaleAware(@ptrCast(self));
     }
 
     pub fn SortColumn(self: ?*anyopaque, ) i32 {
@@ -167,20 +147,12 @@ return  _ret;
         qtc.QSortFilterProxyModel_SetDynamicSortFilter(@ptrCast(self), enable);
     }
 
-    pub fn BindableDynamicSortFilter(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QSortFilterProxyModel_BindableDynamicSortFilter(@ptrCast(self));
-    }
-
     pub fn SortRole(self: ?*anyopaque, ) i32 {
         return qtc.QSortFilterProxyModel_SortRole(@ptrCast(self));
     }
 
     pub fn SetSortRole(self: ?*anyopaque, role: i32) void {
         qtc.QSortFilterProxyModel_SetSortRole(@ptrCast(self), role);
-    }
-
-    pub fn BindableSortRole(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QSortFilterProxyModel_BindableSortRole(@ptrCast(self));
     }
 
     pub fn FilterRole(self: ?*anyopaque, ) i32 {
@@ -191,10 +163,6 @@ return  _ret;
         qtc.QSortFilterProxyModel_SetFilterRole(@ptrCast(self), role);
     }
 
-    pub fn BindableFilterRole(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QSortFilterProxyModel_BindableFilterRole(@ptrCast(self));
-    }
-
     pub fn IsRecursiveFilteringEnabled(self: ?*anyopaque, ) bool {
         return qtc.QSortFilterProxyModel_IsRecursiveFilteringEnabled(@ptrCast(self));
     }
@@ -203,20 +171,12 @@ return  _ret;
         qtc.QSortFilterProxyModel_SetRecursiveFilteringEnabled(@ptrCast(self), recursive);
     }
 
-    pub fn BindableRecursiveFilteringEnabled(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QSortFilterProxyModel_BindableRecursiveFilteringEnabled(@ptrCast(self));
-    }
-
     pub fn AutoAcceptChildRows(self: ?*anyopaque, ) bool {
         return qtc.QSortFilterProxyModel_AutoAcceptChildRows(@ptrCast(self));
     }
 
     pub fn SetAutoAcceptChildRows(self: ?*anyopaque, accept: bool) void {
         qtc.QSortFilterProxyModel_SetAutoAcceptChildRows(@ptrCast(self), accept);
-    }
-
-    pub fn BindableAutoAcceptChildRows(self: ?*anyopaque, ) QBindable<bool> {
-        return qtc.QSortFilterProxyModel_BindableAutoAcceptChildRows(@ptrCast(self));
     }
 
     pub fn SetFilterRegularExpression(self: ?*anyopaque, pattern: []const u8) void {

@@ -70,7 +70,6 @@ libqt_string QIcon_ThemeName();
 void QIcon_SetThemeName(const libqt_string path);
 libqt_string QIcon_FallbackThemeName();
 void QIcon_SetFallbackThemeName(const libqt_string name);
-QIconPrivate** QIcon_DataPtr(QIcon* self);
 QPixmap* QIcon_Pixmap22(const QIcon* self, const QSize* size, int mode);
 QPixmap* QIcon_Pixmap32(const QIcon* self, const QSize* size, int mode, int state);
 QPixmap* QIcon_Pixmap33(const QIcon* self, int w, int h, int mode);

@@ -465,20 +465,12 @@ return  _ret;
 qtc.QDnsLookup_SetName(@ptrCast(self), name_str);
     }
 
-    pub fn BindableName(self: ?*anyopaque, ) QBindable<QString> {
-        return qtc.QDnsLookup_BindableName(@ptrCast(self));
-    }
-
     pub fn Type(self: ?*anyopaque, ) i32 {
         return qtc.QDnsLookup_Type(@ptrCast(self));
     }
 
     pub fn SetType(self: ?*anyopaque, typeVal: i32) void {
         qtc.QDnsLookup_SetType(@ptrCast(self), @intCast(typeVal));
-    }
-
-    pub fn BindableType(self: ?*anyopaque, ) QBindable<Type> {
-        return qtc.QDnsLookup_BindableType(@ptrCast(self));
     }
 
     pub fn Nameserver(self: ?*anyopaque, ) QtC.QHostAddress {
@@ -489,10 +481,6 @@ qtc.QDnsLookup_SetName(@ptrCast(self), name_str);
         qtc.QDnsLookup_SetNameserver(@ptrCast(self), @ptrCast(nameserver));
     }
 
-    pub fn BindableNameserver(self: ?*anyopaque, ) QBindable<QHostAddress> {
-        return qtc.QDnsLookup_BindableNameserver(@ptrCast(self));
-    }
-
     pub fn NameserverPort(self: ?*anyopaque, ) u16 {
         return qtc.QDnsLookup_NameserverPort(@ptrCast(self));
     }
@@ -501,20 +489,12 @@ qtc.QDnsLookup_SetName(@ptrCast(self), name_str);
         qtc.QDnsLookup_SetNameserverPort(@ptrCast(self), port);
     }
 
-    pub fn BindableNameserverPort(self: ?*anyopaque, ) QBindable<quint16> {
-        return qtc.QDnsLookup_BindableNameserverPort(@ptrCast(self));
-    }
-
     pub fn NameserverProtocol(self: ?*anyopaque, ) u8 {
         return qtc.QDnsLookup_NameserverProtocol(@ptrCast(self));
     }
 
     pub fn SetNameserverProtocol(self: ?*anyopaque, protocol: u8) void {
         qtc.QDnsLookup_SetNameserverProtocol(@ptrCast(self), @intCast(protocol));
-    }
-
-    pub fn BindableNameserverProtocol(self: ?*anyopaque, ) QBindable<Protocol> {
-        return qtc.QDnsLookup_BindableNameserverProtocol(@ptrCast(self));
     }
 
     pub fn SetNameserver2(self: ?*anyopaque, protocol: u8, nameserver: ?*anyopaque) void {

@@ -47,7 +47,6 @@ void QGraphicsEffect_EnabledChanged(QGraphicsEffect* self, bool enabled);
 void QGraphicsEffect_Connect_EnabledChanged(QGraphicsEffect* self, intptr_t slot);
 void QGraphicsEffect_Draw(QGraphicsEffect* self, QPainter* painter);
 void QGraphicsEffect_SourceChanged(QGraphicsEffect* self, int flags);
-QGraphicsEffectSource* QGraphicsEffect_Source(const QGraphicsEffect* self);
 libqt_string QGraphicsEffect_Tr2(const char* s, const char* c);
 libqt_string QGraphicsEffect_Tr3(const char* s, const char* c, int n);
 void QGraphicsEffect_OnBoundingRectFor(const QGraphicsEffect* self, intptr_t slot);

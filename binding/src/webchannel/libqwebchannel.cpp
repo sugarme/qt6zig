@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QWebChannel>
 #include <QWebChannelAbstractTransport>
 #include <qwebchannel.h>
@@ -28,11 +29,16 @@ libqt_string QWebChannel_Tr(const char* s) {
 }
 
 void QWebChannel_RegisterObjects(QWebChannel* self, const libqt_map objects) {
-	self->registerObjects(*objects);
+	self->registerObjects(QHash<QString, QObject *>());
 }
 
 libqt_map QWebChannel_RegisteredObjects(const QWebChannel* self) {
-	return self->registeredObjects();
+	auto _ret = self->registeredObjects();
+	libqt_map _map;
+	_map.len = _ret.size();
+	_map.keys = nullptr;
+	_map.values = nullptr;
+	return _map;
 }
 
 void QWebChannel_RegisterObject(QWebChannel* self, const libqt_string id, QObject* object) {
@@ -51,20 +57,12 @@ void QWebChannel_SetBlockUpdates(QWebChannel* self, bool block) {
 	self->setBlockUpdates(block);
 }
 
-QBindable<bool> QWebChannel_BindableBlockUpdates(QWebChannel* self) {
-	return self->bindableBlockUpdates();
-}
-
 int QWebChannel_PropertyUpdateInterval(const QWebChannel* self) {
 	return self->propertyUpdateInterval();
 }
 
 void QWebChannel_SetPropertyUpdateInterval(QWebChannel* self, int ms) {
 	self->setPropertyUpdateInterval(ms);
-}
-
-QBindable<int> QWebChannel_BindablePropertyUpdateInterval(QWebChannel* self) {
-	return self->bindablePropertyUpdateInterval();
 }
 
 void QWebChannel_BlockUpdatesChanged(QWebChannel* self, bool block) {

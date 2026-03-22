@@ -29,10 +29,6 @@ return  _ret;
         return qtc.QAbstractAnimation_State(@ptrCast(self));
     }
 
-    pub fn BindableState(self: ?*anyopaque, ) QBindable<QAbstractAnimation::State> {
-        return qtc.QAbstractAnimation_BindableState(@ptrCast(self));
-    }
-
     pub fn Group(self: ?*anyopaque, ) QtC.QAnimationGroup {
         return qtc.QAbstractAnimation_Group(@ptrCast(self));
     }
@@ -45,16 +41,8 @@ return  _ret;
         qtc.QAbstractAnimation_SetDirection(@ptrCast(self), @intCast(direction));
     }
 
-    pub fn BindableDirection(self: ?*anyopaque, ) QBindable<Direction> {
-        return qtc.QAbstractAnimation_BindableDirection(@ptrCast(self));
-    }
-
     pub fn CurrentTime(self: ?*anyopaque, ) i32 {
         return qtc.QAbstractAnimation_CurrentTime(@ptrCast(self));
-    }
-
-    pub fn BindableCurrentTime(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QAbstractAnimation_BindableCurrentTime(@ptrCast(self));
     }
 
     pub fn CurrentLoopTime(self: ?*anyopaque, ) i32 {
@@ -69,16 +57,8 @@ return  _ret;
         qtc.QAbstractAnimation_SetLoopCount(@ptrCast(self), loopCount);
     }
 
-    pub fn BindableLoopCount(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QAbstractAnimation_BindableLoopCount(@ptrCast(self));
-    }
-
     pub fn CurrentLoop(self: ?*anyopaque, ) i32 {
         return qtc.QAbstractAnimation_CurrentLoop(@ptrCast(self));
-    }
-
-    pub fn BindableCurrentLoop(self: ?*anyopaque, ) QBindable<int> {
-        return qtc.QAbstractAnimation_BindableCurrentLoop(@ptrCast(self));
     }
 
     pub fn Duration(self: ?*anyopaque, ) i32 {

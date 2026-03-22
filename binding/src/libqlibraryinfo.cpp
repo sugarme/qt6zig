@@ -2,6 +2,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QVersionNumber>
 #include <qlibraryinfo.h>
 #include "libqlibraryinfo.h"
@@ -55,7 +56,21 @@ libqt_string QLibraryInfo_Path(int p) {
 }
 
 libqt_list QLibraryInfo_Paths(int p) {
-	return QLibraryInfo::paths(static_cast<QLibraryInfo::LibraryPath>(p));
+	auto _ret = QLibraryInfo::paths(static_cast<QLibraryInfo::LibraryPath>(p));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 libqt_string QLibraryInfo_Location(int location) {
@@ -70,7 +85,21 @@ libqt_string QLibraryInfo_Location(int location) {
 }
 
 libqt_list QLibraryInfo_PlatformPluginArguments(const libqt_string platformName) {
-	return QLibraryInfo::platformPluginArguments(QString::fromUtf8(platformName.data, platformName.len));
+	auto _ret = QLibraryInfo::platformPluginArguments(QString::fromUtf8(platformName.data, platformName.len));
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 void QLibraryInfo_Delete(QLibraryInfo* self) {

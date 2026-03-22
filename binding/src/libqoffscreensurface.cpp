@@ -5,6 +5,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QSurface>
 #include <QSurfaceFormat>
 #include <qoffscreensurface.h>
@@ -72,10 +73,6 @@ QScreen* QOffscreenSurface_Screen(const QOffscreenSurface* self) {
 
 void QOffscreenSurface_SetScreen(QOffscreenSurface* self, QScreen* screen) {
 	self->setScreen(screen);
-}
-
-QPlatformOffscreenSurface* QOffscreenSurface_Handle(const QOffscreenSurface* self) {
-	return self->handle();
 }
 
 void QOffscreenSurface_ScreenChanged(QOffscreenSurface* self, QScreen* screen) {

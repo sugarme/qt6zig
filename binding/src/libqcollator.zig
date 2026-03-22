@@ -118,28 +118,12 @@ const s2_str = qtc.libqt_string{
 return qtc.QCollator_OperatorCall(@ptrCast(self), s1_str, s2_str);
     }
 
-    pub fn Compare3(self: ?*anyopaque, s1: []const u8, s2: []const u8) i32 {
-        return qtc.QCollator_Compare3(@ptrCast(self), @ptrCast(s1), @ptrCast(s2));
-    }
-
-    pub fn OperatorCall2(self: ?*anyopaque, s1: []const u8, s2: []const u8) bool {
-        return qtc.QCollator_OperatorCall2(@ptrCast(self), @ptrCast(s1), @ptrCast(s2));
-    }
-
     pub fn SortKey(self: ?*anyopaque, stringVal: []const u8) QtC.QCollatorSortKey {
         const stringVal_str = qtc.libqt_string{
     .len = stringVal.len,
     .data = stringVal.ptr,
 };
 return qtc.QCollator_SortKey(@ptrCast(self), stringVal_str);
-    }
-
-    pub fn DefaultCompare(s1: []const u8, s2: []const u8) i32 {
-        return qtc.QCollator_DefaultCompare(@ptrCast(s1), @ptrCast(s2));
-    }
-
-    pub fn DefaultSortKey(key: []const u8) QtC.QCollatorSortKey {
-        return qtc.QCollator_DefaultSortKey(@ptrCast(key));
     }
 
     /// Delete this object from C++ memory.

@@ -8,6 +8,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
+#include <type_traits>
 #include <QTimeZone>
 #include <qdirlisting.h>
 #include "libqdirlisting.h"
@@ -18,7 +19,7 @@ QDirListing* QDirListing_new(const libqt_string path) {
 }
 
 QDirListing* QDirListing_new2(const libqt_string path, const libqt_list nameFilters) {
-	 return new QDirListing(QString::fromUtf8(path.data, path.len), *nameFilters);
+	 return new QDirListing(QString::fromUtf8(path.data, path.len), QList<QString>());
 }
 
 QDirListing* QDirListing_new3(const libqt_string path, int flags) {
@@ -26,7 +27,7 @@ QDirListing* QDirListing_new3(const libqt_string path, int flags) {
 }
 
 QDirListing* QDirListing_new4(const libqt_string path, const libqt_list nameFilters, int flags) {
-	 return new QDirListing(QString::fromUtf8(path.data, path.len), *nameFilters, static_cast<QFlags<QDirListing::IteratorFlag>>(flags));
+	 return new QDirListing(QString::fromUtf8(path.data, path.len), QList<QString>(), static_cast<QFlags<QDirListing::IteratorFlag>>(flags));
 }
 
 void QDirListing_Swap(QDirListing* self, QDirListing* other) {
@@ -49,7 +50,21 @@ int QDirListing_IteratorFlags(const QDirListing* self) {
 }
 
 libqt_list QDirListing_NameFilters(const QDirListing* self) {
-	return self->nameFilters();
+	auto _ret = self->nameFilters();
+	libqt_list _arr;
+	_arr.len = _ret.length();
+	_arr.data = malloc(_arr.len * sizeof(void*));
+	void** _data = static_cast<void**>(_arr.data);
+	for (int _i = 0; _i < _arr.len; ++_i) {
+		QByteArray _b = _ret[_i].toUtf8();
+		libqt_string* _str = new libqt_string();
+		_str->len = _b.length();
+		_str->data = static_cast<const char*>(malloc(_str->len + 1));
+		memcpy((void*)_str->data, _b.data(), _str->len);
+		((char*)_str->data)[_str->len] = '\0';
+		_data[_i] = _str;
+	}
+	return _arr;
 }
 
 const QRect* QDirListing_Begin(const QDirListing* self) {

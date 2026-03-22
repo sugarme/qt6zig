@@ -9,7 +9,7 @@
 #include <QString>
 #include <QByteArray>
 #include <cstring>
-#include <QStringView>
+#include <type_traits>
 #include <qdebug.h>
 #include "libqdebug.h"
 #include "libqdebug.hxx"
@@ -22,11 +22,7 @@ QDebug* QDebug_new2(libqt_string stringVal) {
 	 return new QDebug(QString::fromUtf8(stringVal.data, stringVal.len));
 }
 
-QDebug* QDebug_new3(int t) {
-	 return new QDebug(static_cast<QtMsgType>(t));
-}
-
-QDebug* QDebug_new4(const QDebug* o) {
+QDebug* QDebug_new3(const QDebug* o) {
 	 return new QDebug(*o);
 }
 
@@ -138,10 +134,6 @@ QDebug* QDebug_OperatorShiftLeft13(QDebug* self, unsigned long long t) {
 	return new QDebug(self->operator<<(t));
 }
 
-QDebug* QDebug_OperatorShiftLeft14(QDebug* self, qfloat16* t) {
-	return new QDebug(self->operator<<(*t));
-}
-
 QDebug* QDebug_OperatorShiftLeft15(QDebug* self, float t) {
 	return new QDebug(self->operator<<(t));
 }
@@ -158,18 +150,6 @@ QDebug* QDebug_OperatorShiftLeft19(QDebug* self, const libqt_string t) {
 	return new QDebug(self->operator<<(QString::fromUtf8(t.data, t.len)));
 }
 
-QDebug* QDebug_OperatorShiftLeft20(QDebug* self, QStringView* s) {
-	return new QDebug(self->operator<<(*s));
-}
-
-QDebug* QDebug_OperatorShiftLeft21(QDebug* self, QUtf8StringView s) {
-	return new QDebug(self->operator<<(s));
-}
-
-QDebug* QDebug_OperatorShiftLeft22(QDebug* self, QLatin1StringView t) {
-	return new QDebug(self->operator<<(t));
-}
-
 QDebug* QDebug_OperatorShiftLeft23(QDebug* self, const libqt_string t) {
 	return new QDebug(self->operator<<(QByteArray(t.data, t.len)));
 }
@@ -180,14 +160,6 @@ QDebug* QDebug_OperatorShiftLeft24(QDebug* self, QByteArrayView* t) {
 
 QDebug* QDebug_OperatorShiftLeft25(QDebug* self, const void* t) {
 	return new QDebug(self->operator<<(t));
-}
-
-QDebug* QDebug_OperatorShiftLeft27(QDebug* self, std::nullopt_t param1) {
-	return new QDebug(self->operator<<(param1));
-}
-
-QDebug* QDebug_OperatorShiftLeft29(QDebug* self, QTextStreamManipulator* m) {
-	return new QDebug(self->operator<<(*m));
 }
 
 QDebug* QDebug_MaybeQuote1(QDebug* self, char c) {
@@ -220,10 +192,6 @@ void QNoDebug_CopyAssign(QNoDebug* self, QNoDebug* other) {
 
 void QNoDebug_MoveAssign(QNoDebug* self, QNoDebug* other) {
     *self = std::move(*other);
-}
-
-QNoDebug* QNoDebug_OperatorShiftLeft2(QNoDebug* self, QTextStreamManipulator* param1) {
-	return new QNoDebug(self->operator<<(*param1));
 }
 
 QNoDebug* QNoDebug_Space(QNoDebug* self) {
