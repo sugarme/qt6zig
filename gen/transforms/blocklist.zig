@@ -106,12 +106,15 @@ const globally_blocked_methods = [_][]const u8{
 /// Check if all parameters and return type of a method are allowed.
 fn methodAllowed(class_name: []const u8, m: ir.CppMethod) bool {
     _ = class_name;
-    // Block globally problematic methods
-    for (&globally_blocked_methods) |blocked| {
-        if (std.mem.eql(u8, m.method_name, blocked)) return false;
+    // Check both current and original method names (overloads transform may have renamed)
+    const names = [_][]const u8{ m.method_name, m.override_method_name };
+    for (&names) |name| {
+        if (name.len == 0) continue;
+        for (&globally_blocked_methods) |blocked| {
+            if (std.mem.eql(u8, name, blocked)) return false;
+        }
+        if (std.mem.indexOf(u8, name, "QGADGET") != null) return false;
     }
-    // Block methods containing QGADGET in name
-    if (std.mem.indexOf(u8, m.method_name, "QGADGET") != null) return false;
     if (!allowType(m.return_type, true)) {
         return false;
     }

@@ -20,6 +20,11 @@ pub fn transform(parsed: *ir.CppParsedHeader) void {
             const original_proposal = safeMethodName(alloc, m.*);
             var proposed_name = original_proposal;
 
+            // Always rename to the safe version (handles operators, casing)
+            if (!std.mem.eql(u8, proposed_name, m.method_name)) {
+                m.rename(proposed_name);
+            }
+
             if (!existing.contains(proposed_name)) {
                 // No collision - register and move on
                 existing.put(proposed_name, {}) catch {};
@@ -57,10 +62,20 @@ fn safeMethodName(alloc: std.mem.Allocator, m: ir.CppMethod) []const u8 {
         tmp = tmp[3..];
     }
 
+    // Handle "operator" methods: strip "operator" prefix and ensure symbol gets replaced
+    // "operator=" -> "= " -> "Assign" (via replacements below)
+    // "operator==" -> "== " -> "Equal"
+    // "operator " already has space
+    if (std.mem.startsWith(u8, tmp, "operator") and !std.mem.startsWith(u8, tmp, "operator ")) {
+        // Insert space after "operator" so replacement table can handle symbols
+        const suffix = tmp[8..]; // everything after "operator"
+        const with_space = std.fmt.allocPrint(alloc, "operator {s}", .{suffix}) catch return tmp;
+        tmp = with_space;
+    }
+
     // Operator replacements (order matters: more-specific first)
     const replacements = [_]struct { from: []const u8, to: []const u8 }{
         .{ .from = "operator ", .to = "Operator" },
-        .{ .from = "operator", .to = "Operator" },
         .{ .from = "::", .to = "__" },
         // Compound assignment (must be before single-char operators)
         .{ .from = "+=", .to = "PlusAssign" },
