@@ -59,8 +59,21 @@ fn safeMethodName(alloc: std.mem.Allocator, m: ir.CppMethod) []const u8 {
 
     // Operator replacements (order matters: more-specific first)
     const replacements = [_]struct { from: []const u8, to: []const u8 }{
-        .{ .from = "operator ", .to = "To " },
+        .{ .from = "operator ", .to = "Operator" },
+        .{ .from = "operator", .to = "Operator" },
         .{ .from = "::", .to = "__" },
+        // Compound assignment (must be before single-char operators)
+        .{ .from = "+=", .to = "PlusAssign" },
+        .{ .from = "-=", .to = "MinusAssign" },
+        .{ .from = "*=", .to = "MultiplyAssign" },
+        .{ .from = "/=", .to = "DivideAssign" },
+        .{ .from = "%=", .to = "ModuloAssign" },
+        .{ .from = "&=", .to = "BitwiseAndAssign" },
+        .{ .from = "|=", .to = "BitwiseOrAssign" },
+        .{ .from = "^=", .to = "BitwiseXorAssign" },
+        .{ .from = "<<=", .to = "ShiftLeftAssign" },
+        .{ .from = ">>=", .to = "ShiftRightAssign" },
+        // Comparison
         .{ .from = "==", .to = "Equal" },
         .{ .from = "!=", .to = "NotEqual" },
         .{ .from = ">=", .to = "GreaterOrEqual" },

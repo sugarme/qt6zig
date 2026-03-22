@@ -160,7 +160,7 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
 
         // Regular methods
         for (c.methods) |m| {
-            if (m.is_protected and !m.is_virtual) continue;
+            if (m.is_protected) continue; // Protected methods handled via virtual callbacks
 
             const safe_name = try cabi_header.safeMethodName(tmp, m);
             const full_name = try std.fmt.allocPrint(tmp, "{s}_{s}", .{ c.class_name, safe_name });
@@ -188,7 +188,7 @@ pub fn emit(allocator: Allocator, parsed: *const CppParsedHeader, state: *const 
 
             // Build the call target
             var call_target: []const u8 = undefined;
-            if (m.is_static and !m.is_protected) {
+            if (m.is_static) {
                 call_target = try std.fmt.allocPrint(tmp, "{s}::{s}({s})", .{ c.class_name, m.cppCallTarget(), forwarding });
             } else {
                 call_target = try std.fmt.allocPrint(tmp, "self->{s}({s})", .{ m.cppCallTarget(), forwarding });
