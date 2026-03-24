@@ -4,7 +4,7 @@ Pure Zig bindings for Qt 6.8.3. Build standalone desktop applications with Zig a
 
 ## Features
 
-- **760 generated bindings** across 13 Qt modules (747 compile, 98%+ success)
+- **570 generated bindings** across 13 Qt modules
 - **Static linking**: Produces standalone executables with no Qt6 DLL dependencies
 - **Self-contained**: Qt 6.8.3 source bundled in submodule — no external Qt installation needed
 - **Three-layer binding**: Zig wrappers → C ABI wrappers → Qt6 C++ (static libs)
@@ -111,24 +111,24 @@ binding/
 
 ## Qt Modules
 
-### Generated Bindings: 760 classes across 13 modules
+### Generated Bindings: 570 classes across 13 modules
 
 | Module | Bindings | Description |
 |--------|----------|-------------|
-| **QtCore + QtGui + QtWidgets** | 495 | Core, GUI, and widget classes |
-| **QtCharts** | 57 | Charts (line, bar, pie, scatter, area, box plot, candlestick) |
-| **QtNetwork** | 49 | Networking (HTTP, TCP/UDP sockets, DNS, SSL, cookies) |
-| **QtOpenGL** | 47 | OpenGL wrappers, paint engine, shader programs |
-| **QtMultimedia** | 37 | Audio/video playback, capture, devices |
-| **QtConcurrent** | 18 | Thread pool and parallel execution |
-| **QtSql** | 17 | SQL database abstraction and models |
-| **QtPrintSupport** | 12 | Printing, print dialogs, print preview |
-| **QtSvg + QtSvgWidgets** | 10 | SVG rendering and widget integration |
-| **QtSpatialAudio** | 8 | 3D spatial audio (Resonance Audio engine) |
-| **QtWebChannel** | 5 | Qt/web bridge communication |
-| **QtXml** | 5 | XML DOM parser |
+| **QtCore + QtGui + QtWidgets** | 367 | Core, GUI, and widget classes |
+| **QtOpenGL** | 42 | OpenGL wrappers, paint engine, shader programs |
+| **QtCharts** | 39 | Charts (line, bar, pie, scatter, area, box plot, candlestick) |
+| **QtNetwork** | 33 | Networking (HTTP, TCP/UDP sockets, DNS, SSL, cookies) |
+| **QtMultimedia** | 24 | Audio/video playback, capture, devices |
+| **QtConcurrent** | 17 | Thread pool and parallel execution |
+| **QtSql** | 13 | SQL database abstraction and models |
+| **QtPrintSupport** | 11 | Printing, print dialogs, print preview |
+| **QtSvg + QtSvgWidgets** | 9 | SVG rendering and widget integration |
+| **QtSpatialAudio** | 7 | 3D spatial audio (Resonance Audio engine) |
+| **QtWebChannel** | 4 | Qt/web bridge communication |
+| **QtXml** | 4 | XML DOM parser |
 
-**Compilation status**: 747/760 (98%) compile successfully. The remaining 13 failures are due to QUrl incomplete type in QList element conversion and QGenericRunnable references.
+All 570 bindings compile successfully.
 
 ### Key Classes by Category
 
@@ -212,15 +212,12 @@ Intermediate Representation (gen/intermediate.zig)
 binding/src/*.{h,cpp,hxx,zig}
 ```
 
-### Known Generator Issues
+### Known Generator Limitations
 
-The following patterns produce C++ code that doesn't compile (~13/760 classes):
-
-- **QUrl incomplete type**: QList<QUrl> return conversion tries to heap-allocate QUrl elements without a complete type definition in scope.
-- **QGenericRunnable**: Referenced by some files but blocked from inclusion — causes undeclared identifier errors.
 - **QList/QMap parameter round-trip**: Parameters accepting QList/QMap pass a default-constructed container (data not forwarded from C ABI struct yet).
 
-Resolved issues (previously failing, now fixed):
+Resolved issues:
+- QUrl incomplete type, QGenericRunnable references (removed from bindings)
 - OpenGL versioned function files (blocked at header filter level)
 - Iterator types (blocked in config)
 - QBindable/QProperty templates (blocked in config)

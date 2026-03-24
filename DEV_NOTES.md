@@ -19,6 +19,7 @@ Static libraries produced (25 total):
 - **Platform**: qwindows (Windows platform plugin)
 - **3rd party**: qtHarfbuzz, qtFreetype, qtLibpng, qtLibjpeg, qtPcre2, qtZlib, qtDoubleConversion, qtBootstrap
 - **Tools**: moc.exe, rcc.exe, uic.exe, syncqt.exe
+- **Build options**: Per-module `-D<module>=false` flags to disable optional modules
 
 ### Layer 2: C ABI Wrappers (binding/src/*.cpp)
 
