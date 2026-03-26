@@ -1,6 +1,5 @@
 const QtC = @import("qt6zig");
-const qtc = @import("qt6c");%%_IMPORTLIBS_%%
-%%_STRUCTDEFS_%%
+const qtc = @import("qt6c");
 
 /// https://doc.qt.io/qt-6/qpainter.html
 pub const qpainter = struct {

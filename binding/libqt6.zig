@@ -199,8 +199,35 @@ pub const qtextformat_enums = @import("src/libqtextformat.zig").enums;
 pub const qtextoption_enums = @import("src/libqtextoption.zig").enums;
 pub const qwidget_enums = @import("src/libqwidget.zig").enums;
 
-// Platform plugin registration - must be called before QApplication.New()
+// Additional types needed by mpod viewer
+pub const qcursor = @import("src/libqcursor.zig").qcursor;
+pub const qscrollbar = @import("src/libqscrollbar.zig").qscrollbar;
+pub const qabstractslider = @import("src/libqabstractslider.zig").qabstractslider;
+
+// Painting and printing
+pub const qpainter = @import("src/libqpainter.zig").qpainter;
+pub const qprinter = @import("src/printsupport/libqprinter.zig").qprinter;
+
+// QPoint/QPointF accessors (no generated wrapper in src/)
 const qtc = @import("qt6c");
+pub const qpoint = struct {
+    pub fn X(self: ?*anyopaque) i32 {
+        return qtc.QPoint_X(@ptrCast(self));
+    }
+    pub fn Y(self: ?*anyopaque) i32 {
+        return qtc.QPoint_Y(@ptrCast(self));
+    }
+};
+pub const qpointf = struct {
+    pub fn X(self: ?*anyopaque) f64 {
+        return qtc.QPointF_X(@ptrCast(self));
+    }
+    pub fn Y(self: ?*anyopaque) f64 {
+        return qtc.QPointF_Y(@ptrCast(self));
+    }
+};
+
+// Platform plugin registration - must be called before QApplication.New()
 pub fn registerPlatformPlugins() void {
     qtc.qt6zig_register_platform_plugins();
 }

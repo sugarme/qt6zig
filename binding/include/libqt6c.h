@@ -60,6 +60,7 @@
 #include "../src/libqspinbox.h"
 #include "../src/libqsplitter.h"
 #include "../src/libqstackedwidget.h"
+#include "../src/libqtableview.h"
 #include "../src/libqtablewidget.h"
 #include "../src/libqtextcursor.h"
 #include "../src/libqtextdocument.h"
@@ -68,6 +69,24 @@
 #include "../src/libqtextoption.h"
 #include "../src/libqwidget.h"
 #include "../src/libqwidgetaction.h"
+
+// Additional headers for zoom viewer
+#include "../src/libqcursor.h"
+#include "../src/libqscrollbar.h"
+#include "../src/libqabstractslider.h"
+
+// Painting and printing
+#include "../src/libqpainter.h"
+#include "../src/printsupport/libqprinter.h"
+
+// QPoint/QPointF accessors
+// Inline declarations to avoid include-path issues with libqpoint.h
+typedef struct QPoint QPoint;
+typedef struct QPointF QPointF;
+int QPoint_X(const QPoint* self);
+int QPoint_Y(const QPoint* self);
+double QPointF_X(const QPointF* self);
+double QPointF_Y(const QPointF* self);
 
 // Static plugin registration (must be called before QApplication)
 void qt6zig_register_platform_plugins(void);
